@@ -16,10 +16,6 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
-Bundle 'altercation/vim-colors-solarized'
-
-" non github repos
-Bundle 'git://git.wincent.com/command-t.git'
 
 filetype plugin indent on
 
@@ -136,13 +132,10 @@ nnoremap <C-h> <C-W>h
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
-if has("ruby")
-  " Command-T mappings
-  nnoremap <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-else
-  " CtrlP mappings
-  nnoremap <leader>f :CtrlP<cr>
-endif
+" CtrlP
+let g:ctrlp_working_path_mode = 1
+nnoremap <leader>f :CtrlP<cr><f5><cr>
+
 " select text that was just pasted
 nnoremap <leader>v V`]
 " create a new vertical split and switch over to it
