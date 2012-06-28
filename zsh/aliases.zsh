@@ -1,3 +1,8 @@
-alias zreload!='. ~/.zshrc'
+alias zr!='. ~/.zshrc'
 
 alias c='clear'
+
+# OSX specific directories
+alias desk='cd $HOME/Desktop'
+alias proj='cd $HOME/Projects'
+alias sites='cd $HOME/Sites'
