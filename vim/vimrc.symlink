@@ -134,8 +134,8 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
 " CtrlP
-let g:ctrlp_working_path_mode = 1
-nnoremap <leader>f :CtrlP<cr><f5><cr>
+let cwd = getcwd()
+nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
 
 " select text that was just pasted
 nnoremap <leader>v V`]
