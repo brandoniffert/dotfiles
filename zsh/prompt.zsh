@@ -47,4 +47,4 @@ precmd() {
     title "zsh" "%n@%m" "%55<...<%~"
 }
 
-export PROMPT=$'\n$(directory_name) $(git_dirty)$(need_push)\n› '
+export PROMPT=$'$(directory_name) $(git_dirty)$(need_push)\n${fg_bold[red]%}›%{$reset_color%} '
