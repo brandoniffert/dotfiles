@@ -67,7 +67,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 set wildmenu
-set wildmode=longest,list,full
+set wildmode=list:longest,list:full
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store
 
 set showmatch
@@ -139,8 +139,8 @@ nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
 
 " select text that was just pasted
 nnoremap <leader>v V`]
-" create a new vertical split and switch over to it
-nnoremap <leader>w <C-w>v<C-w>l
+" create a new vertical split window and switch over to it
+nnoremap <leader>sv :botright vnew<cr>
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
 " open .vimrc to edit in the current window
