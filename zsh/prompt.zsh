@@ -14,9 +14,9 @@ git_dirty() {
     else
         if [[ $st == "nothing to commit (working directory clean)" ]]
         then
-            echo "on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+            echo " on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
         else
-            echo "on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+            echo " on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
         fi
     fi
 }
@@ -40,11 +40,11 @@ need_push () {
 }
 
 directory_name() {
-    echo "%{$fg_bold[blue]%}${PWD/#$HOME/~}%\/%{$reset_color%}"
+    echo "%{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 precmd() {
     title "zsh" "%n@%m" "%55<...<%~"
 }
 
-export PROMPT=$'$(directory_name) $(git_dirty)$(need_push)\n${fg_bold[red]%}›%{$reset_color%} '
+export PROMPT=$'$(directory_name)$(git_dirty)$(need_push)${fg_bold[white]%}›%{$reset_color%} '
