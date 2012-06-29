@@ -1,10 +1,17 @@
+# set correct term
+set -g default-terminal screen-256color
+
+# set correct shell
 set-option -g default-shell /bin/zsh
 
-# Use C-a as prefix
+# use C-a as prefix
+unbind C-b
 set-option -g prefix C-a
 bind-key C-a last-window
-
 bind-key a send-prefix
+
+# reload config
+bind R source-file ~/.tmux.conf \; display-message " Tmux config reloaded...".
 
 # Start numbering at 1
 set -g base-index 1
@@ -12,17 +19,47 @@ set -g base-index 1
 # Allows for faster key repetition
 set -s escape-time 0
 
-# Set status bar
-set -g status-bg black
-set -g status-fg white
-set -g status-left ""
-set -g status-right "#[fg=green]#H"
+#statusbar
+set-option -g   status-utf8 on
+set-option -g   status-interval 5
+set-option -g   status-justify left
+set-option -g   status-left-length 15
+set-option -g   status-left ' #h |'
+set-option -g   status-right ' | %Y-%m-%d %H:%M #[default]'
+
+# default statusbar colors
+set-option -g   status-fg white
+set-option -g   status-bg black
+# set-option -g   status-attr bright
+set-option -g   status-keys vi
+
+# default window title colors
+set-window-option -g window-status-fg white
+set-window-option -g window-status-bg black
+set-window-option -g window-status-attr dim
+
+# active window title colors
+set-window-option -g window-status-current-fg yellow
+set-window-option -g window-status-current-bg red
+set-window-option -g window-status-current-attr bright
+#
+set-window-option -g mode-fg white
+set-window-option -g mode-bg red
+set-window-option -g mode-attr bright
+
+# Window options
+set-window-option -g utf8 on
+set-window-option -g clock-mode-colour blue
+set-window-option -g clock-mode-style 24
+set-window-option -g monitor-activity on
+set-window-option -g xterm-keys on
+set-window-option -g automatic-rename off
+#
+set-window-option -g window-status-format ' #I-#S '
+set-window-option -g window-status-current-format ' #I-#S '
 
 setw -g aggressive-resize on
 
 # Activity monitoring
 setw -g monitor-activity on
 set -g visual-activity on
-
-# Highlight active window
-set-window-option -g window-status-current-bg red
