@@ -13,50 +13,28 @@ bind-key a send-prefix
 # reload config
 bind R source-file ~/.tmux.conf \; display-message " Tmux config reloaded...".
 
-# Start numbering at 1
+# start numbering at 1
 set -g base-index 1
 
-# Allows for faster key repetition
+# allows for faster key repetition
 set -s escape-time 0
 
-#statusbar
+# statusbar
 set-option -g   status-utf8 on
 set-option -g   status-interval 5
-set-option -g   status-justify left
-set-option -g   status-left-length 15
-set-option -g   status-left ' #h |'
-set-option -g   status-right ' | %Y-%m-%d %H:%M #[default]'
+set-option -g   status-right ' #(whoami) | #h | %Y-%m-%d %H:%M #[default]'
 
-# default statusbar colors
-set-option -g   status-fg white
-set-option -g   status-bg black
-# set-option -g   status-attr bright
-set-option -g   status-keys vi
+set -g status-fg white
+set -g status-bg colour234
+set -g window-status-activity-attr bold
+set -g pane-border-fg colour245
+set -g pane-active-border-fg colour39
+set -g message-fg colour16
+set -g message-bg colour221
 
-# default window title colors
-set-window-option -g window-status-fg white
-set-window-option -g window-status-bg black
-set-window-option -g window-status-attr dim
-
-# active window title colors
-set-window-option -g window-status-current-fg yellow
-set-window-option -g window-status-current-bg red
-set-window-option -g window-status-current-attr bright
-#
-set-window-option -g mode-fg white
-set-window-option -g mode-bg red
-set-window-option -g mode-attr bright
-
-# Window options
-set-window-option -g utf8 on
-set-window-option -g clock-mode-colour blue
-set-window-option -g clock-mode-style 24
-set-window-option -g monitor-activity on
-set-window-option -g xterm-keys on
-set-window-option -g automatic-rename off
-#
-set-window-option -g window-status-format ' #I-#S '
-set-window-option -g window-status-current-format ' #I-#S '
+set -g status-left "#[fg=colour16,bg=colour252,nobold] ❐ #S "
+set -g window-status-format "#[fg=white,bg=colour234] #I #W "
+set -g window-status-current-format "#[fg=colour16,bg=red,noreverse,nobold] #I #W "
 
 setw -g aggressive-resize on
 
