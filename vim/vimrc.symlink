@@ -25,7 +25,6 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set modelines=0
-set noshowmode
 set showcmd
 set showtabline=2
 set hidden
@@ -43,21 +42,19 @@ set dictionary=/usr/share/dict/words
 set splitright
 set shiftround
 set autoread
-set title
 set cursorline
 set cmdheight=2
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ %P
-set shell=bash
-set t_ti= t_te=
 
+" Tabs
 set expandtab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2
+set shiftwidth=2
+set softtabstop=2
 set autoindent
 set smarttab
 set smartindent
-" set formatoptions=qrn1
+
+set formatoptions=qrn1
 
 " backup to ~/.tmp 
 set backup 
@@ -75,7 +72,6 @@ set incsearch
 set hlsearch
 set ignorecase smartcase
 set scrolloff=3
-
 
 set winwidth=84
 set winheight=5
@@ -183,9 +179,7 @@ if has("autocmd")
     au BufReadPost *.ss,*.eruby set syntax=html ft=html
     au BufRead,BufNewFile *.html,*.ss,*.eruby source ~/.vim/indent/html_grb.vim
 
-    au FileType ruby,haml,eruby,yaml,html,javascript,css,php,sass,scss,cucumber set ai sw=2 sts=2 et
     au FileType python set sw=4 sts=4 et
-    au FileType vim set sw=2 sts=2 et
 
     autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:&gt;
     autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
@@ -318,8 +312,6 @@ map <leader>t :call RunTestFile()<cr>
 map <leader>T :call RunNearestTest()<cr>
 map <leader>a :call RunTests('')<cr>
 map <leader>c :w\|:!script/features<cr>
-" map <leader>w :w\|:!script/features --profile wip<cr>
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SHOW SYNTAX HIGHLIGHTING GROUPS FOR WORD UNDER CURSOR
