@@ -45,6 +45,9 @@ set autoread
 set cursorline
 set cmdheight=2
 
+" Powerline shows the mode
+set noshowmode
+
 " Tabs
 set expandtab
 set tabstop=2
@@ -99,11 +102,9 @@ let iterm_profile = $ITERM_PROFILE
 if iterm_profile == "solarized-light"
   set bg=light
   colorscheme solarized
-  set showtabline=0
 endif
 if iterm_profile == "solarized-dark"
   colorscheme solarized
-  set showtabline=0
 endif
 
 if has("gui_running")
