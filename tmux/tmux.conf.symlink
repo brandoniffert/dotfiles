@@ -20,9 +20,9 @@ set -g base-index 1
 set -s escape-time 0
 
 # statusbar
-set-option -g   status-utf8 on
-set-option -g   status-interval 5
-set-option -g   status-right ' #(whoami) | #h | %Y-%m-%d %H:%M #[default]'
+set -g status-utf8 on
+set -g status-interval 5
+set -g status-right '#(whoami) | #h | %Y-%m-%d'
 
 set -g status-fg white
 set -g status-bg colour234
