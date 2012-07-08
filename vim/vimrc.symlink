@@ -93,9 +93,9 @@ let mapleader=","
 syntax on
 set fillchars+=vert:│
 
-" By default, use bti256
+" By default, use wombat256mod
 set bg=dark
-colorscheme bti256
+colorscheme wombat256mod
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
