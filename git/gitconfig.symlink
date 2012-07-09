@@ -3,14 +3,17 @@
   email = brandoniffert@gmail.com
 
 [alias]
+  a = add
+  aa = add --all
   ci = commit
+  cl = clone
   cm = commit -m
   co = checkout
-  st = status
-  aa = add --all
-  a = add
+  d = diff
+  dc = diff --cached
   l = log --graph --abbrev-commit --date=relative
   la = log --graph --abbrev-commit --date=relative --all
+  st = status
 
 [color]
   branch = auto
