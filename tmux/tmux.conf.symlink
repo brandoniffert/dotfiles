@@ -40,14 +40,14 @@ bind j select-pane -D
 bind k select-pane -U
 bind l select-pane -R
 
-# resize panes with vim motion keys
-bind-key J resize-pane -D 5
-bind-key K resize-pane -U 5
-bind-key H resize-pane -L 5
-bind-key L resize-pane -R 5
+# resize panes with arrow keys
+bind-key C-Down resize-pane -D 5
+bind-key C-Up resize-pane -U 5
+bind-key C-Left resize-pane -L 5
+bind-key C-Right resize-pane -R 5
 
 # statusbar
-set -g display-time 1500
+set -g display-time 1000
 set -g status-utf8 on
 set -g status-interval 5
 set -g status-left-length 48
