@@ -44,6 +44,7 @@ set shiftround
 set autoread
 set cursorline
 set cmdheight=2
+set lazyredraw
 
 " Powerline shows the mode
 set noshowmode
@@ -57,7 +58,7 @@ set autoindent
 set smarttab
 set smartindent
 
-set formatoptions=qrn1
+set formatoptions=qn1
 
 " backup to ~/.tmp 
 set backup 
