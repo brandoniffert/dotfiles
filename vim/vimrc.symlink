@@ -178,16 +178,12 @@ if has("autocmd")
     " For all text files set 'textwidth' to 78 characters.
     au FileType text setlocal textwidth=78
 
-    au BufReadPost *.ss,*.eruby set syntax=html ft=html
-    au BufRead,BufNewFile *.html,*.ss,*.eruby source ~/.vim/indent/html_grb.vim
+    au BufNewFile,BufRead *.ss,*.erb silent set syntax=html ft=html
+    au BufNewFile,BufRead *.php silent set syntax=phtml ft=phtml
 
     au FileType python set sw=4 sts=4 et
 
-    autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:&gt;
-    autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
-    " Indent p tags
-    autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
+    au BufRead *.md,*.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
