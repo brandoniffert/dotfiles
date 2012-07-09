@@ -22,7 +22,9 @@ set -s escape-time 0
 # statusbar
 set -g status-utf8 on
 set -g status-interval 5
-set -g status-right '#(whoami) | #h | %Y-%m-%d'
+set -g status-left-length 48
+set -g status-right-length 150
+set -g status-right '%Y-%m-%d | %H:%M'
 
 set -g status-fg white
 set -g status-bg colour234
