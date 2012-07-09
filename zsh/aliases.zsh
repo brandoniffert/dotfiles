@@ -8,4 +8,4 @@ alias proj='cd $HOME/Projects'
 alias sites='cd $HOME/Sites'
 alias dot='cd $HOME/.dotfiles'
 
-alias t='tmux'
+alias t='tmux -u'
