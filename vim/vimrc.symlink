@@ -178,8 +178,9 @@ if has("autocmd")
     " For all text files set 'textwidth' to 78 characters.
     au FileType text setlocal textwidth=78
 
-    au BufNewFile,BufRead *.ss,*.erb silent set syntax=html ft=html
-    au BufNewFile,BufRead *.php silent set syntax=phtml ft=phtml
+    au BufNewFile,BufRead *.ss,*.erb silent set ft=html
+    au BufNewFile,BufRead *.php silent set ft=phtml
+    au BufNewFile,BufRead /etc/nginx/*.conf silent set ft=nginx
 
     au FileType python set sw=4 sts=4 et
 
