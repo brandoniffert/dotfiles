@@ -78,11 +78,6 @@ set hlsearch
 set ignorecase smartcase
 set scrolloff=3
 
-set winwidth=84
-set winheight=5
-set winminheight=5
-set winheight=999
-
 set foldmethod=marker
 set foldlevelstart=0
 nnoremap <space> za
@@ -140,6 +135,8 @@ nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
 nnoremap <leader>v V`]
 " create a new vertical split window and switch over to it
 nnoremap <leader>sv :botright vnew<cr>
+" create a new horizontal split window
+nnoremap <leader>hs :sp<cr>
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
 " open .vimrc to edit in the current window
