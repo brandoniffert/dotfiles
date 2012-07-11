@@ -43,8 +43,16 @@ directory_name() {
     echo "%{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
+current_user() {
+  if [[ $EUID -ne 0 ]]; then
+    echo "%{$fg_bold[green]%}%n%{$reset_color%}"
+  else
+    echo "%{$fg[red]%}root%{$reset_color%}"
+  fi
+}
+
 precmd() {
     title "zsh" "%n@%m" "%55<...<%~"
 }
 
-export PROMPT=$'$(directory_name)$(git_dirty)$(need_push)%{$fg_bold[yellow]%}$%{$reset_color%} '
+export PROMPT=$'$(current_user) in $(directory_name)$(git_dirty)$(need_push)%{$fg_bold[blue]%}\n$%{$reset_color%} '
