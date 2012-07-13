@@ -18,6 +18,7 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
+Bundle 'tmhedberg/matchit'
 
 filetype plugin indent on
 
@@ -69,7 +70,7 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set writebackup
 
 set wildmenu
-set wildmode=list:longest,list:full
+set wildmode=longest,list:longest,list:full
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store
 
 set showmatch
