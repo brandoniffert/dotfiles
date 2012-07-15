@@ -80,6 +80,11 @@ set hlsearch
 set ignorecase smartcase
 set scrolloff=3
 
+set winwidth=84
+set winheight=7
+set winminheight=7
+set winheight=999
+
 set foldmethod=marker
 set foldlevelstart=0
 nnoremap <space> za
