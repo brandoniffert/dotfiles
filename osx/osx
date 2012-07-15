@@ -1,0 +1,73 @@
+###############################################################################
+## General UI/UX                                                              #
+###############################################################################
+
+# Menu bar: disable transparency
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+
+# Menu bar: show remaining battery time; hide percentage
+defaults write com.apple.menuextra.battery ShowPercent -string "NO"
+defaults write com.apple.menuextra.battery ShowTime -string "YES"
+
+# Expand save panel by default
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
+
+# Disable Resume system-wide
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+
+###############################################################################
+## Finder                                                                     #
+###############################################################################
+
+# Finder: show all filename extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+# Finder: show status bar
+defaults write com.apple.finder ShowStatusBar -bool true
+
+# Finder: allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Disable the warning when changing a file extension
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Empty Trash securely by default
+defaults write com.apple.finder EmptyTrashSecurely -bool true
+
+# Show the ~/Library folder
+chflags nohidden ~/Library
+
+###############################################################################
+# Address Book, Dashboard, iCal, iTunes, Mail, and Disk Utility               #
+###############################################################################
+
+# Disable the iTunes arrow links completely
+defaults write com.apple.iTunes show-store-arrow-links -bool false
+
+# Disable the Ping sidebar in iTunes
+defaults write com.apple.iTunes disablePingSidebar -bool true
+
+# Disable all the other Ping stuff in iTunes
+defaults write com.apple.iTunes disablePing -bool true
+
+# Make ⌘ + F focus the search input in iTunes
+defaults write com.apple.iTunes NSUserKeyEquivalents -dict-add "Target Search Field" "@F"
+
+###############################################################################
+# Time Machine                                                                #
+###############################################################################
+
+# Prevent Time Machine from prompting to use new hard drives as backup volume
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+
+###############################################################################
+## Kill affected applications                                                 #
+###############################################################################
+
+for app in Finder Dock Mail Safari iTunes iCal Address\ Book SystemUIServer; do
+  killall "$app" > /dev/null 2>&1
+done
+echo "Done. Note that some of these changes require a logout/restart to take effect."
