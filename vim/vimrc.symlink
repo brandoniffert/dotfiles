@@ -47,7 +47,6 @@ set shiftround
 set autoread
 set cursorline
 set cmdheight=2
-set lazyredraw
 
 " Powerline shows the mode
 set noshowmode
