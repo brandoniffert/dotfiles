@@ -197,8 +197,6 @@ if has("autocmd")
 
     au FileType python set sw=4 sts=4 et
 
-    au BufRead *.md,*.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
-
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     " (happens when dropping a file on gvim).
@@ -326,7 +324,4 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if filereadable(expand("$HOME/.vimrc.local"))
   so $HOME/.vimrc.local
-endif
-if filereadable(expand("$PWD/.vimrc.local"))
-  so $PWD/.vimrc.local
 endif
