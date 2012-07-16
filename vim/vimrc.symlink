@@ -46,7 +46,7 @@ set splitright
 set shiftround
 set autoread
 set cursorline
-set cmdheight=1
+set cmdheight=2
 
 " Powerline shows the mode
 set noshowmode
