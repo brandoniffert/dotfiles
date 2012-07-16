@@ -138,6 +138,7 @@ nnoremap <C-l> <C-W>l
 " use Command-T if available...
 if has('ruby')
   let g:CommandTCancelMap=['<esc>', '<C-c>']
+  let g:CommandTMaxHeight=20
   nnoremap <silent> <leader>f :CommandTFlush<cr>:CommandT<cr>
 else
 " else CtrlP
