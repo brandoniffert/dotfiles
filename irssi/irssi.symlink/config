@@ -124,6 +124,7 @@ statusbar = {
         lag = { priority = "-1"; };
         more = { priority = "-1"; alignment = "right"; };
         barend = { priority = "100"; alignment = "right"; };
+        usercount = { };
       };
     };
 
@@ -183,8 +184,7 @@ statusbar = {
 settings = {
   core = { real_name = "Unknown"; user_name = "bti"; nick = "bti"; };
   "fe-text" = { actlist_sort = "refnum"; };
-  "perl/core/scripts" = {
-    awl_block = "20";
-    awl_display_key = "($Q|$N) $H$C$S";
-  };
+  "perl/core/scripts" = { awl_block = "20"; };
+  "fe-common/core" = { theme = "fear2-bti"; };
 };
+hilights = ( { text = "bti"; nick = "yes"; word = "no"; } );
