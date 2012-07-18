@@ -185,6 +185,5 @@ settings = {
   core = { real_name = "Unknown"; user_name = "bti"; nick = "bti"; };
   "fe-text" = { actlist_sort = "refnum"; };
   "perl/core/scripts" = { awl_block = "20"; };
-  "fe-common/core" = { theme = "fear2-bti"; };
+  "fe-common/core" = { theme = "industrial"; };
 };
-hilights = ( { text = "bti"; nick = "yes"; word = "no"; } );
