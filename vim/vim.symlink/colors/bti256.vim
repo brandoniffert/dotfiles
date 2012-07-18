@@ -34,3 +34,6 @@ hi LineNr guifg=#aaaaaa ctermfg=243
 hi VertSplit guibg=#dedede
 hi StatusLine guibg=#ffffff guifg=#222222
 hi StatusLineNC guibg=#ababab 
+
+hi NonText ctermfg=darkgray
+hi Ignore ctermfg=darkgray
