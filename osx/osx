@@ -40,6 +40,9 @@ defaults write com.apple.finder EmptyTrashSecurely -bool true
 # Show the ~/Library folder
 chflags nohidden ~/Library
 
+# Make Quick Look text selectable
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
 ###############################################################################
 # Address Book, Dashboard, iCal, iTunes, Mail, and Disk Utility               #
 ###############################################################################
