@@ -20,6 +20,7 @@ Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'wincent/Command-T'
+Bundle 'gregsexton/Muon'
 
 filetype plugin indent on
 
@@ -83,9 +84,9 @@ let mapleader=","
 syntax on
 set t_Co=256
 
-" By default, use bti256
+" By default, use Muon
 set bg=dark
-colorscheme bti256
+colorscheme muon
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
