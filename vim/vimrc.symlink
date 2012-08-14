@@ -46,6 +46,7 @@ set noshowmode
 
 " Tabs & Indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+set shiftround
 set autoindent smarttab smartindent
 
 set formatoptions=qn1
