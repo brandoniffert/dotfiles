@@ -91,6 +91,7 @@ set t_Co=256
 set bg=dark
 colorscheme hybrid
 hi Normal ctermbg=NONE
+hi LineNr ctermfg=239
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
