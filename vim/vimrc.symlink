@@ -25,7 +25,7 @@ Bundle 'w0ng/vim-hybrid'
 filetype plugin indent on
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" BASICS
+" GENERAL
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set nomodeline
@@ -40,6 +40,8 @@ set showbreak=↪
 set autoread
 set cursorline
 set cmdheight=2
+set scrolloff=3
+set fillchars=vert:¦
 
 " Powerline shows the mode
 set noshowmode
@@ -49,8 +51,6 @@ set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set shiftround
 set autoindent smarttab smartindent
 
-set formatoptions=qn1
-
 " Backups
 set backup 
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
@@ -58,21 +58,24 @@ set backupskip=/tmp/*,/private/tmp/*
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp 
 set writebackup
 
+" Wildmenu
 set wildmenu
 set wildmode=longest,list:longest,list:full
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store
 
+" Searching
 set showmatch
 set incsearch
 set hlsearch
 set ignorecase smartcase
-set scrolloff=3
 
+" Accordion horizontal splits
 set winwidth=84
-set winheight=7
-set winminheight=7
+set winheight=10
+set winminheight=10
 set winheight=999
 
+" Folding
 set foldmethod=marker
 set foldlevelstart=0
 nnoremap <space> za
@@ -117,7 +120,7 @@ nnoremap <C-l> <C-W>l
 " use Command-T if available...
 if has('ruby')
   let g:CommandTCancelMap=['<esc>', '<C-c>']
-  let g:CommandTMaxHeight=20
+  let g:CommandTMaxHeight=25
   nnoremap <silent> <leader>f :CommandTFlush<cr>:CommandT<cr>
 else
 " else CtrlP
@@ -130,7 +133,7 @@ nnoremap <leader>v V`]
 " create a new vertical split window and switch over to it
 nnoremap <leader>sv :botright vnew<cr>
 " create a new horizontal split window
-nnoremap <leader>hs :sp<cr>
+nnoremap <leader>sh :sp<cr>
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
 " open .vimrc to edit in the current window
@@ -145,11 +148,11 @@ nnoremap <S-Tab> <<
 vnoremap <Tab> >gv 
 vnoremap <S-Tab> <gv
 " yank to system clipboard
-map <leader>y "*y
+nnoremap <leader>y "*y
 " paste from system clipboard
-map <leader>p "*p
+nnoremap <leader>p "*p
 " toggle spell check
-map <leader>ss :setlocal spell!<cr>
+nnoremap <leader>ss :setlocal spell!<cr>
 
 " open directory of file in Finder
 if has('mac')
@@ -171,6 +174,7 @@ if has("autocmd")
 
     au BufNewFile,BufRead *.ss,*.erb silent set ft=html
     au BufNewFile,BufRead /etc/nginx/*.conf silent set ft=nginx
+    au BufNewFile,BufRead * setlocal formatoptions=cqnl
 
     au FileType python set sta=4 sw=4 sts=4 et
 
