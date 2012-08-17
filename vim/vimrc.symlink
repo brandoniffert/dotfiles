@@ -85,7 +85,7 @@ let mapleader=","
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " ENVIRONMENTS AND COLOR
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax on
+syntax enable
 set t_Co=256
 
 set bg=dark
@@ -101,6 +101,7 @@ if iterm_profile == "solarized-light"
   set showtabline=0
 endif
 if iterm_profile == "solarized-dark"
+  set bg=dark
   colorscheme solarized
   set showtabline=0
 endif
