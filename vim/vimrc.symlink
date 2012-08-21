@@ -21,6 +21,7 @@ Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'wincent/Command-T'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'Lokaltog/vim-easymotion'
 
 filetype plugin indent on
 
@@ -118,6 +119,8 @@ nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
+
+let g:EasyMotion_leader_key = '<Leader>m'
 
 " use Command-T if available...
 if has('ruby')
