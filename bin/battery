@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-HEART_CONNECTED=♥
-HEART_DISCONNECTED=♡
+HEART_CONNECTED=+
+HEART_DISCONNECTED=-
 
 case $(uname -s) in
     "Darwin")
@@ -23,9 +23,9 @@ case $(uname -s) in
                     exit
                 fi
                 if [[ "$extconnect" == "Yes" ]]; then
-                    echo $HEART_CONNECTED $(( 100 * $curcap / $maxcap ))"%"
+                    echo $(( 100 * $curcap / $maxcap )) $HEART_CONNECTED""
                 else
-                    echo $HEART_DISCONNECTED $(( 100 * $curcap / $maxcap ))"%"
+                    echo $(( 100 * $curcap / $maxcap )) $HEART_DISCONNECTED""
                 fi
                 break
             fi
