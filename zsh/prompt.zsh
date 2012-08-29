@@ -40,7 +40,7 @@ need_push () {
 }
 
 directory_name() {
-    echo "%{$fg_bold[green]%}${PWD/#$HOME/~}%{$reset_color%}"
+    echo "%{$fg_bold[yellow]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 current_user() {
