@@ -99,6 +99,7 @@ let iterm_profile = $ITERM_PROFILE
 if iterm_profile == "solarized-light"
   set bg=light
   colorscheme solarized
+  hi VertSplit ctermbg=NONE
   set showtabline=0
 endif
 if iterm_profile == "solarized-dark"
