@@ -168,6 +168,22 @@ endif
 nmap Y y$
 map Q gq
 
+function! RunCurrentFile()
+  let ft = &ft
+  exec ':w'
+
+  if ft == 'ruby'
+    exec ':!ruby %'
+  endif
+  if ft == 'php'
+    exec ':!php -f %'
+  endif
+  if ft == 'sh'
+    exec ':!bash %'
+  endif
+endfunction
+nnoremap <leader>r :call RunCurrentFile()<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOCOMMANDS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
