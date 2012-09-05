@@ -93,14 +93,13 @@ set t_Co=256
 set bg=dark
 colorscheme Tomorrow-Night
 hi Normal ctermbg=NONE
-hi LineNr ctermfg=239
+hi VertSplit ctermbg=NONE
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
 if iterm_profile == "solarized-light"
   set bg=light
   colorscheme solarized
-  hi VertSplit ctermbg=NONE
   set showtabline=0
 endif
 if iterm_profile == "solarized-dark"
