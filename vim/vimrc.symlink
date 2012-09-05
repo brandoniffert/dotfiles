@@ -21,6 +21,7 @@ Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'wincent/Command-T'
 Bundle 'w0ng/vim-hybrid'
+Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'Lokaltog/vim-easymotion'
 
 filetype plugin indent on
