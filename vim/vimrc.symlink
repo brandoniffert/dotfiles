@@ -90,7 +90,7 @@ syntax enable
 set t_Co=256
 
 set bg=dark
-colorscheme hybrid
+colorscheme Tomorrow-Night
 hi Normal ctermbg=NONE
 hi LineNr ctermfg=239
 
