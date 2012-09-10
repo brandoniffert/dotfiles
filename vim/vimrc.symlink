@@ -22,6 +22,7 @@ Bundle 'tmhedberg/matchit'
 Bundle 'wincent/Command-T'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'scrooloose/nerdtree'
 
 filetype plugin indent on
 
@@ -132,6 +133,9 @@ else
   let cwd = getcwd()
   nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
 endif
+
+" toggle NERDTree
+nnoremap <C-n> :NERDTreeToggle<cr>
 
 " select text that was just pasted
 nnoremap <leader>v V`]
