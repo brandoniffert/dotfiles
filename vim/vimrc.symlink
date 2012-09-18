@@ -64,7 +64,7 @@ set writebackup
 " Wildmenu
 set wildmenu
 set wildmode=longest,list:longest,list:full
-set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store
+set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc
 
 " Searching
 set showmatch
