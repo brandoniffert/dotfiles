@@ -185,6 +185,9 @@ function! RunCurrentFile()
   if ft == 'sh'
     exec ':!bash %'
   endif
+  if ft == 'python'
+    exec ':!python %'
+  endif
 endfunction
 nnoremap <leader>r :call RunCurrentFile()<cr>
 
@@ -202,7 +205,7 @@ if has("autocmd")
     au BufNewFile,BufRead /etc/nginx/*.conf silent set ft=nginx
     au BufNewFile,BufRead * setlocal formatoptions=cqnl
 
-    au FileType python set sta=4 sw=4 sts=4 et
+    au FileType python set sw=4 sts=4 et
 
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
