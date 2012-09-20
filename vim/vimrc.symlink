@@ -24,6 +24,7 @@ Bundle 'wincent/Command-T'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
+Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on
 
