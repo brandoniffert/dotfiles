@@ -1,0 +1,17 @@
+// Settings in here override those in "Default/Preferences.sublime-settings", and
+// are overridden in turn by file type specific settings.
+{
+  "color_scheme": "Packages/Theme - Tomorrow/textmate/Tomorrow-Night.tmTheme",
+  "font_face": "Inconsolata-g",
+  "font_size": 12,
+  "tab_size": 2,
+  "translate_tabs_to_spaces": true,
+  "matchBracketsAngle": true,
+  "matchBracketsBraces": true,
+  "matchBracketsSquare": true,
+  "trimTrailingWhiteSpaceOnSave": true,
+  "highlight_modified_tabs": true,
+  "highlight_line": true,
+  "remember_open_files": false,
+  "hot_exit": false
+}
