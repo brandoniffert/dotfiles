@@ -14,9 +14,9 @@ git_dirty() {
     else
         if [[ $st == "nothing to commit (working directory clean)" ]]
         then
-            echo " on %{$fg_bold[green]%}$(git_prompt_info)%{$reset_color%}"
+            echo " on %{$fg[green]%}$(git_prompt_info)%{$reset_color%}"
         else
-            echo " on %{$fg_bold[red]%}$(git_prompt_info)%{$reset_color%}"
+            echo " on %{$fg[red]%}$(git_prompt_info)%{$reset_color%}"
         fi
     fi
 }
@@ -35,17 +35,17 @@ need_push () {
     then
         echo " "
     else
-        echo " with %{$fg_bold[magenta]%}unpushed%{$reset_color%} "
+        echo " with %{$fg[magenta]%}unpushed%{$reset_color%} "
     fi
 }
 
 directory_name() {
-    echo "%{$fg_bold[yellow]%}${PWD/#$HOME/~}%{$reset_color%}"
+    echo "%{$fg[yellow]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 current_user() {
   if [[ $EUID -ne 0 ]]; then
-    echo "%{$fg_bold[blue]%}%n%{$reset_color%}"
+    echo "%{$fg[blue]%}%n%{$reset_color%}"
   else
     echo "%{$fg[red]%}root%{$reset_color%}"
   fi
