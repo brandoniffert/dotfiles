@@ -108,6 +108,14 @@ if iterm_profile == "solarized-dark"
   set showtabline=0
 endif
 
+if has('gui_macvim')
+  set guifont=Inconsolata-g:h12
+  set guioptions-=r
+  set guioptions-=L
+  set guioptions-=b
+  set showtabline=0
+endif
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
