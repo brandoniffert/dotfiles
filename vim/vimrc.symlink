@@ -19,12 +19,9 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'Valloric/MatchTagAlways'
-Bundle 'wincent/Command-T'
 Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
-Bundle 'kchmck/vim-coffee-script'
 
 filetype plugin indent on
 
@@ -33,7 +30,6 @@ filetype plugin indent on
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
 set nomodeline
-set showtabline=2
 set hidden
 set ruler
 set number
@@ -100,12 +96,6 @@ let iterm_profile = $ITERM_PROFILE
 if iterm_profile == "solarized-light"
   set bg=light
   colorscheme solarized
-  set showtabline=0
-endif
-if iterm_profile == "solarized-dark"
-  set bg=dark
-  colorscheme solarized
-  set showtabline=0
 endif
 
 if has('gui_macvim')
@@ -113,7 +103,6 @@ if has('gui_macvim')
   set guioptions-=r
   set guioptions-=L
   set guioptions-=b
-  set showtabline=0
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -131,16 +120,10 @@ nnoremap <C-l> <C-W>l
 
 let g:EasyMotion_leader_key = '<Leader>m'
 
-" use Command-T if available...
-if has('ruby')
-  let g:CommandTCancelMap=['<esc>', '<C-c>']
-  let g:CommandTMaxHeight=25
-  nnoremap <silent> <leader>f :CommandTFlush<cr>:CommandT<cr>
-else
-" else CtrlP
-  let cwd = getcwd()
-  nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
-endif
+" CtrlP
+let g:ctrlp_max_height = 25
+let cwd = getcwd()
+nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
 
 " toggle NERDTree
 nnoremap <C-n> :NERDTreeToggle<cr>
@@ -178,6 +161,9 @@ endif
 
 nmap Y y$
 map Q gq
+
+" make the split full width - useful when more space is temporarily needed
+nnoremap <S-M> :vertical resize 999<cr>
 
 function! RunCurrentFile()
   let ft = &ft
