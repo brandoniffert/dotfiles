@@ -1,13 +1,9 @@
 autoload colors && colors
-# cheers, @ehrenmurdick
-# http://github.com/ehrenmurdick/config/blob/master/zsh/prompt.zsh
 
-git_branch() {
-    echo $(/usr/bin/git symbolic-ref HEAD 2>/dev/null | awk -F/ {'print $NF'})
-}
+git=`which git`
 
 git_dirty() {
-    st=$(/usr/bin/git status 2>/dev/null | tail -n 1)
+    st=$($git status 2>/dev/null | tail -n 1)
     if [[ $st == "" ]]
     then
         echo ""
@@ -22,12 +18,12 @@ git_dirty() {
 }
 
 git_prompt_info () {
-    ref=$(/usr/bin/git symbolic-ref HEAD 2>/dev/null) || return
+    ref=$($git symbolic-ref HEAD 2>/dev/null) || return
     echo "${ref#refs/heads/}"
 }
 
 unpushed () {
-    /usr/bin/git cherry -v @{upstream} 2>/dev/null
+    $git cherry -v @{upstream} 2>/dev/null
 }
 
 need_push () {
