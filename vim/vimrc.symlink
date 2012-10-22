@@ -111,7 +111,7 @@ endif
 inoremap jj <Esc>
 nnoremap j gj
 nnoremap k gk
-nnoremap <CR> :nohlsearch<cr>
+nnoremap <silent> <CR> :nohlsearch<cr>
 " use hjkl for switching between splits
 nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
@@ -126,14 +126,14 @@ let cwd = getcwd()
 nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
 
 " toggle NERDTree
-nnoremap <C-n> :NERDTreeToggle<cr>
+nnoremap <silent> <C-n> :NERDTreeToggle<cr>
 
 " select text that was just pasted
 nnoremap <leader>v V`]
 " create a new vertical split window and switch over to it
-nnoremap <leader>sv :botright vnew<cr>
+nnoremap <silent> <leader>sv :botright vnew<cr>
 " create a new horizontal split window
-nnoremap <leader>sh :sp<cr>
+nnoremap <silent> <leader>sh :sp<cr>
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
 " open .vimrc to edit in the current window
@@ -152,7 +152,7 @@ nnoremap <leader>y "*y
 " paste from system clipboard
 nnoremap <leader>p "*p
 " toggle spell check
-nnoremap <leader>ss :setlocal spell!<cr>
+nnoremap <silent> <leader>ss :setlocal spell!<cr>
 
 " open directory of file in Finder
 if has('mac')
@@ -163,7 +163,7 @@ nmap Y y$
 map Q gq
 
 " make the split full width - useful when more space is temporarily needed
-nnoremap <S-M> :vertical resize 999<cr>
+nnoremap <silent> <S-M> :vertical resize 999<cr>
 
 function! RunCurrentFile()
   let ft = &ft
