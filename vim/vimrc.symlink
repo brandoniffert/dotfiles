@@ -19,7 +19,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'chriskempson/tomorrow-theme', {'rtp': 'vim/'}
+Bundle 'wgibbs/vim-irblack'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
 
@@ -62,15 +62,12 @@ set wildmode=longest,list:longest,list:full
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc
 
 " Searching
-set showmatch
-set incsearch
-set hlsearch
-set ignorecase smartcase
+set showmatch incsearch hlsearch ignorecase smartcase
 
 " Accordion horizontal splits
 set winwidth=84
-set winheight=10
-set winminheight=10
+set winheight=15
+set winminheight=15
 set winheight=999
 
 " Folding
@@ -87,8 +84,7 @@ syntax enable
 set t_Co=256
 
 set bg=dark
-colorscheme Tomorrow-Night
-hi Normal ctermbg=NONE
+colorscheme ir_black
 hi VertSplit ctermbg=NONE
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
