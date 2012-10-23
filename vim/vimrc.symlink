@@ -19,7 +19,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'nanotech/jellybeans.vim'
+Bundle 'vim-scripts/Lucius'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
 
