@@ -19,7 +19,7 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'wgibbs/vim-irblack'
+Bundle 'nanotech/jellybeans.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
 
@@ -84,8 +84,7 @@ syntax enable
 set t_Co=256
 
 set bg=dark
-colorscheme ir_black
-hi VertSplit ctermbg=NONE
+colorscheme bti256
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
