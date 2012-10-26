@@ -9,3 +9,5 @@ alias sites='cd $HOME/Sites'
 alias dot='cd $HOME/.dotfiles'
 
 alias t='tmux -u'
+
+alias create-ss-module='touch _config.php && mkdir code && mkdir -p templates/Includes && mkdir -p templates/Layout && mkdir stylesheets && mkdir -p javascripts/vendor'
