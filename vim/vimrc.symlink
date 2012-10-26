@@ -16,6 +16,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
+Bundle 'wincent/Command-T'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'ervandew/supertab'
@@ -115,10 +116,17 @@ nnoremap <C-l> <C-W>l
 
 let g:EasyMotion_leader_key = '<Leader>m'
 
-" CtrlP
-let g:ctrlp_max_height = 15
-let cwd = getcwd()
-nnoremap <leader>f :CtrlP cwd<cr><f5><cr>
+" use Command-T if available...
+if has('ruby')
+  let g:CommandTCancelMap=['<esc>', '<C-c>']
+  let g:CommandTMaxHeight=15
+  nnoremap <silent> <leader>f :CommandTFlush<cr>:CommandT<cr>
+else
+" else CtrlP
+  let g:ctrlp_max_height = 15
+  let cwd = getcwd()
+  nnoremap <silent> <leader>f :CtrlP cwd<cr><f5><cr>
+endif
 
 " toggle NERDTree
 nnoremap <silent> <C-n> :NERDTreeToggle<cr>
