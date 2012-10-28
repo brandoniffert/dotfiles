@@ -43,6 +43,11 @@ set cursorline
 set cmdheight=2
 set scrolloff=3
 set fillchars=vert:¦
+set notimeout
+set ttimeout
+set ttimeoutlen=10
+set complete=.,w,b,u,t
+set completeopt=longest,menuone,preview
 
 " Powerline shows the mode
 set noshowmode
