@@ -23,6 +23,7 @@ Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 filetype plugin indent on
 
