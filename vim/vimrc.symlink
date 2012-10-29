@@ -98,6 +98,7 @@ let iterm_profile = $ITERM_PROFILE
 if iterm_profile == "solarized-light"
   set bg=light
   colorscheme solarized
+  let g:Powerline_colorscheme = 'solarized256'
 endif
 
 if has('gui_macvim')
