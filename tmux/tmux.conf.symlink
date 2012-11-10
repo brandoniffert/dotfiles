@@ -50,7 +50,7 @@ bind-key C-Right resize-pane -R 5
 set -g display-time 1000
 set -g status-utf8 on
 set -g status-interval 5
-set -g status-right '%A %B %d, %Y :: %H:%M :: #(~/.dotfiles/bin/battery) '
+set -g status-right '%A %B %d, %Y :: %H:%M'
 
 set -g status-fg default
 set -g status-bg default
