@@ -14,16 +14,13 @@ Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'kien/ctrlp.vim'
 Bundle 'wincent/Command-T'
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'w0ng/vim-hybrid'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'Lokaltog/vim-easymotion'
 Bundle 'scrooloose/nerdtree'
-Bundle 'nathanaelkane/vim-indent-guides'
 
 filetype plugin indent on
 
@@ -33,8 +30,8 @@ filetype plugin indent on
 set encoding=utf-8
 set nomodeline
 set hidden
+" set number
 set ruler
-set number
 set backspace=eol,start,indent
 set laststatus=2
 set history=10000
@@ -44,14 +41,12 @@ set cursorline
 set cmdheight=2
 set scrolloff=3
 set fillchars=vert:¦
+set showcmd
 set notimeout
 set ttimeout
 set ttimeoutlen=10
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
-
-" Powerline shows the mode
-set noshowmode
 
 " Tabs & Indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -71,16 +66,13 @@ set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc
 " Searching
 set showmatch incsearch hlsearch ignorecase smartcase
 
-" Accordion horizontal splits
-set winwidth=84
-set winheight=15
-set winminheight=15
-set winheight=999
-
 " Folding
 set foldmethod=marker
 set foldlevelstart=0
 nnoremap <space> za
+
+" Status Line
+set statusline=\ %<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ %P\ 
 
 let mapleader=","
 
@@ -98,7 +90,6 @@ let iterm_profile = $ITERM_PROFILE
 if iterm_profile == "solarized-light"
   set bg=light
   colorscheme solarized
-  let g:Powerline_colorscheme = 'solarized256'
 endif
 
 if has('gui_macvim')
@@ -111,7 +102,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPS
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap jj <Esc>
 nnoremap j gj
 nnoremap k gk
 nnoremap <silent> <CR> :nohlsearch<cr>
@@ -126,11 +116,11 @@ let g:EasyMotion_leader_key = '<Leader>m'
 " use Command-T if available...
 if has('ruby')
   let g:CommandTCancelMap=['<esc>', '<C-c>']
-  let g:CommandTMaxHeight=15
+  let g:CommandTMaxHeight=20
   nnoremap <silent> <leader>f :CommandTFlush<cr>:CommandT<cr>
 else
 " else CtrlP
-  let g:ctrlp_max_height = 15
+  let g:ctrlp_max_height = 20
   let cwd = getcwd()
   nnoremap <silent> <leader>f :CtrlP cwd<cr><f5><cr>
 endif
