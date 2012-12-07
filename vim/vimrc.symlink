@@ -30,7 +30,7 @@ filetype plugin indent on
 set encoding=utf-8
 set nomodeline
 set hidden
-" set number
+set number
 set ruler
 set backspace=eol,start,indent
 set laststatus=2
