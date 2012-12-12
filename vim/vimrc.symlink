@@ -21,6 +21,8 @@ Bundle 'w0ng/vim-hybrid'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'scrooloose/nerdtree'
+Bundle 'mattn/gist-vim'
+Bundle 'mattn/webapi-vim'
 
 filetype plugin indent on
 
