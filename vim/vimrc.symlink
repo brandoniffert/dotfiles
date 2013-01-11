@@ -146,7 +146,7 @@ nnoremap <S-Tab> <<
 vnoremap <Tab> >gv 
 vnoremap <S-Tab> <gv
 " yank to system clipboard
-nnoremap <leader>y "*y
+noremap <leader>y "+y
 " paste from system clipboard
 nnoremap <leader>p "*p
 " toggle spell check
