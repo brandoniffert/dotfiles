@@ -22,6 +22,7 @@ Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'mattn/gist-vim'
 Bundle 'mattn/webapi-vim'
+Bundle 'Raynes/jellybeans.vim'
 
 filetype plugin indent on
 
