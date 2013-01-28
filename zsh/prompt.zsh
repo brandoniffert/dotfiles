@@ -36,12 +36,12 @@ need_push () {
 }
 
 directory_name() {
-    echo "%{$fg_bold[blue]%}${PWD/#$HOME/~}%{$reset_color%}"
+    echo "%{$fg[cyan]%}${PWD/#$HOME/~}%{$reset_color%}"
 }
 
 current_user() {
   if [[ $EUID -ne 0 ]]; then
-    echo "%n"
+    echo "%{$fg[blue]%}%n%{$reset_color%}"
   else
     echo "%{$fg[red]%}root%{$reset_color%}"
   fi
