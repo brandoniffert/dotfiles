@@ -51,4 +51,4 @@ precmd() {
     title "zsh" "%n@%m" "%55<...<%~"
 }
 
-export PROMPT=$'$(current_user) in $(directory_name)$(git_dirty)$(need_push)\n→ '
+export PROMPT=$'$(current_user) in $(directory_name)$(git_dirty)$(need_push)\n➟ '
