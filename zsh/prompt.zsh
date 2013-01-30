@@ -41,7 +41,7 @@ directory_name() {
 
 current_user() {
   if [[ $EUID -ne 0 ]]; then
-    echo "%{$fg[cyan]%}%n%{$reset_color%}"
+    echo "%{$fg[yellow]%}%n%{$reset_color%}"
   else
     echo "%{$fg[red]%}root%{$reset_color%}"
   fi
