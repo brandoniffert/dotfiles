@@ -116,11 +116,11 @@ let g:EasyMotion_leader_key = '<Leader>e'
 " use Command-T if available...
 if has('ruby')
   let g:CommandTCancelMap=['<esc>', '<C-c>']
-  let g:CommandTMaxHeight=20
+  let g:CommandTMaxHeight=30
   nnoremap <silent> <leader>f :CommandTFlush<cr>:CommandT<cr>
 else
 " else CtrlP
-  let g:ctrlp_max_height = 20
+  let g:ctrlp_max_height = 30
   let cwd = getcwd()
   nnoremap <silent> <leader>f :CtrlP cwd<cr><f5><cr>
 endif
