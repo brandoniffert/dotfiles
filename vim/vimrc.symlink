@@ -21,6 +21,7 @@ Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'Raynes/jellybeans.vim'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'Lokaltog/vim-powerline'
 
 filetype plugin indent on
 
@@ -47,6 +48,7 @@ set ttimeout
 set ttimeoutlen=10
 set complete=.,w,b,u,t
 set completeopt=longest,menuone,preview
+set noshowmode
 
 " Tabs & Indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
