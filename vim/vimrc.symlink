@@ -161,9 +161,6 @@ endif
 nmap Y y$
 map Q gq
 
-" make the split full width - useful when more space is temporarily needed
-nnoremap <silent> <S-M> :vertical resize 999<cr>
-
 function! RunCurrentFile()
   let ft = &ft
   exec ':w'
