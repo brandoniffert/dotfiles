@@ -22,6 +22,7 @@ Bundle 'tmhedberg/matchit'
 Bundle 'Raynes/jellybeans.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
+Bundle 'johnhamelink/blade.vim'
 
 filetype plugin indent on
 
