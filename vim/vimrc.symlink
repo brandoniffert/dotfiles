@@ -90,7 +90,11 @@ colorscheme bti256
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
-if iterm_profile == "solarized-light"
+if iterm_profile == 'solarized-dark'
+  set bg=dark
+  colorscheme solarized
+endif
+if iterm_profile == 'solarized-light'
   set bg=light
   colorscheme solarized
 endif
