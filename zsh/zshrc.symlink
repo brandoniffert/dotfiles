@@ -6,10 +6,10 @@ for config_file ($ZSH/**/*.zsh) source $config_file
 
 # use .localrc for SUPER SECRET CRAP that you don't
 # want in your public, versioned repo.
-if [[ -a ~/.localrc ]]
-then
-  source ~/.localrc
-fi
+[ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
+
+# source z.sh script
+[ -f `brew --prefix`/etc/profile.d/z.sh ] && source `brew --prefix`/etc/profile.d/z.sh
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
