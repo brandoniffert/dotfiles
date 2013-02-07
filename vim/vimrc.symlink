@@ -99,6 +99,11 @@ if iterm_profile == 'solarized-light'
   set bg=light
   colorscheme solarized
 endif
+if iterm_profile == 'bti-pastel'
+  set bg=dark
+  colorscheme grb256
+  set showtabline=2
+endif
 
 if has('gui_macvim')
   set guifont=Inconsolata-g:h12
