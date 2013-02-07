@@ -103,6 +103,8 @@ if iterm_profile == 'bti-pastel'
   set bg=dark
   colorscheme grb256
   set showtabline=2
+  hi Error ctermfg=red ctermbg=NONE cterm=underline
+  hi TabLineFill ctermfg=white
 endif
 
 if has('gui_macvim')
