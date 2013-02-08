@@ -28,9 +28,6 @@ set -g base-index 1
 # allows for faster key repetition
 set -s escape-time 0
 
-# allow scrolling through history with mouse
-setw -g mode-mouse on
-
 # vim key bindings
 setw -g mode-keys vi
 
