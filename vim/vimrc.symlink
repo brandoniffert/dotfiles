@@ -86,24 +86,17 @@ let mapleader=","
 syntax enable
 set t_Co=256
 
-set bg=dark
-colorscheme bti256
-
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
-if iterm_profile == 'solarized-dark'
+if iterm_profile == 'bti-wombat'
   set bg=dark
-  colorscheme solarized
-endif
-if iterm_profile == 'solarized-light'
+  colorscheme bti-jelly256
+elseif iterm_profile == 'solarized-light'
   set bg=light
   colorscheme solarized
-endif
-if iterm_profile == 'bti-pastel'
+else
   set bg=dark
-  colorscheme grb256
-  set showtabline=2
-  hi Error ctermfg=red ctermbg=NONE cterm=underline
+  colorscheme bti-grb256
 endif
 
 if has('gui_macvim')

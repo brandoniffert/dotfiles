@@ -1,7 +1,7 @@
 " Based on
 runtime vim/colors/jellybeans.vim
 
-let g:colors_name = "bti256"
+let g:colors_name = "bti-jelly256"
 
 hi Normal ctermbg=NONE
 hi NonText ctermbg=NONE
