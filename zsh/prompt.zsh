@@ -31,7 +31,7 @@ need_push () {
     then
         echo " "
     else
-        echo " %{$fg[red]%}!%{$reset_color%} "
+        echo " %{$fg[red]%}!!!%{$reset_color%} "
     fi
 }
 
