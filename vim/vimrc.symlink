@@ -118,6 +118,9 @@ nnoremap <C-h> <C-W>h
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
+nnoremap <C-e> 3<C-e>
+nnoremap <C-y> 3<C-y>
+
 let g:EasyMotion_leader_key = '<Leader>e'
 
 " use Command-T if available...
