@@ -24,6 +24,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'johnhamelink/blade.vim'
 Bundle 'mileszs/ack.vim'
+Bundle 'xenoterracide/html.vim'
 
 filetype plugin indent on
 
