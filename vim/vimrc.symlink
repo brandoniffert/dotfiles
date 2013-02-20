@@ -6,6 +6,13 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible
 filetype off
+
+" bootstrap vundle on a fresh install
+if !isdirectory(expand("~/.vim/bundle/vundle"))
+  !git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  let s:bootstrap=1
+endif
+
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
@@ -25,6 +32,11 @@ Bundle 'Lokaltog/vim-powerline'
 Bundle 'johnhamelink/blade.vim'
 Bundle 'mileszs/ack.vim'
 Bundle 'xenoterracide/html.vim'
+
+if exists("s:bootstrap") && s:bootstrap
+  unlet s:bootstrap
+  BundleInstall
+endif
 
 filetype plugin indent on
 
