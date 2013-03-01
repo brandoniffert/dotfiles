@@ -102,7 +102,7 @@ set t_Co=256
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
-if iterm_profile == 'bti-wombat'
+if iterm_profile == 'bti-dark'
   set bg=dark
   colorscheme bti-jelly256
 elseif iterm_profile == 'solarized-light'
