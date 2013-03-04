@@ -62,8 +62,6 @@ set showcmd
 set notimeout
 set ttimeout
 set ttimeoutlen=10
-set complete=.,w,b,u,t
-set completeopt=longest,menuone,preview
 set noshowmode
 
 " Tabs & Indenting
@@ -78,7 +76,7 @@ set noswapfile
 
 " Wildmenu
 set wildmenu
-set wildmode=longest,list:longest,list:full
+set wildmode=longest,list
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc
 
 " Searching
