@@ -57,7 +57,7 @@ suspended_jobs() {
   then
     echo ""
   else
-    echo "(%{$fg_bold[red]%}$suspended%{$reset_color%}) "
+    echo "[%{$fg_bold[red]%}$suspended%{$reset_color%}] "
   fi
 }
 
