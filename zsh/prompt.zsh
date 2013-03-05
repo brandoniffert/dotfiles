@@ -51,4 +51,14 @@ precmd() {
     title "zsh" "%n@%m" "%55<...<%~"
 }
 
-export PROMPT=$'$(current_user) in $(directory_name)$(git_dirty)$(need_push)\n➟ '
+suspended_jobs() {
+  suspended=$(jobs | wc -l | xargs)
+  if [[ $suspended == "0" ]]
+  then
+    echo ""
+  else
+    echo "(%{$fg_bold[red]%}$suspended%{$reset_color%}) "
+  fi
+}
+
+export PROMPT=$'$(suspended_jobs)$(current_user) in $(directory_name)$(git_dirty)$(need_push)\n➟ '
