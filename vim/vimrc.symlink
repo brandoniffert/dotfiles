@@ -63,6 +63,9 @@ set notimeout
 set ttimeout
 set ttimeoutlen=10
 set noshowmode
+set display+=lastline
+set fileformats+=mac
+set complete-=i
 
 " Tabs & Indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -100,19 +103,16 @@ set t_Co=256
 
 " Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
 let iterm_profile = $ITERM_PROFILE
-if iterm_profile == 'bti-dark'
-  set bg=dark
-  colorscheme bti-jelly256
-elseif iterm_profile == 'solarized-light'
+if iterm_profile == 'solarized-light'
   set bg=light
   colorscheme solarized
 else
   set bg=dark
-  colorscheme bti-grb256
+  colorscheme bti-jelly256
 endif
 
 if has('gui_macvim')
-  set guifont=Inconsolata-g:h12
+  set guifont=Inconsolata-g:h13
   set guioptions-=r
   set guioptions-=L
   set guioptions-=b
