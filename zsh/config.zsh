@@ -2,7 +2,7 @@ HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 
-KEYTIMEOUT=5
+KEYTIMEOUT=1
 
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
