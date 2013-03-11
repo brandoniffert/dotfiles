@@ -33,6 +33,8 @@ setw -g mode-mouse on
 
 # vim key bindings
 setw -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
 
 # move around panes with vim motion keys
 bind h select-pane -L
