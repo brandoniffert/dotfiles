@@ -1,5 +1,5 @@
 # taken from https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/key-bindings.zsh
-bindkey -e
+bindkey -v
 bindkey '\ew' kill-region
 bindkey -s '\el' "ls\n"
 bindkey '^r' history-incremental-search-backward
@@ -28,4 +28,3 @@ bindkey '^?' backward-delete-char
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
-
