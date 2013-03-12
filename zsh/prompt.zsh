@@ -52,12 +52,11 @@ precmd() {
 }
 
 suspended_jobs() {
-  suspended=$(jobs | wc -l | xargs)
-  if [[ $suspended == "0" ]]
+  suspended=$(jobs)
+  if [[ $suspended == "" ]]
   then
-    echo ""
   else
-    echo "[%{$fg_bold[red]%}$suspended%{$reset_color%}] "
+    echo "%{$fg_bold[red]%}⚙%{$reset_color%} "
   fi
 }
 
