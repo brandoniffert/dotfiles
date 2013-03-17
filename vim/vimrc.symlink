@@ -23,10 +23,10 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-surround'
 Bundle 'kien/ctrlp.vim'
 Bundle 'wincent/Command-T'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'Raynes/jellybeans.vim'
+Bundle 'jonathanfilip/vim-lucius'
+Bundle 'altercation/vim-colors-solarized'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'johnhamelink/blade.vim'
@@ -108,7 +108,7 @@ if iterm_profile == 'solarized-light'
   colorscheme solarized
 else
   set bg=dark
-  colorscheme bti-jelly256
+  colorscheme bti-dark
 endif
 
 if has('gui_macvim')
