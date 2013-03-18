@@ -16,7 +16,7 @@ endif
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-" github repos
+" plugins
 Bundle 'gmarik/vundle'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-rails'
@@ -25,14 +25,20 @@ Bundle 'kien/ctrlp.vim'
 Bundle 'wincent/Command-T'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
-Bundle 'johnhamelink/blade.vim'
 Bundle 'mileszs/ack.vim'
+
+" colors
+Bundle 'nanotech/jellybeans.vim'
+Bundle 'altercation/vim-colors-solarized'
+
+" syntax/ft
 Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
+Bundle 'johnhamelink/blade.vim'
+Bundle 'evanmiller/nginx-vim-syntax'
+Bundle 'tpope/vim-haml'
 
 if exists("s:bootstrap") && s:bootstrap
   unlet s:bootstrap
@@ -65,6 +71,7 @@ set ttimeoutlen=10
 set noshowmode
 set display+=lastline
 set fileformats+=mac
+set formatoptions=cqnl
 set complete-=i
 
 " Tabs & Indenting
@@ -210,8 +217,6 @@ if has("autocmd")
 
     au BufNewFile,BufRead *.ss,*.erb silent set ft=html
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
-    au BufNewFile,BufRead /etc/nginx/*.conf silent set ft=nginx
-    au BufNewFile,BufRead * setlocal formatoptions=cqnl
 
     au FileType python set sw=4 sts=4 et
 
