@@ -1,0 +1,8 @@
+--sort-files
+--color-match=red
+--color
+--group
+
+--ignore-dir=tmp
+--ignore-dir=log
+--ignore-dir=.sass-cache
