@@ -6,3 +6,6 @@
 --ignore-dir=tmp
 --ignore-dir=log
 --ignore-dir=.sass-cache
+
+--type-set=scss=.scss
+--type-set=sass=.sass
