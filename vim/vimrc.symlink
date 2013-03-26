@@ -28,6 +28,7 @@ Bundle 'tmhedberg/matchit'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
+Bundle 'mattn/zencoding-vim'
 
 " colors
 Bundle 'nanotech/jellybeans.vim'
