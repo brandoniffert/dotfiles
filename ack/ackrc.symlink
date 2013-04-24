@@ -2,6 +2,7 @@
 --color-match=red
 --color
 --group
+--smart-case
 
 --ignore-dir=tmp
 --ignore-dir=log
