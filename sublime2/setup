@@ -10,3 +10,5 @@ ln -s "$ZSH/sublime2/User" "$sublime_dir"
 # get tomorrow night theme
 cd "$sublime_dir"
 git clone https://github.com/chriskempson/tomorrow-theme.git "Theme - Tomorrow"
+
+ln -s "/Applications/Sublime Text 2.app/Contents/SharedSupport/bin/subl" /usr/local/bin/subl
