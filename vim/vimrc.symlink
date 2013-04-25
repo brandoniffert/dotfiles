@@ -134,6 +134,9 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <silent> <CR> :nohlsearch<cr>
 
+" make K split lines (opposite of J)
+nmap K i<cr><esc>k$
+
 " use hjkl for switching between splits
 nnoremap <C-j> <C-W>j
 nnoremap <C-h> <C-W>h
@@ -151,7 +154,7 @@ else
 " else CtrlP
   let g:ctrlp_max_height = 30
   let cwd = getcwd()
-  nnoremap <silent> <leader>f :CtrlP cwd<cr><f5><cr>
+  nnoremap <silent> <leader>f :CtrlP cwd<cr>
 endif
 
 " select text that was just pasted
