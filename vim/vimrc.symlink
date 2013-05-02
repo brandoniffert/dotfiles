@@ -29,7 +29,6 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
 Bundle 'mattn/zencoding-vim'
-Bundle 'kbarrette/mediummode'
 
 " colors
 Bundle 'nanotech/jellybeans.vim'
