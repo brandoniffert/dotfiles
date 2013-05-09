@@ -26,7 +26,6 @@ Bundle 'wincent/Command-T'
 Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'Lokaltog/vim-powerline'
 Bundle 'mileszs/ack.vim'
 Bundle 'mattn/zencoding-vim'
 
@@ -70,7 +69,6 @@ set showcmd
 set notimeout
 set ttimeout
 set ttimeoutlen=10
-set noshowmode
 set display+=lastline
 set fileformats+=mac
 set formatoptions=cqnl
@@ -100,7 +98,7 @@ set foldlevelstart=0
 nnoremap <space> za
 
 " Status Line
-set statusline=\ %<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)\ %P\ 
+set statusline=%<\ %f%=\ %{&fileformat}\ \|\ %{&fileencoding}\ \|\ %{&filetype}\ \|\ %p%%\ \|\ LN\ %l:%c\ 
 
 let mapleader=","
 
