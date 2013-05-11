@@ -1,5 +1,5 @@
 # taken from https://github.com/robbyrussell/oh-my-zsh/blob/master/lib/key-bindings.zsh
-bindkey -v
+bindkey -e
 bindkey '\ew' kill-region
 bindkey -s '\el' "ls\n"
 bindkey '^r' history-incremental-search-backward
@@ -28,3 +28,8 @@ bindkey '^?' backward-delete-char
 bindkey "^[[3~" delete-char
 bindkey "^[3;5~" delete-char
 bindkey "\e[3~" delete-char
+
+# allow C-x C-e to edit command line
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '\C-x\C-e' edit-command-line

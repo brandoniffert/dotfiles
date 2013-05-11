@@ -54,19 +54,4 @@ suspended_jobs() {
   fi
 }
 
-vim_ins_mode="❯"
-vim_cmd_mode="%{$fg_bold[red]%}${vim_ins_mode}%{$reset_color%}"
-vim_mode=$vim_ins_mode
-
-function zle-keymap-select {
-  vim_mode="${${KEYMAP/vicmd/${vim_cmd_mode}}/(main|viins)/${vim_ins_mode}}"
-  zle reset-prompt
-}
-zle -N zle-keymap-select
-
-function zle-line-finish {
-  vim_mode=$vim_ins_mode
-}
-zle -N zle-line-finish
-
-export PROMPT=$'$(suspended_jobs)$(current_user) in $(directory_name)$(git_dirty)$(need_push)\n${vim_mode} '
+export PROMPT=$'$(suspended_jobs)$(current_user) in $(directory_name)$(git_dirty)$(need_push)\n❯ '
