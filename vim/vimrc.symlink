@@ -230,6 +230,7 @@ if has("autocmd")
 
     au BufNewFile,BufRead *.ss,*.erb silent set ft=html
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
+    au BufRead,BufNewFile *.scss set filetype=scss
 
     au FileType python set sw=4 sts=4 et
 
