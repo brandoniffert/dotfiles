@@ -155,6 +155,8 @@ function! Mode()
     return "  V·LINE "
   elseif l:mode ==# "\<C-V>"
     return "  V·BLOCK "
+  elseif l:mode ==# "c"
+    return "  COMMAND "
   else
     return l:mode
   endif
