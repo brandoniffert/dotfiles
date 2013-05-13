@@ -7,3 +7,6 @@ if test -f $completion
 then
   source $completion
 fi
+
+# make aliased completions work
+compdef g=git
