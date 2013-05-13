@@ -73,6 +73,7 @@ set display+=lastline
 set fileformats+=mac
 set formatoptions=cqnl
 set complete-=i
+set noshowmode
 
 " Tabs & Indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -96,19 +97,6 @@ set showmatch incsearch hlsearch ignorecase smartcase
 set foldmethod=marker
 set foldlevelstart=0
 nnoremap <space> za
-
-" Status Line
-set laststatus=2
-set statusline=                        " clear
-set statusline+=[%n]                   " buffer number
-set statusline+=\ %f                   " file path
-set statusline+=\ %m%r%w%h             " modified/read-only/preview/help
-set statusline+=%=                     " left/right separator
-set statusline+=%{&fileformat}\ \|     " file format
-set statusline+=\ %{&fileencoding}\ \| " file encoding
-set statusline+=\ %{&filetype}\ \|     " file type
-set statusline+=\ %p%%\ \|             " file percentage
-set statusline+=\ LN\ %l:%c\           " line/column number
 
 let mapleader=","
 
@@ -134,6 +122,43 @@ if has('gui_macvim')
   set guioptions-=L
   set guioptions-=b
 endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" STATUSLINE
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+set statusline=                        " clear
+set statusline=%{Mode()}               " show current mode name
+set statusline+=[%n]                   " buffer number
+set statusline+=\ %f                   " file path
+set statusline+=\ %m%r%w%h             " modified/read-only/preview/help
+set statusline+=%=                     " left/right separator
+set statusline+=%{&fileformat}\ \|     " file format
+set statusline+=\ %{&fileencoding}\ \| " file encoding
+set statusline+=\ %{&filetype}\ \|     " file type
+set statusline+=\ %p%%\ \|             " file percentage
+set statusline+=\ LN\ %l:%c\           " line/column number
+
+let g:last_mode = ''
+function! Mode()
+  let l:mode = mode()
+
+  if l:mode ==# "n"
+    return "  NORMAL "
+  elseif l:mode ==# "i"
+    return "  INSERT "
+  elseif l:mode ==# "R"
+    return "  REPLACE "
+  elseif l:mode ==# "v"
+    return "  VISUAL "
+  elseif l:mode ==# "V"
+    return "  V·LINE "
+  elseif l:mode ==# "\<C-V>"
+    return "  V·BLOCK "
+  else
+    return l:mode
+  endif
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPS
