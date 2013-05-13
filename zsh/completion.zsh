@@ -7,6 +7,9 @@ zstyle ':completion:*' insert-tab pending
 # don't autocomplete hosts
 zstyle ':completion:*:ssh:*' hosts off
 
+# color ls completion
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
 # make aliased completions work
 compdef t=tmux
 compdef g=git
