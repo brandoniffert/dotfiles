@@ -116,6 +116,7 @@ endif
 
 if iterm_profile =~ 'solarized'
   colorscheme solarized
+  let g:powerline_config_overrides = {'ext': {'vim': {'colorscheme': 'solarized'} } }
 else
   colorscheme bti-dark
 endif
