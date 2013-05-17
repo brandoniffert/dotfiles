@@ -106,15 +106,20 @@ let mapleader=","
 syntax enable
 set t_Co=256
 
-" Read ITERM_PROFILE enviornment variable and set colorscheme accordingly
+" Read ITERM_PROFILE enviornment variable and set colors accordingly
 let iterm_profile = $ITERM_PROFILE
-if iterm_profile == 'solarized-light'
+if iterm_profile =~ '-light'
   set bg=light
-  colorscheme solarized
 else
   set bg=dark
+endif
+
+if iterm_profile =~ 'solarized'
+  colorscheme solarized
+else
   colorscheme bti-dark
 endif
+
 
 if has('gui_macvim')
   set guifont=Inconsolata-g:h13
