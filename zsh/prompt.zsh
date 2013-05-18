@@ -1,6 +1,6 @@
 PROMPT_CARET='❯'
 PROMPT_JOBS='⚙'
-PROMPT_PUSH='●'
+PROMPT_PUSH='‼'
 
 prompt_git() {
   st=$(git status 2>/dev/null | tail -n 1)
