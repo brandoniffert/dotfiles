@@ -1,8 +1,8 @@
 # set correct term
 set -g default-terminal screen-256color
 
-# makes pbcopy and pbpaste work on tmux, rename first window to zsh
-set-option -g default-command "tmux rename-window zsh; reattach-to-user-namespace -l zsh"
+# makes pbcopy and pbpaste work on tmux, rename first window to shell
+set-option -g default-command "tmux rename-window shell; reattach-to-user-namespace -l zsh"
 
 # send current ITERM_PROFILE variable to new sessions
 set-option -ga update-environment ' ITERM_PROFILE'
@@ -19,8 +19,8 @@ bind-key a send-prefix
 # turn automatic window renaming off
 setw -g automatic-rename off
 
-# reattach-to-user-namespace is always set as the title, rename to zsh by default
-bind-key c new-window -n zsh
+# reattach-to-user-namespace is always set as the title, rename to shell by default
+bind-key c new-window -n shell
 
 # reload config
 bind R source-file ~/.tmux.conf \; display-message " Tmux config reloaded...".
@@ -51,20 +51,23 @@ bind-key C-Up resize-pane -U 5
 bind-key C-Left resize-pane -L 5
 bind-key C-Right resize-pane -R 5
 
+# resize based on smallest client viewing the session
 setw -g aggressive-resize on
 
-# statusbar
-set -g display-time 1000
+# activity monitoring
+setw -g monitor-activity on
+set -g visual-activity on
+
+# status
+set -g status on
 set -g status-utf8 on
 set -g status-interval 5
 set -g status-right '%A %B %d, %Y :: %H:%M '
 set -g status-left ' #S'
+set -g status-left-length 20
 set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
 
+# status color - load dark or light depending on $ITERM_PROFILE
 source-file ~/.dotfiles/tmux/colors-dark.conf
 if-shell 'test "$ITERM_PROFILE" = "solarized-light"' 'source ~/.dotfiles/tmux/colors-light.conf'
-
-# Activity monitoring
-setw -g monitor-activity on
-set -g visual-activity on
