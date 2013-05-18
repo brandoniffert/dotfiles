@@ -27,3 +27,11 @@ function extract() {
 		echo "'$1' is not a valid file"
 	fi
 }
+
+# get gzipped size
+function gz() {
+	echo "orig size    (bytes): "
+	cat "$1" | wc -c
+	echo "gzipped size (bytes): "
+	gzip -c "$1" | wc -c
+}
