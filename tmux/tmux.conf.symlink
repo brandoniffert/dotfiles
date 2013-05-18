@@ -1,8 +1,8 @@
+# makes pbcopy and pbpaste work on tmux, rename first window to shell
+set-option -g default-command "reattach-to-user-namespace -l zsh"
+
 # set correct term
 set -g default-terminal screen-256color
-
-# makes pbcopy and pbpaste work on tmux, rename first window to shell
-set-option -g default-command "tmux rename-window shell; reattach-to-user-namespace -l zsh"
 
 # send current ITERM_PROFILE variable to new sessions
 set-option -ga update-environment ' ITERM_PROFILE'
