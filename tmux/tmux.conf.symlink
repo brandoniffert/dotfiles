@@ -23,7 +23,7 @@ setw -g automatic-rename off
 bind-key c new-window -n shell
 
 # reload config
-bind R source-file ~/.tmux.conf \; display-message " Tmux config reloaded...".
+bind-key r source-file ~/.tmux.conf \; display-message " Tmux config reloaded...".
 
 # start numbering at 1
 set -g base-index 1
