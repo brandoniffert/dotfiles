@@ -1,5 +1,5 @@
 # makes pbcopy and pbpaste work on tmux, rename first window to shell
-set-option -g default-command "reattach-to-user-namespace -l zsh"
+set-option -g default-command "tmux rename-window shell; reattach-to-user-namespace -l zsh"
 
 # set correct term
 set -g default-terminal screen-256color
