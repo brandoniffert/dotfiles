@@ -68,4 +68,4 @@ set -g window-status-current-format ' #I:#W '
 
 # status color - load dark or light depending on $ITERM_PROFILE
 source-file ~/.dotfiles/tmux/colors-dark.conf
-if-shell 'test "$ITERM_PROFILE" = "solarized-light"' 'source ~/.dotfiles/tmux/colors-light.conf'
+if-shell 'test "$ITERM_PROFILE" = "solarized-light"' 'source $DOTFILES/tmux/colors-light.conf'
