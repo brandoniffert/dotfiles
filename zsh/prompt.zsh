@@ -46,6 +46,7 @@ prompt_context() {
   fi
 }
 
+# Git: branch/detached head, dirty status, push status
 prompt_git() {
   local ref st dirty push
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
@@ -60,12 +61,13 @@ prompt_git() {
       prompt_segment yellow black
     fi
 
-    [[ $(git cherry -v @{upstream} 2>/dev/null) != "" ]] && push=' !!'
+    [[ $(git cherry -v @{upstream} 2>/dev/null) != "" ]] && push=' ‼'
 
     echo -n "${ref/refs\/heads\// }$dirty$push"
   fi
 }
 
+# Dir: current working directory
 prompt_dir() {
   prompt_segment blue black '%~'
 }
