@@ -29,6 +29,7 @@ Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mileszs/ack.vim'
 Bundle 'mattn/zencoding-vim'
 Bundle 'godlygeek/tabular'
+Bundle 'danro/rename.vim'
 
 " colors
 Bundle 'nanotech/jellybeans.vim'
@@ -75,29 +76,30 @@ set formatoptions=cqnl
 set complete-=i
 set noshowmode
 
-" Tabs & Indenting
+" tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set shiftround
 set autoindent smarttab smartindent
 
-" Backups
+" backups
 set nobackup 
 set nowritebackup
 set noswapfile
 
-" Wildmenu
+" wildmenu
 set wildmenu
 set wildmode=longest,list
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc
 
-" Searching
+" searching
 set showmatch incsearch hlsearch ignorecase smartcase
 
-" Folding
+" folding
 set foldmethod=marker
 set foldlevelstart=0
 nnoremap <space> za
 
+" remap leader
 let mapleader=","
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -106,7 +108,7 @@ let mapleader=","
 syntax enable
 set t_Co=256
 
-" Read ITERM_PROFILE enviornment variable and set colors accordingly
+" read ITERM_PROFILE enviornment variable and set colors accordingly
 let iterm_profile = $ITERM_PROFILE
 if iterm_profile =~ '-light'
   set bg=light
@@ -121,9 +123,8 @@ else
   colorscheme bti-dark
 endif
 
-
 if has('gui_macvim')
-  set guifont=Inconsolata-g:h13
+  set guifont=Source\ Code\ Pro\ Light\ for\ Powerline:h14
   set guioptions-=r
   set guioptions-=L
   set guioptions-=b
@@ -228,33 +229,13 @@ noremap <leader>y "+y
 nnoremap <leader>p "*p
 " toggle spell check
 nnoremap <silent> <leader>ss :setlocal spell!<cr>
+" make Y act like other capital letters
+nmap Y y$
 
 " open directory of file in Finder
 if has('mac')
   nnoremap <leader>o :silent !open %:p:h<cr> 
 endif
-
-nmap Y y$
-map Q gq
-
-function! RunCurrentFile()
-  let ft = &ft
-  exec ':w'
-
-  if ft == 'ruby'
-    exec ':!ruby %'
-  endif
-  if ft == 'php'
-    exec ':!php -f %'
-  endif
-  if ft == 'sh'
-    exec ':!bash %'
-  endif
-  if ft == 'python'
-    exec ':!python %'
-  endif
-endfunction
-nnoremap <leader>r :call RunCurrentFile()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " AUTOCOMMANDS
@@ -264,12 +245,11 @@ if has("autocmd")
   augroup vimrcEx
     au!
     au FileType text,markdown set spell
+    au FileType python set sw=4 sts=4 et
 
     au BufNewFile,BufRead *.ss,*.erb silent set ft=html
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
     au BufRead,BufNewFile *.scss set filetype=scss
-
-    au FileType python set sw=4 sts=4 et
 
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
@@ -284,80 +264,25 @@ if has("autocmd")
   augroup END
 endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RUNNING TESTS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>t :call RunTestFile()<cr>
-map <leader>T :call RunNearestTest()<cr>
-map <leader>a :call RunTests('')<cr>
-
-function! RunTestFile(...)
-  if a:0
-    let command_suffix = a:1
-  else
-    let command_suffix = ""
-  endif
-
-  " Run the tests for the previously-marked file.
-  let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\)$') != -1
-  if in_test_file
-    call SetTestFile()
-  elseif !exists("t:grb_test_file")
-    return
-  end
-  call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunNearestTest()
-  let spec_line_number = line('.')
-  call RunTestFile(":" . spec_line_number . " -b")
-endfunction
-
-function! SetTestFile()
-  " Set the spec file that tests will be run for.
-  let t:grb_test_file=@%
-endfunction
-
-function! RunTests(filename)
-  " Write the file and run tests for the given filename
-  :w
-  if match(a:filename, '\.feature$') != -1
-    exec ":!script/features " . a:filename
-  else
-    if filereadable("script/test")
-      exec ":!script/test " . a:filename
-    elseif filereadable("Gemfile")
-      exec ":!bundle exec rspec --color " . a:filename
-    else
-      exec ":!rspec --color " . a:filename
-    end
-  end
-endfunction
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RENAME CURRENT FILE
+" RUN CURRENT FILE ON COMMAND LINE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! RenameFile()
-  let old_name = expand('%')
-  let new_name = input('New file name: ', expand('%'), 'file')
-  if new_name != '' && new_name != old_name
-    exec ':saveas ' . new_name
-    exec ':silent !rm ' . old_name
-    redraw!
+function! RunCurrentFile()
+  let ft = &ft
+  exec ':w'
+
+  if ft == 'ruby'
+    exec ':!ruby %'
+  elseif ft == 'php'
+    exec ':!php -f %'
+  elseif ft == 'sh'
+    exec ':!bash %'
+  elseif ft == 'python'
+    exec ':!python %'
   endif
 endfunction
-map <leader>n :call RenameFile()<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SHOW SYNTAX HIGHLIGHTING GROUPS FOR WORD UNDER CURSOR
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <leader>hi :call <SID>SynStack()<CR>
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
+nnoremap <leader>r :call RunCurrentFile()<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " USE LOCAL .vimrc.local
