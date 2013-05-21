@@ -263,8 +263,7 @@ if has("autocmd")
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
     au!
-    " For all text files set 'textwidth' to 78 characters.
-    au FileType text setlocal textwidth=78
+    au FileType text,markdown set spell
 
     au BufNewFile,BufRead *.ss,*.erb silent set ft=html
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
