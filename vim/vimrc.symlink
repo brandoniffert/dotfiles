@@ -27,7 +27,6 @@ Bundle 'ervandew/supertab'
 Bundle 'tmhedberg/matchit'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mileszs/ack.vim'
-Bundle 'mattn/zencoding-vim'
 Bundle 'godlygeek/tabular'
 Bundle 'danro/rename.vim'
 
