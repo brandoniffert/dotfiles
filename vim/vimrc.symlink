@@ -36,7 +36,6 @@ Bundle 'nanotech/jellybeans.vim'
 Bundle 'altercation/vim-colors-solarized'
 
 " syntax/ft
-Bundle 'vim-scripts/indenthtml.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'johnhamelink/blade.vim'
 Bundle 'evanmiller/nginx-vim-syntax'
