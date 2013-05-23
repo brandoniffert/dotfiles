@@ -211,10 +211,6 @@ nnoremap <silent> <leader>sv :botright vnew<cr>
 nnoremap <silent> <leader>sh :sp<cr>
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
-" open .vimrc to edit in the current window
-nnoremap <leader>ev :e ~/.vimrc<cr>
-" open .vimrc to edit in a vertical split
-nnoremap <leader>esv :vsp ~/.vimrc<cr>
 " change working directory to file being edited, print after
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " easy indent/outdent
