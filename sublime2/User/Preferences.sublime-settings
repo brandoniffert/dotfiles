@@ -1,7 +1,7 @@
 {
   "color_scheme": "Packages/Theme - Tomorrow/textmate/Tomorrow-Night.tmTheme",
-  "font_face": "Inconsolata-g",
-  "font_size": 12,
+  "font_face": "Source Code Pro Light for Powerline",
+  "font_size": 14,
   "highlight_line": true,
   "highlight_modified_tabs": true,
   "hot_exit": false,
