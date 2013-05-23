@@ -195,7 +195,7 @@ let g:EasyMotion_leader_key = '<Leader>e'
 if has('ruby')
   let g:CommandTCancelMap=['<esc>', '<C-c>']
   let g:CommandTMaxHeight=30
-  nnoremap <silent> <leader>f :CommandT<cr>
+  nnoremap <silent> <leader>f :CommandTFlush<cr>\|:CommandT<cr>
 else
 " else CtrlP
   let g:ctrlp_max_height = 30
