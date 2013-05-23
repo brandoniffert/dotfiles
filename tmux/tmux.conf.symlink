@@ -56,6 +56,10 @@ bind-key C-Right resize-pane -R 5
 # resize based on smallest client viewing the session
 setw -g aggressive-resize on
 
+# set window notifications
+setw -g monitor-activity on
+set -g visual-activity on
+
 # status
 set -g status on
 set -g status-utf8 on
