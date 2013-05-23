@@ -40,6 +40,7 @@ Bundle 'johnhamelink/blade.vim'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'tpope/vim-markdown'
+Bundle 'davidoc/taskpaper.vim'
 
 if exists("s:bootstrap") && s:bootstrap
   unlet s:bootstrap
