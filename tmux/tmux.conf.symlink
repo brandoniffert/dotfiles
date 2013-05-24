@@ -63,8 +63,8 @@ set -g visual-activity on
 # status
 set -g status on
 set -g status-utf8 on
-set -g status-interval 5
-set -g status-right '%A %B %d, %Y :: %H:%M '
+set -g status-interval 1
+set -g status-right '%A %B %d, %Y %H:%M:%S '
 set -g status-left ' #S'
 set -g status-left-length 20
 set -g window-status-format ' #I:#W '
