@@ -17,28 +17,29 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " plugins
-Bundle 'gmarik/vundle'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-surround'
-Bundle 'kien/ctrlp.vim'
-Bundle 'wincent/Command-T'
+Bundle 'danro/rename.vim'
 Bundle 'ervandew/supertab'
-Bundle 'tmhedberg/matchit'
+Bundle 'gmarik/vundle'
+Bundle 'godlygeek/tabular'
+Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-easymotion'
 Bundle 'mileszs/ack.vim'
-Bundle 'godlygeek/tabular'
-Bundle 'danro/rename.vim'
+Bundle 'tmhedberg/matchit'
+Bundle 'tpope/vim-commentary'
+Bundle 'tpope/vim-rails'
+Bundle 'tpope/vim-repeat'
+Bundle 'tpope/vim-surround'
+Bundle 'wincent/Command-T'
 
 " colors
-Bundle 'nanotech/jellybeans.vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'nanotech/jellybeans.vim'
 
 " syntax/ft
-Bundle 'pangloss/vim-javascript'
-Bundle 'johnhamelink/blade.vim'
-Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'cakebaker/scss-syntax.vim'
+Bundle 'evanmiller/nginx-vim-syntax'
+Bundle 'johnhamelink/blade.vim'
+Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-markdown'
 
 if exists("s:bootstrap") && s:bootstrap
