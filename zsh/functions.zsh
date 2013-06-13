@@ -35,3 +35,22 @@ function gz() {
 	echo "gzipped size (bytes): "
 	gzip -c "$1" | wc -c
 }
+
+# get all dig info
+function digg() {
+  dig +nocmd "$1" any +multiline +noall +answer
+}
+
+# Determine size of a file or total size of a directory
+function fs() {
+  if du -b /dev/null > /dev/null 2>&1; then
+    local arg=-sbh
+  else
+    local arg=-sh
+  fi
+  if [[ -n "$@" ]]; then
+    du $arg -- "$@"
+  else
+    du $arg .[^.]* *
+  fi
+}
