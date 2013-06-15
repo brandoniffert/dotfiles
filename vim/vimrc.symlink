@@ -30,6 +30,7 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'wincent/Command-T'
+Bundle 'skalnik/vim-vroom'
 
 " colors
 Bundle 'altercation/vim-colors-solarized'
@@ -190,6 +191,9 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
 let g:EasyMotion_leader_key = '<Leader>e'
+
+let g:vroom_map_keys = 0
+map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use Command-T if available...
 if has('ruby')
