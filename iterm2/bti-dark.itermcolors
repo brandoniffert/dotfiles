@@ -5,11 +5,11 @@
 	<key>Ansi 0 Color</key>
 	<dict>
 		<key>Blue Component</key>
-		<real>0.13272412121295929</real>
+		<real>0.10000000149011612</real>
 		<key>Green Component</key>
-		<real>0.13272412121295929</real>
+		<real>0.10000000149011612</real>
 		<key>Red Component</key>
-		<real>0.13272412121295929</real>
+		<real>0.10000000149011612</real>
 	</dict>
 	<key>Ansi 1 Color</key>
 	<dict>
@@ -41,11 +41,11 @@
 	<key>Ansi 12 Color</key>
 	<dict>
 		<key>Blue Component</key>
-		<real>0.96277573529411764</real>
+		<real>0.96277570724487305</real>
 		<key>Green Component</key>
-		<real>0.661476906389311</real>
+		<real>0.66147691011428833</real>
 		<key>Red Component</key>
-		<real>0.37208261949590599</real>
+		<real>0.37208262085914612</real>
 	</dict>
 	<key>Ansi 13 Color</key>
 	<dict>
@@ -95,11 +95,11 @@
 	<key>Ansi 4 Color</key>
 	<dict>
 		<key>Blue Component</key>
-		<real>0.7609056843891403</real>
+		<real>0.7609056830406189</real>
 		<key>Green Component</key>
-		<real>0.441134701377007</real>
+		<real>0.44113469123840332</real>
 		<key>Red Component</key>
-		<real>0.12934508670939823</real>
+		<real>0.12934508919715881</real>
 	</dict>
 	<key>Ansi 5 Color</key>
 	<dict>
@@ -131,11 +131,11 @@
 	<key>Ansi 8 Color</key>
 	<dict>
 		<key>Blue Component</key>
-		<real>0.32587945461273193</real>
+		<real>0.25</real>
 		<key>Green Component</key>
-		<real>0.34155622124671936</real>
+		<real>0.25</real>
 		<key>Red Component</key>
-		<real>0.33358165621757507</real>
+		<real>0.25</real>
 	</dict>
 	<key>Ansi 9 Color</key>
 	<dict>
@@ -149,11 +149,11 @@
 	<key>Background Color</key>
 	<dict>
 		<key>Blue Component</key>
-		<real>0.06718396493212675</real>
+		<real>0.070920020341873169</real>
 		<key>Green Component</key>
-		<real>0.066304219798969236</real>
+		<real>0.068928636610507965</real>
 		<key>Red Component</key>
-		<real>0.066010971421250064</real>
+		<real>0.068029329180717468</real>
 	</dict>
 	<key>Bold Color</key>
 	<dict>
