@@ -1,5 +1,6 @@
 " Based on
 runtime bundle/jellybeans.vim/colors/jellybeans.vim
+hi! link rubyClass rubyDefine
 
 let g:colors_name = "bti-dark"
 
