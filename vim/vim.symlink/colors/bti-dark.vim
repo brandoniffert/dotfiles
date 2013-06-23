@@ -1,4 +1,4 @@
-" Based on
+" Based on jellybeans
 runtime bundle/jellybeans.vim/colors/jellybeans.vim
 hi! link rubyClass rubyDefine
 
@@ -9,4 +9,4 @@ hi NonText ctermbg=NONE
 hi VertSplit ctermbg=NONE guibg=NONE
 hi TabLineFill ctermbg=252
 hi TabLineSel ctermbg=NONE ctermfg=254
-hi Error ctermfg=red ctermbg=NONE cterm=underline
+hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
