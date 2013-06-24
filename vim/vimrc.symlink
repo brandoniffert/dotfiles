@@ -65,7 +65,6 @@ set cursorline
 set cmdheight=2
 set scrolloff=3
 set t_ti= t_te=
-set fillchars=vert:¦
 set showcmd
 set notimeout
 set ttimeout
