@@ -4,8 +4,8 @@ set-option -g default-command "tmux rename-window shell; reattach-to-user-namesp
 # set correct term
 set -g default-terminal screen-256color
 
-# send current ITERM_PROFILE variable to new sessions
-set-option -ga update-environment ' ITERM_PROFILE'
+# send current $PROFILE_BG variable to new sessions
+set-option -ga update-environment ' PROFILE_BG'
 
 # set correct shell
 set-option -g default-shell $SHELL
@@ -70,6 +70,11 @@ set -g status-left-length 20
 set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
 
-# status color - load dark or light depending on $ITERM_PROFILE
+# colors
+set-option -g display-panes-active-colour blue
+set-option -g display-panes-colour brightred
+set-window-option -g clock-mode-colour green
+
+# status color - load dark or light depending on $PROFILE_BG
 source-file ~/.dotfiles/tmux/colors-dark.conf
-if-shell 'test "$ITERM_PROFILE" = "solarized-light"' 'source $DOTFILES/tmux/colors-light.conf'
+if-shell 'test "$PROFILE_BG" = "light"' 'source $DOTFILES/tmux/colors-light.conf'
