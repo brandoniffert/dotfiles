@@ -107,15 +107,15 @@ let mapleader=","
 syntax enable
 set t_Co=256
 
-" read ITERM_PROFILE enviornment variable and set colors accordingly
-let iterm_profile = $ITERM_PROFILE
-if iterm_profile =~ '-light'
+" read PROFILE_BG enviornment variable and set colors accordingly
+if $PROFILE_BG == 'light'
   set bg=light
 else
   set bg=dark
 endif
 
-if iterm_profile =~ 'solarized'
+" read ITERM_PROFILE enviornment variable and set solarized
+if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
   let g:powerline_config_overrides = {'ext': {'vim': {'colorscheme': 'solarized'} } }
 else
