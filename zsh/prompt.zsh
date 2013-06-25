@@ -69,7 +69,12 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue white '%~'
+  if [[ $PROFILE_BG == 'light' ]]
+  then
+    prompt_segment white black '%~'
+  else
+    prompt_segment blue white '%~'
+  fi
 }
 
 # Status:
