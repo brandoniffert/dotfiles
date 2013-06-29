@@ -74,6 +74,7 @@ set fileformats+=mac
 set formatoptions=cqnl
 set complete-=i
 set noshowmode
+set lazyredraw
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
