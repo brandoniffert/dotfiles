@@ -33,3 +33,5 @@
 	default = simple
 [github]
 	user = brandoniffert
+[core]
+	excludesfile = ~/.gitignore_global
