@@ -216,9 +216,9 @@ endif
 " select text that was just pasted
 nnoremap <leader>v V`]
 " create a new vertical split window and switch over to it
-nnoremap <silent> <leader>sv :botright vnew<cr>
+nnoremap <silent> <leader>v :botright vsp<cr>
 " create a new horizontal split window
-nnoremap <silent> <leader>sh :sp<cr>
+nnoremap <silent> <leader>h :sp<cr>
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
 " change working directory to file being edited, print after
