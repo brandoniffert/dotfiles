@@ -31,6 +31,8 @@ Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'wincent/Command-T'
 Bundle 'skalnik/vim-vroom'
+Bundle 'itchyny/lightline.vim'
+Bundle 'tpope/vim-fugitive'
 
 " colors
 Bundle 'altercation/vim-colors-solarized'
@@ -75,6 +77,7 @@ set formatoptions=cqnl
 set complete-=i
 set noshowmode
 set lazyredraw
+set laststatus=2
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -118,7 +121,6 @@ endif
 " read ITERM_PROFILE enviornment variable and set solarized
 if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
-  let g:powerline_config_overrides = {'ext': {'vim': {'colorscheme': 'solarized'} } }
 else
   colorscheme bti-dark
   set showtabline=2
@@ -132,48 +134,55 @@ if has('gui_macvim')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" STATUSLINE
+" LIGHTLINE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set laststatus=2
-set statusline=                        " clear
-set statusline=%{Mode()}               " show current mode name
-set statusline+=[%n]                   " buffer number
-set statusline+=\ %f                   " file path
-set statusline+=\ %m%r%w%h             " modified/read-only/preview/help
-set statusline+=%=                     " left/right separator
-set statusline+=%{&fileformat}\ \|     " file format
-set statusline+=\ %{&fileencoding}\ \| " file encoding
-set statusline+=\ %{&filetype}\ \|     " file type
-set statusline+=\ %p%%\ \|             " file percentage
-set statusline+=\ LN\ %l:%c\           " line/column number
+let g:lightline = {
+      \ 'colorscheme': 'powerline',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightlineFugitive',
+      \   'readonly': 'LightlineReadonly',
+      \   'modified': 'LightlineModified',
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '⮁', 'right': '⮃' }
+      \ }
 
-let g:last_mode = ''
-function! Mode()
-  let l:mode = mode()
-
-  if l:mode ==# "n"
-    return "  NORMAL "
-  elseif l:mode ==# "i"
-    return "  INSERT "
-  elseif l:mode ==# "R"
-    return "  REPLACE "
-  elseif l:mode ==# "v"
-    return "  VISUAL "
-  elseif l:mode ==# "V"
-    return "  V·LINE "
-  elseif l:mode ==# "\<C-V>"
-    return "  V·BLOCK "
-  elseif l:mode ==# "c"
-    return "  COMMAND "
+function! LightlineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
   else
-    return l:mode
+    return ""
   endif
 endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" POWERLINE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set rtp+=$POWERLINE/bindings/vim
+function! LightlineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return "⭤"
+  else
+    return ""
+  endif
+endfunction
+
+function! LightlineFugitive()
+  return exists('*fugitive#head') && strlen(fugitive#head()) ? '⭠ '.fugitive#head() : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+       \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
+       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPS
