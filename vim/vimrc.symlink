@@ -121,6 +121,7 @@ if $ITERM_PROFILE =~ 'solarized'
   let g:powerline_config_overrides = {'ext': {'vim': {'colorscheme': 'solarized'} } }
 else
   colorscheme bti-dark
+  set showtabline=2
 endif
 
 if has('gui_macvim')
