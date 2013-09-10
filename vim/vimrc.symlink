@@ -137,6 +137,7 @@ endif
 " LIGHTLINE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
+      \ 'enable': { 'tabline': 0 },
       \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
