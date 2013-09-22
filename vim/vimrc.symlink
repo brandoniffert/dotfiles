@@ -33,6 +33,7 @@ Bundle 'wincent/Command-T'
 Bundle 'skalnik/vim-vroom'
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
+Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
 Bundle 'altercation/vim-colors-solarized'
