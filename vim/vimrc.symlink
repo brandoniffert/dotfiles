@@ -78,16 +78,15 @@ set complete-=i
 set noshowmode
 set lazyredraw
 set laststatus=2
+set dictionary=/usr/share/dict/words
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set shiftround
 set autoindent smarttab smartindent
 
-" backups
-set nobackup 
-set nowritebackup
-set noswapfile
+" no backups or swap file
+set nobackup nowritebackup noswapfile
 
 " wildmenu
 set wildmenu
@@ -192,8 +191,8 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <silent> <CR> :nohlsearch<cr>
 
-" make K split lines (opposite of J)
-nmap K i<cr><esc>k$
+" make S split lines (opposite of J)
+nnoremap S i<cr><esc>k$
 
 " use hjkl for switching between splits
 nnoremap <C-j> <C-W>j
