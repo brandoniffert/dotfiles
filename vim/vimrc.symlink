@@ -75,6 +75,7 @@ set ttimeoutlen=10
 set display+=lastline
 set fileformats+=mac
 set formatoptions=cqnl
+set nojoinspaces
 set complete-=i
 set noshowmode
 set lazyredraw
