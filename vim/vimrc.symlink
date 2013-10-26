@@ -124,7 +124,6 @@ if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
 else
   colorscheme bti-dark
-  set showtabline=2
 endif
 
 if has('gui_macvim')
