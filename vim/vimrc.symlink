@@ -107,38 +107,11 @@ nnoremap <space> za
 let mapleader=","
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ENVIRONMENTS AND COLOR
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-set t_Co=256
-
-" read PROFILE_BG enviornment variable and set colors accordingly
-if $PROFILE_BG == 'light'
-  set bg=light
-else
-  set bg=dark
-endif
-
-" read ITERM_PROFILE enviornment variable and set solarized
-if $ITERM_PROFILE =~ 'solarized'
-  colorscheme solarized
-else
-  colorscheme bti-dark
-endif
-
-if has('gui_macvim')
-  set guifont=Source\ Code\ Pro\ Light\ for\ Powerline:h14
-  set guioptions-=r
-  set guioptions-=L
-  set guioptions-=b
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " LIGHTLINE
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
       \ 'enable': { 'tabline': 0 },
-      \ 'colorscheme': 'powerline',
+      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'filename' ] ]
@@ -184,6 +157,34 @@ function! LightlineFilename()
        \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ENVIRONMENTS AND COLOR
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+syntax enable
+set t_Co=256
+
+" read PROFILE_BG enviornment variable and set colors accordingly
+if $PROFILE_BG == 'light'
+  set bg=light
+else
+  set bg=dark
+endif
+
+" read ITERM_PROFILE enviornment variable and set solarized
+if $ITERM_PROFILE =~ 'solarized'
+  colorscheme solarized
+  let g:lightline.colorscheme = 'solarized'
+else
+  colorscheme bti-dark
+endif
+
+if has('gui_macvim')
+  set guifont=Source\ Code\ Pro\ Light\ for\ Powerline:h14
+  set guioptions-=r
+  set guioptions-=L
+  set guioptions-=b
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPS
