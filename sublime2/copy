@@ -1,2 +1,0 @@
-rm -rf $DOTFILES/sublime2/User
-cp -R ~/Library/Application\ Support/Sublime\ Text\ 2/Packages/User $DOTFILES/sublime2/User
