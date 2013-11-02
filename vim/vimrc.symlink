@@ -184,7 +184,7 @@ if &diff
 endif
 
 if has('gui_macvim')
-  set guifont=Source\ Code\ Pro\ Light\ for\ Powerline:h14
+  set guifont=Sauce\ Code\ Powerline:h14
   set guioptions-=r
   set guioptions-=L
   set guioptions-=b
