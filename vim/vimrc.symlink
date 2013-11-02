@@ -38,6 +38,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 " colors
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'nanotech/jellybeans.vim'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 " syntax/ft
 Bundle 'cakebaker/scss-syntax.vim'
@@ -111,7 +112,6 @@ let mapleader=","
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:lightline = {
       \ 'enable': { 'tabline': 0 },
-      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'filename' ] ]
@@ -177,6 +177,10 @@ if $ITERM_PROFILE =~ 'solarized'
   let g:lightline.colorscheme = 'solarized'
 else
   colorscheme bti-dark
+endif
+
+if &diff
+  colorscheme jellybeans
 endif
 
 if has('gui_macvim')

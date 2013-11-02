@@ -1,5 +1,5 @@
 " Based on jellybeans
-runtime bundle/jellybeans.vim/colors/jellybeans.vim
+runtime bundle/vim-tomorrow-theme/colors/Tomorrow-Night.vim
 hi! link rubyClass rubyDefine
 
 let g:colors_name = "bti-dark"
