@@ -21,7 +21,7 @@ prompt_git() {
       echo -n '%F{yellow}'
     fi
 
-    echo -n "[${ref#(refs/heads/)}$push]%f "
+    echo -n "(${ref#(refs/heads/)}$push)%f "
   fi
 }
 
