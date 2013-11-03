@@ -5,6 +5,13 @@ function server() {
 	python -c $'import SimpleHTTPServer;\nmap = SimpleHTTPServer.SimpleHTTPRequestHandler.extensions_map;\nmap[""] = "text/plain";\nfor key, value in map.items():\n\tmap[key] = value + ";charset=UTF-8";\nSimpleHTTPServer.test();' "$port"
 }
 
+# serve a directory on localhost and open in browser (php)
+function pserver() {
+	local port="${1:-6789}"
+	open "http://localhost:${port}/"
+  php -S localhost:$port
+}
+
 # Extract archives - use: extract <file>
 # Credits to http://dotfiles.org/~pseup/.bashrc
 function extract() {
