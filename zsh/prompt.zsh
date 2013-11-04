@@ -30,7 +30,7 @@ prompt_dir() {
 }
 
 prompt_jobs() {
-  echo -n '%(1j.[%j] .)'
+  echo -n '%(1j.%F{red}[%j]%f .)'
 }
 
 prompt_status() {
