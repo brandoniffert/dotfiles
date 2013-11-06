@@ -3,7 +3,7 @@ prompt_hostname() {
 }
 
 prompt_git() {
-  local ref st push
+  local ref st symbol
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     st=$(git status 2>/dev/null | tail -n 1)
     ref=$(git symbolic-ref -q HEAD || (git name-rev --name-only --no-undefined --tags --always HEAD | sed -e "s,\^*.$,,")) 2> /dev/null
@@ -12,16 +12,14 @@ prompt_git() {
     then
       echo -n '%F{green}'
     else
+      symbol='?'
       echo -n '%F{red}'
     fi
 
-    if [[ $(git cherry -v @{upstream} 2>/dev/null) != "" ]]
-    then
-      push='*'
-      echo -n '%F{yellow}'
-    fi
+    [[ $(git diff --cached) 2>/dev/null ]] && symbol='+'
+    [[ $(git cherry -v @{upstream} 2>/dev/null) != "" ]] && symbol='!'
 
-    echo -n "(${ref#(refs/heads/)}$push)%f "
+    echo -n "(${ref#(refs/heads/)}$symbol)%f "
   fi
 }
 
