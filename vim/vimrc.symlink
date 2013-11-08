@@ -37,8 +37,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'nanotech/jellybeans.vim'
-Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'vim-scripts/xoria256.vim'
 
 " syntax/ft
 Bundle 'cakebaker/scss-syntax.vim'
@@ -177,10 +176,6 @@ if $ITERM_PROFILE =~ 'solarized'
   let g:lightline.colorscheme = 'solarized'
 else
   colorscheme bti-dark
-endif
-
-if &diff
-  colorscheme jellybeans
 endif
 
 if has('gui_macvim')

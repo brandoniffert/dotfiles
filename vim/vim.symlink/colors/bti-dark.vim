@@ -1,6 +1,5 @@
 " Based on jellybeans
-runtime bundle/vim-tomorrow-theme/colors/Tomorrow-Night.vim
-hi! link rubyClass rubyDefine
+runtime bundle/xoria256.vim/colors/xoria256.vim
 
 let g:colors_name = "bti-dark"
 
@@ -9,4 +8,3 @@ hi NonText ctermbg=NONE
 hi VertSplit ctermbg=234 guibg=NONE
 hi TabLineFill ctermbg=252
 hi TabLineSel ctermbg=NONE ctermfg=254
-hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
