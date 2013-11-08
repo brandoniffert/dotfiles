@@ -81,6 +81,8 @@ set noshowmode
 set lazyredraw
 set laststatus=2
 set dictionary=/usr/share/dict/words
+set textwidth=80
+set colorcolumn=+1
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
