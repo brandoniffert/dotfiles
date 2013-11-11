@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<root>
+  <item>
+    <name>Remap F13-F15 to media keys</name>
+    <appendix>F13 to Volume Down</appendix>
+    <appendix>F14 to Volume Up</appendix>
+    <appendix>F15 to Media Play/Pause</appendix>
+    <identifier>brandoniffert.fkeys.media</identifier>
+    <autogen>--KeyToConsumer-- KeyCode::F13, ConsumerKeyCode::VOLUME_DOWN</autogen>
+    <autogen>--KeyToConsumer-- KeyCode::F14, ConsumerKeyCode::VOLUME_UP</autogen>
+    <autogen>--KeyToConsumer-- KeyCode::F15, ConsumerKeyCode::MUSIC_PLAY</autogen>
+  </item>
+</root>
