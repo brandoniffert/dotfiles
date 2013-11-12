@@ -29,7 +29,6 @@ Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'wincent/Command-T'
 Bundle 'skalnik/vim-vroom'
 Bundle 'itchyny/lightline.vim'
 Bundle 'tpope/vim-fugitive'
@@ -95,7 +94,7 @@ set nobackup nowritebackup noswapfile
 " wildmenu
 set wildmenu
 set wildmode=longest,list
-set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc
+set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 
 " searching
 set showmatch incsearch hlsearch ignorecase smartcase
@@ -208,23 +207,9 @@ let g:EasyMotion_leader_key = '<Leader>e'
 let g:vroom_map_keys = 0
 map <silent> <leader>t :VroomRunTestFile<cr>
 
-" use Command-T if available...
-if has('ruby')
-  let g:CommandTCancelMap=['<esc>', '<C-c>']
-  let g:CommandTMaxHeight=30
-  nnoremap <silent> <leader>gs :CommandTFlush<cr>\|:CommandT app/assets/stylesheets<cr>
-  nnoremap <silent> <leader>gj :CommandTFlush<cr>\|:CommandT app/assets/javascripts<cr>
-  nnoremap <silent> <leader>gm :CommandTFlush<cr>\|:CommandT app/models<cr>
-  nnoremap <silent> <leader>gc :CommandTFlush<cr>\|:CommandT app/controllers<cr>
-  nnoremap <silent> <leader>gv :CommandTFlush<cr>\|:CommandT app/views<cr>
-  nnoremap <silent> <leader>gl :CommandTFlush<cr>\|:CommandT lib<cr>
-  nnoremap <silent> <leader>f :CommandTFlush<cr>\|:CommandT<cr>
-else
-" else CtrlP
-  let g:ctrlp_max_height = 30
-  let cwd = getcwd()
-  nnoremap <silent> <leader>f :CtrlP cwd<cr>
-endif
+" use CtrlP
+let g:ctrlp_max_height = 30
+nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
 " select text that was just pasted
 nnoremap <leader>v V`]
@@ -239,7 +224,7 @@ nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
 " easy indent/outdent
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
-vnoremap <Tab> >gv 
+vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 " yank to system clipboard
 noremap <leader>y "+y
@@ -252,7 +237,7 @@ nmap Y y$
 
 " open directory of file in Finder
 if has('mac')
-  nnoremap <leader>o :silent !open %:p:h<cr> 
+  nnoremap <leader>o :silent !open %:p:h<cr>
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
