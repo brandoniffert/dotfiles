@@ -28,7 +28,7 @@ prompt_dir() {
 }
 
 prompt_jobs() {
-  echo -n '%(1j.[%j] .)'
+  echo -n "%B%F{black}%(1j.[%j] .)%f%b"
 }
 
 prompt_status() {
