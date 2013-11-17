@@ -36,7 +36,6 @@ Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'vim-scripts/xoria256.vim'
 
 " syntax/ft
 Bundle 'cakebaker/scss-syntax.vim'
@@ -175,6 +174,7 @@ if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
   let g:lightline.colorscheme = 'solarized'
 else
+  set showtabline=2
   colorscheme bti-dark
 endif
 
