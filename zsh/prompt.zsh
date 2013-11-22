@@ -24,7 +24,7 @@ prompt_git() {
 }
 
 prompt_dir() {
-  echo -n '%F{default}%. %f'
+  echo -n '%F{default}%2~ %f'
 }
 
 prompt_jobs() {
