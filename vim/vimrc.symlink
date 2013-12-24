@@ -208,7 +208,8 @@ map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use CtrlP
 let g:ctrlp_max_height = 30
-nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
+nnoremap <silent> <leader>cf :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
+nnoremap <silent> <leader>f :CtrlPCurWD<cr>
 
 " select text that was just pasted
 nnoremap <leader>v V`]
