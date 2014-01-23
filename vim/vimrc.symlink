@@ -4,7 +4,6 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SETUP
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
 filetype off
 
 " bootstrap vundle on a fresh install
@@ -55,7 +54,7 @@ filetype plugin indent on
 " GENERAL
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set encoding=utf-8
-set nomodeline
+set modelines=1
 set hidden
 set ruler
 set backspace=eol,start,indent
@@ -160,13 +159,10 @@ endfunction
 " ENVIRONMENTS AND COLOR
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 syntax enable
-set t_Co=256
 
 " read PROFILE_BG enviornment variable and set colors accordingly
 if $PROFILE_BG == 'light'
   set bg=light
-else
-  set bg=dark
 endif
 
 " read ITERM_PROFILE enviornment variable and set solarized
@@ -174,7 +170,6 @@ if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
   let g:lightline.colorscheme = 'solarized'
 else
-  set showtabline=2
   colorscheme bti-dark
 endif
 
@@ -190,6 +185,8 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 nnoremap j gj
 nnoremap k gk
+
+" <cr> clears the highlighted search
 nnoremap <silent> <CR> :nohlsearch<cr>
 
 " make S split lines (opposite of J)
@@ -201,11 +198,13 @@ nnoremap <C-h> <C-W>h
 nnoremap <C-k> <C-W>k
 nnoremap <C-l> <C-W>l
 
+" easymotion
 let g:EasyMotion_leader_key = '<Leader>e'
 
 " use ag
 nnoremap <leader>a :Ag<space>
 
+" setup vroom for ruby/rspec tests
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
 map <silent> <leader>t :VroomRunTestFile<cr>
@@ -293,8 +292,24 @@ function! RunCurrentFile()
     exec ':!python %'
   endif
 endfunction
-
 nnoremap <leader>r :call RunCurrentFile()<cr>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" RemoveFancyCharacters COMMAND
+" Remove smart quotes, etc.
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! RemoveFancyCharacters()
+  let typo = {}
+  let typo["“"] = '"'
+  let typo["”"] = '"'
+  let typo["‘"] = "'"
+  let typo["’"] = "'"
+  let typo["–"] = '--'
+  let typo["—"] = '---'
+  let typo["…"] = '...'
+  :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+endfunction
+command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " USE LOCAL .vimrc.local
