@@ -204,6 +204,7 @@ nnoremap <C-l> <C-W>l
 let g:EasyMotion_leader_key = '<Leader>e'
 
 let g:vroom_map_keys = 0
+let g:vroom_use_binstubs = 1
 map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use CtrlP
