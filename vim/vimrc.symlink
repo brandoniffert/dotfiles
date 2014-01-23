@@ -23,7 +23,7 @@ Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'mileszs/ack.vim'
+Bundle 'rking/ag.vim'
 Bundle 'tmhedberg/matchit'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-rails'
@@ -203,6 +203,9 @@ nnoremap <C-l> <C-W>l
 
 let g:EasyMotion_leader_key = '<Leader>e'
 
+" use ag
+nnoremap <leader>a :Ag<space>
+
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
 map <silent> <leader>t :VroomRunTestFile<cr>
@@ -211,6 +214,10 @@ map <silent> <leader>t :VroomRunTestFile<cr>
 let g:ctrlp_max_height = 30
 nnoremap <silent> <leader>cf :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 nnoremap <silent> <leader>f :CtrlPCurWD<cr>
+
+if executable("ag")
+  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
+endif
 
 " select text that was just pasted
 nnoremap <leader>v V`]
