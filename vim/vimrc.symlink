@@ -102,6 +102,57 @@ nnoremap <space> za
 let mapleader=","
 
 "------------------------------------------------------------------------------
+" LIGHTLINE
+"------------------------------------------------------------------------------
+let g:lightline = {
+      \ 'enable': { 'tabline': 0 },
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'fugitive', 'filename' ] ]
+      \ },
+      \ 'component_function': {
+      \   'fugitive': 'LightlineFugitive',
+      \   'readonly': 'LightlineReadonly',
+      \   'modified': 'LightlineModified',
+      \   'filename': 'LightlineFilename'
+      \ },
+      \ 'separator': { 'left': '', 'right': '' },
+      \ 'subseparator': { 'left': '', 'right': '' }
+      \ }
+
+function! LightlineModified()
+  if &filetype == "help"
+    return ""
+  elseif &modified
+    return "+"
+  elseif &modifiable
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightlineReadonly()
+  if &filetype == "help"
+    return ""
+  elseif &readonly
+    return ""
+  else
+    return ""
+  endif
+endfunction
+
+function! LightlineFugitive()
+  return exists('*fugitive#head') && strlen(fugitive#head()) ? ' '.fugitive#head() : ''
+endfunction
+
+function! LightlineFilename()
+  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
+       \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
+       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
+endfunction
+
+"------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "------------------------------------------------------------------------------
 syntax enable
@@ -176,6 +227,8 @@ endif
 "------------------------------------------------------------------------------
 " PLUGINS
 "------------------------------------------------------------------------------
+nnoremap <leader>a :Ag<space>
+
 " easymotion
 let g:EasyMotion_leader_key = '<Leader>e'
 
@@ -183,9 +236,6 @@ let g:EasyMotion_leader_key = '<Leader>e'
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
 map <silent> <leader>t :VroomRunTestFile<cr>
-
-" use ag
-nnoremap <leader>a :Ag<space>
 
 " use ctrlp
 let g:ctrlp_switch_buffer = 0
@@ -202,58 +252,6 @@ endif
 let g:SuperTabDefaultCompletionType = "context"
 let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
 let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
-
-"------------------------------------------------------------------------------
-" LIGHTLINE
-"------------------------------------------------------------------------------
-let g:lightline = {
-      \ 'enable': { 'tabline': 0 },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'filename' ] ]
-      \ },
-      \ 'component_function': {
-      \   'fugitive': 'LightlineFugitive',
-      \   'readonly': 'LightlineReadonly',
-      \   'modified': 'LightlineModified',
-      \   'filename': 'LightlineFilename'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
-
-function! LightlineModified()
-  if &filetype == "help"
-    return ""
-  elseif &modified
-    return "+"
-  elseif &modifiable
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightlineReadonly()
-  if &filetype == "help"
-    return ""
-  elseif &readonly
-    return ""
-  else
-    return ""
-  endif
-endfunction
-
-function! LightlineFugitive()
-  return exists('*fugitive#head') && 
-         strlen(fugitive#head()) ? ' '.fugitive#head() : ''
-endfunction
-
-function! LightlineFilename()
-  return ('' != LightlineReadonly() ? LightlineReadonly() . ' ' : '') .
-       \ ('' != expand('%t') ? expand('%t') : '[No Name]') .
-       \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
-endfunction
 
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
