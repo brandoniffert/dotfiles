@@ -1,9 +1,8 @@
-" .vimrc
-" Brandon Iffert <brandoniffert@gmail.com>
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" brandoniffert's dotfiles
+"
+"------------------------------------------------------------------------------
 " SETUP
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 filetype off
 
 " bootstrap vundle on a fresh install
@@ -50,15 +49,15 @@ endif
 
 filetype plugin indent on
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 " GENERAL
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 set encoding=utf-8
 set modelines=1
 set hidden
 set ruler
 set backspace=eol,start,indent
-set history=10000
+set history=1000
 set showbreak=↪
 set autoread
 set cursorline
@@ -66,12 +65,9 @@ set cmdheight=2
 set scrolloff=3
 set t_ti= t_te=
 set showcmd
-set notimeout
-set ttimeout
-set ttimeoutlen=10
 set display+=lastline
 set fileformats+=mac
-set formatoptions=cqnl
+set formatoptions=cqnlj
 set nojoinspaces
 set complete-=i
 set noshowmode
@@ -91,7 +87,8 @@ set nobackup nowritebackup noswapfile
 " wildmenu
 set wildmenu
 set wildmode=longest,list
-set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
+set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif
+set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 
 " searching
 set showmatch incsearch hlsearch ignorecase smartcase
@@ -104,9 +101,111 @@ nnoremap <space> za
 " remap leader
 let mapleader=","
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
+" ENVIRONMENTS AND COLOR
+"------------------------------------------------------------------------------
+syntax enable
+
+" read PROFILE_BG enviornment variable and set colors accordingly
+if $PROFILE_BG == 'light'
+  set bg=light
+endif
+
+" read ITERM_PROFILE enviornment variable and set solarized
+if $ITERM_PROFILE =~ 'solarized'
+  colorscheme solarized
+  let g:lightline.colorscheme = 'solarized'
+else
+  colorscheme bti-dark
+endif
+
+if has('gui_macvim')
+  set guifont=Sauce\ Code\ Powerline:h14
+  set guioptions-=r
+  set guioptions-=L
+  set guioptions-=b
+endif
+
+"------------------------------------------------------------------------------
+" KEY MAPS
+"------------------------------------------------------------------------------
+nnoremap j gj
+nnoremap k gk
+
+" <cr> clears the highlighted search
+nnoremap <silent> <CR> :nohlsearch<cr>
+
+" make S split lines (opposite of J)
+nnoremap S i<cr><esc>k$
+
+" use hjkl for switching between splits
+nnoremap <C-j> <C-W>j
+nnoremap <C-h> <C-W>h
+nnoremap <C-k> <C-W>k
+nnoremap <C-l> <C-W>l
+
+" select text that was just pasted
+nnoremap <leader>v V`]
+" create a new vertical split window and switch over to it
+nnoremap <silent> <leader>sv :botright vsp<cr>
+" create a new horizontal split window
+nnoremap <silent> <leader>sh :sp<cr>
+" jump back and forth between files
+nnoremap <leader><leader> <C-^>
+" change working directory to file being edited, print after
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+" easy indent/outdent
+nnoremap <Tab> >>
+nnoremap <S-Tab> <<
+vnoremap <Tab> >gv
+vnoremap <S-Tab> <gv
+" yank to system clipboard
+noremap <leader>y "+y
+" paste from system clipboard
+nnoremap <leader>p "*p
+" toggle spell check
+nnoremap <silent> <leader>ss :setlocal spell!<cr>
+" make Y act like other capital letters
+nmap Y y$
+
+" open directory of file in Finder
+if has('mac')
+  nnoremap <leader>o :silent !open %:p:h<cr>
+endif
+
+"------------------------------------------------------------------------------
+" PLUGINS
+"------------------------------------------------------------------------------
+" easymotion
+let g:EasyMotion_leader_key = '<Leader>e'
+
+" setup vroom for ruby/rspec tests
+let g:vroom_map_keys = 0
+let g:vroom_use_binstubs = 1
+map <silent> <leader>t :VroomRunTestFile<cr>
+
+" use ag
+nnoremap <leader>a :Ag<space>
+
+" use ctrlp
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_max_height = 15
+nnoremap <silent> <leader>cf :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
+nnoremap <silent> <leader>f :CtrlPCurWD<cr>
+
+" have ctrlp use ag if available - much faster
+if executable("ag")
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --smart-case -g ""'
+endif
+
+" supertab
+let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabCompletionContexts = ['s:ContextText', 's:ContextDiscover']
+let g:SuperTabContextDiscoverDiscovery = ["&completefunc:<c-x><c-u>", "&omnifunc:<c-x><c-o>"]
+
+"------------------------------------------------------------------------------
 " LIGHTLINE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 let g:lightline = {
       \ 'enable': { 'tabline': 0 },
       \ 'active': {
@@ -146,7 +245,8 @@ function! LightlineReadonly()
 endfunction
 
 function! LightlineFugitive()
-  return exists('*fugitive#head') && strlen(fugitive#head()) ? ' '.fugitive#head() : ''
+  return exists('*fugitive#head') && 
+         strlen(fugitive#head()) ? ' '.fugitive#head() : ''
 endfunction
 
 function! LightlineFilename()
@@ -155,102 +255,9 @@ function! LightlineFilename()
        \ ('' != LightlineModified() ? ' ' . LightlineModified() : '')
 endfunction
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" ENVIRONMENTS AND COLOR
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-syntax enable
-
-" read PROFILE_BG enviornment variable and set colors accordingly
-if $PROFILE_BG == 'light'
-  set bg=light
-endif
-
-" read ITERM_PROFILE enviornment variable and set solarized
-if $ITERM_PROFILE =~ 'solarized'
-  colorscheme solarized
-  let g:lightline.colorscheme = 'solarized'
-else
-  colorscheme bti-dark
-endif
-
-if has('gui_macvim')
-  set guifont=Sauce\ Code\ Powerline:h14
-  set guioptions-=r
-  set guioptions-=L
-  set guioptions-=b
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" KEY MAPS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap j gj
-nnoremap k gk
-
-" <cr> clears the highlighted search
-nnoremap <silent> <CR> :nohlsearch<cr>
-
-" make S split lines (opposite of J)
-nnoremap S i<cr><esc>k$
-
-" use hjkl for switching between splits
-nnoremap <C-j> <C-W>j
-nnoremap <C-h> <C-W>h
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
-
-" easymotion
-let g:EasyMotion_leader_key = '<Leader>e'
-
-" use ag
-nnoremap <leader>a :Ag<space>
-
-" setup vroom for ruby/rspec tests
-let g:vroom_map_keys = 0
-let g:vroom_use_binstubs = 1
-map <silent> <leader>t :VroomRunTestFile<cr>
-
-" use CtrlP
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_max_height = 30
-nnoremap <silent> <leader>cf :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
-nnoremap <silent> <leader>f :CtrlPCurWD<cr>
-
-if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --smart-case -g ""'
-endif
-
-" select text that was just pasted
-nnoremap <leader>v V`]
-" create a new vertical split window and switch over to it
-nnoremap <silent> <leader>sv :botright vsp<cr>
-" create a new horizontal split window
-nnoremap <silent> <leader>sh :sp<cr>
-" jump back and forth between files
-nnoremap <leader><leader> <C-^>
-" change working directory to file being edited, print after
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
-" easy indent/outdent
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
-" yank to system clipboard
-noremap <leader>y "+y
-" paste from system clipboard
-nnoremap <leader>p "*p
-" toggle spell check
-nnoremap <silent> <leader>ss :setlocal spell!<cr>
-" make Y act like other capital letters
-nmap Y y$
-
-" open directory of file in Finder
-if has('mac')
-  nnoremap <leader>o :silent !open %:p:h<cr>
-endif
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 " AUTOCOMMANDS
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 if has("autocmd")
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
@@ -262,6 +269,7 @@ if has("autocmd")
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
     au BufRead,BufNewFile *.scss set filetype=scss
 
+    " only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
 
@@ -275,9 +283,9 @@ if has("autocmd")
   augroup END
 endif
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 " RUN CURRENT FILE ON COMMAND LINE
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
 function! RunCurrentFile()
   let ft = &ft
   exec ':w'
@@ -294,10 +302,9 @@ function! RunCurrentFile()
 endfunction
 nnoremap <leader>r :call RunCurrentFile()<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" RemoveFancyCharacters COMMAND
-" Remove smart quotes, etc.
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"------------------------------------------------------------------------------
+" REMOVE FANCY CHARACTERS
+"------------------------------------------------------------------------------
 function! RemoveFancyCharacters()
   let typo = {}
   let typo["“"] = '"'
@@ -310,10 +317,3 @@ function! RemoveFancyCharacters()
   :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
 endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" USE LOCAL .vimrc.local
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if filereadable(expand("$HOME/.vimrc.local"))
-  so $HOME/.vimrc.local
-endif
