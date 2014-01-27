@@ -65,6 +65,9 @@ set cmdheight=2
 set scrolloff=3
 set t_ti= t_te=
 set showcmd
+set notimeout
+set ttimeout
+set ttimeoutlen=10
 set display+=lastline
 set fileformats+=mac
 set formatoptions=cqnlj
