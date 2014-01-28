@@ -34,7 +34,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
 Bundle 'altercation/vim-colors-solarized'
-Bundle 'adlawson/vim-sorcerer'
+Bundle 'chriskempson/vim-tomorrow-theme'
 
 " syntax/ft
 Bundle 'cakebaker/scss-syntax.vim'
@@ -114,7 +114,6 @@ let mapleader=","
 "------------------------------------------------------------------------------
 let g:lightline = {
       \ 'enable': { 'tabline': 0 },
-      \ 'colorscheme': 'wombat',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
