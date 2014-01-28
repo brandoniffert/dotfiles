@@ -220,13 +220,14 @@ map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use ctrlp
 let g:ctrlp_switch_buffer = 0
-let g:ctrlp_max_height = 25
+let g:ctrlp_max_height = 20
+let g:ctrlp_show_hidden = 1
 nnoremap <silent> <leader>cf :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 nnoremap <silent> <leader>f :CtrlPCurWD<cr>
 
 " have ctrlp use ag if available - much faster
 if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --smart-case -g ""'
+  let g:ctrlp_user_command = 'ag %s -l --nocolor --hidden --smart-case --column -g ""'
 endif
 
 "------------------------------------------------------------------------------
