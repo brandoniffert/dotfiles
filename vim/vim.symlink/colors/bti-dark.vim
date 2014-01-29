@@ -1,5 +1,5 @@
 " based off tomorrow night
-runtime bundle/vim-tomorrow-theme/colors/Tomorrow-Night.vim
+runtime bundle/vim-sorcerer/colors/sorcerer.vim
 let g:colors_name = "bti-dark"
 
 hi Normal      ctermbg=NONE

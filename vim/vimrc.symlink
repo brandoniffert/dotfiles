@@ -35,6 +35,7 @@ Bundle 'nathanaelkane/vim-indent-guides'
 " colors
 Bundle 'altercation/vim-colors-solarized'
 Bundle 'chriskempson/vim-tomorrow-theme'
+Bundle 'adlawson/vim-sorcerer'
 
 " syntax/ft
 Bundle 'cakebaker/scss-syntax.vim'
