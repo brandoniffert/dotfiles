@@ -44,3 +44,4 @@ build_prompt() {
 }
 
 PROMPT='$(build_prompt)'
+RPROMPT="%B%F{black}%*%f%b"
