@@ -64,6 +64,7 @@ set -g visual-activity on
 set -g status on
 set -g status-utf8 on
 set -g status-interval 1
+set -g status-justify centre
 set -g status-right '%A %b %d, %Y %H:%M '
 set -g status-left ' ❏ Session: #S'
 set -g status-left-length 20
