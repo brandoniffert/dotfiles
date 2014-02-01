@@ -64,17 +64,34 @@ set -g visual-activity on
 set -g status on
 set -g status-utf8 on
 set -g status-interval 1
-set -g status-right '%A %B %d, %Y %H:%M:%S '
-set -g status-left ' #S'
+set -g status-right '%A %b %d, %Y %H:%M '
+set -g status-left ' ❏ Session: #S'
 set -g status-left-length 20
 set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
 
-# colors
+# statusbar colors
+set-option -g status-bg white
+set-option -g status-fg black
+set-option -g status-attr default
+
+# window title colors
+set-window-option -g window-status-fg default
+set-window-option -g window-status-bg default
+
+# active window title colors
+set-window-option -g window-status-current-fg white
+set-window-option -g window-status-current-bg brightgreen
+
+# window activity colors
+set-option -g window-status-activity-fg red
+set-option -g window-status-activity-bg black
+
+# message text
+set-option -g message-bg black
+set-option -g message-fg red
+
+# panes colors
 set-option -g display-panes-active-colour blue
 set-option -g display-panes-colour brightred
 set-window-option -g clock-mode-colour green
-
-# status color - load dark or light depending on $PROFILE_BG
-source-file ~/.dotfiles/tmux/colors-dark.conf
-if-shell 'test "$PROFILE_BG" = "light"' 'source $DOTFILES/tmux/colors-light.conf'
