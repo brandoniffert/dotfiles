@@ -81,18 +81,15 @@ set-window-option -g window-status-fg default
 set-window-option -g window-status-bg default
 
 # active window title colors
-set-window-option -g window-status-current-fg white
-set-window-option -g window-status-current-bg brightgreen
+set-window-option -g window-status-current-fg black
+set-window-option -g window-status-current-bg blue
 
 # window activity colors
 set-option -g window-status-activity-fg red
 set-option -g window-status-activity-bg black
 
 # message text
-set-option -g message-bg black
+set-option -g message-bg default
 set-option -g message-fg red
 
-# panes colors
-set-option -g display-panes-active-colour blue
-set-option -g display-panes-colour brightred
 set-window-option -g clock-mode-colour green
