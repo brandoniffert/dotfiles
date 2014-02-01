@@ -29,7 +29,6 @@ Bundle 'skalnik/vim-vroom'
 Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
-Bundle 'altercation/vim-colors-solarized'
 Bundle 'adlawson/vim-sorcerer'
 Bundle 'chriskempson/base16-vim'
 
@@ -126,10 +125,7 @@ if $PROFILE_BG == 'light'
   set bg=light
 endif
 
-" read ITERM_PROFILE enviornment variable and set solarized
-if $ITERM_PROFILE =~ 'solarized'
-  colorscheme solarized
-elseif $ITERM_PROFILE =~ 'tomorrow'
+if $ITERM_PROFILE =~ 'tomorrow'
   colorscheme base16-tomorrow
   hi ModeMsg ctermfg=8
 else
