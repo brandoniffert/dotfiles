@@ -129,7 +129,7 @@ endif
 colorscheme base16-default
 
 if has('gui_macvim')
-  set guifont=Sauce\ Code\ Powerline:h14
+  set guifont=Source\ Code\ Pro:h14
   set guioptions-=r
   set guioptions-=L
   set guioptions-=b
