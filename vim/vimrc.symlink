@@ -123,6 +123,8 @@ syntax enable
 " read PROFILE_BG enviornment variable and set colors accordingly
 if $PROFILE_BG == 'light'
   set bg=light
+else
+  set bg=dark
 endif
 
 if $ITERM_PROFILE =~ 'tomorrow'
