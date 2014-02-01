@@ -1,4 +1,4 @@
-export LSCOLORS="ExGxBxDxCxEgEdxbxgxcxd"
+export LSCOLORS="exGxBxDxCxEgEdxbxgxcxd"
 export CLICOLOR=true
 export EDITOR='vim'
 
