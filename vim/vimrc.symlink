@@ -1,5 +1,3 @@
-" brandoniffert's dotfiles
-"
 "------------------------------------------------------------------------------
 " SETUP
 "------------------------------------------------------------------------------
@@ -28,8 +26,6 @@ Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
 Bundle 'skalnik/vim-vroom'
-Bundle 'itchyny/lightline.vim'
-Bundle 'tpope/vim-fugitive'
 Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
@@ -55,7 +51,7 @@ filetype plugin indent on
 " GENERAL
 "------------------------------------------------------------------------------
 set encoding=utf-8
-set modelines=1
+set modelines=2
 set hidden
 set ruler
 set backspace=eol,start,indent
@@ -74,7 +70,6 @@ set display+=lastline
 set fileformats+=mac
 set formatoptions=cqnlj
 set nojoinspaces
-set noshowmode
 set lazyredraw
 set laststatus=2
 set dictionary=/usr/share/dict/words
@@ -110,28 +105,16 @@ nnoremap <space> za
 " remap leader
 let mapleader=","
 
-"------------------------------------------------------------------------------
-" LIGHTLINE
-"------------------------------------------------------------------------------
-let g:lightline = {
-      \ 'enable': { 'tabline': 0 },
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'fugitive', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component': {
-      \   'readonly': '%{&filetype=="help"?"":&readonly?"!":""}',
-      \   'modified': '%{&filetype=="help"?"":&modified?"+":&modifiable?"":"-"}',
-      \   'fugitive': '%{exists("*fugitive#head")?fugitive#head():""}'
-      \ },
-      \ 'component_visible_condition': {
-      \   'readonly': '(&filetype!="help"&& &readonly)',
-      \   'modified': '(&filetype!="help"&&(&modified||!&modifiable))',
-      \   'fugitive': '(exists("*fugitive#head") && ""!=fugitive#head())'
-      \ },
-      \ 'separator': { 'left': '', 'right': '' },
-      \ 'subseparator': { 'left': '', 'right': '' }
-      \ }
+" statusline
+set statusline=                           " clear
+set statusline+=[%n]                      " buffer number
+set statusline+=\ %t                      " file path
+set statusline+=\ (%{&filetype})          " file type
+set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
+set statusline+=%=                        " left/right separator
+set statusline+=%{&fileformat}\ \|        " file format
+set statusline+=\ %{&fileencoding}\ \|    " file encoding
+set statusline+=\ %l\/%L:%c\              " line/column number
 
 "------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
@@ -149,6 +132,7 @@ if $ITERM_PROFILE =~ 'solarized'
   let g:lightline.colorscheme = 'solarized'
 elseif $ITERM_PROFILE =~ 'tomorrow'
   colorscheme base16-tomorrow
+  hi ModeMsg ctermfg=8
 else
   colorscheme bti-dark
 endif
