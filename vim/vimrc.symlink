@@ -129,7 +129,6 @@ endif
 " read ITERM_PROFILE enviornment variable and set solarized
 if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
-  let g:lightline.colorscheme = 'solarized'
 elseif $ITERM_PROFILE =~ 'tomorrow'
   colorscheme base16-tomorrow
   hi ModeMsg ctermfg=8
