@@ -32,7 +32,7 @@ prompt_jobs() {
 }
 
 prompt_status() {
-  echo -n '%(?.%F{default}.%F{red})%(!.#.%%)%f '
+  echo -n '%(?.%F{default}.%F{red})%(!.#.$)%f '
 }
 
 build_prompt() {
