@@ -63,33 +63,33 @@ set -g visual-activity on
 # status
 set -g status on
 set -g status-utf8 on
-set -g status-interval 1
+set -g status-interval 30
 set -g status-justify centre
 set -g status-right '%A %b %d, %Y %H:%M '
-set -g status-left ' ❏ Session: #S'
+set -g status-left '#[bg=white,fg=black] ❏ Session: #S '
 set -g status-left-length 20
 set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
 
 # statusbar colors
-set-option -g status-bg white
-set-option -g status-fg black
+set-option -g status-bg brightblack
+set-option -g status-fg brightwhite
 set-option -g status-attr default
 
 # window title colors
-set-window-option -g window-status-fg default
+set-window-option -g window-status-fg white
 set-window-option -g window-status-bg default
 
 # active window title colors
 set-window-option -g window-status-current-fg black
-set-window-option -g window-status-current-bg blue
+set-window-option -g window-status-current-bg green
 
 # window activity colors
 set-option -g window-status-activity-fg red
 set-option -g window-status-activity-bg black
 
 # message text
-set-option -g message-bg default
+set-option -g message-bg black
 set-option -g message-fg red
 
 set-window-option -g clock-mode-colour green
