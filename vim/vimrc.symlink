@@ -199,8 +199,7 @@ map <silent> <leader>t :VroomRunTestFile<cr>
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_max_height = 20
 let g:ctrlp_show_hidden = 1
-nnoremap <silent> <leader>cf :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
-nnoremap <silent> <leader>f :CtrlPCurWD<cr>
+nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
 " have ctrlp use ag if available - much faster
 if executable("ag")
