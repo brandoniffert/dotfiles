@@ -121,13 +121,13 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 syntax enable
 
 " read PROFILE_BG enviornment variable and set colors accordingly
-let base16colorspace=256
 if $PROFILE_BG == 'light'
   set bg=light
 else
   set bg=dark
 endif
-colorscheme base16-default
+
+colorscheme bti-base16
 
 if has('gui_macvim')
   set guifont=Source\ Code\ Pro:h14
