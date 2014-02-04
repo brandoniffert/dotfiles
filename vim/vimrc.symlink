@@ -228,6 +228,9 @@ if has("autocmd")
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
 
+    " resize splits when window is resized
+    au VimResized * :wincmd =
+
     " When editing a file, always jump to the last known cursor position.
     " Don't do it when the position is invalid or when inside an event handler
     " (happens when dropping a file on gvim).
