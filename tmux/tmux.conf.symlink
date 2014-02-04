@@ -67,7 +67,7 @@ set -g status-interval 30
 set -g status-justify centre
 set -g status-right '%A %b %d, %Y %H:%M '
 set -g status-left '#[bg=white,fg=black] ❏ Session: #S '
-set -g status-left-length 20
+set -g status-left-length 60
 set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
 
