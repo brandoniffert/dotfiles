@@ -50,21 +50,17 @@ filetype plugin indent on
 " GENERAL
 "------------------------------------------------------------------------------
 set encoding=utf-8
-set modelines=2
+set modelines=3
 set hidden
-set ruler
 set backspace=eol,start,indent
 set history=500
 set showbreak=↪
 set autoread
 set cursorline
-set cmdheight=2
 set scrolloff=3
 set t_ti= t_te=
+set switchbuf=useopen
 set showcmd
-set notimeout
-set ttimeout
-set ttimeoutlen=10
 set display+=lastline
 set fileformats+=mac
 set formatoptions=cqnlj
@@ -73,6 +69,14 @@ set lazyredraw
 set laststatus=2
 set dictionary=/usr/share/dict/words
 set textwidth=80
+set timeout timeoutlen=1000 ttimeoutlen=100
+
+" make cmdheight larger if inside tmux
+if $TMUX == ''
+  set cmdheight=1
+else
+  set cmdheight=2
+end
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -107,7 +111,7 @@ let mapleader=","
 " statusline
 set statusline=                           " clear
 set statusline+=[%n]                      " buffer number
-set statusline+=\ %t                      " file path
+set statusline+=\ %f                      " file path
 set statusline+=\ (%{&filetype})          " file type
 set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
 set statusline+=%=                        " left/right separator
