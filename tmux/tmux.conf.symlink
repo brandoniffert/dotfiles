@@ -66,7 +66,7 @@ set -g status-utf8 on
 set -g status-interval 30
 set -g status-justify centre
 set -g status-right '%A %b %d, %Y %H:%M '
-set -g status-left '#[bg=white,fg=black] ❏ Session: #S '
+set -g status-left '#[bg=white,fg=black] ❏ #S '
 set -g status-left-length 60
 set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
@@ -82,7 +82,7 @@ set-window-option -g window-status-bg default
 
 # active window title colors
 set-window-option -g window-status-current-fg black
-set-window-option -g window-status-current-bg green
+set-window-option -g window-status-current-bg yellow
 
 # window activity colors
 set-option -g window-status-activity-fg red
