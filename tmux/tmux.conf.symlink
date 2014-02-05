@@ -72,8 +72,8 @@ set -g window-status-format ' #I:#W '
 set -g window-status-current-format ' #I:#W '
 
 # statusbar colors
-set-option -g status-bg brightblack
-set-option -g status-fg black
+set-option -g status-bg black
+set-option -g status-fg white
 set-option -g status-attr default
 
 # window title colors
