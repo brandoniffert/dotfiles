@@ -1,1 +1,0 @@
-alias zr!='source ~/.zshrc'
