@@ -49,25 +49,26 @@ filetype plugin indent on
 "-------------------------------------------------------------------------------
 " GENERAL
 "-------------------------------------------------------------------------------
-set encoding=utf-8
-set modelines=3
-set hidden
-set backspace=eol,start,indent
-set history=500
-set showbreak=↪
 set autoread
+set backspace=eol,start,indent
 set cursorline
-set scrolloff=3
-set t_ti= t_te=
-set switchbuf=useopen
-set showcmd
+set dictionary=/usr/share/dict/words
 set display+=lastline
+set encoding=utf-8
 set fileformats+=mac
 set formatoptions=cqnlj
-set nojoinspaces
-set lazyredraw
+set hidden
+set history=500
 set laststatus=2
-set dictionary=/usr/share/dict/words
+set lazyredraw
+set modelines=3
+set nojoinspaces
+set scrolloff=3
+set showbreak=↪
+set showcmd
+set showtabline=2
+set switchbuf=useopen
+set t_ti= t_te=
 set textwidth=80
 set timeout timeoutlen=1000 ttimeoutlen=100
 
@@ -134,7 +135,8 @@ endif
 colorscheme bti-base16
 
 if has('gui_macvim')
-  set guifont=Source\ Code\ Pro:h14
+  set showtabline=0
+  set guifont=Source\ Code\ Pro:h13
   set guioptions-=r
   set guioptions-=L
   set guioptions-=b
