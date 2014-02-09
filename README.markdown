@@ -8,6 +8,6 @@ brandoniffert's dotfiles
 `./script/dotfiles` will setup symlinks in the home directory
 
 ### iTerm2
-* Use [Source Code Pro](http://sourceforge.net/projects/sourcecodepro.adobe/files/) set at 14pt Regular
+* Use [Source Code Pro](http://sourceforge.net/projects/sourcecodepro.adobe/files/) set at 13pt Regular
 * Setup [base16-shell](https://github.com/chriskempson/base16-shell)
 * Use [base16](https://github.com/chriskempson/base16-iterm2) iTerm2 themes
