@@ -1,7 +1,7 @@
 .DS_Store
 .git/
 .svn/
-.sass_cache/
+.sass-cache/
 bower_components/
 node_modules/
 images/
