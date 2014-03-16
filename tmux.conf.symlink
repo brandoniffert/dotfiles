@@ -85,8 +85,8 @@ set-window-option -g window-status-current-fg black
 set-window-option -g window-status-current-bg blue
 
 # window activity colors
-set-option -g window-status-activity-fg red
-set-option -g window-status-activity-bg black
+set-option -g window-status-activity-fg black
+set-option -g window-status-activity-bg red
 
 # message text
 set-option -g message-bg black
