@@ -8,3 +8,4 @@ hi VertSplit term=reverse cterm=NONE ctermbg=NONE ctermfg=59 gui=NONE guibg=NONE
 hi TabLineFill ctermbg=252
 hi TabLineSel ctermbg=NONE ctermfg=254
 hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
+hi StatusLineNC ctermfg=244 ctermbg=234
