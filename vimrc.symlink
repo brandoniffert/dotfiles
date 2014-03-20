@@ -135,7 +135,6 @@ endif
 if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
 else
-  set showtabline=2
   colorscheme bti-base16
 endif
 

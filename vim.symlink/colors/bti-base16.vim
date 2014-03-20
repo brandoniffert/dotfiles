@@ -3,6 +3,8 @@
 let base16colorspace=256
 runtime bundle/base16-vim/colors/base16-tomorrow.vim
 
+set showtabline=2
+
 hi Normal ctermbg=NONE
 hi VertSplit term=reverse cterm=NONE ctermbg=NONE ctermfg=59 gui=NONE guibg=NONE guifg=#5f5f5f
 hi TabLineFill ctermbg=252
