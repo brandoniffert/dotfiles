@@ -38,7 +38,7 @@ setopt COMPLETE_ALIASES     # don't expand aliases before completion finishes
 #-------------------------------------------------------------------------------
 # EXPORTS
 #-------------------------------------------------------------------------------
-export LSCOLORS="exfxBxDxCxEgEdxbxgxcxd"
+export LSCOLORS="exgxBxDxCxEgEdxbxgxcxd"
 export CLICOLOR=true
 export GREP_OPTIONS="--color"
 
