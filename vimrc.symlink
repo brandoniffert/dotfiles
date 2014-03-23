@@ -67,17 +67,11 @@ set nojoinspaces
 set scrolloff=3
 set showbreak=↪
 set showcmd
+set cmdheight=2
 set switchbuf=useopen
 set t_ti= t_te=
 set textwidth=80
 set timeout timeoutlen=1000 ttimeoutlen=100
-
-" make cmdheight larger if inside tmux
-if $TMUX == ''
-  set cmdheight=1
-else
-  set cmdheight=2
-end
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
