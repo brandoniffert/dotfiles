@@ -1,5 +1,17 @@
+prompt_jobs() {
+  echo -n "%B%F{black}%(1j.[%j] .)%f%b"
+}
+
 prompt_hostname() {
-  echo -n "%F{yellow}%m%f "
+  echo -n "%F{blue}%m%f "
+}
+
+prompt_marker() {
+  echo -n "%F{red}❯%f%F{yellow}❯%f%F{green}❯%f "
+}
+
+prompt_dir() {
+  echo -n '%F{default}%~%f '
 }
 
 prompt_git() {
@@ -23,21 +35,14 @@ prompt_git() {
   fi
 }
 
-prompt_dir() {
-  echo -n '%F{default}%2~ %f'
-}
-
-prompt_jobs() {
-  echo -n "%B%F{black}%(1j.[%j] .)%f%b"
-}
-
 prompt_status() {
-  echo -n '%(?.%F{default}.%F{red})%(!.#.$)%f '
+  echo "\n%(?.%F{default}.%F{red})%(!.#.$)%f "
 }
 
 build_prompt() {
   prompt_jobs
   prompt_hostname
+  prompt_marker
   prompt_dir
   prompt_git
   prompt_status
