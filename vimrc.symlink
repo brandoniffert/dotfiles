@@ -13,30 +13,30 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " plugins
+Bundle 'Lokaltog/vim-easymotion'
 Bundle 'danro/rename.vim'
 Bundle 'ervandew/supertab'
 Bundle 'gmarik/vundle'
 Bundle 'godlygeek/tabular'
 Bundle 'kien/ctrlp.vim'
-Bundle 'Lokaltog/vim-easymotion'
+Bundle 'nathanaelkane/vim-indent-guides'
 Bundle 'rking/ag.vim'
+Bundle 'skalnik/vim-vroom'
 Bundle 'tmhedberg/matchit'
 Bundle 'tpope/vim-commentary'
 Bundle 'tpope/vim-rails'
 Bundle 'tpope/vim-repeat'
 Bundle 'tpope/vim-surround'
-Bundle 'skalnik/vim-vroom'
-Bundle 'nathanaelkane/vim-indent-guides'
 
 " colors
-Bundle 'chriskempson/base16-vim'
 Bundle 'altercation/vim-colors-solarized'
+Bundle 'chriskempson/base16-vim'
 
 " syntax/ft
-Bundle 'othree/html5.vim'
 Bundle 'cakebaker/scss-syntax.vim'
 Bundle 'evanmiller/nginx-vim-syntax'
 Bundle 'johnhamelink/blade.vim'
+Bundle 'othree/html5.vim'
 Bundle 'pangloss/vim-javascript'
 Bundle 'tpope/vim-markdown'
 
@@ -103,7 +103,9 @@ nnoremap <leader>z za
 " remap leader
 let mapleader="\<space>"
 
-" statusline
+"-------------------------------------------------------------------------------
+" STATUSLINE
+"-------------------------------------------------------------------------------
 set statusline=                           " clear
 set statusline+=[%n]                      " buffer number
 set statusline+=\ %f                      " file path
@@ -120,16 +122,14 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 syntax enable
 
 " read PROFILE_BG enviornment variable and set colors accordingly
+set bg=dark
 if $PROFILE_BG == 'light'
   set bg=light
-else
-  set bg=dark
 endif
 
+colorscheme bti-base16
 if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
-else
-  colorscheme bti-base16
 endif
 
 if has('gui_macvim')
