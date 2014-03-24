@@ -98,10 +98,10 @@ set showmatch incsearch hlsearch ignorecase smartcase
 " folding
 set foldmethod=marker
 set foldlevelstart=0
-nnoremap <space> za
+nnoremap <leader>z za
 
 " remap leader
-let mapleader=","
+let mapleader="\<space>"
 
 " statusline
 set statusline=                           " clear
