@@ -198,6 +198,7 @@ let g:EasyMotion_leader_key = '<Leader>e'
 " setup vroom for ruby/rspec tests
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
+let g:vroom_clear_screen = 0
 map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use ctrlp
