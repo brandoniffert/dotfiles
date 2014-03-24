@@ -160,25 +160,34 @@ nnoremap <C-l> <C-W>l
 
 " select text that was just pasted
 nnoremap <leader>v V`]
+
 " create a new vertical split window and switch over to it
 nnoremap <silent> <leader>sv :botright vsp<cr>
+
 " create a new horizontal split window
 nnoremap <silent> <leader>sh :sp<cr>
+
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
+
 " change working directory to file being edited, print after
 nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
 " easy indent/outdent
 nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
+
 " yank to system clipboard
 noremap <leader>y "+y
+
 " paste from system clipboard
 nnoremap <leader>p "*p
+
 " toggle spell check
 nnoremap <silent> <leader>ss :setlocal spell!<cr>
+
 " make Y act like other capital letters
 nmap Y y$
 
@@ -203,7 +212,7 @@ map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use ctrlp
 let g:ctrlp_switch_buffer = 0
-let g:ctrlp_max_height = 20
+let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
@@ -253,13 +262,13 @@ function! RunCurrentFile()
   exec ':w'
 
   if ft == 'ruby'
-    exec ':!ruby %'
+    exec ':!/usr/bin/env ruby %'
   elseif ft == 'php'
-    exec ':!php -f %'
+    exec ':!/usr/bin/env php -f %'
   elseif ft == 'sh'
-    exec ':!bash %'
+    exec ':!/usr/bin/env bash %'
   elseif ft == 'python'
-    exec ':!python %'
+    exec ':!/usr/bin/env python %'
   endif
 endfunction
 nnoremap <leader>r :call RunCurrentFile()<cr>
