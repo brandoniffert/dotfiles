@@ -27,7 +27,7 @@ install() {
   e_header 'Installing dotfiles...'
 
   for file in "${FILES[@]}"; do
-    source="$DOTFILES/$file"
+    source="$DOTHOME/$file"
     dest="$HOME/.$file"
 
     # skip if link is the same
