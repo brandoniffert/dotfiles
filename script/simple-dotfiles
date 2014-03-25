@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# installs dotfiles to $HOME dir
+# installs a simplified set of dotfiles to $HOME dir
 
 set -e
 
@@ -12,13 +12,10 @@ FILES=(
   'agignore'
   'bash_profile'
   'gemrc'
-  'gitconfig'
   'gitignore_global'
   'rspec'
-  'tmux.conf'
   'vim'
   'vimrc'
-  'zshrc'
 )
 
 e_header()  { echo -e "\n\033[1;36m$@\033[0m"; }
