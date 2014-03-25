@@ -1,6 +1,6 @@
 .DS_Store
-vim.symlink/.netrwhist
-vim.symlink/bundle/*
+vim/.netrwhist
+vim/bundle/*
 sublime2/User/Package\ Control.sublime-settings
 sublime2/User/Package Control.last-run
 sublime2/User/ShopifyStores.json
