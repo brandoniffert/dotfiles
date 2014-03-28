@@ -2,9 +2,6 @@ autoload -U compinit && compinit
 
 export DOTFILES=$HOME/.dotfiles
 
-# use .localrc for local options
-[ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
-
 #-------------------------------------------------------------------------------
 # PATHS
 #-------------------------------------------------------------------------------
@@ -136,3 +133,6 @@ eval "$(rbenv init - --no-rehash)"
 
 # source z.sh script
 [ -f `brew --prefix`/etc/profile.d/z.sh ] && source `brew --prefix`/etc/profile.d/z.sh
+
+# use .localrc for local options
+[ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
