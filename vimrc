@@ -74,6 +74,12 @@ set t_ti= t_te=
 set textwidth=80
 set timeout timeoutlen=1000 ttimeoutlen=100
 
+" using the old regexp engine in 7.4 speeds up ruby syntax highlighting
+" http://stackoverflow.com/a/16920294
+if v:version > 703
+  set regexpengine=1
+endif
+
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set shiftround
