@@ -68,7 +68,7 @@ set nojoinspaces
 set scrolloff=3
 set showbreak=↪
 set showcmd
-set cmdheight=2
+set cmdheight=1
 set switchbuf=useopen
 set t_ti= t_te=
 set textwidth=80
