@@ -58,7 +58,7 @@ set dictionary=/usr/share/dict/words
 set display+=lastline
 set encoding=utf-8
 set fileformats+=mac
-set formatoptions=cqnlj
+set formatoptions=cqnl
 set hidden
 set history=500
 set laststatus=2
