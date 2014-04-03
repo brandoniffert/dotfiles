@@ -237,7 +237,7 @@ if has("autocmd")
     au FileType text,markdown set spell
     au FileType python set sw=4 sts=4 et
 
-    au BufNewFile,BufRead *.ss,*.erb silent set ft=html
+    au BufNewFile,BufRead *.ss silent set ft=html
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
     au BufRead,BufNewFile *.scss set filetype=scss
 
