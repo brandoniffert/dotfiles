@@ -13,37 +13,37 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " plugins
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'danro/rename.vim'
-Bundle 'ervandew/supertab'
-Bundle 'gmarik/vundle'
-Bundle 'godlygeek/tabular'
-Bundle 'kien/ctrlp.vim'
-Bundle 'nathanaelkane/vim-indent-guides'
-Bundle 'rking/ag.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'skalnik/vim-vroom'
-Bundle 'tmhedberg/matchit'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-rails'
-Bundle 'tpope/vim-repeat'
-Bundle 'tpope/vim-surround'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'danro/rename.vim'
+Plugin 'ervandew/supertab'
+Plugin 'gmarik/vundle'
+Plugin 'godlygeek/tabular'
+Plugin 'kien/ctrlp.vim'
+Plugin 'nathanaelkane/vim-indent-guides'
+Plugin 'rking/ag.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'skalnik/vim-vroom'
+Plugin 'tmhedberg/matchit'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-repeat'
+Plugin 'tpope/vim-surround'
 
 " colors
-Bundle 'altercation/vim-colors-solarized'
-Bundle 'chriskempson/base16-vim'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'chriskempson/base16-vim'
 
 " syntax/ft
-Bundle 'cakebaker/scss-syntax.vim'
-Bundle 'evanmiller/nginx-vim-syntax'
-Bundle 'johnhamelink/blade.vim'
-Bundle 'othree/html5.vim'
-Bundle 'pangloss/vim-javascript'
-Bundle 'tpope/vim-markdown'
+Plugin 'cakebaker/scss-syntax.vim'
+Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'johnhamelink/blade.vim'
+Plugin 'othree/html5.vim'
+Plugin 'pangloss/vim-javascript'
+Plugin 'tpope/vim-markdown'
 
 if exists("s:bootstrap") && s:bootstrap
   unlet s:bootstrap
-  BundleInstall
+  PluginInstall
 endif
 
 filetype plugin indent on
