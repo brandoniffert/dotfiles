@@ -230,7 +230,7 @@ endif
 " AUTOCOMMANDS
 "-------------------------------------------------------------------------------
 if has("autocmd")
-  augroup vimrcEx
+  augroup btivimrc
     au!
     au FileType text,markdown set spell
     au FileType python set sw=4 sts=4 et
@@ -260,21 +260,19 @@ if has("autocmd")
 endif
 
 "-------------------------------------------------------------------------------
-" RUN CURRENT FILE ON COMMAND LINE
+" RUN CURRENT FILE
 "-------------------------------------------------------------------------------
 function! RunCurrentFile()
-  let ft = &ft
-  exec ':w'
+  if &ft == 'ruby'   | let l:runftcmd = 'ruby %'   | endif
+  if &ft == 'php'    | let l:runftcmd = 'php -f %' | endif
+  if &ft == 'python' | let l:runftcmd = 'python %' | endif
+  if &ft == 'sh'     | let l:runftcmd = 'bash %'   | endif
 
-  if ft == 'ruby'
-    exec ':!/usr/bin/env ruby %'
-  elseif ft == 'php'
-    exec ':!/usr/bin/env php -f %'
-  elseif ft == 'sh'
-    exec ':!/usr/bin/env bash %'
-  elseif ft == 'python'
-    exec ':!/usr/bin/env python %'
-  endif
+  if !exists('l:runftcmd')
+    echo "Unrecognized run filetype command!"
+  else
+    exec ':w |:!' . l:runftcmd
+  end
 endfunction
 nnoremap <leader>r :call RunCurrentFile()<cr>
 
