@@ -53,12 +53,9 @@ filetype plugin indent on
 "-------------------------------------------------------------------------------
 set autoread
 set backspace=eol,start,indent
-set cursorline
 set dictionary=/usr/share/dict/words
-set display+=lastline
 set encoding=utf-8
-set fileformats+=mac
-set formatoptions=cqnl
+set formatoptions=qrn1j
 set hidden
 set history=500
 set laststatus=2
@@ -68,11 +65,11 @@ set nojoinspaces
 set scrolloff=3
 set showbreak=↪
 set showcmd
-set cmdheight=1
 set switchbuf=useopen
+set synmaxcol=500
 set t_ti= t_te=
 set textwidth=80
-set timeout timeoutlen=1000 ttimeoutlen=100
+set notimeout ttimeout ttimeoutlen=10
 
 " using the old regexp engine in 7.4 speeds up ruby syntax highlighting
 " http://stackoverflow.com/a/16920294
@@ -169,10 +166,10 @@ nnoremap <C-l> <C-W>l
 nnoremap <leader>v V`]
 
 " create a new vertical split window and switch over to it
-nnoremap <silent> <leader>sv :botright vsp<cr>
+nnoremap <silent> <leader>sv :botright :vnew<cr>
 
 " create a new horizontal split window
-nnoremap <silent> <leader>sh :sp<cr>
+nnoremap <silent> <leader>sh :new<cr>
 
 " jump back and forth between files
 nnoremap <leader><leader> <C-^>
@@ -209,7 +206,7 @@ endif
 nnoremap <leader>a :Ag<space>
 
 " easymotion
-let g:EasyMotion_leader_key = '<Leader>e'
+let g:EasyMotion_leader_key = '<leader>e'
 
 " setup vroom for ruby/rspec tests
 let g:vroom_map_keys = 0
@@ -218,9 +215,10 @@ let g:vroom_clear_screen = 0
 map <silent> <leader>t :VroomRunTestFile<cr>
 
 " use ctrlp
-let g:ctrlp_switch_buffer = 0
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_use_caching = 0
 nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
 " have ctrlp use ag if available - much faster
