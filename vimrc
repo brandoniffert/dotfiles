@@ -130,6 +130,10 @@ if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
 endif
 
+if exists('$TMUX')
+  set cmdheight=2
+endif
+
 if has('gui_macvim')
   set showtabline=0
   set guifont=Source\ Code\ Pro:h13
@@ -177,8 +181,11 @@ nnoremap <S-Tab> <<
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
 
+" quick save
+nnoremap <leader>w :w<cr>
+
 " yank to system clipboard
-noremap <leader>y "+y
+nnoremap <leader>y "+y
 
 " paste from system clipboard
 nnoremap <leader>p "*p
@@ -187,7 +194,7 @@ nnoremap <leader>p "*p
 nnoremap <silent> <leader>ss :setlocal spell!<cr>
 
 " make Y act like other capital letters
-nmap Y y$
+nnoremap Y y$
 
 " open directory of file in Finder
 if has('mac')
@@ -206,7 +213,7 @@ let g:EasyMotion_leader_key = '<leader>e'
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
 let g:vroom_clear_screen = 0
-map <silent> <leader>t :VroomRunTestFile<cr>
+nnoremap <silent> <leader>t :VroomRunTestFile<cr>
 
 " use ctrlp
 let g:ctrlp_max_height = 25
@@ -217,7 +224,7 @@ nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
 " have ctrlp use ag if available - much faster
 if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden --column -g ""'
+  let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden -g ""'
 endif
 
 "-------------------------------------------------------------------------------
