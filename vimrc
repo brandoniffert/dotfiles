@@ -1,6 +1,6 @@
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " SETUP
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 filetype off
 
 " bootstrap vundle on a fresh install
@@ -48,9 +48,9 @@ endif
 
 filetype plugin indent on
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " GENERAL
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 set autoread
 set backspace=eol,start,indent
 set dictionary=/usr/share/dict/words
@@ -62,13 +62,15 @@ set laststatus=2
 set lazyredraw
 set modelines=3
 set nojoinspaces
+set splitbelow
+set splitright
 set scrolloff=3
 set showbreak=↪
 set showcmd
 set switchbuf=useopen
 set synmaxcol=500
 set t_ti= t_te=
-set textwidth=80
+set textwidth=79
 set notimeout ttimeout ttimeoutlen=10
 
 " tabs & indenting
@@ -96,14 +98,13 @@ set showmatch incsearch hlsearch ignorecase smartcase
 " folding
 set foldmethod=marker
 set foldlevelstart=0
-nnoremap <leader>z za
 
 " remap leader
 let mapleader="\<space>"
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " STATUSLINE
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 set statusline=                           " clear
 set statusline+=[%n]                      " buffer number
 set statusline+=\ %f                      " file path
@@ -114,9 +115,9 @@ set statusline+=%{&fileformat}\ \|        " file format
 set statusline+=\ %{&fileencoding}\ \|    " file encoding
 set statusline+=\ %l\/%L:%c\              " line/column number
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 syntax enable
 
 " read PROFILE_BG enviornment variable and set colors accordingly
@@ -142,9 +143,9 @@ if has('gui_macvim')
   set guioptions-=b
 endif
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " KEY MAPS
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 nnoremap j gj
 nnoremap k gk
 
@@ -164,7 +165,7 @@ nnoremap <C-l> <C-W>l
 nnoremap <leader>v V`]
 
 " create a new vertical split window and switch over to it
-nnoremap <silent> <leader>sv :botright :vnew<cr>
+nnoremap <silent> <leader>sv :vnew<cr>
 
 " create a new horizontal split window
 nnoremap <silent> <leader>sh :new<cr>
@@ -180,9 +181,6 @@ nnoremap <Tab> >>
 nnoremap <S-Tab> <<
 vnoremap <Tab> >gv
 vnoremap <S-Tab> <gv
-
-" quick save
-nnoremap <leader>w :w<cr>
 
 " yank to system clipboard
 nnoremap <leader>y "+y
@@ -201,9 +199,9 @@ if has('mac')
   nnoremap <leader>o :silent !open %:p:h<cr>
 endif
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " PLUGINS
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 nnoremap <leader>a :Ag<space>
 
 " easymotion
@@ -227,9 +225,9 @@ if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden -g ""'
 endif
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " AUTOCOMMANDS
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 if has("autocmd")
   augroup btivimrc
     au!
@@ -260,9 +258,9 @@ if has("autocmd")
   augroup END
 endif
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " RUN CURRENT FILE
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 function! RunCurrentFile()
   if &ft == 'ruby'   | let l:runftcmd = 'ruby %'   | endif
   if &ft == 'php'    | let l:runftcmd = 'php -f %' | endif
@@ -277,9 +275,9 @@ function! RunCurrentFile()
 endfunction
 nnoremap <leader>r :call RunCurrentFile()<cr>
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " REMOVE FANCY CHARACTERS
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 function! RemoveFancyCharacters()
   let typo = {}
   let typo["“"] = '"'
@@ -293,9 +291,9 @@ function! RemoveFancyCharacters()
 endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 " TOGGLE COLORCOLUMN
-"-------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
 function! g:ToggleColorColumn()
   if &colorcolumn != ''
     setlocal colorcolumn&
