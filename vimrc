@@ -53,6 +53,7 @@ filetype plugin indent on
 "------------------------------------------------------------------------------
 set autoread
 set backspace=eol,start,indent
+set clipboard=unnamed
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
 set formatoptions=qrn1j
