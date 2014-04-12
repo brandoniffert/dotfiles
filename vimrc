@@ -54,6 +54,7 @@ filetype plugin indent on
 set autoread
 set backspace=eol,start,indent
 set clipboard=unnamed
+set cursorline
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
 set formatoptions=qrn1j
@@ -74,6 +75,12 @@ set synmaxcol=500
 set t_ti= t_te=
 set textwidth=79
 set notimeout ttimeout ttimeoutlen=10
+
+" using the old regexp engine in 7.4 speeds up ruby syntax highlighting
+" http://stackoverflow.com/a/16920294
+if v:version > 703
+  set regexpengine=1
+endif
 
 " tabs & indenting
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
