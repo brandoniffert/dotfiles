@@ -63,6 +63,7 @@ set laststatus=2
 set lazyredraw
 set modelines=3
 set nojoinspaces
+set relativenumber
 set splitbelow
 set splitright
 set scrolloff=3

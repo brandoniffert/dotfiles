@@ -11,3 +11,4 @@ hi TabLineFill ctermbg=252
 hi TabLineSel ctermbg=NONE ctermfg=254
 hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
 hi StatusLineNC ctermfg=244 ctermbg=234
+hi LineNr ctermbg=NONE ctermfg=236
