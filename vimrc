@@ -1,6 +1,13 @@
 "------------------------------------------------------------------------------
+" This is my vimrc file - it changes often
+" Author: Brandon Iffert <brandoniffert@gmail.com>
+" Source: https://github.com/brandoniffert/dotfiles/blob/master/vimrc
+"------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------
 " SETUP
 "------------------------------------------------------------------------------
+au!
 filetype off
 
 " bootstrap vundle on a fresh install
@@ -51,28 +58,27 @@ filetype plugin indent on
 "------------------------------------------------------------------------------
 " GENERAL
 "------------------------------------------------------------------------------
-set autoread
-set backspace=eol,start,indent
-set clipboard=unnamed
-set cursorline
+set autoread                         " update a open file edited outside of Vim
+set backspace=eol,start,indent       " common sense backspacing
+set clipboard=unnamed                " use system clipboard
+set cursorline                       " highlight current line
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
 set formatoptions=qrn1j
-set hidden
+set hidden                           " keep buffers around
 set history=500
-set laststatus=2
-set lazyredraw
-set modelines=3
-set nojoinspaces
+set laststatus=2                     " keep statusline visible
+set lazyredraw                       " only redraw if needed
+set nojoinspaces                     " only one space after joining lines
+set number
 set relativenumber
-set splitbelow
-set splitright
-set scrolloff=3
+set splitbelow splitright            " put new windows to bottom/right
+set scrolloff=3                      " keep 3 lines of context around cursor
+set shell=/bin/bash
 set showbreak=↪
-set showcmd
-set switchbuf=useopen
-set synmaxcol=500
-set t_ti= t_te=
+set showcmd                          " display incomplete commands
+set synmaxcol=800                    " don't syntax highlight after 800 columns
+set t_ti= t_te=                      " don't clear scrollback buffer on quit
 set textwidth=79
 set notimeout ttimeout ttimeoutlen=10
 
@@ -159,40 +165,38 @@ nnoremap j gj
 nnoremap k gk
 
 " <cr> clears the highlighted search
-nnoremap <silent> <CR> :nohlsearch<cr>
+nnoremap <silent> <cr> :nohlsearch<cr>
 
 " make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
 
 " use hjkl for switching between splits
-nnoremap <C-j> <C-W>j
-nnoremap <C-h> <C-W>h
-nnoremap <C-k> <C-W>k
-nnoremap <C-l> <C-W>l
+nnoremap <c-j> <c-W>j
+nnoremap <c-h> <c-W>h
+nnoremap <c-k> <c-W>k
+nnoremap <c-l> <c-W>l
 
 " select text that was just pasted
-nnoremap <leader>v V`]
+nnoremap <leader>gv V`]
 
-" create a new vertical split window and switch over to it
-nnoremap <silent> <leader>sv :vnew<cr>
+" create a new vertical/horizontal window
+nnoremap <silent> <leader>v :vnew<cr>
+nnoremap <silent> <leader>h :new<cr>
 
-" create a new horizontal split window
-nnoremap <silent> <leader>sh :new<cr>
-
-" jump back and forth between files
-nnoremap <leader><leader> <C-^>
+" quick jump back and forth between files
+nnoremap <leader><leader> <c-^>
 
 " change working directory to file being edited, print after
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " easy indent/outdent
-nnoremap <Tab> >>
-nnoremap <S-Tab> <<
-vnoremap <Tab> >gv
-vnoremap <S-Tab> <gv
+nnoremap <tab> >>
+nnoremap <s-tab> <<
+vnoremap <tab> >gv
+vnoremap <s-tab> <gv
 
 " yank to system clipboard
-nnoremap <leader>y "+y
+nnoremap <leader>y "*y
 
 " paste from system clipboard
 nnoremap <leader>p "*p
@@ -203,9 +207,12 @@ nnoremap <silent> <leader>ss :setlocal spell!<cr>
 " make Y act like other capital letters
 nnoremap Y y$
 
+" quick quit window
+nnoremap <silent> <c-\> :q<cr>
+
 " open directory of file in Finder
 if has('mac')
-  nnoremap <leader>o :silent !open %:p:h<cr>
+  nnoremap <silent> <leader>o :silent !open %:p:h<cr>
 endif
 
 "------------------------------------------------------------------------------
@@ -238,7 +245,7 @@ endif
 " AUTOCOMMANDS
 "------------------------------------------------------------------------------
 if has("autocmd")
-  augroup btivimrc
+  augroup bti-vimrc
     au!
     au FileType text,markdown set spell
     au FileType python set sw=4 sts=4 et
@@ -250,6 +257,9 @@ if has("autocmd")
     " fixes issue with statusline not being drawn in full screen iTerm2 
     au VimEnter * :sleep 5m
 
+    " automatically source this file on save
+    au BufWritePost vimrc source %
+
     " only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
@@ -258,8 +268,6 @@ if has("autocmd")
     au VimResized * :wincmd =
 
     " When editing a file, always jump to the last known cursor position.
-    " Don't do it when the position is invalid or when inside an event handler
-    " (happens when dropping a file on gvim).
     au BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
@@ -310,4 +318,4 @@ function! g:ToggleColorColumn()
     setlocal colorcolumn=+1
   endif
 endfunction
-nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<CR>
+nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<cr>
