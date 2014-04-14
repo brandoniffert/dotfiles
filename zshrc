@@ -51,12 +51,6 @@ export SAVEHIST=$HISTSIZE
 [[ $ITERM_PROFILE == *"light"* ]] && PROFILE_BG='light' || PROFILE_BG='dark'
 export PROFILE_BG
 
-if [[ $ITERM_PROFILE == *"base"* || $TERM_PROGRAM == 'Apple_Terminal' ]]; then
-  BASE16_SCHEME='tomorrow'
-  BASE16_SHELL="$HOME/.config/base16-shell/base16-$BASE16_SCHEME.dark.sh"
-  [[ -s $BASE16_SHELL ]] && . $BASE16_SHELL
-fi
-
 #------------------------------------------------------------------------------
 # KEYS
 #------------------------------------------------------------------------------

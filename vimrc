@@ -38,7 +38,7 @@ Plugin 'tpope/vim-surround'
 
 " colors
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/base16-vim'
+" Plugin 'w0ng/vim-hybrid'
 
 " syntax/ft
 Plugin 'cakebaker/scss-syntax.vim'
@@ -136,13 +136,12 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 syntax enable
 
 " read PROFILE_BG enviornment variable and set colors accordingly
-set bg=dark
-if $PROFILE_BG == 'light'
+if $PROFILE_BG == 'dark'
+  set bg=dark
+  let g:hybrid_use_iTerm_colors = 1
+  colorscheme hybrid
+else
   set bg=light
-endif
-
-colorscheme bti-base16
-if $ITERM_PROFILE =~ 'solarized'
   colorscheme solarized
 endif
 
