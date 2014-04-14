@@ -140,6 +140,8 @@ if $PROFILE_BG == 'dark'
   set bg=dark
   let g:hybrid_use_iTerm_colors = 1
   colorscheme hybrid
+  hi Search ctermfg=8
+  hi StatusLine ctermfg=245
 else
   set bg=light
   colorscheme solarized
