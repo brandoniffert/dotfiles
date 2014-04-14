@@ -198,6 +198,7 @@ vnoremap <s-tab> <gv
 
 " yank to system clipboard
 nnoremap <leader>y "*y
+vnoremap <leader>y "*y
 
 " paste from system clipboard
 nnoremap <leader>p "*p
