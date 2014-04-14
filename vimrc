@@ -60,7 +60,7 @@ filetype plugin indent on
 "------------------------------------------------------------------------------
 set autoread                         " update a open file edited outside of Vim
 set backspace=eol,start,indent       " common sense backspacing
-set clipboard=unnamed                " use system clipboard
+set clipboard=
 set cursorline                       " highlight current line
 set dictionary=/usr/share/dict/words
 set encoding=utf-8
