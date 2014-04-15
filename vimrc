@@ -149,6 +149,7 @@ if $PROFILE_BG == 'dark'
   hi NonText ctermbg=NONE
   hi VertSplit ctermbg=NONE
   hi LineNr ctermbg=NONE ctermfg=235
+  hi! link rubyClass rubyDefine
 else
   set bg=light
   colorscheme solarized
