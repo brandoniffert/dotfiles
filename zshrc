@@ -47,9 +47,17 @@ export HISTSIZE=100000
 export HISTFILE="$HOME/.zsh_history"
 export SAVEHIST=$HISTSIZE
 
-# let programs know whether the term bg is light or dark
+# let programs know whether the term bg is light or dark - default to dark
 [[ $ITERM_PROFILE == *"light"* ]] && PROFILE_BG='light' || PROFILE_BG='dark'
 export PROFILE_BG
+
+# a lot of config for setting up base16 - relies on iterm2 profile name
+if [[ $ITERM_PROFILE == *"base16"* || $TERM_PROGRAM == 'Apple_Terminal' ]]; then
+  BASE16_THEME='tomorrow'
+  [[ $PROFILE_BG == 'light' ]] && THEME_STYLE='light' || THEME_STYLE='dark'
+  BASE16_CONF="$HOME/.config/base16-shell/base16-$BASE16_THEME.$THEME_STYLE.sh"
+  [[ -s $BASE16_CONF ]] && source $BASE16_CONF
+fi
 
 #------------------------------------------------------------------------------
 # KEYS

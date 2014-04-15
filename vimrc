@@ -20,7 +20,6 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " plugins
-Plugin 'bling/vim-airline'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'danro/rename.vim'
 Plugin 'ervandew/supertab'
@@ -40,7 +39,7 @@ Plugin 'tpope/vim-surround'
 
 " colors
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'nanotech/jellybeans.vim'
+Plugin 'chriskempson/base16-vim'
 
 " syntax/ft
 Plugin 'cakebaker/scss-syntax.vim'
@@ -72,7 +71,6 @@ set history=500
 set laststatus=2                     " keep statusline visible
 set lazyredraw                       " only redraw if needed
 set nojoinspaces                     " only one space after joining lines
-set noshowmode
 set number
 set relativenumber
 set splitbelow splitright            " put new windows to bottom/right
@@ -133,9 +131,6 @@ set statusline+=%{&fileformat}\ \|        " file format
 set statusline+=\ %{&fileencoding}\ \|    " file encoding
 set statusline+=\ %l\/%L:%c\              " line/column number
 
-let g:airline_theme = 'bubblegum'
-let g:airline_powerline_fonts = 1
-
 "------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "------------------------------------------------------------------------------
@@ -144,12 +139,7 @@ syntax enable
 " read PROFILE_BG enviornment variable and set colors accordingly
 if $PROFILE_BG == 'dark'
   set bg=dark
-  colorscheme jellybeans
-  hi Normal ctermbg=NONE
-  hi NonText ctermbg=NONE
-  hi VertSplit ctermbg=NONE
-  hi LineNr ctermbg=NONE ctermfg=235
-  hi! link rubyClass rubyDefine
+  colorscheme bti-base16-override
 else
   set bg=light
   colorscheme solarized
