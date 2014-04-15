@@ -20,6 +20,7 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " plugins
+Plugin 'bling/vim-airline'
 Plugin 'Lokaltog/vim-easymotion'
 Plugin 'danro/rename.vim'
 Plugin 'ervandew/supertab'
@@ -32,13 +33,14 @@ Plugin 'scrooloose/syntastic'
 Plugin 'skalnik/vim-vroom'
 Plugin 'tmhedberg/matchit'
 Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-surround'
 
 " colors
 Plugin 'altercation/vim-colors-solarized'
-" Plugin 'w0ng/vim-hybrid'
+Plugin 'nanotech/jellybeans.vim'
 
 " syntax/ft
 Plugin 'cakebaker/scss-syntax.vim'
@@ -70,6 +72,7 @@ set history=500
 set laststatus=2                     " keep statusline visible
 set lazyredraw                       " only redraw if needed
 set nojoinspaces                     " only one space after joining lines
+set noshowmode
 set number
 set relativenumber
 set splitbelow splitright            " put new windows to bottom/right
@@ -130,6 +133,9 @@ set statusline+=%{&fileformat}\ \|        " file format
 set statusline+=\ %{&fileencoding}\ \|    " file encoding
 set statusline+=\ %l\/%L:%c\              " line/column number
 
+let g:airline_theme = 'bubblegum'
+let g:airline_powerline_fonts = 1
+
 "------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "------------------------------------------------------------------------------
@@ -138,10 +144,11 @@ syntax enable
 " read PROFILE_BG enviornment variable and set colors accordingly
 if $PROFILE_BG == 'dark'
   set bg=dark
-  let g:hybrid_use_iTerm_colors = 1
-  colorscheme hybrid
-  hi Search ctermfg=8
-  hi StatusLine ctermfg=245
+  colorscheme jellybeans
+  hi Normal ctermbg=NONE
+  hi NonText ctermbg=NONE
+  hi VertSplit ctermbg=NONE
+  hi LineNr ctermbg=NONE ctermfg=235
 else
   set bg=light
   colorscheme solarized
@@ -256,7 +263,7 @@ if has("autocmd")
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
     au BufRead,BufNewFile *.scss set filetype=scss
 
-    " fixes issue with statusline not being drawn in full screen iTerm2 
+    " fixes issue with statusline not being drawn in full screen iTerm2
     au VimEnter * :sleep 5m
 
     " automatically source this file on save
