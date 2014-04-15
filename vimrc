@@ -149,14 +149,6 @@ if exists('$TMUX')
   set cmdheight=2
 endif
 
-if has('gui_macvim')
-  set showtabline=0
-  set guifont=Source\ Code\ Pro:h13
-  set guioptions-=r
-  set guioptions-=L
-  set guioptions-=b
-endif
-
 "------------------------------------------------------------------------------
 " KEY MAPS
 "------------------------------------------------------------------------------
