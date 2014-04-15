@@ -5,6 +5,7 @@ runtime bundle/base16-vim/colors/base16-tomorrow.vim
 
 let g:colors_name = "bti-base16-override"
 
+hi Normal ctermbg=NONE
 hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
 hi StatusLineNC ctermbg=234 ctermfg=244
 hi LineNr ctermbg=NONE ctermfg=236
