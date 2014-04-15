@@ -221,6 +221,11 @@ let g:vroom_use_binstubs = 1
 let g:vroom_clear_screen = 0
 nnoremap <silent> <leader>t :VroomRunTestFile<cr>
 
+" syntastic
+let g:syntastic_mode_map={ 'mode': 'active',
+                         \ 'active_filetypes': [],
+                         \ 'passive_filetypes': ['html'] }
+
 " use ctrlp
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
