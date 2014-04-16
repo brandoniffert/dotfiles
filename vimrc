@@ -28,6 +28,7 @@ Plugin 'godlygeek/tabular'
 Plugin 'kien/ctrlp.vim'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'rking/ag.vim'
+Plugin 'scrooloose/nerdtree'
 Plugin 'scrooloose/syntastic'
 Plugin 'skalnik/vim-vroom'
 Plugin 'tmhedberg/matchit'
@@ -225,6 +226,9 @@ nnoremap <silent> <leader>t :VroomRunTestFile<cr>
 let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': ['html'] }
+
+" nerdtree
+nnoremap <silent> <c-n> :NERDTreeToggle<cr>
 
 " use ctrlp
 let g:ctrlp_max_height = 25
