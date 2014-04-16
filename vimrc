@@ -205,7 +205,7 @@ nnoremap <silent> <c-\> :q<cr>
 
 " open directory of file in Finder
 if has('mac')
-  nnoremap <silent> <leader>o :silent !open %:p:h<cr>
+  nnoremap <silent> <c-o> :silent !open %:p:h<cr>
 endif
 
 "------------------------------------------------------------------------------
