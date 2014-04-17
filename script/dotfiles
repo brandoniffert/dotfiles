@@ -18,6 +18,7 @@ basic_files=(
 extra_files=(
   'ackrc'
   'agignore'
+  'ctags'
   'gemrc'
   'gitconfig'
   'rspec'
