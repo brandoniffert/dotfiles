@@ -138,3 +138,6 @@ eval "$(rbenv init - --no-rehash)"
 
 # use .localrc for local options
 [ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
+
+# source tmuxinator completions
+[ -f "$DOTFILES"/zsh/completions/tmuxinator.zsh ] && source "$DOTFILES"/zsh/completions/tmuxinator.zsh
