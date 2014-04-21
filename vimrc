@@ -138,12 +138,12 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 syntax enable
 
 " read PROFILE_BG enviornment variable and set colors accordingly
-if $PROFILE_BG == 'dark'
-  set bg=dark
-  colorscheme bti-base16-override
-else
+if $PROFILE_BG == 'light'
   set bg=light
   colorscheme solarized
+else
+  set bg=dark
+  colorscheme bti-base16-override
 endif
 
 if exists('$TMUX')
