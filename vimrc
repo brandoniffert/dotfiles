@@ -230,6 +230,9 @@ let g:syntastic_mode_map={ 'mode': 'active',
 " nerdtree
 nnoremap <silent> <c-n> :NERDTreeToggle<cr>
 
+" supertab
+let g:SuperTabDefaultCompletionType = "context"
+
 " use ctrlp
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
