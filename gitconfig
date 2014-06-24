@@ -5,12 +5,16 @@
 [alias]
   a = add
   aa = add --all
-  ci = commit
+  b = branch
+  ci = commit --verbose
   cl = clone
   cm = commit -m
   co = checkout
   d = diff
   dc = diff --cached
+  fa = fetch --all
+  ff = merge --ff-only
+  noff = merge --no-ff
   l = log --graph --abbrev-commit --date=relative
   la = log --graph --abbrev-commit --date=relative --all
   st = status
