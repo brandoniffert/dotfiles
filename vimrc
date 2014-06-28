@@ -45,6 +45,7 @@ Plugin 'chriskempson/base16-vim'
 " syntax/ft
 Plugin 'cakebaker/scss-syntax.vim'
 Plugin 'evanmiller/nginx-vim-syntax'
+Plugin 'groenewege/vim-less'
 Plugin 'johnhamelink/blade.vim'
 Plugin 'othree/html5.vim'
 Plugin 'pangloss/vim-javascript'
