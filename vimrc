@@ -191,8 +191,8 @@ nnoremap <silent> <leader>ss :setlocal spell!<cr>
 " make Y act like other capital letters
 nnoremap Y y$
 
-" quick quit window
-nnoremap <silent> <c-\> :q<cr>
+" quick quit window and delete buffer
+nnoremap <silent> <c-\> :bd<cr>
 
 " open directory of file in Finder
 if has('mac')
