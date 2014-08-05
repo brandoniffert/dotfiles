@@ -141,9 +141,13 @@ syntax enable
 " read PROFILE_BG enviornment variable and set colors accordingly
 if $PROFILE_BG == 'light'
   set bg=light
-  colorscheme solarized
 else
   set bg=dark
+endif
+
+if $PROFILE_COLORSCHEME == 'solarized'
+  colorscheme solarized
+else
   colorscheme bti-base16-override
 endif
 

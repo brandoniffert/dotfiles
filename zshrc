@@ -51,6 +51,9 @@ export SAVEHIST=$HISTSIZE
 [[ $ITERM_PROFILE == *"light"* ]] && PROFILE_BG='light' || PROFILE_BG='dark'
 export PROFILE_BG
 
+[[ $ITERM_PROFILE == *"solarized"* ]] && PROFILE_COLORSCHEME='solarized' || PROFILE_COLORSCHEME='bti'
+export PROFILE_COLORSCHEME
+
 # a lot of config for setting up base16 - relies on iterm2 profile name
 if [[ $ITERM_PROFILE == *"base16"* || $TERM_PROGRAM == 'Apple_Terminal' ]]; then
   BASE16_THEME='tomorrow'
