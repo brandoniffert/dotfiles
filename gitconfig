@@ -15,8 +15,8 @@
   fa = fetch --all
   ff = merge --ff-only
   noff = merge --no-ff
-  l = log --graph --abbrev-commit --date=relative
-  la = log --graph --abbrev-commit --date=relative --all
+  l = log --graph --abbrev-commit --date=relative --topo-order
+  la = log --graph --abbrev-commit --date=relative --topo-order --all
   st = status
 
 [color]
@@ -27,7 +27,7 @@
   ui = auto
 
 [format]
-  pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
+  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(black bold)(by %an)%Creset
 
 [merge]
   tool = vimdiff
