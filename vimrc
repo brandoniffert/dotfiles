@@ -164,6 +164,16 @@ nnoremap k gk
 " <cr> clears the highlighted search
 nnoremap <silent> <cr> :nohlsearch<cr>
 
+" use hjkl for switching between splits
+nnoremap <c-j> <c-W>j
+nnoremap <c-h> <c-W>h
+nnoremap <c-k> <c-W>k
+nnoremap <c-l> <c-W>l
+
+" create a new vertical/horizontal window
+nnoremap <silent> <leader>v :vnew<cr>
+nnoremap <silent> <leader>h :new<cr>
+
 " make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
 
@@ -318,23 +328,3 @@ function! g:ToggleColorColumn()
   endif
 endfunction
 nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<cr>
-
-"------------------------------------------------------------------------------
-" MOVE TO OR CREATE SPLIT
-"------------------------------------------------------------------------------
-function! SplitMoveOrCreate(key)
-  let t:curwin = winnr()
-  exec "wincmd ".a:key
-  if (t:curwin == winnr())
-    if (match(a:key,'[jk]'))
-      :vnew
-    else
-      :new
-    endif
-    exec "wincmd ".a:key
-  endif
-endfunction
-nnoremap <silent> <C-h> :call SplitMoveOrCreate('h')<cr>
-nnoremap <silent> <C-j> :call SplitMoveOrCreate('j')<cr>
-nnoremap <silent> <C-k> :call SplitMoveOrCreate('k')<cr>
-nnoremap <silent> <C-l> :call SplitMoveOrCreate('l')<cr>
