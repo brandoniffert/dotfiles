@@ -12,7 +12,7 @@ filetype off
 
 " bootstrap vundle on a fresh install
 if !isdirectory(expand("~/.vim/bundle/vundle"))
-  !git clone git://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
+  !git clone git://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
   let s:bootstrap=1
 endif
 
