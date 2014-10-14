@@ -55,7 +55,7 @@ export PROFILE_BG
 export PROFILE_COLORSCHEME
 
 # a lot of config for setting up base16 - relies on iterm2 profile name
-if [[ $ITERM_PROFILE == *"base16"* || $TERM_PROGRAM == 'Apple_Terminal' ]]; then
+if [[ $ITERM_PROFILE == *"base16"* ]]; then
   BASE16_THEME='tomorrow'
   [[ $PROFILE_BG == 'light' ]] && THEME_STYLE='light' || THEME_STYLE='dark'
   BASE16_CONF="$HOME/.config/base16-shell/base16-$BASE16_THEME.$THEME_STYLE.sh"
