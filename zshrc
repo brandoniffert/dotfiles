@@ -56,10 +56,11 @@ export PROFILE_COLORSCHEME
 
 # a lot of config for setting up base16 - relies on iterm2 profile name
 if [[ $ITERM_PROFILE == *"base16"* ]]; then
-  BASE16_THEME='tomorrow'
-  [[ $PROFILE_BG == 'light' ]] && THEME_STYLE='light' || THEME_STYLE='dark'
-  BASE16_CONF="$HOME/.config/base16-shell/base16-$BASE16_THEME.$THEME_STYLE.sh"
+  # get the theme based on iterm profile naming convention: base16-$THEME_NAME
+  BASE16_THEME="$(echo $ITERM_PROFILE | cut -d '-' -f2)"
+  BASE16_CONF="$HOME/.config/base16-shell/base16-$BASE16_THEME.$PROFILE_BG.sh"
   [[ -s $BASE16_CONF ]] && source $BASE16_CONF
+  export BASE16_THEME
 fi
 
 #------------------------------------------------------------------------------

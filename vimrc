@@ -145,10 +145,21 @@ else
   set bg=dark
 endif
 
-if $PROFILE_COLORSCHEME == 'solarized'
-  colorscheme solarized
+if exists('$BASE16_THEME')
+  let base16colorspace=256
+  let s:bti_colorscheme = 'base16-' . $BASE16_THEME
+elseif $PROFILE_COLORSCHEME == 'solarized'
+  let s:bti_colorscheme = 'solarized'
 else
-  colorscheme bti-base16-override
+  let s:bti_colorscheme = 'Tomorrow-Night'
+endif
+exec 'colorscheme ' . s:bti_colorscheme
+
+" color fixes for base16 themes
+if exists('$BASE16_THEME')
+  hi Normal ctermbg=NONE
+  hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
+  hi LineNr ctermbg=NONE ctermfg=237
 endif
 
 if exists('$TMUX')
