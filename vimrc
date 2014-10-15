@@ -262,9 +262,17 @@ endif
 "------------------------------------------------------------------------------
 " UNITE
 "------------------------------------------------------------------------------
+if executable("ag")
+  let g:unite_source_rec_async_command = 'ag -l -S --follow --nocolor --nogroup --hidden -g ""'
+  let g:unite_source_grep_command = 'ag'
+  let g:unite_source_grep_default_opts = '--column --nogroup --nogroup'
+  let g:unite_source_grep_recursive_opt = ''
+endif
+
 let g:unite_source_history_yank_enable = 1
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
+call unite#custom#source('file_rec,file_rec/async', 'ignore_globs', split(&wildignore, ','))
 
 " sort buffers by number
 call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
@@ -290,6 +298,10 @@ function! s:unite_buffer_settings()
   " exit unite
   imap <buffer> <esc> <Plug>(unite_exit)
   nmap <buffer> <esc> <Plug>(unite_exit)
+
+  " clear unite
+  imap <buffer> <c-l> <Plug>(unite_redraw)
+  nmap <buffer> <c-l> <Plug>(unite_redraw)
 endfunction
 
 nnoremap <silent> <leader>f :<c-u>Unite file file_rec/async -start-insert<cr>
