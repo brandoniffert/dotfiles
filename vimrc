@@ -17,10 +17,10 @@ if !filereadable(expand("~/.vim/autoload/plug.vim"))
 endif
 
 call plug#begin()
+Plug 'bling/vim-airline'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
@@ -71,6 +71,7 @@ set history=500
 set laststatus=2                     " keep statusline visible
 set lazyredraw                       " only redraw if needed
 set nojoinspaces                     " only one space after joining lines
+set noshowmode
 set number
 set relativenumber
 set splitbelow splitright            " put new windows to bottom/right
@@ -153,10 +154,8 @@ else
 endif
 exec 'colorscheme ' . s:bti_colorscheme
 
-" color fixes for base16 themes
+" highlight fixes for base16 themes
 if exists('$BASE16_THEME')
-  hi Normal ctermbg=NONE
-  hi SpellBad ctermfg=red ctermbg=NONE cterm=underline
   hi LineNr ctermbg=NONE ctermfg=237
 endif
 
@@ -227,6 +226,11 @@ endif
 "------------------------------------------------------------------------------
 nnoremap <leader>a :Ag<space>
 
+" airline
+let g:airline_powerline_fonts = 1
+let g:airline#themes#base16#constant = 1
+let g:airline_theme = g:colors_name == 'solarized' ? 'solarized' : 'base16'
+
 " easymotion
 let g:EasyMotion_leader_key = '<leader>e'
 
@@ -241,38 +245,24 @@ let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': ['html'] }
 
-" nerdtree
-nnoremap <silent> <c-n> :NERDTreeToggle<cr>
-
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
-
-" use ctrlp
-let g:ctrlp_max_height = 25
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_use_caching = 0
-nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
-
-" have ctrlp use ag if available - much faster
-if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden -g ""'
-endif
 
 "------------------------------------------------------------------------------
 " UNITE
 "------------------------------------------------------------------------------
 if executable("ag")
-  let g:unite_source_rec_async_command = 'ag -l -S --follow --nocolor --nogroup --hidden -g ""'
+  let g:unite_source_rec_async_command = 'ag --nocolor --nogroup --hidden -g ""'
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--column --nogroup --nogroup'
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden -g ""'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
 let g:unite_source_history_yank_enable = 1
 
 call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#custom#source('file_rec,file_rec/async', 'ignore_globs', split(&wildignore, ','))
+call unite#filters#sorter_default#use(['sorter_rank'])
+call unite#custom#source('buffer,file,file_rec/async', 'ignore_globs', split(&wildignore, ','))
 
 " sort buffers by number
 call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
@@ -283,6 +273,8 @@ let g:unite_source_buffer_time_format = '(%Y-%m-%d %H:%M:%S) '
 call unite#custom#profile('default', 'context', {
 \   'winheight': 25,
 \   'direction': 'botright',
+\   'cursor_line_highlight': 'CursorLine',
+\   'update_time': 300,
 \ })
 
 " custom mappings for the unite buffer
@@ -304,7 +296,7 @@ function! s:unite_buffer_settings()
   nmap <buffer> <c-l> <Plug>(unite_redraw)
 endfunction
 
-nnoremap <silent> <leader>f :<c-u>Unite file file_rec/async -start-insert<cr>
+nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file file_rec/async<cr>
 nnoremap <leader>u :<c-u>Unite<space>
 
 "------------------------------------------------------------------------------
@@ -340,7 +332,7 @@ if has("autocmd")
   augroup vimrc-reload
     au!
     " automatically source this file on save
-    au BufWritePost vimrc source $MYVIMRC
+    au BufWritePost vimrc source $MYVIMRC | :AirlineRefresh
   augroup END
 endif
 
