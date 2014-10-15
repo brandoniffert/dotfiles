@@ -1,7 +1,7 @@
 .DS_Store
 vim/.netrwhist
 vim/autoload/plug.vim
-vim/plugged/*
+vim/plugged/
 sublime3/User/Package\ Control.sublime-settings
 sublime3/User/Package Control.last-run
 sublime3/User/ShopifyStores.json
