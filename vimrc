@@ -19,13 +19,11 @@ endif
 call plug#begin()
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
-Plug 'gmarik/vundle'
 Plug 'godlygeek/tabular'
 Plug 'kien/ctrlp.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
