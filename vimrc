@@ -27,6 +27,7 @@ Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 Plug 'Shougo/unite.vim'
 Plug 'skalnik/vim-vroom'
 Plug 'tmhedberg/matchit'
@@ -261,6 +262,42 @@ if executable("ag")
 endif
 
 "------------------------------------------------------------------------------
+" UNITE
+"------------------------------------------------------------------------------
+let g:unite_source_history_yank_enable = 1
+
+call unite#filters#matcher_default#use(['matcher_fuzzy'])
+
+" sort buffers by number
+call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
+
+" settings for buffers
+let g:unite_source_buffer_time_format = '(%Y-%m-%d %H:%M:%S) '
+
+call unite#custom#profile('default', 'context', {
+\   'winheight': 25,
+\   'direction': 'botright',
+\ })
+
+" custom mappings for the unite buffer
+au FileType unite call <SID>unite_buffer_settings()
+function! s:unite_buffer_settings()
+  " play nice with supertab
+  let b:SuperTabDisabled=1
+
+  " enable navigation with control-j and control-k in insert mode
+  imap <buffer> <C-j> <Plug>(unite_select_next_line)
+  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+
+  " exit unite
+  imap <buffer> <esc> <Plug>(unite_exit)
+  nmap <buffer> <esc> <Plug>(unite_exit)
+endfunction
+
+nnoremap <silent> <leader>f :<c-u>Unite file file_rec/async -start-insert<cr>
+nnoremap <leader>u :<c-u>Unite<space>
+
+"------------------------------------------------------------------------------
 " AUTOCOMMANDS
 "------------------------------------------------------------------------------
 if has("autocmd")
@@ -276,9 +313,6 @@ if has("autocmd")
     " fixes issue with statusline not being drawn in full screen iTerm2
     au VimEnter * :sleep 5m
 
-    " automatically source this file on save
-    au BufWritePost vimrc source %
-
     " only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
@@ -291,6 +325,12 @@ if has("autocmd")
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
       \ endif
+  augroup END
+
+  augroup vimrc-reload
+    au!
+    " automatically source this file on save
+    au BufWritePost vimrc source $MYVIMRC
   augroup END
 endif
 
