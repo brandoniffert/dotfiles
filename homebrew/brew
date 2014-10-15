@@ -25,7 +25,7 @@ brew install htop-osx
 brew install ack
 brew install z
 brew install python
-brew install vim --override-system-vi
+brew install vim --override-system-vi --with-lua
 brew install the_silver_searcher
 brew install terminal-notifier
 brew install getmail
