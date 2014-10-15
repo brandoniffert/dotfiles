@@ -290,10 +290,6 @@ function! s:unite_buffer_settings()
   " exit unite
   imap <buffer> <esc> <Plug>(unite_exit)
   nmap <buffer> <esc> <Plug>(unite_exit)
-
-  " clear unite
-  imap <buffer> <c-l> <Plug>(unite_redraw)
-  nmap <buffer> <c-l> <Plug>(unite_redraw)
 endfunction
 
 nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file file_rec/async<cr>
