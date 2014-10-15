@@ -10,50 +10,49 @@
 au!
 filetype off
 
-" bootstrap vundle on a fresh install
-if !isdirectory(expand("~/.vim/bundle/vundle"))
-  !git clone git://github.com/gmarik/Vundle.vim.git ~/.vim/bundle/vundle
+" bootstrap vim-plug on a fresh install
+if !filereadable(expand("~/.vim/autoload/plug.vim"))
+  !curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let s:bootstrap=1
 endif
 
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-
-" plugins
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'danro/rename.vim'
-Plugin 'ervandew/supertab'
-Plugin 'gmarik/vundle'
-Plugin 'godlygeek/tabular'
-Plugin 'kien/ctrlp.vim'
-Plugin 'nathanaelkane/vim-indent-guides'
-Plugin 'rking/ag.vim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'scrooloose/syntastic'
-Plugin 'skalnik/vim-vroom'
-Plugin 'tmhedberg/matchit'
-Plugin 'tpope/vim-commentary'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-rails'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-surround'
+call plug#begin()
+Plug 'danro/rename.vim'
+Plug 'ervandew/supertab'
+Plug 'gmarik/vundle'
+Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
+Plug 'Lokaltog/vim-easymotion'
+Plug 'nathanaelkane/vim-indent-guides'
+Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'Shougo/unite.vim'
+Plug 'skalnik/vim-vroom'
+Plug 'tmhedberg/matchit'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 
 " colors
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'chriskempson/base16-vim'
+Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 
 " syntax/ft
-Plugin 'cakebaker/scss-syntax.vim'
-Plugin 'evanmiller/nginx-vim-syntax'
-Plugin 'groenewege/vim-less'
-Plugin 'johnhamelink/blade.vim'
-Plugin 'othree/html5.vim'
-Plugin 'pangloss/vim-javascript'
-Plugin 'tpope/vim-markdown'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'evanmiller/nginx-vim-syntax'
+Plug 'groenewege/vim-less'
+Plug 'johnhamelink/blade.vim'
+Plug 'othree/html5.vim'
+Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-markdown'
+call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
   unlet s:bootstrap
-  PluginInstall
+  PlugInstall
 endif
 
 filetype plugin indent on
