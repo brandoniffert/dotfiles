@@ -254,18 +254,17 @@ let g:SuperTabDefaultCompletionType = "context"
 if executable("ag")
   let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
   let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nocolor --nogroup --hidden -g ""'
+  let g:unite_source_grep_default_opts = '--nocolor --nogroup -S'
   let g:unite_source_grep_recursive_opt = ''
 endif
 
 let g:unite_source_history_yank_enable = 1
 
-call unite#filters#matcher_default#use(['matcher_fuzzy'])
-call unite#filters#sorter_default#use(['sorter_rank'])
 call unite#custom#source('buffer,file,file_rec/async', 'ignore_globs', split(&wildignore, ','))
-
-" sort buffers by number
+call unite#custom#source('file,file/new,buffer,file_rec,file_mru,menu', 'matchers', 'matcher_fuzzy')
+call unite#custom#source('menu', 'sorters', 'sorter_reverse')
 call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
+call unite#custom#profile('files', 'filters', 'sorter_rank')
 
 " settings for buffers
 let g:unite_source_buffer_time_format = '(%Y-%m-%d %H:%M:%S) '
@@ -292,7 +291,7 @@ function! s:unite_buffer_settings()
   nmap <buffer> <esc> <Plug>(unite_exit)
 endfunction
 
-nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file file_rec/async<cr>
+nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file_rec/async<cr>
 nnoremap <leader>u :<c-u>Unite<space>
 
 "------------------------------------------------------------------------------
