@@ -21,6 +21,7 @@ Plug 'bling/vim-airline'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
+Plug 'kien/ctrlp.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
@@ -157,6 +158,8 @@ exec 'colorscheme ' . s:bti_colorscheme
 " highlight fixes for base16 themes
 if exists('$BASE16_THEME')
   hi LineNr ctermbg=NONE ctermfg=237
+else
+  hi Normal ctermbg=NONE
 endif
 
 if exists('$TMUX')
@@ -248,51 +251,67 @@ let g:syntastic_mode_map={ 'mode': 'active',
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 
-"------------------------------------------------------------------------------
-" UNITE
-"------------------------------------------------------------------------------
+" ctrlp
+let g:ctrlp_max_height = 25
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_use_caching = 0
+
+" have ctrlp use ag if available - much faster
 if executable("ag")
-  let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
-  let g:unite_source_grep_command = 'ag'
-  let g:unite_source_grep_default_opts = '--nocolor --nogroup -S'
-  let g:unite_source_grep_recursive_opt = ''
+  let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden -g ""'
 endif
 
-let g:unite_source_history_yank_enable = 1
+nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
-call unite#custom#source('buffer,file,file_rec/async', 'ignore_globs', split(&wildignore, ','))
-call unite#custom#source('file,file/new,buffer,file_rec,file_mru,menu', 'matchers', 'matcher_fuzzy')
-call unite#custom#source('menu', 'sorters', 'sorter_reverse')
-call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
-call unite#custom#profile('files', 'filters', 'sorter_rank')
+"------------------------------------------------------------------------------
+" UNITE
+" only setup and use unite if env variable exists
+"------------------------------------------------------------------------------
+if exists('$FULLVIM')
+  if executable("ag")
+    let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
+    let g:unite_source_grep_command = 'ag'
+    let g:unite_source_grep_default_opts = '--nocolor --nogroup -S'
+    let g:unite_source_grep_recursive_opt = ''
+  endif
 
-" settings for buffers
-let g:unite_source_buffer_time_format = '(%Y-%m-%d %H:%M:%S) '
+  let g:unite_source_history_yank_enable = 1
 
-call unite#custom#profile('default', 'context', {
-\   'winheight': 25,
-\   'direction': 'botright',
-\   'cursor_line_highlight': 'CursorLine',
-\   'update_time': 300,
-\ })
+  call unite#custom#source('buffer,file,file_rec/async', 'ignore_globs', split(&wildignore, ','))
+  call unite#custom#source('file,file/new,buffer,file_rec,file_mru,menu', 'matchers', 'matcher_fuzzy')
+  call unite#custom#source('menu', 'sorters', 'sorter_reverse')
+  call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
+  call unite#custom#profile('files', 'filters', 'sorter_rank')
 
-" custom mappings for the unite buffer
-au FileType unite call <SID>unite_buffer_settings()
-function! s:unite_buffer_settings()
-  " play nice with supertab
-  let b:SuperTabDisabled=1
+  " settings for buffers
+  let g:unite_source_buffer_time_format = '(%Y-%m-%d %H:%M:%S) '
 
-  " enable navigation with control-j and control-k in insert mode
-  imap <buffer> <C-j> <Plug>(unite_select_next_line)
-  imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+  call unite#custom#profile('default', 'context', {
+  \   'winheight': 25,
+  \   'direction': 'botright',
+  \   'cursor_line_highlight': 'CursorLine',
+  \   'update_time': 300,
+  \ })
 
-  " exit unite
-  imap <buffer> <esc> <Plug>(unite_exit)
-  nmap <buffer> <esc> <Plug>(unite_exit)
-endfunction
+  " custom mappings for the unite buffer
+  au FileType unite call <SID>unite_buffer_settings()
+  function! s:unite_buffer_settings()
+    " play nice with supertab
+    let b:SuperTabDisabled=1
 
-nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file_rec/async<cr>
-nnoremap <leader>u :<c-u>Unite<space>
+    " enable navigation with control-j and control-k in insert mode
+    imap <buffer> <C-j> <Plug>(unite_select_next_line)
+    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
+
+    " exit unite
+    imap <buffer> <esc> <Plug>(unite_exit)
+    nmap <buffer> <esc> <Plug>(unite_exit)
+  endfunction
+
+  nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file_rec/async<cr>
+  nnoremap <leader>u :<c-u>Unite<space>
+endif
 
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
