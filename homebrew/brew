@@ -21,7 +21,6 @@ brew install wget
 brew install tmux
 brew install reattach-to-user-namespace
 brew install tree
-brew install htop-osx
 brew install ack
 brew install z
 brew install python
@@ -30,5 +29,7 @@ brew install the_silver_searcher
 brew install terminal-notifier
 brew install getmail
 brew install yuicompressor
+brew install imagemagick
+brew install htop-osx
 
 brew cleanup
