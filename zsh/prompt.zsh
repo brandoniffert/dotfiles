@@ -7,7 +7,8 @@ prompt_hostname() {
 }
 
 prompt_marker() {
-  echo -n "%F{red}❯%f%F{yellow}❯%f%F{green}❯%f "
+  local symbol='❯'
+  echo -n "%F{red}$symbol%f%F{yellow}$symbol%f%F{green}$symbol%f "
 }
 
 prompt_dir() {
