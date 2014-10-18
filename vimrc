@@ -233,6 +233,19 @@ nnoremap <leader>a :Ag<space>
 let g:airline_powerline_fonts = 1
 let g:airline#themes#base16#constant = 1
 let g:airline_theme = g:colors_name == 'solarized' ? 'solarized' : 'base16'
+let g:airline_mode_map = {
+    \ '__' : '-',
+    \ 'n'  : 'N',
+    \ 'i'  : 'I',
+    \ 'R'  : 'R',
+    \ 'c'  : 'C',
+    \ 'v'  : 'V',
+    \ 'V'  : 'V',
+    \ '' : 'V',
+    \ 's'  : 'S',
+    \ 'S'  : 'S',
+    \ '' : 'S',
+    \ }
 
 " easymotion
 let g:EasyMotion_leader_key = '<leader>e'
