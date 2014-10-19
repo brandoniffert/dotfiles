@@ -26,8 +26,6 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/syntastic'
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
-Plug 'Shougo/unite.vim'
 Plug 'skalnik/vim-vroom'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
@@ -278,52 +276,24 @@ endif
 nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
 "------------------------------------------------------------------------------
-" UNITE
-" only setup and use unite if env variable exists
+" SELECTA
 "------------------------------------------------------------------------------
-if exists('$FULLVIM')
-  if executable("ag")
-    let g:unite_source_rec_async_command = 'ag --follow --nocolor --nogroup --hidden -g ""'
-    let g:unite_source_grep_command = 'ag'
-    let g:unite_source_grep_default_opts = '--nocolor --nogroup -S'
-    let g:unite_source_grep_recursive_opt = ''
-  endif
-
-  let g:unite_source_history_yank_enable = 1
-
-  call unite#custom#source('buffer,file,file_rec/async', 'ignore_globs', split(&wildignore, ','))
-  call unite#custom#source('file,file/new,buffer,file_rec,file_mru,menu', 'matchers', 'matcher_fuzzy')
-  call unite#custom#source('menu', 'sorters', 'sorter_reverse')
-  call unite#custom#source('buffer', 'sorters', 'sorter_reverse')
-  call unite#custom#profile('files', 'filters', 'sorter_rank')
-
-  " settings for buffers
-  let g:unite_source_buffer_time_format = '(%Y-%m-%d %H:%M:%S) '
-
-  call unite#custom#profile('default', 'context', {
-  \   'winheight': 25,
-  \   'direction': 'botright',
-  \   'cursor_line_highlight': 'CursorLine',
-  \   'update_time': 300,
-  \ })
-
-  " custom mappings for the unite buffer
-  au FileType unite call <SID>unite_buffer_settings()
-  function! s:unite_buffer_settings()
-    " play nice with supertab
-    let b:SuperTabDisabled=1
-
-    " enable navigation with control-j and control-k in insert mode
-    imap <buffer> <C-j> <Plug>(unite_select_next_line)
-    imap <buffer> <C-k> <Plug>(unite_select_previous_line)
-
-    " exit unite
-    imap <buffer> <esc> <Plug>(unite_exit)
-    nmap <buffer> <esc> <Plug>(unite_exit)
+if executable('selecta')
+  function! SelectaCommand(choice_command, selecta_args, vim_command)
+    try
+      let selection = system(a:choice_command . " | selecta " . a:selecta_args)
+    catch /Vim:Interrupt/
+      " Swallow the ^C so that the redraw below happens; otherwise there will be
+      " leftovers from selecta on the screen
+      redraw!
+      return
+    endtry
+    redraw!
+    exec a:vim_command . " " . selection
   endfunction
 
-  nnoremap <silent> <leader>f :<c-u>Unite -start-insert -buffer-name=files file_rec/async<cr>
-  nnoremap <leader>u :<c-u>Unite<space>
+  let selecta_search_command = 'ag -l -S --nocolor --hidden -g ""'
+  nnoremap <silent> <leader>f :call SelectaCommand(selecta_search_command, "", ":e")<cr>
 endif
 
 "------------------------------------------------------------------------------
