@@ -76,13 +76,13 @@ bindkey '^[[B' down-line-or-search
 # also do history expansion on space
 bindkey ' ' magic-space
 
-bindkey "^K" kill-whole-line                    
+bindkey "^K" kill-whole-line
 bindkey "^R" history-incremental-search-backward
-bindkey "^A" beginning-of-line                  
-bindkey "^E" end-of-line                        
-bindkey "^D" delete-char                        
-bindkey "^F" forward-char                       
-bindkey "^B" backward-char                      
+bindkey "^A" beginning-of-line
+bindkey "^E" end-of-line
+bindkey "^D" delete-char
+bindkey "^F" forward-char
+bindkey "^B" backward-char
 
 # allow C-x C-e to edit command line
 autoload -U edit-command-line
