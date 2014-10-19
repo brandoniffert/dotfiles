@@ -21,6 +21,7 @@ extra_files=(
   'ctags'
   'gemrc'
   'gitconfig'
+  'gitignore_global'
   'rspec'
   'tmux.conf'
   'zshrc'
