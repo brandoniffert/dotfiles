@@ -397,6 +397,20 @@ endfunction
 command! RemoveFancyCharacters :call RemoveFancyCharacters()
 
 "------------------------------------------------------------------------------
+" CLEAR WHITESPACE
+"------------------------------------------------------------------------------
+function! ClearWhitespace()
+  normal mi
+  try
+    %s/\s\+$//
+  catch /^Vim\%((\a\+)\)\=:E486/
+  endtry
+  let @/=""
+  normal `i
+endfunction
+command! ClearWhitespace :call ClearWhitespace()
+
+"------------------------------------------------------------------------------
 " TOGGLE COLORCOLUMN
 "------------------------------------------------------------------------------
 function! g:ToggleColorColumn()
