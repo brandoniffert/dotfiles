@@ -382,11 +382,11 @@ command! ClearWhitespace :call ClearWhitespace()
 "------------------------------------------------------------------------------
 " TOGGLE COLORCOLUMN
 "------------------------------------------------------------------------------
-function! g:ToggleColorColumn()
+function! ToggleColorColumn()
   if &colorcolumn != ''
     setlocal colorcolumn&
   else
     setlocal colorcolumn=+1
   endif
 endfunction
-nnoremap <silent> <leader>cc :call g:ToggleColorColumn()<cr>
+command! ToggleColorColumn :call ToggleColorColumn()
