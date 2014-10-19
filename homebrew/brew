@@ -32,5 +32,6 @@ brew install getmail
 brew install yuicompressor
 brew install imagemagick
 brew install htop-osx
+brew install selecta
 
 brew cleanup
