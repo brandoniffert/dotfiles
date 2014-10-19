@@ -9,4 +9,4 @@ ln -s "$DOTFILES/sublime3/User" "$sublime_dir"
 
 # get theme
 cd "$sublime_dir"
-git clone https://github.com/chriskempson/tomorrow-theme.git "Theme - Tomorrow"
+git clone git://github.com/chriskempson/base16-textmate.git "Theme - Base16"

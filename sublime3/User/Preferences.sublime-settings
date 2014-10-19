@@ -1,6 +1,6 @@
 {
-  "color_scheme": "Packages/Theme - Tomorrow/textmate/Tomorrow-Night.tmTheme",
-  "font_face": "Source Code Pro",
+  "color_scheme": "Packages/Theme - Base16/base16-tomorrow.dark.tmTheme",
+  "font_face": "Source Code Pro Light",
   "font_size": 14,
   "highlight_line": true,
   "highlight_modified_tabs": true,
@@ -8,9 +8,9 @@
   "matchBracketsAngle": true,
   "matchBracketsBraces": true,
   "matchBracketsSquare": true,
+  "preview_on_click": true,
   "remember_open_files": false,
   "tab_size": 2,
   "translate_tabs_to_spaces": true,
-  "trim_trailing_white_space_on_save": true,
-  "preview_on_click": true
+  "trim_trailing_white_space_on_save": true
 }
