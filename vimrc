@@ -336,18 +336,21 @@ endif
 " RUN CURRENT FILE
 "------------------------------------------------------------------------------
 function! RunCurrentFile()
-  if &ft == 'ruby'   | let l:runftcmd = 'ruby %'   | endif
-  if &ft == 'php'    | let l:runftcmd = 'php -f %' | endif
-  if &ft == 'python' | let l:runftcmd = 'python %' | endif
-  if &ft == 'sh'     | let l:runftcmd = 'bash %'   | endif
+  let types = {
+    \ 'ruby' : 'ruby',
+    \ 'php' : 'php -f',
+    \ 'python' : 'python',
+    \ 'sh' : 'bash'
+    \ }
 
-  if !exists('l:runftcmd')
-    echo "Unrecognized run filetype command!"
+  exec "w"
+  if has_key(types, &ft)
+    exec "!" . types[&ft] . " " . expand("%")
   else
-    exec ':w |:!' . l:runftcmd
-  end
+    echo "Unrecognized run filetype command!"
+  endif
 endfunction
-nnoremap <leader>r :call RunCurrentFile()<cr>
+nnoremap <silent><leader>r :call RunCurrentFile()<cr>
 
 "------------------------------------------------------------------------------
 " REMOVE FANCY CHARACTERS
