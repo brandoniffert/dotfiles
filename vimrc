@@ -228,7 +228,9 @@ endif
 nnoremap <leader>a :Ag<space>
 
 " airline
-let g:airline_powerline_fonts = 1
+let g:airline_powerline_fonts = 0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 let g:airline#themes#base16#constant = 1
 let g:airline_theme = g:colors_name == 'solarized' ? 'solarized' : 'base16'
 let g:airline_mode_map = {
@@ -273,7 +275,7 @@ if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden -g ""'
 endif
 
-nnoremap <silent> <leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
+nnoremap <silent><leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 
 "------------------------------------------------------------------------------
 " SELECTA
@@ -293,7 +295,7 @@ if executable('selecta')
   endfunction
 
   let selecta_search_command = 'ag -l -S --nocolor --hidden -g ""'
-  nnoremap <silent> <leader>f :call SelectaCommand(selecta_search_command, "", ":e")<cr>
+  nnoremap <silent><leader>f :call SelectaCommand(selecta_search_command, "", ":e")<cr>
 endif
 
 "------------------------------------------------------------------------------
@@ -308,9 +310,6 @@ if has("autocmd")
     au BufNewFile,BufRead *.ss silent set ft=html
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
     au BufRead,BufNewFile *.scss set filetype=scss
-
-    " fixes issue with statusline not being drawn in full screen iTerm2
-    au VimEnter * :sleep 5m
 
     " only show cursorline in active window
     au WinEnter * set cursorline
