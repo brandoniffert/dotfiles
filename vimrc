@@ -314,7 +314,7 @@ if has("autocmd")
     au BufRead,BufNewFile *.scss set filetype=scss
 
     " fixes issue with statusline not being drawn in full screen iTerm2
-    au VimEnter * :sleep 3m
+    au VimEnter * :sleep 5m
 
     " only show cursorline in active window
     au WinEnter * set cursorline
