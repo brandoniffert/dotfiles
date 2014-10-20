@@ -276,6 +276,7 @@ if executable("ag")
 endif
 
 nnoremap <silent><leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
+nnoremap <silent><leader>b :CtrlPBuffer<cr>
 
 "------------------------------------------------------------------------------
 " SELECTA
