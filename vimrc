@@ -313,6 +313,9 @@ if has("autocmd")
     au BufNewFile,BufRead *.blade.php silent set ft=blade.html
     au BufRead,BufNewFile *.scss set filetype=scss
 
+    " fixes issue with statusline not being drawn in full screen iTerm2
+    au VimEnter * :sleep 3m
+
     " only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
