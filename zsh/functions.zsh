@@ -61,3 +61,8 @@ function fs() {
     du $arg .[^.]* *
   fi
 }
+
+# use selecta to quickly get to a project
+function proj() {
+  cd $(find ~/Projects -maxdepth 1 -type d | selecta)
+}
