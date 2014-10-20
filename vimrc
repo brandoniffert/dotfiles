@@ -45,6 +45,7 @@ Plug 'groenewege/vim-less'
 Plug 'johnhamelink/blade.vim'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-liquid'
 Plug 'tpope/vim-markdown'
 call plug#end()
 
