@@ -97,6 +97,7 @@ alias t='tmux -u'
 alias vi="vim"
 alias j="z"
 alias zr!='source ~/.zshrc'
+alias lls='ls -al'
 
 #------------------------------------------------------------------------------
 # COMPLETION
