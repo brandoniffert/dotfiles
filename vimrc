@@ -216,7 +216,7 @@ nnoremap <silent> <leader>ss :setlocal spell!<cr>
 nnoremap Y y$
 
 " quick quit window and delete buffer
-nnoremap <silent> <c-\> :bd<cr>
+nnoremap <silent> <leader>\ :bd<cr>
 
 " open directory of file in Finder
 if has('mac')
