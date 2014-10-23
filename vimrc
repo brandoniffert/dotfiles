@@ -376,7 +376,7 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 "------------------------------------------------------------------------------
 " CLEAR WHITESPACE
 "------------------------------------------------------------------------------
-function! ClearWhitespace()
+function! RemoveWhitespace()
   normal mi
   try
     %s/\s\+$//
