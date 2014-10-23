@@ -64,5 +64,5 @@ function fs() {
 
 # use selecta to quickly get to a project
 function proj() {
-  cd $(find ~/Projects -maxdepth 1 -type d | selecta)
+  cd $(find ~/Projects -maxdepth 1 -type d | selecta) && clear
 }
