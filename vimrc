@@ -385,7 +385,7 @@ function! RemoveWhitespace()
   let @/=""
   normal `i
 endfunction
-command! ClearWhitespace :call ClearWhitespace()
+command! RemoveWhitespace :call RemoveWhitespace()
 
 "------------------------------------------------------------------------------
 " TOGGLE COLORCOLUMN
