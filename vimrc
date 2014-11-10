@@ -72,6 +72,7 @@ set laststatus=2                     " keep statusline visible
 set lazyredraw                       " only redraw if needed
 set nojoinspaces                     " only one space after joining lines
 set noshowmode
+set nrformats-=octal
 set number
 set relativenumber
 set splitbelow splitright            " put new windows to bottom/right
@@ -108,6 +109,10 @@ set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 set complete-=i
 set completeopt=menu,longest,preview
 set pumheight=15
+
+" show invisible characters
+set list
+let &listchars = "tab:>-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 
 " searching
 set showmatch incsearch hlsearch ignorecase smartcase
@@ -216,7 +221,7 @@ nnoremap <silent> <leader>ss :setlocal spell!<cr>
 nnoremap Y y$
 
 " quick quit window and delete buffer
-nnoremap <silent> <leader>\ :bd<cr>
+nnoremap <silent> <leader>q :bd<cr>
 
 " open directory of file in Finder
 if has('mac')
