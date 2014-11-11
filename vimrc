@@ -302,7 +302,7 @@ if executable('selecta')
   endfunction
 
   let selecta_search_command = 'ag -l -S --nocolor --hidden -g ""'
-  nnoremap <silent><leader>f :call SelectaCommand(selecta_search_command, "", ":e")<cr>
+  nnoremap <silent><leader>gs :call SelectaCommand(selecta_search_command, "", ":e")<cr>
 endif
 
 "------------------------------------------------------------------------------
