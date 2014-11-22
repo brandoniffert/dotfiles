@@ -32,7 +32,8 @@ brew install terminal-notifier
 brew install getmail
 brew install yuicompressor
 brew install imagemagick
-brew install htop-osx
 brew install selecta
+brew install ctags
+brew install htop-osx
 
 brew cleanup
