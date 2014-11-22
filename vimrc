@@ -217,9 +217,6 @@ vnoremap <leader>y "*y
 " paste from system clipboard
 nnoremap <leader>p "*p
 
-" toggle spell check
-nnoremap <silent> <leader>ss :setlocal spell!<cr>
-
 " make Y act like other capital letters
 nnoremap Y y$
 
