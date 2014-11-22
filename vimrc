@@ -17,6 +17,7 @@ if !filereadable(expand("~/.vim/autoload/plug.vim"))
 endif
 
 call plug#begin()
+Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
@@ -29,10 +30,12 @@ Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
 Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-unimpaired'
 
 " colors
 Plug 'altercation/vim-colors-solarized'
