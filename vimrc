@@ -12,7 +12,8 @@ filetype off
 
 " bootstrap vim-plug on a fresh install
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
-  !curl -fLo ~/.vim/autoload/plug.vim https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  !curl -fLo ~/.vim/autoload/plug.vim
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let s:bootstrap=1
 endif
 
@@ -115,7 +116,7 @@ set pumheight=15
 
 " show invisible characters
 set list
-let &listchars = "tab:>-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
+let &listchars="tab:\u2593-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 
 " searching
 set showmatch incsearch hlsearch ignorecase smartcase
@@ -240,18 +241,18 @@ let g:airline_right_sep=''
 let g:airline#themes#base16#constant = 1
 let g:airline_theme = g:colors_name == 'solarized' ? 'solarized' : 'base16'
 let g:airline_mode_map = {
-    \ '__' : '-',
-    \ 'n'  : 'N',
-    \ 'i'  : 'I',
-    \ 'R'  : 'R',
-    \ 'c'  : 'C',
-    \ 'v'  : 'V',
-    \ 'V'  : 'V',
-    \ '' : 'V',
-    \ 's'  : 'S',
-    \ 'S'  : 'S',
-    \ '' : 'S',
-    \ }
+      \ '__' : '-',
+      \ 'n'  : 'N',
+      \ 'i'  : 'I',
+      \ 'R'  : 'R',
+      \ 'c'  : 'C',
+      \ 'v'  : 'V',
+      \ 'V'  : 'V',
+      \ '' : 'V',
+      \ 's'  : 'S',
+      \ 'S'  : 'S',
+      \ '' : 'S',
+      \ }
 
 " easymotion
 let g:EasyMotion_leader_key = '<leader>e'
@@ -283,27 +284,7 @@ endif
 
 nnoremap <silent><leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
-
-"------------------------------------------------------------------------------
-" SELECTA
-"------------------------------------------------------------------------------
-if executable('selecta')
-  function! SelectaCommand(choice_command, selecta_args, vim_command)
-    try
-      let selection = system(a:choice_command . " | selecta " . a:selecta_args)
-    catch /Vim:Interrupt/
-      " Swallow the ^C so that the redraw below happens; otherwise there will be
-      " leftovers from selecta on the screen
-      redraw!
-      return
-    endtry
-    redraw!
-    exec a:vim_command . " " . selection
-  endfunction
-
-  let selecta_search_command = 'ag -l -S --nocolor --hidden -g ""'
-  nnoremap <silent><leader>gs :call SelectaCommand(selecta_search_command, "", ":e")<cr>
-endif
+nnoremap <silent>gt :CtrlPTag<cr>
 
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
@@ -315,8 +296,6 @@ if has("autocmd")
     au FileType python set sw=4 sts=4 et
 
     au BufNewFile,BufRead *.ss silent set ft=html
-    au BufNewFile,BufRead *.blade.php silent set ft=blade.html
-    au BufRead,BufNewFile *.scss set filetype=scss
 
     " fixes issue with statusline not being drawn in full screen iTerm2
     au VimEnter * :sleep 5m
@@ -347,11 +326,11 @@ endif
 "------------------------------------------------------------------------------
 function! RunCurrentFile()
   let types = {
-    \ 'ruby' : 'ruby',
-    \ 'php' : 'php -f',
-    \ 'python' : 'python',
-    \ 'sh' : 'bash'
-    \ }
+        \ 'ruby' : 'ruby',
+        \ 'php' : 'php -f',
+        \ 'python' : 'python',
+        \ 'sh' : 'bash'
+        \ }
 
   exec "w"
   if has_key(types, &ft)
@@ -363,25 +342,27 @@ endfunction
 nnoremap <silent><leader>r :call RunCurrentFile()<cr>
 
 "------------------------------------------------------------------------------
-" REMOVE FANCY CHARACTERS
+" REPLACE FANCY CHARACTERS
 "------------------------------------------------------------------------------
-function! RemoveFancyCharacters()
-  let typo = {}
-  let typo["“"] = '"'
-  let typo["”"] = '"'
-  let typo["‘"] = "'"
-  let typo["’"] = "'"
-  let typo["–"] = '--'
-  let typo["—"] = '---'
-  let typo["…"] = '...'
-  :exe ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+function! ReplaceFancyCharacters()
+  let typo = {
+        \ "“" : '"',
+        \ "”" : '"',
+        \ "‘" : "'",
+        \ "’" : "'",
+        \ "–" : '--',
+        \ "—" : '---',
+        \ "…" : '...'
+        \ }
+
+  exec ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
 endfunction
-command! RemoveFancyCharacters :call RemoveFancyCharacters()
+command! ReplaceFancyCharacters :call ReplaceFancyCharacters()
 
 "------------------------------------------------------------------------------
-" CLEAR WHITESPACE
+" STRIP WHITESPACE
 "------------------------------------------------------------------------------
-function! RemoveWhitespace()
+function! StripWhitespace()
   normal mi
   try
     %s/\s\+$//
@@ -389,8 +370,9 @@ function! RemoveWhitespace()
   endtry
   let @/=""
   normal `i
+  :retab
 endfunction
-command! RemoveWhitespace :call RemoveWhitespace()
+command! StripWhitespace :call StripWhitespace()
 
 "------------------------------------------------------------------------------
 " TOGGLE COLORCOLUMN
