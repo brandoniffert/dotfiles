@@ -32,10 +32,12 @@
 [merge]
   tool = vimdiff
 [credential]
-	helper = osxkeychain
+  helper = osxkeychain
 [push]
-	default = simple
+  default = simple
 [github]
-	user = brandoniffert
+  user = brandoniffert
 [core]
-	excludesfile = ~/.gitignore_global
+  excludesfile = ~/.gitignore_global
+[init]
+  templatedir = ~/.git_template
