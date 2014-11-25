@@ -98,6 +98,7 @@ alias vi="vim"
 alias j="z"
 alias zr!='source ~/.zshrc'
 alias lls='ls -al'
+alias tnew='tmux new-session -As'
 
 #------------------------------------------------------------------------------
 # COMPLETION
