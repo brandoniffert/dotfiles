@@ -163,7 +163,9 @@ else
 endif
 exec 'colorscheme ' . s:bti_colorscheme
 
+" extra highlight config
 hi Normal ctermbg=NONE
+hi VertSplit ctermbg=NONE
 
 " highlight fixes for base16 themes
 if exists('$BASE16_THEME')
@@ -272,17 +274,18 @@ let g:syntastic_mode_map={ 'mode': 'active',
 let g:SuperTabDefaultCompletionType = "context"
 
 " ctrlp
-let g:ctrlp_max_height = 25
+let g:ctrlp_max_height = 20
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0
+let g:ctrlp_mruf_relative = 1
+let g:ctrlp_map = '<leader>f'
 
 " have ctrlp use ag if available - much faster
 if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -l -S --nocolor --hidden -g ""'
+  let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
 
-nnoremap <silent><leader>f :CtrlPClearCache<cr>\|:CtrlPCurWD<cr>
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 nnoremap <silent>gt :CtrlPTag<cr>
 
