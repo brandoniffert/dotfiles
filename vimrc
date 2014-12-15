@@ -20,10 +20,10 @@ endif
 call plug#begin()
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'kien/ctrlp.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
