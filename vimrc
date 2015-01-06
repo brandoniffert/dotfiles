@@ -24,6 +24,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
+Plug 'junegunn/goyo.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
@@ -285,6 +286,19 @@ endif
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 nnoremap <silent>gt :CtrlPTag<cr>
 
+" goyo
+let g:goyo_width = 100
+let g:goyo_margin_top = 0
+let g:goyo_margin_bottom = 0
+
+function! s:goyo_enter()
+endfunction
+
+function! s:goyo_leave()
+  source ~/.vimrc
+  AirlineRefresh
+endfunction
+
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
 "------------------------------------------------------------------------------
@@ -295,6 +309,9 @@ if has("autocmd")
     au FileType python set sw=4 sts=4 et
 
     au BufNewFile,BufRead *.ss silent set ft=html
+
+    au User GoyoEnter nested call <SID>goyo_enter()
+    au User GoyoLeave nested call <SID>goyo_leave()
 
     " fixes issue with statusline not being drawn in full screen iTerm2
     au VimEnter * :sleep 5m
