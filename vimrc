@@ -308,6 +308,8 @@ if has("autocmd")
     au FileType text,markdown set spell
     au FileType python set sw=4 sts=4 et
 
+    au FileType markdown set wrap linebreak nolist
+
     au BufNewFile,BufRead *.ss silent set ft=html
 
     au User GoyoEnter nested call <SID>goyo_enter()
