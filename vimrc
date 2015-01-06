@@ -90,6 +90,11 @@ set t_ti= t_te=                      " don't clear scrollback buffer on quit
 set textwidth=79
 set notimeout ttimeout ttimeoutlen=10
 
+" set custom spellfile
+if filereadable(expand("~/.custom.en.utf8.add"))
+  set spellfile=~/.custom.en.utf8.add
+endif
+
 " using the old regexp engine in 7.4 speeds up ruby syntax highlighting
 " http://stackoverflow.com/a/16920294
 if v:version > 703
