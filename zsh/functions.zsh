@@ -66,3 +66,13 @@ function fs() {
 function proj() {
   cd $(find ~/Projects -maxdepth 1 -type d | selecta) && clear
 }
+
+# use selecta to quickly get to a note
+function n() {
+  vi $(find ~/Dropbox/Notes -maxdepth 1 -type f | selecta) && clear
+}
+
+# open notes dir
+function notes() {
+  vi ~/Dropbox/Notes
+}
