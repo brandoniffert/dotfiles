@@ -63,7 +63,7 @@ function fs() {
 }
 
 # use selecta to quickly get to a project
-function proj() {
+function p() {
   cd $(find ~/Projects -maxdepth 1 -type d | selecta) && clear
 }
 
