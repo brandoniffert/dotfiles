@@ -50,8 +50,9 @@ Plug 'groenewege/vim-less'
 Plug 'johnhamelink/blade.vim'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-liquid'
-Plug 'tpope/vim-markdown'
+" Plug 'tpope/vim-markdown'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -316,6 +317,9 @@ function! s:goyo_leave()
     AirlineRefresh
   endif
 endfunction
+
+" markdown folding
+let g:vim_markdown_folding_disabled = 1
 
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
