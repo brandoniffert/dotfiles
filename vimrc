@@ -52,7 +52,6 @@ Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-liquid'
-" Plug 'tpope/vim-markdown'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -330,7 +329,7 @@ if has("autocmd")
     au FileType text,markdown set spell
     au FileType python set sw=4 sts=4 et
 
-    au FileType markdown set wrap linebreak nolist
+    au FileType markdown,mkd set wrap linebreak nolist
 
     au BufNewFile,BufRead *.ss silent set ft=html
 
