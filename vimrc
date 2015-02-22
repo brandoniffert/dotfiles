@@ -24,7 +24,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
-Plug 'junegunn/goyo.vim'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'rking/ag.vim'
@@ -291,32 +290,6 @@ endif
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 nnoremap <silent>gt :CtrlPTag<cr>
 
-" goyo
-let g:goyo_width = 100
-let g:goyo_margin_top = 0
-let g:goyo_margin_bottom = 0
-
-function! s:goyo_enter()
-  let b:quitting = 0
-  let b:quitting_bang = 0
-  autocmd QuitPre <buffer> let b:quitting = 1
-  cabbrev <buffer> q! let b:quitting_bang = 1 <bar> q!
-endfunction
-
-function! s:goyo_leave()
-  " Quit Vim if this is the only remaining buffer
-  if b:quitting && len(filter(range(1, bufnr('$')), 'buflisted(v:val)')) == 1
-    if b:quitting_bang
-      qa!
-    else
-      qa
-    endif
-  else
-    source ~/.vimrc
-    AirlineRefresh
-  endif
-endfunction
-
 " markdown folding
 let g:vim_markdown_folding_disabled = 1
 
@@ -332,9 +305,6 @@ if has("autocmd")
     au FileType markdown,mkd set wrap linebreak nolist
 
     au BufNewFile,BufRead *.ss silent set ft=html
-
-    au User GoyoEnter nested call <SID>goyo_enter()
-    au User GoyoLeave nested call <SID>goyo_leave()
 
     " fixes issue with statusline not being drawn in full screen iTerm2
     au VimEnter * :sleep 5m

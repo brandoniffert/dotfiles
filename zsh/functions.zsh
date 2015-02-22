@@ -69,7 +69,7 @@ function p() {
 
 # use selecta to quickly get to a note
 function n() {
-  vi +Goyo "$(find ~/Dropbox/Notes -maxdepth 1 -type f | selecta)"
+  vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | selecta)"
 }
 
 # open notes dir
