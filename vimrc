@@ -39,6 +39,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " colors
+Plug 'ajh17/Spacegray.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
 
@@ -164,13 +165,12 @@ if exists('$BASE16_THEME')
 elseif $PROFILE_COLORSCHEME == 'solarized'
   let s:bti_colorscheme = 'solarized'
 else
-  let s:bti_colorscheme = 'Tomorrow-Night'
+  let s:bti_colorscheme = 'spacegray'
 endif
 exec 'colorscheme ' . s:bti_colorscheme
 
 " extra highlight config
 hi Normal ctermbg=NONE
-hi VertSplit ctermbg=NONE
 
 " highlight fixes for base16 themes
 if exists('$BASE16_THEME')
