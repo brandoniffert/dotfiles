@@ -39,9 +39,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " colors
-Plug 'ajh17/Spacegray.vim'
 Plug 'altercation/vim-colors-solarized'
 Plug 'chriskempson/base16-vim'
+Plug 'w0ng/vim-hybrid'
 
 " syntax/ft
 Plug 'cakebaker/scss-syntax.vim'
@@ -165,7 +165,8 @@ if exists('$BASE16_THEME')
 elseif $PROFILE_COLORSCHEME == 'solarized'
   let s:bti_colorscheme = 'solarized'
 else
-  let s:bti_colorscheme = 'spacegray'
+  let g:hybrid_use_iTerm_colors = 1
+  let s:bti_colorscheme = 'hybrid'
 endif
 exec 'colorscheme ' . s:bti_colorscheme
 
