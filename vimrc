@@ -175,7 +175,7 @@ hi Normal ctermbg=NONE
 
 " highlight fixes for base16 themes
 if exists('$BASE16_THEME')
-  hi LineNr ctermbg=NONE ctermfg=237
+  hi LineNr ctermbg=NONE ctermfg=235
 endif
 
 "------------------------------------------------------------------------------
