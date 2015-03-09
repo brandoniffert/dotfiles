@@ -258,9 +258,6 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
-" easymotion
-let g:EasyMotion_leader_key = '<leader>e'
-
 " setup vroom for ruby/rspec tests
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
@@ -276,7 +273,7 @@ let g:syntastic_mode_map={ 'mode': 'active',
 let g:SuperTabDefaultCompletionType = "context"
 
 " ctrlp
-let g:ctrlp_max_height = 20
+let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0
