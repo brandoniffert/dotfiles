@@ -165,7 +165,7 @@ if exists('$BASE16_THEME')
 elseif $PROFILE_COLORSCHEME == 'solarized'
   let s:bti_colorscheme = 'solarized'
 else
-  let g:hybrid_use_iTerm_colors = 1
+  let g:hybrid_use_Xresources = 1
   let s:bti_colorscheme = 'hybrid'
 endif
 exec 'colorscheme ' . s:bti_colorscheme
