@@ -1,5 +1,5 @@
 prompt_jobs() {
-  echo -n "%B%F{black}%(1j.[%j] .)%f%b"
+  echo -n "%F{green}%(1j.[%j] .)%f"
 }
 
 prompt_hostname() {
