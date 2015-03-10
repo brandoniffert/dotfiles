@@ -272,6 +272,9 @@ let g:syntastic_mode_map={ 'mode': 'active',
 " supertab
 let g:SuperTabDefaultCompletionType = "context"
 
+" easymotion
+let g:EasyMotion_leader_key = '<leader>e'
+
 " ctrlp
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
