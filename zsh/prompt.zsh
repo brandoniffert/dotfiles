@@ -3,12 +3,12 @@ prompt_jobs() {
 }
 
 prompt_hostname() {
-  echo -n "%F{blue}%m%f "
+  echo -n "%B%F{blue}%m%f%b "
 }
 
 prompt_marker() {
   local symbol='❯'
-  echo -n "%F{red}$symbol%f%F{yellow}$symbol%f%F{green}$symbol%f "
+  echo -n "%B%F{red}$symbol%f%b%B%F{yellow}$symbol%f%b%B%F{green}$symbol%f%b "
 }
 
 prompt_dir() {
