@@ -1,5 +1,5 @@
 prompt_jobs() {
-  echo -n "%F{green}%(1j.[%j] .)%f"
+  echo -n "%F{default}%(1j.[%j] .)%f"
 }
 
 prompt_hostname() {
@@ -8,7 +8,7 @@ prompt_hostname() {
 
 prompt_marker() {
   local symbol='❯'
-  echo -n "%B%F{red}$symbol%f%b%B%F{yellow}$symbol%f%b%B%F{green}$symbol%f%b "
+  echo -n "%F{red}$symbol%f%F{yellow}$symbol%f%F{green}$symbol%f "
 }
 
 prompt_dir() {
