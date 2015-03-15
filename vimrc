@@ -22,10 +22,10 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
-Plug 'ervandew/supertab'
 Plug 'godlygeek/tabular'
 Plug 'Lokaltog/vim-easymotion'
 Plug 'nathanaelkane/vim-indent-guides'
+Plug 'neitanod/vim-clevertab'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
@@ -269,8 +269,13 @@ let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': ['html'] }
 
-" supertab
-let g:SuperTabDefaultCompletionType = "context"
+" clevertab
+inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
+                      \<c-r>=CleverTab#Complete('tab')<cr>
+                      \<c-r>=CleverTab#Complete('keyword')<cr>
+                      \<c-r>=CleverTab#Complete('omni')<cr>
+                      \<c-r>=CleverTab#Complete('stop')<cr>
+inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 
 " easymotion
 let g:EasyMotion_leader_key = '<leader>e'
