@@ -152,6 +152,7 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 "------------------------------------------------------------------------------
 syntax enable
 
+set bg=dark
 colorscheme Tomorrow-Night
 
 " custom highlights
