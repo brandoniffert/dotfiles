@@ -152,18 +152,14 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 "------------------------------------------------------------------------------
 syntax enable
 
-" read PROFILE_BG enviornment variable and set colors accordingly
-if $PROFILE_BG == 'light'
-  set bg=light
-else
-  set bg=dark
-  colorscheme Tomorrow-Night
-  hi Normal ctermbg=NONE
-  hi LineNr ctermbg=NONE ctermfg=235
-  hi CursorLine ctermbg=235
-  hi Visual ctermbg=237
-  hi SpellBad cterm=underline ctermbg=NONE ctermfg=9
-endif
+colorscheme Tomorrow-Night
+
+" custom highlights
+hi Normal ctermbg=NONE
+hi LineNr ctermbg=NONE ctermfg=235
+hi CursorLine ctermbg=235
+hi Visual ctermbg=237
+hi SpellBad cterm=underline ctermbg=NONE ctermfg=9
 
 "------------------------------------------------------------------------------
 " KEY MAPS
