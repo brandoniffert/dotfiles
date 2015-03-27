@@ -4,7 +4,7 @@ brandoniffert's dotfiles
 
 ## Install & Setup
 
-`./homebrew/brew` will install common dependencies and keep them up to date  
+`./homebrew/brew` will install common dependencies and keep them up to date
 `./script/dotfiles` will setup symlinks in the home directory
 
 ### iTerm2
