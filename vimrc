@@ -27,8 +27,8 @@ Plug 'Lokaltog/vim-easymotion'
 Plug 'mattn/emmet-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neitanod/vim-clevertab'
-Plug 'osyo-manga/vim-over'
 Plug 'rking/ag.vim'
+Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
 Plug 'tmhedberg/matchit'
@@ -41,9 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " colors
-Plug 'altercation/vim-colors-solarized'
-Plug 'chriskempson/base16-vim'
-Plug 'w0ng/vim-hybrid'
+Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
 
 " syntax/ft
 Plug 'cakebaker/scss-syntax.vim'
@@ -159,25 +157,12 @@ if $PROFILE_BG == 'light'
   set bg=light
 else
   set bg=dark
-endif
-
-if exists('$BASE16_THEME')
-  let base16colorspace=256
-  let s:bti_colorscheme = 'base16-' . $BASE16_THEME
-elseif $PROFILE_COLORSCHEME == 'solarized'
-  let s:bti_colorscheme = 'solarized'
-else
-  let g:hybrid_use_Xresources = 1
-  let s:bti_colorscheme = 'hybrid'
-endif
-exec 'colorscheme ' . s:bti_colorscheme
-
-" extra highlight config
-hi Normal ctermbg=NONE
-
-" highlight fixes for base16 themes
-if exists('$BASE16_THEME')
+  colorscheme Tomorrow-Night
+  hi Normal ctermbg=NONE
   hi LineNr ctermbg=NONE ctermfg=235
+  hi CursorLine ctermbg=235
+  hi Visual ctermbg=237
+  hi SpellBad cterm=underline ctermbg=NONE ctermfg=9
 endif
 
 "------------------------------------------------------------------------------
@@ -245,7 +230,7 @@ let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#themes#base16#constant = 1
-let g:airline_theme = g:colors_name == 'solarized' ? 'solarized' : 'base16'
+let g:airline_theme = 'base16'
 let g:airline_mode_map = {
       \ '__' : '-',
       \ 'n'  : 'N',
@@ -279,6 +264,9 @@ inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
                       \<c-r>=CleverTab#Complete('stop')<cr>
 inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 
+" nerdtree
+nnoremap <silent> <leader><tab> :NERDTreeToggle<cr>
+
 " easymotion
 let g:EasyMotion_leader_key = '<leader>e'
 
@@ -310,6 +298,7 @@ if has("autocmd")
     au!
     au FileType text,markdown set spell
     au FileType python set sw=4 sts=4 et
+    au FileType help set nospell
 
     au FileType markdown,mkd set wrap linebreak nolist
 
