@@ -41,7 +41,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 
 " colors
-Plug 'chriskempson/tomorrow-theme', { 'rtp': 'vim' }
+Plug 'romainl/Apprentice'
 
 " syntax/ft
 Plug 'cakebaker/scss-syntax.vim'
@@ -153,14 +153,10 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 syntax enable
 
 set bg=dark
-colorscheme Tomorrow-Night
+colorscheme apprentice
 
 " custom highlights
-hi Normal ctermbg=NONE
-hi LineNr ctermbg=NONE ctermfg=235
-hi CursorLine ctermbg=235
-hi Visual ctermbg=237
-hi SpellBad cterm=underline ctermbg=NONE ctermfg=9
+hi LineNr ctermbg=NONE ctermfg=236
 
 "------------------------------------------------------------------------------
 " KEY MAPS
