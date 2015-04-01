@@ -82,7 +82,7 @@ set nrformats-=octal                 " allow incrementing 001 to 002 with <C-a>
 set number relativenumber            " show number and relativenumber
 set splitbelow splitright            " put new windows to bottom/right
 set scrolloff=3                      " keep 3 lines of context around cursor
-set shell=/bin/bash
+set shell=/bin/bash\ --login
 set synmaxcol=800                    " don't syntax highlight after 800 columns
 set t_ti= t_te=                      " don't clear scrollback buffer on quit
 set textwidth=79
@@ -150,11 +150,8 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 "------------------------------------------------------------------------------
 syntax enable
 
-set bg=dark
-colorscheme apprentice
-
-" custom highlights
-hi LineNr ctermbg=NONE ctermfg=236
+" use a custom file - wraps apprentice.vim colorscheme
+colorscheme bti-dark
 
 "------------------------------------------------------------------------------
 " KEY MAPS
