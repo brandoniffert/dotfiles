@@ -76,23 +76,20 @@ set history=500
 set laststatus=2                     " keep statusline visible
 set lazyredraw                       " only redraw if needed
 set nojoinspaces                     " only one space after joining lines
-set noshowmode
-set nrformats-=octal
-set number
-set relativenumber
+set noshowmode                       " mode is shown using Airline
+set notimeout ttimeout ttimeoutlen=10
+set nrformats-=octal                 " allow incrementing 001 to 002 with <C-a>
+set number relativenumber            " show number and relativenumber
 set splitbelow splitright            " put new windows to bottom/right
 set scrolloff=3                      " keep 3 lines of context around cursor
 set shell=/bin/bash
-set showbreak=↪
-set showcmd                          " display incomplete commands
 set synmaxcol=800                    " don't syntax highlight after 800 columns
 set t_ti= t_te=                      " don't clear scrollback buffer on quit
 set textwidth=79
-set notimeout ttimeout ttimeoutlen=10
 
 " set custom spellfile
-if filereadable(expand("~/.custom.en.utf8.add"))
-  set spellfile=~/.custom.en.utf8.add
+if filereadable(expand("~/.vim-custom.en.utf8.add"))
+  set spellfile=~/.vim-custom.en.utf8.add
 endif
 
 " using the old regexp engine in 7.4 speeds up ruby syntax highlighting
@@ -102,9 +99,9 @@ if v:version > 703
 endif
 
 " tabs & indenting
+set autoindent smarttab smartindent
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set shiftround
-set autoindent smarttab smartindent
 
 " no backups or swap file
 set nobackup nowritebackup noswapfile
@@ -122,6 +119,7 @@ set pumheight=15
 
 " show invisible characters
 set list
+set showbreak=↪
 let &listchars="tab:\u2593-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 
 " searching
@@ -137,7 +135,7 @@ let mapleader="\<space>"
 "------------------------------------------------------------------------------
 " STATUSLINE
 "------------------------------------------------------------------------------
-set statusline=                           " clear
+set statusline=                           " reset
 set statusline+=[%n]                      " buffer number
 set statusline+=\ %f                      " file path
 set statusline+=\ (%{&filetype})          " file type
