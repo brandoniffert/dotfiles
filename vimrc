@@ -22,8 +22,8 @@ Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
-Plug 'godlygeek/tabular'
-Plug 'Lokaltog/vim-easymotion'
+Plug 'junegunn/vim-easy-align'
+Plug 'justinmk/vim-sneak'
 Plug 'mattn/emmet-vim'
 Plug 'nathanaelkane/vim-indent-guides'
 Plug 'neitanod/vim-clevertab'
@@ -260,8 +260,11 @@ inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 " nerdtree
 nnoremap <silent> <leader><tab> :NERDTreeToggle<cr>
 
-" easymotion
-let g:EasyMotion_leader_key = '<leader>e'
+" vim sneak
+let g:sneak#streak = 1
+
+" easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
 
 " ctrlp
 let g:ctrlp_max_height = 25
@@ -297,15 +300,12 @@ if has("autocmd")
 
     au BufNewFile,BufRead *.ss silent set ft=html
 
-    " fixes issue with statusline not being drawn in full screen iTerm2
-    au VimEnter * :sleep 5m
-
     " only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
 
     " resize splits when window is resized
-    au VimResized * :wincmd =
+    au VimResized * wincmd =
 
     " When editing a file, always jump to the last known cursor position.
     au BufReadPost *
@@ -370,7 +370,7 @@ function! StripWhitespace()
   endtry
   let @/=""
   normal `i
-  :retab
+  retab
 endfunction
 command! StripWhitespace :call StripWhitespace()
 
