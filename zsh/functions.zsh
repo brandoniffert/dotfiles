@@ -1,11 +1,11 @@
-# serve a directory on localhost and open in browser
+# Serve a directory on localhost and open in browser
 function server() {
   local port="${1:-9876}"
   open "http://localhost:${port}/"
   python -m SimpleHTTPServer $port
 }
 
-# serve a directory on localhost and open in browser (php)
+# Serve a directory on localhost and open in browser (php)
 function pserver() {
   local port="${1:-6789}"
   open "http://localhost:${port}/"
@@ -35,7 +35,7 @@ function xtract() {
   fi
 }
 
-# get gzipped size
+# Get gzipped size
 function gz() {
   echo "orig size    (bytes): "
   cat "$1" | wc -c
@@ -43,7 +43,7 @@ function gz() {
   gzip -c "$1" | wc -c
 }
 
-# get all dig info
+# Get all dig info
 function digg() {
   dig +nocmd "$1" any +multiline +noall +answer
 }
@@ -62,17 +62,35 @@ function fs() {
   fi
 }
 
-# use selecta to quickly get to a project
+# Colorize man pages
+function man() {
+  env \
+    LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+    LESS_TERMCAP_md=$(printf "\e[1;31m") \
+    LESS_TERMCAP_me=$(printf "\e[0m") \
+    LESS_TERMCAP_se=$(printf "\e[0m") \
+    LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+    LESS_TERMCAP_ue=$(printf "\e[0m") \
+    LESS_TERMCAP_us=$(printf "\e[1;32m") \
+    man "$@"
+}
+
+# Shows the most used shell commands.
+function history_stat() {
+  history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
+}
+
+# Use selecta to quickly get to a project
 function p() {
   cd $(find ~/Projects -maxdepth 1 -type d | selecta) && clear
 }
 
-# use selecta to quickly get to a note
+# Use selecta to quickly get to a note
 function n() {
   vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | selecta)"
 }
 
-# open notes dir
+# Open notes dir
 function notes() {
   vi ~/Dropbox/Notes
 }
