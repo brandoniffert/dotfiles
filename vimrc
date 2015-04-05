@@ -10,7 +10,7 @@
 au!
 filetype off
 
-" bootstrap vim-plug on a fresh install
+" Bootstrap vim-plug on a fresh install
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
   !curl -fLo ~/.vim/autoload/plug.vim
         \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -38,10 +38,10 @@ Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
-" colors
+" Colors
 Plug 'ajh17/Spacegray.vim'
 
-" syntax/ft
+" Syntax
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'othree/html5.vim'
@@ -82,49 +82,49 @@ set synmaxcol=800                    " don't syntax highlight after 800 columns
 set t_ti= t_te=                      " don't clear scrollback buffer on quit
 set textwidth=79
 
-" set custom spellfile
+" Set custom spellfile
 if filereadable(expand("~/.vim-custom.en.utf8.add"))
   set spellfile=~/.vim-custom.en.utf8.add
 endif
 
-" using the old regexp engine in 7.4 speeds up ruby syntax highlighting
+" Using the old regexp engine in 7.4 speeds up ruby syntax highlighting
 " http://stackoverflow.com/a/16920294
 if v:version > 703
   set regexpengine=1
 endif
 
-" tabs & indenting
+" Tabs & Indenting
 set autoindent smarttab smartindent
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
 set shiftround
 
-" no backups or swap file
+" No backups or swap file
 set nobackup nowritebackup noswapfile
 
-" wildmenu
+" Wildmenu
 set wildmenu
 set wildmode=longest,list
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif
 set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 
-" completion options
+" Completion options
 set complete-=i
 set completeopt=menu,longest,preview
 set pumheight=15
 
-" show invisible characters
+" Show invisible characters
 set list
 set showbreak=↪
 let &listchars="tab:\u2593-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 
-" searching
+" Searching
 set showmatch incsearch hlsearch ignorecase smartcase
 
-" folding
+" Folding
 set foldmethod=marker
 set foldlevelstart=0
 
-" remap leader
+" Remap leader
 let mapleader="\<space>"
 
 "------------------------------------------------------------------------------
@@ -147,7 +147,7 @@ endif
 "------------------------------------------------------------------------------
 syntax enable
 
-" use a custom colors file - wraps spacegray.vim colorscheme
+" Use a custom colors file - wraps spacegray.vim colorscheme
 colorscheme bti-dark
 
 "------------------------------------------------------------------------------
@@ -159,44 +159,44 @@ nnoremap k gk
 " <cr> clears the highlighted search
 nnoremap <silent> <cr> :nohlsearch<cr>
 
-" use hjkl for switching between splits
+" Use hjkl for switching between splits
 nnoremap <c-j> <c-W>j
 nnoremap <c-h> <c-W>h
 nnoremap <c-k> <c-W>k
 nnoremap <c-l> <c-W>l
 
-" create a new vertical/horizontal window
+" Create a new vertical/horizontal window
 nnoremap <silent> <leader>v :vnew<cr>
 nnoremap <silent> <leader>h :new<cr>
 
-" select text that was just pasted
+" Select text that was just pasted
 nnoremap <leader>gv V`]
 
-" quick jump back and forth between files
+" Quick jump back and forth between files
 nnoremap <leader><leader> <c-^>
 
-" easy indent/outdent
+" Easy indent/outdent
 nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
-" yank to system clipboard
+" Yank to system clipboard
 vnoremap <leader>y "*y
 
-" paste from system clipboard
+" Paste from system clipboard
 nnoremap <leader>p "*p
 
-" make Y act like other capital letters
+" Make Y act like other capital letters
 nnoremap Y y$
 
-" quick quit window and delete buffer
+" Quick quit window and delete buffer
 nnoremap <silent> <leader>q :bd<cr>
 
 "------------------------------------------------------------------------------
 " PLUGINS
 "------------------------------------------------------------------------------
-" airline
+" Airline
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -216,18 +216,18 @@ let g:airline_mode_map = {
       \ '' : 'S',
       \ }
 
-" setup vroom for ruby/rspec tests
+" Setup vroom for ruby/rspec tests
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
 let g:vroom_clear_screen = 0
 nnoremap <silent> <leader>t :VroomRunTestFile<cr>
 
-" syntastic
+" Syntastic
 let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': ['html'] }
 
-" clevertab
+" Clevertab
 inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
                       \<c-r>=CleverTab#Complete('tab')<cr>
                       \<c-r>=CleverTab#Complete('keyword')<cr>
@@ -235,16 +235,16 @@ inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
                       \<c-r>=CleverTab#Complete('stop')<cr>
 inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 
-" nerdtree
+" Nerdtree
 nnoremap <silent> <leader><tab> :NERDTreeToggle<cr>
 
-" vim sneak
+" Vim sneak
 let g:sneak#streak = 1
 
-" easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+" Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
-" ctrlp
+" Ctrlp
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
@@ -253,7 +253,7 @@ let g:ctrlp_mruf_relative = 1
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<leader>f'
 
-" have ctrlp use ag if available - much faster
+" Have ctrlp use ag if available - much faster
 if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
@@ -275,14 +275,14 @@ if has("autocmd")
 
     au BufNewFile,BufRead *.ss silent set ft=html
 
-    " only show cursorline in active window
+    " Only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
 
-    " resize splits when window is resized
+    " Resize splits when window is resized
     au VimResized * wincmd =
 
-    " fixes issue with statusline not being drawn sometimes
+    " Fixes issue with statusline not being drawn sometimes
     au VimEnter * :sleep 5m
 
     " When editing a file, always jump to the last known cursor position.
@@ -294,7 +294,7 @@ if has("autocmd")
 
   augroup vimrc-reload
     au!
-    " automatically source this file on save
+    " Automatically source this file on save
     au BufWritePost vimrc source $MYVIMRC | :AirlineRefresh
   augroup END
 endif
