@@ -37,7 +37,6 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tpope/vim-unimpaired'
 
 " colors
 Plug 'romainl/Apprentice'
@@ -49,7 +48,6 @@ Plug 'groenewege/vim-less'
 Plug 'johnhamelink/blade.vim'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'plasticboy/vim-markdown'
 Plug 'tpope/vim-liquid'
 call plug#end()
 
@@ -276,9 +274,6 @@ endif
 
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 nnoremap <silent>gt :CtrlPTag<cr>
-
-" markdown folding
-let g:vim_markdown_folding_disabled = 1
 
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
