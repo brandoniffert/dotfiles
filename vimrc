@@ -39,7 +39,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " colors
-Plug 'romainl/Apprentice'
+Plug 'ajh17/Spacegray.vim'
 
 " syntax/ft
 Plug 'cakebaker/scss-syntax.vim'
@@ -147,7 +147,7 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 "------------------------------------------------------------------------------
 syntax enable
 
-" use a custom file - wraps apprentice.vim colorscheme
+" use a custom colors file - wraps spacegray.vim colorscheme
 colorscheme bti-dark
 
 "------------------------------------------------------------------------------
