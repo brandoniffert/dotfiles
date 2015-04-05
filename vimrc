@@ -18,6 +18,7 @@ if !filereadable(expand("~/.vim/autoload/plug.vim"))
 endif
 
 call plug#begin()
+runtime macros/matchit.vim
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -30,7 +31,6 @@ Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
-Plug 'tmhedberg/matchit'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
@@ -43,12 +43,9 @@ Plug 'ajh17/Spacegray.vim'
 
 " syntax/ft
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'evanmiller/nginx-vim-syntax'
 Plug 'groenewege/vim-less'
-Plug 'johnhamelink/blade.vim'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
-Plug 'tpope/vim-liquid'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -65,8 +62,9 @@ set autoread                         " update a open file edited outside of Vim
 set backspace=eol,start,indent       " common sense backspacing
 set clipboard=
 set cursorline                       " highlight current line
-set dictionary=/usr/share/dict/words
+set dictionary+=/usr/share/dict/words
 set encoding=utf-8
+set fileformats+=mac
 set formatoptions=qrn1j
 set hidden                           " keep buffers around
 set history=500
@@ -132,15 +130,17 @@ let mapleader="\<space>"
 "------------------------------------------------------------------------------
 " STATUSLINE
 "------------------------------------------------------------------------------
-set statusline=                           " reset
-set statusline+=[%n]                      " buffer number
-set statusline+=\ %f                      " file path
-set statusline+=\ (%{&filetype})          " file type
-set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
-set statusline+=%=                        " left/right separator
-set statusline+=%{&fileformat}\ \|        " file format
-set statusline+=\ %{&fileencoding}\ \|    " file encoding
-set statusline+=\ %l\/%L:%c\              " line/column number
+if !exists('g:loaded_airline')
+  set statusline=                           " reset
+  set statusline+=[%n]                      " buffer number
+  set statusline+=\ %f                      " file path
+  set statusline+=\ (%{&filetype})          " file type
+  set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
+  set statusline+=%=                        " left/right separator
+  set statusline+=%{&fileformat}\ \|        " file format
+  set statusline+=\ %{&fileencoding}\ \|    " file encoding
+  set statusline+=\ %l\/%L:%c\              " line/column number
+endif
 
 "------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
@@ -169,17 +169,11 @@ nnoremap <c-l> <c-W>l
 nnoremap <silent> <leader>v :vnew<cr>
 nnoremap <silent> <leader>h :new<cr>
 
-" make S split lines (opposite of J)
-nnoremap S i<cr><esc>k$
-
 " select text that was just pasted
 nnoremap <leader>gv V`]
 
 " quick jump back and forth between files
 nnoremap <leader><leader> <c-^>
-
-" change working directory to file being edited, print after
-nnoremap <leader>cd :cd %:p:h<cr>:pwd<cr>
 
 " easy indent/outdent
 nnoremap <tab> >>
@@ -188,7 +182,6 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
 " yank to system clipboard
-nnoremap <leader>y "*y
 vnoremap <leader>y "*y
 
 " paste from system clipboard
@@ -200,16 +193,9 @@ nnoremap Y y$
 " quick quit window and delete buffer
 nnoremap <silent> <leader>q :bd<cr>
 
-" open directory of file in Finder
-if has('mac')
-  nnoremap <silent> <c-o> :silent !open %:p:h<cr>
-endif
-
 "------------------------------------------------------------------------------
 " PLUGINS
 "------------------------------------------------------------------------------
-nnoremap <leader>a :Ag<space>
-
 " airline
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
@@ -296,6 +282,9 @@ if has("autocmd")
     " resize splits when window is resized
     au VimResized * wincmd =
 
+    " fixes issue with statusline not being drawn sometimes
+    au VimEnter * :sleep 5m
+
     " When editing a file, always jump to the last known cursor position.
     au BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
@@ -334,7 +323,7 @@ nnoremap <silent><leader>r :call RunCurrentFile()<cr>
 " REPLACE FANCY CHARACTERS
 "------------------------------------------------------------------------------
 function! ReplaceFancyCharacters()
-  let typo = {
+  let chars = {
         \ "“" : '"',
         \ "”" : '"',
         \ "‘" : "'",
@@ -344,22 +333,19 @@ function! ReplaceFancyCharacters()
         \ "…" : '...'
         \ }
 
-  exec ":%s/".join(keys(typo), '\|').'/\=typo[submatch(0)]/ge'
+  exec ":%s/".join(keys(chars), '\|').'/\=chars[submatch(0)]/ge'
 endfunction
 command! ReplaceFancyCharacters :call ReplaceFancyCharacters()
 
 "------------------------------------------------------------------------------
-" STRIP WHITESPACE
+" STRIP WHITESPACE & TABS
 "------------------------------------------------------------------------------
 function! StripWhitespace()
-  normal mi
-  try
-    %s/\s\+$//
-  catch /^Vim\%((\a\+)\)\=:E486/
-  endtry
-  let @/=""
-  normal `i
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
   retab
+  call cursor(l, c)
 endfunction
 command! StripWhitespace :call StripWhitespace()
 
