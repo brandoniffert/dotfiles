@@ -81,8 +81,16 @@ function history_stat() {
 }
 
 # Use selecta to quickly get to a project
-function p() {
+function proj() {
   cd $(find ~/Projects -maxdepth 1 -type d | selecta) && clear
+}
+
+function projwp() {
+  cd $(find ~/Projects/vagrant-wordpress/sites -maxdepth 1 -type d | selecta) && clear
+}
+
+function projss() {
+  cd $(find ~/Projects/vagrant-silverstripe/sites -maxdepth 1 -type d | selecta) && clear
 }
 
 # Use selecta to quickly get to a note
