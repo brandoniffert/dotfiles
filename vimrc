@@ -39,7 +39,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Colors
-Plug 'ajh17/Spacegray.vim'
+Plug 'vim-scripts/xoria256.vim'
 
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'
@@ -147,7 +147,7 @@ endif
 "------------------------------------------------------------------------------
 syntax enable
 
-" Use a custom colors file - wraps spacegray.vim colorscheme
+" Use a custom colors file - wraps xoria256.vim colorscheme
 colorscheme bti-dark
 
 "------------------------------------------------------------------------------
@@ -180,6 +180,9 @@ nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
+
+" Make S split lines (opposite of J)
+nnoremap S i<cr><esc>k$
 
 " Yank to system clipboard
 vnoremap <leader>y "*y
