@@ -39,7 +39,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Colors
-Plug 'vim-scripts/xoria256.vim'
+Plug 'altercation/vim-colors-solarized'
 
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'
@@ -147,8 +147,8 @@ endif
 "------------------------------------------------------------------------------
 syntax enable
 
-" Use a custom colors file - wraps xoria256.vim colorscheme
-colorscheme bti-dark
+set bg=dark
+colorscheme solarized
 
 "------------------------------------------------------------------------------
 " KEY MAPS
@@ -203,8 +203,7 @@ nnoremap <silent> <leader>q :bd<cr>
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline#themes#base16#constant = 1
-let g:airline_theme = 'base16'
+let g:airline_theme = 'solarized'
 let g:airline_mode_map = {
       \ '__' : '-',
       \ 'n'  : 'N',
