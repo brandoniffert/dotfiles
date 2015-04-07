@@ -65,6 +65,8 @@ set cursorline                       " highlight current line
 set dictionary+=/usr/share/dict/words
 set encoding=utf-8
 set fileformats+=mac
+set foldmethod=marker
+set foldlevelstart=0                 " close folds by default
 set formatoptions=qrn1j
 set hidden                           " keep buffers around
 set history=500
@@ -74,6 +76,8 @@ set nojoinspaces                     " only one space after joining lines
 set noshowmode                       " mode is shown using Airline
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                 " allow incrementing 001 to 002 with <C-a>
+set number relativenumber            " show number and relativenumber
+set switchbuf+=useopen
 set splitbelow splitright            " put new windows to bottom/right
 set scrolloff=3                      " keep 3 lines of context around cursor
 set shell=/bin/bash\ --login
@@ -119,10 +123,6 @@ let &listchars="tab:\u2593-,trail:\u2591,extends:>,precedes:<,nbsp:\u00b7"
 " Searching
 set showmatch incsearch hlsearch ignorecase smartcase
 
-" Folding
-set foldmethod=marker
-set foldlevelstart=0
-
 " Remap leader
 let mapleader="\<space>"
 
@@ -145,14 +145,15 @@ endif
 " ENVIRONMENTS AND COLOR
 "------------------------------------------------------------------------------
 syntax enable
-
 set bg=dark
-let base16colorspace=256
-colorscheme base16-tomorrow
+
+" Use a custom colors file - wraps base16 colorscheme
+colorscheme bti-dark
 
 "------------------------------------------------------------------------------
 " KEY MAPS
 "------------------------------------------------------------------------------
+" Navigate over wrapped lines
 nnoremap j gj
 nnoremap k gk
 
@@ -184,10 +185,8 @@ vnoremap <s-tab> <gv
 " Make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
 
-" Yank to system clipboard
+" Yank/paste using system clipboard
 vnoremap <leader>y "*y
-
-" Paste from system clipboard
 nnoremap <leader>p "*p
 
 " Make Y act like other capital letters
@@ -196,14 +195,10 @@ nnoremap Y y$
 " Quick quit window and delete buffer
 nnoremap <silent><leader>q :bd<cr>
 
-" Quick toggle number and relativenumber
-nnoremap <silent><leader>n :set number! relativenumber!<cr>
-
 "------------------------------------------------------------------------------
 " PLUGINS
 "------------------------------------------------------------------------------
 " Airline
-let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#themes#base16#constant = 1
