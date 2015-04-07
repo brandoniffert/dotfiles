@@ -36,6 +36,11 @@ prompt_git() {
   fi
 }
 
+prompt_vagrant_status() {
+  local running="$(cat /tmp/vagrant-global-status 2> /dev/null)"
+  [ -n "$running" ] && echo -n "%F{8}[$running]%f"
+}
+
 prompt_status() {
   echo "\n%(?.%F{default}.%F{red})%(!.#.>)%f "
 }
@@ -46,6 +51,7 @@ build_prompt() {
   prompt_marker
   prompt_dir
   prompt_git
+  prompt_vagrant_status
   prompt_status
 }
 
