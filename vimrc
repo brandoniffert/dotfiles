@@ -74,7 +74,6 @@ set nojoinspaces                     " only one space after joining lines
 set noshowmode                       " mode is shown using Airline
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                 " allow incrementing 001 to 002 with <C-a>
-set number relativenumber            " show number and relativenumber
 set splitbelow splitright            " put new windows to bottom/right
 set scrolloff=3                      " keep 3 lines of context around cursor
 set shell=/bin/bash\ --login
@@ -157,7 +156,7 @@ nnoremap j gj
 nnoremap k gk
 
 " <cr> clears the highlighted search
-nnoremap <silent> <cr> :nohlsearch<cr>
+nnoremap <silent><cr> :nohlsearch<cr>
 
 " Use hjkl for switching between splits
 nnoremap <c-j> <c-W>j
@@ -166,8 +165,8 @@ nnoremap <c-k> <c-W>k
 nnoremap <c-l> <c-W>l
 
 " Create a new vertical/horizontal window
-nnoremap <silent> <leader>v :vnew<cr>
-nnoremap <silent> <leader>h :new<cr>
+nnoremap <silent><leader>v :vnew<cr>
+nnoremap <silent><leader>h :new<cr>
 
 " Select text that was just pasted
 nnoremap <leader>gv V`]
@@ -194,7 +193,10 @@ nnoremap <leader>p "*p
 nnoremap Y y$
 
 " Quick quit window and delete buffer
-nnoremap <silent> <leader>q :bd<cr>
+nnoremap <silent><leader>q :bd<cr>
+
+" Quick toggle number and relativenumber
+nnoremap <silent><leader>n :set number! relativenumber!<cr>
 
 "------------------------------------------------------------------------------
 " PLUGINS
@@ -222,7 +224,7 @@ let g:airline_mode_map = {
 let g:vroom_map_keys = 0
 let g:vroom_use_binstubs = 1
 let g:vroom_clear_screen = 0
-nnoremap <silent> <leader>t :VroomRunTestFile<cr>
+nnoremap <silent><leader>t :VroomRunTestFile<cr>
 
 " Syntastic
 let g:syntastic_mode_map={ 'mode': 'active',
@@ -238,7 +240,7 @@ inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
 inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 
 " Nerdtree
-nnoremap <silent> <leader><tab> :NERDTreeToggle<cr>
+nnoremap <silent><leader><tab> :NERDTreeToggle<cr>
 
 " Vim sneak
 let g:sneak#streak = 1
