@@ -37,7 +37,7 @@ prompt_git() {
 }
 
 prompt_vagrant_status() {
-  local running="$(cat /tmp/vagrant-global-status 2> /dev/null)"
+  local running="$(cat $TMPDIR/vagrant-global-status 2> /dev/null)"
   [ -n "$running" ] && echo -n "%F{8}[$running]%f"
 }
 
