@@ -51,6 +51,14 @@ export SAVEHIST=$HISTSIZE
 [[ $ITERM_PROFILE == *"light"* ]] && PROFILE_BG='light' || PROFILE_BG='dark'
 export PROFILE_BG
 
+if [[ $ITERM_PROFILE == *"base16"* ]]; then
+  # get the theme based on iterm profile naming convention: base16-$THEME_NAME
+  BASE16_THEME="$(echo $ITERM_PROFILE | cut -d '-' -f2)"
+  BASE16_CONF="$HOME/.config/base16-shell/base16-$BASE16_THEME.$PROFILE_BG.sh"
+  [[ -s $BASE16_CONF ]] && source $BASE16_CONF
+  export BASE16_THEME
+fi
+
 #------------------------------------------------------------------------------
 # KEYS
 #------------------------------------------------------------------------------

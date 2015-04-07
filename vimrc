@@ -39,7 +39,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
 " Colors
-Plug 'altercation/vim-colors-solarized'
+Plug 'chriskempson/base16-vim'
 
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'
@@ -147,7 +147,8 @@ endif
 syntax enable
 
 set bg=dark
-colorscheme solarized
+let base16colorspace=256
+colorscheme base16-tomorrow
 
 "------------------------------------------------------------------------------
 " KEY MAPS
@@ -205,7 +206,8 @@ nnoremap <silent><leader>n :set number! relativenumber!<cr>
 let g:airline_powerline_fonts = 0
 let g:airline_left_sep=''
 let g:airline_right_sep=''
-let g:airline_theme = 'solarized'
+let g:airline#themes#base16#constant = 1
+let g:airline_theme = 'base16'
 let g:airline_mode_map = {
       \ '__' : '-',
       \ 'n'  : 'N',
