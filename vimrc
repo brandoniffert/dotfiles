@@ -19,6 +19,7 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
+Plug 'ajh17/VimCompletesMe'
 Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -26,7 +27,6 @@ Plug 'danro/rename.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'mattn/emmet-vim'
-Plug 'neitanod/vim-clevertab'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
@@ -61,6 +61,7 @@ filetype plugin indent on
 set autoread                         " update a open file edited outside of Vim
 set backspace=eol,start,indent       " common sense backspacing
 set clipboard=
+set complete-=i                      " don't scan included files
 set cursorline                       " highlight current line
 set dictionary+=/usr/share/dict/words
 set encoding=utf-8
@@ -109,11 +110,6 @@ set wildmenu
 set wildmode=longest,list
 set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif
 set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
-
-" Completion options
-set complete-=i
-set completeopt=menu,longest,preview
-set pumheight=15
 
 " Show invisible characters
 set list
@@ -203,19 +199,6 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#themes#base16#constant = 1
 let g:airline_theme = 'base16'
-let g:airline_mode_map = {
-      \ '__' : '-',
-      \ 'n'  : 'N',
-      \ 'i'  : 'I',
-      \ 'R'  : 'R',
-      \ 'c'  : 'C',
-      \ 'v'  : 'V',
-      \ 'V'  : 'V',
-      \ '' : 'V',
-      \ 's'  : 'S',
-      \ 'S'  : 'S',
-      \ '' : 'S',
-      \ }
 
 " Setup vroom for ruby/rspec tests
 let g:vroom_map_keys = 0
@@ -227,14 +210,6 @@ nnoremap <silent><leader>t :VroomRunTestFile<cr>
 let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': ['html'] }
-
-" Clevertab
-inoremap <silent><tab> <c-r>=CleverTab#Complete('start')<cr>
-                      \<c-r>=CleverTab#Complete('tab')<cr>
-                      \<c-r>=CleverTab#Complete('keyword')<cr>
-                      \<c-r>=CleverTab#Complete('omni')<cr>
-                      \<c-r>=CleverTab#Complete('stop')<cr>
-inoremap <silent><s-tab> <c-r>=CleverTab#Complete('prev')<cr>
 
 " Nerdtree
 nnoremap <silent><leader><tab> :NERDTreeToggle<cr>
@@ -250,7 +225,6 @@ let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0
-let g:ctrlp_mruf_relative = 1
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<leader>f'
 
@@ -268,14 +242,6 @@ nnoremap <silent>gt :CtrlPTag<cr>
 if has("autocmd")
   augroup bti-vimrc
     au!
-    au FileType text,markdown set spell
-    au FileType python set sw=4 sts=4 et
-    au FileType help set nospell
-
-    au FileType markdown,mkd set wrap linebreak nolist
-
-    au BufNewFile,BufRead *.ss silent set ft=html
-
     " Only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
@@ -310,7 +276,6 @@ function! RunCurrentFile()
         \ 'python' : 'python',
         \ 'sh' : 'bash'
         \ }
-
   exec "w"
   if has_key(types, &ft)
     exec "!" . types[&ft] . " " . expand("%")
@@ -333,7 +298,6 @@ function! ReplaceFancyCharacters()
         \ "—" : '---',
         \ "…" : '...'
         \ }
-
   exec ":%s/".join(keys(chars), '\|').'/\=chars[submatch(0)]/ge'
 endfunction
 command! ReplaceFancyCharacters :call ReplaceFancyCharacters()
