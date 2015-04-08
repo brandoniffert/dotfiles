@@ -1,5 +1,5 @@
 prompt_jobs() {
-  echo -n "%F{default}%(1j.[%j] .)%f"
+  echo -n "%F{8}%(1j.(%j) .)%f"
 }
 
 prompt_hostname() {
