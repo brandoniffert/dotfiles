@@ -19,11 +19,10 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
-Plug 'ajh17/VimCompletesMe'
-Plug 'AndrewRadev/splitjoin.vim'
 Plug 'bling/vim-airline'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
+Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'mattn/emmet-vim'
@@ -32,7 +31,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
@@ -234,7 +232,6 @@ if executable("ag")
 endif
 
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
-nnoremap <silent>gt :CtrlPTag<cr>
 
 "------------------------------------------------------------------------------
 " AUTOCOMMANDS
