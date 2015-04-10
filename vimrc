@@ -53,9 +53,9 @@ endif
 filetype plugin indent on
 
 "------------------------------------------------------------------------------
-" GENERAL
+" GENERAL SETTINGS
 "------------------------------------------------------------------------------
-set autoread                         " update a open file edited outside of Vim
+set autoread                         " update open files edited outside of Vim
 set backspace=eol,start,indent       " common sense backspacing
 set clipboard=
 set complete-=i                      " don't scan included files
@@ -71,17 +71,15 @@ set history=500
 set laststatus=2                     " keep statusline visible
 set lazyredraw                       " only redraw if needed
 set nojoinspaces                     " only one space after joining lines
-set noshowmode                       " mode is shown using Airline
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                 " allow incrementing 001 to 002 with <C-a>
 set number relativenumber            " show number and relativenumber
 set switchbuf+=useopen
 set splitbelow splitright            " put new windows to bottom/right
 set scrolloff=3                      " keep 3 lines of context around cursor
-set shell=/bin/bash\ --login
+set shell=/bin/bash\ --login         " --login make sure bash_profile gets used
 set synmaxcol=800                    " don't syntax highlight after 800 columns
 set t_ti= t_te=                      " don't clear scrollback buffer on quit
-set textwidth=79
 
 " Set custom spellfile
 if filereadable(expand("~/.vim-custom.en.utf8.add"))
@@ -116,7 +114,9 @@ let mapleader="\<space>"
 "------------------------------------------------------------------------------
 " STATUSLINE
 "------------------------------------------------------------------------------
-if !exists('g:loaded_airline')
+if exists('g:loaded_airline')
+  set noshowmode                            " mode is shown using Airline
+else
   set statusline=                           " reset
   set statusline+=[%n]                      " buffer number
   set statusline+=\ %f                      " file path
