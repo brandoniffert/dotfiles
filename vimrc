@@ -1,12 +1,12 @@
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " This is my vimrc file - it changes often
 " Author: Brandon Iffert <brandoniffert@gmail.com>
 " Source: https://github.com/brandoniffert/dotfiles/blob/master/vimrc
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " SETUP
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 au!
 filetype off
 
@@ -52,34 +52,35 @@ endif
 
 filetype plugin indent on
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " GENERAL SETTINGS
-"------------------------------------------------------------------------------
-set autoread                         " update open files edited outside of Vim
-set backspace=eol,start,indent       " common sense backspacing
+"-------------------------------------------------------------------------------
+set autoread                          " update open files edited outside of Vim
+set backspace=eol,start,indent        " common sense backspacing
 set clipboard=
-set complete-=i                      " don't scan included files
-set cursorline                       " highlight current line
+set complete-=i                       " don't scan included files
+set cursorline                        " highlight current line
 set dictionary+=/usr/share/dict/words
 set encoding=utf-8
 set fileformats+=mac
 set foldmethod=marker
-set foldlevelstart=0                 " close folds by default
+set foldlevelstart=0                  " close folds by default
 set formatoptions=qrn1j
-set hidden                           " keep buffers around
+set hidden                            " keep buffers around
 set history=500
-set laststatus=2                     " keep statusline visible
-set lazyredraw                       " only redraw if needed
-set nojoinspaces                     " only one space after joining lines
+set laststatus=2                      " keep statusline visible
+set lazyredraw                        " only redraw if needed
+set nojoinspaces                      " only one space after joining lines
 set notimeout ttimeout ttimeoutlen=10
-set nrformats-=octal                 " allow incrementing 001 to 002 with <C-a>
-set number relativenumber            " show number and relativenumber
+set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
+set number relativenumber             " show number and relativenumber
 set switchbuf+=useopen
-set splitbelow splitright            " put new windows to bottom/right
-set scrolloff=3                      " keep 3 lines of context around cursor
-set shell=/bin/bash\ --login         " --login make sure bash_profile gets used
-set synmaxcol=800                    " don't syntax highlight after 800 columns
-set t_ti= t_te=                      " don't clear scrollback buffer on quit
+set splitbelow splitright             " put new windows to bottom/right
+set scrolloff=3                       " keep 3 lines of context around cursor
+set shell=/bin/bash\ --login          " --login make sure bash_profile gets used
+set synmaxcol=800                     " don't syntax highlight after 800 columns
+set t_ti= t_te=                       " don't clear scrollback buffer on quit
+set textwidth=80
 
 " Set custom spellfile
 if filereadable(expand("~/.vim-custom.en.utf8.add"))
@@ -111,9 +112,9 @@ set showmatch incsearch hlsearch ignorecase smartcase
 " Remap leader
 let mapleader="\<space>"
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " STATUSLINE
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 if exists('g:loaded_airline')
   set noshowmode                            " mode is shown using Airline
 else
@@ -128,18 +129,18 @@ else
   set statusline+=\ %l\/%L:%c\              " line/column number
 endif
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 syntax enable
 
 " Use a custom colors file - wraps base16 colorscheme
 colorscheme bti-dark
 set bg=dark
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " KEY MAPS
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " Navigate over wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -182,9 +183,9 @@ nnoremap Y y$
 " Quick quit window and delete buffer
 nnoremap <silent><leader>q :bd<cr>
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " PLUGINS
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " Airline
 let g:airline_left_sep=''
 let g:airline_right_sep=''
@@ -223,9 +224,9 @@ endif
 
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " AUTOCOMMANDS
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 if has("autocmd")
   augroup bti-vimrc
     au!
@@ -241,9 +242,9 @@ if has("autocmd")
   augroup END
 endif
 
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 " COMMANDS - AUTOLOADED FROM vim/autoload/bti
-"------------------------------------------------------------------------------
+"-------------------------------------------------------------------------------
 command! ReplaceFancyCharacters call bti#fancycharacters#replace()
 command! StripWhitespace call bti#whitespace#strip()
 command! ToggleColorColumn call bti#colorcolumn#toggle()
