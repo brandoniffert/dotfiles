@@ -27,7 +27,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'mattn/emmet-vim'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/nerdtree'
 Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-commentary'
@@ -89,12 +88,6 @@ if filereadable(expand("~/.vim-custom.en.utf8.add"))
   set spellfile=~/.vim-custom.en.utf8.add
 endif
 
-" Using the old regexp engine in 7.4 speeds up ruby syntax highlighting
-" http://stackoverflow.com/a/16920294
-if v:version > 703
-  set regexpengine=1
-endif
-
 " Tabs & Indenting
 set autoindent smarttab smartindent
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -139,10 +132,10 @@ endif
 " ENVIRONMENTS AND COLOR
 "------------------------------------------------------------------------------
 syntax enable
-set bg=dark
 
 " Use a custom colors file - wraps base16 colorscheme
 colorscheme bti-dark
+set bg=dark
 
 "------------------------------------------------------------------------------
 " KEY MAPS
@@ -209,17 +202,14 @@ let g:syntastic_mode_map={ 'mode': 'active',
                          \ 'active_filetypes': [],
                          \ 'passive_filetypes': ['html'] }
 
-" Nerdtree
-nnoremap <silent><leader><tab> :NERDTreeToggle<cr>
-
 " Vim sneak
 let g:sneak#streak = 1
 
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
-" Ctrlp
-let g:ctrlp_max_height = 25
+" CtrlP
+let g:ctrlp_max_height = 20
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0
@@ -239,15 +229,9 @@ nnoremap <silent><leader>b :CtrlPBuffer<cr>
 if has("autocmd")
   augroup bti-vimrc
     au!
-    " Only show cursorline in active window
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
-
-    " Resize splits when window is resized
     au VimResized * wincmd =
-
-    " Fixes issue with statusline not being drawn sometimes
-    au VimEnter * :sleep 5m
 
     " When editing a file, always jump to the last known cursor position.
     au BufReadPost *
@@ -255,70 +239,12 @@ if has("autocmd")
       \   exe "normal g`\"" |
       \ endif
   augroup END
-
-  augroup vimrc-reload
-    au!
-    " Automatically source this file on save
-    au BufWritePost vimrc source $MYVIMRC | :AirlineRefresh
-  augroup END
 endif
 
 "------------------------------------------------------------------------------
-" RUN CURRENT FILE
+" COMMANDS - AUTOLOADED FROM vim/autoload/bti
 "------------------------------------------------------------------------------
-function! RunCurrentFile()
-  let types = {
-        \ 'ruby' : 'ruby',
-        \ 'php' : 'php -f',
-        \ 'python' : 'python',
-        \ 'sh' : 'bash'
-        \ }
-  exec "w"
-  if has_key(types, &ft)
-    exec "!" . types[&ft] . " " . expand("%")
-  else
-    echo "Unrecognized run filetype command!"
-  endif
-endfunction
-nnoremap <silent><leader>r :call RunCurrentFile()<cr>
-
-"------------------------------------------------------------------------------
-" REPLACE FANCY CHARACTERS
-"------------------------------------------------------------------------------
-function! ReplaceFancyCharacters()
-  let chars = {
-        \ "“" : '"',
-        \ "”" : '"',
-        \ "‘" : "'",
-        \ "’" : "'",
-        \ "–" : '--',
-        \ "—" : '---',
-        \ "…" : '...'
-        \ }
-  exec ":%s/".join(keys(chars), '\|').'/\=chars[submatch(0)]/ge'
-endfunction
-command! ReplaceFancyCharacters :call ReplaceFancyCharacters()
-
-"------------------------------------------------------------------------------
-" STRIP WHITESPACE & TABS
-"------------------------------------------------------------------------------
-function! StripWhitespace()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
-  retab
-  call cursor(l, c)
-endfunction
-command! StripWhitespace :call StripWhitespace()
-
-"------------------------------------------------------------------------------
-" TOGGLE COLORCOLUMN
-"------------------------------------------------------------------------------
-function! ToggleColorColumn()
-  if &colorcolumn != ''
-    setlocal colorcolumn&
-  else
-    setlocal colorcolumn=+1
-  endif
-endfunction
-command! ToggleColorColumn :call ToggleColorColumn()
+command! ReplaceFancyCharacters call bti#fancycharacters#replace()
+command! StripWhitespace call bti#whitespace#strip()
+command! ToggleColorColumn call bti#colorcolumn#toggle()
+nnoremap <silent><leader>r :call bti#runcurrentfile#run()<cr>
