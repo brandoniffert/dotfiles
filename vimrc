@@ -12,8 +12,8 @@ filetype off
 
 " Bootstrap vim-plug on a fresh install
 if !filereadable(expand("~/.vim/autoload/plug.vim"))
-  !curl -fLo ~/.vim/autoload/plug.vim
-        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   let s:bootstrap=1
 endif
 
@@ -25,13 +25,11 @@ Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
-Plug 'mattn/emmet-vim'
 Plug 'rking/ag.vim'
 Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-Plug 'tpope/vim-rails'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
@@ -43,6 +41,7 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'tpope/vim-rails'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -61,7 +60,6 @@ set clipboard=
 set complete-=i                       " don't scan included files
 set cursorline                        " highlight current line
 set dictionary+=/usr/share/dict/words
-set encoding=utf-8
 set fileformats+=mac
 set foldmethod=marker
 set foldlevelstart=0                  " close folds by default
@@ -76,7 +74,6 @@ set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
 set switchbuf+=useopen
 set splitbelow splitright             " put new windows to bottom/right
-set scrolloff=3                       " keep 3 lines of context around cursor
 set shell=/bin/bash\ --login          " --login make sure bash_profile gets used
 set synmaxcol=800                     " don't syntax highlight after 800 columns
 set t_ti= t_te=                       " don't clear scrollback buffer on quit
@@ -187,21 +184,17 @@ nnoremap <silent><leader>q :bd<cr>
 " PLUGINS
 "-------------------------------------------------------------------------------
 " Airline
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-let g:airline#themes#base16#constant = 1
-let g:airline_theme = 'base16'
+let [g:airline_left_sep, g:airline_right_sep] = ['', '']
+let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
 
 " Setup vroom for ruby/rspec tests
-let g:vroom_map_keys = 0
-let g:vroom_use_binstubs = 1
-let g:vroom_clear_screen = 0
+let [g:vroom_map_keys, g:vroom_use_binstubs, g:vroom_clear_screen] = [0, 1, 0]
 nnoremap <silent><leader>t :VroomRunTestFile<cr>
 
 " Syntastic
-let g:syntastic_mode_map={ 'mode': 'active',
-                         \ 'active_filetypes': [],
-                         \ 'passive_filetypes': ['html'] }
+let g:syntastic_mode_map = { 'mode': 'active',
+                           \ 'active_filetypes': [],
+                           \ 'passive_filetypes': ['html'] }
 
 " Vim sneak
 let g:sneak#streak = 1
@@ -210,19 +203,15 @@ let g:sneak#streak = 1
 vmap <Enter> <Plug>(EasyAlign)
 
 " CtrlP
-let g:ctrlp_max_height = 20
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_use_caching = 0
-let g:ctrlp_working_path_mode = 0
+let [g:ctrlp_max_height, g:ctrlp_working_path_mode] = [20, 0]
+let [g:ctrlp_show_hidden, g:ctrlp_use_caching] = [0, 0]
 let g:ctrlp_map = '<leader>f'
+nnoremap <silent><leader>b :CtrlPBuffer<cr>
 
 " Have ctrlp use ag if available - much faster
 if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
-
-nnoremap <silent><leader>b :CtrlPBuffer<cr>
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
