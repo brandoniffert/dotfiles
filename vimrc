@@ -41,7 +41,9 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'groenewege/vim-less'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
+Plug 'StanAngeloff/php.vim'
 Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -68,14 +70,15 @@ set hidden                            " keep buffers around
 set history=500
 set laststatus=2                      " keep statusline visible
 set lazyredraw                        " only redraw if needed
+set noshowmode                        " mode is shown using Airline
 set nojoinspaces                      " only one space after joining lines
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
 set switchbuf+=useopen
 set splitbelow splitright             " put new windows to bottom/right
-set shell=/bin/bash\ --login          " --login make sure bash_profile gets used
-set synmaxcol=800                     " don't syntax highlight after 800 columns
+set shell=/bin/bash
+set synmaxcol=500                     " don't syntax highlight after 500 columns
 set t_ti= t_te=                       " don't clear scrollback buffer on quit
 set textwidth=80
 
@@ -112,9 +115,7 @@ let mapleader="\<space>"
 "-------------------------------------------------------------------------------
 " STATUSLINE
 "-------------------------------------------------------------------------------
-if exists('g:loaded_airline')
-  set noshowmode                            " mode is shown using Airline
-else
+if !exists('g:loaded_airline')
   set statusline=                           " reset
   set statusline+=[%n]                      " buffer number
   set statusline+=\ %f                      " file path
@@ -130,6 +131,7 @@ endif
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
+syntax sync minlines=256
 
 " Use a custom colors file - wraps base16 colorscheme
 colorscheme bti-dark
