@@ -15,6 +15,7 @@ brew upgrade
 brew install git
 brew install zsh
 brew install bash
+brew install coreutils
 brew install rbenv
 brew install ruby-build
 brew install ssh-copy-id
@@ -31,7 +32,6 @@ brew install node
 brew install the_silver_searcher
 brew install terminal-notifier
 brew install getmail
-brew install yuicompressor
 brew install imagemagick
 brew install selecta
 brew install ctags
