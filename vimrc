@@ -75,9 +75,10 @@ set nojoinspaces                      " only one space after joining lines
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
-set switchbuf+=useopen
-set splitbelow splitright             " put new windows to bottom/right
+set scrolloff=3
 set shell=/bin/bash
+set splitbelow splitright             " put new windows to bottom/right
+set switchbuf+=useopen
 set synmaxcol=500                     " don't syntax highlight after 500 columns
 set t_ti= t_te=                       " don't clear scrollback buffer on quit
 set textwidth=80
