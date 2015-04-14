@@ -19,7 +19,7 @@ prompt_git() {
   local ref st symbol
   if $(git rev-parse --is-inside-work-tree >/dev/null 2>&1); then
     st=$(git status 2>/dev/null | tail -n 1)
-    ref=$(git symbolic-ref -q HEAD || (git name-rev --name-only --no-undefined --tags --always HEAD | sed -e "s,\^*.$,,")) 2> /dev/null
+    ref=$(git symbolic-ref -q HEAD || (git name-rev --name-only --no-undefined --tags --always HEAD)) 2> /dev/null
 
     if [[ $st == "nothing to commit, working directory clean" ]]
     then
