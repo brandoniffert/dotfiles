@@ -5,7 +5,7 @@ function! bti#runcurrentfile#run()
   let l:types = {
         \ 'ruby' : 'ruby',
         \ 'php' : 'php -f',
-        \ 'python' : 'python',
+        \ 'python' : 'python3',
         \ 'sh' : 'bash'
         \ }
   exec "w"
