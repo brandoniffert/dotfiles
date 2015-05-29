@@ -38,6 +38,7 @@ Plug 'chriskempson/base16-vim'
 
 " Syntax
 Plug 'cakebaker/scss-syntax.vim'
+Plug 'chrisbra/csv.vim'
 Plug 'groenewege/vim-less'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
@@ -215,6 +216,9 @@ nnoremap <silent><leader>b :CtrlPBuffer<cr>
 if executable("ag")
   let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
+
+" CSV
+let g:csv_autocmd_arrange = 1
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
