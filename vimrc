@@ -200,6 +200,7 @@ nnoremap <silent><leader>t :VroomRunTestFile<cr>
 let g:syntastic_mode_map = { 'mode': 'active',
                            \ 'active_filetypes': [],
                            \ 'passive_filetypes': ['html'] }
+let g:syntastic_javascript_checkers = ['eslint']
 
 " Vim sneak
 let g:sneak#streak = 1
