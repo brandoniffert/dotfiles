@@ -40,6 +40,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'chrisbra/csv.vim'
 Plug 'groenewege/vim-less'
+Plug 'klen/python-mode'
 Plug 'mxw/vim-jsx'
 Plug 'othree/html5.vim'
 Plug 'pangloss/vim-javascript'
@@ -220,6 +221,12 @@ endif
 
 " CSV
 let g:csv_autocmd_arrange = 1
+
+" Pymode
+let g:pymode_virtualenv = 0
+let g:pymode_run = 0
+let g:pymode_folding = 0
+let g:pymode_rope = 0
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
