@@ -142,3 +142,6 @@ eval "$(rbenv init - --no-rehash)"
 
 # Use .localrc for local options
 [ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
+
+# Use zsh syntax highlighting
+[ -f `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
