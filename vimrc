@@ -227,6 +227,7 @@ let g:pymode_virtualenv = 0
 let g:pymode_run = 0
 let g:pymode_folding = 0
 let g:pymode_rope = 0
+let g:pymode_lint_ignore = "E501"
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
