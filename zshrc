@@ -145,3 +145,6 @@ eval "$(rbenv init - --no-rehash)"
 
 # Use zsh syntax highlighting
 [ -f `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# Use fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

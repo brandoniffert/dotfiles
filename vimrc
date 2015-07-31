@@ -20,9 +20,9 @@ endif
 call plug#begin()
 runtime macros/matchit.vim
 Plug 'bling/vim-airline'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim'
@@ -208,16 +208,19 @@ let g:sneak#streak = 1
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
-" CtrlP
-let [g:ctrlp_max_height, g:ctrlp_working_path_mode] = [20, 0]
-let [g:ctrlp_show_hidden, g:ctrlp_use_caching] = [0, 0]
-let g:ctrlp_map = '<leader>f'
-nnoremap <silent><leader>b :CtrlPBuffer<cr>
-
-" Have ctrlp use ag if available - much faster
+" Have FZF use ag if available
 if executable("ag")
-  let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
+  let bti_fzf_source = 'ag -l -S --hidden -g ""'
+else
+  let bti_fzf_source = 'find .'
 endif
+
+" FZF
+nnoremap <silent><leader>f :call fzf#run({
+\   'source':  bti_fzf_source,
+\   'sink':    'e',
+\   'down':    20
+\ })<CR>
 
 " CSV
 let g:csv_autocmd_arrange = 1
