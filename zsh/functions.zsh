@@ -80,22 +80,19 @@ function history_stat() {
   history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
 }
 
-# Use selecta to quickly get to a project
+# Use fzf to quickly get to a project
 function p() {
-  cd $(find ~/Projects -maxdepth 1 -type d | selecta) && clear
+  local ignore='Projects$|sites$|vagrant-silverstripe$|vagrant-wordpress$'
+  cd "$(
+    find ~/Projects ~/Projects/vagrant-silverstripe/sites ~/Projects/vagrant-wordpress/sites -maxdepth 1 -type d |
+    grep -Ev $ignore |
+    fzf
+  )"
 }
 
-function pwp() {
-  cd $(find ~/Projects/vagrant-wordpress/sites -maxdepth 1 -type d | selecta) && clear
-}
-
-function pss() {
-  cd $(find ~/Projects/vagrant-silverstripe/sites -maxdepth 1 -type d | selecta) && clear
-}
-
-# Use selecta to quickly get to a note
+# Use fzf to quickly get to a note
 function n() {
-  vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | selecta)"
+  vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | fzf)"
 }
 
 # Open notes dir
