@@ -33,7 +33,6 @@ brew install the_silver_searcher
 brew install terminal-notifier
 brew install getmail
 brew install imagemagick
-brew install selecta
 brew install ctags
 brew install htop-osx
 
