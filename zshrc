@@ -41,7 +41,7 @@ export GREP_OPTIONS="--color"
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=100000
 export LANG='en_US.UTF-8'
-export LSCOLORS="exgxbxdxcxegedxbxgxcad"
+export LSCOLORS="exgxbxdxcxegedxbxgacad"
 export SAVEHIST=$HISTSIZE
 export WORDCHARS='*?[]~&;!$%^<>'
 
