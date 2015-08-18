@@ -87,7 +87,6 @@ bindkey '\C-x\C-e' edit-command-line
 # ALIASES
 #-------------------------------------------------------------------------------
 alias g='git'
-alias j="z"
 alias lls='ls -al'
 alias t='tmux -u'
 alias tnew='tmux new-session -As'
@@ -134,9 +133,6 @@ compdef t=tmux
 # Setup rbenv
 eval "$(rbenv init - --no-rehash)"
 
-# Source z.sh script
-[ -f `brew --prefix`/etc/profile.d/z.sh ] && source `brew --prefix`/etc/profile.d/z.sh
-
 # Source tmuxinator completions
 [ -f "$DOTFILES"/zsh/completions/tmuxinator.zsh ] && source "$DOTFILES"/zsh/completions/tmuxinator.zsh
 
@@ -148,3 +144,6 @@ eval "$(rbenv init - --no-rehash)"
 
 # Use fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Use fasd
+eval "$(fasd --init auto)"
