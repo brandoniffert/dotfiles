@@ -23,11 +23,11 @@ Plug 'benekastah/neomake'
 Plug 'bling/vim-airline'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
+Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim'
-Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
@@ -194,12 +194,11 @@ nnoremap <silent><leader>q :bd<cr>
 let [g:airline_left_sep, g:airline_right_sep] = ['', '']
 let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
 
-" Setup vroom for ruby/rspec tests
-let [g:vroom_map_keys, g:vroom_use_binstubs, g:vroom_clear_screen] = [0, 1, 0]
-nnoremap <silent><leader>t :VroomRunTestFile<cr>
-
 " Vim sneak
 let g:sneak#streak = 1
+
+" Vim test
+nnoremap <silent> <leader>t :TestFile<CR>
 
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
