@@ -19,6 +19,7 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
+Plug 'benekastah/neomake'
 Plug 'bling/vim-airline'
 Plug 'danro/rename.vim'
 Plug 'ervandew/supertab'
@@ -26,7 +27,6 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim'
-Plug 'scrooloose/syntastic'
 Plug 'skalnik/vim-vroom'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -198,11 +198,6 @@ let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
 let [g:vroom_map_keys, g:vroom_use_binstubs, g:vroom_clear_screen] = [0, 1, 0]
 nnoremap <silent><leader>t :VroomRunTestFile<cr>
 
-" Syntastic
-let g:syntastic_mode_map = { 'mode': 'active',
-                           \ 'active_filetypes': [],
-                           \ 'passive_filetypes': ['html'] }
-
 " Vim sneak
 let g:sneak#streak = 1
 
@@ -242,6 +237,8 @@ if has("autocmd")
     au WinEnter * set cursorline
     au WinLeave * set nocursorline
     au VimResized * wincmd =
+
+    autocmd! BufWritePost * Neomake
 
     " When editing a file, always jump to the last known cursor position.
     au BufReadPost *
