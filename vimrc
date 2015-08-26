@@ -192,7 +192,7 @@ nnoremap <silent><leader>q :bd<cr>
 "-------------------------------------------------------------------------------
 " Airline
 let [g:airline_left_sep, g:airline_right_sep] = ['', '']
-let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
+let g:airline_theme = 'tomorrow'
 
 " Vim sneak
 let g:sneak#streak = 1
