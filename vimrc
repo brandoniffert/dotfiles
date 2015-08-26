@@ -210,11 +210,30 @@ else
   let bti_fzf_source = 'find .'
 endif
 
-" FZF
-nnoremap <silent><leader>f :call fzf#run({
+" Basic FZF search
+nnoremap <silent> <leader>f :call fzf#run({
 \   'source':  bti_fzf_source,
 \   'sink':    'e',
 \   'down':    20
+\ })<CR>
+
+function! s:buflist()
+  redir => ls
+  silent ls
+  redir END
+  return split(ls, '\n')
+endfunction
+
+function! s:bufopen(e)
+  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
+endfunction
+
+" Search open buffers with FZF
+nnoremap <silent> <leader>b :call fzf#run({
+\   'source':  reverse(<sid>buflist()),
+\   'sink':    function('<sid>bufopen'),
+\   'options': '+m',
+\   'down':    len(<sid>buflist()) + 2
 \ })<CR>
 
 " CSV
