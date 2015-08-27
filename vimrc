@@ -84,7 +84,6 @@ set shell=/bin/bash
 set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
 set synmaxcol=500                     " don't syntax highlight after 500 columns
-set t_ti= t_te=                       " don't clear scrollback buffer on quit
 set textwidth=80
 
 " Set custom spellfile
