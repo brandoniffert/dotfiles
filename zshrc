@@ -92,6 +92,8 @@ alias t='tmux -u'
 alias tnew='tmux new-session -As'
 alias vgs="vagrant global-status"
 alias vi="vim"
+alias v="vim"
+alias nv="nvim"
 alias zr!='source ~/.zshrc'
 
 #-------------------------------------------------------------------------------

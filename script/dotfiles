@@ -23,6 +23,8 @@ extra_files=(
   'gitconfig'
   'gitignore_global'
   'git_template'
+  'nvim'
+  'nvimrc'
   'rspec'
   'tmux.conf'
   'zshrc'
