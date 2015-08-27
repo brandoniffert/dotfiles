@@ -33,6 +33,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 
+if has('gui')
+  Plug 'ctrlpvim/ctrlp.vim'
+endif
+
 " Colors
 Plug 'chriskempson/base16-vim'
 

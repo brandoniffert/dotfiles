@@ -23,6 +23,7 @@ extra_files=(
   'gitconfig'
   'gitignore_global'
   'git_template'
+  'gvimrc'
   'nvim'
   'nvimrc'
   'rspec'
