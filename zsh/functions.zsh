@@ -95,6 +95,11 @@ function n() {
   vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | fzf)"
 }
 
+# Use fzf to upgrade installed homebrew package
+function brewup {
+  brew upgrade $(brew list | fzf)
+}
+
 # Open notes dir
 function notes() {
   vi ~/Dropbox/Notes
