@@ -29,7 +29,7 @@ prompt_git() {
       echo -n '%F{red}'
     fi
 
-    [[ $(git diff --cached) 2>/dev/null ]] && symbol='+'
+    [ $(git diff --cached) 2>/dev/null ] && symbol='+'
     [[ $(git cherry -v @{upstream} 2>/dev/null) != "" ]] && symbol='!'
 
     echo -n "(${ref#(refs/heads/)}$symbol)%f "
