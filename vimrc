@@ -29,6 +29,7 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
+Plug 'SirVer/ultisnips'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
@@ -50,7 +51,6 @@ set autoread                          " update open files edited outside of Vim
 set backspace=eol,start,indent        " common sense backspacing
 set clipboard=
 set complete-=i                       " don't scan included files
-set cursorline                        " highlight current line
 set dictionary+=/usr/share/dict/words
 set fileformats+=mac
 set foldlevelstart=0                  " close folds by default
@@ -68,6 +68,7 @@ set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
 set scrolloff=3
 set shell=/bin/bash
+set showcmd
 set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
 set synmaxcol=500                     " don't syntax highlight after 500 columns
@@ -209,8 +210,10 @@ let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<leader>f'
-
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger = '<tab>'
 
 " Have ctrlp use ag if available
 if executable("ag")
@@ -223,14 +226,11 @@ endif
 if has("autocmd")
   augroup bti-vimrc
     au!
-    au WinEnter * set cursorline
-    au WinLeave * set nocursorline
-    au VimResized * wincmd =
-
-    autocmd! BufWritePost * Neomake
+    au! VimResized * wincmd =
+    au! BufWritePost * Neomake
 
     " When editing a file, always jump to the last known cursor position.
-    au BufReadPost *
+    au! BufReadPost *
       \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   exe "normal g`\"" |
       \ endif
