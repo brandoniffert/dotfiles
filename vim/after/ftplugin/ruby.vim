@@ -3,3 +3,6 @@
 if v:version > 703
   set regexpengine=1
 endif
+
+" Run current file
+set makeprg=ruby\ %

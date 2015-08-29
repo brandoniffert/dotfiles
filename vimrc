@@ -19,39 +19,21 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
-Plug 'benekastah/neomake'
+Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'bling/vim-airline'
-Plug 'danro/rename.vim'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
-Plug 'rking/ag.vim'
+Plug 'rking/ag.vim', { 'on': 'Ag' }
+Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-
-if has('gui')
-  Plug 'ctrlpvim/ctrlp.vim'
-endif
-
-" Colors
-Plug 'chriskempson/base16-vim'
-
-" Syntax
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'chrisbra/csv.vim'
-Plug 'groenewege/vim-less'
-Plug 'klen/python-mode'
-Plug 'mustache/vim-mustache-handlebars'
-Plug 'mxw/vim-jsx'
-Plug 'othree/html5.vim'
-Plug 'othree/yajs.vim'
-Plug 'StanAngeloff/php.vim'
-Plug 'tpope/vim-rails'
-Plug 'vim-ruby/vim-ruby'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -71,15 +53,16 @@ set complete-=i                       " don't scan included files
 set cursorline                        " highlight current line
 set dictionary+=/usr/share/dict/words
 set fileformats+=mac
-set foldmethod=marker
 set foldlevelstart=0                  " close folds by default
+set foldmethod=marker
 set formatoptions=qrn1j
 set hidden                            " keep buffers around
 set history=500
 set laststatus=2                      " keep statusline visible
 set lazyredraw                        " only redraw if needed
-set noshowmode                        " mode is shown using Airline
+set nocursorline
 set nojoinspaces                      " only one space after joining lines
+set noshowmode                        " mode is shown using Airline
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
@@ -174,25 +157,38 @@ nnoremap <leader><leader> <c-^>
 " Easy indent/outdent
 nnoremap <tab> >>
 nnoremap <s-tab> <<
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
+xnoremap <tab> >gv
+xnoremap <s-tab> <gv
+
+" When jump to next match also center screen
+noremap n nzz
+noremap N Nzz
 
 " Make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
 
 " Yank/paste using system clipboard
-vnoremap <leader>y "*y
+xnoremap <leader>y "*y
 nnoremap <leader>p "*p
 
 " Make Y act like other capital letters
 nnoremap Y y$
 
+" Quick replay recorded macro
+nnoremap Q @@
+
 " Quick quit window and delete buffer
 nnoremap <silent><leader>q :bd<cr>
+
+" Run current file using makeprg
+nnoremap <silent><leader>r :make!<cr>
 
 "-------------------------------------------------------------------------------
 " PLUGINS
 "-------------------------------------------------------------------------------
+" Polyglot
+let g:polyglot_disabled = ['css']
+
 " Airline
 let [g:airline_left_sep, g:airline_right_sep] = ['', '']
 let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
@@ -206,48 +202,20 @@ nnoremap <silent> <leader>t :TestFile<CR>
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
-" Have FZF use ag if available
+" CtrlP
+let g:ctrlp_max_height = 20
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_switch_buffer = 0
+let g:ctrlp_use_caching = 0
+let g:ctrlp_working_path_mode = 0
+let g:ctrlp_map = '<leader>f'
+
+nnoremap <silent><leader>b :CtrlPBuffer<cr>
+
+" Have ctrlp use ag if available
 if executable("ag")
-  let bti_fzf_source = 'ag -l -S --hidden -g ""'
-else
-  let bti_fzf_source = 'find .'
+  let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
-
-" Basic FZF search
-nnoremap <silent> <leader>f :call fzf#run({
-\   'source':  bti_fzf_source,
-\   'sink':    'e',
-\   'down':    20
-\ })<CR>
-
-function! s:buflist()
-  redir => ls
-  silent ls
-  redir END
-  return split(ls, '\n')
-endfunction
-
-function! s:bufopen(e)
-  execute 'buffer' matchstr(a:e, '^[ 0-9]*')
-endfunction
-
-" Search open buffers with FZF
-nnoremap <silent> <leader>b :call fzf#run({
-\   'source':  reverse(<sid>buflist()),
-\   'sink':    function('<sid>bufopen'),
-\   'options': '+m',
-\   'down':    len(<sid>buflist()) + 2
-\ })<CR>
-
-" CSV
-let g:csv_autocmd_arrange = 1
-
-" Pymode
-let g:pymode_virtualenv = 0
-let g:pymode_run = 0
-let g:pymode_folding = 0
-let g:pymode_rope = 0
-let g:pymode_lint_ignore = "E501"
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
@@ -275,4 +243,4 @@ endif
 command! ReplaceFancyCharacters call bti#fancycharacters#replace()
 command! StripWhitespace call bti#whitespace#strip()
 command! ToggleColorColumn call bti#colorcolumn#toggle()
-nnoremap <silent><leader>r :call bti#runcurrentfile#run()<cr>
+command! Rename call bti#renamefile()
