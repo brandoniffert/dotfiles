@@ -28,6 +28,7 @@ brew install fasd
 brew install python
 brew install python3
 brew install vim --override-system-vi --with-lua
+brew install neovim
 brew install node
 brew install the_silver_searcher
 brew install terminal-notifier
@@ -35,5 +36,7 @@ brew install getmail
 brew install imagemagick
 brew install ctags
 brew install htop-osx
+brew install fzf
+brew install lame
 
 brew cleanup
