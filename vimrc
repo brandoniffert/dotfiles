@@ -29,12 +29,14 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
-Plug 'SirVer/ultisnips'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+if has('python')
+  Plug 'SirVer/ultisnips'
+endif
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
