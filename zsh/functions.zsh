@@ -82,9 +82,9 @@ function history_stat() {
 
 # Use fzf to quickly get to a project
 function p() {
-  local ignore='Projects$|sites$|vagrant-silverstripe$|vagrant-wordpress$'
+  local ignore='Projects$|sites$|vagrant-lemp$'
   cd "$(
-    find ~/Projects ~/Projects/vagrant-silverstripe/sites ~/Projects/vagrant-wordpress/sites -maxdepth 1 -type d |
+    find ~/Projects ~/Projects/vagrant-lemp/sites -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf
   )"
