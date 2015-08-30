@@ -31,6 +31,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
@@ -245,4 +246,3 @@ endif
 command! ReplaceFancyCharacters call bti#fancycharacters#replace()
 command! StripWhitespace call bti#whitespace#strip()
 command! ToggleColorColumn call bti#colorcolumn#toggle()
-command! Rename call bti#renamefile()
