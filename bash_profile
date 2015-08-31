@@ -1,6 +1,3 @@
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-
 if type rbenv &> /dev/null; then
   eval "$(rbenv init - --no-rehash)"
 fi
