@@ -161,8 +161,8 @@ nnoremap <leader><leader> <c-^>
 " Easy indent/outdent
 nnoremap <tab> >>
 nnoremap <s-tab> <<
-vnoremap <tab> >gv
-vnoremap <s-tab> <gv
+xnoremap <tab> >gv
+xnoremap <s-tab> <gv
 
 " When jump to next match also center screen
 noremap n nzz
@@ -172,7 +172,7 @@ noremap N Nzz
 nnoremap S i<cr><esc>k$
 
 " Yank/paste using system clipboard
-vnoremap <leader>y "*y
+xnoremap <leader>y "*y
 nnoremap <leader>p "*p
 
 " Make Y act like other capital letters
