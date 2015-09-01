@@ -212,7 +212,6 @@ vmap <Enter> <Plug>(EasyAlign)
 " CtrlP
 let g:ctrlp_max_height = 20
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_switch_buffer = 0
 let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<leader>f'
