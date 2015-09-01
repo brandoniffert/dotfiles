@@ -197,8 +197,8 @@ nnoremap <silent><leader>r :make!<cr>
 let g:polyglot_disabled = ['css']
 
 " Airline
-let [g:airline_left_sep, g:airline_right_sep] = ['', '']
 let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
+let g:airline_powerline_fonts = 1
 
 " Vim sneak
 let g:sneak#streak = 1
