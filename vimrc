@@ -132,6 +132,9 @@ syntax sync minlines=256
 colorscheme bti-dark
 set bg=dark
 
+" Make sure bash scripts are colored fully
+let g:is_bash = 1
+
 "-------------------------------------------------------------------------------
 " KEY MAPS
 "-------------------------------------------------------------------------------
