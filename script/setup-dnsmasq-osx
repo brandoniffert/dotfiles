@@ -1,0 +1,36 @@
+#!/bin/bash
+
+set -e
+
+if [ -f /etc/resolver/dev ]; then
+  echo "!  dnsmasq is already setup for .dev"
+else
+  sudo -v
+
+  # Install dnsmasq
+  brew install dnsmasq
+
+  # Copy the default configuration file.
+  cp $(brew list dnsmasq | grep /dnsmasq.conf.example$) /usr/local/etc/dnsmasq.conf
+
+  # Copy the daemon configuration file into place.
+  sudo cp $(brew list dnsmasq | grep /homebrew.mxcl.dnsmasq.plist$) /Library/LaunchDaemons/
+
+  # Start Dnsmasq automatically.
+  sudo launchctl load /Library/LaunchDaemons/homebrew.mxcl.dnsmasq.plist
+
+  # Add dev rule to dnsmasq conf
+  echo "address=/dev/127.0.0.1" >> /usr/local/etc/dnsmasq.conf
+
+  # Restart dnsmasq
+  sudo launchctl stop homebrew.mxcl.dnsmasq
+  sudo launchctl start homebrew.mxcl.dnsmasq
+
+  # Create resolver dir
+  sudo mkdir -p /etc/resolver
+
+  # Setup dev resolver
+  sudo echo "nameserver 127.0.0.1" > /etc/resolver/dev
+
+  echo ">  dnsmasq setup complete"
+fi
