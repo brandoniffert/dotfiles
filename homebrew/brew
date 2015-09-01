@@ -33,7 +33,7 @@ brew install node
 brew install the_silver_searcher
 brew install terminal-notifier
 brew install getmail
-brew install imagemagick
+brew install imagemagick --with-webp
 brew install ctags
 brew install htop-osx
 brew install fzf
