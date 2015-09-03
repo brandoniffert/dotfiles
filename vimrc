@@ -63,6 +63,7 @@ set hidden                            " keep buffers around
 set history=500
 set laststatus=2                      " keep statusline visible
 set lazyredraw                        " only redraw if needed
+set mouse=
 set nocursorline
 set nojoinspaces                      " only one space after joining lines
 set noshowmode                        " mode is shown using Airline
@@ -166,10 +167,6 @@ nnoremap <tab> >>
 nnoremap <s-tab> <<
 vnoremap <tab> >gv
 vnoremap <s-tab> <gv
-
-" When jump to next match also center screen
-noremap n nzz
-noremap N Nzz
 
 " Make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
