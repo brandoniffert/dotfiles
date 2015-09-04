@@ -1,4 +1,5 @@
 autoload -U compinit && compinit
+autoload -U colors && colors
 
 export DOTFILES=$HOME/.dotfiles
 
