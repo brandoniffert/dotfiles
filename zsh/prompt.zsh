@@ -4,11 +4,28 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 
 # Git info styles
-zstyle ':vcs_info:git*' unstagedstr '%F{red}?%f'
-zstyle ':vcs_info:git*' stagedstr '%F{red}+%f'
-zstyle ':vcs_info:git*' formats '%F{8}[%b%f%u%c%F{8}]%f'
-zstyle ':vcs_info:git*' actionformats '%F{8}[%b%f%u%c:%F{green}%a%F{8}]%f'
+zstyle ':vcs_info:git*' unstagedstr '%F{red}•%f'
+zstyle ':vcs_info:git*' stagedstr '%F{green}•%f'
+zstyle ':vcs_info:git*' formats '%F{8}(%b%u%c%m%F{8})%f'
+zstyle ':vcs_info:git*' actionformats '%F{8}(%b%u%c%m:%F{green}%a%F{8})%f'
+zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-ahead
 zstyle ':vcs_info:git*' check-for-changes true
+
+function +vi-git-untracked(){
+  if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
+      git status --porcelain | fgrep '??' &> /dev/null ; then
+    hook_com[staged]+='%F{red}?%f'
+  fi
+}
+
+function +vi-git-ahead() {
+  local ahead
+  local -a gitstatus
+
+  ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | xargs)
+  [ $ahead -ne 0 ] && gitstatus+="%F{blue}!%f"
+  hook_com[misc]+=${gitstatus}
+}
 
 precmd() {
   vcs_info
@@ -20,9 +37,9 @@ prompt_jobs() {
 
 prompt_last_status() {
   if [ $? != 0 ]; then
-    echo -n "%{$bg[red]%} %{$bg[default]%} "
+    echo -n "%F{red}┃%f "
   else
-    echo -n "%{$bg[green]%} %{$bg[default]%} "
+    echo -n "%F{green}┃%f "
   fi
 }
 
