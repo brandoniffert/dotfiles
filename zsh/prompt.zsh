@@ -19,7 +19,7 @@ prompt_jobs() {
 }
 
 prompt_hostname() {
-  echo -n "%F{magenta}%m%f"
+  echo -n "%F{green}%m%f"
 }
 
 prompt_dir() {
