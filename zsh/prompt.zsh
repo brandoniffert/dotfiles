@@ -18,8 +18,16 @@ prompt_jobs() {
   echo -n "%F{8}%(1j.[%j] .)%f"
 }
 
+prompt_last_status() {
+  if [ $? != 0 ]; then
+    echo -n "%{$bg[red]%} %{$bg[default]%} "
+  else
+    echo -n "%{$bg[green]%} %{$bg[default]%} "
+  fi
+}
+
 prompt_hostname() {
-  echo -n "%F{green}%m%f"
+  echo -n "%F{8}%m%f"
 }
 
 prompt_dir() {
@@ -38,16 +46,17 @@ prompt_vagrant_status() {
   [ -n "$running" ] && echo -n "%F{8}[$running]%f"
 }
 
-prompt_status() {
-  echo "%(?.%F{default}.%F{red})%(!.#.$)%f "
+prompt_marker() {
+  echo "%(!.#.$) "
 }
 
 build_prompt() {
+  prompt_last_status
   prompt_jobs
   prompt_hostname
   prompt_dir
   prompt_git
-  prompt_status
+  prompt_marker
 }
 
 PROMPT='$(build_prompt)'
