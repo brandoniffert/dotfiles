@@ -11,14 +11,14 @@ zstyle ':vcs_info:git*' actionformats '%F{8}(%b%u%c%m:%F{green}%a%F{8})%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-ahead
 zstyle ':vcs_info:git*' check-for-changes true
 
-function +vi-git-untracked(){
++vi-git-untracked(){
   if [[ $(git rev-parse --is-inside-work-tree 2> /dev/null) == 'true' ]] && \
       git status --porcelain | fgrep '??' &> /dev/null ; then
     hook_com[staged]+='%F{red}?%f'
   fi
 }
 
-function +vi-git-ahead() {
++vi-git-ahead() {
   local ahead
   local -a gitstatus
 
@@ -32,7 +32,7 @@ precmd() {
 }
 
 prompt_jobs() {
-  echo -n "%F{8}%(1j.[%j] .)%f"
+  echo -n "%F{8}%(1j.%j .)%f"
 }
 
 prompt_last_status() {
@@ -53,9 +53,7 @@ prompt_dir() {
 
 prompt_git() {
   local git_status="${vcs_info_msg_0_}"
-  if [[ $git_status != '' ]]; then
-    echo -n "$git_status "
-  fi
+  [[ $git_status != '' ]] && echo -n "$git_status "
 }
 
 prompt_vagrant_status() {
@@ -68,8 +66,8 @@ prompt_marker() {
 }
 
 build_prompt() {
-  prompt_last_status
   prompt_jobs
+  prompt_last_status
   prompt_hostname
   prompt_dir
   prompt_git
