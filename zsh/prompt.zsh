@@ -23,7 +23,7 @@ zstyle ':vcs_info:git*' check-for-changes true
   local -a gitstatus
 
   ahead=$(git rev-list ${hook_com[branch]}@{upstream}..HEAD 2>/dev/null | wc -l | xargs)
-  [ $ahead -ne 0 ] && gitstatus+="%F{blue}!%f"
+  [ $ahead -ne 0 ] && gitstatus+="%F{red}!%f"
   hook_com[misc]+=${gitstatus}
 }
 
