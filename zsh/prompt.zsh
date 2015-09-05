@@ -36,11 +36,7 @@ prompt_jobs() {
 }
 
 prompt_last_status() {
-  if [ $? != 0 ]; then
-    echo -n "%F{red}┃%f "
-  else
-    echo -n "%F{green}┃%f "
-  fi
+  echo -n "%(?.%F{green}.%F{red})┃ "
 }
 
 prompt_hostname() {
