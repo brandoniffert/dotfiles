@@ -27,7 +27,6 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
-Plug 'justinmk/vim-sneak'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -196,9 +195,6 @@ let g:polyglot_disabled = ['css']
 " Airline
 let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
 let g:airline_powerline_fonts = 1
-
-" Vim sneak
-let g:sneak#streak = 1
 
 " Vim test
 nnoremap <silent> <leader>t :TestFile<CR>
