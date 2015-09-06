@@ -38,5 +38,6 @@ brew install ctags
 brew install htop-osx
 brew install fzf
 brew install lame
+brew install pandoc
 
 brew cleanup
