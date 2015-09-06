@@ -6,8 +6,8 @@ zstyle ':vcs_info:*' enable git
 # Git info styles
 zstyle ':vcs_info:git*' unstagedstr '%F{red}●%f'
 zstyle ':vcs_info:git*' stagedstr '%F{green}●%f'
-zstyle ':vcs_info:git*' formats '%F{8}(%b %u%c%m%F{8})%f'
-zstyle ':vcs_info:git*' actionformats '%F{8}(%b %u%c%m:%F{green}%a%F{8})%f'
+zstyle ':vcs_info:git*' formats '%F{8}(%b%u%c%m%F{8})%f'
+zstyle ':vcs_info:git*' actionformats '%F{8}(%b%u%c%m:%F{green}%a%F{8})%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-ahead
 zstyle ':vcs_info:git*' check-for-changes true
 
