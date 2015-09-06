@@ -36,7 +36,7 @@ prompt_jobs() {
 }
 
 prompt_hostname() {
-  echo -n "%F{8}%m%f"
+  echo -n "%F{242}%m%f"
 }
 
 prompt_dir() {
