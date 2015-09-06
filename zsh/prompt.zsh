@@ -4,10 +4,10 @@ autoload -Uz vcs_info
 zstyle ':vcs_info:*' enable git
 
 # Git info styles
-zstyle ':vcs_info:git*' unstagedstr '%F{red}•%f'
-zstyle ':vcs_info:git*' stagedstr '%F{green}•%f'
-zstyle ':vcs_info:git*' formats '%F{8}(%b%u%c%m%F{8})%f'
-zstyle ':vcs_info:git*' actionformats '%F{8}(%b%u%c%m:%F{green}%a%F{8})%f'
+zstyle ':vcs_info:git*' unstagedstr '%F{red}●%f'
+zstyle ':vcs_info:git*' stagedstr '%F{green}●%f'
+zstyle ':vcs_info:git*' formats '%F{8}(%b %u%c%m%F{8})%f'
+zstyle ':vcs_info:git*' actionformats '%F{8}(%b %u%c%m:%F{green}%a%F{8})%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-ahead
 zstyle ':vcs_info:git*' check-for-changes true
 
@@ -35,10 +35,6 @@ prompt_jobs() {
   echo -n "%F{8}%(1j.%j .)%f"
 }
 
-prompt_last_status() {
-  echo -n "%(?.%F{green}.%F{red})┃ "
-}
-
 prompt_hostname() {
   echo -n "%F{8}%m%f"
 }
@@ -58,12 +54,11 @@ prompt_vagrant_status() {
 }
 
 prompt_marker() {
-  echo "%(!.#.$) "
+  echo "%(?.%F{default}.%F{red})%(!.#.$) "
 }
 
 build_prompt() {
   prompt_jobs
-  prompt_last_status
   prompt_hostname
   prompt_dir
   prompt_git
