@@ -99,7 +99,7 @@ set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 " Show invisible characters
 set list
 set showbreak=↪
-let &listchars="tab:\u25B8-,trail:\u2022,extends:>,precedes:<,nbsp:\u00b7"
+let &listchars="tab:>-,trail:.,extends:>,precedes:<,nbsp:\u00b7"
 
 " Searching
 set showmatch incsearch hlsearch ignorecase smartcase
