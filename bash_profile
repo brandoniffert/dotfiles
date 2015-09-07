@@ -46,10 +46,10 @@ function __git_repo_status() {
 
 function __custom_prompt() {
   local __time="${BoldBlack}\t${Reset}"
-  local __user_host="${White}\u:${Yellow}\h${Reset}"
-  local __cur_dir="${Blue}\w${Reset}"
+  local __user_host="${Reset}\u:${Yellow}\h${Reset}"
+  local __cur_dir="${Blue}\W${Reset}"
   local __tail="\n\$ "
 
-  echo "$__time $__user_host $__cur_dir \$(__git_repo_status) $__tail"
+  echo "$__time $__user_host:$__cur_dir \$(__git_repo_status) $__tail"
 }
 export PS1=$(__custom_prompt)
