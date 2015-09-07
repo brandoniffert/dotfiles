@@ -1,11 +1,18 @@
-let base16colorspace=256
-runtime plugged/base16-vim/colors/base16-tomorrow.vim
+" Wrap Tomorrow-Night theme and customize
+" Also sets Airline theme if available
 
-let g:colors_name = "bti-dark"
+runtime colors/Tomorrow-Night.vim
 
+let g:colors_name = 'bti-tomorrow-dark'
 let g:vimsyn_noerror = 1
+let g:airline#themes#base16#constant = 1
+let g:airline_theme = 'base16'
 
-hi Search                ctermfg=black
-hi SpellBad ctermbg=NONE ctermfg=red   cterm=underline
-hi LineNr   ctermbg=NONE ctermfg=237   guibg=NONE      guifg=#3a3a3a
-hi Visual   ctermbg=blue ctermfg=black guibg=#93b2ca   guifg=#27292c
+highlight link pythonImport pythonFunction
+
+hi Normal       ctermbg=NONE
+hi CursorLineNr              ctermfg=4   cterm=NONE                 guifg=#6F90B0 gui=NONE
+hi Search       ctermbg=NONE ctermfg=3   cterm=underline
+hi SpellBad     ctermbg=NONE ctermfg=1   cterm=underline
+hi LineNr       ctermbg=NONE ctermfg=237                 guibg=NONE guifg=#3a3a3a
+hi Visual       ctermbg=237
