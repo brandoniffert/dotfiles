@@ -1,12 +1,12 @@
 --sort-files
 --color-match=red
---color
 --group
 --smart-case
 
 --ignore-dir=tmp
 --ignore-dir=log
 --ignore-dir=.sass-cache
+--ignore-dir=node_modules
 
 --type-set=scss=.scss
 --type-set=sass=.sass
