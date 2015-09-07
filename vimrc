@@ -22,7 +22,6 @@ runtime macros/matchit.vim
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'bling/vim-airline'
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
@@ -128,9 +127,13 @@ endif
 syntax enable
 syntax sync minlines=256
 
-" Use a custom colors file - wraps base16 colorscheme
-colorscheme bti-dark
+" Use a custom colors file based on terminal color - default to dark
 set bg=dark
+colorscheme bti-tomorrow-dark
+if $ITERM_PROFILE_BG == 'light'
+  set bg=light
+  colorscheme bti-solarized-light
+endif
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
@@ -193,7 +196,6 @@ nnoremap <silent><leader>r :make!<cr>
 let g:polyglot_disabled = ['css']
 
 " Airline
-let [g:airline#themes#base16#constant, g:airline_theme] = [1, 'base16']
 let g:airline_powerline_fonts = 1
 
 " Vim test

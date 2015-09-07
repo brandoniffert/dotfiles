@@ -32,7 +32,7 @@ precmd() {
 }
 
 prompt_jobs() {
-  echo -n "%F{8}%(1j.%j .)%f"
+  echo -n "%(1j.%j .)"
 }
 
 prompt_hostname() {
