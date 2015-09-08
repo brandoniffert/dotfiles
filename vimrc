@@ -21,7 +21,6 @@ call plug#begin()
 runtime macros/matchit.vim
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'bling/vim-airline'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
@@ -192,12 +191,6 @@ nnoremap <silent><leader>r :make!<cr>
 "-------------------------------------------------------------------------------
 " PLUGINS
 "-------------------------------------------------------------------------------
-" Polyglot
-let g:polyglot_disabled = ['css']
-
-" Airline
-let g:airline_powerline_fonts = 1
-
 " Vim test
 nnoremap <silent> <leader>t :TestFile<CR>
 
@@ -205,20 +198,19 @@ nnoremap <silent> <leader>t :TestFile<CR>
 vmap <Enter> <Plug>(EasyAlign)
 
 " CtrlP
-let g:ctrlp_max_height = 20
+let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
-let g:ctrlp_working_path_mode = 0
 let g:ctrlp_map = '<leader>f'
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 
-" Ultisnips
-let g:UltiSnipsExpandTrigger = '<c-e>'
-
 " Have ctrlp use ag if available
-if executable("ag")
+if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger = '<c-e>'
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS

@@ -7,6 +7,7 @@ let g:colors_name = 'bti-tomorrow-dark'
 let g:vimsyn_noerror = 1
 let g:airline#themes#base16#constant = 1
 let g:airline_theme = 'base16'
+let g:airline_powerline_fonts = 1
 
 highlight link pythonImport pythonFunction
 
