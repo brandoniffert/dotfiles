@@ -50,6 +50,9 @@ export WORDCHARS='*?[]~&;!$%^<>'
 [[ $ITERM_PROFILE == *"light"* ]] && ITERM_PROFILE_BG='light' || ITERM_PROFILE_BG='dark'
 export ITERM_PROFILE_BG
 
+# Set correct FZF color depending on the profile color
+[[ $ITERM_PROFILE_BG == 'light' ]] && export FZF_DEFAULT_OPTS='--color=light'
+
 #-------------------------------------------------------------------------------
 # KEYS
 #-------------------------------------------------------------------------------
