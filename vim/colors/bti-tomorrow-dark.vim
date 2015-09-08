@@ -12,7 +12,6 @@ let g:airline_powerline_fonts = 1
 highlight link pythonImport pythonFunction
 
 hi Normal       ctermbg=NONE
-hi CursorLineNr              ctermfg=4   cterm=NONE                 guifg=#6F90B0 gui=NONE
 hi Search       ctermbg=NONE ctermfg=3   cterm=underline
 hi SpellBad     ctermbg=NONE ctermfg=1   cterm=underline
 hi LineNr       ctermbg=NONE ctermfg=237                 guibg=NONE guifg=#3a3a3a
