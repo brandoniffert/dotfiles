@@ -25,6 +25,7 @@ Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
+Plug 'morhetz/gruvbox'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -125,14 +126,7 @@ endif
 "-------------------------------------------------------------------------------
 syntax enable
 syntax sync minlines=256
-
-" Use a custom colors file based on terminal color - default to dark
-set bg=dark
-colorscheme bti-tomorrow-dark
-if $ITERM_PROFILE_BG == 'light'
-  set bg=light
-  colorscheme bti-solarized-light
-endif
+colorscheme bti-gruvbox
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
@@ -193,6 +187,9 @@ nnoremap <silent><leader>r :make!<cr>
 "-------------------------------------------------------------------------------
 " Vim test
 nnoremap <silent> <leader>t :TestFile<CR>
+
+" Airline
+let g:airline_powerline_fonts = 1
 
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)

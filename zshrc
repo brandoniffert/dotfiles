@@ -50,6 +50,10 @@ export WORDCHARS='*?[]~&;!$%^<>'
 [[ $ITERM_PROFILE == *"light"* ]] && ITERM_PROFILE_BG='light' || ITERM_PROFILE_BG='dark'
 export ITERM_PROFILE_BG
 
+# Source gruvbox script to fix colors
+[ -f "$DOTFILES/vim/plugged/gruvbox/gruvbox_256palette.sh" ] &&
+  source "$DOTFILES/vim/plugged/gruvbox/gruvbox_256palette.sh"
+
 # Set correct FZF color depending on the profile color
 [[ $ITERM_PROFILE_BG == 'light' ]] && export FZF_DEFAULT_OPTS='--color=light'
 
@@ -132,13 +136,15 @@ compdef t=tmux
 eval "$(rbenv init - --no-rehash)"
 
 # Source tmuxinator completions
-[ -f "$DOTFILES"/zsh/completions/tmuxinator.zsh ] && source "$DOTFILES"/zsh/completions/tmuxinator.zsh
+[ -f "$DOTFILES"/zsh/completions/tmuxinator.zsh ] &&
+  source "$DOTFILES"/zsh/completions/tmuxinator.zsh
 
 # Use .localrc for local options
 [ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
 
 # Use zsh syntax highlighting
-[ -f `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] && source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+[ -f `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] &&
+  source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # Use fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
