@@ -7,7 +7,6 @@ endif
 
 let g:colors_name = 'bti-gruvbox'
 let g:gruvbox_invert_selection = 0
-let g:gruvbox_contrast_dark = 'soft'
 
 runtime plugged/gruvbox/colors/gruvbox.vim
 
