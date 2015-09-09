@@ -75,6 +75,7 @@ set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
 set synmaxcol=500                     " don't syntax highlight after 500 columns
 set textwidth=80
+set ttyfast
 
 " Set custom spellfile
 if filereadable(expand("~/.vim-custom.en.utf8.add"))
