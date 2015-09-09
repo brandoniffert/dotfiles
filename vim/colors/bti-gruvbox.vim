@@ -12,3 +12,4 @@ let g:gruvbox_contrast_dark = 'soft'
 runtime plugged/gruvbox/colors/gruvbox.vim
 
 let g:vimsyn_noerror = 1
+let g:airline_powerline_fonts = 1

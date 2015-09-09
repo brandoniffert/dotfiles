@@ -188,9 +188,6 @@ nnoremap <silent><leader>r :make!<cr>
 " Vim test
 nnoremap <silent> <leader>t :TestFile<CR>
 
-" Airline
-let g:airline_powerline_fonts = 1
-
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
