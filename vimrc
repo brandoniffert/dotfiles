@@ -181,7 +181,7 @@ nnoremap Q @@
 nnoremap <silent><leader>q :bd<cr>
 
 " Run current file using makeprg
-nnoremap <silent><leader>r :make!<cr>
+nnoremap <leader>r :make!<cr>
 
 "-------------------------------------------------------------------------------
 " PLUGINS
