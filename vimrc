@@ -21,11 +21,11 @@ call plug#begin()
 runtime macros/matchit.vim
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'bling/vim-airline'
+Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
-Plug 'morhetz/gruvbox'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -127,7 +127,7 @@ endif
 "-------------------------------------------------------------------------------
 syntax enable
 syntax sync minlines=256
-colorscheme bti-gruvbox
+colorscheme bti-base16
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
@@ -192,10 +192,16 @@ nnoremap <silent> <leader>t :TestFile<CR>
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
 
+" Airline
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
+let g:airline_theme = 'monochrome'
+
 " CtrlP
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
+let g:ctrlp_working_path_mode= 0
 let g:ctrlp_map = '<leader>f'
 nnoremap <silent><leader>b :CtrlPBuffer<cr>
 

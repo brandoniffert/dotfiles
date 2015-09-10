@@ -50,12 +50,11 @@ export WORDCHARS='*?[]~&;!$%^<>'
 [[ $ITERM_PROFILE == *"light"* ]] && ITERM_PROFILE_BG='light' || ITERM_PROFILE_BG='dark'
 export ITERM_PROFILE_BG
 
-# Source gruvbox script to fix colors
-[ -f "$DOTFILES/vim/plugged/gruvbox/gruvbox_256palette.sh" ] &&
-  source "$DOTFILES/vim/plugged/gruvbox/gruvbox_256palette.sh"
-
 # Set correct FZF color depending on the profile color
 [[ $ITERM_PROFILE_BG == 'light' ]] && export FZF_DEFAULT_OPTS='--color=light'
+
+[ -f ~/.config/base16-shell/base16-tomorrow.dark.sh ] &&
+  source ~/.config/base16-shell/base16-tomorrow.dark.sh
 
 #-------------------------------------------------------------------------------
 # KEYS
@@ -95,6 +94,7 @@ alias vi="vim"
 alias v="vim"
 alias nv="nvim"
 alias zr!='source ~/.zshrc'
+alias ag="ag --color-match='0;31'"
 
 #-------------------------------------------------------------------------------
 # COMPLETION

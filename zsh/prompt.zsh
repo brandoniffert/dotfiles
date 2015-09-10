@@ -54,7 +54,7 @@ prompt_vagrant_status() {
 }
 
 prompt_marker() {
-  echo "%(?.%F{default}.%F{red})%(!.#.$) "
+  echo "%(?.%F{default}.%F{red})%(!.#.$) %f"
 }
 
 build_prompt() {
