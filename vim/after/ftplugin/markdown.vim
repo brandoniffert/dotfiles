@@ -1,4 +1,2 @@
-setlocal nolist
-setlocal linebreak
 setlocal spell
-setlocal wrap
+setlocal formatoptions-=t
