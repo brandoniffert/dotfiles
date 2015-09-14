@@ -127,6 +127,8 @@ endif
 "-------------------------------------------------------------------------------
 syntax enable
 syntax sync minlines=256
+
+" Use custom colorscheme that wraps base16 and sets Airline theme
 colorscheme bti-base16
 
 " Make sure bash scripts are colored fully
@@ -147,10 +149,6 @@ nnoremap <c-j> <c-W>j
 nnoremap <c-h> <c-W>h
 nnoremap <c-k> <c-W>k
 nnoremap <c-l> <c-W>l
-
-" Create a new vertical/horizontal window
-nnoremap <silent><leader>v :vnew<cr>
-nnoremap <silent><leader>h :new<cr>
 
 " Select text that was just pasted
 nnoremap <leader>gv V`]
@@ -177,9 +175,6 @@ nnoremap Y y$
 " Quick replay recorded macro
 nnoremap Q @@
 
-" Quick quit window and delete buffer
-nnoremap <silent><leader>q :bd<cr>
-
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
 
@@ -187,15 +182,10 @@ nnoremap <leader>r :make!<cr>
 " PLUGINS
 "-------------------------------------------------------------------------------
 " Vim test
-nnoremap <silent> <leader>t :TestFile<CR>
+nnoremap <silent><leader>t :TestFile<CR>
 
 " Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
 vmap <Enter> <Plug>(EasyAlign)
-
-" Airline
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
-let g:airline_theme = 'monochrome'
 
 " CtrlP
 let g:ctrlp_max_height = 25
