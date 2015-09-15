@@ -98,7 +98,6 @@ set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 
 " Show invisible characters
 set list
-set showbreak=↪
 let &listchars="tab:>-,trail:.,extends:>,precedes:<,nbsp:\u00b7"
 
 " Searching
