@@ -64,7 +64,6 @@ set lazyredraw                        " only redraw if needed
 set mouse=
 set nocursorline
 set nojoinspaces                      " only one space after joining lines
-set noshowmode                        " mode is shown using Airline
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
@@ -125,7 +124,6 @@ endif
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
-syntax sync minlines=256
 
 " Use custom colorscheme that wraps base16 and sets Airline theme
 colorscheme bti-base16
@@ -183,11 +181,7 @@ nnoremap <leader>r :make!<cr>
 " Vim test
 nnoremap <silent><leader>t :TestFile<CR>
 
-" Easy align - start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
-
 " CtrlP
-let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_use_caching = 0
 let g:ctrlp_working_path_mode= 0
@@ -205,19 +199,17 @@ let g:UltiSnipsExpandTrigger = '<c-e>'
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
 "-------------------------------------------------------------------------------
-if has("autocmd")
-  augroup bti-vimrc
-    au!
-    au! VimResized * wincmd =
-    au! BufWritePost * Neomake
+augroup bti-vimrc
+  au!
+  au! VimResized * wincmd =
+  au! BufWritePost * Neomake
 
-    " When editing a file, always jump to the last known cursor position.
-    au! BufReadPost *
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |
-      \   exe "normal g`\"" |
-      \ endif
-  augroup END
-endif
+  " When editing a file, always jump to the last known cursor position.
+  au! BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+augroup END
 
 "-------------------------------------------------------------------------------
 " COMMANDS - AUTOLOADED FROM vim/autoload/bti
