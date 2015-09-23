@@ -162,6 +162,9 @@ vnoremap <s-tab> <gv
 " Make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
 
+" Open new vertical split
+nnoremap <silent><leader>v :vnew<cr>
+
 " Yank/paste using system clipboard
 vnoremap <leader>y "*y
 nnoremap <leader>p "*p
