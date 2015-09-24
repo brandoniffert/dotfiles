@@ -21,13 +21,12 @@ call plug#begin()
 runtime macros/matchit.vim
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'bling/vim-airline'
-Plug 'cakebaker/scss-syntax.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
+Plug 'romainl/Apprentice'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -52,28 +51,28 @@ filetype plugin indent on
 set autoread                          " update open files edited outside of Vim
 set backspace=eol,start,indent        " common sense backspacing
 set clipboard=
-set complete-=i                       " don't scan included files
+set complete-=i
 set dictionary+=/usr/share/dict/words
 set fileformats+=mac
 set foldlevelstart=0                  " close folds by default
 set foldmethod=marker
 set formatoptions=qrn1j
 set hidden                            " keep buffers around
-set history=500
 set laststatus=2                      " keep statusline visible
 set lazyredraw                        " only redraw if needed
 set mouse=
 set nocursorline
 set nojoinspaces                      " only one space after joining lines
+set noshowmode
 set notimeout ttimeout ttimeoutlen=10
 set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
 set number relativenumber             " show number and relativenumber
+set ruler
 set scrolloff=3
 set shell=/bin/bash
 set showcmd
 set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
-set synmaxcol=500                     " don't syntax highlight after 500 columns
 set textwidth=80
 set ttyfast
 
@@ -107,27 +106,12 @@ set showmatch incsearch hlsearch ignorecase smartcase
 let mapleader="\<space>"
 
 "-------------------------------------------------------------------------------
-" STATUSLINE
-"-------------------------------------------------------------------------------
-if !exists('g:loaded_airline')
-  set statusline=                           " reset
-  set statusline+=[%n]                      " buffer number
-  set statusline+=\ %f                      " file path
-  set statusline+=\ (%{&filetype})          " file type
-  set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
-  set statusline+=%=                        " left/right separator
-  set statusline+=%{&fileformat}\ \|        " file format
-  set statusline+=\ %{&fileencoding}\ \|    " file encoding
-  set statusline+=\ %l\/%L:%c\              " line/column number
-endif
-
-"-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
 
-" Use custom colorscheme that wraps base16 and sets Airline theme
-colorscheme bti-base16
+" Use custom colorscheme that wraps apprentice and sets Airline theme/options
+colorscheme bti-dark
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
@@ -173,9 +157,6 @@ nnoremap <leader>p "*p
 " Make Y act like other capital letters
 nnoremap Y y$
 
-" Quick replay recorded macro
-nnoremap Q @@
-
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
 
@@ -184,9 +165,6 @@ nnoremap <leader>r :make!<cr>
 "-------------------------------------------------------------------------------
 " Vim test
 nnoremap <silent><leader>t :TestFile<CR>
-
-" Vim polyglot
-let g:polyglot_disabled = ['css']
 
 " CtrlP
 let g:ctrlp_max_height = 25

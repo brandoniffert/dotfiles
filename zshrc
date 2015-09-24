@@ -53,9 +53,6 @@ export ITERM_PROFILE_BG
 # Set correct FZF color depending on the profile color
 [[ $ITERM_PROFILE_BG == 'light' ]] && export FZF_DEFAULT_OPTS='--color=light'
 
-[ -f ~/.config/base16-shell/base16-tomorrow.dark.sh ] &&
-  source ~/.config/base16-shell/base16-tomorrow.dark.sh
-
 #-------------------------------------------------------------------------------
 # KEYS
 #-------------------------------------------------------------------------------
