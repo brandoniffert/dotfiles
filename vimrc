@@ -21,12 +21,13 @@ call plug#begin()
 runtime macros/matchit.vim
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'bling/vim-airline'
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
-Plug 'romainl/Apprentice'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -165,6 +166,9 @@ nnoremap <leader>r :make!<cr>
 "-------------------------------------------------------------------------------
 " Vim test
 nnoremap <silent><leader>t :TestFile<CR>
+
+" Polyglot
+let g:polyglot_disabled = ['css']
 
 " CtrlP
 let g:ctrlp_max_height = 25

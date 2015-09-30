@@ -2,17 +2,19 @@ let colors_name = "bti-dark"
 
 set bg=dark
 
-runtime plugged/Apprentice/colors/apprentice.vim
+let base16colorspace=256
+runtime plugged/base16-vim/colors/base16-tomorrow.vim
 
-hi LineNr ctermfg=235 ctermbg=NONE guifg=#444444 guibg=NONE
+hi LineNr ctermfg=236 ctermbg=NONE guifg=#444444 guibg=NONE
 hi SpellBad guifg=#BF5053 gui=NONE guisp=NONE
-hi Normal ctermbg=NONE guibg=#101010
-hi SpecialKey ctermfg=235
+hi Search ctermfg=0 guifg=#111111
+hi SpecialKey ctermfg=238
+hi Comment ctermfg=240
 
 " Airline
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'monochrome'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
