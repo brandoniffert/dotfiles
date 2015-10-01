@@ -151,3 +151,7 @@ eval "$(rbenv init - --no-rehash)"
 
 # Use fasd
 eval "$(fasd --init auto)"
+
+# Setup nvm
+export NVM_DIR=~/.nvm
+source $(brew --prefix nvm)/nvm.sh
