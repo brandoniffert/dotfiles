@@ -56,6 +56,9 @@ export ITERM_PROFILE_BG
 # Set correct FZF color depending on the profile color
 [[ $ITERM_PROFILE_BG == 'light' ]] && export FZF_DEFAULT_OPTS='--color=light'
 
+# For nvm
+export NVM_DIR=~/.nvm
+
 #-------------------------------------------------------------------------------
 # KEYS
 #-------------------------------------------------------------------------------
@@ -151,7 +154,3 @@ eval "$(rbenv init - --no-rehash)"
 
 # Use fasd
 eval "$(fasd --init auto)"
-
-# Setup nvm
-export NVM_DIR=~/.nvm
-source $(brew --prefix nvm)/nvm.sh
