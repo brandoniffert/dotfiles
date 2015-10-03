@@ -40,9 +40,10 @@ brew install fzf
 brew install lame
 brew install pandoc
 brew install ansible
-brew install ffmpeg
+brew install ffmpeg --with-faac
 brew install dnsmasq
 brew install zsh-syntax-highlighting
 brew install jq
+brew install youtube-dl
 
 brew cleanup
