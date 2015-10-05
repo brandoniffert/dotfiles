@@ -14,7 +14,7 @@ hi Comment ctermfg=240
 " Airline
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'monochrome'
+let g:airline_theme = 'base16'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
