@@ -161,6 +161,11 @@ nnoremap Y y$
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
 
+" Hack to get C-h working in neovim
+if has('nvim')
+  nmap <BS> <C-W>h
+endif
+
 "-------------------------------------------------------------------------------
 " PLUGINS
 "-------------------------------------------------------------------------------
