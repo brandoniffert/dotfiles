@@ -30,7 +30,6 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'othree/yajs.vim'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
-Plug 'rstacruz/vim-closer'
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -113,8 +112,6 @@ let mapleader="\<space>"
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
-
-" Use custom colorscheme that wraps apprentice and sets Airline theme/options
 colorscheme bti-dark
 
 " Make sure bash scripts are colored fully

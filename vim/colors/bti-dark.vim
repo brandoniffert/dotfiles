@@ -9,7 +9,7 @@ hi LineNr ctermfg=235 ctermbg=NONE guifg=#444444 guibg=NONE
 hi SpellBad guifg=#BF5053 gui=NONE guisp=NONE
 hi Search ctermfg=0 guifg=#111111
 hi SpecialKey ctermfg=238
-hi Comment ctermfg=237
+hi Comment ctermfg=238
 
 " Airline
 let g:airline_left_sep = ''
