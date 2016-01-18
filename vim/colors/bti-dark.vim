@@ -1,9 +1,8 @@
-let colors_name = "bti-dark"
-
-set bg=dark
-
 let base16colorspace=256
+set bg=dark
 runtime plugged/base16-vim/colors/base16-tomorrow.vim
+
+let colors_name = "bti-dark"
 
 hi LineNr ctermfg=235 ctermbg=NONE guifg=#444444 guibg=NONE
 hi SpellBad guifg=#BF5053 gui=NONE guisp=NONE
