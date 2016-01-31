@@ -20,7 +20,6 @@ endif
 call plug#begin()
 runtime macros/matchit.vim
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
-Plug 'bling/vim-airline'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
@@ -36,6 +35,8 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 if has('python')
   Plug 'SirVer/ultisnips'
 endif
