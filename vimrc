@@ -24,10 +24,8 @@ Plug 'cakebaker/scss-syntax.vim'
 Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
-Plug 'gavocanov/vim-js-indent'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
-Plug 'othree/yajs.vim'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -174,7 +172,7 @@ endif
 nnoremap <silent><leader>t :TestFile<CR>
 
 " Polyglot
-let g:polyglot_disabled = ['css', 'javascript', 'jsx']
+let g:polyglot_disabled = ['css']
 
 " CtrlP
 let g:ctrlp_max_height = 25
