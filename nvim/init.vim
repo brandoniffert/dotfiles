@@ -1,8 +1,49 @@
 "-------------------------------------------------------------------------------
-" This is the vimrc file I use on remote machines
+" This is my nvim/init file - it changes often
 " Author: Brandon Iffert <brandoniffert@gmail.com>
-" Source: https://github.com/brandoniffert/dotfiles/blob/master/vimrc
+" Source: https://github.com/brandoniffert/dotfiles/blob/master/nvim/init.vim
 "-------------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------------
+" SETUP
+"-------------------------------------------------------------------------------
+au!
+filetype off
+
+" Bootstrap vim-plug on a fresh install
+if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
+  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  let s:bootstrap=1
+endif
+
+call plug#begin()
+runtime macros/matchit.vim
+Plug 'benekastah/neomake', { 'on': 'Neomake' }
+Plug 'cakebaker/scss-syntax.vim'
+Plug 'chriskempson/base16-vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'ervandew/supertab'
+Plug 'janko-m/vim-test'
+Plug 'junegunn/vim-easy-align'
+Plug 'rking/ag.vim', { 'on': 'Ag' }
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'SirVer/ultisnips'
+call plug#end()
+
+if exists("s:bootstrap") && s:bootstrap
+  unlet s:bootstrap
+  PlugInstall
+endif
+
+filetype plugin indent on
 
 "-------------------------------------------------------------------------------
 " GENERAL SETTINGS
@@ -14,18 +55,25 @@ set foldlevelstart=0                  " close folds by default
 set foldmethod=marker
 set formatoptions=qrn1j
 set hidden                            " keep buffers around
+set lazyredraw                        " only redraw if needed
 set mouse=
+set nocursorline
 set nojoinspaces                      " only one space after joining lines
+set noshowmode
 set notimeout ttimeout ttimeoutlen=10
-set nrformats-=octal                  " allow incrementing 001 to 002 with <C-a>
-set number
+set number relativenumber             " show number and relativenumber
+set ruler
 set scrolloff=3
 set shell=/bin/bash
 set showcmd
 set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
 set textwidth=80
-set ttyfast
+
+" Set custom spellfile
+if filereadable(expand("~/.vim-custom.en.utf8.add"))
+  set spellfile=~/.vim-custom.en.utf8.add
+endif
 
 " Tabs & Indenting
 set smartindent
@@ -50,26 +98,11 @@ set showmatch incsearch hlsearch ignorecase smartcase
 " Remap leader
 let mapleader="\<space>"
 
-"------------------------------------------------------------------------------
-" STATUSLINE
-"------------------------------------------------------------------------------
-set statusline=                           " reset
-set statusline+=[%n]                      " buffer number
-set statusline+=\ %f                      " file path
-set statusline+=\ (%{&filetype})          " file type
-set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
-set statusline+=%=                        " left/right separator
-set statusline+=%{&fileformat}\ \|        " file format
-set statusline+=\ %{&fileencoding}\ \|    " file encoding
-set statusline+=\ %l\/%L:%c\              " line/column number
-
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
-set bg=dark
-colorscheme Tomorrow-Night
-hi Normal ctermbg=NONE
+colorscheme bti-dark
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
@@ -118,12 +151,41 @@ nnoremap Y y$
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
 
+" Hack to get C-h working in neovim
+nmap <BS> <C-W>h
+
+"-------------------------------------------------------------------------------
+" PLUGINS
+"-------------------------------------------------------------------------------
+" Vim test
+nnoremap <silent><leader>t :TestFile<CR>
+
+" Polyglot
+let g:polyglot_disabled = ['css']
+
+" CtrlP
+let g:ctrlp_max_height = 25
+let g:ctrlp_show_hidden = 1
+let g:ctrlp_use_caching = 0
+let g:ctrlp_working_path_mode= 0
+let g:ctrlp_map = '<leader>f'
+nnoremap <silent><leader>b :CtrlPBuffer<cr>
+
+" Have ctrlp use ag if available
+if executable('ag')
+  let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
+endif
+
+" Ultisnips
+let g:UltiSnipsExpandTrigger = '<c-e>'
+
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
 "-------------------------------------------------------------------------------
 augroup bti-vimrc
   au!
   au! VimResized * wincmd =
+  au! BufWritePost * Neomake
 
   " When editing a file, always jump to the last known cursor position.
   au! BufReadPost *

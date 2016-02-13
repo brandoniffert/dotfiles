@@ -9,6 +9,7 @@ hi SpellBad guifg=#BF5053 gui=NONE guisp=NONE
 hi Search ctermfg=0 guifg=#111111
 hi SpecialKey ctermfg=238
 hi Comment ctermfg=238
+hi Visual ctermbg=235
 
 " Airline
 let g:airline_left_sep = ''

@@ -67,6 +67,18 @@ install() {
     e_success "Linked: $file"
   done
 
+  e_header 'Installing neovim dotfiles...'
+
+  local nvim_source="$dotdir/nvim"
+  local nvim_dest="$HOME/.config/nvim"
+
+  if [[ "$nvim_source" -ef "$nvim_dest" ]]; then
+    e_success "Already linked: nvim"
+  else
+    ln -sfF "$nvim_source" "$nvim_dest"
+    e_success "Linked: nvim"
+  fi
+
   e_header "All done!"
   echo
 }
