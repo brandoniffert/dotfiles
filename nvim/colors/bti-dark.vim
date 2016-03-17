@@ -3,10 +3,12 @@ runtime plugged/Spacegray.vim/colors/spacegray.vim
 
 let colors_name = "bti-dark"
 
+hi LineNr ctermfg=236
+
 " Airline
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'bubblegum'
+let g:airline_theme = 'monochrome'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
