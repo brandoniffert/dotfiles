@@ -1,20 +1,12 @@
-let base16colorspace=256
 set bg=dark
-runtime plugged/base16-vim/colors/base16-tomorrow.vim
+runtime plugged/Spacegray.vim/colors/spacegray.vim
 
 let colors_name = "bti-dark"
-
-hi LineNr ctermfg=235 ctermbg=NONE guifg=#444444 guibg=NONE
-hi SpellBad guifg=#BF5053 gui=NONE guisp=NONE
-hi Search ctermfg=0 guifg=#111111
-hi SpecialKey ctermfg=238
-hi Comment ctermfg=238
-hi Visual ctermbg=235
 
 " Airline
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'base16'
+let g:airline_theme = 'bubblegum'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',

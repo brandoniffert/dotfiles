@@ -19,9 +19,9 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
+Plug 'ajh17/Spacegray.vim'
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'cakebaker/scss-syntax.vim'
-Plug 'chriskempson/base16-vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'

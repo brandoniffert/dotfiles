@@ -27,6 +27,11 @@ set switchbuf+=useopen
 set textwidth=80
 set ttyfast
 
+" Set custom spellfile
+if filereadable(expand("~/.vim-custom.en.utf8.add"))
+  set spellfile=~/.vim-custom.en.utf8.add
+endif
+
 " Tabs & Indenting
 set smartindent
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
@@ -68,7 +73,7 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 "-------------------------------------------------------------------------------
 syntax enable
 set bg=dark
-colorscheme Tomorrow-Night
+colorscheme spacegray
 hi Normal ctermbg=NONE
 
 " Make sure bash scripts are colored fully
