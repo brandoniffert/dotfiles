@@ -3,7 +3,7 @@ runtime plugged/Spacegray.vim/colors/spacegray.vim
 
 let colors_name = "bti-dark"
 
-hi LineNr ctermfg=236
+hi LineNr ctermfg=236 guifg=#303030
 
 " Airline
 let g:airline_left_sep = ''
