@@ -35,7 +35,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'SirVer/ultisnips'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -175,9 +174,6 @@ nnoremap <silent><leader>b :CtrlPBuffer<cr>
 if executable('ag')
   let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
 endif
-
-" Ultisnips
-let g:UltiSnipsExpandTrigger = '<c-e>'
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
