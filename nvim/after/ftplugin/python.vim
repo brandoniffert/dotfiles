@@ -4,4 +4,4 @@ setlocal softtabstop=4
 setlocal tabstop=4
 
 " Run current file
-set makeprg=python3\ %
+set makeprg=python\ %
