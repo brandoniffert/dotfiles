@@ -12,10 +12,8 @@
 --exclude=build
 --exclude=dist
 --exclude=*.min.js
---exclude=jquery.*.js
---exclude=jquery-*.js
---exclude=.dotfiles
+--exclude=plugged
 
 --fields=+i+a+S+n
 
---languages=-html
+--languages=-html,sql

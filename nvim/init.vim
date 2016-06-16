@@ -84,7 +84,7 @@ set nobackup nowritebackup noswapfile
 
 " Wildmenu
 set wildmode=longest,list
-set wildignore+=.git,.svn,*.jpg,*.jpeg,*.png,*.gif
+set wildignore+=.svn,*.jpg,*.jpeg,*.png,*.gif
 set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 
 " Show invisible characters

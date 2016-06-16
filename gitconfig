@@ -43,3 +43,5 @@
   templatedir = ~/.git_template
 [pull]
   ff = only
+[diff]
+  compactionHeuristic = true
