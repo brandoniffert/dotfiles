@@ -22,7 +22,6 @@ extra_files=(
   'gemrc'
   'gitconfig'
   'gitignore_global'
-  'git_template'
   'gvimrc'
   'rspec'
   'tmux.conf'
