@@ -182,6 +182,9 @@ nnoremap <silent><leader>t :TestFile<CR>
 " Polyglot
 let g:polyglot_disabled = ['css']
 
+" Neomake
+let g:neomake_html_enabled_makers = []
+
 " CtrlP
 let g:ctrlp_max_height = 25
 let g:ctrlp_show_hidden = 1
