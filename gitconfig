@@ -18,6 +18,7 @@
   l = log --graph --abbrev-commit --date=relative --topo-order
   la = log --graph --abbrev-commit --date=relative --topo-order --all
   st = status
+  dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
 
 [color]
   branch = auto
