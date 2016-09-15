@@ -67,6 +67,7 @@ set shell=/bin/bash
 set showcmd
 set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
+set termguicolors
 set textwidth=80
 
 " Set custom spellfile
