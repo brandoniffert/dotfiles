@@ -19,11 +19,11 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
-Plug 'ajh17/Spacegray.vim'
 Plug 'benekastah/neomake', { 'on': 'Neomake' }
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
+Plug 'jacoborus/tender.vim'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
@@ -102,14 +102,17 @@ let mapleader="\<space>"
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
-colorscheme spacegray
+colorscheme tender
 
-hi LineNr ctermfg=236 guifg=#303030
+hi Normal guibg=#15181A
+hi SpecialKey guifg=#2c2c2c
+hi Visual guibg=#333333
 
 " Airline
+let g:tender_airline = 1
+let g:airline_theme = 'tender'
 let g:airline_left_sep = ''
 let g:airline_right_sep = ''
-let g:airline_theme = 'jay'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
