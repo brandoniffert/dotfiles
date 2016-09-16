@@ -104,7 +104,7 @@ let mapleader="\<space>"
 syntax enable
 colorscheme tender
 
-hi Normal guibg=#15181A
+hi Normal guibg=NONE
 hi SpecialKey guifg=#2c2c2c
 hi Visual guibg=#333333
 
