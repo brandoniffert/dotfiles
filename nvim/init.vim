@@ -215,9 +215,6 @@ augroup bti-vimrc
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
-
-  au! VimEnter,WinEnter,BufWinEnter * setlocal cursorline
-  au! WinLeave * setlocal nocursorline
 augroup END
 
 "-------------------------------------------------------------------------------
