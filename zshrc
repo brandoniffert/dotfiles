@@ -133,7 +133,14 @@ compdef t=tmux
 # SETUP OTHER SCRIPTS/PROGRAMS
 #-------------------------------------------------------------------------------
 # Setup rbenv
-eval "$(rbenv init - --no-rehash)"
+if ! type rbenv > /dev/null; then
+  eval "$(rbenv init - --no-rehash)"
+fi
+
+# Use fasd
+if ! type fasd > /dev/null; then
+  eval "$(fasd --init auto)"
+fi
 
 # Source tmuxinator completions
 [ -f "$DOTFILES"/zsh/completions/tmuxinator.zsh ] &&
@@ -148,6 +155,3 @@ eval "$(rbenv init - --no-rehash)"
 
 # Use fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-# Use fasd
-eval "$(fasd --init auto)"
