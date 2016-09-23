@@ -133,12 +133,12 @@ compdef t=tmux
 # SETUP OTHER SCRIPTS/PROGRAMS
 #-------------------------------------------------------------------------------
 # Setup rbenv
-if ! type rbenv > /dev/null; then
+if type rbenv > /dev/null; then
   eval "$(rbenv init - --no-rehash)"
 fi
 
 # Use fasd
-if ! type fasd > /dev/null; then
+if type fasd > /dev/null; then
   eval "$(fasd --init auto)"
 fi
 
