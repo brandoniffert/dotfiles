@@ -57,7 +57,12 @@ prompt_marker() {
   echo "%(!.#.$) %f"
 }
 
+prompt_divider() {
+ echo "%F{black}$(repeat $COLUMNS printf '-')%f"
+}
+
 build_prompt() {
+  prompt_divider
   prompt_jobs
   prompt_hostname
   prompt_dir
