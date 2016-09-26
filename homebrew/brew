@@ -45,5 +45,6 @@ brew install dnsmasq
 brew install zsh-syntax-highlighting
 brew install jq
 brew install youtube-dl
+brew install ngrok2
 
 brew cleanup
