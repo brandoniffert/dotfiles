@@ -19,7 +19,7 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
-Plug 'benekastah/neomake', { 'on': 'Neomake' }
+Plug 'benekastah/neomake'
 Plug 'cakebaker/scss-syntax.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
