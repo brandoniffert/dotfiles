@@ -115,6 +115,12 @@ git_completion='$(brew --prefix)/share/zsh/site-functions/_git'
 [ -f "$git_completion" ] && source "$git_completion"
 unset git_completion
 
+zsh_completions=/usr/local/share/zsh-completions
+if [ -d $zsh_completions ]; then
+  fpath=($zsh_completions $fpath)
+fi
+unset zsh_completions
+
 # make aliased completions work
 compdef g=git
 compdef t=tmux
