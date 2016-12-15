@@ -58,7 +58,7 @@ prompt_marker() {
 }
 
 prompt_divider() {
- echo "%F{black}$(repeat $COLUMNS printf '-')%f"
+ echo "%F{black}$(repeat $COLUMNS printf "%s" "-")%f"
 }
 
 build_prompt() {
