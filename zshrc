@@ -45,6 +45,7 @@ export LANG='en_US.UTF-8'
 export LSCOLORS="exfxbxdxcxegedxbxgacac"
 export SAVEHIST=$HISTSIZE
 export WORDCHARS='*?[]~&;!$%^<>'
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Let programs know whether the term bg is light or dark - default to dark
 [[ $ITERM_PROFILE == *"light"* ]] && ITERM_PROFILE_BG='light' || ITERM_PROFILE_BG='dark'

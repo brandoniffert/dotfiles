@@ -61,8 +61,13 @@ prompt_divider() {
  echo "%F{black}$(repeat $COLUMNS printf "%s" "-")%f"
 }
 
+prompt_virtualenv() {
+  [[ ! -z "$VIRTUAL_ENV" ]] && echo -n "(`basename \"$VIRTUAL_ENV\"`) "
+}
+
 build_prompt() {
   prompt_divider
+  prompt_virtualenv
   prompt_jobs
   prompt_hostname
   prompt_dir
