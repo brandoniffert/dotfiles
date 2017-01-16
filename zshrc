@@ -96,6 +96,7 @@ alias v="vim"
 alias nv="NVIM_TUI_ENABLE_TRUE_COLOR=1 nvim"
 alias zr!='source ~/.zshrc'
 alias ag="ag --color-match='0;31'"
+alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 
 #-------------------------------------------------------------------------------
 # COMPLETION
