@@ -105,7 +105,7 @@ syntax enable
 colorscheme tender
 
 hi Normal guibg=NONE
-hi SpecialKey guifg=#2c2c2c
+hi SpecialKey guifg=#444444
 hi Visual guibg=#3b3b3b
 hi VertSplit guifg=#444444
 
