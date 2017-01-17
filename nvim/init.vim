@@ -106,7 +106,7 @@ colorscheme tender
 
 hi Normal guibg=NONE
 hi SpecialKey guifg=#2c2c2c
-hi Visual guibg=#333333
+hi Visual guibg=#3b3b3b
 
 " Airline
 let g:tender_airline = 1

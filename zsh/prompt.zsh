@@ -58,7 +58,7 @@ prompt_marker() {
 }
 
 prompt_divider() {
- echo "%F{black}$(repeat $COLUMNS printf "%s" "-")%f"
+ echo "%F{238}$(repeat $COLUMNS printf "%s" "-")%f"
 }
 
 prompt_virtualenv() {
