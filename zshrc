@@ -151,10 +151,6 @@ if type fasd > /dev/null; then
   eval "$(fasd --init auto)"
 fi
 
-# Source tmuxinator completions
-[ -f "$DOTFILES"/zsh/completions/tmuxinator.zsh ] &&
-  source "$DOTFILES"/zsh/completions/tmuxinator.zsh
-
 # Use .localrc for local options
 [ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
 
