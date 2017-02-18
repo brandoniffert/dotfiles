@@ -102,6 +102,8 @@ alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"
 #-------------------------------------------------------------------------------
 # COMPLETION
 #-------------------------------------------------------------------------------
+# Visual select
+zstyle ':completion:*' menu select
 # Matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # Pasting with tabs doesn't perform completion
