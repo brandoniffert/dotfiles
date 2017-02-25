@@ -6,7 +6,7 @@ export DOTFILES=$HOME/.dotfiles
 #-------------------------------------------------------------------------------
 # PATHS
 #-------------------------------------------------------------------------------
-export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.composer/vendor/bin:$PATH"
 export PATH="$DOTFILES/bin:$HOME/.scripts:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
