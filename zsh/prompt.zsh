@@ -36,7 +36,7 @@ prompt_jobs() {
 }
 
 prompt_hostname() {
-  echo -n "%F{242}%m%f"
+  echo -n "%F{8}%m%f"
 }
 
 prompt_dir() {
@@ -58,7 +58,7 @@ prompt_marker() {
 }
 
 prompt_divider() {
- echo "%F{238}$(repeat $COLUMNS printf "%s" "─")%f"
+ echo "%F{black}$(repeat $COLUMNS printf "%s" "─")%f"
 }
 
 prompt_virtualenv() {
