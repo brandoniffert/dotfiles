@@ -6,8 +6,8 @@ zstyle ':vcs_info:*' enable git
 # Git info styles
 zstyle ':vcs_info:git*' unstagedstr '%F{red}●%f'
 zstyle ':vcs_info:git*' stagedstr '%F{green}●%f'
-zstyle ':vcs_info:git*' formats '%F{8}(%b%u%c%m%F{8})%f'
-zstyle ':vcs_info:git*' actionformats '%F{8}(%b%u%c%m:%F{green}%a%F{8})%f'
+zstyle ':vcs_info:git*' formats '%F{245}(%b%u%c%m%F{245})%f'
+zstyle ':vcs_info:git*' actionformats '%F{245}(%b%u%c%m:%F{green}%a%F{245})%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-ahead
 zstyle ':vcs_info:git*' check-for-changes true
 
@@ -36,7 +36,7 @@ prompt_jobs() {
 }
 
 prompt_hostname() {
-  echo -n "%F{8}%m%f"
+  echo -n "%F{green}%m%f"
 }
 
 prompt_dir() {
@@ -50,7 +50,7 @@ prompt_git() {
 
 prompt_vagrant_status() {
   local running="$(cat ~/.vagrant-global-status 2> /dev/null)"
-  [ -n "$running" ] && echo -n "%F{242}[$running]%f"
+  [ -n "$running" ] && echo -n "%F{black}[$running]%f"
 }
 
 prompt_marker() {
