@@ -106,6 +106,7 @@ let mapleader="\<space>"
 syntax enable
 
 colorscheme nord
+hi Comment guifg=#5a657d
 
 " Airline
 let g:airline_theme = 'nord'

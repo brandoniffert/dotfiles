@@ -32,7 +32,7 @@ precmd() {
 }
 
 prompt_jobs() {
-  echo -n "%(1j.%j .)"
+  echo -n "%F{245}%(1j.%j .)%f"
 }
 
 prompt_dir() {
