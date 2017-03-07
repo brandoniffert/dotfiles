@@ -35,12 +35,8 @@ prompt_jobs() {
   echo -n "%(1j.%j .)"
 }
 
-prompt_hostname() {
-  echo -n "%F{green}%m%f"
-}
-
 prompt_dir() {
-  echo -n '%F{default}:%c%f '
+  echo -n '%F{default}%c%f '
 }
 
 prompt_git() {
@@ -69,7 +65,6 @@ build_prompt() {
   prompt_divider
   prompt_virtualenv
   prompt_jobs
-  prompt_hostname
   prompt_dir
   prompt_git
   prompt_marker
