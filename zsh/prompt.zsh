@@ -46,7 +46,7 @@ prompt_git() {
 
 prompt_vagrant_status() {
   local running="$(cat ~/.vagrant-global-status 2> /dev/null)"
-  [ -n "$running" ] && echo -n "%B%F{black}[$running]%f%b"
+  [ -n "$running" ] && echo -n "%F{245}[$running]%f"
 }
 
 prompt_marker() {
