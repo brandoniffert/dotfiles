@@ -21,7 +21,6 @@ call plug#begin()
 runtime macros/matchit.vim
 Plug 'arcticicestudio/nord-vim'
 Plug 'benekastah/neomake'
-Plug 'cakebaker/scss-syntax.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
@@ -179,9 +178,6 @@ nmap <BS> <C-W>h
 "-------------------------------------------------------------------------------
 " Vim test
 nnoremap <silent><leader>t :TestFile<CR>
-
-" Polyglot
-let g:polyglot_disabled = ['css']
 
 " Neomake
 let g:neomake_html_enabled_makers = []
