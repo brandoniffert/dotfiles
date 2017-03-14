@@ -26,6 +26,7 @@ Plug 'jacoborus/tender.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
+Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -45,6 +46,9 @@ if exists("s:bootstrap") && s:bootstrap
 endif
 
 filetype plugin indent on
+
+" Setup yankstack before any other configurations
+call yankstack#setup()
 
 "-------------------------------------------------------------------------------
 " GENERAL SETTINGS
