@@ -54,6 +54,9 @@ export ITERM_PROFILE_BG
 # For nvm
 export NVM_DIR=~/.nvm
 
+# For fzf
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+
 #-------------------------------------------------------------------------------
 # KEYS
 #-------------------------------------------------------------------------------

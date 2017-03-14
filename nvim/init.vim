@@ -20,12 +20,12 @@ endif
 call plug#begin()
 runtime macros/matchit.vim
 Plug 'benekastah/neomake'
-Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'jacoborus/tender.vim'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
-Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
@@ -184,18 +184,14 @@ nnoremap <silent><leader>t :TestFile<CR>
 " Neomake
 let g:neomake_html_enabled_makers = []
 
-" CtrlP
-let g:ctrlp_max_height = 25
-let g:ctrlp_show_hidden = 1
-let g:ctrlp_use_caching = 0
-let g:ctrlp_working_path_mode= 0
-let g:ctrlp_map = '<leader>f'
-nnoremap <silent><leader>b :CtrlPBuffer<cr>
+" FZF
+let g:fzf_layout = { 'down': '~25%' }
 
-" Have ctrlp use ag if available
-if executable('ag')
-  let g:ctrlp_user_command = 'ag %s -l -S --hidden -g ""'
-endif
+nnoremap <silent><leader>f :Files<cr>
+nnoremap <silent><leader>b :Buffers<cr>
+
+" Ripgrep
+set grepprg=rg\ --vimgrep
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
