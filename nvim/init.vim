@@ -19,10 +19,10 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
+Plug 'arcticicestudio/nord-vim'
 Plug 'benekastah/neomake'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
-Plug 'jacoborus/tender.vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/vim-easy-align'
@@ -106,13 +106,12 @@ let mapleader="\<space>"
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
-colorscheme tender
+colorscheme nord
 
-hi Visual guibg=#3b3b3b
-hi VertSplit guifg=#444444
+hi Comment guifg=#566177
 
 " Airline
-let g:airline_theme = 'tender'
+let g:airline_theme = 'nord'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -186,14 +185,20 @@ nnoremap <silent><leader>t :TestFile<CR>
 " Neomake
 let g:neomake_html_enabled_makers = []
 
+" Ripgrep
+set grepprg=rg\ --vimgrep
+
 " FZF
 let g:fzf_layout = { 'down': '~25%' }
 
 nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>b :Buffers<cr>
 
-" Ripgrep
-set grepprg=rg\ --vimgrep
+function! s:fzf_statusline()
+  highlight fzf1 guibg=#4E5668
+  setlocal statusline=%#fzf1#\ >\ fzf
+endfunction
+autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS

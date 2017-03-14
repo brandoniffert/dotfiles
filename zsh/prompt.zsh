@@ -6,8 +6,8 @@ zstyle ':vcs_info:*' enable git
 # Git info styles
 zstyle ':vcs_info:git*' unstagedstr '%F{red}●%f'
 zstyle ':vcs_info:git*' stagedstr '%F{green}●%f'
-zstyle ':vcs_info:git*' formats '%F{242}(%b%u%c%m%F{242})%f'
-zstyle ':vcs_info:git*' actionformats '%F{242}(%b%u%c%m:%F{green}%a%F{242})%f'
+zstyle ':vcs_info:git*' formats '%F{8}(%b%u%c%m%F{8})%f'
+zstyle ':vcs_info:git*' actionformats '%F{8}(%b%u%c%m:%F{green}%a%F{8})%f'
 zstyle ':vcs_info:git*+set-message:*' hooks git-untracked git-ahead
 zstyle ':vcs_info:git*' check-for-changes true
 
@@ -32,7 +32,7 @@ precmd() {
 }
 
 prompt_jobs() {
-  echo -n "%F{240}%(1j.%j .)%f"
+  echo -n "%F{8}%(1j.%j .)%f"
 }
 
 prompt_dir() {
@@ -46,7 +46,7 @@ prompt_git() {
 
 prompt_vagrant_status() {
   local running="$(cat ~/.vagrant-global-status 2> /dev/null)"
-  [ -n "$running" ] && echo -n "%F{240}[$running]%f"
+  [ -n "$running" ] && echo -n "%F{8}[$running]%f"
 }
 
 prompt_marker() {
@@ -54,7 +54,7 @@ prompt_marker() {
 }
 
 prompt_divider() {
- echo "%F{237}$(repeat $COLUMNS printf "%s" "─")%f"
+ echo "%F{8}$(repeat $COLUMNS printf "%s" "─")%f"
 }
 
 prompt_virtualenv() {
