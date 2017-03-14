@@ -19,11 +19,11 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
-Plug 'arcticicestudio/nord-vim'
 Plug 'benekastah/neomake'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
+Plug 'jacoborus/tender.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'rking/ag.vim', { 'on': 'Ag' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
@@ -34,6 +34,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/django-plus.vim'
+Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 call plug#end()
@@ -103,12 +104,13 @@ let mapleader="\<space>"
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
+colorscheme tender
 
-colorscheme nord
-hi Comment guifg=#5a657d
+hi Visual guibg=#3b3b3b
+hi VertSplit guifg=#444444
 
 " Airline
-let g:airline_theme = 'nord'
+let g:airline_theme = 'tender'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
