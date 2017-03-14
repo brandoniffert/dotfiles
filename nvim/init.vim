@@ -1,5 +1,5 @@
 "-------------------------------------------------------------------------------
-" This is my nvim/init file - it changes often
+" This is my nvim init file - it changes often
 " Author: Brandon Iffert <brandoniffert@gmail.com>
 " Source: https://github.com/brandoniffert/dotfiles/blob/master/nvim/init.vim
 "-------------------------------------------------------------------------------
@@ -56,22 +56,20 @@ call yankstack#setup()
 set clipboard=
 set dictionary+=/usr/share/dict/words
 set fileformats+=mac
-set foldlevelstart=0                  " close folds by default
+set foldlevelstart=0
 set foldmethod=marker
-set formatoptions=qrn1j
-set hidden                            " keep buffers around
-set lazyredraw                        " only redraw if needed
-set mouse=
+set formatoptions+=qrn1j
+set hidden
+set lazyredraw
 set nocursorline
-set nojoinspaces                      " only one space after joining lines
+set nojoinspaces
 set noshowmode
-set notimeout ttimeout ttimeoutlen=10
-set number relativenumber             " show number and relativenumber
+set number relativenumber
 set ruler
 set scrolloff=3
 set shell=/bin/bash
 set showcmd
-set splitbelow splitright             " put new windows to bottom/right
+set splitbelow splitright
 set switchbuf+=useopen
 set termguicolors
 set textwidth=80
@@ -140,7 +138,7 @@ nnoremap j gj
 nnoremap k gk
 
 " <cr> clears the highlighted search
-nnoremap <silent><cr> :nohlsearch<cr>
+nnoremap <silent><cr> :noh<cr>
 
 " Use hjkl for switching between splits
 nnoremap <c-j> <c-W>j
@@ -210,6 +208,7 @@ augroup bti-vimrc
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
+    noh
 augroup END
 
 "-------------------------------------------------------------------------------
