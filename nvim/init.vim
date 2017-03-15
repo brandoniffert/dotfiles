@@ -35,9 +35,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/django-plus.vim'
-Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -61,6 +59,7 @@ set foldmethod=marker
 set formatoptions+=qrn1j
 set hidden
 set lazyredraw
+set mouse=
 set nocursorline
 set nojoinspaces
 set noshowmode
@@ -102,13 +101,17 @@ set showmatch incsearch hlsearch ignorecase smartcase
 " Remap leader
 let mapleader="\<space>"
 
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
+
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
 colorscheme nord
 
-hi Comment guifg=#566177
+hi Comment guifg=#5d6980
+hi IncSearch guifg=#3b4252 guibg=#EBCB8B
+hi Search guifg=#bf616a guibg=NONE gui=underline
 
 " Airline
 let g:airline_theme = 'nord'
@@ -170,11 +173,11 @@ nnoremap <leader>p "*p
 " Make Y act like other capital letters
 nnoremap Y y$
 
-" Run current file using makeprg
-nnoremap <leader>r :make!<cr>
-
 " Hack to get C-h working in neovim
 nmap <BS> <C-W>h
+
+" Run current file using makeprg
+nnoremap <leader>r :make!<cr>
 
 "-------------------------------------------------------------------------------
 " PLUGINS

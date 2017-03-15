@@ -54,7 +54,7 @@ prompt_marker() {
 }
 
 prompt_divider() {
- echo "%F{8}$(repeat $COLUMNS printf "%s" "─")%f"
+  echo "\x1b[38;2;66;75;92m$(repeat $COLUMNS printf "%s" "⸺")\x1b[0m"
 }
 
 prompt_virtualenv() {
