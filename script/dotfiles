@@ -16,8 +16,7 @@ basic_files=(
 
 # extra set of dotfiles (personal machine)
 extra_files=(
-  'ackrc'
-  'agignore'
+  'ignore'
   'ctags'
   'gemrc'
   'gitconfig'
