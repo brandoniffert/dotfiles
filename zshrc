@@ -57,9 +57,9 @@ export NVM_DIR=~/.nvm
 # For fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
-  --color=bg+:#363d4b,bg:#2E3440,spinner:#719e07,hl:#ebcb8b
-  --color=fg:#6c7a96,header:#586e75,info:#81a1c1,pointer:#81a1c1
-  --color=marker:#ebcb8b,fg+:#e5e9f0,prompt:#81a1c1,hl+:#ebcb8b
+  --color=bg+:#272c42,bg:#161821,spinner:#719e07,hl:#b4be82
+  --color=fg:#6b7089,header:#586e75,info:#b4be82,pointer:#b4be82
+  --color=marker:#b4be82,fg+:#e5e9f0,prompt:#b4be82,hl+:#b4be82
 '
 
 #-------------------------------------------------------------------------------

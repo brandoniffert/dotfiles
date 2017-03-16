@@ -19,8 +19,8 @@ endif
 
 call plug#begin()
 runtime macros/matchit.vim
-Plug 'arcticicestudio/nord-vim'
 Plug 'benekastah/neomake'
+Plug 'cocopon/iceberg.vim'
 Plug 'ervandew/supertab'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -60,13 +60,12 @@ set formatoptions+=qrn1j
 set hidden
 set lazyredraw
 set mouse=
-set nocursorline
 set nojoinspaces
 set noshowmode
 set number relativenumber
 set ruler
 set scrolloff=3
-set shell=/bin/bash
+set shell=/usr/local/bin/zsh
 set showcmd
 set splitbelow splitright
 set switchbuf+=useopen
@@ -101,20 +100,24 @@ set showmatch incsearch hlsearch ignorecase smartcase
 " Remap leader
 let mapleader="\<space>"
 
+" Neovim
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
 syntax enable
-colorscheme nord
+colorscheme iceberg
 
-hi Comment guifg=#5d6980
-hi IncSearch guifg=#3b4252 guibg=#EBCB8B
-hi Search guifg=#bf616a guibg=NONE gui=underline
+" Custom overrides
+hi VertSplit guifg=#1e2132 guibg=#1e2132
+hi LineNr guifg=#3e445e guibg=NONE
+hi CursorLineNr guibg=NONE
+hi icebergLLBase guibg=#34394e guifg=#c6c8d1
+hi icebergLLNC guibg=#1e2132 guifg=#6b7089
 
 " Airline
-let g:airline_theme = 'nord'
+let g:airline_theme = 'iceberg'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -173,7 +176,7 @@ nnoremap <leader>p "*p
 " Make Y act like other capital letters
 nnoremap Y y$
 
-" Hack to get C-h working in neovim
+" Hack to get C-h working in Neovim
 nmap <BS> <C-W>h
 
 " Run current file using makeprg
@@ -192,13 +195,13 @@ let g:neomake_html_enabled_makers = []
 set grepprg=rg\ --vimgrep
 
 " FZF
-let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_layout = { 'down': '~20%' }
 
 nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>b :Buffers<cr>
 
 function! s:fzf_statusline()
-  highlight fzf1 guibg=#4E5668
+  highlight fzf1 guibg=#3e445e
   setlocal statusline=%#fzf1#\ >\ fzf
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
