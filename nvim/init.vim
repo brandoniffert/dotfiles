@@ -22,6 +22,7 @@ runtime macros/matchit.vim
 Plug 'benekastah/neomake'
 Plug 'cocopon/iceberg.vim'
 Plug 'ervandew/supertab'
+Plug 'gregsexton/gitv'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
