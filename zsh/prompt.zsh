@@ -36,12 +36,12 @@ prompt_jobs() {
 }
 
 prompt_dir() {
-  echo -n '%F{default}%c%f '
+  echo -n '%F{cyan}%c%f'
 }
 
 prompt_git() {
   local git_status="${vcs_info_msg_0_}"
-  [[ $git_status != '' ]] && echo -n "$git_status "
+  [[ $git_status != '' ]] && echo -n " $git_status"
 }
 
 prompt_vagrant_status() {
@@ -50,11 +50,11 @@ prompt_vagrant_status() {
 }
 
 prompt_marker() {
-  echo "%(!.#.$) %f"
+  echo "%F{red}%(!.#.:) %f"
 }
 
 prompt_divider() {
-  echo "\x1b[38;2;39;43;59m$(repeat $COLUMNS printf "%s" "⸺")\x1b[0m"
+  echo "\x1b[38;2;39;43;59m$(repeat $COLUMNS printf "%s" "—")\x1b[0m"
 }
 
 prompt_virtualenv() {
