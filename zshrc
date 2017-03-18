@@ -57,9 +57,10 @@ export NVM_DIR=~/.nvm
 # For fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
-  --color=bg+:#272c42,bg:#161821,spinner:#719e07,hl:#b4be82
-  --color=fg:#6b7089,header:#586e75,info:#b4be82,pointer:#b4be82
-  --color=marker:#b4be82,fg+:#e5e9f0,prompt:#b4be82,hl+:#b4be82
+  --color=bg:#161821,fg:#999ca3,hl:#b4be82
+  --color=bg+:#272c42,fg+:#e5e9f0,hl+:#b4be82
+  --color=info:#b4be82,marker:#b4be82,prompt:#b4be82
+  --color=spinner:#719e07,pointer:#b4be82,header:#586e75
 '
 
 #-------------------------------------------------------------------------------
@@ -162,8 +163,9 @@ fi
 [ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
 
 # Use zsh syntax highlighting
-[ -f `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ] &&
-  source `brew --prefix`/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+zsh_syntax_hightlighting="$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[ -f "$zsh_syntax_hightlighting" ] && source "$zsh_syntax_hightlighting"
+unset zsh_syntax_hightlighting
 
 # Use fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

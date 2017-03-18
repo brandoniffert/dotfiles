@@ -71,17 +71,14 @@ set showcmd
 set splitbelow splitright
 set switchbuf+=useopen
 set termguicolors
-set textwidth=80
 
 " Set custom spellfile
 if filereadable(expand("~/.vim-custom.en.utf8.add"))
   set spellfile=~/.vim-custom.en.utf8.add
 endif
 
-" Tabs & Indenting
-set smartindent
+" Tabs
 set expandtab tabstop=2 shiftwidth=2 softtabstop=2
-set shiftround
 
 " No backups or swap file
 set nobackup nowritebackup noswapfile
