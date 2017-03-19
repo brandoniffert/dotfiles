@@ -17,7 +17,7 @@ function prompt_dir() {
 }
 
 function prompt_marker() {
-  echo "%F{yellow}%(!.#.:) %f"
+  echo -n " %F{yellow}%(!.#.❯) %f"
 }
 
 function prompt_vagrant_status() {
