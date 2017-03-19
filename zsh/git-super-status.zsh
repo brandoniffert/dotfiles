@@ -43,6 +43,9 @@ function update_current_git_vars() {
 
 function git_super_status() {
   precmd_update_git_vars
+
+  local STATUS=''
+
   if [ -n "$__CURRENT_GIT_STATUS" ]; then
     STATUS="$ZSH_THEME_GIT_PROMPT_PREFIX$ZSH_THEME_GIT_PROMPT_BRANCH$GIT_BRANCH%{${reset_color}%}"
 
@@ -86,4 +89,4 @@ ZSH_THEME_GIT_PROMPT_CONFLICTS="%{$fg[red]%}%{!%G%}"
 ZSH_THEME_GIT_PROMPT_CHANGED="%{$fg[blue]%}%{+%G%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%{↓%G%}"
 ZSH_THEME_GIT_PROMPT_AHEAD="%{↑%G%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?%G%}"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}%{?%G%}"
