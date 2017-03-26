@@ -111,11 +111,11 @@ syntax enable
 colorscheme iceberg
 
 " Custom overrides
-hi VertSplit guifg=#1e2132 guibg=#1e2132
-hi LineNr guifg=#3e445e guibg=NONE
-hi CursorLineNr guibg=NONE
-hi icebergLLBase guibg=#34394e guifg=#c6c8d1
-hi icebergLLNC guibg=#1e2132 guifg=#6b7089
+hi  VertSplit      guifg=#1e2132  guibg=#1e2132
+hi  LineNr         guifg=#3e445e  guibg=NONE
+hi  CursorLineNr   guibg=NONE
+hi  icebergLLBase  guibg=#34394e  guifg=#c6c8d1
+hi  icebergLLNC    guibg=#1e2132  guifg=#6b7089
 
 " Airline
 let g:airline_theme = 'iceberg'
