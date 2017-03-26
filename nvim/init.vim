@@ -26,6 +26,8 @@ Plug 'gregsexton/gitv'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
@@ -189,6 +191,10 @@ nnoremap <silent><leader>t :TestFile<CR>
 
 " Neomake
 let g:neomake_html_enabled_makers = []
+
+" Limelight
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
 
 " Ripgrep
 set grepprg=rg\ --vimgrep
