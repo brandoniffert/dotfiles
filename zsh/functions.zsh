@@ -95,6 +95,21 @@ function n() {
   vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | fzf)"
 }
 
+# Quickly open life journal
+function jlife() {
+  nvim -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Life.md
+}
+
+# Quickly open work journal
+function jwork() {
+  nvim -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Work.md
+}
+
+# Quickly open both life and work journals
+function jlogs() {
+  nvim -c 'silent Goyo 160 | vsp ~/Dropbox/Notes/Life.md | bufdo setlocal ft=markdown.journal | wincmd h' ~/Dropbox/Notes/Work.md
+}
+
 # Use fzf to upgrade installed homebrew package
 function brewup {
   brew upgrade $(brew list | fzf)
