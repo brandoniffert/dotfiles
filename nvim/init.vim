@@ -60,6 +60,7 @@ set foldmethod=marker
 set formatoptions+=qrn1j
 set hidden
 set lazyredraw
+set linebreak
 set mouse=
 set nojoinspaces
 set noshowmode
