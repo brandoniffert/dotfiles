@@ -11,7 +11,7 @@ augroup journal
   au FileType markdown.journal nnoremap <silent><down> :call search('^##\s\d\{4}-\d\{2}-\d\{2}', 'W')<cr>
 
   " If there is no previous date then jump to top of file
-  function JumpToPrevDate()
+  function! JumpToPrevDate()
     execute search('^##\s\d\{4}-\d\{2}-\d\{2}', 'bW')
   endfunction
 augroup END
