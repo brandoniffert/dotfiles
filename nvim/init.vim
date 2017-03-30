@@ -77,6 +77,7 @@ set showcmd
 set splitbelow splitright
 set switchbuf+=useopen
 set termguicolors
+set undofile
 
 " Set custom spellfile
 if filereadable(expand("~/.vim-custom.en.utf8.add"))
