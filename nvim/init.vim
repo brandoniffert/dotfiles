@@ -56,6 +56,9 @@ call yankstack#setup()
 "-------------------------------------------------------------------------------
 set clipboard=
 set dictionary+=/usr/share/dict/words
+set dictionary+=/usr/share/dict/web2a
+set dictionary+=/usr/share/dict/propernames
+set dictionary+=/usr/share/dict/connectives
 set fileformats+=mac
 set foldlevelstart=0
 set foldmethod=marker
