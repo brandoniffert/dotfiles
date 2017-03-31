@@ -8,7 +8,6 @@
 " SETUP
 "-------------------------------------------------------------------------------
 au!
-filetype off
 
 " Bootstrap vim-plug on a fresh install
 if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
@@ -18,7 +17,6 @@ if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
 endif
 
 call plug#begin()
-runtime macros/matchit.vim
 Plug 'benekastah/neomake'
 Plug 'cocopon/iceberg.vim'
 Plug 'ervandew/supertab'
@@ -46,8 +44,6 @@ if exists("s:bootstrap") && s:bootstrap
   PlugInstall
 endif
 
-filetype plugin indent on
-
 " Setup yankstack before any other configurations
 call yankstack#setup()
 
@@ -66,7 +62,6 @@ set formatoptions+=qrn1j
 set hidden
 set lazyredraw
 set linebreak
-set mouse=
 set nojoinspaces
 set noshowmode
 set number relativenumber
@@ -100,7 +95,7 @@ set list
 let &listchars="tab:>-,trail:.,extends:>,precedes:<,nbsp:\u00b7"
 
 " Searching
-set showmatch incsearch hlsearch ignorecase smartcase
+set showmatch ignorecase smartcase
 
 " Remap leader
 let mapleader="\<space>"
@@ -111,7 +106,6 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
-syntax enable
 colorscheme iceberg
 
 " Custom overrides
@@ -147,7 +141,7 @@ let g:is_bash = 1
 nnoremap j gj
 nnoremap k gk
 
-" <cr> clears the highlighted search
+" Clear the highlighted search
 nnoremap <silent><cr> :noh<cr>
 
 " Use hjkl for switching between splits
