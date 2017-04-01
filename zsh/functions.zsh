@@ -136,16 +136,16 @@ function tsnew() {
 
   tmux -q has-session -t "$SESSION_NAME" > /dev/null 2>&1
 
-  if [ ! $? ]; then
-    echo "Session: $SESSION_NAME already exists!"
-    return 1
+  # If session already exists, attach to it
+  if [ $? -eq 0 ]; then
+    tmux attach-session -t "$SESSION_NAME"
+  else
+    tmux new-session -d -s "$SESSION_NAME"
+    tmux rename-window 'code'
+    tmux new-window -n 'server-build'
+    tmux split-window -h
+    tmux new-window -d -n 'scratch'
+    tmux select-window -t 'code'
+    tmux attach-session -t "$SESSION_NAME"
   fi
-
-  tmux new-session -d -s "$SESSION_NAME"
-  tmux rename-window 'code'
-  tmux new-window -n 'server-build'
-  tmux split-window -h
-  tmux new-window -d -n 'scratch'
-  tmux select-window -t 'code'
-  tmux attach-session -t "$SESSION_NAME"
 }
