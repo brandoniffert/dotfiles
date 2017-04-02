@@ -134,6 +134,24 @@ let g:airline_mode_map = {
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
 
+" Terminal mode colors
+let g:terminal_color_0  = '#272c42'
+let g:terminal_color_1  = '#e27878'
+let g:terminal_color_2  = '#b4be82'
+let g:terminal_color_3  = '#e4aa80'
+let g:terminal_color_4  = '#84a0c6'
+let g:terminal_color_5  = '#a093c7'
+let g:terminal_color_6  = '#89b8c2'
+let g:terminal_color_7  = '#6b7089'
+let g:terminal_color_8  = '#3d425b'
+let g:terminal_color_9  = '#e27878'
+let g:terminal_color_10 = '#b4be82'
+let g:terminal_color_11 = '#e4aa80'
+let g:terminal_color_12 = '#84a0c6'
+let g:terminal_color_13 = '#a093c7'
+let g:terminal_color_14 = '#89b8c2'
+let g:terminal_color_15 = '#c6c8d2'
+
 "-------------------------------------------------------------------------------
 " KEY MAPS
 "-------------------------------------------------------------------------------
@@ -176,10 +194,17 @@ nnoremap <leader>p "*p
 nnoremap Y y$
 
 " Hack to get C-h working in Neovim
-nmap <BS> <C-W>h
+nmap <BS> <c-w>h
 
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
+
+" Terminal mode mappings
+tnoremap <leader><esc> <c-\><c-n>
+tnoremap <leader><c-h> <c-\><c-n><c-w>h
+tnoremap <leader><c-j> <c-\><c-n><c-w>j
+tnoremap <leader><c-k> <c-\><c-n><c-w>k
+tnoremap <leader><c-l> <c-\><c-n><c-w>l
 
 "-------------------------------------------------------------------------------
 " PLUGINS
@@ -223,6 +248,8 @@ augroup bti-vimrc
   au!
   au! VimResized * wincmd =
   au! BufWritePost * Neomake
+
+  au! WinEnter term://* startinsert
 
   " When editing a file, always jump to the last known cursor position.
   au! BufReadPost *
