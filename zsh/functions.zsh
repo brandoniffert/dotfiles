@@ -84,7 +84,7 @@ function history_stat() {
 function p() {
   local ignore='Projects$|sites$'
   cd "$(
-    find ~/Projects ~/Projects/vagrant-lemp/sites ~/Projects/vagrant-docker/sites -maxdepth 1 -type d |
+    find ~/Projects ~/Projects/vagrant-lemp/sites -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf
   )"
