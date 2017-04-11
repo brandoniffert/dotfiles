@@ -149,3 +149,13 @@ function tsnew() {
     tmux attach-session -t "$SESSION_NAME"
   fi
 }
+
+# Quickly ssh into docker vm
+function dockssh() {
+  cd ~/Projects/vagrant-docker && vagrant ssh
+}
+
+# Quickly start vagrant fsnotify for docker vm
+function dockfs() {
+  cd ~/Projects/vagrant-docker && vagrant fsnotify
+}
