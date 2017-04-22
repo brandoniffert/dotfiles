@@ -106,14 +106,26 @@ let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
+" Custom overrides
+augroup colors
+  au!
+  autocmd ColorScheme *
+        \ hi VertSplit          guifg=#1e2132 guibg=#1e2132  |
+        \ hi LineNr             guifg=#3e445e guibg=NONE     |
+        \ hi CursorLineNr       guibg=NONE                   |
+        \ hi icebergLLBase      guibg=#34394e guifg=#c6c8d1  |
+        \ hi icebergLLNC        guibg=#1e2132 guifg=#6b7089  |
+        \ hi SignColumn         guibg=NONE                   |
+        \ hi SyntasticErrorSign guibg=NONE
+augroup END
+
 colorscheme iceberg
 
-" Custom overrides
-hi  VertSplit      guifg=#1e2132  guibg=#1e2132
-hi  LineNr         guifg=#3e445e  guibg=NONE
-hi  CursorLineNr   guibg=NONE
-hi  icebergLLBase  guibg=#34394e  guifg=#c6c8d1
-hi  icebergLLNC    guibg=#1e2132  guifg=#6b7089
+" Neomake
+let g:neomake_error_sign = {'text': '✖', 'texthl': 'SyntasticErrorSign'}
+let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'SyntasticWarningSign'}
+let g:neomake_message_sign = {'text': '➤', 'texthl': 'SyntasticMessageSign'}
+let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'SyntasticInfoSign'}
 
 " Airline
 let g:airline_theme = 'iceberg'
