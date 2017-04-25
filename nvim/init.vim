@@ -116,7 +116,10 @@ augroup colors
         \ hi icebergLLBase      guibg=#34394e guifg=#c6c8d1  |
         \ hi icebergLLNC        guibg=#1e2132 guifg=#6b7089  |
         \ hi SignColumn         guibg=NONE                   |
-        \ hi SyntasticErrorSign guibg=NONE
+        \ hi SyntasticErrorSign guibg=NONE                   |
+        \ hi link phpType Keyword                            |
+        \ hi link phpIdentifier Constant                     |
+        \ hi link phpVarSelector Constant
 augroup END
 
 colorscheme iceberg
