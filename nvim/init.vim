@@ -100,9 +100,6 @@ set showmatch ignorecase smartcase
 " Remap leader
 let mapleader="\<space>"
 
-" Neovim
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=2
-
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
@@ -207,9 +204,6 @@ nnoremap <leader>p "*p
 
 " Make Y act like other capital letters
 nnoremap Y y$
-
-" Hack to get C-h working in Neovim
-nmap <BS> <c-w>h
 
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
