@@ -108,7 +108,7 @@ augroup colors
   au!
   autocmd ColorScheme *
         \ hi VertSplit          guifg=#1e2132 guibg=#1e2132  |
-        \ hi LineNr             guifg=#3e445e guibg=NONE     |
+        \ hi LineNr             guifg=#34384c guibg=NONE     |
         \ hi CursorLineNr       guibg=NONE                   |
         \ hi icebergLLBase      guibg=#34394e guifg=#c6c8d1  |
         \ hi icebergLLNC        guibg=#1e2132 guifg=#6b7089  |
