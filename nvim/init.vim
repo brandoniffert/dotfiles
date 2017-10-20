@@ -107,6 +107,8 @@ let mapleader="\<space>"
 augroup colors
   au!
   autocmd ColorScheme *
+        \ hi Normal             guibg=NONE                   |
+        \ hi EndOfBuffer        guibg=NONE                   |
         \ hi VertSplit          guifg=#1e2132 guibg=#1e2132  |
         \ hi LineNr             guifg=#34384c guibg=NONE     |
         \ hi CursorLineNr       guibg=NONE                   |
