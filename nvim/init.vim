@@ -17,7 +17,7 @@ if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
 endif
 
 call plug#begin()
-Plug 'cocopon/iceberg.vim'
+Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'ervandew/supertab'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'janko-m/vim-test'
@@ -103,34 +103,11 @@ let mapleader="\<space>"
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
-" Custom overrides
-augroup colors
-  au!
-  autocmd ColorScheme *
-        \ hi Normal             guibg=NONE                   |
-        \ hi EndOfBuffer        guibg=NONE                   |
-        \ hi VertSplit          guifg=#1e2132 guibg=#1e2132  |
-        \ hi LineNr             guifg=#34384c guibg=NONE     |
-        \ hi CursorLineNr       guibg=NONE                   |
-        \ hi icebergLLBase      guibg=#34394e guifg=#c6c8d1  |
-        \ hi icebergLLNC        guibg=#1e2132 guifg=#6b7089  |
-        \ hi SignColumn         guibg=NONE                   |
-        \ hi SyntasticErrorSign guibg=NONE                   |
-        \ hi link phpType Keyword                            |
-        \ hi link phpIdentifier Constant                     |
-        \ hi link phpVarSelector Constant
-augroup END
-
-colorscheme iceberg
-
-" Neomake
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'SyntasticErrorSign'}
-let g:neomake_warning_sign = {'text': '⚠', 'texthl': 'SyntasticWarningSign'}
-let g:neomake_message_sign = {'text': '➤', 'texthl': 'SyntasticMessageSign'}
-let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'SyntasticInfoSign'}
+let g:nord_comment_brightness = 10
+colorscheme nord
 
 " Airline
-let g:airline_theme = 'iceberg'
+let g:airline_theme = 'nord'
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -147,24 +124,6 @@ let g:airline_mode_map = {
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
-
-" Terminal mode colors
-let g:terminal_color_0  = '#272c42'
-let g:terminal_color_1  = '#e27878'
-let g:terminal_color_2  = '#b4be82'
-let g:terminal_color_3  = '#e4aa80'
-let g:terminal_color_4  = '#84a0c6'
-let g:terminal_color_5  = '#a093c7'
-let g:terminal_color_6  = '#89b8c2'
-let g:terminal_color_7  = '#6b7089'
-let g:terminal_color_8  = '#3d425b'
-let g:terminal_color_9  = '#e27878'
-let g:terminal_color_10 = '#b4be82'
-let g:terminal_color_11 = '#e4aa80'
-let g:terminal_color_12 = '#84a0c6'
-let g:terminal_color_13 = '#a093c7'
-let g:terminal_color_14 = '#89b8c2'
-let g:terminal_color_15 = '#c6c8d2'
 
 "-------------------------------------------------------------------------------
 " KEY MAPS
