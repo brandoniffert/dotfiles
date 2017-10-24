@@ -17,7 +17,6 @@ if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
 endif
 
 call plug#begin()
-Plug 'benekastah/neomake'
 Plug 'cocopon/iceberg.vim'
 Plug 'ervandew/supertab'
 Plug 'gregsexton/gitv', { 'on': 'Gitv' }
@@ -37,6 +36,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tweekmonster/django-plus.vim'
 Plug 'vim-airline/vim-airline'
+Plug 'w0rp/ale'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -223,8 +223,12 @@ tnoremap <leader><c-l> <c-\><c-n><c-w>l
 " Vim test
 nnoremap <silent><leader>t :TestFile<CR>
 
-" Neomake
-let g:neomake_html_enabled_makers = []
+" ALE
+let g:ale_lint_on_text_changed = 'never'
+let g:airline#extensions#ale#enabled = 1
+let g:ale_linters = {
+\   'html': [],
+\}
 
 " Limelight
 autocmd! User GoyoEnter Limelight
@@ -258,7 +262,6 @@ command! -bang -nargs=* Rg
 augroup bti-vimrc
   au!
   au! VimResized * wincmd =
-  au! BufWritePost * Neomake
 
   au! WinEnter term://* startinsert
 
