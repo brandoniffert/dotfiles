@@ -75,7 +75,7 @@ set termguicolors
 set undofile
 
 " Set custom spellfile
-if filereadable(expand("~/.vim-custom.en.utf8.add"))
+if filereadable(expand('~/.vim-custom.en.utf8.add'))
   set spellfile=~/.vim-custom.en.utf8.add
 endif
 
