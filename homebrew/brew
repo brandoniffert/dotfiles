@@ -31,6 +31,7 @@ brew install vim --with-override-system-vi --without-python
 brew install neovim
 brew install nvm
 brew install the_silver_searcher
+brew install ripgrep
 brew install terminal-notifier
 brew install getmail
 brew install imagemagick --with-webp
@@ -42,6 +43,7 @@ brew install pandoc
 brew install ansible
 brew install ffmpeg --with-faac
 brew install zsh-syntax-highlighting
+brew install zsh-completions
 brew install jq
 brew install youtube-dl
 brew install ngrok2
