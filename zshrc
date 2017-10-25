@@ -37,7 +37,7 @@ setopt SHARE_HISTORY        # share history between sessions
 # EXPORTS
 #-------------------------------------------------------------------------------
 export CLICOLOR=true
-export EDITOR='vim'
+export EDITOR='nvim'
 export GREP_OPTIONS="--color"
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=100000
