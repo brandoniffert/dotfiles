@@ -103,7 +103,17 @@ let mapleader="\<space>"
 "-------------------------------------------------------------------------------
 " ENVIRONMENTS AND COLOR
 "-------------------------------------------------------------------------------
-let g:nord_comment_brightness = 10
+augroup nord-overrides
+  autocmd!
+  autocmd ColorScheme nord highlight Normal guibg=#20242c
+  autocmd ColorScheme nord highlight LineNr guibg=#20242c
+  autocmd ColorScheme nord highlight CursorLineNr guibg=#20242c
+  autocmd ColorScheme nord highlight Folded guifg=#7b88a1
+  autocmd ColorScheme nord highlight diffAdded guifg=#A3BE8C
+  autocmd ColorScheme nord highlight diffRemoved guifg=#BF616A
+augroup END
+
+let g:nord_comment_brightness = 5
 colorscheme nord
 
 " Airline
@@ -203,7 +213,7 @@ nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>b :Buffers<cr>
 
 function! s:fzf_statusline()
-  highlight fzf1 guibg=#3e445e
+  highlight fzf1 guibg=#3B4252
   setlocal statusline=%#fzf1#\ >\ fzf
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
