@@ -108,6 +108,8 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight Normal guibg=#20242c
   autocmd ColorScheme nord highlight LineNr guibg=#20242c
   autocmd ColorScheme nord highlight CursorLineNr guibg=#20242c
+  autocmd ColorScheme nord highlight SignColumn guibg=#20242c
+  autocmd ColorScheme nord highlight FoldColumn guibg=#20242c
   autocmd ColorScheme nord highlight Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight diffAdded guifg=#A3BE8C
   autocmd ColorScheme nord highlight diffRemoved guifg=#BF616A
