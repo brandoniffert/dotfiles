@@ -249,4 +249,3 @@ augroup END
 "-------------------------------------------------------------------------------
 command! ReplaceFancyCharacters call bti#fancycharacters#replace()
 command! StripWhitespace call bti#whitespace#strip()
-command! ToggleColorColumn call bti#colorcolumn#toggle()
