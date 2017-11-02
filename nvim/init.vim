@@ -113,6 +113,8 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight diffAdded guifg=#A3BE8C
   autocmd ColorScheme nord highlight diffRemoved guifg=#BF616A
+  autocmd ColorScheme nord highlight link jsThis Keyword
+  autocmd ColorScheme nord highlight link jsObjectKey jsonKeyword
 augroup END
 
 let g:nord_comment_brightness = 5
