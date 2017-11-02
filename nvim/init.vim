@@ -170,7 +170,8 @@ vnoremap <s-tab> <gv
 " Make S split lines (opposite of J)
 nnoremap S i<cr><esc>k$
 
-" Open new vertical split
+" Open new horizontal/vertical split
+nnoremap <silent><leader>h :new<cr>
 nnoremap <silent><leader>v :vnew<cr>
 
 " Yank/paste using system clipboard
@@ -202,6 +203,9 @@ let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \   'html': [],
 \}
+
+nmap <silent> [e <Plug>(ale_previous_wrap)
+nmap <silent> ]e <Plug>(ale_next_wrap)
 
 " Limelight
 autocmd! User GoyoEnter Limelight
@@ -235,7 +239,6 @@ command! -bang -nargs=* Rg
 augroup bti-vimrc
   au!
   au! VimResized * wincmd =
-
   au! WinEnter term://* startinsert
 
   " When editing a file, always jump to the last known cursor position.
