@@ -137,9 +137,30 @@ augroup bti-vimrc
     \ endif
 augroup END
 
-"-------------------------------------------------------------------------------
-" COMMANDS - AUTOLOADED FROM vim/autoload/bti
-"-------------------------------------------------------------------------------
-command! ReplaceFancyCharacters call bti#fancycharacters#replace()
-command! StripWhitespace call bti#whitespace#strip()
-command! ToggleColorColumn call bti#colorcolumn#toggle()
+"------------------------------------------------------------------------------
+" CUSTOM COMMANDS
+"------------------------------------------------------------------------------
+" Replace fancy characters
+function! ReplaceFancyCharacters()
+  let chars = {
+    \ "“" : '"',
+    \ "”" : '"',
+    \ "‘" : "'",
+    \ "’" : "'",
+    \ "–" : '--',
+    \ "—" : '---',
+    \ "…" : '...'
+    \ }
+  exec ":%s/".join(keys(chars), '\|').'/\=chars[submatch(0)]/ge'
+endfunction
+command! ReplaceFancyCharacters call ReplaceFancyCharacters()
+
+" Strip whitespace and tabs
+function! StripWhitespace()
+  let l = line(".")
+  let c = col(".")
+  %s/\s\+$//e
+  retab
+  call cursor(l, c)
+endfunction
+command! StripWhitespace call StripWhitespace()
