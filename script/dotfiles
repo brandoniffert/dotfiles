@@ -65,7 +65,7 @@ install() {
     e_success "Linked: $file"
   done
 
-  e_header 'Installing neovim dotfiles...'
+  e_header 'Linking neovim config'
 
   local nvim_source="$dotdir/nvim"
   local nvim_dest="$HOME/.config/nvim"
@@ -75,6 +75,18 @@ install() {
   else
     ln -sfF "$nvim_source" "$nvim_dest"
     e_success "Linked: nvim"
+  fi
+
+  e_header 'Linking kitty.conf'
+
+  local kitty_source="$dotdir/kitty.conf"
+  local kitty_dest="$HOME/Library/Preferences/kitty/kitty.conf"
+
+  if [[ "$kitty_source" -ef "$kitty_dest" ]]; then
+    e_success "Already linked: kitty.conf"
+  else
+    ln -sfF "$kitty_source" "$kitty_dest"
+    e_success "Linked: kitty.conf"
   fi
 
   e_header "All done!"
