@@ -19,12 +19,12 @@ endif
 call plug#begin()
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'ervandew/supertab'
-Plug 'gregsexton/gitv', { 'on': 'Gitv' }
 Plug 'henrik/vim-indexed-search'
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
+Plug 'junegunn/gv.vim'
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
