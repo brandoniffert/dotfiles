@@ -17,6 +17,7 @@ if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
 endif
 
 call plug#begin()
+Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'ervandew/supertab'
 Plug 'henrik/vim-indexed-search'
