@@ -106,7 +106,7 @@ let mapleader="\<space>"
 augroup nord-overrides
   autocmd!
   autocmd ColorScheme nord highlight Normal guibg=#20242c
-  autocmd ColorScheme nord highlight LineNr guibg=#20242c
+  autocmd ColorScheme nord highlight LineNr guifg=#2f3542 guibg=#20242c
   autocmd ColorScheme nord highlight CursorLineNr guibg=#20242c
   autocmd ColorScheme nord highlight SignColumn guibg=#20242c
   autocmd ColorScheme nord highlight FoldColumn guibg=#20242c
@@ -117,11 +117,14 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight link jsObjectKey jsonKeyword
 augroup END
 
-let g:nord_comment_brightness = 5
+let g:nord_comment_brightness = 2
 colorscheme nord
 
 " Airline
 let g:airline_theme = 'nord'
+let g:airline_powerline_fonts = 1
+let g:airline_left_sep = ''
+let g:airline_right_sep = ''
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
