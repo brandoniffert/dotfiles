@@ -159,6 +159,10 @@ nnoremap <c-h> <c-W>h
 nnoremap <c-k> <c-W>k
 nnoremap <c-l> <c-W>l
 
+" Use arrow keys for tab navigation
+nnoremap <left> :tabp<cr>
+nnoremap <right> :tabn<cr>
+
 " Select text that was just pasted
 nnoremap <leader>gv V`]
 
