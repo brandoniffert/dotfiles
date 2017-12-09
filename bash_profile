@@ -53,3 +53,5 @@ function __custom_prompt() {
   echo "$__time $__user_host:$__cur_dir \$(__git_repo_status) $__tail"
 }
 export PS1=$(__custom_prompt)
+
+export PATH="$HOME/.cargo/bin:$PATH"
