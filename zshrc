@@ -55,7 +55,10 @@ export NVM_DIR=~/.nvm
 
 # For fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
-export FZF_DEFAULT_OPTS='--color=bg+:#3b4252,pointer:#3b4252'
+export FZF_DEFAULT_OPTS='
+  --height 40% --border
+  --color=bg+:#3b4252,pointer:#3b4252,border:#3b4252
+'
 
 #-------------------------------------------------------------------------------
 # KEYS
@@ -160,7 +163,10 @@ fi
 
 # Use zsh syntax highlighting
 zsh_syntax_hightlighting="$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-[ -f "$zsh_syntax_hightlighting" ] && source "$zsh_syntax_hightlighting"
+if [ -f "$zsh_syntax_hightlighting" ]; then
+  source "$zsh_syntax_hightlighting"
+  ZSH_HIGHLIGHT_STYLES[path]='none'
+fi
 unset zsh_syntax_hightlighting
 
 # Use fzf
