@@ -107,8 +107,8 @@ let mapleader="\<space>"
 augroup nord-overrides
   autocmd!
   autocmd ColorScheme nord highlight Normal guibg=#20242c
-  autocmd ColorScheme nord highlight LineNr guifg=#2f3542 guibg=#20242c
-  autocmd ColorScheme nord highlight CursorLineNr guibg=#20242c
+  autocmd ColorScheme nord highlight LineNr guifg=#3B4252 guibg=#20242c
+  autocmd ColorScheme nord highlight CursorLineNr guifg=#7b88a1 guibg=#20242c
   autocmd ColorScheme nord highlight SignColumn guibg=#20242c
   autocmd ColorScheme nord highlight FoldColumn guibg=#20242c
   autocmd ColorScheme nord highlight Folded guifg=#7b88a1
@@ -118,14 +118,18 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight link jsObjectKey jsonKeyword
 augroup END
 
-let g:nord_comment_brightness = 2
+let g:nord_comment_brightness = 4
+let g:nord_italic_comments = 1
 colorscheme nord
 
 " Airline
-let g:airline_theme = 'nord'
-let g:airline_powerline_fonts = 1
-let g:airline_left_sep = ''
-let g:airline_right_sep = ''
+let g:airline_theme = 'bti_nord'
+let g:airline_symbols_ascii = 1
+let g:airline_skip_empty_sections = 1
+let g:airline#extensions#hunks#non_zero_only = 1
+let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
+let g:airline_section_z = airline#section#create(['%3p%% ', '%l/%L:%c '])
+
 let g:airline_mode_map = {
     \ '__' : '-',
     \ 'n'  : 'N',
@@ -179,7 +183,7 @@ vnoremap <s-tab> <gv
 nnoremap S i<cr><esc>k$
 
 " Open new horizontal/vertical split
-nnoremap <silent><leader>h :new<cr>
+nnoremap <silent><leader>s :new<cr>
 nnoremap <silent><leader>v :vnew<cr>
 
 " Yank/paste using system clipboard
@@ -223,13 +227,13 @@ autocmd! User GoyoLeave Limelight!
 set grepprg=rg\ --vimgrep
 
 " FZF
-let g:fzf_layout = { 'down': '~20%' }
+let g:fzf_layout = { 'down': '~25%' }
 
 nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>b :Buffers<cr>
 
 function! s:fzf_statusline()
-  highlight fzf1 guibg=#3B4252
+  highlight fzf1 guibg=#2E3440
   setlocal statusline=%#fzf1#\ >\ fzf
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
@@ -247,9 +251,14 @@ command! -bang -nargs=* Rg
 augroup bti-vimrc
   au!
   au! VimResized * wincmd =
-  au! WinEnter term://* startinsert
 
-  " When editing a file, always jump to the last known cursor position.
+  " Don't show line numbers in terminal
+  au TermOpen * setlocal nonumber norelativenumber
+
+  " Always highlight shebang-looking lines as Comment
+  autocmd BufEnter,WinEnter * call matchadd("Comment", "^#!\/.*", -1)
+
+  " When editing a file, always jump to the last known cursor position
   au! BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
@@ -277,10 +286,9 @@ command! ReplaceFancyCharacters call ReplaceFancyCharacters()
 
 " Strip whitespace and tabs
 function! StripWhitespace()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
+  let l:saved_winview = winsaveview()
+  %s/\v\s+$//e
   retab
-  call cursor(l, c)
+  call winrestview(l:saved_winview)
 endfunction
 command! StripWhitespace call StripWhitespace()
