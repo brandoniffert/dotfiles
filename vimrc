@@ -24,7 +24,6 @@ set shell=/bin/bash
 set showcmd
 set splitbelow splitright             " put new windows to bottom/right
 set switchbuf+=useopen
-set textwidth=80
 set ttyfast
 
 " Set custom spellfile
@@ -59,7 +58,7 @@ let mapleader="\<space>"
 " STATUSLINE
 "------------------------------------------------------------------------------
 set statusline=                           " reset
-set statusline+=[%n]                      " buffer number
+set statusline+=\ [%n]                    " buffer number
 set statusline+=\ %f                      " file path
 set statusline+=\ (%{&filetype})          " file type
 set statusline+=\ %m%r%w%h                " modified/read-only/preview/help
@@ -73,8 +72,8 @@ set statusline+=\ %l\/%L:%c\              " line/column number
 "-------------------------------------------------------------------------------
 syntax enable
 set bg=dark
-colorscheme spacegray
-hi Normal ctermbg=NONE
+let g:monochrome_italic_comments = 1
+colorscheme monochrome
 
 " Make sure bash scripts are colored fully
 let g:is_bash = 1
