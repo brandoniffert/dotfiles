@@ -25,7 +25,7 @@ Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-Plug 'junegunn/gv.vim'
+Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
@@ -128,7 +128,7 @@ let g:airline_symbols_ascii = 1
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_section_z = airline#section#create(['%3p%% ', '%l/%L:%c '])
+let g:airline_section_z = airline#section#create(['%3p%% ', '%3l/%3L:%2c '])
 
 let g:airline_mode_map = {
     \ '__' : '-',
