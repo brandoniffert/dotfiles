@@ -129,7 +129,6 @@ let g:airline_symbols_ascii = 1
 let g:airline_skip_empty_sections = 1
 let g:airline#extensions#hunks#non_zero_only = 1
 let g:airline#parts#ffenc#skip_expected_string='utf-8[unix]'
-let g:airline_section_z = airline#section#create(['%3p%% ', '%3l/%3L:%2c '])
 
 let g:airline_mode_map = {
     \ '__' : '-',
