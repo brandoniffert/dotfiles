@@ -106,11 +106,11 @@ let mapleader="\<space>"
 "-------------------------------------------------------------------------------
 augroup nord-overrides
   autocmd!
-  autocmd ColorScheme nord highlight Normal guibg=#20242c
-  autocmd ColorScheme nord highlight LineNr guifg=#3B4252 guibg=#20242c
-  autocmd ColorScheme nord highlight CursorLineNr guifg=#7b88a1 guibg=#20242c
-  autocmd ColorScheme nord highlight SignColumn guibg=#20242c
-  autocmd ColorScheme nord highlight FoldColumn guibg=#20242c
+  autocmd ColorScheme nord highlight Normal guibg=#15181e
+  autocmd ColorScheme nord highlight LineNr guifg=#3B4252 guibg=#15181e
+  autocmd ColorScheme nord highlight CursorLineNr guifg=#7b88a1 guibg=#15181e
+  autocmd ColorScheme nord highlight SignColumn guibg=#15181e
+  autocmd ColorScheme nord highlight FoldColumn guibg=#15181e
   autocmd ColorScheme nord highlight Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight Error guifg=#D8DEE9
   autocmd ColorScheme nord highlight diffAdded guifg=#A3BE8C
@@ -119,7 +119,6 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight link jsObjectKey jsonKeyword
 augroup END
 
-let g:nord_comment_brightness = 4
 let g:nord_italic_comments = 1
 colorscheme nord
 
