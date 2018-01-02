@@ -57,7 +57,7 @@ export NVM_DIR=~/.nvm
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
   --height 40% --border
-  --color=bg+:#3b4252,pointer:#3b4252,border:#3b4252
+  --color=bg+:#2E3440,pointer:#2E3440,border:#2E3440
 '
 
 #-------------------------------------------------------------------------------
