@@ -19,6 +19,7 @@ endif
 call plug#begin()
 Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'henrik/vim-indexed-search'
 Plug 'janko-m/vim-test'
@@ -35,7 +36,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
-Plug 'tweekmonster/django-plus.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
 call plug#end()
