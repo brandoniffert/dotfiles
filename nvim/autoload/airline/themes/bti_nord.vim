@@ -62,8 +62,8 @@ let s:VRight = [s:nord6_gui, s:nord2_gui, s:nord1_term, s:nord9_term]
 let s:VMiddle = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord3_term]
 let g:airline#themes#bti_nord#palette.visual = airline#themes#generate_color_map(s:VMain, s:VRight, s:VMiddle)
 
-let s:IAMain = [s:nord4_gui, s:nord3_gui, s:nord4_term, s:nord3_term]
-let s:IARight = [s:nord4_gui, s:nord2_gui, s:nord4_term, s:nord3_term]
+let s:IAMain = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord3_term]
+let s:IARight = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord3_term]
 let s:IAMiddle = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord1_term]
 let g:airline#themes#bti_nord#palette.inactive = airline#themes#generate_color_map(s:IAMain, s:IARight, s:IAMiddle)
 
