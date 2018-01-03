@@ -95,6 +95,9 @@ set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so,*.zip
 set list
 let &listchars="tab:>-,trail:.,extends:>,precedes:<,nbsp:\u00b7"
 
+" Fillchars
+set fillchars=vert:│,fold:-
+
 " Searching
 set showmatch ignorecase smartcase
 
