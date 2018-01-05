@@ -116,6 +116,7 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight FoldColumn guibg=#1c1f26
   autocmd ColorScheme nord highlight Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight Error guifg=#D8DEE9
+  autocmd ColorScheme nord highlight PmenuSel guifg=#2E3440 guibg=#D8DEE9
   autocmd ColorScheme nord highlight Visual guibg=#313745
   autocmd ColorScheme nord highlight VertSplit guibg=NONE
   autocmd ColorScheme nord highlight diffAdded guifg=#A3BE8C
