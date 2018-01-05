@@ -229,6 +229,9 @@ nmap <silent> ]e <Plug>(ale_next_wrap)
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+" EasyMotion
+map <Leader>m <Plug>(easymotion-prefix)
+
 " Ripgrep
 set grepprg=rg\ --vimgrep
 
