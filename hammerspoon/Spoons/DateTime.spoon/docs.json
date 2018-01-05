@@ -1,0 +1,41 @@
+[
+  {
+    "Constant" : [
+
+    ],
+    "submodules" : [
+
+    ],
+    "Function" : [
+
+    ],
+    "Variable" : [
+
+    ],
+    "stripped_doc" : [
+
+    ],
+    "desc" : "Add date and time to the desktop",
+    "Deprecated" : [
+
+    ],
+    "type" : "Module",
+    "Constructor" : [
+
+    ],
+    "doc" : "Add date and time to the desktop",
+    "Field" : [
+
+    ],
+    "items" : [
+
+    ],
+    "Command" : [
+
+    ],
+    "Method" : [
+
+    ],
+    "name" : "DateTime"
+  }
+]
