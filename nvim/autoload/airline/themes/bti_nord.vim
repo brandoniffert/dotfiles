@@ -72,11 +72,11 @@ let g:airline#themes#bti_nord#palette.accents = {
       \ }
 
 call airline#parts#define('filepathmodified', {
-  \ 'raw' : '%f %m',
+  \ 'raw' : '%f (%{&filetype}) %m',
   \ 'accent' : 'bold'})
 let g:airline_section_c = airline#section#create(['filepathmodified'])
 
 call airline#parts#define('linescols', {
-  \ 'raw' : '%3p%% %3l/%3L:%2c ',
+  \ 'raw' : '%3p%% %2l/%2L:%2c',
   \ 'accent' : 'bold'})
 let g:airline_section_z = airline#section#create(['linescols'])
