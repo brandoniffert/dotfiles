@@ -16,14 +16,16 @@ local function updateCanvas()
 end
 
 function obj:init()
-  local canvasW = 195
-  local canvasH = 29
+  local canvasW = 188
+  local canvasH = 33
   local offset = 20
   local screen = hs.screen.mainScreen()
   local frame = screen:fullFrame()
+  local numScreens = #hs.screen.allScreens()
+  local canvasX = numScreens > 1 and (frame.w + offset) or offset
 
   obj.canvas = hs.canvas.new({
-      x = frame.w - canvasW - offset,
+      x = canvasX,
       y = frame.h - canvasH - offset,
       w = canvasW,
       h = canvasH
@@ -41,9 +43,15 @@ function obj:init()
   obj.canvas[2] = {
     type = "text",
     text = "",
-    textFont = "Source Code Pro",
-    textSize = 14,
-    textAlignment = "center"
+    textFont = "Inconsolata LGC",
+    textSize = 13,
+    textAlignment = "center",
+    frame = {
+      x = 0,
+      y = 6,
+      w = "100%",
+      h = "100%"
+    }
   }
 
   if obj.timer == nil then
