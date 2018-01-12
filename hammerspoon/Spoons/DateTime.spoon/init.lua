@@ -16,8 +16,8 @@ local function updateCanvas()
 end
 
 function obj:init()
-  local canvasW = 188
-  local canvasH = 33
+  local canvasW = 185
+  local canvasH = 35
   local offset = 20
   local screen = hs.screen.mainScreen()
   local frame = screen:fullFrame()
@@ -44,11 +44,11 @@ function obj:init()
     type = "text",
     text = "",
     textFont = "Inconsolata LGC",
-    textSize = 13,
+    textSize = 12.5,
     textAlignment = "center",
     frame = {
       x = 0,
-      y = 6,
+      y = 8,
       w = "100%",
       h = "100%"
     }
