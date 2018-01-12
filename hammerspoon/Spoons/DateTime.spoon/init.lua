@@ -12,12 +12,12 @@ obj.author = "Brandon Iffert"
 obj.license = "MIT - https://opensource.org/licenses/MIT"
 
 local function updateCanvas()
-  obj.canvas[2].text = os.date("%a %b %d %Y %H:%M")
+  obj.canvas[2].text = os.date("%H:%M %a %b %d")
 end
 
 function obj:init()
-  local canvasW = 185
-  local canvasH = 35
+  local canvasW = 140
+  local canvasH = 30
   local offset = 20
   local screen = hs.screen.mainScreen()
   local frame = screen:fullFrame()
@@ -48,14 +48,14 @@ function obj:init()
     textAlignment = "center",
     frame = {
       x = 0,
-      y = 8,
+      y = 5,
       w = "100%",
       h = "100%"
     }
   }
 
   if obj.timer == nil then
-    obj.timer = hs.timer.doEvery(15, function() updateCanvas() end)
+    obj.timer = hs.timer.doEvery(5, function() updateCanvas() end)
     obj.timer:setNextTrigger(0)
   else
     obj.timer:start()

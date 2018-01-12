@@ -15,12 +15,19 @@
     "stripped_doc" : [
 
     ],
+    "type" : "Module",
     "desc" : "Add date and time to the desktop",
     "Deprecated" : [
 
     ],
-    "type" : "Module",
     "Constructor" : [
+
+    ],
+    "doc" : "Add date and time to the desktop",
+    "Field" : [
+
+    ],
+    "Command" : [
 
     ],
     "items" : [
@@ -29,13 +36,6 @@
     "Method" : [
 
     ],
-    "Command" : [
-
-    ],
-    "Field" : [
-
-    ],
-    "doc" : "Add date and time to the desktop",
     "name" : "DateTime"
   }
 ]
