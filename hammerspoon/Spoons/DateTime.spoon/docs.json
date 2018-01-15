@@ -16,15 +16,17 @@
 
     ],
     "type" : "Module",
-    "desc" : "Add date and time to the desktop",
     "Deprecated" : [
 
     ],
+    "desc" : "Add date and time to the desktop",
     "Constructor" : [
 
     ],
-    "doc" : "Add date and time to the desktop",
     "Field" : [
+
+    ],
+    "Method" : [
 
     ],
     "Command" : [
@@ -33,9 +35,7 @@
     "items" : [
 
     ],
-    "Method" : [
-
-    ],
+    "doc" : "Add date and time to the desktop",
     "name" : "DateTime"
   }
 ]
