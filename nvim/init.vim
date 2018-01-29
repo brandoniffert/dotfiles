@@ -58,6 +58,7 @@ set dictionary+=/usr/share/dict/web2a
 set dictionary+=/usr/share/dict/propernames
 set dictionary+=/usr/share/dict/connectives
 set fileformats+=mac
+set fileencoding=utf8
 set foldlevelstart=0
 set foldmethod=marker
 set formatoptions+=qrn1j
