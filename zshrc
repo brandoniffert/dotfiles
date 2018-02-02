@@ -92,6 +92,9 @@ bindkey '\C-x\C-e' edit-command-line
 alias g='git'
 alias ls='gls --color=auto'
 alias lls='gls --color=auto -al'
+alias l='tree -L 1'
+alias ll='tree -L 2'
+alias lll='tree -L 3'
 alias t='tmux -u'
 alias tnew='tmux new-session -As'
 alias vgs="vagrant global-status"
