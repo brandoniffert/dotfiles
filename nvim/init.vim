@@ -83,7 +83,7 @@ if filereadable(expand('~/.vim-custom.en.utf8.add'))
 endif
 
 " Tabs
-set expandtab tabstop=2 shiftwidth=2 softtabstop=2
+set expandtab shiftwidth=2 softtabstop=2
 
 " No backups or swap file
 set nobackup nowritebackup noswapfile
@@ -246,7 +246,7 @@ let g:fzf_layout = { 'down': '~25%' }
 nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>b :Buffers<cr>
 
-function! s:fzf_statusline()
+function! s:fzf_statusline() abort
   highlight fzf1 guibg=#2E3440
   setlocal statusline=%#fzf1#\ >\ fzf
 endfunction
@@ -263,17 +263,17 @@ command! -bang -nargs=* Rg
 " AUTOCOMMANDS
 "-------------------------------------------------------------------------------
 augroup bti-vimrc
-  au!
-  au! VimResized * wincmd =
+  autocmd!
+  autocmd! VimResized * wincmd =
 
   " Don't show line numbers in terminal
-  au TermOpen * setlocal nonumber norelativenumber
+  autocmd! TermOpen * setlocal nonumber norelativenumber
 
   " Always highlight shebang-looking lines as Comment
-  autocmd BufEnter,WinEnter * call matchadd("Comment", "^#!\/.*", -1)
+  autocmd! BufEnter,WinEnter * call matchadd("Comment", "^#!\/.*", -1)
 
   " When editing a file, always jump to the last known cursor position
-  au! BufReadPost *
+  autocmd! BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
@@ -284,7 +284,7 @@ augroup END
 " CUSTOM COMMANDS
 "------------------------------------------------------------------------------
 " Replace fancy characters
-function! ReplaceFancyCharacters()
+function! ReplaceFancyCharacters() abort
   let chars = {
     \ "“" : '"',
     \ "”" : '"',
@@ -299,7 +299,7 @@ endfunction
 command! ReplaceFancyCharacters call ReplaceFancyCharacters()
 
 " Strip whitespace and tabs
-function! StripWhitespace()
+function! StripWhitespace() abort
   let l:saved_winview = winsaveview()
   %s/\v\s+$//e
   retab
