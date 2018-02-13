@@ -22,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TAB,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B, ALL_T(KC_NO),
       KC_EQUAL, KC_A,    KC_R,    KC_S,    KC_T,    KC_G,
       MO(2),    KC_Z,    KC_X,    KC_C,    KC_D,    KC_V, MO(1),
-      KC_TRNS,  KC_TRNS, KC_TRNS, KC_TRNS, KC_LGUI,
+      KC_TRNS,  KC_TRNS, KC_TRNS, KC_LALT, KC_LGUI,
 
       // Left thumb
       KC_PGDOWN,       KC_PGUP,
@@ -34,7 +34,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       MEH_T(KC_NO), KC_J,    KC_L,    KC_U,     KC_Y,     KC_SCOLON, KC_MINUS,
       KC_M,         KC_N,    KC_E,    KC_I,     KC_O,     KC_QUOTE,
       MO(1),        KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH,  MO(2),
-      ALT_T(KC_NO), KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
+      KC_RALT,      KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
