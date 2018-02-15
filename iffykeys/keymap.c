@@ -11,18 +11,18 @@ enum custom_keycodes {
 
   MC_ARROW,
   MC_HASH_ROCKET,
-  TD_CLN = 0
+  TD_SPC_SFT = 0
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Base Colemak Mod-DH layer
   [0] = KEYMAP(
       // Left hand
-      KC_HYPR,  KC_1,      KC_2,    KC_3,    KC_4,    KC_5, KC_TRNS,
-      KC_TAB,   KC_Q,      KC_W,    KC_F,    KC_P,    KC_B, LCTL(KC_A),
-      LT(2,     KC_EQUAL), KC_A,    KC_R,    KC_S,    KC_T, KC_G,
-      KC_GRAVE, KC_Z,      KC_X,    KC_C,    KC_D,    KC_V, MO(1),
-      KC_TRNS,  KC_TRNS,   KC_TRNS, KC_LALT, KC_LSPO,
+      KC_HYPR,  KC_1,    KC_2,    KC_3,    KC_4,  KC_5, KC_TRNS,
+      KC_TAB,   KC_Q,    KC_W,    KC_F,    KC_P,  KC_B, LCTL(KC_A),
+      KC_EQUAL, KC_A,    KC_R,    KC_S,    KC_T,  KC_G,
+      KC_GRAVE, KC_Z,    KC_X,    KC_C,    KC_D,  KC_V, MO(1),
+      KC_TRNS,  KC_TRNS, KC_TRNS, KC_LALT, MO(2),
 
       // Left thumb
       KC_PGDOWN,  KC_PGUP,
@@ -30,16 +30,16 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       MT(MOD_LGUI, KC_ENTER), CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
       // Right hand
-      KC_TRNS, KC_6,    KC_7,    KC_8,     KC_9,     KC_0,       KC_MEH,
-      KC_TRNS, KC_J,    KC_L,    KC_U,     KC_Y,     TD(TD_CLN), KC_MINUS,
-      KC_M,    KC_N,    KC_E,    KC_I,     KC_O,     LT(2,       KC_QUOTE),
-      MO(1),   KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH,   KC_BSLASH,
-      KC_RSPC, KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
+      KC_TRNS, KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_MEH,
+      KC_TRNS, KC_J,    KC_L,    KC_U,     KC_Y,     KC_SCLN,  KC_MINUS,
+      KC_M,    KC_N,    KC_E,    KC_I,     KC_O,     KC_QUOTE,
+      MO(1),   KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH, KC_BSLASH,
+      MO(2),   KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
       KC_TRNS,
-      LCTL(KC_LGUI),       KC_BSPACE, KC_SPACE
+      LCTL(KC_LGUI),       KC_BSPACE, TD(TD_SPC_SFT)
   ),
 
   // Programming symbols layer
@@ -58,9 +58,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
       // Right hand
       KC_TRNS, KC_F6,   KC_F7,       KC_F8,          KC_F9,       KC_F10,  KC_F11,
-      KC_TRNS, KC_TRNS, KC_LBRACKET, MC_HASH_ROCKET, KC_RBRACKET, KC_TRNS, KC_F12,
-      KC_TRNS, KC_LCBR, MC_ARROW,    KC_RCBR,        KC_TRNS,     KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_LCBR,     MC_HASH_ROCKET, KC_RCBR,     KC_TRNS, KC_F12,
+      KC_TRNS, KC_LPRN, MC_ARROW,    KC_RPRN,        KC_TRNS,     KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_LBRACKET, KC_TRNS,        KC_RBRACKET, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,
 
       // Right thumb
@@ -84,11 +84,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS, KC_TRNS,
 
       // Right hand
-      KC_TRNS,    KC_KP_SLASH,    KC_TRNS,   KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
-      KC_TRNS,    KC_KP_ASTERISK, KC_KP_7,   KC_KP_8, KC_KP_9, KC_TRNS,  KC_TRNS,
-      KC_KP_PLUS, KC_KP_4,        KC_KP_5,   KC_KP_6, KC_TRNS, KC_EQUAL,
-      KC_TRNS,    KC_KP_MINUS,    KC_KP_1,   KC_KP_2, KC_KP_3, KC_TRNS,  KC_TRNS,
-      KC_KP_0,    KC_KP_0,        KC_KP_DOT, KC_TRNS, KC_TRNS,
+      KC_TRNS,    KC_KP_SLASH,    KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
+      KC_TRNS,    KC_KP_ASTERISK, KC_KP_7, KC_KP_8, KC_KP_9, KC_TRNS,  KC_TRNS,
+      KC_KP_PLUS, KC_KP_4,        KC_KP_5, KC_KP_6, KC_TRNS, KC_EQUAL,
+      KC_TRNS,    KC_KP_MINUS,    KC_KP_1, KC_KP_2, KC_KP_3, KC_TRNS,  KC_TRNS,
+      KC_KP_0,    KC_KP_DOT,      KC_TRNS, KC_TRNS, KC_TRNS,
 
       // Right thumb
       KC_TRNS, RESET,
@@ -211,6 +211,23 @@ uint32_t layer_state_set_user(uint32_t state) {
     return state;
 };
 
+void td_spc_finished (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    if (state->interrupted || state->pressed == 0) {
+      register_code (KC_SPC);
+    } else {
+      register_code (KC_RSFT);
+    }
+  }
+};
+
+void td_spc_reset (qk_tap_dance_state_t *state, void *user_data) {
+  if (state->count == 1) {
+    unregister_code (KC_SPC);
+    unregister_code (KC_RSFT);
+  }
+};
+
 qk_tap_dance_action_t tap_dance_actions[] = {
-  [TD_CLN] = ACTION_TAP_DANCE_DOUBLE(KC_SCLN, LSFT(KC_SCLN))
+  [TD_SPC_SFT] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, td_spc_finished, td_spc_reset)
 };
