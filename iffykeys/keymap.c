@@ -18,11 +18,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Base Colemak Mod-DH layer
   [0] = KEYMAP(
       // Left hand
-      KC_HYPR,  KC_1,    KC_2,    KC_3,    KC_4,  KC_5, KC_TRNS,
-      KC_TAB,   KC_Q,    KC_W,    KC_F,    KC_P,  KC_B, LCTL(KC_A),
-      KC_EQUAL, KC_A,    KC_R,    KC_S,    KC_T,  KC_G,
-      KC_GRAVE, KC_Z,    KC_X,    KC_C,    KC_D,  KC_V, MO(1),
-      KC_TRNS,  KC_TRNS, KC_TRNS, KC_LALT, MO(2),
+      KC_HYPR,  KC_1,      KC_2,    KC_3,    KC_4,  KC_5, KC_TRNS,
+      KC_TAB,   KC_Q,      KC_W,    KC_F,    KC_P,  KC_B, KC_TRNS,
+      LT(1,     KC_EQUAL), KC_A,    KC_R,    KC_S,  KC_T, KC_G,
+      KC_GRAVE, KC_Z,      KC_X,    KC_C,    KC_D,  KC_V, LCTL(KC_A),
+      KC_LALT,  KC_TRNS,   KC_TRNS, KC_TRNS, MO(2),
 
       // Left thumb
       KC_PGDOWN,  KC_PGUP,
@@ -30,11 +30,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       MT(MOD_LGUI, KC_ENTER), CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
       // Right hand
-      KC_TRNS, KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_MEH,
-      KC_TRNS, KC_J,    KC_L,    KC_U,     KC_Y,     KC_SCLN,  KC_MINUS,
-      KC_M,    KC_N,    KC_E,    KC_I,     KC_O,     KC_QUOTE,
-      MO(1),   KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH, KC_BSLASH,
-      MO(2),   KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
+      KC_TRNS,  KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_MEH,
+      KC_RALT,  KC_J,    KC_L,    KC_U,     KC_Y,     KC_SCLN,  KC_MINUS,
+      KC_M,     KC_N,    KC_E,    KC_I,     KC_O,     LT(1,     KC_QUOTE),
+      KC_COLON, KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH, KC_BSLASH,
+      MO(2),    KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
@@ -57,11 +57,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS, RGB_VAD,
 
       // Right hand
-      KC_TRNS, KC_F6,   KC_F7,       KC_F8,          KC_F9,       KC_F10,  KC_F11,
-      KC_TRNS, KC_TRNS, KC_LCBR,     MC_HASH_ROCKET, KC_RCBR,     KC_TRNS, KC_F12,
-      KC_TRNS, KC_LPRN, MC_ARROW,    KC_RPRN,        KC_TRNS,     KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_LBRACKET, KC_TRNS,        KC_RBRACKET, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,
+      KC_TRNS,  KC_F6,   KC_F7,       KC_F8,          KC_F9,       KC_F10,  KC_F11,
+      KC_TRNS,  KC_TRNS, KC_LCBR,     MC_HASH_ROCKET, KC_RCBR,     KC_TRNS, KC_F12,
+      KC_COLON, KC_LPRN, MC_ARROW,    KC_RPRN,        KC_TRNS,     KC_TRNS,
+      KC_TRNS,  KC_TRNS, KC_LBRACKET, KC_UNDERSCORE,  KC_RBRACKET, KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,
 
       // Right thumb
       RGB_TOG, RGB_SLD,
@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, RESET,
       KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS
-  ),
+  )
 
 };
 
