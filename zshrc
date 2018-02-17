@@ -141,7 +141,38 @@ compdef t=tmux
 # PROMPT
 #-------------------------------------------------------------------------------
 autoload -U promptinit; promptinit
-prompt pure
+prompt spaceship
+
+SPACESHIP_CHAR_SYMBOL='❯'
+SPACESHIP_CHAR_SUFFIX=' '
+SPACESHIP_CHAR_COLOR_SUCCESS=white
+SPACESHIP_DIR_TRUNC=1
+SPACESHIP_GIT_PREFIX=''
+SPACESHIP_GIT_BRANCH_COLOR=8
+SPACESHIP_GIT_STATUS_PREFIX=' '
+SPACESHIP_GIT_STATUS_SUFFIX=''
+SPACESHIP_GIT_STATUS_DELETED='-'
+SPACESHIP_JOBS_SYMBOL='!'
+SPACESHIP_JOBS_COLOR=yellow
+SPACESHIP_EXEC_TIME_PREFIX=''
+SPACESHIP_VENV_PREFIX=''
+SPACESHIP_VENV_COLOR=8
+SPACESHIP_PROMPT_ORDER=(
+  time          # Time stampts section
+  user          # Username section
+  dir           # Current directory section
+  host          # Hostname section
+  git           # Git section (git_branch + git_status)
+  aws           # Amazon Web Services section
+  exec_time     # Execution time
+  line_sep      # Line break
+  battery       # Battery level and status
+  vi_mode       # Vi-mode indicator
+  jobs          # Backgound jobs indicator
+  venv          # virtualenv section
+  exit_code     # Exit code section
+  char          # Prompt character
+)
 
 #-------------------------------------------------------------------------------
 # FUNCTIONS
