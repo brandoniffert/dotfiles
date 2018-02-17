@@ -67,6 +67,7 @@ set lazyredraw
 set linebreak
 set nojoinspaces
 set noshowmode
+set noswapfile
 set number relativenumber
 set ruler
 set scrolloff=3
@@ -84,9 +85,6 @@ endif
 
 " Tabs
 set expandtab shiftwidth=2 softtabstop=2
-
-" No backups or swap file
-set nobackup nowritebackup noswapfile
 
 " Wildmenu
 set wildmode=longest,list
