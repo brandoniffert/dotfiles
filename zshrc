@@ -140,6 +140,8 @@ compdef t=tmux
 #-------------------------------------------------------------------------------
 # PROMPT
 #-------------------------------------------------------------------------------
+SPACESHIP_GIT_SYMBOL=''
+
 autoload -U promptinit; promptinit
 prompt spaceship
 
@@ -156,7 +158,7 @@ SPACESHIP_JOBS_SYMBOL='!'
 SPACESHIP_JOBS_COLOR=yellow
 SPACESHIP_EXEC_TIME_PREFIX=''
 SPACESHIP_VENV_PREFIX=''
-SPACESHIP_VENV_COLOR=8
+SPACESHIP_VENV_COLOR=250
 SPACESHIP_PROMPT_ORDER=(
   time          # Time stampts section
   user          # Username section
