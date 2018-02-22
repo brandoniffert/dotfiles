@@ -30,15 +30,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       MT(MOD_LGUI, KC_ENTER), CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
       // Right hand
-      KC_TRNS,  KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_MEH,
-      KC_RALT,  KC_J,    KC_L,    KC_U,     KC_Y,     KC_SCLN,  KC_MINUS,
-      KC_M,     KC_N,    KC_E,    KC_I,     KC_O,     LT(1,     KC_QUOTE),
-      KC_COLON, KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH, KC_BSLASH,
-      MO(2),    KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
+      KC_TRNS, KC_6,    KC_7,    KC_8,     KC_9,     KC_0,     KC_MEH,
+      KC_TRNS, KC_J,    KC_L,    KC_U,     KC_Y,     KC_SCLN,  KC_MINUS,
+      KC_M,    KC_N,    KC_E,    KC_I,     KC_O,     LT(1,     KC_QUOTE),
+      KC_RALT, KC_K,    KC_H,    KC_COMMA, KC_DOT,   KC_SLASH, KC_BSLASH,
+      MO(2),   KC_LEFT, KC_DOWN, KC_UP,    KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
-      KC_TRNS,
+      KC_ENTER,
       LCTL(KC_LGUI),       KC_BSPACE, TD(TD_SPC_SFT)
   ),
 
@@ -72,10 +72,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // Numbers + symbols layer
   [2] = KEYMAP(
       // Left hand
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_AMPR, KC_ASTR, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_DLR,  KC_PERC, KC_CIRC, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,   KC_TRNS,       KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_AMPR, KC_ASTR, KC_BSLASH, KC_PIPE,       KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_DLR,  KC_PERC, KC_CIRC,   KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_EXLM, KC_AT,   KC_HASH,   KC_TRNS,       KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
 
       // Left thumb
