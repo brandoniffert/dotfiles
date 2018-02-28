@@ -30,6 +30,7 @@ Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
@@ -237,6 +238,12 @@ set grepprg=rg\ --vimgrep
 " Indent Line
 let g:indentLine_char = '│'
 let g:indentLine_color_gui = '#3B4252'
+
+" Vim markdown
+let g:vim_markdown_conceal = 0
+
+let g:NERDTreeDirArrowExpandable = '▶'
+let g:NERDTreeDirArrowCollapsible = '▼'
 
 " FZF
 let g:fzf_layout = { 'down': '~25%' }
