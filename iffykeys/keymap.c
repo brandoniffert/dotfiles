@@ -24,8 +24,8 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = KEYMAP(
       // Left hand
-      KC_HYPR,             KC_1,         KC_2,             KC_3,          KC_4,      KC_5,      KC_PGUP,
-      KC_TAB,              KC_Q,         KC_W,             KC_F,          KC_P,      KC_B,      KC_GRAVE,
+      KC_GRAVE,            KC_1,         KC_2,             KC_3,          KC_4,      KC_5,      KC_PGUP,
+      KC_TAB,              KC_Q,         KC_W,             KC_F,          KC_P,      KC_B,      LCTL(KC_A),
       MO(2),               KC_A,         KC_R,             KC_S,          KC_T,      KC_G,
       MO(4),               KC_Z,         KC_X,             KC_C,          KC_D,      KC_V,      KC_MINUS,
       KC_UP,               KC_DOWN,      KC_TRNS,          KC_LALT,       KC_LSHIFT,
@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_BSLASH,           KC_J,         KC_L,             KC_U,          KC_Y,      KC_SCOLON, KC_QUOTE,
       KC_M,                KC_N,         KC_E,             KC_I,          KC_O,      MO(1),
       KC_EQUAL,            KC_K,         KC_H,             KC_COMMA,      KC_DOT,    KC_SLASH,  MO(3),
-      KC_RSHIFT,           LCTL(KC_A),   KC_TRNS,          KC_LEFT,       KC_RIGHT,
+      KC_RSHIFT,           KC_HYPR,      KC_TRNS,          KC_LEFT,       KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
