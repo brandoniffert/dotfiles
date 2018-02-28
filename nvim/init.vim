@@ -39,7 +39,6 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
-Plug 'Yggdroot/indentLine'
 call plug#end()
 
 if exists("s:bootstrap") && s:bootstrap
@@ -234,10 +233,6 @@ map <Leader>m <Plug>(easymotion-prefix)
 
 " Ripgrep
 set grepprg=rg\ --vimgrep
-
-" Indent Line
-let g:indentLine_char = '│'
-let g:indentLine_color_gui = '#3B4252'
 
 " Vim markdown
 let g:vim_markdown_conceal = 0
