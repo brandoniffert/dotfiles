@@ -39,7 +39,6 @@ setopt SHARE_HISTORY        # share history between sessions
 #-------------------------------------------------------------------------------
 export CLICOLOR=true
 export EDITOR='nvim'
-export GREP_OPTIONS="--color"
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=100000
 export LANG='en_US.UTF-8'
@@ -90,6 +89,7 @@ bindkey '\C-x\C-e' edit-command-line
 # ALIASES
 #-------------------------------------------------------------------------------
 alias g='git'
+alias grep='grep --color'
 alias ls='gls --color=auto'
 alias lls='gls --color=auto -al'
 alias l='tree -L 1'
