@@ -57,7 +57,6 @@ set dictionary+=/usr/share/dict/words
 set dictionary+=/usr/share/dict/web2a
 set dictionary+=/usr/share/dict/propernames
 set dictionary+=/usr/share/dict/connectives
-set fileformats+=mac
 set fileencoding=utf8
 set foldlevelstart=0
 set foldmethod=marker
@@ -71,7 +70,6 @@ set noswapfile
 set number relativenumber
 set ruler
 set scrolloff=3
-set shell=/usr/local/bin/zsh
 set showcmd
 set splitbelow splitright
 set switchbuf+=useopen
