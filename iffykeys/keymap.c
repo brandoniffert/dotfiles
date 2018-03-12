@@ -8,7 +8,8 @@ enum custom_layers {
   _NAV,
   _PROGRAMMING,
   _SYMBOLS,
-  _NUMBERS
+  _NUMBERS,
+  _QWERTY
 };
 
 enum custom_keycodes {
@@ -24,28 +25,28 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = KEYMAP(
       // Left hand
-      KC_GRAVE,            KC_1,         KC_2,             KC_3,          KC_4,      KC_5,      KC_PGUP,
-      KC_TAB,              KC_Q,         KC_W,             KC_F,          KC_P,      KC_B,      LCTL(KC_A),
-      MO(2),               KC_A,         KC_R,             KC_S,          KC_T,      KC_G,
-      MO(4),               KC_Z,         KC_X,             KC_C,          KC_D,      KC_V,      KC_MINUS,
-      KC_UP,               KC_DOWN,      KC_TRNS,          KC_LALT,       KC_LSHIFT,
+      KC_GRAVE,            KC_1,         KC_2,             KC_3,          KC_4,     KC_5,      KC_PGUP,
+      KC_TAB,              KC_Q,         KC_W,             KC_F,          KC_P,     KC_G,      LCTL(KC_A),
+      MO(2),               KC_A,         KC_R,             KC_S,          KC_T,     KC_D,
+      KC_LSHIFT,           KC_Z,         KC_X,             KC_C,          KC_V,     KC_B,      KC_MINUS,
+      KC_UP,               KC_DOWN,      KC_TRNS,          KC_LALT,       MO(4),
 
       // Left thumb
       LCTL(LSFT(KC_TAB)),  LCTL(KC_TAB),
-      KC_TRNS,
+      TG(5),
       MT(MOD_LGUI,         KC_ENTER),    CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
       // Right hand
-      KC_PGDOWN,           KC_6,         KC_7,             KC_8,          KC_9,      KC_0,      KC_ESCAPE,
-      KC_BSLASH,           KC_J,         KC_L,             KC_U,          KC_Y,      KC_SCOLON, KC_QUOTE,
-      KC_M,                KC_N,         KC_E,             KC_I,          KC_O,      MO(1),
-      KC_EQUAL,            KC_K,         KC_H,             KC_COMMA,      KC_DOT,    KC_SLASH,  MO(3),
-      KC_RSHIFT,           KC_HYPR,      KC_TRNS,          KC_LEFT,       KC_RIGHT,
+      KC_PGDOWN,           KC_6,         KC_7,             KC_8,          KC_9,     KC_0,      KC_ENTER,
+      KC_BSLASH,           KC_J,         KC_L,             KC_U,          KC_Y,     KC_SCOLON, KC_QUOTE,
+      KC_H,                KC_N,         KC_E,             KC_I,          KC_O,     MO(1),
+      KC_EQUAL,            KC_K,         KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,  KC_RSHIFT,
+      MO(3),               KC_HYPR,      KC_TRNS,          KC_LEFT,       KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
       KC_TRNS,
-      LCTL(KC_LGUI),       KC_BSPACE,    KC_SPACE
+      LCTL(KC_LGUI),       KC_BSPACE,    SFT_T(KC_SPACE)
   ),
 
   [_NAV] = KEYMAP(
@@ -150,6 +151,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,   KC_TRNS,
       KC_TRNS,
       KC_TRNS,   KC_TRNS, KC_TRNS
+  ),
+
+  [_QWERTY] = KEYMAP(
+      // Left hand
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,
+      KC_TRNS, KC_Q,    KC_W,    KC_E,     KC_R,      KC_T,     KC_TRNS,
+      KC_TRNS, KC_A,    KC_S,    KC_D,     KC_F,      KC_G,
+      KC_TRNS, KC_Z,    KC_X,    KC_C,     KC_V,      KC_B,     KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
+
+      // Left thumb
+      KC_TRNS, KC_TRNS,
+      KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS,
+
+      // Right hand
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,
+      KC_TRNS, KC_Y,    KC_U,    KC_I,     KC_O,      KC_P,     KC_TRNS,
+      KC_H,    KC_J,    KC_K,    KC_L,     KC_SCOLON, KC_TRNS,
+      KC_TRNS, KC_N,    KC_M,    KC_COMMA, KC_DOT,    KC_SLASH, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
+
+      // Right thumb
+      KC_TRNS, KC_TRNS,
+      KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS
   )
 };
 
