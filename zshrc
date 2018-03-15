@@ -1,6 +1,3 @@
-autoload -U compinit && compinit
-autoload -U colors && colors
-
 export DOTFILES=$HOME/.dotfiles
 
 #-------------------------------------------------------------------------------
@@ -14,40 +11,44 @@ export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 #-------------------------------------------------------------------------------
 # OPTIONS
 #-------------------------------------------------------------------------------
-setopt APPEND_HISTORY       # adds history
-setopt AUTO_CD              # auto cd into directory by name
-setopt COMPLETE_ALIASES     # don't expand aliases before completion finishes
-setopt COMPLETE_IN_WORD     # completion from both ends
-setopt CORRECT              # spell check commands
-setopt EXTENDED_HISTORY     # add timestamps to history
-setopt HIST_IGNORE_ALL_DUPS # don't record dupes in history
-setopt HIST_IGNORE_SPACE    # don't save commands with leading space to history
-setopt HIST_REDUCE_BLANKS   # remove superfluous blanks from history
-setopt HIST_VERIFY          # don't auto execute expanded history command
-setopt IGNORE_EOF           # don't exit on EOF
-setopt INC_APPEND_HISTORY   # adds history incrementally
-setopt LOCAL_OPTIONS        # allow functions to have local options
-setopt LOCAL_TRAPS          # allow functions to have local traps
-setopt NO_BG_NICE           # don't nice background tasks
-setopt NO_HUP
-setopt NO_LIST_BEEP
-setopt PROMPT_SUBST
-setopt SHARE_HISTORY        # share history between sessions
+setopt autocd              # Auto cd into directory by name
+setopt autoparamslash      # Tab completing directory appends a slash
+setopt autopushd           # cd automatically pushes old dir onto dir stack
+setopt completealiases     # Do not expand aliases before completion finishes
+setopt completeinword      # Completion from both ends
+setopt correct             # Spell check commands
+setopt correctall          # Argument auto-correction
+setopt extendedhistory     # Add timestamps to history
+setopt histignorealldups   # Prevent recording dupes in history
+setopt histignorespace     # Do not save commands with leading space to history
+setopt histreduceblanks    # Remove superfluous blanks from history
+setopt histverify          # Prevent auto execute expanded history command
+setopt ignoreeof           # Prevent exit on eof
+setopt incappendhistory    # Adds history incrementally
+setopt interactivecomments # Allow comments, even in interactive shells
+setopt localoptions        # Allow functions to have local options
+setopt localtraps          # Allow functions to have local traps
+setopt nobgnice            # Do not nice background tasks
+setopt promptsubst         # Expansion and substitution performed in prompts
+setopt pushdignoredups     # Prevent pushing multiple copies of same dir onto stack
+setopt pushdsilent         # Do not print dir stack after pushing/popping
+setopt sharehistory        # Share history between sessions
 
 #-------------------------------------------------------------------------------
 # EXPORTS
 #-------------------------------------------------------------------------------
-export CLICOLOR=true
-export EDITOR='nvim'
+export EDITOR=nvim
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=100000
-export LANG='en_US.UTF-8'
 export SAVEHIST=$HISTSIZE
+export LANG=en_US.UTF-8
+export LC_CTYPE=en_US.UTF-8
 export WORDCHARS='*?[]~&;!$%^<>'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# Export from Nord dir_colors
-export LS_COLORS='no=00:rs=0:fi=00:di=01;34:ln=36:mh=04;36:pi=04;01;36:so=04;33:do=04;01;36:bd=01;33:cd=33:or=31:mi=01;37;41:ex=01;36:su=01;04;37:sg=01;04;37:ca=01;37:tw=01;37;44:ow=01;04;34:st=04;37;44:*.7z=01;32:*.ace=01;32:*.alz=01;32:*.arc=01;32:*.arj=01;32:*.bz=01;32:*.bz2=01;32:*.cab=01;32:*.cpio=01;32:*.deb=01;32:*.dz=01;32:*.ear=01;32:*.gz=01;32:*.jar=01;32:*.lha=01;32:*.lrz=01;32:*.lz=01;32:*.lz4=01;32:*.lzh=01;32:*.lzma=01;32:*.lzo=01;32:*.rar=01;32:*.rpm=01;32:*.rz=01;32:*.sar=01;32:*.t7z=01;32:*.tar=01;32:*.taz=01;32:*.tbz=01;32:*.tbz2=01;32:*.tgz=01;32:*.tlz=01;32:*.txz=01;32:*.tz=01;32:*.tzo=01;32:*.tzst=01;32:*.war=01;32:*.xz=01;32:*.z=01;32:*.Z=01;32:*.zip=01;32:*.zoo=01;32:*.zst=01;32:*.aac=32:*.au=32:*.flac=32:*.m4a=32:*.mid=32:*.midi=32:*.mka=32:*.mp3=32:*.mpa=32:*.mpeg=32:*.mpg=32:*.ogg=32:*.opus=32:*.ra=32:*.wav=32:*.3des=01;35:*.aes=01;35:*.gpg=01;35:*.pgp=01;35:*.doc=32:*.docx=32:*.dot=32:*.odg=32:*.odp=32:*.ods=32:*.odt=32:*.otg=32:*.otp=32:*.ots=32:*.ott=32:*.pdf=32:*.ppt=32:*.pptx=32:*.xls=32:*.xlsx=32:*.app=01;36:*.bat=01;36:*.btm=01;36:*.cmd=01;36:*.com=01;36:*.exe=01;36:*.reg=01;36:*~=02;37:*.bak=02;37:*.BAK=02;37:*.log=02;37:*.log=02;37:*.old=02;37:*.OLD=02;37:*.orig=02;37:*.ORIG=02;37:*.swo=02;37:*.swp=02;37:*.bmp=32:*.cgm=32:*.dl=32:*.dvi=32:*.emf=32:*.eps=32:*.gif=32:*.jpeg=32:*.jpg=32:*.JPG=32:*.mng=32:*.pbm=32:*.pcx=32:*.pgm=32:*.png=32:*.PNG=32:*.ppm=32:*.pps=32:*.ppsx=32:*.ps=32:*.svg=32:*.svgz=32:*.tga=32:*.tif=32:*.tiff=32:*.xbm=32:*.xcf=32:*.xpm=32:*.xwd=32:*.xwd=32:*.yuv=32:*.anx=32:*.asf=32:*.avi=32:*.axv=32:*.flc=32:*.fli=32:*.flv=32:*.gl=32:*.m2v=32:*.m4v=32:*.mkv=32:*.mov=32:*.MOV=32:*.mp4=32:*.mpeg=32:*.mpg=32:*.nuv=32:*.ogm=32:*.ogv=32:*.ogx=32:*.qt=32:*.rm=32:*.rmvb=32:*.swf=32:*.vob=32:*.webm=32:*.wmv=32:';
+# Setup dircolors
+command -v dircolors >/dev/null 2>&1 && [ -f "$HOME"/.dir_colors ] && eval $(dircolors $HOME/.dir_colors)
+command -v gdircolors >/dev/null 2>&1 && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
 
 # For nvm
 export NVM_DIR=~/.nvm
@@ -56,7 +57,7 @@ export NVM_DIR=~/.nvm
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
   --height 40% --border
-  --color=bg+:#2E3440,pointer:#2E3440,border:#2E3440
+  --color=bg+:#2b303b,pointer:#2b303b,border:#2b303b
 '
 
 #-------------------------------------------------------------------------------
@@ -109,10 +110,13 @@ alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"
 #-------------------------------------------------------------------------------
 # COMPLETION
 #-------------------------------------------------------------------------------
+# Make completion:
+# - Case-insensitive
+# - Accept abbreviations after . or _ or - (ie. f.b -> foo.bar)
+# - Substring complete (ie. bar -> foobar)
+zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 # Visual select
 zstyle ':completion:*' menu select
-# Matches case insensitive for lowercase
-zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # Pasting with tabs doesn't perform completion
 zstyle ':completion:*' insert-tab pending
 # Don't autocomplete hosts
@@ -120,20 +124,16 @@ zstyle ':completion:*:ssh:*' hosts off
 # Color ls completion
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# Uses git's autocompletion for inner commands. Assumes an install of git's
-# bash `git-completion` script at $completion below (this is where Homebrew
-# tosses it, at least).
-git_completion='$(brew --prefix)/share/zsh/site-functions/_git'
-[ -f "$git_completion" ] && source "$git_completion"
-unset git_completion
-
 zsh_completions=/usr/local/share/zsh-completions
 if [ -d $zsh_completions ]; then
   fpath=($zsh_completions $fpath)
 fi
 unset zsh_completions
 
-# make aliased completions work
+autoload -U compinit
+compinit
+
+# Make aliased completions work
 compdef g=git
 compdef t=tmux
 
@@ -141,37 +141,40 @@ compdef t=tmux
 # PROMPT
 #-------------------------------------------------------------------------------
 SPACESHIP_GIT_SYMBOL=''
+SPACESHIP_DIR_PREFIX='%F{black}┌%{%f%} '
+SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
 
-autoload -U promptinit; promptinit
+autoload -U promptinit
+promptinit
 prompt spaceship
 
+SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_CHAR_SYMBOL='❯'
+SPACESHIP_CHAR_PREFIX='%F{black}└%{%f%} '
 SPACESHIP_CHAR_SUFFIX=' '
 SPACESHIP_CHAR_COLOR_SUCCESS=white
 SPACESHIP_DIR_TRUNC=1
+SPACESHIP_DIR_COLOR=black
 SPACESHIP_GIT_PREFIX=''
-SPACESHIP_GIT_BRANCH_COLOR=8
+SPACESHIP_GIT_BRANCH_COLOR=cyan
 SPACESHIP_GIT_STATUS_PREFIX=' '
 SPACESHIP_GIT_STATUS_SUFFIX=''
 SPACESHIP_GIT_STATUS_DELETED='-'
-SPACESHIP_JOBS_SYMBOL='!'
+SPACESHIP_JOBS_SYMBOL='♦'
 SPACESHIP_JOBS_COLOR=yellow
 SPACESHIP_EXEC_TIME_PREFIX=''
-SPACESHIP_VENV_PREFIX=''
-SPACESHIP_VENV_COLOR=250
+SPACESHIP_VENV_PREFIX='venv:'
+SPACESHIP_VENV_COLOR=8
 SPACESHIP_PROMPT_ORDER=(
-  time          # Time stampts section
-  user          # Username section
   dir           # Current directory section
   host          # Hostname section
+  jobs          # Backgound jobs indicator
   git           # Git section (git_branch + git_status)
   aws           # Amazon Web Services section
   exec_time     # Execution time
-  line_sep      # Line break
   battery       # Battery level and status
-  vi_mode       # Vi-mode indicator
-  jobs          # Backgound jobs indicator
   venv          # virtualenv section
+  line_sep      # Line break
   exit_code     # Exit code section
   char          # Prompt character
 )
@@ -181,29 +184,51 @@ SPACESHIP_PROMPT_ORDER=(
 #-------------------------------------------------------------------------------
 [ -f "$DOTFILES/zsh/functions.zsh" ] && source "$DOTFILES/zsh/functions.zsh"
 
+# Adds `cdr` command for navigating to recent directories
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+# Enable menu-style completion for cdr
+zstyle ':completion:*:*:cdr:*:*' menu selection
+
+# Fall through to cd if cdr is passed a non-recent dir as an argument
+zstyle ':chpwd:*' recent-dirs-default true
+
 #-------------------------------------------------------------------------------
 # SETUP OTHER SCRIPTS/PROGRAMS
 #-------------------------------------------------------------------------------
 # Setup rbenv
-if type rbenv > /dev/null; then
+if command -v rbenv >/dev/null 2>&1; then
   eval "$(rbenv init - --no-rehash)"
 fi
 
 # Use fasd
-if type fasd > /dev/null; then
+if command -v fasd >/dev/null 2>&1; then
   eval "$(fasd --init auto)"
 fi
 
-# Use .localrc for local options
-[ -f "$HOME"/.localrc ] && source "$HOME"/.localrc
+# Setup additonal scripts that vary in location based on distro
+function () {
+  local -a locations
+  local file
 
-# Use zsh syntax highlighting
-zsh_syntax_hightlighting="$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-if [ -f "$zsh_syntax_hightlighting" ]; then
-  source "$zsh_syntax_hightlighting"
-  ZSH_HIGHLIGHT_STYLES[path]='none'
-fi
-unset zsh_syntax_hightlighting
+  locations=(
+    /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  )
+
+  for file in $locations; do
+    [ -f $file ] && source $file
+  done
+}
+
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # Use fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# Use .localrc for local options
+[ -f "$HOME/.localrc" ] && source "$HOME/.localrc"
