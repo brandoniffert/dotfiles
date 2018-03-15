@@ -91,8 +91,6 @@ bindkey '\C-x\C-e' edit-command-line
 #-------------------------------------------------------------------------------
 alias g='git'
 alias grep='grep --color'
-alias ls='gls --color=auto'
-alias lls='gls --color=auto -al'
 alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
@@ -106,6 +104,15 @@ alias nvd="nvim -d"
 alias zr!='source ~/.zshrc'
 alias ag="ag --color-match='0;31'"
 alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
+
+# Need special case for macos
+if [ "$(uname)" = "Darwin" ]; then
+  alias ls='gls --color=auto'
+  alias lls='gls --color=auto -al'
+else
+  alias ls='ls --color=auto'
+  alias lls='ls --color=auto -al'
+fi
 
 #-------------------------------------------------------------------------------
 # COMPLETION
