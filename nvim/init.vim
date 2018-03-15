@@ -75,6 +75,7 @@ set splitbelow splitright
 set switchbuf+=useopen
 set termguicolors
 set undofile
+set updatetime=500
 
 " Set custom spellfile
 if filereadable(expand('~/.vim-custom.en.utf8.add'))
