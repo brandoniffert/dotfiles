@@ -32,8 +32,6 @@
 
 [merge]
   tool = vimdiff
-[credential]
-  helper = osxkeychain
 [push]
   default = simple
 [github]
@@ -44,3 +42,7 @@
   ff = only
 [diff]
   compactionHeuristic = true
+
+# Include a local gitconfig for machine specific config (ex: credential.helper)
+[include]
+  path = .gitconfig.local
