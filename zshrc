@@ -17,7 +17,6 @@ setopt autopushd           # cd automatically pushes old dir onto dir stack
 setopt completealiases     # Do not expand aliases before completion finishes
 setopt completeinword      # Completion from both ends
 setopt correct             # Spell check commands
-setopt correctall          # Argument auto-correction
 setopt extendedhistory     # Add timestamps to history
 setopt histignorealldups   # Prevent recording dupes in history
 setopt histignorespace     # Do not save commands with leading space to history
@@ -161,9 +160,9 @@ SPACESHIP_CHAR_PREFIX='%F{black}└%{%f%} '
 SPACESHIP_CHAR_SUFFIX=' '
 SPACESHIP_CHAR_COLOR_SUCCESS=white
 SPACESHIP_DIR_TRUNC=1
-SPACESHIP_DIR_COLOR=black
+SPACESHIP_DIR_COLOR=blue
 SPACESHIP_GIT_PREFIX=''
-SPACESHIP_GIT_BRANCH_COLOR=cyan
+SPACESHIP_GIT_BRANCH_COLOR=black
 SPACESHIP_GIT_STATUS_PREFIX=' '
 SPACESHIP_GIT_STATUS_SUFFIX=''
 SPACESHIP_GIT_STATUS_DELETED='-'
@@ -189,7 +188,9 @@ SPACESHIP_PROMPT_ORDER=(
 #-------------------------------------------------------------------------------
 # FUNCTIONS
 #-------------------------------------------------------------------------------
-[ -f "$DOTFILES/zsh/functions.zsh" ] && source "$DOTFILES/zsh/functions.zsh"
+if [ -f "$DOTFILES/zsh/functions.zsh" ]; then
+  source "$DOTFILES/zsh/functions.zsh"
+fi
 
 # Adds `cdr` command for navigating to recent directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -227,7 +228,9 @@ function () {
   )
 
   for file in $locations; do
-    [ -f $file ] && source $file
+    if [ -f $file ]; then
+      source $file
+    fi
   done
 }
 
@@ -235,7 +238,11 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # Use fzf
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+if [ -f ~/.fzf.zsh ]; then
+  source ~/.fzf.zsh
+fi
 
 # Use .localrc for local options
-[ -f "$HOME/.localrc" ] && source "$HOME/.localrc"
+if [ -f "$HOME/.localrc" ]; then
+  source "$HOME/.localrc"
+fi
