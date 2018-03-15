@@ -107,11 +107,11 @@ let mapleader="\<space>"
 "-------------------------------------------------------------------------------
 augroup nord-overrides
   autocmd!
-  autocmd ColorScheme nord highlight Normal guibg=#1c1f26
-  autocmd ColorScheme nord highlight LineNr guifg=#3B4252 guibg=#1c1f26
-  autocmd ColorScheme nord highlight CursorLineNr guifg=#7b88a1 guibg=#1c1f26
-  autocmd ColorScheme nord highlight SignColumn guibg=#1c1f26
-  autocmd ColorScheme nord highlight FoldColumn guibg=#1c1f26
+  autocmd ColorScheme nord highlight Normal guibg=#181a20
+  autocmd ColorScheme nord highlight LineNr guifg=#3B4252 guibg=#181a20
+  autocmd ColorScheme nord highlight CursorLineNr guifg=#7b88a1 guibg=#181a20
+  autocmd ColorScheme nord highlight SignColumn guibg=#181a20
+  autocmd ColorScheme nord highlight FoldColumn guibg=#181a20
   autocmd ColorScheme nord highlight Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight Error guifg=#D8DEE9
   autocmd ColorScheme nord highlight PmenuSel guifg=#2E3440 guibg=#D8DEE9
@@ -159,6 +159,10 @@ nnoremap k gk
 
 " Clear the highlighted search
 nnoremap <silent><cr> :noh<cr>
+
+" Enter command mode
+nnoremap <leader><cr> :
+vnoremap <leader><cr> :
 
 " Use hjkl for switching between splits
 nnoremap <c-j> <c-W>j
@@ -227,7 +231,9 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " EasyMotion
-map <Leader>m <Plug>(easymotion-prefix)
+map <leader>m <Plug>(easymotion-s)
+map <leader>j <Plug>(easymotion-j)
+map <leader>k <Plug>(easymotion-k)
 
 " Ripgrep
 set grepprg=rg\ --vimgrep
