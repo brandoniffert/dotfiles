@@ -124,6 +124,7 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight link jsObjectKey jsonKeyword
 augroup END
 
+let g:nord_comment_brightness = 8
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 colorscheme nord
@@ -232,7 +233,7 @@ autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
 " EasyMotion
-map <leader>m <Plug>(easymotion-s)
+map <leader>m <Plug>(easymotion-prefix)
 map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
@@ -242,6 +243,7 @@ set grepprg=rg\ --vimgrep
 " Vim markdown
 let g:vim_markdown_conceal = 0
 
+" NERDTree
 let g:NERDTreeDirArrowExpandable = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
 
