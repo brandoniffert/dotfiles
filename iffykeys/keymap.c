@@ -5,8 +5,7 @@
 
 enum custom_layers {
   _COLEMAK,
-  _NAV,
-  _PROGRAMMING,
+  _NAV_PROGRAMMING_SYMBOLS,
   _SYMBOLS,
   _NUMBERS,
   _QWERTY
@@ -25,37 +24,37 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = KEYMAP(
       // Left hand
-      KC_GRAVE,            KC_1,         KC_2,             KC_3,          KC_4,     KC_5,      KC_PGUP,
-      KC_TAB,              KC_Q,         KC_W,             KC_F,          KC_P,     KC_G,      LCTL(KC_A),
-      MO(2),               KC_A,         KC_R,             KC_S,          KC_T,     KC_D,
-      KC_LSHIFT,           KC_Z,         KC_X,             KC_C,          KC_V,     KC_B,      KC_MINUS,
-      KC_UP,               KC_DOWN,      KC_TRNS,          KC_LALT,       MO(4),
+      KC_GRAVE,                     KC_1,         KC_2,             KC_3,          KC_4,      KC_5,                         KC_PGUP,
+      KC_TAB,                       KC_Q,         KC_W,             KC_F,          KC_P,      KC_G,                         LCTL(KC_A),
+      MO(_NUMBERS),                 KC_A,         KC_R,             KC_S,          KC_T,      KC_D,
+      MO(_NAV_PROGRAMMING_SYMBOLS), KC_Z,         KC_X,             KC_C,          KC_V,      KC_B,                         KC_MINUS,
+      KC_UP,                        KC_DOWN,      KC_TRNS,          KC_LALT,       KC_LSHIFT,
 
       // Left thumb
-      LCTL(LSFT(KC_TAB)),  LCTL(KC_TAB),
-      TG(5),
-      MT(MOD_LGUI,         KC_ENTER),    CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
+      LCTL(LSFT(KC_TAB)),           LCTL(KC_TAB),
+      TG(_QWERTY),
+      MT(MOD_LGUI,                  KC_ENTER),    CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
       // Right hand
-      KC_PGDOWN,           KC_6,         KC_7,             KC_8,          KC_9,     KC_0,      KC_ENTER,
-      KC_BSLASH,           KC_J,         KC_L,             KC_U,          KC_Y,     KC_SCOLON, KC_QUOTE,
-      KC_H,                KC_N,         KC_E,             KC_I,          KC_O,     MO(1),
-      KC_EQUAL,            KC_K,         KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,  KC_RSHIFT,
-      MO(3),               KC_HYPR,      KC_TRNS,          KC_LEFT,       KC_RIGHT,
+      KC_PGDOWN,                    KC_6,         KC_7,             KC_8,          KC_9,      KC_0,                         KC_ENTER,
+      KC_BSLASH,                    KC_J,         KC_L,             KC_U,          KC_Y,      KC_SCOLON,                    KC_QUOTE,
+      KC_H,                         KC_N,         KC_E,             KC_I,          KC_O,      MO(_NAV_PROGRAMMING_SYMBOLS),
+      KC_EQUAL,                     KC_K,         KC_M,             KC_COMMA,      KC_DOT,    KC_SLASH,                     MO(_SYMBOLS),
+      KC_RSHIFT,                    KC_HYPR,      KC_TRNS,          KC_LEFT,       KC_RIGHT,
 
       // Right thumb
-      KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
+      KC_MEDIA_PLAY_PAUSE,          KC_ESCAPE,
       KC_TRNS,
-      LCTL(KC_LGUI),       KC_BSPACE,    SFT_T(KC_SPACE)
+      LCTL(KC_LGUI),                KC_BSPACE,    KC_SPACE
   ),
 
-  [_NAV] = KEYMAP(
+  [_NAV_PROGRAMMING_SYMBOLS] = KEYMAP(
       // Left hand
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, LALT(KC_B), KC_UP,   LALT(KC_F), KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_LEFT,    KC_DOWN, KC_RIGHT,   KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_F1,   KC_F2,       KC_F3,       KC_F4,          KC_F5,   KC_TRNS,
+      KC_TRNS, KC_TRNS, LALT(KC_B),  KC_UP,       LALT(KC_F),     KC_TRNS, KC_TRNS,
+      RESET,   KC_TRNS, KC_LEFT,     KC_DOWN,     KC_RIGHT,       KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,        KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,
 
       // Left thumb
       RGB_MOD, KC_TRNS,
@@ -63,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS, RGB_VAD,
 
       // Right hand
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,    KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_F6,   KC_F7,       KC_F8,       KC_F9,          KC_F10,  KC_F11,
+      KC_TRNS, KC_TRNS, KC_LCBR,     KC_RCBR,     KC_TRNS,        KC_TRNS, KC_F12,
+      KC_TRNS, KC_LPRN, KC_RPRN,     MC_ARROW,    KC_TRNS,        KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_LBRACKET, KC_RBRACKET, MC_HASH_ROCKET, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,
 
       // Right thumb
       RGB_TOG, RGB_SLD,
@@ -75,36 +74,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RGB_HUD, KC_TRNS, KC_TRNS
   ),
 
-  [_PROGRAMMING] = KEYMAP(
-      // Left hand
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,
-
-      // Left thumb
-      KC_TRNS, KC_TRNS,
-      KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,
-
-      // Right hand
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS, RESET,
-      KC_TRNS, KC_TRNS, KC_LCBR,     MC_HASH_ROCKET, KC_RCBR,     KC_TRNS, KC_TRNS,
-      KC_COLN, KC_LPRN, MC_ARROW,    KC_RPRN,        KC_TRNS,     KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_LBRACKET, KC_TRNS,        KC_RBRACKET, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,        KC_TRNS,
-
-      // Right thumb
-      KC_TRNS, KC_TRNS,
-      KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS
-  ),
-
   [_SYMBOLS] = KEYMAP(
       // Left hand
-      KC_TRNS, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_AMPR, KC_ASTR, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_AMPR, KC_ASTR, KC_EXLM, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_DLR,  KC_PERC, KC_CIRC, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
@@ -115,8 +88,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS, KC_TRNS,
 
       // Right hand
-      KC_TRNS, KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_F12,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
