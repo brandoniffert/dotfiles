@@ -160,26 +160,28 @@ SPACESHIP_CHAR_PREFIX='%F{black}└%{%f%} '
 SPACESHIP_CHAR_SUFFIX=' '
 SPACESHIP_CHAR_COLOR_SUCCESS=white
 SPACESHIP_DIR_TRUNC=1
-SPACESHIP_DIR_COLOR=blue
-SPACESHIP_GIT_PREFIX=''
-SPACESHIP_GIT_BRANCH_COLOR=black
+SPACESHIP_DIR_COLOR=cyan
+SPACESHIP_GIT_PREFIX='%F{black}-%{%f%} '
+SPACESHIP_GIT_BRANCH_COLOR=yellow
 SPACESHIP_GIT_STATUS_PREFIX=' '
 SPACESHIP_GIT_STATUS_SUFFIX=''
 SPACESHIP_GIT_STATUS_DELETED='-'
-SPACESHIP_JOBS_SYMBOL='♦'
-SPACESHIP_JOBS_COLOR=yellow
+SPACESHIP_JOBS_SYMBOL='+'
+SPACESHIP_JOBS_COLOR=white
 SPACESHIP_EXEC_TIME_PREFIX=''
-SPACESHIP_VENV_PREFIX='venv:'
-SPACESHIP_VENV_COLOR=8
+SPACESHIP_EXEC_TIME_COLOR=black
+SPACESHIP_VENV_PREFIX='%F{0}(%{%f%}'
+SPACESHIP_VENV_SUFFIX='%F{0})%{%f%}'
+SPACESHIP_VENV_COLOR=black
 SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory section
   host          # Hostname section
   jobs          # Backgound jobs indicator
   git           # Git section (git_branch + git_status)
   aws           # Amazon Web Services section
+  venv          # virtualenv section
   exec_time     # Execution time
   battery       # Battery level and status
-  venv          # virtualenv section
   line_sep      # Line break
   exit_code     # Exit code section
   char          # Prompt character
