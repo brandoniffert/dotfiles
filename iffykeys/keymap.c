@@ -5,8 +5,7 @@
 
 enum custom_layers {
   _COLEMAK,
-  _NAV_PROGRAMMING_SYMBOLS,
-  _SYMBOLS,
+  _NAV_MACROS,
   _NUMBERS,
   _QWERTY
 };
@@ -24,106 +23,80 @@ enum custom_keycodes {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = KEYMAP(
       // Left hand
-      KC_GRAVE,                     KC_1,         KC_2,             KC_3,          KC_4,      KC_5,                         KC_PGUP,
-      KC_TAB,                       KC_Q,         KC_W,             KC_F,          KC_P,      KC_G,                         LCTL(KC_A),
-      MO(_NUMBERS),                 KC_A,         KC_R,             KC_S,          KC_T,      KC_D,
-      MO(_NAV_PROGRAMMING_SYMBOLS), KC_Z,         KC_X,             KC_C,          KC_V,      KC_B,                         KC_MINUS,
-      KC_UP,                        KC_DOWN,      KC_TRNS,          KC_LALT,       KC_LSHIFT,
+      KC_GRAVE,            KC_1,       KC_2,             KC_3,          KC_4,     KC_5,           KC_PGUP,
+      KC_TAB,              KC_Q,       KC_W,             KC_F,          KC_P,     KC_G,           KC_MINUS,
+      LT(_NUMBERS,         KC_BSPACE), KC_A,             KC_R,          KC_S,     KC_T,           KC_D,
+      KC_TRNS,             KC_Z,       KC_X,             KC_C,          KC_V,     KC_B,           KC_LBRACKET,
+      KC_UP,               KC_DOWN,    KC_TRNS,          KC_LALT,       KC_LSPO,
 
       // Left thumb
-      LCTL(LSFT(KC_TAB)),           LCTL(KC_TAB),
+      LCTL(KC_A),          KC_TRNS,
       TG(_QWERTY),
-      MT(MOD_LGUI,                  KC_ENTER),    CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
+      MT(MOD_LGUI,         KC_ENTER),  CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
       // Right hand
-      KC_PGDOWN,                    KC_6,         KC_7,             KC_8,          KC_9,      KC_0,                         KC_ENTER,
-      KC_BSLASH,                    KC_J,         KC_L,             KC_U,          KC_Y,      KC_SCOLON,                    KC_QUOTE,
-      KC_H,                         KC_N,         KC_E,             KC_I,          KC_O,      MO(_NAV_PROGRAMMING_SYMBOLS),
-      KC_EQUAL,                     KC_K,         KC_M,             KC_COMMA,      KC_DOT,    KC_SLASH,                     MO(_SYMBOLS),
-      KC_RSHIFT,                    KC_HYPR,      KC_TRNS,          KC_LEFT,       KC_RIGHT,
+      KC_PGDOWN,           KC_6,       KC_7,             KC_8,          KC_9,     KC_0,           KC_BSLASH,
+      KC_EQUAL,            KC_J,       KC_L,             KC_U,          KC_Y,     KC_SCOLON,      KC_QUOTE,
+      KC_H,                KC_N,       KC_E,             KC_I,          KC_O,     LT(_NAV_MACROS, KC_BSPACE),
+      KC_RBRACKET,         KC_K,       KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,       KC_HYPR,
+      KC_RSPC,             KC_RALT,    KC_TRNS,          KC_LEFT,       KC_RIGHT,
 
       // Right thumb
-      KC_MEDIA_PLAY_PAUSE,          KC_ESCAPE,
+      KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
       KC_TRNS,
-      LCTL(KC_LGUI),                KC_BSPACE,    KC_SPACE
+      LCTL(KC_LGUI),       KC_BSPACE,  KC_SPACE
   ),
 
-  [_NAV_PROGRAMMING_SYMBOLS] = KEYMAP(
+  [_NAV_MACROS] = KEYMAP(
       // Left hand
-      KC_TRNS, KC_F1,   KC_F2,       KC_F3,       KC_F4,          KC_F5,   KC_TRNS,
-      KC_TRNS, KC_TRNS, LALT(KC_B),  KC_UP,       LALT(KC_F),     KC_TRNS, KC_TRNS,
-      RESET,   KC_TRNS, KC_LEFT,     KC_DOWN,     KC_RIGHT,       KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,        KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS,        LALT(KC_B),         KC_UP,        LALT(KC_F),     KC_TRNS, KC_TRNS,
+      RESET,    KC_TRNS,        KC_LEFT,            KC_DOWN,      KC_RIGHT,       KC_TRNS,
+      KC_TRNS,  KC_TRNS,        LGUI(KC_LEFT),      KC_TRNS,      LGUI(KC_RIGHT), KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
       // Left thumb
-      RGB_MOD, KC_TRNS,
+      RGB_MOD,  KC_TRNS,
       RGB_VAI,
-      KC_TRNS, KC_TRNS, RGB_VAD,
+      KC_TRNS,  KC_TRNS,        RGB_VAD,
 
       // Right hand
-      KC_TRNS, KC_F6,   KC_F7,       KC_F8,       KC_F9,          KC_F10,  KC_F11,
-      KC_TRNS, KC_TRNS, KC_LCBR,     KC_RCBR,     KC_TRNS,        KC_TRNS, KC_F12,
-      KC_TRNS, KC_LPRN, KC_RPRN,     MC_ARROW,    KC_TRNS,        KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_LBRACKET, KC_RBRACKET, MC_HASH_ROCKET, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,     KC_TRNS,     KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS, KC_TRNS,
+      KC_TRNS,  MC_HASH_ROCKET, LCTL(LSFT(KC_TAB)), LCTL(KC_TAB), KC_TRNS,        KC_TRNS, KC_TRNS,
+      MC_ARROW, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
       // Right thumb
-      RGB_TOG, RGB_SLD,
+      RGB_TOG,  RGB_SLD,
       RGB_HUI,
-      RGB_HUD, KC_TRNS, KC_TRNS
-  ),
-
-  [_SYMBOLS] = KEYMAP(
-      // Left hand
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_AMPR, KC_ASTR, KC_EXLM, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_DLR,  KC_PERC, KC_CIRC, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_EXLM, KC_AT,   KC_HASH, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-
-      // Left thumb
-      KC_TRNS, KC_TRNS,
-      KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS,
-
-      // Right hand
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
-
-      // Right thumb
-      KC_TRNS, KC_TRNS,
-      KC_TRNS,
-      KC_TRNS, KC_TRNS, KC_TRNS
+      RGB_HUD,  KC_TRNS,        KC_TRNS
   ),
 
   [_NUMBERS] = KEYMAP(
       // Left hand
-      KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,        KC_TRNS,     KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,
+      KC_TRNS,        KC_F1,       KC_F2,   KC_F3,   KC_F4,   KC_F5,    KC_TRNS,
+      KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
+      KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,
+      KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
+      KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS,
 
       // Left thumb
-      KC_TRNS,   KC_TRNS,
+      KC_TRNS,        KC_TRNS,
       KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS,
+      KC_TRNS,        KC_TRNS,     KC_TRNS,
 
       // Right hand
-      KC_TRNS,   KC_TRNS, KC_KP_PLUS, KC_KP_MINUS, KC_KP_ASTERISK, KC_KP_SLASH, KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_KP_7,    KC_KP_8,     KC_KP_9,        KC_TRNS,     KC_TRNS,
-      KC_KP_DOT, KC_KP_4, KC_KP_5,    KC_KP_6,     KC_EQUAL,       KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_KP_1,    KC_KP_2,     KC_KP_3,        KC_TRNS,     KC_TRNS,
-      KC_KP_0,   KC_TRNS, KC_TRNS,    KC_TRNS,     KC_TRNS,
+      KC_TRNS,        KC_F6,       KC_F7,   KC_F8,   KC_F9,   KC_F10,   KC_F11,
+      KC_KP_PLUS,     KC_KP_MINUS, KC_7,    KC_8,    KC_KP_9, KC_TRNS,  KC_F12,
+      KC_KP_ASTERISK, KC_4,        KC_5,    KC_6,    KC_DOT,  KC_EQUAL,
+      KC_TRNS,        KC_KP_SLASH, KC_1,    KC_2,    KC_3,    KC_TRNS,  KC_TRNS,
+      KC_KP_0,        KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS,
 
       // Right thumb
-      KC_TRNS,   KC_TRNS,
+      KC_TRNS,        KC_TRNS,
       KC_TRNS,
-      KC_TRNS,   KC_TRNS, KC_TRNS
+      KC_TRNS,        KC_TRNS,     KC_TRNS
   ),
 
   [_QWERTY] = KEYMAP(
