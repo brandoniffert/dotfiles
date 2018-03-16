@@ -77,6 +77,10 @@ set termguicolors
 set undofile
 set updatetime=500
 
+if !empty($TMUX)
+  set cmdheight=2
+endif
+
 " Set custom spellfile
 if filereadable(expand('~/.vim-custom.en.utf8.add'))
   set spellfile=~/.vim-custom.en.utf8.add
