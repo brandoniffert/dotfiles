@@ -64,15 +64,13 @@ function fs() {
 
 # Colorize man pages
 function man() {
-  env \
-    LESS_TERMCAP_mb=$(printf "\e[0;31m") \
-    LESS_TERMCAP_md=$(printf "\e[0;31m") \
-    LESS_TERMCAP_me=$(printf "\e[0m") \
-    LESS_TERMCAP_se=$(printf "\e[0m") \
-    LESS_TERMCAP_so=$(printf "\e[1;44;30m") \
-    LESS_TERMCAP_ue=$(printf "\e[0m") \
-    LESS_TERMCAP_us=$(printf "\e[0;32m") \
-    man "$@"
+  LESS_TERMCAP_md=$'\e[01;34m' \
+  LESS_TERMCAP_me=$'\e[0m' \
+  LESS_TERMCAP_se=$'\e[0m' \
+  LESS_TERMCAP_so=$'\e[01;44;30m' \
+  LESS_TERMCAP_ue=$'\e[0m' \
+  LESS_TERMCAP_us=$'\e[01;32m' \
+  command man "$@"
 }
 
 # Shows the most used shell commands.
