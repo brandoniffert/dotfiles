@@ -112,23 +112,22 @@ let mapleader="\<space>"
 "-------------------------------------------------------------------------------
 augroup nord-overrides
   autocmd!
-  autocmd ColorScheme nord highlight Normal guibg=#181a20
-  autocmd ColorScheme nord highlight LineNr guifg=#3B4252 guibg=#181a20
-  autocmd ColorScheme nord highlight CursorLineNr guifg=#7b88a1 guibg=#181a20
-  autocmd ColorScheme nord highlight SignColumn guibg=#181a20
-  autocmd ColorScheme nord highlight FoldColumn guibg=#181a20
-  autocmd ColorScheme nord highlight Folded guifg=#7b88a1
-  autocmd ColorScheme nord highlight Error guifg=#D8DEE9
-  autocmd ColorScheme nord highlight PmenuSel guifg=#2E3440 guibg=#D8DEE9
-  autocmd ColorScheme nord highlight Visual guibg=#313745
-  autocmd ColorScheme nord highlight VertSplit guibg=NONE
-  autocmd ColorScheme nord highlight diffAdded guifg=#A3BE8C
-  autocmd ColorScheme nord highlight diffRemoved guifg=#BF616A
-  autocmd ColorScheme nord highlight link jsThis Keyword
-  autocmd ColorScheme nord highlight link jsObjectKey jsonKeyword
+  autocmd ColorScheme nord highlight! Normal guibg=NONE
+  autocmd ColorScheme nord highlight! CursorLine guibg=#2B303B
+  autocmd ColorScheme nord highlight! Error guifg=#D8DEE9
+  autocmd ColorScheme nord highlight! Folded guifg=#7b88a1
+  autocmd ColorScheme nord highlight! LineNr guifg=#2E3440 guibg=NONE
+  autocmd ColorScheme nord highlight! TabLine guibg=#2E3440
+  autocmd ColorScheme nord highlight! TabLineFill guibg=#2E3440
+  autocmd ColorScheme nord highlight! TabLineSel guifg=#A3BE8C guibg=#3B4252
+  autocmd ColorScheme nord highlight! VertSplit guibg=NONE
+  autocmd ColorScheme nord highlight! Visual guibg=#2E3440
+  autocmd ColorScheme nord highlight! link CursorLineNr LineNr
+  autocmd ColorScheme nord highlight! link jsThis Keyword
+  autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
 augroup END
 
-let g:nord_comment_brightness = 8
+let g:nord_comment_brightness = 1
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 colorscheme nord
