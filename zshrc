@@ -46,8 +46,8 @@ export WORDCHARS='*?[]~&;!$%^<>'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # Setup dircolors
-command -v dircolors >/dev/null 2>&1 && [ -f "$HOME"/.dir_colors ] && eval $(dircolors $HOME/.dir_colors)
-command -v gdircolors >/dev/null 2>&1 && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
+command -v dircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(dircolors $HOME/.dir_colors)
+command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
 
 # For nvm
 export NVM_DIR=~/.nvm
@@ -155,24 +155,24 @@ promptinit
 prompt spaceship
 
 SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_SYMBOL='❯'
+SPACESHIP_CHAR_COLOR_SUCCESS=white
 SPACESHIP_CHAR_PREFIX='%F{black}└%{%f%} '
 SPACESHIP_CHAR_SUFFIX=' '
-SPACESHIP_CHAR_COLOR_SUCCESS=white
-SPACESHIP_DIR_TRUNC=1
+SPACESHIP_CHAR_SYMBOL='❯'
 SPACESHIP_DIR_COLOR=cyan
+SPACESHIP_DIR_TRUNC=1
+SPACESHIP_EXEC_TIME_COLOR=black
+SPACESHIP_EXEC_TIME_PREFIX=''
+SPACESHIP_GIT_BRANCH_COLOR=230
 SPACESHIP_GIT_PREFIX='%F{black}-%{%f%} '
-SPACESHIP_GIT_BRANCH_COLOR=yellow
+SPACESHIP_GIT_STATUS_DELETED='-'
 SPACESHIP_GIT_STATUS_PREFIX=' '
 SPACESHIP_GIT_STATUS_SUFFIX=''
-SPACESHIP_GIT_STATUS_DELETED='-'
-SPACESHIP_JOBS_SYMBOL='+'
 SPACESHIP_JOBS_COLOR=white
-SPACESHIP_EXEC_TIME_PREFIX=''
-SPACESHIP_EXEC_TIME_COLOR=black
+SPACESHIP_JOBS_SYMBOL='+'
+SPACESHIP_VENV_COLOR=black
 SPACESHIP_VENV_PREFIX='%F{0}(%{%f%}'
 SPACESHIP_VENV_SUFFIX='%F{0})%{%f%}'
-SPACESHIP_VENV_COLOR=black
 SPACESHIP_PROMPT_ORDER=(
   dir           # Current directory section
   host          # Hostname section
