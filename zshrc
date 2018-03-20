@@ -244,7 +244,7 @@ if [ -f ~/.fzf.zsh ]; then
   source ~/.fzf.zsh
 fi
 
-# Use .localrc for local options
-if [ -f "$HOME/.localrc" ]; then
-  source "$HOME/.localrc"
+# Use .zshrc.local for local options
+if [ -f "$HOME/.zshrc.local" ]; then
+  source "$HOME/.zshrc.local"
 fi
