@@ -25,9 +25,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_COLEMAK] = KEYMAP(
       // Left hand
       KC_GRAVE,            KC_1,       KC_2,             KC_3,          KC_4,     KC_5,           KC_PGUP,
-      KC_TAB,              KC_Q,       KC_W,             KC_F,          KC_P,     KC_G,           MO(_SYMBOLS),
+      KC_TAB,              KC_Q,       KC_W,             KC_F,          KC_P,     KC_G,           KC_LBRACKET,
       LT(_NUMBERS,         KC_BSPACE), KC_A,             KC_R,          KC_S,     KC_T,           KC_D,
-      KC_LBRACKET,         KC_Z,       KC_X,             KC_C,          KC_V,     KC_B,           KC_MINUS,
+      MO(_SYMBOLS),        KC_Z,       KC_X,             KC_C,          KC_V,     KC_B,           KC_MINUS,
       KC_UP,               KC_DOWN,    KC_TRNS,          KC_LALT,       KC_LSPO,
 
       // Left thumb
@@ -37,9 +37,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
       // Right hand
       KC_PGDOWN,           KC_6,       KC_7,             KC_8,          KC_9,     KC_0,           KC_BSLASH,
-      KC_TRNS,             KC_J,       KC_L,             KC_U,          KC_Y,     KC_SCOLON,      KC_QUOTE,
+      KC_RBRACKET,         KC_J,       KC_L,             KC_U,          KC_Y,     KC_SCOLON,      KC_QUOTE,
       KC_H,                KC_N,       KC_E,             KC_I,          KC_O,     LT(_NAV_MACROS, KC_BSPACE),
-      KC_EQUAL,            KC_K,       KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,       KC_RBRACKET,
+      KC_EQUAL,            KC_K,       KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,       MO(_SYMBOLS),
       KC_RSPC,             KC_HYPR,    KC_TRNS,          KC_LEFT,       KC_RIGHT,
 
       // Right thumb
