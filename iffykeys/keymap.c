@@ -31,7 +31,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_UP,               KC_DOWN,    KC_TRNS,          KC_LALT,       KC_LSPO,
 
       // Left thumb
-      LCTL(KC_A),          KC_TRNS,
+      KC_TRNS,             KC_TRNS,
       TG(_QWERTY),
       MT(MOD_LGUI,         KC_ENTER),  CTL_T(KC_ESCAPE), LSFT(KC_LGUI),
 
@@ -39,8 +39,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_PGDOWN,           KC_6,       KC_7,             KC_8,          KC_9,     KC_0,           KC_BSLASH,
       KC_RBRACKET,         KC_J,       KC_L,             KC_U,          KC_Y,     KC_SCOLON,      KC_QUOTE,
       KC_H,                KC_N,       KC_E,             KC_I,          KC_O,     LT(_NAV_MACROS, KC_BSPACE),
-      KC_EQUAL,            KC_K,       KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,       MO(_SYMBOLS),
-      KC_RSPC,             KC_HYPR,    KC_TRNS,          KC_LEFT,       KC_RIGHT,
+      KC_EQUAL,            KC_K,       KC_M,             KC_COMMA,      KC_DOT,   KC_SLASH,       LCTL(KC_A),
+      KC_RSPC,             KC_HYPR,    KC_LGUI,          KC_LEFT,       KC_RIGHT,
 
       // Right thumb
       KC_MEDIA_PLAY_PAUSE, KC_ESCAPE,
