@@ -123,7 +123,6 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! VertSplit guibg=NONE
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
-  autocmd ColorScheme nord highlight! link jsThis Keyword
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
 augroup END
 

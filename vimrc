@@ -88,6 +88,10 @@ nnoremap k gk
 " <cr> clears the highlighted search
 nnoremap <silent><cr> :nohlsearch<cr>
 
+" Enter command mode
+nnoremap <leader><cr> :
+vnoremap <leader><cr> :
+
 " Use hjkl for switching between splits
 nnoremap <c-j> <c-W>j
 nnoremap <c-h> <c-W>h
@@ -155,11 +159,10 @@ endfunction
 command! ReplaceFancyCharacters call ReplaceFancyCharacters()
 
 " Strip whitespace and tabs
-function! StripWhitespace()
-  let l = line(".")
-  let c = col(".")
-  %s/\s\+$//e
+function! StripWhitespace() abort
+  let l:saved_winview = winsaveview()
+  %s/\v\s+$//e
   retab
-  call cursor(l, c)
+  call winrestview(l:saved_winview)
 endfunction
 command! StripWhitespace call StripWhitespace()

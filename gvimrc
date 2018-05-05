@@ -1,3 +1,6 @@
 set vb t_vb=
 set guioptions=
-set guifont=Fira\ Code:h13
+set guifont=Inconsolata\ LGC:h11
+
+set bg=light
+colorscheme flattened_light
