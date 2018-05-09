@@ -249,6 +249,9 @@ let g:vim_markdown_conceal = 0
 let g:NERDTreeDirArrowExpandable = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
 
+" Polyglot
+let g:polyglot_disabled = ['graphql']
+
 " FZF
 let g:fzf_layout = { 'down': '~25%' }
 
