@@ -50,10 +50,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NAV_MACROS] = KEYMAP(
       // Left hand
-      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS, KC_TRNS,
-      KC_TRNS,  KC_TRNS,        LALT(KC_B),         KC_UP,        LALT(KC_F),     KC_TRNS, KC_TRNS,
-      RESET,    KC_TRNS,        KC_LEFT,            KC_DOWN,      KC_RIGHT,       KC_TRNS,
-      KC_TRNS,  KC_TRNS,        LGUI(KC_LEFT),      KC_TRNS,      LGUI(KC_RIGHT), KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS,        LALT(KC_B),         KC_UP,        LALT(KC_F), KC_TRNS, KC_TRNS,
+      RESET,    LGUI(KC_LEFT),  KC_LEFT,            KC_DOWN,      KC_RIGHT,   LGUI(KC_RIGHT),
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
       KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
       // Left thumb
@@ -62,10 +62,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,  KC_TRNS,        RGB_VAD,
 
       // Right hand
-      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS, KC_TRNS,
-      KC_TRNS,  MC_HASH_ROCKET, LCTL(LSFT(KC_TAB)), LCTL(KC_TAB), KC_TRNS,        KC_TRNS, KC_TRNS,
-      MC_ARROW, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS,
-      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,        KC_TRNS, KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
+      KC_TRNS,  MC_HASH_ROCKET, LCTL(LSFT(KC_TAB)), LCTL(KC_TAB), KC_TRNS,    KC_TRNS, KC_TRNS,
+      MC_ARROW, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,
+      KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
       KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
       // Right thumb
