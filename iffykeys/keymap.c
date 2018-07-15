@@ -22,7 +22,7 @@ enum custom_keycodes {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [_COLEMAK] = KEYMAP(
+  [_COLEMAK] = LAYOUT_ergodox(
       // Left hand
       KC_GRAVE,            KC_1,       KC_2,             KC_3,          KC_4,     KC_5,           KC_PGUP,
       KC_TAB,              KC_Q,       KC_W,             KC_F,          KC_P,     KC_G,           KC_LBRACKET,
@@ -48,7 +48,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       LCTL(KC_LGUI),       KC_BSPACE,  KC_SPACE
   ),
 
-  [_NAV_MACROS] = KEYMAP(
+  [_NAV_MACROS] = LAYOUT_ergodox(
       // Left hand
       KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
       KC_TRNS,  KC_TRNS,        LALT(KC_B),         KC_UP,        LALT(KC_F), KC_TRNS, KC_TRNS,
@@ -74,7 +74,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       RGB_HUD,  KC_TRNS,        KC_TRNS
   ),
 
-  [_NUMBERS] = KEYMAP(
+  [_NUMBERS] = LAYOUT_ergodox(
       // Left hand
       KC_TRNS,        KC_F1,       KC_F2,   KC_F3,   KC_F4,   KC_F5,    KC_TRNS,
       KC_TRNS,        KC_TRNS,     KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS,        KC_TRNS,     KC_TRNS
   ),
 
-  [_SYMBOLS] = KEYMAP(
+  [_SYMBOLS] = LAYOUT_ergodox(
       // Left hand
       KC_TRNS, KC_TRNS,   KC_TRNS,      KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS,
       KC_TRNS, KC_TRNS,   KC_TRNS,      KC_TRNS,       KC_TRNS, KC_TRNS, KC_TRNS,
@@ -126,7 +126,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
       KC_TRNS, KC_TRNS,   KC_TRNS
   ),
 
-  [_QWERTY] = KEYMAP(
+  [_QWERTY] = LAYOUT_ergodox(
       // Left hand
       KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,  KC_TRNS,   KC_TRNS,  KC_TRNS,
       KC_TRNS, KC_Q,    KC_W,    KC_E,     KC_R,      KC_T,     KC_TRNS,
