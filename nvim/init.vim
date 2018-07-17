@@ -17,7 +17,6 @@ if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
 endif
 
 call plug#begin()
-Plug 'airblade/vim-gitgutter'
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
@@ -31,8 +30,10 @@ Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'machakann/vim-sandwich'
+Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
+Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
@@ -117,6 +118,7 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! Error guifg=#D8DEE9
   autocmd ColorScheme nord highlight! Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight! LineNr guifg=#2E3440 guibg=NONE
+  autocmd ColorScheme nord highlight! SignColumn guibg=NONE
   autocmd ColorScheme nord highlight! TabLine guibg=#2E3440
   autocmd ColorScheme nord highlight! TabLineFill guibg=#2E3440
   autocmd ColorScheme nord highlight! TabLineSel guifg=#A3BE8C guibg=#3B4252
@@ -244,6 +246,9 @@ set grepprg=rg\ --vimgrep
 
 " Vim markdown
 let g:vim_markdown_conceal = 0
+
+" Signify
+let g:signify_vcs_list = ['git']
 
 " NERDTree
 let g:NERDTreeDirArrowExpandable = '▶'
