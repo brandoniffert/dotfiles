@@ -63,8 +63,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
       // Right hand
       KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
-      KC_TRNS,  MC_HASH_ROCKET, LCTL(LSFT(KC_TAB)), LCTL(KC_TAB), KC_TRNS,    KC_TRNS, KC_TRNS,
-      MC_ARROW, KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS,
+      KC_TRNS,  KC_TRNS,        LCTL(LSFT(KC_TAB)), LCTL(KC_TAB), KC_TRNS,    KC_TRNS, KC_TRNS,
+      KC_TRNS,  MC_ARROW,       MC_HASH_ROCKET,     KC_TRNS,      KC_TRNS,    KC_TRNS,
       KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,    KC_TRNS, KC_TRNS,
       KC_TRNS,  KC_TRNS,        KC_TRNS,            KC_TRNS,      KC_TRNS,
 
