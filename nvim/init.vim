@@ -286,6 +286,9 @@ augroup bti-vimrc
   " Always highlight shebang-looking lines as Comment
   autocmd! BufEnter,WinEnter * call matchadd("Comment", "^#!\/.*", -1)
 
+  " Handle crontab editing
+  autocmd! filetype crontab setlocal nobackup nowritebackup
+
   " When editing a file, always jump to the last known cursor position
   autocmd! BufReadPost *
     \  if line("'\"") > 1 && line("'\"") <= line("$")
