@@ -242,7 +242,8 @@ map <leader>j <Plug>(easymotion-j)
 map <leader>k <Plug>(easymotion-k)
 
 " Ripgrep
-set grepprg=rg\ --vimgrep
+set grepprg=rg\ --vimgrep\ $*
+set grepformat=%f:%l:%m
 
 " Vim markdown
 let g:vim_markdown_conceal = 0
@@ -255,7 +256,7 @@ let g:NERDTreeDirArrowExpandable = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
 
 " FZF
-let g:fzf_layout = { 'down': '~25%' }
+let g:fzf_layout = { 'down': '~30%' }
 
 nnoremap <silent><leader>f :Files<cr>
 nnoremap <silent><leader>b :Buffers<cr>
@@ -266,12 +267,21 @@ function! s:fzf_statusline() abort
 endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --vimgrep --smart-case --color=always --colors=path:fg:white --colors=line:none '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
+if executable('rg')
+  function! s:rg_with_opts(arg, bang)
+    let rg_cmd = 'rg --line-number --smart-case --color=always --colors=path:fg:green --colors=line:fg:blue '
+    let tokens = split(a:arg)
+    let rg_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
+    let query = join(filter(copy(tokens), 'v:val !~ "^-"'))
+    let cmd = rg_cmd . rg_opts . ' ' . shellescape(query)
+    let preview_type = a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%:hidden', '?')
+
+    return call('fzf#vim#grep', [cmd, 0, preview_type])
+  endfunction
+
+  command! -bang -nargs=* G call s:rg_with_opts(<q-args>, <bang>0)
+  nnoremap <leader>a :G<space>
+endif
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS
