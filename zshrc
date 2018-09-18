@@ -40,6 +40,7 @@ export EDITOR=nvim
 export HISTFILE="$HOME/.zsh_history"
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
+export HISTIGNORE="fg"
 export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export WORDCHARS='*?[]~&;!$%^<>'
