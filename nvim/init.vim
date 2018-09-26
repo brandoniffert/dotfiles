@@ -31,6 +31,7 @@ Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-signify'
+Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo'
@@ -236,6 +237,10 @@ nmap <silent> ]e <Plug>(ale_next_wrap)
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
 
+" indexed-search
+let g:indexed_search_center = 1
+let g:indexed_search_numbered_only = 1
+
 " EasyMotion
 map <leader>m <Plug>(easymotion-prefix)
 map <leader>j <Plug>(easymotion-j)
@@ -254,6 +259,10 @@ let g:signify_vcs_list = ['git']
 " NERDTree
 let g:NERDTreeDirArrowExpandable = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
+
+" phpactor
+nmap <silent><leader>u :call phpactor#UseAdd()<cr>
+nmap <silent><leader>o :call phpactor#GotoDefinition()<cr>
 
 " FZF
 let g:fzf_layout = { 'down': '~30%' }
