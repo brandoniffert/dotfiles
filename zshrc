@@ -3,10 +3,11 @@ export DOTFILES=$HOME/.dotfiles
 #-------------------------------------------------------------------------------
 # PATHS
 #-------------------------------------------------------------------------------
-export PATH="/usr/local/sbin:/usr/local/bin:$HOME/.composer/vendor/bin:$PATH"
+export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 export PATH="$DOTFILES/bin:$HOME/.scripts:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 #-------------------------------------------------------------------------------
@@ -52,7 +53,7 @@ command -v dircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(dircolor
 command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
 
 # For nvm
-export NVM_DIR=~/.nvm
+export NVM_DIR="$HOME/.nvm"
 
 # For fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
@@ -102,7 +103,7 @@ alias vi="vim"
 alias v="vim"
 alias nv="nvim"
 alias nvd="nvim -d"
-alias zr!='source ~/.zshrc'
+alias zr!="source $HOME/.zshrc"
 alias ag="ag --color-match='0;31'"
 alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 
@@ -242,8 +243,8 @@ ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
 # Use fzf
-if [ -f ~/.fzf.zsh ]; then
-  source ~/.fzf.zsh
+if [ -f "$HOME/.fzf.zsh" ]; then
+  source "$HOME/.fzf.zsh"
 fi
 
 # Use .zshrc.local for local options
