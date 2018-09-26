@@ -69,7 +69,7 @@ set linebreak
 set nojoinspaces
 set noshowmode
 set noswapfile
-set number relativenumber
+set nonumber
 set ruler
 set scrolloff=3
 set showcmd
@@ -209,6 +209,10 @@ nnoremap Y y$
 
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
+
+" Toggle line numbers
+noremap <F3> :set invnumber invrelativenumber<cr>
+noremap <F4> :set invnumber<cr>
 
 " Terminal mode mappings
 tnoremap <leader><esc> <c-\><c-n>
