@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
+STATUS_FILE="$HOME/.vagrant-global-status"
+
+vagrant global-status | grep running | awk '{print $2}' | xargs > $STATUS_FILE
