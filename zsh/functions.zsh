@@ -169,6 +169,15 @@ function tsnew() {
   fi
 }
 
+# Quickly manage homestead vagrant from anywhere
+function hs() {
+  if [ $# -eq 0 ]; then
+    cd "$HOME/Projects/vagrant-homestead"
+  else
+    ( cd "$HOME/Projects/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
+  fi
+}
+
 # Quickly ssh into docker vm
 function dockssh() {
   cd ~/Projects/vagrant-docker && vagrant ssh
