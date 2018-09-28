@@ -6,7 +6,6 @@ export DOTFILES=$HOME/.dotfiles
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
 export PATH="$DOTFILES/bin:$HOME/.scripts:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
