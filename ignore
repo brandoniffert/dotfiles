@@ -1,8 +1,0 @@
-.DS_Store
-.git
-.svn
-.sass-cache
-bower_components
-node_modules
-images
-vim/plugged
