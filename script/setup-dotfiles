@@ -10,17 +10,18 @@ import errno
 dotfiles = (
     ('bash_profile', '~/.bash_profile'),
     ('ctags', '~/.ctags'),
-    ('vim', '~/.vim'),
-    ('vimrc', '~/.vimrc'),
+    ('.eslintrc.json', '~/.eslintrc.json'),
     ('gemrc', '~/.gemrc'),
     ('gitconfig', '~/.gitconfig'),
     ('gitignore_global', '~/.gitignore_global'),
     ('gvimrc', '~/.gvimrc'),
+    ('kitty.conf', '~/.config/kitty/kitty.conf'),
+    ('nvim', '~/.config/nvim'),
+    ('.ripgreprc', '~/.ripgreprc'),
     ('rspec', '~/.rspec'),
     ('tmux.conf', '~/.tmux.conf'),
+    ('vim', '~/.vim'),
     ('zshrc', '~/.zshrc'),
-    ('nvim', '~/.config/nvim'),
-    ('kitty.conf', '~/.config/kitty/kitty.conf')
 )
 
 BLACK = "\033[1;30m"
