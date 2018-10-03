@@ -74,7 +74,7 @@ function man() {
 }
 
 # Shows the most used shell commands.
-function history_stat() {
+function histstat() {
   history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head
 }
 
@@ -82,7 +82,25 @@ function history_stat() {
 function p() {
   local ignore='Projects$|sites$'
   cd "$(
-    find ~/Projects ~/Projects/vagrant-lemp/sites ~/Projects/vagrant-lemp/sites-available -maxdepth 1 -type d |
+    find ~/Projects/Work ~/Projects/Life ~/Projects/vagrant-lemp/sites ~/Projects/vagrant-lemp/sites-available -maxdepth 1 -type d |
+    grep -Ev $ignore |
+    fzf
+  )"
+}
+
+function pw() {
+  local ignore='Projects\/Work$|sites$'
+  cd "$(
+    find ~/Projects/Work ~/Projects/vagrant-lemp/sites ~/Projects/vagrant-lemp/sites-available -maxdepth 1 -type d |
+    grep -Ev $ignore |
+    fzf
+  )"
+}
+
+function pl() {
+  local ignore='Projects\/Life$'
+  cd "$(
+    find ~/Projects/Life -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf
   )"
@@ -90,22 +108,22 @@ function p() {
 
 # Use fzf to quickly get to a note
 function n() {
-  vi "$(find ~/Dropbox/Notes -maxdepth 1 -type f | fzf)"
+  $EDITOR "$(find $HOME/Dropbox/Notes -maxdepth 1 -type f | fzf)"
 }
 
 # Quickly open life journal
 function jlife() {
-  nvim -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Life.md
+  $EDITOR -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Life.md
 }
 
 # Quickly open work journal
 function jwork() {
-  nvim -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Work.md
+  $EDITOR -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Work.md
 }
 
 # Quickly open both life and work journals
 function jlogs() {
-  nvim -c 'silent Goyo 160 | vsp ~/Dropbox/Notes/Life.md | bufdo setlocal ft=markdown.journal | wincmd h' ~/Dropbox/Notes/Work.md
+  $EDITOR -c 'silent Goyo 160 | vsp ~/Dropbox/Notes/Life.md | bufdo setlocal ft=markdown.journal | wincmd h' ~/Dropbox/Notes/Work.md
 }
 
 # Use fzf to upgrade installed homebrew package
@@ -114,7 +132,7 @@ function brewup {
 }
 
 # Browse Chrome history
-bh() {
+function bhist() {
   local cols sep google_history open
   cols=$(( COLUMNS / 3 ))
   sep='{::}'
@@ -134,41 +152,6 @@ bh() {
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
 
-# Open notes dir
-function notes() {
-  vi ~/Dropbox/Notes
-}
-
-# Create a new tmux session and default windows
-function tsnew() {
-  local SESSION_NAME="$1"
-
-  if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
-    echo 'Already inside a tmux session'
-    return 1
-  fi
-
-  if [ -z "$SESSION_NAME" ]; then
-    echo 'Please provide a session name!'
-    return 1
-  fi
-
-  tmux -q has-session -t "$SESSION_NAME" > /dev/null 2>&1
-
-  # If session already exists, attach to it
-  if [ $? -eq 0 ]; then
-    tmux attach-session -t "$SESSION_NAME"
-  else
-    tmux new-session -d -s "$SESSION_NAME"
-    tmux rename-window 'code'
-    tmux new-window -n 'server-build'
-    tmux split-window -h
-    tmux new-window -d -n 'scratch'
-    tmux select-window -t 'code'
-    tmux attach-session -t "$SESSION_NAME"
-  fi
-}
-
 # Quickly manage homestead vagrant from anywhere
 function hs() {
   if [ $# -eq 0 ]; then
@@ -178,14 +161,14 @@ function hs() {
   fi
 }
 
-# Quickly ssh into docker vm
-function dockssh() {
-  cd ~/Projects/vagrant-docker && vagrant ssh
-}
-
-# Quickly start vagrant fsnotify for docker vm
-function dockfs() {
-  cd ~/Projects/vagrant-docker && vagrant fsnotify
+# ts [FUZZY PATTERN] - Select selected tmux session
+#   - Bypass fuzzy finder if there's only one match (--select-1)
+#   - Exit if there's no match (--exit-0)
+function ts() {
+  local session
+  session=$(tmux list-sessions -F "#{session_name}" | \
+    fzf --query="$1" --select-1 --exit-0) &&
+  tmux switch-client -t "$session"
 }
 
 # Allow Ctrl-z to toggle between suspend and resume

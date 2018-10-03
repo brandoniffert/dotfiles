@@ -18,11 +18,12 @@ endif
 
 call plug#begin()
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
 Plug 'henrik/vim-indexed-search'
 Plug 'janko-m/vim-test'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
@@ -119,17 +120,19 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! Error guifg=#D8DEE9
   autocmd ColorScheme nord highlight! Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight! LineNr guifg=#2E3440 guibg=NONE
+  autocmd ColorScheme nord highlight! Search gui=bold
+  autocmd ColorScheme nord highlight! IncSearch guibg=#ebcb8b gui=bold
   autocmd ColorScheme nord highlight! SignColumn guibg=NONE
-  autocmd ColorScheme nord highlight! TabLine guibg=#2E3440
-  autocmd ColorScheme nord highlight! TabLineFill guibg=#2E3440
-  autocmd ColorScheme nord highlight! TabLineSel guifg=#A3BE8C guibg=#3B4252
+  autocmd ColorScheme nord highlight! TabLine guibg=#15171E guifg=#D8DEE9
+  autocmd ColorScheme nord highlight! TabLineFill guifg=#D8DEE9 guibg=NONE
+  autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#15171E
   autocmd ColorScheme nord highlight! VertSplit guibg=NONE
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
 augroup END
 
-let g:nord_comment_brightness = 1
+let g:nord_comment_brightness = 2
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 colorscheme nord
@@ -172,8 +175,8 @@ nnoremap <leader><cr> :
 vnoremap <leader><cr> :
 
 " Use hjkl for switching between splits
-nnoremap <c-j> <c-W>j
 nnoremap <c-h> <c-W>h
+nnoremap <c-j> <c-W>j
 nnoremap <c-k> <c-W>k
 nnoremap <c-l> <c-W>l
 
@@ -229,6 +232,8 @@ nnoremap <silent><leader>t :TestFile<CR>
 
 " ALE
 let g:ale_lint_on_text_changed = 'never'
+let g:ale_sign_error = '●'
+let g:ale_sign_warning = '●'
 let g:airline#extensions#ale#enabled = 1
 let g:ale_linters = {
 \   'html': [],
@@ -259,14 +264,15 @@ let g:vim_markdown_conceal = 0
 
 " Signify
 let g:signify_vcs_list = ['git']
+let g:signify_sign_show_count = 0
 
 " NERDTree
 let g:NERDTreeDirArrowExpandable = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
 
 " phpactor
-nmap <silent><leader>u :call phpactor#UseAdd()<cr>
-nmap <silent><leader>o :call phpactor#GotoDefinition()<cr>
+nmap <silent><leader>gu :call phpactor#UseAdd()<cr>
+nmap <silent><leader>go :call phpactor#GotoDefinition()<cr>
 
 " FZF
 let g:fzf_layout = { 'down': '~30%' }
@@ -282,7 +288,7 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 if executable('rg')
   function! s:rg_with_opts(arg, bang)
-    let rg_cmd = 'rg --line-number --smart-case --color=always --colors=path:fg:green --colors=line:fg:blue '
+    let rg_cmd = 'rg --line-number --smart-case --color=always --colors=path:none --colors=line:none --colors=match:fg:red '
     let tokens = split(a:arg)
     let rg_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
     let query = join(filter(copy(tokens), 'v:val !~ "^-"'))

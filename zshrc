@@ -54,11 +54,21 @@ command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircol
 # For nvm
 export NVM_DIR="$HOME/.nvm"
 
+# For ripgrep
+export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+
 # For fzf
 export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
   --height 40% --border
-  --color=bg+:#2b303b,pointer:#2b303b,border:#2b303b
+  --color=fg:#8994A9
+  --color=hl:1,hl+:1
+  --color=bg+:-1
+  --color=info:3
+  --color=prompt:4
+  --color=marker:4
+  --color=pointer:-1
+  --color=border:0
 '
 
 #-------------------------------------------------------------------------------
@@ -87,6 +97,17 @@ autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
+# Magic Enter
+function magic-enter () {
+  if [[ -z $BUFFER ]]; then
+    zle clear-screen
+  else
+    zle accept-line
+  fi
+}
+zle -N magic-enter
+bindkey "^M" magic-enter
+
 #-------------------------------------------------------------------------------
 # ALIASES
 #-------------------------------------------------------------------------------
@@ -97,6 +118,7 @@ alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias t='tmux -u'
 alias tnew='tmux new-session -As'
+alias tnewd='tmux new-session -ds'
 alias vgs="vagrant global-status"
 alias vi="vim"
 alias v="vim"
@@ -104,6 +126,7 @@ alias nv="nvim"
 alias nvd="nvim -d"
 alias zr!="source $HOME/.zshrc"
 alias ag="ag --color-match='0;31'"
+alias notes="$EDITOR $HOME/Dropbox/Notes"
 alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 
 # Need special case for macos
@@ -241,12 +264,10 @@ function () {
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_HIGHLIGHT_STYLES[path]='none'
 
-# Use fzf
-if [ -f "$HOME/.fzf.zsh" ]; then
-  source "$HOME/.fzf.zsh"
-fi
-
 # Use .zshrc.local for local options
 if [ -f "$HOME/.zshrc.local" ]; then
   source "$HOME/.zshrc.local"
 fi
+
+# FZF
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
