@@ -1,13 +1,10 @@
-export DOTFILES=$HOME/.dotfiles
-
 #-------------------------------------------------------------------------------
 # PATHS
 #-------------------------------------------------------------------------------
 export PATH="/usr/local/sbin:/usr/local/bin:$PATH"
-export PATH="$DOTFILES/bin:$HOME/.scripts:$PATH"
+export PATH="$HOME/.zsh/bin:$HOME/.local/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
-export MANPATH="/usr/local/man:/usr/local/mysql/man:/usr/local/git/man:$MANPATH"
 
 #-------------------------------------------------------------------------------
 # OPTIONS
@@ -215,8 +212,8 @@ SPACESHIP_PROMPT_ORDER=(
 #-------------------------------------------------------------------------------
 # FUNCTIONS
 #-------------------------------------------------------------------------------
-if [ -f "$DOTFILES/zsh/functions.zsh" ]; then
-  source "$DOTFILES/zsh/functions.zsh"
+if [ -f "$HOME/zsh/functions.zsh" ]; then
+  source "$HOME/zsh/functions.zsh"
 fi
 
 # Adds `cdr` command for navigating to recent directories

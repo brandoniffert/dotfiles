@@ -9,11 +9,10 @@
 "-------------------------------------------------------------------------------
 au!
 
-" Bootstrap vim-plug on a fresh install
-if !filereadable(expand("~/.config/nvim/autoload/plug.vim"))
-  silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+" Bootstrap vim-plug on a fresh install - require a manual PlugInstall
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  let s:bootstrap=1
 endif
 
 call plug#begin()
@@ -32,7 +31,6 @@ Plug 'junegunn/vim-easy-align'
 Plug 'maxbrunsfeld/vim-yankstack'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-signify'
-Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo'
@@ -42,15 +40,11 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
-call plug#end()
 
-if exists("s:bootstrap") && s:bootstrap
-  unlet s:bootstrap
-  PlugInstall
+if executable('composer')
+  Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 endif
-
-" Setup yankstack before any other configurations
-call yankstack#setup()
+call plug#end()
 
 "-------------------------------------------------------------------------------
 " GENERAL SETTINGS
@@ -60,7 +54,6 @@ set dictionary+=/usr/share/dict/words
 set dictionary+=/usr/share/dict/web2a
 set dictionary+=/usr/share/dict/propernames
 set dictionary+=/usr/share/dict/connectives
-set fileencoding=utf8
 set foldlevelstart=0
 set foldmethod=marker
 set formatoptions+=qrn1j
@@ -135,7 +128,7 @@ augroup END
 let g:nord_comment_brightness = 2
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
-colorscheme nord
+silent! colorscheme nord
 
 " Airline
 let g:airline_theme = 'bti_nord'
@@ -163,6 +156,12 @@ let g:airline_mode_map = {
 "-------------------------------------------------------------------------------
 " KEY MAPS
 "-------------------------------------------------------------------------------
+
+" Setup yankstack before any other key maps
+if globpath(&runtimepath, 'vim-yankstack', 1) !=# ''
+  call yankstack#setup()
+endif
+
 " Navigate over wrapped lines
 nnoremap j gj
 nnoremap k gk
@@ -218,11 +217,13 @@ noremap <F3> :set invnumber invrelativenumber<cr>
 noremap <F4> :set invnumber<cr>
 
 " Terminal mode mappings
-tnoremap <leader><esc> <c-\><c-n>
-tnoremap <leader><c-h> <c-\><c-n><c-w>h
-tnoremap <leader><c-j> <c-\><c-n><c-w>j
-tnoremap <leader><c-k> <c-\><c-n><c-w>k
-tnoremap <leader><c-l> <c-\><c-n><c-w>l
+if exists(':tnoremap')
+  tnoremap <leader><esc> <c-\><c-n>
+  tnoremap <leader><c-h> <c-\><c-n><c-w>h
+  tnoremap <leader><c-j> <c-\><c-n><c-w>j
+  tnoremap <leader><c-k> <c-\><c-n><c-w>k
+  tnoremap <leader><c-l> <c-\><c-n><c-w>l
+endif
 
 "-------------------------------------------------------------------------------
 " PLUGINS
@@ -310,7 +311,9 @@ augroup bti-vimrc
   autocmd! VimResized * wincmd =
 
   " Don't show line numbers in terminal
-  autocmd! TermOpen * setlocal nonumber norelativenumber
+  if has('nvim')
+    autocmd! TermOpen * setlocal nonumber norelativenumber
+  endif
 
   " Always highlight shebang-looking lines as Comment
   autocmd! BufEnter,WinEnter * call matchadd("Comment", "^#!\/.*", -1)

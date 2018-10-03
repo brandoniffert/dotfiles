@@ -8,20 +8,21 @@ import errno
 
 # source => target
 dotfiles = (
-    ('bash_profile', '~/.bash_profile'),
-    ('ctags', '~/.ctags'),
+    ('.bash_profile', '~/.bash_profile'),
+    ('.config/kitty', '~/.config/kitty'),
+    ('.ctags', '~/.ctags'),
+    ('.dir_colors', '~/.dir_colors'),
     ('.eslintrc.json', '~/.eslintrc.json'),
-    ('gemrc', '~/.gemrc'),
-    ('gitconfig', '~/.gitconfig'),
-    ('gitignore_global', '~/.gitignore_global'),
-    ('gvimrc', '~/.gvimrc'),
-    ('kitty.conf', '~/.config/kitty/kitty.conf'),
-    ('nvim', '~/.config/nvim'),
+    ('.gemrc', '~/.gemrc'),
+    ('.gitconfig', '~/.gitconfig'),
+    ('.gvimrc', '~/.gvimrc'),
     ('.ripgreprc', '~/.ripgreprc'),
-    ('rspec', '~/.rspec'),
-    ('tmux.conf', '~/.tmux.conf'),
-    ('vim', '~/.vim'),
-    ('zshrc', '~/.zshrc'),
+    ('.rspec', '~/.rspec'),
+    ('.tmux.conf', '~/.tmux.conf'),
+    ('.vim', '~/.config/nvim'),
+    ('.vim', '~/.vim'),
+    ('.zsh', '~/.zsh'),
+    ('.zshrc', '~/.zshrc'),
 )
 
 BLACK = "\033[1;30m"

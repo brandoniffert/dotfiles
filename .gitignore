@@ -1,11 +1,7 @@
 .DS_Store
-vim/.netrwhist
-nvim/shada
-nvim/.netrwhist
-nvim/autoload/plug.vim
-nvim/autoload/plug.vim.old
-nvim/plugged/
-sublime3/User/Package\ Control.sublime-settings
-sublime3/User/Package Control.last-run
-sublime3/User/ShopifyStores.json
-!.gitkeep
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+*.pyc
