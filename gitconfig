@@ -5,6 +5,7 @@
 [alias]
   a = add
   aa = add --all
+  amend = commit --amend
   b = branch
   ci = commit --verbose
   cl = clone
@@ -14,9 +15,9 @@
   dc = diff --cached
   fa = fetch --all
   ff = merge --ff-only
-  noff = merge --no-ff
   l = log --graph --abbrev-commit --date=relative --topo-order
   la = log --graph --abbrev-commit --date=relative --topo-order --all
+  noff = merge --no-ff
   st = status
   dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; f"
 
@@ -45,4 +46,4 @@
 
 # Include a local gitconfig for machine specific config (ex: credential.helper)
 [include]
-  path = .gitconfig.local
+  path = ~/.gitconfig.local
