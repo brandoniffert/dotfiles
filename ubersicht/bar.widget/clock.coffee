@@ -8,11 +8,11 @@
     """
 
   style: """
-    font-family: 'Inconsolata LGC'
+    font-family: 'Source Code Pro Light'
     color: white
     font-size: 13px
     right: 15px
-    bottom: 5px
+    bottom: 6px
 
     .fa
       display: inline-block
@@ -20,7 +20,6 @@
       font-size: inherit
       text-rendering: auto
       position: relative
-      top: -0.5px
       -webkit-font-smoothing: antialiased
       -moz-osx-font-smoothing: grayscale
 
