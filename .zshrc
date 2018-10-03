@@ -103,7 +103,7 @@ function magic-enter () {
   fi
 }
 zle -N magic-enter
-bindkey "^M" magic-enter
+bindkey '^M' magic-enter
 
 #-------------------------------------------------------------------------------
 # ALIASES
@@ -260,6 +260,7 @@ function () {
 
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_HIGHLIGHT_STYLES[path]='none'
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
 # Use .zshrc.local for local options
 if [ -f "$HOME/.zshrc.local" ]; then
