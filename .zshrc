@@ -212,8 +212,8 @@ SPACESHIP_PROMPT_ORDER=(
 #-------------------------------------------------------------------------------
 # FUNCTIONS
 #-------------------------------------------------------------------------------
-if [ -f "$HOME/zsh/functions.zsh" ]; then
-  source "$HOME/zsh/functions.zsh"
+if [ -f "$HOME/.zsh/functions" ]; then
+  source "$HOME/.zsh/functions"
 fi
 
 # Adds `cdr` command for navigating to recent directories
