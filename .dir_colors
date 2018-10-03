@@ -68,7 +68,7 @@ CHR 33
 ORPHAN 31
 MISSING 01;37;41
 
-EXEC 01;36
+EXEC 01;32
 
 SETUID 01;04;37
 SETGID 01;04;37
@@ -177,17 +177,17 @@ STICKY 04;37;44
 .reg 01;36
 
 #+--- Ignores ---+
-*~ 01;30
-.bak 01;30
-.BAK 01;30
-.log 01;30
-.log 01;30
-.old 01;30
-.OLD 01;30
-.orig 01;30
-.ORIG 01;30
-.swo 01;30
-.swp 01;30
+*~ 02;37
+.bak 02;37
+.BAK 02;37
+.log 02;37
+.log 02;37
+.old 02;37
+.OLD 02;37
+.orig 02;37
+.ORIG 02;37
+.swo 02;37
+.swp 02;37
 
 #+--- Images ---+
 .bmp 32
