@@ -77,7 +77,6 @@ brew 'zsh-syntax-highlighting'
 
 cask 'alfred'
 cask 'arq'
-cask 'backblaze'
 cask 'bettertouchtool'
 cask 'docker'
 cask 'dropbox'
