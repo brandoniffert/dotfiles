@@ -1,0 +1,8 @@
+---
+- name: Add /usr/local/bin/zsh to /etc/shells
+  lineinfile: >
+    dest=/etc/shells
+    group=wheel
+    line=/usr/local/bin/zsh
+    owner=root
+  become: !!bool yes

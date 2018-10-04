@@ -1,0 +1,3 @@
+---
+vim_plug: '{{ ansible_env.PWD }}/roles/dotfiles/files/.vim/autoload/plug.vim'
+spellfile: '{{ ansible_env.PWD }}/roles/dotfiles/files/.vim/spell/en.utf-8.add'

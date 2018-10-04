@@ -1,0 +1,4 @@
+---
+- import_tasks: plug.yml
+- import_tasks: build.yml
+- import_tasks: nvim.yml

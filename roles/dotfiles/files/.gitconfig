@@ -38,7 +38,7 @@
 [github]
   user = brandoniffert
 [core]
-  excludesfile = ~/.gitignore
+  excludesfile = ~/.gitignore.global
 [pull]
   ff = only
 [diff]

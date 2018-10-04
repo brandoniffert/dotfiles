@@ -1,0 +1,17 @@
+---
+dotfile_files:
+  - .bash_profile
+  - .config/kitty
+  - .ctags
+  - .dir_colors
+  - .eslintrc.json
+  - .gemrc
+  - .gitconfig
+  - .gitignore.global
+  - .gvimrc
+  - .ripgreprc
+  - .rspec
+  - .tmux.conf
+  - .vim
+  - .zsh
+  - .zshrc
