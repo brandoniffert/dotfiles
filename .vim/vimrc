@@ -46,6 +46,11 @@ if executable('composer')
 endif
 call plug#end()
 
+" Setup yankstack before any other key maps
+if globpath(&runtimepath, 'vim-yankstack', 1) !=# ''
+  call yankstack#setup()
+endif
+
 "-------------------------------------------------------------------------------
 " GENERAL SETTINGS
 "-------------------------------------------------------------------------------
@@ -78,8 +83,8 @@ if !empty($TMUX)
 endif
 
 " Set custom spellfile
-if filereadable(expand('~/.vim-custom.en.utf8.add'))
-  set spellfile=~/.vim-custom.en.utf8.add
+if filereadable(expand('~/.vim/spell/en.utf-8.add'))
+  set spellfile=~/.vim/spell/en.utf-8.add
 endif
 
 " Tabs
@@ -110,7 +115,7 @@ augroup nord-overrides
   autocmd!
   autocmd ColorScheme nord highlight! Normal guibg=NONE
   autocmd ColorScheme nord highlight! CursorLine guibg=#2B303B
-  autocmd ColorScheme nord highlight! Error guifg=#D8DEE9
+  autocmd ColorScheme nord highlight! Error guifg=#D8DEE9 gui=bold
   autocmd ColorScheme nord highlight! Folded guifg=#7b88a1
   autocmd ColorScheme nord highlight! LineNr guifg=#2E3440 guibg=NONE
   autocmd ColorScheme nord highlight! Search gui=bold
@@ -156,11 +161,6 @@ let g:airline_mode_map = {
 "-------------------------------------------------------------------------------
 " KEY MAPS
 "-------------------------------------------------------------------------------
-
-" Setup yankstack before any other key maps
-if globpath(&runtimepath, 'vim-yankstack', 1) !=# ''
-  call yankstack#setup()
-endif
 
 " Navigate over wrapped lines
 nnoremap j gj
@@ -289,7 +289,7 @@ autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 if executable('rg')
   function! s:rg_with_opts(arg, bang)
-    let rg_cmd = 'rg --line-number --smart-case --color=always --colors=path:none --colors=line:none --colors=match:fg:red '
+    let rg_cmd = 'rg --line-number --smart-case --hidden --color=always --colors=path:none --colors=line:none --colors=match:fg:red '
     let tokens = split(a:arg)
     let rg_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
     let query = join(filter(copy(tokens), 'v:val !~ "^-"'))

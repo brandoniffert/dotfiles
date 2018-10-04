@@ -55,11 +55,14 @@ export NVM_DIR="$HOME/.nvm"
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # For fzf
-export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --smart-case --hidden --follow --glob "!.git/*"'
 export FZF_DEFAULT_OPTS='
-  --height 40% --border
-  --color=fg:#8994A9
-  --color=hl:1,hl+:1
+  --height 40%
+  --border
+  --color=fg:#606d85
+  --color=hl:15
+  --color=hl+:4
+  --color=bg:-1
   --color=bg+:-1
   --color=info:3
   --color=prompt:4
