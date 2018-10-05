@@ -1,3 +1,6 @@
 ---
-- name: Setup macos
-  shell: echo "TODO"
+- name: Siri -> Enable Siri
+  osx_defaults: domain=com.apple.assistant.support key="Assistant Enabled" type=bool value=false
+
+- name: Show all file extensions
+  osx_defaults: domain=NSGlobalDomain key="AppleShowAllExtensions" type=bool value=true

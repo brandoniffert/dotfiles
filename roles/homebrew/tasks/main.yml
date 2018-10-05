@@ -1,3 +1,28 @@
 ---
-- name: Setup Homebrew
-  shell: echo "TODO"
+- name: Download Homebrew install script
+  get_url:
+    url=https://raw.githubusercontent.com/Homebrew/install/master/install
+    dest=vendor/homebrew/install
+
+- name: Install Homebrew
+  command: ruby vendor/homebrew/install creates=/usr/local/bin/brew
+
+- name: Update Homebrew
+  homebrew: update_homebrew=yes
+
+- name: Tap bundle
+  homebrew_tap: tap=homebrew/bundle state=present
+
+- name: Bundle
+  command: "brew bundle -v --file={{ ansible_env.PWD }}/roles/homebrew/files/Brewfile"
+  register: brew_bundle
+  changed_when: "'==> Pouring' in brew_bundle.stdout"
+
+- name: Log bundle output
+  local_action:
+    copy content="{{ brew_bundle.stdout }}" dest="/tmp/ansible-homebrew-bundle-{{ ansible_date_time.date }}-{{ ansible_date_time.time }}.log"
+  changed_when: False
+
+- name: Clean up old versions
+  command: brew cleanup
+  changed_when: False

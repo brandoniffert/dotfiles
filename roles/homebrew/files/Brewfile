@@ -1,5 +1,7 @@
 # vim:fileencoding=utf-8:ft=conf
 
+# Based on the output of `brew bundle dump` (which must be run outside of tmux)
+
 cask_args appdir: '/Applications'
 
 # Taps
@@ -28,6 +30,7 @@ brew 'bash'
 brew 'less'
 brew 'make', args: ['with-default-names']
 
+# Custom programs
 brew 'aspell'
 brew 'awscli'
 brew 'bat'

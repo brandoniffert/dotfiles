@@ -1,12 +1,10 @@
 ---
 - name: Install eslint node package
-  yarn:
-    name: eslint
-    version: latest
-    global: yes
+  command: yarn global add eslint
+  args:
+    creates: /usr/local/bin/eslint
 
 - name: Install diff-so-fancy node package
-  yarn:
-    name: diff-so-fancy
-    version: latest
-    global: yes
+  command: yarn global add diff-so-fancy
+  args:
+    creates: /usr/local/bin/diff-so-fancy

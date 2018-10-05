@@ -8,6 +8,17 @@
 
 set -e
 
+HOST_OS=$(uname)
+
+# Check for developer tools
+if [ "$HOST_OS" = 'Darwin' ]; then
+  if ! xcode-select -p > /dev/null; then
+    echo 'Could not find developer tools, installing...'
+    xcode-select --install
+    exit 1
+  fi
+fi
+
 ANSIBLE_ENV_SETUP=vendor/ansible/hacking/env-setup
 VIRTUALENV_SETUP=vendor/virtualenv/virtualenv.py
 VIRTUALENV_TARGET_DIR=.venv
@@ -105,10 +116,8 @@ fi
 
 source vendor/ansible/hacking/env-setup &> $DEV_NULL
 
-HOST_OS=$(uname)
-
 if [ "$HOST_OS" = 'Darwin' ]; then
-  ansible-playbook --ask-become-pass ${VERBOSE+-v} ${ROLES} "${EXTRA_ARGS[@]}" darwin.yml
+  ansible-playbook --ask-become-pass ${VERBOSE+-v} "${ROLES}" "${EXTRA_ARGS[@]}" darwin.yml
 else
   echo "Unknown host OS: $HOST_OS"
   exit 1
