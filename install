@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# Taken almost directly from https://github.com/wincent/wincent
+
 # 1. Sets up a local Python environment via virtualenv
 # 2. Installs Ansible prerequisites
 # 3. Hands off to Ansible to complete actual installation of dotfiles etc

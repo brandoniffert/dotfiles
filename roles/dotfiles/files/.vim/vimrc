@@ -1,7 +1,7 @@
 "-------------------------------------------------------------------------------
 " This is my nvim init file - it changes often
 " Author: Brandon Iffert <brandoniffert@gmail.com>
-" Source: https://github.com/brandoniffert/dotfiles/blob/master/nvim/init.vim
+" Source: https://github.com/brandoniffert/computer/blob/master/roles/dotfiles/files/.vim/vimrc
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
