@@ -32,7 +32,3 @@
 
 - name: Symlink nvim to vim
   file: path=~/.config/nvim src=~/.vim state=link
-
-# Provide an extension point for other roles to dump .zshenv stuff into.
-- name: Make ~/.zshenv.d
-  file: path=~/.zshenv.d state=directory

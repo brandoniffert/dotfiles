@@ -1,9 +1,11 @@
 ---
 - hosts: localhost
   roles:
-    - { role: dotfiles, tags: dotfiles }
     - { role: terminfo, tags: terminfo }
+    - { role: dotfiles, tags: dotfiles }
     - { role: homebrew, tags: homebrew }
     - { role: shell, tags: shell }
     - { role: vim, tags: vim }
+    - { role: nvm, tags: nvm }
+    - { role: yarn, tags: yarn }
     - { role: macos, tags: macos }

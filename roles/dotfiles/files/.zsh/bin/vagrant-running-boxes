@@ -1,4 +1,4 @@
 #!/bin/bash
 
-RUNNING_BOXES="$(cat ~/.vagrant-global-status 2> /dev/null)"
+RUNNING_BOXES="$(cat $HOME/.local/share/vagrant-global-status 2> /dev/null)"
 [ -n "$RUNNING_BOXES" ] && echo -n "$RUNNING_BOXES"

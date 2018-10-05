@@ -1,3 +1,5 @@
+# vi: set ft=zsh :
+
 # Serve a directory on localhost and open in browser
 function server() {
   local port="${1:-9876}"
@@ -152,13 +154,18 @@ function bhist() {
   fzf --ansi --multi | sed 's#.*\(https*://\)#\1#' | xargs $open > /dev/null 2> /dev/null
 }
 
-# Quickly manage homestead vagrant from anywhere
+# Quickly manage vagrant homestead from anywhere
 function hs() {
   if [ $# -eq 0 ]; then
     cd "$HOME/Projects/vagrant-homestead"
   else
     ( cd "$HOME/Projects/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
   fi
+}
+
+# Pass-through vagrant commands and write-vagrant-global-status
+function vg() {
+  vagrant $* && write-vagrant-global-status
 }
 
 # ts [FUZZY PATTERN] - Select selected tmux session
