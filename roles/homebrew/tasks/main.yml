@@ -5,7 +5,9 @@
     dest=vendor/homebrew/install
 
 - name: Install Homebrew
-  command: ruby vendor/homebrew/install creates=/usr/local/bin/brew
+  command: ruby vendor/homebrew/install
+  args:
+    creates: /usr/local/bin/brew
 
 - name: Update Homebrew
   homebrew: update_homebrew=yes
@@ -13,7 +15,7 @@
 - name: Tap bundle
   homebrew_tap: tap=homebrew/bundle state=present
 
-- name: Bundle
+- name: Bundle install
   command: "brew bundle -v --file={{ ansible_env.PWD }}/roles/homebrew/files/Brewfile"
   register: brew_bundle
   changed_when: "'==> Pouring' in brew_bundle.stdout"
@@ -26,3 +28,9 @@
 - name: Clean up old versions
   command: brew cleanup
   changed_when: False
+
+- name: Setup fzf
+  shell: $(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc
+  args:
+    creates: "{{ ansible_env.HOME }}/.config/fzf"
+    executable: /bin/bash

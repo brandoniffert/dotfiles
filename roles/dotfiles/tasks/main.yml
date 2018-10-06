@@ -13,10 +13,10 @@
   changed_when: false
 
 - name: Backup originals
-  command:
-    mv ~/{{ item.0 }} ~/.backups/
-    creates=~/.backups/{{ item.0 }}
-    removes=~/{{ item.0 }}
+  command: mv ~/{{ item.0 }} ~/.backups/
+  args:
+    creates:~/.backups/{{ item.0 }}
+    removes:~/{{ item.0 }}
   with_together:
     - "{{ dotfile_files }}"
     - "{{ original_check.results }}"

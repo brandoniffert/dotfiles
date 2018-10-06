@@ -67,12 +67,13 @@ export FZF_DEFAULT_OPTS='
   --border
   --color=fg:#606d85
   --color=hl:15
-  --color=hl+:4
+  --color=hl+:#c95866
   --color=bg:-1
   --color=bg+:-1
   --color=info:3
   --color=prompt:4
   --color=marker:4
+  --color=header:4
   --color=pointer:-1
   --color=border:0
 '
@@ -126,16 +127,15 @@ alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias llll='tree -L 4'
 alias t='tmux -u'
-alias tnew='tmux new-session -As'
-alias tnewd='tmux new-session -ds'
 alias vgs="vagrant global-status"
 alias vi="vim"
-alias v="vim"
+alias e=$EDITOR
 alias nv="nvim"
 alias nvd="nvim -d"
 alias zr!="source $HOME/.zshrc"
 alias notes="$EDITOR $HOME/Dropbox/Notes"
 alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
+alias digg="dig +multiline +noall +answer -t ANY"
 
 # Need special case for macos
 if [ "$(uname)" = "Darwin" ]; then
@@ -260,9 +260,9 @@ test -f $LOCAL_RC && source $LOCAL_RC
 unset LOCAL_RC
 
 # fzf
-FZF="$HOME/.fzf.zsh"
-test -f $FZF && source $FZF
-unset FZF
+FZF_ZSH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+test -f $FZF_ZSH && source $FZF_ZSH
+unset FZF_ZSH
 
 # zsh-async
 source "$HOME/.zsh/async.zsh"
