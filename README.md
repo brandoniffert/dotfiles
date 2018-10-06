@@ -4,4 +4,4 @@ brandoniffert's computer
 
 ## Setup
 
-`git clone --recursive git@github.com:brandoniffert/computer.git`
+`git clone --recursive https://github.com/brandoniffert/computer.git`
