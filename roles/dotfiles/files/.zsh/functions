@@ -124,18 +124,18 @@ function histstat() {
 
 # Use fzf to quickly get to a project
 function p() {
-  local ignore='Projects$|sites$'
+  local ignore='Projects$|Work$|Life$'
   cd "$(
-    find ~/Projects/Work ~/Projects/Life ~/Projects/vagrant-lemp/sites ~/Projects/vagrant-lemp/sites-available -maxdepth 1 -type d |
+    find ~/Projects/Work ~/Projects/Life -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects'
   )"
 }
 
 function pw() {
-  local ignore='Projects\/Work$|sites$'
+  local ignore='Projects\/Work$'
   cd "$(
-    find ~/Projects/Work ~/Projects/vagrant-lemp/sites ~/Projects/vagrant-lemp/sites-available -maxdepth 1 -type d |
+    find ~/Projects/Work -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects (Work)'
   )"
@@ -147,6 +147,15 @@ function pl() {
     find ~/Projects/Life -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects (Life)'
+  )"
+}
+
+function pa() {
+  local ignore='Projects\/Archive$'
+  cd "$(
+    find ~/Projects/Archive -maxdepth 1 -type d |
+    grep -Ev $ignore |
+    fzf --header='Projects (Archive)'
   )"
 }
 
@@ -206,7 +215,7 @@ function hs() {
 }
 
 # Pass-through vagrant commands and write-vagrant-global-status
-function vg() {
+function v() {
   vagrant $* && write-vagrant-global-status
 }
 

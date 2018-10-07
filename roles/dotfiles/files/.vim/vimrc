@@ -1,5 +1,5 @@
 "-------------------------------------------------------------------------------
-" This is my nvim init file - it changes often
+" vimrc
 " Author: Brandon Iffert <brandoniffert@gmail.com>
 " Source: https://github.com/brandoniffert/computer/blob/master/roles/dotfiles/files/.vim/vimrc
 "-------------------------------------------------------------------------------
@@ -28,7 +28,7 @@ Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'junegunn/gv.vim', { 'on': 'GV' }
 Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
-Plug 'maxbrunsfeld/vim-yankstack'
+Plug 'junegunn/vim-peekaboo'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
@@ -40,16 +40,12 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline'
 Plug 'w0rp/ale'
+Plug 'Yggdroot/indentLine'
 
 if executable('composer')
   Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 endif
 call plug#end()
-
-" Setup yankstack before any other key maps
-if globpath(&runtimepath, 'vim-yankstack', 1) !=# ''
-  call yankstack#setup()
-endif
 
 "-------------------------------------------------------------------------------
 " GENERAL SETTINGS
@@ -274,6 +270,17 @@ let g:NERDTreeDirArrowCollapsible = '▼'
 " phpactor
 nmap <silent><leader>gu :call phpactor#UseAdd()<cr>
 nmap <silent><leader>go :call phpactor#GotoDefinition()<cr>
+
+" vim-peekaboo
+let g:peekaboo_compact = 1
+let g:peekaboo_window = 'bo 30new'
+
+" indentLine
+let g:indentLine_char = '│'
+let g:indentLine_color_term = 0
+let g:indentLine_color_gui = '#2B303B'
+let g:indentLine_bufNameExclude=['NERD_tree.*']
+let g:indentLine_fileTypeExclude=['help']
 
 " FZF
 let g:fzf_layout = { 'down': '~30%' }

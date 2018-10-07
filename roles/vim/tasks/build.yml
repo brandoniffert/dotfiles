@@ -1,13 +1,8 @@
 ---
-- name: Check for spellfile
-  stat: path={{ spellfile }}
-  register: spellfile_stat
-
-- name: Report on spellfile
-  fail: msg="{{ spellfile }} does not exist; please create {{ spellfile }}"
-  when: not spellfile_stat.stat.exists
+- name: Create spellfile
+  file:
+    path: "{{ spellfile }}"
+    state: touch
 
 - name: Create or update spellfile
   command: vim -u NONE -N -c 'mkspell! {{ spellfile }} | quit'
-  args:
-    creates: "{{ spellfile }}.spl"
