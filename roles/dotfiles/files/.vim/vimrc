@@ -124,6 +124,8 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
+  autocmd ColorScheme nord highlight! Pmenu guibg=#3b4252
+  autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2B303B gui=bold cterm=bold
 augroup END
 
 let g:nord_comment_brightness = 2
