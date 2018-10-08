@@ -43,6 +43,7 @@ brew 'fd'
 brew 'ffmpeg', args: ['with-libvpx', 'with-x265', 'with-fdk-aac']
 brew 'fzf'
 brew 'getmail'
+brew 'ghostscript'
 brew 'gifsicle'
 brew 'git', args: ['with-pcre2']
 brew 'htop-osx'
