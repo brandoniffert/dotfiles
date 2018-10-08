@@ -1,7 +1,3 @@
-if type rbenv &> /dev/null; then
-  eval "$(rbenv init - --no-rehash)"
-fi
-
 # Colors
 Reset='\e[0m'              # Color Reset
 Black='\e[0;30m'           # Black
@@ -45,13 +41,24 @@ function __git_repo_status() {
 }
 
 function __custom_prompt() {
-  local __time="${BoldBlack}\t${Reset}"
-  local __user_host="${Reset}\u:${Yellow}\h${Reset}"
-  local __cur_dir="${Blue}\W${Reset}"
-  local __tail="\n\$ "
+  local __time="${BoldBlack}\\t${Reset}"
+  local __user_host="${Reset}\\u:${Yellow}\\h${Reset}"
+  local __cur_dir="${Blue}\\W${Reset}"
+  local __tail="\\n\$ "
 
   echo "$__time $__user_host:$__cur_dir \$(__git_repo_status) $__tail"
 }
-export PS1=$(__custom_prompt)
+PS1=$(__custom_prompt)
+export PS1
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+# Setup rbenv
+if command -v rbenv >/dev/null 2>&1; then
+  eval "$(rbenv init - --no-rehash)"
+fi
+
+# fzf
+FZF_BASH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.bash
+test -f "$FZF_BASH" && source "$FZF_BASH"
+unset FZF_BASH

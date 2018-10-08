@@ -1,6 +1,6 @@
 ---
 dotfile_files:
-  - .bash_profile
+  - .bashrc
   - .config/kitty
   - .ctags
   - .dir_colors
