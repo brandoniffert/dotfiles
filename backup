@@ -93,3 +93,11 @@ if cp "$HOME/.gitconfig.local" "$BACKUP_DIR/gitconfig.local"; then
 else
   p_error 'Error backing up!'
 fi
+
+# Backup Visual Studio Code settings
+p_header "Visual Studio Code settings"
+if cp -R "$HOME/Library/Application Support/Code/User" "$BACKUP_DIR/visual-studio-code"; then
+  p_success 'Backed up Visual Studio Code settings'
+else
+  p_error 'Error backing up!'
+fi
