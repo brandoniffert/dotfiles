@@ -44,6 +44,11 @@
 [diff]
   compactionHeuristic = true
 
+[tig "color"]
+  cursor      = white black bold
+  title-focus = black white bold
+  title-blur  = white black bold
+
 # Include a local gitconfig for machine specific config (ex: credential.helper)
 [include]
   path = ~/.gitconfig.local

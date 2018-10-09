@@ -67,6 +67,7 @@ brew 'shellcheck'
 brew 'sqlite'
 brew 'ssh-copy-id'
 brew 'teensy_loader_cli', args: ['with-libusb-compat']
+brew 'tig'
 brew 'tldr'
 brew 'tmux'
 brew 'tree'
