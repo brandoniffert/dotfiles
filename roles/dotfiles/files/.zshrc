@@ -305,6 +305,6 @@ function load_nvm() {
 }
 
 # Initialize a new worker
-async_start_worker nvm_worker
+async_start_worker nvm_worker -n
 async_register_callback nvm_worker load_nvm
-async_job nvm_worker "sleep 0.1"
+async_job nvm_worker
