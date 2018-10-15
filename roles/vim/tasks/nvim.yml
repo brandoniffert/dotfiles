@@ -2,8 +2,8 @@
 - name: Install neovim support via rubygems
   gem: name=neovim user_install=yes
 
-- name: Install neovim support via pip2
-  pip: executable=pip2 name=neovim
+- name: Install neovim support via pip
+  pip: executable=pip name=neovim
 
 - name: Install neovim support via pip3
   pip: executable=pip3 name=neovim

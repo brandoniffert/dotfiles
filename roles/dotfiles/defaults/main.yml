@@ -9,6 +9,7 @@ dotfile_files:
   - .gemrc
   - .gitconfig
   - .gitignore.global
+  - .hammerspoon
   - .ripgreprc
   - .rspec
   - .tmux.conf

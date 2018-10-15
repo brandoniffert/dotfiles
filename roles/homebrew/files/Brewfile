@@ -81,7 +81,7 @@ brew 'zsh-syntax-highlighting'
 
 cask 'alfred'
 cask 'arq'
-cask 'bettertouchtool'
+cask 'dash'
 cask 'docker'
 cask 'dropbox'
 cask 'firefox'
