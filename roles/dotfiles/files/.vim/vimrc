@@ -321,6 +321,10 @@ if exists('$SUDO_USER')
   let g:gutentags_dont_load = 1
 endif
 
+if executable('rg')
+  let g:gutentags_file_list_command = 'rg --files'
+endif
+
 " indentLine
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 0
