@@ -14,7 +14,7 @@ PATH=$PATH:$SYSTEM_PATH
 export -U PATH
 
 #-------------------------------------------------------------------------------
-# Options
+# OPTIONS
 #-------------------------------------------------------------------------------
 
 setopt autocd              # Auto cd into directory by name
@@ -40,7 +40,7 @@ setopt pushdsilent         # Do not print dir stack after pushing/popping
 setopt sharehistory        # Share history between sessions
 
 #-------------------------------------------------------------------------------
-# Exports
+# EXPORTS
 #-------------------------------------------------------------------------------
 
 export EDITOR=nvim
@@ -79,7 +79,7 @@ export FZF_DEFAULT_OPTS='
 '
 
 #-------------------------------------------------------------------------------
-# Keys
+# KEYS
 #-------------------------------------------------------------------------------
 
 # Use emacs key bindings
@@ -117,7 +117,7 @@ zle -N magic-enter
 bindkey '^M' magic-enter
 
 #-------------------------------------------------------------------------------
-# Aliases
+# ALIASES
 #-------------------------------------------------------------------------------
 
 alias g='git'
@@ -128,8 +128,9 @@ alias lll='tree -L 3'
 alias llll='tree -L 4'
 alias t='tmux -u'
 alias vgs="vagrant global-status"
-alias vi="vim"
-alias e=exit
+alias e="$EDITOR"
+alias v=view
+alias q=exit
 alias nv="nvim"
 alias nvd="nvim -d"
 alias dots="cd $HOME/Projects/Life/computer"
@@ -148,7 +149,7 @@ else
 fi
 
 #-------------------------------------------------------------------------------
-# Completion
+# COMPLETION
 #-------------------------------------------------------------------------------
 
 # Make completion:
@@ -179,12 +180,16 @@ compdef g=git
 compdef t=tmux
 
 #-------------------------------------------------------------------------------
-# Prompt
+# PROMPT
 #-------------------------------------------------------------------------------
 
 SPACESHIP_GIT_SYMBOL=''
-SPACESHIP_DIR_PREFIX='%F{black}┌%{%f%} '
+SPACESHIP_DIR_PREFIX='%F{black}┌%{%f%}'
 SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
+
+# Note use a non-breaking space at the end of the prompt because we can use it as a find pattern to jump back in tmux
+local NBSP='​'
+SPACESHIP_DIR_PREFIX="${SPACESHIP_DIR_PREFIX}${NBSP}"
 
 autoload -U promptinit
 promptinit
@@ -224,7 +229,7 @@ SPACESHIP_PROMPT_ORDER=(
 )
 
 #-------------------------------------------------------------------------------
-# Functions
+# FUNCTIONS
 #-------------------------------------------------------------------------------
 
 if [ -f "$HOME/.zsh/functions" ]; then
@@ -242,7 +247,7 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 zstyle ':chpwd:*' recent-dirs-default true
 
 #-------------------------------------------------------------------------------
-# Setup other scripts/programs
+# SETUP OTHER SCRIPTS/PROGRAMS
 #-------------------------------------------------------------------------------
 
 # Setup rbenv
@@ -292,19 +297,23 @@ ZSH_HIGHLIGHT_STYLES[path]="none"
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
 #-------------------------------------------------------------------------------
-# nvm
+# NVM
 #-------------------------------------------------------------------------------
 
-# https://github.com/creationix/nvm/issues/539#issuecomment-403661578
-export NVM_DIR="$HOME/.config/nvm"
+# node may be set to a specific version from ~/.zshrc.local
+# If it isn't, then load up nvm but do it asynchronously
+if ! command -v node >/dev/null 2>&1; then
+  # https://github.com/creationix/nvm/issues/539#issuecomment-403661578
+  export NVM_DIR="$HOME/.config/nvm"
 
-function load_nvm() {
-  # /usr/local/opt/nvm/nvm.sh is the expected path when nvm is managed by Homebrew
-  local nvmsh="/usr/local/opt/nvm/nvm.sh"
-  [ -s "$nvmsh" ] && source "$nvmsh"
-}
+  function load_nvm() {
+    # /usr/local/opt/nvm/nvm.sh is the expected path when nvm is managed by Homebrew
+    local nvmsh="/usr/local/opt/nvm/nvm.sh"
+    [ -s "$nvmsh" ] && source "$nvmsh"
+  }
 
-# Initialize a new worker
-async_start_worker nvm_worker -n
-async_register_callback nvm_worker load_nvm
-async_job nvm_worker
+  # Initialize a new worker to load (source) nvm.sh
+  async_start_worker nvm_worker -n
+  async_register_callback nvm_worker load_nvm
+  async_job nvm_worker
+fi

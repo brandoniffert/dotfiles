@@ -206,7 +206,7 @@ function bhist() {
 }
 
 # Quickly manage vagrant homestead from anywhere
-function hs() {
+function hst() {
   if [ $# -eq 0 ]; then
     cd "$HOME/Projects/vagrant-homestead"
   else
@@ -215,7 +215,7 @@ function hs() {
 }
 
 # Pass-through vagrant commands and write-vagrant-global-status
-function v() {
+function vg() {
   vagrant $* && write-vagrant-global-status
 }
 
