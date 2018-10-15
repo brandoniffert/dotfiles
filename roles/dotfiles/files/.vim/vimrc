@@ -358,6 +358,9 @@ highlight! link Sneak IncSearch
 " vim-test
 nnoremap <silent> <leader>t :TestFile<cr>
 
+" vim-markdown
+let g:vim_markdown_conceal = 0
+
 " fzf
 let g:fzf_layout = { 'down': '~30%' }
 
