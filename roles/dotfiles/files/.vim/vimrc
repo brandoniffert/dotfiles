@@ -5,9 +5,10 @@
 "-------------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------------
-" SETUP
+" PLUGINS
 "-------------------------------------------------------------------------------
-au!
+
+autocmd!
 
 " Bootstrap vim-plug on a fresh install - require a manual PlugInstall
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -18,17 +19,13 @@ endif
 call plug#begin()
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'easymotion/vim-easymotion'
 Plug 'ervandew/supertab'
-Plug 'henrik/vim-indexed-search'
 Plug 'janko-m/vim-test'
-Plug '/usr/local/opt/fzf'
-Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-Plug 'junegunn/gv.vim', { 'on': 'GV' }
-Plug 'junegunn/limelight.vim', { 'on': 'Limelight' }
 Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
+Plug 'justinmk/vim-sneak'
+Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-signify'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
@@ -39,8 +36,14 @@ Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'vim-airline/vim-airline'
+Plug 'wincent/loupe'
 Plug 'w0rp/ale'
 Plug 'Yggdroot/indentLine'
+
+if executable('fzf')
+  Plug '/usr/local/opt/fzf'
+  Plug 'junegunn/fzf.vim'
+endif
 
 if executable('composer')
   Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
@@ -48,8 +51,10 @@ endif
 call plug#end()
 
 "-------------------------------------------------------------------------------
-" GENERAL SETTINGS
+" SETTINGS
 "-------------------------------------------------------------------------------
+
+" General settings
 set clipboard=
 set dictionary+=/usr/share/dict/words
 set dictionary+=/usr/share/dict/web2a
@@ -63,18 +68,17 @@ set lazyredraw
 set linebreak
 set nojoinspaces
 set noshowmode
-set noswapfile
 set nonumber
 set ruler
 set scrolloff=3
 set showcmd
-set splitbelow splitright
+set splitbelow
+set splitright
 set switchbuf+=useopen
 set termguicolors
-set undofile
 set updatetime=500
 
-if !empty($TMUX)
+if !empty('$TMUX')
   set cmdheight=2
 endif
 
@@ -84,7 +88,9 @@ if filereadable(expand('~/.vim/spell/en.utf-8.add'))
 endif
 
 " Tabs
-set expandtab shiftwidth=2 softtabstop=2
+set expandtab
+set shiftwidth=2
+set softtabstop=2
 
 " Wildmenu
 set wildmode=longest,list
@@ -99,36 +105,97 @@ let &listchars="tab:>-,trail:.,extends:>,precedes:<,nbsp:\u00b7"
 set fillchars=vert:│,fold:-
 
 " Searching
-set showmatch ignorecase smartcase
+set showmatch
+set ignorecase
+set smartcase
 
-" Remap leader
-let mapleader="\<space>"
+" Backups
+if exists('$SUDO_USER')
+  set nobackup
+  set nowritebackup
+else
+  if !has('nvim')
+    set backupdir=~/.vim/tmp/backup//
+    set backupdir+=.
+  endif
+endif
+
+" Swapfile
+if exists('$SUDO_USER')
+  set noswapfile
+else
+  if !has('nvim')
+    set directory=~/.vim/tmp/swap//
+    set directory+=.
+  endif
+endif
+
+" Undo
+if has('persistent_undo')
+  if exists('$SUDO_USER')
+    set noundofile
+  else
+    if !has('nvim')
+      set undodir=~/.vim/tmp/undo//
+      set undodir+=.
+    endif
+
+    set undofile
+  endif
+endif
+
+" viminfo
+if has('viminfo')
+  if exists('$SUDO_USER')
+    set viminfo=
+  else
+    if !has('nvim')
+      set viminfo+=n~/.vim/tmp/viminfo
+
+      if !empty(glob('~/.vim/tmp/viminfo'))
+        if !filereadable(expand('~/.vim/tmp/viminfo'))
+          echoerr 'warning: ~/.vim/tmp/viminfo exists but is not readable'
+        endif
+      endif
+    endif
+  endif
+endif
+
+" Set grepprg to use ripgrep
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ $*
+  set grepformat=%f:%l:%m
+endif
 
 "-------------------------------------------------------------------------------
-" ENVIRONMENTS AND COLOR
+" COLOR
 "-------------------------------------------------------------------------------
+
 augroup nord-overrides
   autocmd!
-  autocmd ColorScheme nord highlight! Normal guibg=NONE
   autocmd ColorScheme nord highlight! CursorLine guibg=#2B303B
-  autocmd ColorScheme nord highlight! Error guifg=#D8DEE9 gui=bold
-  autocmd ColorScheme nord highlight! Folded guifg=#7b88a1
-  autocmd ColorScheme nord highlight! LineNr guifg=#2E3440 guibg=NONE
-  autocmd ColorScheme nord highlight! Search gui=bold
-  autocmd ColorScheme nord highlight! IncSearch guibg=#ebcb8b gui=bold
+  autocmd ColorScheme nord highlight! Error cterm=bold guifg=#D8DEE9 gui=bold
+  autocmd ColorScheme nord highlight! ErrorMsg cterm=bold gui=bold
+  autocmd ColorScheme nord highlight! Folded guifg=#7b88a1 guibg=#2E3440 gui=NONE
+  autocmd ColorScheme nord highlight! IncSearch cterm=bold guibg=#ebcb8b gui=bold
+  autocmd ColorScheme nord highlight! LineNr guibg=NONE
+  autocmd ColorScheme nord highlight! Normal guibg=NONE
+  autocmd ColorScheme nord highlight! Pmenu guibg=#3b4252
+  autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2B303B gui=bold cterm=bold
+  autocmd ColorScheme nord highlight! Search cterm=bold gui=bold
   autocmd ColorScheme nord highlight! SignColumn guibg=NONE
+  autocmd ColorScheme nord highlight! Statement gui=NONE
   autocmd ColorScheme nord highlight! TabLine guibg=#15171E guifg=#D8DEE9
   autocmd ColorScheme nord highlight! TabLineFill guifg=#D8DEE9 guibg=NONE
   autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#15171E
   autocmd ColorScheme nord highlight! VertSplit guibg=NONE
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
+  autocmd ColorScheme nord highlight! WarningMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
-  autocmd ColorScheme nord highlight! Pmenu guibg=#3b4252
-  autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2B303B gui=bold cterm=bold
 augroup END
 
-let g:nord_comment_brightness = 2
+let g:nord_comment_brightness = 3
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 silent! colorscheme nord
@@ -157,15 +224,19 @@ let g:airline_mode_map = {
     \ }
 
 "-------------------------------------------------------------------------------
-" KEY MAPS
+" KEY MAPPINGS
 "-------------------------------------------------------------------------------
+
+" Remap leaders
+let mapleader = "\<space>"
+let maplocalleader = ","
 
 " Navigate over wrapped lines
 nnoremap j gj
 nnoremap k gk
 
 " Clear the highlighted search
-nnoremap <silent><cr> :noh<cr>
+nmap <cr> <Plug>(LoupeClearHighlight)
 
 " Enter command mode
 nnoremap <leader><cr> :
@@ -187,6 +258,9 @@ nnoremap <leader>gv V`]
 " Quick jump back and forth between files
 nnoremap <leader><leader> <c-^>
 
+" Quick quit
+nnoremap <silent> <leader>q :quit<cr>
+
 " Easy indent/outdent
 nnoremap <tab> >>
 nnoremap <s-tab> <<
@@ -194,11 +268,10 @@ vnoremap <tab> >gv
 vnoremap <s-tab> <gv
 
 " Make S split lines (opposite of J)
-nnoremap S i<cr><esc>k$
+nnoremap <silent> S :<c-u>call bti#functions#BreakHere()<cr>
 
 " Open new horizontal/vertical split
-nnoremap <silent><leader>s :new<cr>
-nnoremap <silent><leader>v :vnew<cr>
+nnoremap <silent> <leader>v :vnew<cr>
 
 " Yank/paste using system clipboard
 vnoremap <leader>y "*y
@@ -210,9 +283,8 @@ nnoremap Y y$
 " Run current file using makeprg
 nnoremap <leader>r :make!<cr>
 
-" Toggle line numbers
-noremap <F3> :set invnumber invrelativenumber<cr>
-noremap <F4> :set invnumber<cr>
+" Cycle line numbering
+noremap <silent> <f3> :call bti#functions#CycleLineNumbering()<cr>
 
 " Terminal mode mappings
 if exists(':tnoremap')
@@ -224,10 +296,11 @@ if exists(':tnoremap')
 endif
 
 "-------------------------------------------------------------------------------
-" PLUGINS
+" PLUGIN SETTINGS
 "-------------------------------------------------------------------------------
-" Vim test
-nnoremap <silent><leader>t :TestFile<CR>
+
+" vim-peekaboo
+let g:peekaboo_window = 'bo 30new'
 
 " ALE
 let g:ale_lint_on_text_changed = 'never'
@@ -241,54 +314,55 @@ let g:ale_linters = {
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
 
-" Limelight
-autocmd! User GoyoEnter Limelight
-autocmd! User GoyoLeave Limelight!
+" gutentags
+let g:gutentags_cache_dir = '~/.vim/tmp/tags'
 
-" indexed-search
-let g:indexed_search_center = 1
-let g:indexed_search_numbered_only = 1
-
-" EasyMotion
-map <leader>m <Plug>(easymotion-prefix)
-map <leader>j <Plug>(easymotion-j)
-map <leader>k <Plug>(easymotion-k)
-
-" Ripgrep
-set grepprg=rg\ --vimgrep\ $*
-set grepformat=%f:%l:%m
-
-" Vim markdown
-let g:vim_markdown_conceal = 0
-
-" Signify
-let g:signify_vcs_list = ['git']
-let g:signify_sign_show_count = 0
-
-" NERDTree
-let g:NERDTreeDirArrowExpandable = '▶'
-let g:NERDTreeDirArrowCollapsible = '▼'
-
-" phpactor
-nmap <silent><leader>gu :call phpactor#UseAdd()<cr>
-nmap <silent><leader>go :call phpactor#GotoDefinition()<cr>
-
-" vim-peekaboo
-let g:peekaboo_compact = 1
-let g:peekaboo_window = 'bo 30new'
+if exists('$SUDO_USER')
+  let g:gutentags_dont_load = 1
+endif
 
 " indentLine
 let g:indentLine_char = '│'
 let g:indentLine_color_term = 0
 let g:indentLine_color_gui = '#2B303B'
-let g:indentLine_bufNameExclude=['NERD_tree.*']
-let g:indentLine_fileTypeExclude=['help']
+let g:indentLine_bufNameExclude = ['NERD_tree.*']
+let g:indentLine_fileTypeExclude = ['help']
 
-" FZF
+" loupe
+let g:LoupeCenterResults = 0
+
+" NERDTree
+let g:NERDTreeDirArrowExpandable = '▶'
+let g:NERDTreeDirArrowCollapsible = '▼'
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeWinSize = 40
+
+" phpactor
+nmap <silent> <leader>gu :call phpactor#UseAdd()<cr>
+nmap <silent> <leader>go :call phpactor#GotoDefinition()<cr>
+
+" vim-signify
+let g:signify_vcs_list = ['git']
+let g:signify_sign_show_count = 0
+
+" vim-sneak
+let g:sneak#use_ic_scs = 1
+let g:sneak#prompt = 'sneak: '
+let g:sneak#target_labels = ';luyneioqwfpgarstdLUYNEIOQWFPGARSTD'
+
+nmap <leader>s <Plug>SneakLabel_s
+nmap <leader>S <Plug>SneakLabel_S
+
+highlight! link Sneak IncSearch
+
+" vim-test
+nnoremap <silent> <leader>t :TestFile<cr>
+
+" fzf
 let g:fzf_layout = { 'down': '~30%' }
 
-nnoremap <silent><leader>f :Files<cr>
-nnoremap <silent><leader>b :Buffers<cr>
+nnoremap <silent> <leader>f :Files<cr>
+nnoremap <silent> <leader>b :Buffers<cr>
 
 function! s:fzf_statusline() abort
   highlight fzf1 guibg=#2E3440
@@ -297,7 +371,7 @@ endfunction
 autocmd! User FzfStatusLine call <SID>fzf_statusline()
 
 if executable('rg')
-  function! s:rg_with_opts(arg, bang)
+  function! s:rg_with_opts(arg, bang) abort
     let rg_cmd = 'rg --line-number --smart-case --hidden --color=always --colors=path:none --colors=line:none --colors=match:fg:red '
     let tokens = split(a:arg)
     let rg_opts = join(filter(copy(tokens), 'v:val =~ "^-"'))
@@ -313,54 +387,31 @@ if executable('rg')
 endif
 
 "-------------------------------------------------------------------------------
+" COMMANDS
+"-------------------------------------------------------------------------------
+
+command! ReplaceFancyCharacters call bti#functions#ReplaceFancyCharacters()
+command! StripWhitespace call bti#functions#StripWhitespace()
+
+"-------------------------------------------------------------------------------
 " AUTOCOMMANDS
 "-------------------------------------------------------------------------------
-augroup bti-vimrc
+
+augroup btiautocmds
   autocmd!
-  autocmd! VimResized * wincmd =
+
+  " Automatically resize vim splits/panes when the window changes size
+  autocmd! VimResized * execute "normal! \<c-w>="
 
   " Don't show line numbers in terminal
   if has('nvim')
     autocmd! TermOpen * setlocal nonumber norelativenumber
   endif
 
-  " Always highlight shebang-looking lines as Comment
-  autocmd! BufEnter,WinEnter * call matchadd("Comment", "^#!\/.*", -1)
-
-  " Handle crontab editing
-  autocmd! filetype crontab setlocal nobackup nowritebackup
-
   " When editing a file, always jump to the last known cursor position
   autocmd! BufReadPost *
     \  if line("'\"") > 1 && line("'\"") <= line("$")
-    \|   exe 'normal! g`"zvzz'
+    \|   execute 'normal! g`"zvzz'
     \| endif
     noh
 augroup END
-
-"------------------------------------------------------------------------------
-" CUSTOM COMMANDS
-"------------------------------------------------------------------------------
-" Replace fancy characters
-function! ReplaceFancyCharacters() abort
-  let chars = {
-    \ "“" : '"',
-    \ "”" : '"',
-    \ "‘" : "'",
-    \ "’" : "'",
-    \ "–" : '--',
-    \ "—" : '---',
-    \ "…" : '...'
-    \ }
-  exec ":%s/".join(keys(chars), '\|').'/\=chars[submatch(0)]/ge'
-endfunction
-command! ReplaceFancyCharacters call ReplaceFancyCharacters()
-
-" Strip whitespace and tabs
-function! StripWhitespace() abort
-  let l:saved_winview = winsaveview()
-  %s/\v\s+$//e
-  retab
-  call winrestview(l:saved_winview)
-endfunction
-command! StripWhitespace call StripWhitespace()

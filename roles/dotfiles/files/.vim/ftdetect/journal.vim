@@ -4,8 +4,6 @@ augroup journal
 
   au FileType markdown.journal exe "normal! gg"
 
-  au FileType markdown.journal let g:limelight_bop = '^##'
-  au FileType markdown.journal let g:limelight_eop = '\s*\n##'
   au FileType markdown.journal setlocal foldmethod=expr foldexpr=getline(v:lnum)=~#'^##'?'>1':'='
 
   au FileType markdown.journal nnoremap <silent> <M-k> :call JumpToPrevDate()<cr>zz
