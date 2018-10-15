@@ -1,18 +1,19 @@
 -R
 --tag-relative=yes
 
+--exclude=*.min.js
 --exclude=.git
 --exclude=.svn
---exclude=log
---exclude=vendor
---exclude=thirdparty
---exclude=node_modules
+--exclude=.venv
 --exclude=bower_components
---exclude=libs
 --exclude=build
 --exclude=dist
---exclude=*.min.js
+--exclude=libs
+--exclude=log
+--exclude=node_modules
 --exclude=plugged
+--exclude=thirdparty
+--exclude=vendor
 
 --fields=+i+a+S+n
 
