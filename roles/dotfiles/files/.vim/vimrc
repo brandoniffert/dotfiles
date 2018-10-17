@@ -399,6 +399,7 @@ endif
 
 command! ReplaceFancyCharacters call bti#functions#ReplaceFancyCharacters()
 command! StripWhitespace call bti#functions#StripWhitespace()
+command! -nargs=* -complete=file Preview call bti#functions#Preview(<f-args>)
 
 "-------------------------------------------------------------------------------
 " AUTOCOMMANDS

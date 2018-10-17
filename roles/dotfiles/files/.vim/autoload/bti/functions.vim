@@ -31,3 +31,18 @@ function! bti#functions#BreakHere() abort
   s/^\(\s*\)\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\2\r\1\4\6
   call histdel('/', -1)
 endfunction
+
+" Open file in Marked
+function! s:preview(file) abort
+  silent execute '!open -a "Marked 2.app" ' . shellescape(a:file)
+endfunction
+
+function! bti#functions#Preview(...) abort
+  if a:0 == 0
+    call s:preview(expand('%'))
+  else
+    for l:file in a:000
+      call s:preview(l:file)
+    endfor
+  endif
+endfunction
