@@ -66,17 +66,3 @@ let s:IAMain = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord3_term]
 let s:IARight = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord3_term]
 let s:IAMiddle = [s:nord4_gui, s:nord0_gui, s:nord4_term, s:nord1_term]
 let g:airline#themes#bti_nord#palette.inactive = airline#themes#generate_color_map(s:IAMain, s:IARight, s:IAMiddle)
-
-let g:airline#themes#bti_nord#palette.accents = {
-      \ 'red': [s:nord11_gui, '', s:nord11_term, '']
-      \ }
-
-call airline#parts#define('filepathmodified', {
-  \ 'raw' : '%f (%{&filetype}) %m',
-  \ 'accent' : 'bold'})
-let g:airline_section_c = airline#section#create(['filepathmodified'])
-
-call airline#parts#define('linescols', {
-  \ 'raw' : '%3p%% %2l/%2L:%2c',
-  \ 'accent' : 'bold'})
-let g:airline_section_z = airline#section#create(['linescols'])
