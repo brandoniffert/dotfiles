@@ -29,7 +29,7 @@ Plug 'justinmk/vim-sneak'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
 Plug 'mhinz/vim-signify'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeFocus' }
 Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo'
 Plug 'tpope/vim-commentary'
@@ -193,6 +193,7 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
   autocmd ColorScheme nord highlight! WarningMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
+  autocmd ColorScheme nord highlight! link NERDTreeCWD Comment
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
 augroup END
 
@@ -314,10 +315,15 @@ let g:indentLine_fileTypeExclude = ['help']
 let g:LoupeCenterResults = 0
 
 " NERDTree
-let g:NERDTreeDirArrowExpandable = '▶'
 let g:NERDTreeDirArrowCollapsible = '▼'
+let g:NERDTreeDirArrowExpandable = '▶'
+let g:NERDTreeHighlightCursorline = 0
 let g:NERDTreeMinimalUI = 1
+let g:NERDTreeRespectWildIgnore = 1
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeWinSize = 40
+
+nmap <silent> <leader>n :NERDTreeFocus<cr>
 
 " phpactor
 nmap <silent> <leader>gu :call phpactor#UseAdd()<cr>
