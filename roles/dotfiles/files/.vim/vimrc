@@ -74,6 +74,7 @@ set nonumber
 set ruler
 set scrolloff=3
 set showcmd
+set spellcapcheck=
 set splitbelow
 set splitright
 set switchbuf+=useopen
