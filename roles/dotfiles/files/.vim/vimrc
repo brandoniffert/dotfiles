@@ -36,6 +36,7 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
+Plug 'unblevable/quick-scope'
 Plug 'vim-airline/vim-airline'
 Plug 'wincent/loupe'
 Plug 'w0rp/ale'
@@ -183,6 +184,8 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! Normal guibg=NONE
   autocmd ColorScheme nord highlight! Pmenu guibg=#3b4252
   autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2B303B gui=bold cterm=bold
+  autocmd ColorScheme nord highlight! QuickScopePrimary guifg=#bf616a gui=underline,bold ctermfg=1 cterm=underline,bold
+  autocmd ColorScheme nord highlight! QuickScopeSecondary guifg=#bf616a ctermfg=1
   autocmd ColorScheme nord highlight! Search cterm=bold gui=bold
   autocmd ColorScheme nord highlight! SignColumn guibg=NONE
   autocmd ColorScheme nord highlight! Statement gui=NONE
@@ -292,6 +295,9 @@ let g:ale_linters = {
 
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
+
+" quick-scope
+let g:qs_highlight_on_keys = ['f', 'F', 't', 'T']
 
 " gutentags
 let g:gutentags_cache_dir = '~/.vim/tmp/tags'
