@@ -198,6 +198,7 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! WarningMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
   autocmd ColorScheme nord highlight! link NERDTreeCWD Comment
+  autocmd ColorScheme nord highlight! link Sneak SpellBad
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
 augroup END
 
@@ -342,13 +343,18 @@ let g:signify_sign_show_count = 0
 
 " vim-sneak
 let g:sneak#use_ic_scs = 1
+let g:sneak#label = 1
 let g:sneak#prompt = 'sneak: '
-let g:sneak#target_labels = ';luyneioqwfpgarstdLUYNEIOQWFPGARSTD'
+let g:sneak#target_labels = 'luyneioqwfpgarstdLUYNEIOQWFPGARSTD'
 
-nmap <leader>s <Plug>SneakLabel_s
-nmap <leader>S <Plug>SneakLabel_S
-
-highlight! link Sneak IncSearch
+nmap <leader>s <Plug>Sneak_s
+nmap <leader>S <Plug>Sneak_S
+omap <leader>s <Plug>Sneak_s
+omap <leader>S <Plug>Sneak_S
+vmap <leader>s <Plug>Sneak_s
+vmap <leader>S <Plug>Sneak_S
+nmap <leader>; <Plug>Sneak_;
+nmap <leader>, <Plug>Sneak_,
 
 " vim-test
 nnoremap <silent> <leader>t :TestFile<cr>
