@@ -120,27 +120,28 @@ bindkey '^M' magic-enter
 # ALIASES
 #-------------------------------------------------------------------------------
 
+alias digg="dig +multiline +noall +answer -t ANY"
+alias dots="cd $HOME/Projects/Life/computer"
+alias e="$EDITOR"
+alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 alias g='git'
 alias grep='grep --color'
 alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias llll='tree -L 4'
-alias t='tmux -u'
-alias vgs="vagrant global-status"
-alias e="$EDITOR"
-alias v=view
-alias q=exit
+alias notes="$EDITOR $HOME/Dropbox/Notes"
 alias nv="nvim"
 alias nvd="nvim -d"
-alias dots="cd $HOME/Projects/Life/computer"
+alias q=exit
+alias t='tmux -u'
+alias v=view
+alias vi=vim
+alias vgs="vagrant global-status"
 alias zr!="source $HOME/.zshrc"
-alias notes="$EDITOR $HOME/Dropbox/Notes"
-alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
-alias digg="dig +multiline +noall +answer -t ANY"
 
 # Need special case for macos
-if [ "$(uname)" = "Darwin" ]; then
+if [ "$(uname)" = 'Darwin' ]; then
   alias ls='gls --color=auto'
   alias lls='gls --color=auto -al'
 else
