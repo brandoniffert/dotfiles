@@ -1,13 +1,14 @@
-augroup journal
-  au!
+augroup JournalDetect
+  autocmd!
+
   setlocal linebreak noshowcmd
 
-  au FileType markdown.journal exe "normal! gg"
+  autocmd FileType markdown.journal execute 'normal! gg'
 
-  au FileType markdown.journal setlocal foldmethod=expr foldexpr=getline(v:lnum)=~#'^##'?'>1':'='
+  autocmd FileType markdown.journal setlocal foldmethod=expr foldexpr=getline(v:lnum)=~#'^##'?'>1':'='
 
-  au FileType markdown.journal nnoremap <silent> <M-k> :call JumpToPrevDate()<cr>zz
-  au FileType markdown.journal nnoremap <silent> <M-j> :call JumpToNextDate()<cr>zz
+  autocmd FileType markdown.journal nnoremap <silent> <M-k> :call JumpToPrevDate()<cr>zz
+  autocmd FileType markdown.journal nnoremap <silent> <M-j> :call JumpToNextDate()<cr>zz
 
   " If there is no previous date then jump to top of file
   function! JumpToPrevDate()

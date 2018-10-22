@@ -1,3 +1,14 @@
+if exists('b:current_syntax')
+  finish
+endif
+
+if !exists('main_syntax')
+  let main_syntax = 'html'
+endif
+
+runtime! syntax/html.vim
+unlet b:current_syntax
+
 syn match ssBlock /<%\s*.*\s*%>/ containedin=htmlTag
 syn region ssComment start=+<%--+ end=+--%>+ contains=@Spell
 syn match ssOperator /\v\|\||\&\&|\=\=\=|\=\=/ contained containedin=ssBlock
@@ -11,3 +22,6 @@ hi def link ssOperator Operator
 hi def link ssKeyword Keyword
 hi def link ssComment Comment
 hi def link ssString String
+
+let b:current_syntax = 'ss'
+let main_syntax = 'html'

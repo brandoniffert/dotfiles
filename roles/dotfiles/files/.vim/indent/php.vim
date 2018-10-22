@@ -1,6 +1,5 @@
-" Better indent support for PHP by making it possible to indent HTML sections
-" as well.
-if exists("b:did_indent")
+" Better indent support for PHP by making it possible to indent HTML sections as well
+if exists('b:did_indent')
   finish
 endif
 
@@ -21,13 +20,15 @@ function! GetPhpHtmlIndent(lnum)
   else
     let html_ind = HtmlIndentGet(a:lnum)
   endif
+
   let php_ind = GetPhpIndent()
-  " priority one for php indent script
+  " Priority one for php indent script
   if php_ind > -1
     return php_ind
   endif
+
   if html_ind > -1
-    if getline(a:num) =~ "^<?" && (0< searchpair('<?', '', '?>', 'nWb')
+    if getline(a:lnum) =~# '^<?' && (0 < searchpair('<?', '', '?>', 'nWb')
           \ || 0 < searchpair('<?', '', '?>', 'nW'))
       return -1
     endif

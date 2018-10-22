@@ -1,5 +1,7 @@
-augroup silverstripe-templates
-  au!
-  au BufEnter,BufRead,BufNewFile *.ss silent set ft=html.ss
-  au BufEnter *.ss :syntax sync fromstart
+augroup SilverStripeTemplateDetect
+  autocmd!
+  autocmd BufEnter,BufRead,BufNewFile *.ss
+        \ set filetype=ss.html syntax=ss |
+        \ runtime! ftplugin/ss.vim |
+        \ runtime! indent/ss.vim
 augroup END
