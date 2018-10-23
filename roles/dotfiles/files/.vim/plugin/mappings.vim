@@ -10,8 +10,6 @@ nnoremap k gk
 nnoremap <leader><cr> :
 vnoremap <leader><cr> :
 
-" nnoremap <leader><cr> :call feedkeys(':', 'n')<cr>
-
 " Use hjkl for switching between splits
 nnoremap <c-h> <c-W>h
 nnoremap <c-j> <c-W>j
