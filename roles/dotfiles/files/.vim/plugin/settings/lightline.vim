@@ -53,7 +53,7 @@ let g:lightline.component = {
 
 let g:lightline.component_type = {
       \  'linter_info': 'warning',
-      \  'whitespace': 'error',
+      \  'whitespace': 'warning',
       \ }
 
 let g:lightline.component_expand = {

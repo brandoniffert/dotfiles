@@ -1,4 +1,4 @@
-augroup nord-overrides
+augroup NordOverrides
   autocmd!
   autocmd ColorScheme nord highlight! CursorLine guibg=#2B303B
   autocmd ColorScheme nord highlight! Error cterm=bold guifg=#D8DEE9 gui=bold
@@ -7,13 +7,14 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! IncSearch cterm=bold guibg=#ebcb8b gui=bold
   autocmd ColorScheme nord highlight! LineNr guibg=NONE
   autocmd ColorScheme nord highlight! Normal guibg=NONE
-  autocmd ColorScheme nord highlight! Pmenu guibg=#3b4252
-  autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2B303B gui=bold cterm=bold
+  autocmd ColorScheme nord highlight! Pmenu guibg=#2E3440 ctermbg=16
+  autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2E3440 gui=bold ctermbg=7 ctermfg=16 cterm=bold
   autocmd ColorScheme nord highlight! QuickScopePrimary guifg=#bf616a gui=underline,bold ctermfg=1 cterm=underline,bold
   autocmd ColorScheme nord highlight! QuickScopeSecondary guifg=#bf616a ctermfg=1
   autocmd ColorScheme nord highlight! Search guifg=#bf616a ctermfg=1 guibg=NONE ctermbg=NONE cterm=underline,bold gui=underline,bold
   autocmd ColorScheme nord highlight! SignColumn guibg=NONE
   autocmd ColorScheme nord highlight! Statement gui=NONE
+  autocmd ColorScheme nord highlight! StatusLine guibg=#2E3440 guifg=#E5E9F0 ctermbg=16 ctermfg=7
   autocmd ColorScheme nord highlight! TabLine guibg=#15171E guifg=#D8DEE9
   autocmd ColorScheme nord highlight! TabLineFill guifg=#D8DEE9 guibg=NONE
   autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#15171E
@@ -24,6 +25,7 @@ augroup nord-overrides
   autocmd ColorScheme nord highlight! link NERDTreeCWD Comment
   autocmd ColorScheme nord highlight! link Sneak WarningMsg
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
+  autocmd ColorScheme nord highlight! link Wildmenu PmenuSel
 augroup END
 
 let g:nord_comment_brightness = 3
