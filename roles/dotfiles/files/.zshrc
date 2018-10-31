@@ -5,9 +5,12 @@
 SYSTEM_PATH=$PATH
 unset PATH
 
+export GOPATH="$HOME/Projects/Go"
+
 PATH=$HOME/.zsh/bin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/.composer/vendor/bin
+PATH=$PATH:$GOPATH/bin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
 PATH=$PATH:$SYSTEM_PATH
@@ -133,6 +136,7 @@ alias llll='tree -L 4'
 alias notes="$EDITOR $HOME/Dropbox/Notes"
 alias nv="nvim"
 alias nvd="nvim -d"
+alias pipenvsh="pipenv shell --fancy"
 alias q=exit
 alias t='tmux -u'
 alias v=view
@@ -181,61 +185,10 @@ compdef g=git
 compdef t=tmux
 
 #-------------------------------------------------------------------------------
-# PROMPT
-#-------------------------------------------------------------------------------
-
-SPACESHIP_GIT_SYMBOL=''
-SPACESHIP_DIR_PREFIX='%F{black}┌%{%f%}'
-SPACESHIP_PROMPT_FIRST_PREFIX_SHOW=true
-
-# Note use a non-breaking space at the end of the prompt because we can use it as a find pattern to jump back in tmux
-local NBSP='​'
-SPACESHIP_DIR_PREFIX="${SPACESHIP_DIR_PREFIX}${NBSP}"
-
-autoload -U promptinit
-promptinit
-prompt spaceship
-
-SPACESHIP_PROMPT_ADD_NEWLINE=false
-SPACESHIP_CHAR_COLOR_SUCCESS=white
-SPACESHIP_CHAR_PREFIX='%F{black}└%{%f%} '
-SPACESHIP_CHAR_SUFFIX=' '
-SPACESHIP_CHAR_SYMBOL='❯'
-SPACESHIP_DIR_COLOR=cyan
-SPACESHIP_DIR_TRUNC=1
-SPACESHIP_EXEC_TIME_COLOR=black
-SPACESHIP_EXEC_TIME_PREFIX=''
-SPACESHIP_GIT_BRANCH_COLOR=230
-SPACESHIP_GIT_PREFIX='%F{black}-%{%f%} '
-SPACESHIP_GIT_STATUS_DELETED='-'
-SPACESHIP_GIT_STATUS_PREFIX=' '
-SPACESHIP_GIT_STATUS_SUFFIX=''
-SPACESHIP_JOBS_COLOR=white
-SPACESHIP_JOBS_SYMBOL='*'
-SPACESHIP_VENV_COLOR=black
-SPACESHIP_VENV_PREFIX='%F{0}(%{%f%}'
-SPACESHIP_VENV_SUFFIX='%F{0})%{%f%}'
-SPACESHIP_PROMPT_ORDER=(
-  dir           # Current directory section
-  host          # Hostname section
-  jobs          # Backgound jobs indicator
-  git           # Git section (git_branch + git_status)
-  aws           # Amazon Web Services section
-  venv          # virtualenv section
-  exec_time     # Execution time
-  battery       # Battery level and status
-  line_sep      # Line break
-  exit_code     # Exit code section
-  char          # Prompt character
-)
-
-#-------------------------------------------------------------------------------
 # FUNCTIONS
 #-------------------------------------------------------------------------------
 
-if [ -f "$HOME/.zsh/functions" ]; then
-  source "$HOME/.zsh/functions"
-fi
+source "$HOME/.zsh/functions.zsh"
 
 # Adds `cdr` command for navigating to recent directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -246,6 +199,12 @@ zstyle ':completion:*:*:cdr:*:*' menu selection
 
 # Fall through to cd if cdr is passed a non-recent dir as an argument
 zstyle ':chpwd:*' recent-dirs-default true
+
+#-------------------------------------------------------------------------------
+# PROMPT
+#-------------------------------------------------------------------------------
+
+source "$HOME/.zsh/prompt.zsh"
 
 #-------------------------------------------------------------------------------
 # SETUP OTHER SCRIPTS/PROGRAMS
@@ -261,18 +220,10 @@ if command -v fasd >/dev/null 2>&1; then
   eval "$(fasd --init auto)"
 fi
 
-# Use .zshrc.local for local options
-LOCAL_RC="$HOME/.zshrc.local"
-test -f $LOCAL_RC && source $LOCAL_RC
-unset LOCAL_RC
-
 # fzf
 FZF_ZSH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 test -f $FZF_ZSH && source $FZF_ZSH
 unset FZF_ZSH
-
-# zsh-async
-source "$HOME/.zsh/async.zsh"
 
 # zsh-autosuggestions and zsh-syntax-highlighting
 function() {
@@ -295,7 +246,13 @@ function() {
 
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_HIGHLIGHT_STYLES[path]="none"
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
+
+# Use .zshrc.local for local options
+LOCAL_RC="$HOME/.zshrc.local"
+test -f $LOCAL_RC && source $LOCAL_RC
+unset LOCAL_RC
 
 #-------------------------------------------------------------------------------
 # NVM
@@ -305,16 +262,20 @@ ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 # If it isn't, then load up nvm but do it asynchronously
 if ! command -v node >/dev/null 2>&1; then
   # https://github.com/creationix/nvm/issues/539#issuecomment-403661578
+
+  # Setup zsh-async
+  source "$HOME/.zsh/async.zsh"
+  async_init
+
   export NVM_DIR="$HOME/.config/nvm"
 
-  function load_nvm() {
+  function load-nvm() {
     # /usr/local/opt/nvm/nvm.sh is the expected path when nvm is managed by Homebrew
     local nvmsh="/usr/local/opt/nvm/nvm.sh"
     [ -s "$nvmsh" ] && source "$nvmsh"
   }
 
   # Initialize a new worker to load (source) nvm.sh
-  async_start_worker nvm_worker -n
-  async_register_callback nvm_worker load_nvm
-  async_job nvm_worker
+  async_start_worker nvm-worker
+  async_job nvm-worker load-nvm
 fi
