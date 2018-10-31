@@ -46,6 +46,7 @@ brew 'getmail'
 brew 'ghostscript'
 brew 'gifsicle'
 brew 'git', args: ['with-pcre2']
+brew 'go'
 brew 'htop-osx'
 brew 'httpie'
 brew 'imagemagick@6'
