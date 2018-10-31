@@ -1,5 +1,3 @@
-# vi: set ft=zsh :
-
 # Serve a directory on localhost and open in browser
 function server() {
   local port="${1:-9876}"
@@ -264,3 +262,21 @@ function Resume {
 }
 zle -N Resume
 bindkey "^Z" Resume
+
+# Don't send tmux TERM when using ssh
+function ssh() {
+  emulate -L zsh
+
+  local LOCAL_TERM=$(echo -n "$TERM" | sed -e s/tmux/screen/)
+  env TERM=$LOCAL_TERM command ssh "$@"
+}
+
+# Create a scratch shell and directory
+function scratch() {
+  local SCRATCH=$(mktemp -d)
+  echo 'Spawing subshell in scratch directory:'
+  echo "  $SCRATCH"
+  (cd $SCRATCH; zsh)
+  echo "Removing scratch directory"
+  rm -r "$SCRATCH"
+}
