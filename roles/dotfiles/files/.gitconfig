@@ -29,7 +29,7 @@
   ui = auto
 
 [format]
-  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(black bold)%an%Creset
+  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(black)%an%Creset
 
 [merge]
   tool = vimdiff
