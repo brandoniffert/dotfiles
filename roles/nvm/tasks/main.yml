@@ -4,6 +4,6 @@
 
 # Assumes that nvm was installed with Homebrew, sources nvm.sh at the location Homebrew installs it
 - name: Install the latest LTS node
-  command: "source /usr/local/opt/nvm/nvm.sh && nvm install --lts && nvm alias default lts/*"
+  shell: "NVM_DIR=$HOME/.config/nvm && source /usr/local/opt/nvm/nvm.sh && nvm install --lts && nvm alias default lts/*"
   args:
     creates: "{{ ansible_env.HOME }}/.config/nvm/versions/node"
