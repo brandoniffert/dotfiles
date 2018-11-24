@@ -1,10 +1,10 @@
 ---
 - name: Install eslint node package
-  command: yarn global add eslint
+  shell: "source /usr/local/opt/nvm/nvm.sh && yarn global add eslint"
   args:
     creates: /usr/local/bin/eslint
 
 - name: Install diff-so-fancy node package
-  command: yarn global add diff-so-fancy
+  shell: "source /usr/local/opt/nvm/nvm.sh && yarn global add diff-so-fancy"
   args:
     creates: /usr/local/bin/diff-so-fancy
