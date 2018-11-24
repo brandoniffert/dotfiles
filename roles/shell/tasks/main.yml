@@ -6,3 +6,9 @@
     line=/usr/local/bin/zsh
     owner=root
   become: !!bool yes
+
+- name: Change default shell to zsh
+  user:
+    name: "{{ ansible_env.USER }}"
+    shell: /usr/local/bin/zsh
+  become: !!bool yes
