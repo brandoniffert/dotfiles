@@ -164,12 +164,12 @@ function n() {
 
 # Quickly open life journal
 function jlife() {
-  $EDITOR -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Life.md
+  $EDITOR -c 'set ft=markdown.journal | Goyo' ~/Dropbox/Notes/Life.md
 }
 
 # Quickly open work journal
 function jwork() {
-  $EDITOR -c 'silent Goyo | set ft=markdown.journal' ~/Dropbox/Notes/Work.md
+  $EDITOR -c 'set ft=markdown.journal | Goyo' ~/Dropbox/Notes/Work.md
 }
 
 # Quickly open both life and work journals
