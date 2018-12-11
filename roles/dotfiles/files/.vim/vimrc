@@ -20,6 +20,7 @@ Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_s', '<Plug>Sneak_S'] }
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'machakann/vim-sandwich'
+Plug 'mattn/emmet-vim'
 Plug 'mhinz/vim-signify'
 Plug 'sheerun/vim-polyglot'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
