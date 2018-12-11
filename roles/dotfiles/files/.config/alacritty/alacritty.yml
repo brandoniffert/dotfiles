@@ -85,10 +85,10 @@ font:
     family: Source Code Pro
     style: Light
 
-  # Italic font face
+  # Bold font face
   bold:
     family: Source Code Pro
-    style: Semibold
+    style: Medium
 
   # Italic font face
   italic:
