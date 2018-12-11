@@ -1,5 +1,29 @@
 ---
-- name: Siri -> Enable Siri
+- name: Set computername
+  shell: scutil --set ComputerName {{ computer_name }}
+  become: !!bool yes
+  when: ansible_hostname != computer_name
+
+- name: Set hostname
+  shell: scutil --set HostName {{ computer_name }}
+  become: !!bool yes
+  when: ansible_hostname != computer_name
+
+- name: Set localhostname
+  shell: scutil --set LocalHostName {{ computer_name }}
+  become: !!bool yes
+  when: ansible_hostname != computer_name
+
+- name: Set the netbios name
+  become: yes
+  osx_defaults:
+    domain: com.apple.smb.server
+    key: NetBIOSName
+    type: string
+    value: "{{ computer_name }}"
+    state: present
+
+- name: Disable Siri
   osx_defaults: domain=com.apple.assistant.support key="Assistant Enabled" type=bool value=false
 
 - name: Show all file extensions

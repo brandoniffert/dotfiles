@@ -9,3 +9,4 @@
     - { role: vim, tags: vim }
     - { role: nvm, tags: nvm }
     - { role: yarn, tags: yarn }
+    - { role: macos, tags: macos }
