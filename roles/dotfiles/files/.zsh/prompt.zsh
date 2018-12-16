@@ -44,42 +44,30 @@ function +vi-git-stash() {
   hook_com[misc]+=${(j::)gitstatus}
 }
 
-# Anonymous function to avoid leaking NBSP variable
-function() {
-  if [[ -n "$TMUX" ]]; then
-    local LVL=$(($SHLVL - 1))
-  else
-    local LVL=$SHLVL
-  fi
+if [[ -n "$TMUX" ]]; then
+  local LVL=$(($SHLVL - 1))
+else
+  local LVL=$SHLVL
+fi
 
-  if [[ -n "$VIRTUAL_ENV" ]]; then
-    local VENV="%F{black}(${VIRTUAL_ENV##*/})%f"
-  else
-    local VENV=''
-  fi
+if [[ -n "$VIRTUAL_ENV" ]]; then
+  local VENV="%F{black}(${VIRTUAL_ENV##*/})%f"
+else
+  local VENV=''
+fi
 
-  local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
-  local DIR="%F{blue}%1~%f "
-  local JOBS_RETURNVAL="%F{red}%B%(1j.*.)%(?..!)%b%f"
+local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
+local DIR="%F{blue}%1~%f "
+local JOBS_RETURNVAL="%F{red}%B%(1j.*.)%(?..!)%b%f"
 
-  if [[ $EUID -eq 0 ]]; then
-    local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
-  else
-    local SUFFIX="%F{white}$(printf '\$%.0s' {1..$LVL})%f"
-  fi
+if [[ $EUID -eq 0 ]]; then
+  local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
+else
+  local SUFFIX="%F{white}$(printf '\$%.0s' {1..$LVL})%f"
+fi
 
-  if [[ -n "$TMUX" ]]; then
-    # Note: use a non-breaking space at the end of the prompt because we can use it as a find pattern to jump back in tmux
-    local NBSP='​'
-    export PS1="${SSHTTY}${DIR}${JOBS_RETURNVAL}${SUFFIX}${NBSP}"
-    export ZLE_RPROMPT_INDENT=0
-  else
-    export PS1="${SSHTTY}${DIR}${JOBS_RETURNVAL}${SUFFIX} "
-  fi
-
-  export RPROMPT_BASE="\${vcs_info_msg_0_%%}${VENV}"
-}
-
+export PS1="${SSHTTY}${DIR}${JOBS_RETURNVAL}${SUFFIX} "
+export RPROMPT_BASE="\${vcs_info_msg_0_%%}${VENV}"
 export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 
 # Show the time it took to execute a command
