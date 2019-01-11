@@ -39,6 +39,7 @@ set scrolloff=3
 set shiftwidth=2
 let &showbreak = '↳ '
 set showmatch
+set signcolumn=yes
 set smartcase
 set smarttab
 set softtabstop=2
