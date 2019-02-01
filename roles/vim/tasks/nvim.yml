@@ -3,7 +3,7 @@
   gem: name=neovim user_install=yes
 
 - name: Install neovim support via pip
-  pip: executable=pip name=neovim
+  pip: executable=pip name=pynvim
 
 - name: Install neovim support via pip3
-  pip: executable=pip3 name=neovim
+  pip: executable=pip3 name=pynvim
