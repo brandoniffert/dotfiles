@@ -28,7 +28,6 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! link Wildmenu PmenuSel
 augroup END
 
-let g:nord_comment_brightness = 3
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 
