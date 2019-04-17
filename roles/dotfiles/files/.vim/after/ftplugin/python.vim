@@ -4,3 +4,10 @@ setlocal tabstop=4
 
 " Run current file
 set makeprg=python\ %
+
+augroup PythonFileType
+  autocmd!
+
+  " Automatically format
+  autocmd BufWritePre *.py execute ':Black'
+augroup END
