@@ -5,7 +5,7 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! ErrorMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! Folded guifg=#7b88a1 guibg=#2E3440 gui=NONE
   autocmd ColorScheme nord highlight! IncSearch cterm=bold guibg=#ebcb8b gui=bold
-  autocmd ColorScheme nord highlight! LineNr guibg=NONE guifg=#3c4453
+  autocmd ColorScheme nord highlight! LineNr guibg=NONE guifg=#363d4a
   autocmd ColorScheme nord highlight! Normal guibg=NONE
   autocmd ColorScheme nord highlight! Pmenu guibg=#2E3440 ctermbg=16
   autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2E3440 gui=bold ctermbg=7 ctermfg=16 cterm=bold

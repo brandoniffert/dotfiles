@@ -35,7 +35,7 @@ let g:lightline.active = {
       \ }
 
 let g:lightline.inactive = {
-      \  'left': [ [ 'fullfilename' ] ],
+      \  'left': [ [ 'fullfilename', 'modified' ] ],
       \  'right': []
       \ }
 

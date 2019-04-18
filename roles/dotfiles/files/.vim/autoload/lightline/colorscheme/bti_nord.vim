@@ -1,5 +1,6 @@
 let s:p = {'normal': {}, 'inactive': {}, 'insert': {}, 'replace': {}, 'visual': {}, 'tabline': {}}
 
+let s:nord00 = ['#171a26', 16]
 let s:nord0 = ['#2E3440', 16]
 let s:nord1 = ['#3B4252', 0]
 let s:nord2 = ['#434C5E', 'NONE']
@@ -23,8 +24,8 @@ let s:p.normal.right = [ [ s:nord5, s:nord1 ], [ s:nord5, s:nord1 ], [ s:nord5, 
 let s:p.normal.warning = [ [ s:nord1, s:nord13, 'bold' ] ]
 let s:p.normal.error = [ [ s:nord5, s:nord11, 'bold' ] ]
 
-let s:p.inactive.left =  [ [ s:nord4, s:nord0 ] ]
-let s:p.inactive.middle = [ [ s:nord4, s:nord0 ] ]
+let s:p.inactive.left =  [ [ s:nord3, s:nord00 ] ]
+let s:p.inactive.middle = [ [ s:nord3, s:nord00 ] ]
 
 let s:p.insert.left = [ [ s:nord1, s:nord14, 'bold' ], [ s:nord5, s:nord0 ] ]
 let s:p.replace.left = [ [ s:nord5, s:nord11, 'bold' ], [ s:nord5, s:nord0 ] ]
