@@ -34,10 +34,10 @@ set mouse=a
 set nojoinspaces
 set noshowcmd
 set noshowmode
-set nonumber
 set scrolloff=3
 set shiftwidth=2
 let &showbreak = '↳ '
+set relativenumber
 set showmatch
 set signcolumn=yes
 set smartcase
