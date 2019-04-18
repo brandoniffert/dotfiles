@@ -103,6 +103,11 @@ bindkey "^D" delete-char
 bindkey "^F" forward-char
 bindkey "^B" backward-char
 
+# Use "cbt" capability ("back_tab", as per `man terminfo`), if we have it:
+if tput cbt &> /dev/null; then
+  bindkey "$(tput cbt)" reverse-menu-complete # Make Shift-tab go to previous completion
+fi
+
 # Allow C-x C-e to edit command line
 autoload -U edit-command-line
 zle -N edit-command-line
