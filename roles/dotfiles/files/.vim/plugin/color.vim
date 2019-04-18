@@ -5,7 +5,7 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! ErrorMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! Folded guifg=#7b88a1 guibg=#2E3440 gui=NONE
   autocmd ColorScheme nord highlight! IncSearch cterm=bold guibg=#ebcb8b gui=bold
-  autocmd ColorScheme nord highlight! LineNr guibg=NONE
+  autocmd ColorScheme nord highlight! LineNr guibg=NONE guifg=#3c4453
   autocmd ColorScheme nord highlight! Normal guibg=NONE
   autocmd ColorScheme nord highlight! Pmenu guibg=#2E3440 ctermbg=16
   autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2E3440 gui=bold ctermbg=7 ctermfg=16 cterm=bold
@@ -17,7 +17,7 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! StatusLine guibg=#2E3440 guifg=#E5E9F0 ctermbg=16 ctermfg=7
   autocmd ColorScheme nord highlight! TabLine guibg=#15171E guifg=#D8DEE9
   autocmd ColorScheme nord highlight! TabLineFill guifg=#D8DEE9 guibg=NONE
-  autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#15171E
+  autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#12141e
   autocmd ColorScheme nord highlight! VertSplit guibg=NONE
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
   autocmd ColorScheme nord highlight! WarningMsg cterm=bold gui=bold
@@ -28,6 +28,7 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! link Wildmenu PmenuSel
 augroup END
 
+let g:nord_underline = 1
 let g:nord_italic = 1
 let g:nord_italic_comments = 1
 
