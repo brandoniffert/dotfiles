@@ -10,7 +10,7 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! Pmenu guibg=#2E3440 ctermbg=16
   autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2E3440 gui=bold ctermbg=7 ctermfg=16 cterm=bold
   autocmd ColorScheme nord highlight! QuickScopePrimary guifg=#bf616a gui=underline,bold ctermfg=1 cterm=underline,bold
-  autocmd ColorScheme nord highlight! QuickScopeSecondary guifg=#bf616a ctermfg=1
+  autocmd ColorScheme nord highlight! QuickScopeSecondary guifg=#bf616a gui=bold ctermfg=1 cterm=bold
   autocmd ColorScheme nord highlight! Search guifg=#bf616a ctermfg=1 guibg=NONE ctermbg=NONE cterm=underline,bold gui=underline,bold
   autocmd ColorScheme nord highlight! SignColumn guibg=NONE
   autocmd ColorScheme nord highlight! Statement gui=NONE
