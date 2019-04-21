@@ -1,11 +1,19 @@
-" Call rg and filter with FZF but allow passing through flags (ex: --no-hidden -tjs)
-function! bti#fzf#rg_with_opts(arg, bang) abort
-  let rg_cmd = 'rg --line-number --smart-case --hidden --color=always --colors=path:none --colors=line:none --colors=match:fg:red '
-  let tokens = split(a:arg)
-  let rg_opts = join(filter(copy(tokens), 'v:val =~# "^-"'))
-  let query = join(filter(copy(tokens), 'v:val !~# "^-"'))
-  let cmd = rg_cmd . rg_opts . ' ' . shellescape(query)
-  let preview_type = a:bang ? fzf#vim#with_preview('up:60%') : fzf#vim#with_preview('right:50%', '?')
+" FZF Rg variant that uses a custom rg cmd and preview script
+function! bti#fzf#rg_with_opts(args, bang) abort
+  let s:base_rg_cmd = 'rg --line-number --hidden --smart-case --color=always --colors=path:none --colors=line:none --colors=match:fg:red '
+  let s:rg_cmd = a:bang ? s:base_rg_cmd . '--no-ignore ' : s:base_rg_cmd . '--ignore '
+  let s:cmd = s:rg_cmd . a:args
 
-  return call('fzf#vim#grep', [cmd, 0, preview_type])
+  let s:preview_script = $HOME . '/.vim/bin/fzf-vim-preview.sh'
+  let s:preview_opts = {
+        \  'options': [
+        \    '--preview-window',
+        \    'right:50%',
+        \    '--preview', '' . s:preview_script . ' {}',
+        \    '--bind',
+        \    '?:toggle-preview'
+        \  ]
+        \ }
+
+  return call('fzf#vim#grep', [s:cmd, 0, s:preview_opts])
 endfunction
