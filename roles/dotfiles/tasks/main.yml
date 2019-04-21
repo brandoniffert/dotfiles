@@ -1,9 +1,11 @@
 ---
 - name: Make ~/.config
-  file: path=~/.config state=directory
+  file: path=~/.config
+        state=directory
 
 - name: Create backup directory
-  file: path=~/.local/backups state=directory
+  file: path=~/.local/backups
+        state=directory
 
 - name: Check for non-symlink originals
   command: test -e ~/{{ item }} -a ! -L ~/{{ item }}
@@ -31,10 +33,16 @@
   with_items: "{{ dotfile_files }}"
 
 - name: Symlink nvim to vim
-  file: path=~/.config/nvim src=~/.vim state=link
+  file: path=~/.config/nvim
+        src=~/.vim
+        state=link
 
 - name: Make ~/.config/karabiner
-  file: path=~/.config/karabiner state=directory
+  file: path=~/.config/karabiner
+        state=directory
 
 - name: Symlink karabiner.json
-  file: path=~/.config/karabiner/karabiner.json src={{ ansible_env.PWD }}/roles/dotfiles/files/.config/karabiner/karabiner.json state=link
+  file: path=~/.config/karabiner/karabiner.json
+        src={{ ansible_env.PWD }}/roles/dotfiles/files/.config/karabiner/karabiner.json
+        state=link
+        force=true
