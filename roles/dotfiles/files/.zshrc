@@ -55,6 +55,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export WORDCHARS='*?[]~&;!$%^<>'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export BAT_THEME=Nord
 
 # Setup dircolors
 command -v dircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(dircolors $HOME/.dir_colors)
