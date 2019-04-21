@@ -24,7 +24,9 @@ let g:lightline.subseparator = { 'left': '·', 'right': '·' }
 let g:lightline.active = {
       \  'left': [
       \    [ 'mode', 'paste', 'spell' ],
-      \    [ 'readonly', 'filename', 'filetype', 'modified' ]
+      \    [ 'readonly', 'filename'],
+      \    [ 'filetype' ],
+      \    [ 'modified' ]
       \  ],
       \  'right': [
       \    [ 'whitespace' ],
