@@ -1,5 +1,3 @@
-scriptencoding utf-8
-
 let g:lightline = {}
 
 let g:lightline.colorscheme = 'bti_nord'

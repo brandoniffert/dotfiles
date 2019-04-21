@@ -1,5 +1,3 @@
-scriptencoding utf-8
-
 function! s:IgnoreBuffer(name) abort
   let ignore = 'NERD*\|help\|nofile\|__Mundo*'
 

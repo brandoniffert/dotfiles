@@ -1,5 +1,3 @@
-scriptencoding utf-8
-
 set autoindent
 set backspace=indent,start,eol
 set belloff=all

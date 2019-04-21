@@ -1,5 +1,3 @@
-scriptencoding utf-8
-
 " Replace fancy characters
 function! bti#functions#ReplaceFancyCharacters() abort
   let chars = {
@@ -70,20 +68,17 @@ endfunction
 function! bti#functions#ShouldAllowFocus() abort
   let s:btiShouldAllowFocusBlacklist = ['diff', 'qf', 'nerdtree', 'help', 'vim-plug']
 
-  return index(s:btiShouldAllowFocusBlacklist, &filetype) == -1
+  return !empty(&filetype) && index(s:btiShouldAllowFocusBlacklist, &filetype) == -1
 endfunction
 
 " Focus the window
 function! bti#functions#FocusWindow() abort
   if bti#functions#ShouldAllowFocus()
-    if !empty(&filetype)
-      :SignifyEnable
-      if exists('&winhighlight')
-        set winhighlight=
-      endif
-      ownsyntax on
-      syntax sync fromstart
+    :SignifyEnable
+    if exists('&winhighlight')
+      set winhighlight=
     endif
+    ownsyntax on
   endif
 endfunction
 
