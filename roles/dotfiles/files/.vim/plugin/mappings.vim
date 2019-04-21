@@ -28,6 +28,7 @@ nnoremap <leader><leader> <c-^>
 
 " Quick quit
 nnoremap <silent> <leader>q :quit<cr>
+nnoremap <silent> <leader>Q :quitall<cr>
 
 " Easy indent/outdent
 nnoremap <tab> >>

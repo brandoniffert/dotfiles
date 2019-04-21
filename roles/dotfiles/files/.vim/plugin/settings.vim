@@ -4,10 +4,6 @@ set autoindent
 set backspace=indent,start,eol
 set belloff=all
 
-if !empty('$TMUX')
-  set cmdheight=2
-endif
-
 set expandtab
 let &fillchars = 'vert:│,fold:·,eob: '
 set foldlevelstart=0
