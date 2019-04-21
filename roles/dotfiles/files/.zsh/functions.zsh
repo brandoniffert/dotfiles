@@ -178,8 +178,10 @@ function jlogs() {
 }
 
 # Use fzf to upgrade installed homebrew package
-function brewup {
-  brew upgrade $(brew list | fzf)
+function brewup() {
+  brew update
+  local choices=$(brew outdated -v | fzf -m --reverse --preview="echo {} | cut -d' ' -f1 | xargs brew info")
+  [[ ! -z "$choices" ]] && echo "$choices" | cut -d' ' -f1 | xargs brew upgrade
 }
 
 # Browse Chrome history
