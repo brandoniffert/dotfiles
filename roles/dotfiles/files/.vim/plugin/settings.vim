@@ -25,6 +25,7 @@ set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:⦸
 set mouse=a
+set number
 set nojoinspaces
 set noshowcmd
 set noshowmode

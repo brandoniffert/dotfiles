@@ -23,6 +23,7 @@ endfunction
 function! bti#functions#CycleLineNumbering() abort
   execute {
         \ '00': 'set norelativenumber | set number',
+        \ '01': 'set norelativenumber | set number',
         \ '10': 'set relativenumber   | set number',
         \ '11': 'set norelativenumber | set nonumber' }[&number . &relativenumber]
 endfunction
