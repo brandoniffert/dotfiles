@@ -20,9 +20,6 @@ augroup btiAutoCommands
   autocmd BufEnter,FocusGained,VimEnter,WinEnter * call bti#functions#FocusWindow()
   autocmd FocusLost,WinLeave * call bti#functions#BlurWindow()
 
-  " Always re-sync syntax highlighting
-  autocmd BufEnter * :syntax sync fromstart
-
   " When editing a file, always jump to the last known cursor position
   autocmd! BufReadPost *
     \  if line("'\"") > 1 && line("'\"") <= line("$")
