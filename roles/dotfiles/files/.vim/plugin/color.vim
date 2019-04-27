@@ -1,10 +1,12 @@
 augroup NordOverrides
   autocmd!
-  autocmd ColorScheme nord highlight! CursorLine guibg=#2B303B
+  autocmd ColorScheme nord highlight! CursorLine guibg=#171a26
+  autocmd ColorScheme nord highlight! DiffAdd gui=reverse,bold
+  autocmd ColorScheme nord highlight! DiffDelete gui=reverse,bold
   autocmd ColorScheme nord highlight! Error cterm=bold guifg=#D8DEE9 gui=bold
   autocmd ColorScheme nord highlight! ErrorMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! Folded guifg=#7b88a1 guibg=#2E3440 gui=NONE
-  autocmd ColorScheme nord highlight! IncSearch cterm=bold guibg=#ebcb8b gui=bold
+  autocmd ColorScheme nord highlight! IncSearch cterm=bold guifg=#3B4252 guibg=#ebcb8b gui=bold
   autocmd ColorScheme nord highlight! LineNr guibg=NONE guifg=#363d4a
   autocmd ColorScheme nord highlight! Normal guibg=NONE
   autocmd ColorScheme nord highlight! Pmenu guibg=#2E3440 ctermbg=16

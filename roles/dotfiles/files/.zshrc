@@ -69,17 +69,18 @@ export FZF_DEFAULT_COMMAND='rg --files --smart-case --hidden --follow --glob "!.
 export FZF_DEFAULT_OPTS='
   --height 40%
   --border
-  --color=fg:#97a1b5
-  --color=hl:1
+  --color=fg:15
+  --color=fg+:1
+  --color=hl:-1
   --color=hl+:1
   --color=bg:-1
   --color=bg+:-1
-  --color=info:3
+  --color=info:2
   --color=prompt:4
-  --color=marker:3
+  --color=marker:1
   --color=header:4
   --color=pointer:-1
-  --color=border:0
+  --color=border:#2E3440
 '
 
 #-------------------------------------------------------------------------------
