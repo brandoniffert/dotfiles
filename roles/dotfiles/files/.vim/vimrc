@@ -33,7 +33,6 @@ Plug 'unblevable/quick-scope'
 Plug 'w0rp/ale'
 Plug 'wincent/loupe'
 Plug 'wincent/terminus'
-Plug 'Yggdroot/indentLine'
 
 if executable('fzf')
   Plug '/usr/local/opt/fzf'
