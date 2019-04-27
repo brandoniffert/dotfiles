@@ -12,8 +12,6 @@
 	<integer>1</integer>
 	<key>AppleWindowTabbingMode</key>
 	<string>manual</string>
-	<key>CGFontRenderingFontSmoothingDisabled</key>
-	<false/>
 	<key>CompactMinimalTabBarHeight</key>
 	<real>30</real>
 	<key>CopySelection</key>
@@ -446,6 +444,8 @@
 		<dict>
 			<key>ASCII Anti Aliased</key>
 			<true/>
+			<key>ASCII Ligatures</key>
+			<false/>
 			<key>Ambiguous Double Width</key>
 			<false/>
 			<key>Ansi 0 Color</key>
@@ -715,6 +715,8 @@
 			<integer>160</integer>
 			<key>Command</key>
 			<string></string>
+			<key>Cursor Boost</key>
+			<real>0.0</real>
 			<key>Cursor Color</key>
 			<dict>
 				<key>Alpha Component</key>
@@ -1092,6 +1094,8 @@
 				<key>Red Component</key>
 				<real>0.17753332991924253</real>
 			</dict>
+			<key>Minimum Contrast</key>
+			<real>0.0</real>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
@@ -1204,7 +1208,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>4</integer>
+			<integer>0</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -1236,20 +1240,22 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Inconsolata LGC</string>
 		<string>Source Code Pro</string>
+		<string>Fira Code</string>
+		<string>Operator Mono</string>
+		<string>SF Mono</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
 	<dict>
 		<key>screenFrame</key>
 		<string>{{0, 0}, {2560, 1440}}</string>
 		<key>topLeft</key>
-		<string>{868, 1070}</string>
+		<string>{868, 1071}</string>
 	</dict>
 	<key>NoSyncInstallationId</key>
 	<string>92240B19-BBFE-4E83-8DFD-DC2DCDE2368E</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>41</integer>
+	<integer>48</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -1913,7 +1919,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-04-21T11:47:42Z</date>
+	<date>2019-04-27T11:47:52Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SmartPlacement</key>
