@@ -14,7 +14,7 @@ Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'ervandew/supertab'
 Plug 'itchyny/lightline.vim'
-Plug 'janko-m/vim-test', { 'on': 'TestFile' }
+Plug 'janko-m/vim-test'
 Plug 'jparise/vim-graphql'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 Plug 'junegunn/vim-easy-align', { 'on': 'EasyAlign' }
