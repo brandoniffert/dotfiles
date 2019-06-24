@@ -1,5 +1,6 @@
 augroup NordOverrides
   autocmd!
+  autocmd ColorScheme nord highlight! Comment guifg=#4c566a
   autocmd ColorScheme nord highlight! CursorLine guibg=#171a26
   autocmd ColorScheme nord highlight! DiffAdd gui=reverse,bold
   autocmd ColorScheme nord highlight! DiffDelete gui=reverse,bold
