@@ -48,6 +48,17 @@ window:
   #     - transparent: Title bar, transparent background, but no title bar buttons
   decorations: none
 
+  # Startup Mode (changes require restart)
+  #
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  #
+  # Values for `startup_mode` (macOS only):
+  #   - SimpleFullscreen
+  startup_mode: SimpleFullscreen
+
 scrolling:
   # Maximum number of lines in the scrollback buffer.
   # Specifying '0' will disable scrolling.
@@ -101,7 +112,7 @@ font:
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
   offset:
-    x: 0
+    x: 1
     y: 0
 
   # Glyph offset determines the locations of the glyphs within their cells with
@@ -117,17 +128,14 @@ font:
   # it is recommended to set `use_thin_strokes` to `false`
   use_thin_strokes: true
 
-# Display the time it takes to redraw each frame.
-render_timer: false
-
 # If `true`, bold text is drawn using the bright color variants.
-draw_bold_text_with_bright_colors: true
+draw_bold_text_with_bright_colors: false
 
-# Colors (Tomorrow Night Bright)
+# Colors
 colors:
   # Default colors
   primary:
-    background: '0x15171e'
+    background: '0x12141e'
     foreground: '0xd8dee9'
 
     # Bright and dim foreground colors
@@ -148,7 +156,7 @@ colors:
 
   # Normal colors
   normal:
-    black:   '0x3b4252'
+    black:   '0x3b4251'
     red:     '0xbf616a'
     green:   '0xa3be8c'
     yellow:  '0xebcb8b'
