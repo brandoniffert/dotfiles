@@ -41,8 +41,8 @@
   file: path=~/.config/karabiner
         state=directory
 
-- name: Symlink karabiner.json
-  file: path=~/.config/karabiner/karabiner.json
-        src={{ ansible_env.PWD }}/roles/dotfiles/files/.config/karabiner/karabiner.json
+- name: Symlink karabiner
+  file: path=~/.config/karabiner
+        src={{ ansible_env.PWD }}/roles/dotfiles/files/.config/karabiner
         state=link
         force=true

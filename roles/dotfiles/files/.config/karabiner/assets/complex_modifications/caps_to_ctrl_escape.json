@@ -1,0 +1,31 @@
+{
+  "title": "Change caps lock to escape on press and control on hold",
+  "rules": [
+    {
+      "description": "Change caps lock to escape on press and control on hold",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": {
+            "key_code": "caps_lock",
+            "modifiers": {
+              "optional": [
+                "any"
+              ]
+            }
+          },
+          "to": [
+            {
+              "key_code": "left_control"
+            }
+          ],
+          "to_if_alone": [
+            {
+              "key_code": "escape"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
