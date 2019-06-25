@@ -44,7 +44,6 @@ brew install htop-osx
 brew install httpie
 brew install imagemagick@6
 brew install jq
-brew install libusb-compat
 brew install media-info
 brew install neovim
 brew install nvm
@@ -61,7 +60,6 @@ brew install ruby-build
 brew install shellcheck
 brew install sqlite
 brew install ssh-copy-id
-brew install teensy_loader_cli
 brew install tig
 brew install tldr
 brew install tmux
@@ -73,9 +71,6 @@ brew install zsh
 brew install zsh-autosuggestions
 brew install zsh-completions
 brew install zsh-syntax-highlighting
-
-# Cleanup
-brew cleanup
 
 # Setup fzf
 "$(brew --prefix)"/opt/fzf/install --xdg --key-bindings --completion --no-update-rc
