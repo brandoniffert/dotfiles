@@ -13,20 +13,32 @@ bindHyper = function(fromKey, toKey)
   hs.hotkey.bind(hyper, fromKey, sendKey, nil, sendKey)
 end
 
+bindHyperFn = function(fromKey, func)
+  hs.hotkey.bind(hyper, fromKey, func)
+end
+
 bindHyper('f', 'up')
 bindHyper('s', 'down')
 bindHyper('r', 'left')
 bindHyper('t', 'right')
 
+bindHyperFn('-', function()
+  hs.eventtap.keyStrokes('->')
+end)
+
+bindHyperFn('=', function()
+  hs.eventtap.keyStrokes('=>')
+end)
+
 -- Put displays to sleep
-hs.hotkey.bind(hyper, '`', function()
+bindHyperFn('`', function()
   os.execute('pmset displaysleepnow')
 end)
 
 -- Move window between screens
 local cycleScreens = hs.fnutils.cycle(hs.screen.allScreens())
 
-hs.hotkey.bind(hyper, 'tab', function()
+bindHyperFn('tab', function()
   hs.window.focusedWindow():moveToScreen(cycleScreens())
 end)
 
