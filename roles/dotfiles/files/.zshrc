@@ -5,11 +5,11 @@
 SYSTEM_PATH=$PATH
 unset PATH
 
-export GOPATH="$HOME/Projects/Go"
-
 PATH=$HOME/.zsh/bin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/.composer/vendor/bin
+PATH=$HOME/.yarn/bin
+PATH=$HOME/.config/yarn/global/node_modules/.bin
 PATH=$PATH:$GOPATH/bin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
