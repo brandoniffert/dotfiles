@@ -55,6 +55,15 @@ nnoremap <leader>r :make!<cr>
 " Cycle line numbering
 noremap <silent> <f3> :call bti#functions#CycleLineNumbering()<cr>
 
+" Strip whitespace
+nnoremap <silent> <localleader>zz :call bti#functions#StripWhitespace()<cr>
+
+" Fix (most) syntax highlighting problems in current buffer
+nnoremap <silent> <localleader>c :syntax sync fromstart<cr>
+
+" Edit file, starting in same directory as current file
+nnoremap <localleader>e :edit <C-R>=expand('%:p:h') . '/'<cr>
+
 " Terminal mode mappings
 if exists(':tnoremap')
   tnoremap <leader><esc> <c-\><c-n>

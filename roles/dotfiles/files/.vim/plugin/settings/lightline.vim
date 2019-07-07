@@ -28,9 +28,10 @@ let g:lightline.active = {
       \  ],
       \  'right': [
       \    [ 'whitespace' ],
-      \    [ 'linter_info' ],
+      \    [ 'linterinfo' ],
       \    [ 'percent', 'lineinfo' ],
-      \    [ 'fileformatencoding' ]
+      \    [ 'fileformatencoding' ],
+      \    [ 'selectedlines' ]
       \  ]
       \ }
 
@@ -48,16 +49,17 @@ let g:lightline.component = {
       \  'fileformatencoding': '%{bti#statusline#FileFormatEncoding()}',
       \  'filetype': '%{bti#statusline#FileType()}',
       \  'spell': '%{&spell? "SPELL" : ""}',
+      \  'selectedlines': '%{bti#statusline#SelectedLines()}',
       \  'close': '',
       \ }
 
 let g:lightline.component_type = {
-      \  'linter_info': 'warning',
+      \  'linterinfo': 'warning',
       \  'whitespace': 'warning',
       \ }
 
 let g:lightline.component_expand = {
-      \  'linter_info': 'bti#statusline#LinterInfo',
+      \  'linterinfo': 'bti#statusline#LinterInfo',
       \  'whitespace': 'bti#statusline#Whitespace',
       \ }
 
@@ -66,6 +68,7 @@ let g:lightline.component_visible_condition = {
       \  'filetype': 'bti#statusline#FileType() !=# ""',
       \  'modified': 'bti#statusline#Modified() !=# ""',
       \  'fileformatencoding': 'bti#statusline#FileFormatEncoding() !=# ""',
+      \  'selectedlines': 'bti#statusline#SelectedLines() !=# ""',
       \  'percent': 0
       \ }
 

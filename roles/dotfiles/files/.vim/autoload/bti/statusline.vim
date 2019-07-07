@@ -111,6 +111,16 @@ function! bti#statusline#Whitespace() abort
   return b:statusline_whitespace_check
 endfunction
 
+function! bti#statusline#SelectedLines() abort
+  let lines = abs(line('.') - line('v')) + 1
+
+  if lines <= 1
+    return ''
+  endif
+
+  return lines
+endfunction
+
 function! bti#statusline#WhitespaceRefresh() abort
   unlet! b:statusline_whitespace_check
 endfunction
