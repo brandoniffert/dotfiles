@@ -13,7 +13,8 @@ let g:ale_fixers = {
 \   'php': ['php_cs_fixer'],
 \}
 
-let g:ale_php_cs_fixer_options = "--rules='{\"@Symfony\": true, \"no_alternative_syntax\": true, \"array_syntax\": { \"syntax\": \"short\" }, \"concat_space\": { \"spacing\": \"one\" }}'"
+let g:ale_php_phpcs_executable = './vendor/bin/phpcs'
+let g:ale_php_php_cs_fixer_executable = './vendor/bin/php-cs-fixer'
 
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
