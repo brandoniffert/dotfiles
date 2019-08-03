@@ -46,6 +46,9 @@ nnoremap <silent> <leader>v :vnew<cr>
 vnoremap <leader>y "*y
 nnoremap <leader>p "*p
 
+" Don't replace register with text that was pasted over
+xnoremap <silent> p p:if v:register == '"'<bar>let @@=@0<bar>endif<cr>
+
 " Make Y act like other capital letters
 nnoremap Y y$
 
