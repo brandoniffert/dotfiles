@@ -8,7 +8,7 @@ zstyle ':vcs_info:*' stagedstr "%F{green}●%f"
 zstyle ':vcs_info:*' unstagedstr "%F{red}●%f"
 zstyle ':vcs_info:*' use-simple true
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-aheadbehind git-stash
-zstyle ':vcs_info:git*:*' formats '%b%m%c%u '
+zstyle ':vcs_info:git*:*' formats '%F{black}[%f%b%m%c%u%F{black}]%f '
 zstyle ':vcs_info:git*:*' actionformats '%b|%a%m%c%u '
 
 function +vi-git-untracked() {
@@ -44,69 +44,34 @@ function +vi-git-stash() {
   hook_com[misc]+=${(j::)gitstatus}
 }
 
-if [[ -n "$TMUX" ]]; then
-  local LVL=$(($SHLVL - 1))
-else
-  local LVL=$SHLVL
-fi
-
-if [[ -n "$VIRTUAL_ENV" ]]; then
-  local VENV="%F{black}(${VIRTUAL_ENV##*/})%f"
-else
-  local VENV=''
-fi
-
-local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
-local DIR="%F{blue}%1~%f "
-local JOBS_RETURNVAL="%F{red}%B%(1j.*.)%(?..!)%b%f"
-
-if [[ $EUID -eq 0 ]]; then
-  local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
-else
-  local SUFFIX="%F{white}$(printf '\$%.0s' {1..$LVL})%f"
-fi
-
-export PS1="${SSHTTY}${DIR}${JOBS_RETURNVAL}${SUFFIX} "
-export RPROMPT_BASE="\${vcs_info_msg_0_%%}${VENV}"
-export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
-
-# Show the time it took to execute a command
-typeset -F SECONDS
-function record-start-time() {
-  emulate -L zsh
-  ZSH_START_TIME=${ZSH_START_TIME:-$SECONDS}
-}
-
-function report-start-time() {
-  emulate -L zsh
-
-  if [ $ZSH_START_TIME ]; then
-    local DELTA=$(($SECONDS - $ZSH_START_TIME))
-    local DAYS=$((~~($DELTA / 86400)))
-    local HOURS=$((~~(($DELTA - $DAYS * 86400) / 3600)))
-    local MINUTES=$((~~(($DELTA - $DAYS * 86400 - $HOURS * 3600) / 60)))
-    local SECS=$(($DELTA - $DAYS * 86400 - $HOURS * 3600 - $MINUTES * 60))
-    local ELAPSED=''
-    test "$DAYS" != '0' && ELAPSED="${DAYS}d"
-    test "$HOURS" != '0' && ELAPSED="${ELAPSED}${HOURS}h"
-    test "$MINUTES" != '0' && ELAPSED="${ELAPSED}${MINUTES}m"
-    if [ "$ELAPSED" = '' ]; then
-      SECS="$(print -f "%.2f" $SECS)s"
-    elif [ "$DAYS" != '0' ]; then
-      SECS=''
-    else
-      SECS="$((~~$SECS))s"
-    fi
-    ELAPSED="${ELAPSED}${SECS}"
-    local ITALIC_ON=$'\e[3m'
-    local ITALIC_OFF=$'\e[23m'
-    export RPROMPT="%F{8}%{$ITALIC_ON%}${ELAPSED}%{$ITALIC_OFF%}%f $RPROMPT_BASE"
-    unset ZSH_START_TIME
-  else
-    export RPROMPT="$RPROMPT_BASE"
+function venv_info() {
+  if [[ -n "$VIRTUAL_ENV" ]]; then
+    echo "%F{black}(%fvenv%F{black})%f"
   fi
 }
 
-add-zsh-hook preexec record-start-time
-add-zsh-hook precmd report-start-time
+function () {
+  local TMUXING=$([[ "$TERM" =~ "tmux" ]] && echo tmux)
+  if [ -n "$TMUXING" -a -n "$TMUX" ]; then
+    local LVL=$(($SHLVL - 1))
+  else
+    local LVL=$SHLVL
+  fi
+
+  local MARKER="%(?.%F{green}.%F{red})░%f "
+  local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
+  local DIR="%F{blue}%1~%f "
+  local JOBS="%F{yellow}%(1j.*.)%f"
+
+  if [[ $EUID -eq 0 ]]; then
+    local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
+  else
+    local SUFFIX="%F{white}$(printf '\$%.0s' {1..$LVL})%f"
+  fi
+
+  export PS1="${MARKER}${SSHTTY}\$(venv_info)${DIR}\${vcs_info_msg_0_%%}${JOBS}${SUFFIX} "
+}
+
+export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
+
 add-zsh-hook precmd vcs_info
