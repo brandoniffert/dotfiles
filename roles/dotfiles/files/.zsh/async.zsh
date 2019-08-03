@@ -3,12 +3,12 @@
 #
 # zsh-async
 #
-# version: 1.7.1
+# version: 1.7.2
 # author: Mathias Fredriksson
 # url: https://github.com/mafredri/zsh-async
 #
 
-typeset -g ASYNC_VERSION=1.7.1
+typeset -g ASYNC_VERSION=1.7.2
 # Produce debug output from zsh-async when set to 1.
 typeset -g ASYNC_DEBUG=${ASYNC_DEBUG:-0}
 
@@ -285,7 +285,7 @@ async_process_results() {
 			else
 				# In case of corrupt data, invoke callback with *async* as job
 				# name, non-zero exit status and an error message on stderr.
-				$callback "[async]" 1 "" 0 "$0:$LINENO: error: bad format, got ${#items} items (${(q)items})" $has_next
+				$callback "[async]" 1 "" 0 "$0:$LINENO: error: bad format, got ${#items} items (${(q)items})" $has_next
 			fi
 		done
 	done
@@ -305,6 +305,22 @@ _async_zle_watcher() {
 	typeset -gA ASYNC_PTYS ASYNC_CALLBACKS
 	local worker=$ASYNC_PTYS[$1]
 	local callback=$ASYNC_CALLBACKS[$worker]
+
+	if [[ -n $2 ]]; then
+		# from man zshzle(1):
+		# `hup' for a disconnect, `nval' for a closed or otherwise
+		# invalid descriptor, or `err' for any other condition.
+		# Systems that support only the `select' system call always use
+		# `err'.
+
+		# this has the side effect to unregister the broken file descriptor
+		async_stop_worker $worker
+
+		if [[ -n $callback ]]; then
+			$callback '[async]' 2 "" 0 "$worker:zle -F $1 returned error $2" 0
+		fi
+		return
+	fi;
 
 	if [[ -n $callback ]]; then
 		async_process_results $worker $callback watcher
