@@ -1,6 +1,5 @@
 augroup NordOverrides
   autocmd!
-  autocmd ColorScheme nord highlight! Comment guifg=#4c566a
   autocmd ColorScheme nord highlight! CursorLine guibg=#171a26
   autocmd ColorScheme nord highlight! DiffAdd gui=reverse,bold
   autocmd ColorScheme nord highlight! DiffDelete gui=reverse,bold
@@ -10,7 +9,6 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! IncSearch cterm=bold guifg=#3B4252 guibg=#ebcb8b gui=bold
   autocmd ColorScheme nord highlight! LineNr guibg=NONE guifg=#363d4a
   autocmd ColorScheme nord highlight! Normal guibg=NONE
-  autocmd ColorScheme nord highlight! Pmenu guibg=#2E3440 ctermbg=16
   autocmd ColorScheme nord highlight! PmenuSel guibg=#e5e9f0 guifg=#2E3440 gui=bold ctermbg=7 ctermfg=16 cterm=bold
   autocmd ColorScheme nord highlight! QuickScopePrimary guifg=#bf616a gui=underline,bold ctermfg=1 cterm=underline,bold
   autocmd ColorScheme nord highlight! QuickScopeSecondary guifg=#bf616a gui=bold ctermfg=1 cterm=bold
@@ -30,7 +28,6 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! link Sneak WarningMsg
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
   autocmd ColorScheme nord highlight! link Wildmenu PmenuSel
-  autocmd ColorScheme nord highlight! def Dim cterm=NONE ctermbg=NONE ctermfg=0 guifg=#576279
 augroup END
 
 let g:nord_underline = 1
