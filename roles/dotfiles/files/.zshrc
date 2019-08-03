@@ -71,9 +71,9 @@ export FZF_DEFAULT_OPTS='
   --height 40%
   --border
   --color=fg:15
-  --color=fg+:1
+  --color=fg+:3
   --color=hl:-1
-  --color=hl+:1
+  --color=hl+:3
   --color=bg:-1
   --color=bg+:-1
   --color=info:2
