@@ -20,7 +20,7 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! TabLine guibg=#15171E guifg=#D8DEE9
   autocmd ColorScheme nord highlight! TabLineFill guifg=#D8DEE9 guibg=NONE
   autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#12141e
-  autocmd ColorScheme nord highlight! VertSplit guibg=NONE guifg=#2E3440
+  autocmd ColorScheme nord highlight! VertSplit guibg=NONE guifg=#171a26
   autocmd ColorScheme nord highlight! Visual guibg=#2E3440
   autocmd ColorScheme nord highlight! WarningMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
