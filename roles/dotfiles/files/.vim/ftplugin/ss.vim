@@ -6,6 +6,7 @@ if exists('loaded_matchit') && exists('b:match_words')
         \ . ',\<\with.*%>:\<end_with.*%>'
         \ . ',\<control\>:\<end_control\>'
         \ . ',\<\loop.*%>:\<end_loop.*%>'
+        \ . ',\<cached\>:\<end_cached\>'
         \ . ',' . b:match_words
 endif
 
