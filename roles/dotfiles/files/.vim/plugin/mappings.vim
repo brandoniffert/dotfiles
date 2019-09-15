@@ -67,6 +67,14 @@ nnoremap <silent> <localleader>c :syntax sync fromstart<cr>
 " Edit file, starting in same directory as current file
 nnoremap <localleader>e :edit <C-R>=expand('%:p:h') . '/'<cr>
 
+nnoremap <localleader>h :call <sid>SynStack()<cr>
+function! <sid>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
 " Terminal mode mappings
 if exists(':tnoremap')
   tnoremap <leader><esc> <c-\><c-n>
