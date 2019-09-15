@@ -42,6 +42,10 @@ endif
 if executable('composer')
   Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 endif
+
+if has('python3')
+  Plug 'SirVer/ultisnips'
+endif
 call plug#end()
 
 " After this file is sourced, custom plugin code will be evaluated, see:
