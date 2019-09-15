@@ -19,8 +19,8 @@ set laststatus=2
 set lazyredraw
 set linebreak
 set list
-set listchars=tab:>-
-set listchars+=trail:.
+set listchars=tab:▷-
+set listchars+=trail:·
 set listchars+=extends:»
 set listchars+=precedes:«
 set listchars+=nbsp:⦸
