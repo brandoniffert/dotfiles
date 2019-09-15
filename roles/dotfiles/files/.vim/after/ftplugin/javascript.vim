@@ -1,2 +1,2 @@
 " Run current file
-set makeprg=node\ %
+setlocal makeprg=node\ %

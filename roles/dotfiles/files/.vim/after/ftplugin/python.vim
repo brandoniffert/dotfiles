@@ -3,7 +3,7 @@ setlocal softtabstop=4
 setlocal tabstop=4
 
 " Run current file
-set makeprg=python\ %
+setlocal makeprg=python3\ %
 
 augroup PythonFileType
   autocmd!
