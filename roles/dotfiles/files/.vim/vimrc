@@ -25,6 +25,7 @@ Plug 'machakann/vim-sandwich'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo', { 'on': 'MundoShow' }
+Plug 'TaDaa/vimade'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-fugitive', { 'on': 'Gblame' }
