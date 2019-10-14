@@ -28,7 +28,7 @@ let g:lightline.active = {
       \  ],
       \  'right': [
       \    [ 'whitespace' ],
-      \    [ 'linterinfo' ],
+      \    [ 'diagnosticinfo' ],
       \    [ 'percent', 'lineinfo' ],
       \    [ 'fileformatencoding' ],
       \    [ 'selectedlines' ]
@@ -54,12 +54,12 @@ let g:lightline.component = {
       \ }
 
 let g:lightline.component_type = {
-      \  'linterinfo': 'warning',
+      \  'diagnosticinfo': 'warning',
       \  'whitespace': 'warning',
       \ }
 
 let g:lightline.component_expand = {
-      \  'linterinfo': 'bti#statusline#LinterInfo',
+      \  'diagnosticinfo': 'bti#statusline#DiagonsticInfo',
       \  'whitespace': 'bti#statusline#Whitespace',
       \ }
 

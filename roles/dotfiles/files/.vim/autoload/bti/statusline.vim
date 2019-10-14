@@ -69,7 +69,7 @@ function! bti#statusline#FileFormatEncoding() abort
   endif
 endfunction
 
-function! bti#statusline#LinterInfo() abort
+function! bti#statusline#DiagonsticInfo() abort
   let counts = ale#statusline#Count(bufnr(''))
   let all_errors = counts.error + counts.style_error
   let all_non_errors = counts.total - all_errors
@@ -86,26 +86,24 @@ function! bti#statusline#LinterInfo() abort
 endfunction
 
 function! bti#statusline#Whitespace() abort
-  if !exists('b:statusline_whitespace_check')
+  let b:statusline_whitespace_check = ''
 
-    if !&modifiable
-      let b:statusline_whitespace_check = ''
-      return b:statusline_whitespace_check
-    endif
+  if !&modifiable
+    return b:statusline_whitespace_check
+  endif
 
-    let status = []
+  let status = []
 
-    if search('\s$', 'nw') != 0
-      call add(status, 'trailing')
-    endif
+  if search('\s$', 'nw') != 0
+    call add(status, 'trailing')
+  endif
 
-    if search('\v(^\t+ +)|(^ +\t+)', 'nw') != 0
-      call add(status, 'mixed')
-    endif
+  if search('\v(^\t+ +)|(^ +\t+)', 'nw') != 0
+    call add(status, 'mixed')
+  endif
 
-    if len(status)
-      let b:statusline_whitespace_check = join(status, ' · ')
-    endif
+  if len(status)
+    let b:statusline_whitespace_check = join(status, ' · ')
   endif
 
   return b:statusline_whitespace_check
@@ -122,5 +120,19 @@ function! bti#statusline#SelectedLines() abort
 endfunction
 
 function! bti#statusline#WhitespaceRefresh() abort
-  unlet! b:statusline_whitespace_check
+  if bufname('%') == ''
+    return
+  endif
+
+  if get(b:, 'statusline_whitespace_changedtick', 0) == b:changedtick
+    return
+  endif
+
+  unlet! b:statusline_whitespace_changedtick
+
+  if exists('g:loaded_lightline')
+    call lightline#update()
+  endif
+
+  let b:statusline_whitespace_changedtick = b:changedtick
 endfunction
