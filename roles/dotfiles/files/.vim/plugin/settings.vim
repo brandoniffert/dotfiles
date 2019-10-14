@@ -1,7 +1,6 @@
 set autoindent
 set backspace=indent,start,eol
 set belloff=all
-
 set expandtab
 let &fillchars = 'vert:│,fold:·,eob: '
 set foldlevelstart=0
@@ -33,6 +32,7 @@ set scrolloff=3
 set shiftwidth=2
 let &showbreak = '↳ '
 set relativenumber
+set shortmess+=c
 set showmatch
 set signcolumn=yes
 set smartcase
@@ -48,7 +48,7 @@ set splitbelow
 set splitright
 set switchbuf+=useopen
 set termguicolors
-set updatetime=500
+set updatetime=300
 set wildmode=longest:full,full
 set wildignore+=.git,*.jpg,*.jpeg,*.png,*.gif
 set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so
