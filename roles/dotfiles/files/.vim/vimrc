@@ -43,8 +43,14 @@ endif
 
 if has('python3')
   Plug 'SirVer/ultisnips'
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
 call plug#end()
+
+" Avoid search, speeding up startup
+if filereadable('/usr/local/bin/python3')
+  let g:python3_host_prog = '/usr/local/bin/python3'
+endif
 
 " After this file is sourced, custom plugin code will be evaluated, see:
 "   ~/.vim/plugin/settings.vim
