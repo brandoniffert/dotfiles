@@ -15,6 +15,7 @@ let g:ale_fixers = {
 
 let g:ale_php_phpcs_executable = './vendor/bin/phpcs'
 let g:ale_php_php_cs_fixer_executable = './vendor/bin/php-cs-fixer'
+let g:ale_virtualtext_cursor = 1
 
 nmap <silent> [e <Plug>(ale_previous_wrap)
 nmap <silent> ]e <Plug>(ale_next_wrap)
