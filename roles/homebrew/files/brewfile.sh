@@ -60,6 +60,7 @@ brew install ruby-build
 brew install shellcheck
 brew install sqlite
 brew install ssh-copy-id
+brew install tag
 brew install tig
 brew install tldr
 brew install tmux
