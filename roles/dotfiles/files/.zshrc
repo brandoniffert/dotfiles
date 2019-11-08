@@ -83,7 +83,7 @@ export FZF_DEFAULT_OPTS='
   --color=marker:1
   --color=header:4
   --color=pointer:-1
-  --color=border:#2E3440
+  --color=border:#1a1d23
 '
 
 #-------------------------------------------------------------------------------
