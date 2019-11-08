@@ -1,6 +1,7 @@
 set autoindent
 set backspace=indent,start,eol
 set belloff=all
+set completeopt=menu,menuone,preview,noselect,noinsert
 set expandtab
 let &fillchars = 'vert:│,fold:·,eob: '
 set foldlevelstart=0

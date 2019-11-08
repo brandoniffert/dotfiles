@@ -16,6 +16,9 @@ augroup btiAutoCommands
   " https://github.com/neovim/neovim/issues/7994#issuecomment-388296360
   autocmd! InsertLeave * set nopaste
 
+  " Auto close preview window
+  autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
+
   " Allow focusing/bluring effect for a window
   autocmd BufEnter,FocusGained,VimEnter,WinEnter * call bti#functions#FocusWindow()
   autocmd FocusLost,WinLeave * call bti#functions#BlurWindow()
