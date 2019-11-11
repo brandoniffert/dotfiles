@@ -30,9 +30,9 @@
 
 [color "diff-highlight"]
   oldNormal = red
-  oldHighlight = 16 bold red
+  oldHighlight = 16 red
   newNormal = green
-  newHighlight = 16 bold green
+  newHighlight = 16 green
 
 [format]
   pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(black)%an%Creset
