@@ -62,6 +62,7 @@ brew install sqlite
 brew install ssh-copy-id
 brew install tag
 brew install tig
+brew install teensy_loader_cli
 brew install tldr
 brew install tmux
 brew install tree
