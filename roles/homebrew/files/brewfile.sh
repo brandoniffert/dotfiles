@@ -36,7 +36,6 @@ brew install fd
 brew install ffmpeg
 brew install fzf
 brew install getmail
-brew install ghostscript
 brew install gifsicle
 brew install git
 brew install go
@@ -50,7 +49,6 @@ brew install nvm
 brew install openssl
 brew install pandoc
 brew install php
-brew install pipenv
 brew install pstree
 brew install python@2
 brew install python
