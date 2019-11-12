@@ -5,22 +5,22 @@ local log = require 'log'
 -- Hyper key
 local hyper = {'cmd', 'alt', 'ctrl', 'shift'}
 
-bindHyper = function(fromKey, toKey)
-  sendKey = function()
-    hs.eventtap.event.newKeyEvent({}, toKey, true):post()
+local function sendKey(mods, key)
+  if key == nil then
+    key = mods
+    mods = {}
   end
 
-  hs.hotkey.bind(hyper, fromKey, sendKey, nil, sendKey)
+  return function() hs.eventtap.keyStroke(mods, key, 1000) end
+end
+
+bindHyper = function(fromKey, toKey)
+  hs.hotkey.bind(hyper, fromKey, toKey, nil, toKey)
 end
 
 bindHyperFn = function(fromKey, func)
   hs.hotkey.bind(hyper, fromKey, func)
 end
-
-bindHyper('f', 'up')
-bindHyper('s', 'down')
-bindHyper('r', 'left')
-bindHyper('t', 'right')
 
 bindHyperFn('-', function()
   hs.eventtap.keyStrokes('->')
