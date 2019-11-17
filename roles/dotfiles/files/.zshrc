@@ -161,6 +161,10 @@ else
   alias lls='ls --color=auto -al'
 fi
 
+if command -v pyenv >/dev/null 2>&1; then
+  alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+fi
+
 #-------------------------------------------------------------------------------
 # COMPLETION
 #-------------------------------------------------------------------------------
