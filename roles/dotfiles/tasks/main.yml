@@ -1,5 +1,5 @@
 ---
-- name: Make ~/.config
+- name: Create ~/.config
   file:
     path: ~/.config
     state: directory
