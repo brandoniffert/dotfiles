@@ -1234,6 +1234,8 @@
 			<integer>3</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
+			<key>Unicode Version</key>
+			<integer>9</integer>
 			<key>Unlimited Scrollback</key>
 			<false/>
 			<key>Use Bold Font</key>
@@ -1273,7 +1275,7 @@
 	</array>
 	<key>NoSyncBFPRecents</key>
 	<array>
-		<string>Cascadia Code</string>
+		<string>Operator Mono</string>
 		<string>Inconsolata LGC</string>
 		<string>Source Code Pro</string>
 		<string>Roboto Mono</string>
@@ -1288,7 +1290,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>1AB36F2A-4037-4D7F-A752-BB021A738D7A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>55</integer>
+	<integer>63</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2065,7 +2067,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-11-08T01:49:21Z</date>
+	<date>2019-11-17T01:49:45Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>

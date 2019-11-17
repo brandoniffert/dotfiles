@@ -14,7 +14,7 @@ VIRTUALENV_TARGET_DIR=.venv
 VIRTUALENV_ACTIVATE=$VIRTUALENV_TARGET_DIR/bin/activate
 
 usage() {
-  echo "./install [options] [roles...]"
+  echo "./run [options] [roles...]"
   echo "Supported options:"
   echo "  -f/--force"
   echo "  -h/--help"
@@ -24,17 +24,18 @@ usage() {
   echo "  --step"
   echo "  --start-at-task='role | task'"
   echo "Supported roles:"
-  for ROLE in $(ls roles); do
+  for roleDir in roles/*; do
+    ROLE=$(basename "$roleDir")
     echo "  $ROLE"
-    echo "    $(cat roles/$ROLE/description)"
+    echo "      $(cat roles/"$ROLE"/description)"
   done
 }
 
 EXTRA_ARGS=()
 while [ $# -gt 0 ]; do
-  if [ "$1" = '--force' -o "$1" = '-f' ]; then
+  if [ "$1" = '--force' ] || [ "$1" = '-f' ]; then
     FORCE=1
-  elif [ "$1" = '--verbose' -o "$1" = '-v' ]; then
+  elif [ "$1" = '--verbose' ] || [ "$1" = '-v' ]; then
     VERBOSE=$((VERBOSE + 1))
   elif [ "$1" = '-vv' ]; then
     VERBOSE=$((VERBOSE + 2))
@@ -42,7 +43,7 @@ while [ $# -gt 0 ]; do
     VERBOSE=$((VERBOSE + 3))
   elif [ "$1" = '-vvvv' ]; then
     VERBOSE=$((VERBOSE + 4))
-  elif [ "$1" = '--help' -o "$1" = '-h' -o "$1" = 'help' ]; then
+  elif [ "$1" = '--help' ] || [ "$1" = '-h' ] || [ "$1" = 'help' ]; then
     usage
     exit
   elif [ -n "$1" ]; then
@@ -92,6 +93,7 @@ elif [ -e $VIRTUALENV_ACTIVATE ]; then
   echo "Skipping virtualenv install (already exists); use --force to override"
 fi
 
+# shellcheck source=.venv/bin/activate
 source $VIRTUALENV_ACTIVATE
 
 # Troubleshooting during OS upgrades, or new machine installs: may need:

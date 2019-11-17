@@ -1,0 +1,31 @@
+---
+- name: Make ~/.config/nvm
+  file:
+    path: ~/.config/nvm
+    state: directory
+
+# Assumes that nvm was installed with homebrew, sources nvm.sh at the location homebrew installs it
+- name: Install the latest LTS node
+  shell: >
+    NVM_DIR=$HOME/.config/nvm &&
+    source /usr/local/opt/nvm/nvm.sh &&
+    nvm install --lts &&
+    nvm alias default lts/*
+  args:
+    creates: ~/.config/nvm/versions/node
+
+- name: Ensure yarn is installed
+  stat:
+    path: /usr/local/bin/yarn
+  register: yarn_check
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+
+- name: Install global yarn/npm packages
+  yarn:
+    name: "{{ item }}"
+    global: true
+    state: latest
+  loop: "{{ yarn_packages }}"
+  when: yarn_check.stat.exists

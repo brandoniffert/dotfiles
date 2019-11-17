@@ -2,6 +2,11 @@
 " vimrc
 "-------------------------------------------------------------------------------
 
+" Set correct paths for python3
+if filereadable($HOME . '/.pyenv/versions/py3nvim/bin/python')
+  let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
+endif
+
 " Bootstrap vim-plug on a fresh install - require a manual PlugInstall
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
@@ -53,11 +58,6 @@ if has('python3')
   endif
 endif
 call plug#end()
-
-" Avoid search, speeding up startup
-if filereadable('/usr/local/bin/python3')
-  let g:python3_host_prog = '/usr/local/bin/python3'
-endif
 
 " After this file is sourced, custom plugin code will be evaluated, see:
 "   ~/.vim/plugin/settings.vim

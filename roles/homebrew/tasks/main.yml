@@ -1,13 +1,41 @@
 ---
-- name: Download Homebrew install script
-  get_url:
-    url=https://raw.githubusercontent.com/Homebrew/install/master/install
-    dest=vendor/homebrew/install
+- name: Ensure homebrew is installed
+  stat:
+    path: /usr/local/bin/brew
+  register: homebrew_check
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
 
-- name: Install Homebrew
-  command: ruby vendor/homebrew/install
+- name: Install homebrew
+  command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  when: not homebrew_check.stat.exists
+
+- name: Tap homebrew/cask-versions
+  homebrew_tap:
+    name: homebrew/cask-versions
+    state: present
+
+- name: Update homebrew
+  homebrew:
+    update_homebrew: true
+  when: homebrew_check.stat.exists
+  changed_when: false
+
+- name: Install homebrew packages
+  homebrew:
+    name: "{{ brew_packages }}"
+    state: present
+  when: homebrew_check.stat.exists
+
+- name: Install homebrew cask packages
+  homebrew_cask:
+    name: "{{ brew_cask_packages }}"
+    state: present
+    accept_external_apps: true
+  when: homebrew_check.stat.exists
+
+- name: Setup FZF
+  command: $(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc
   args:
-    creates: /usr/local/bin/brew
-
-- name: Update Homebrew
-  homebrew: update_homebrew=yes
+    creates: ~/.config/fzf

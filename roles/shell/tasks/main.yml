@@ -5,10 +5,10 @@
     group=wheel
     line=/usr/local/bin/zsh
     owner=root
-  become: !!bool yes
+  become: true
 
 - name: Change default shell to zsh
   user:
     name: "{{ ansible_env.USER }}"
     shell: /usr/local/bin/zsh
-  become: !!bool yes
+  become: true

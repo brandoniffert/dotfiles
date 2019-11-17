@@ -3,10 +3,14 @@
   roles:
     - { role: ssh, tags: ssh }
     - { role: terminfo, tags: terminfo }
-    - { role: dotfiles, tags: dotfiles }
     - { role: homebrew, tags: homebrew }
+    - { role: dotfiles, tags: dotfiles }
     - { role: shell, tags: shell }
+    - { role: nodejs, tags: nodejs }
+    - { role: ruby, tags: ruby }
+    - { role: python, tags: python }
     - { role: vim, tags: vim }
-    - { role: nvm, tags: nvm }
-    - { role: yarn, tags: yarn }
+    - { role: vagrant, tags: vagrant }
     - { role: macos, tags: macos }
+  vars:
+    computer_hostname: iffydesk

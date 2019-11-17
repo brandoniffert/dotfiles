@@ -1,4 +1,10 @@
 ---
-- import_tasks: plug.yml
-- import_tasks: build.yml
-- import_tasks: nvim.yml
+- name: Setup vim-plug
+  get_url:
+    url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    dest: "{{ ansible_env.PWD }}/roles/dotfiles/files/.vim/autoload/plug.vim"
+  register: vim_plug_bootstrap_install
+
+- name: Install vim-plug plugins
+  shell: "vim +'PlugInstall --sync' +qa && nvim --headless +UpdateRemotePlugins +'PlugInstall --sync' +qa &>/dev/null"
+  when: vim_plug_bootstrap_install is changed

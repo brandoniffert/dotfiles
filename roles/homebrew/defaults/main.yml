@@ -1,0 +1,84 @@
+---
+brew_packages:
+  # GNU programs non-existing in macOS
+  - watch
+  - wget
+  # GNU programs whose BSD counterpart is installed in macOS
+  - binutils
+  - coreutils
+  - diffutils
+  - findutils
+  - gnu-sed
+  - gnu-tar
+  - gnu-which
+  - grep
+  - gzip
+  # GNU programs existing in macOS which are outdated
+  - bash
+  - less
+  - make
+  # Custom programs
+  - aspell
+  - awscli
+  - bat
+  - composer
+  - ctags
+  - exiftool
+  - fasd
+  - fd
+  - ffmpeg
+  - fzf
+  - getmail
+  - gifsicle
+  - git
+  - git
+  - go
+  - htop-osx
+  - httpie
+  - imagemagick
+  - jq
+  - media-info
+  - neovim
+  - nvm
+  - openssl
+  - pandoc
+  - php
+  - pstree
+  - pyenv
+  - pyenv-virtualenv
+  - rbenv
+  - rbenv-default-gems
+  - ripgrep
+  - ruby-build
+  - shellcheck
+  - sqlite
+  - ssh-copy-id
+  - tag
+  - teensy_loader_cli
+  - tig
+  - tldr
+  - tmux
+  - tree
+  - vim
+  - yarn
+  - youtube-dl
+  - zsh
+  - zsh-autosuggestions
+  - zsh-completions
+  - zsh-syntax-highlighting
+brew_cask_packages:
+  - alfred
+  - appcleaner
+  - docker
+  - firefox
+  - firefox-developer-edition
+  - google-chrome
+  - hammerspoon
+  - iterm2
+  - karabiner-elements
+  - slack
+  - transmit
+  - ubersicht
+  - vagrant
+  - virtualbox
+  - visual-studio-code

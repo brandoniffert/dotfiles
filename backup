@@ -94,6 +94,14 @@ else
   p_error 'Error backing up!'
 fi
 
+# Backup fonts
+p_header "$HOME/Library/Fonts"
+if cp -R "$HOME/Library/Fonts/" "$BACKUP_DIR/Fonts"; then
+  p_success 'Backed up ~/Library/Fonts'
+else
+  p_error 'Error backing up!'
+fi
+
 # Backup Visual Studio Code settings
 p_header "Visual Studio Code settings"
 if cp -R "$HOME/Library/Application Support/Code/User" "$BACKUP_DIR/visual-studio-code"; then

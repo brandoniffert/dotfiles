@@ -8,8 +8,6 @@ unset PATH
 PATH=$HOME/.zsh/bin
 PATH=$PATH:$HOME/.local/bin
 PATH=$PATH:$HOME/.composer/vendor/bin
-PATH=$PATH:$HOME/.yarn/bin
-PATH=$PATH:$HOME/.config/yarn/global/node_modules/.bin
 PATH=$PATH:$GOPATH/bin
 PATH=$PATH:/usr/local/bin
 PATH=$PATH:/usr/local/sbin
@@ -225,6 +223,11 @@ if command -v rbenv >/dev/null 2>&1; then
   eval "$(rbenv init - --no-rehash)"
 fi
 
+# Setup pyenv
+if command -v pyenv >/dev/null 2>&1; then
+  eval "$(pyenv init -)"
+fi
+
 # Use fasd
 if command -v fasd >/dev/null 2>&1; then
   eval "$(fasd --init auto)"
@@ -280,7 +283,7 @@ if ! command -v node >/dev/null 2>&1; then
   export NVM_DIR="$HOME/.config/nvm"
 
   function load-nvm() {
-    # /usr/local/opt/nvm/nvm.sh is the expected path when nvm is managed by Homebrew
+    # /usr/local/opt/nvm/nvm.sh is the expected path when nvm is managed by homebrew
     local nvmsh="/usr/local/opt/nvm/nvm.sh"
     [ -s "$nvmsh" ] && source "$nvmsh"
   }

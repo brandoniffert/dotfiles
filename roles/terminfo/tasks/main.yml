@@ -1,11 +1,12 @@
 ---
 - name: Create target directory
-  file: path={{ terminfo_path }} state=directory
+  file:
+    path: "{{ terminfo_path }}"
+    state: directory
 
 - name: Update terminfo files
-  command:
-    tic -o {{ terminfo_path }} roles/terminfo/files/{{ item }}
-  with_items:
+  command: tic -o {{ terminfo_path }} roles/terminfo/files/{{ item }}
+  loop:
     - tmux.terminfo
     - tmux-256color.terminfo
     - xterm-256color.terminfo

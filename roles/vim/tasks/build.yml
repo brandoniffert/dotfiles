@@ -1,8 +1,0 @@
----
-- name: Create spellfile
-  file:
-    path: "{{ spellfile }}"
-    state: touch
-
-- name: Create or update spellfile
-  command: vim -u NONE -N -c 'mkspell! {{ spellfile }} | quit'

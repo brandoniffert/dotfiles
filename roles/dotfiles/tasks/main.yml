@@ -1,48 +1,41 @@
 ---
 - name: Make ~/.config
-  file: path=~/.config
-        state=directory
+  file:
+    path: ~/.config
+    state: directory
 
 - name: Create backup directory
-  file: path=~/.local/backups
-        state=directory
+  file:
+    path: ~/.local/backups
+    state: directory
 
 - name: Check for non-symlink originals
-  command: test -e ~/{{ item }} -a ! -L ~/{{ item }}
-  failed_when: original_check.rc > 1
+  stat:
+    path: ~/{{ item }}
   register: original_check
-  with_items: "{{ dotfile_files }}"
-  changed_when: false
+  loop: "{{ dotfile_files }}"
+  changed_when: original_check.stat.exists and not original_check.stat.islnk
 
 - name: Backup originals
   command: mv ~/{{ item.0 }} ~/.local/backups/
   args:
-    creates:~/.local/backups/{{ item.0 }}
-    removes:~/{{ item.0 }}
-  with_together:
-    - "{{ dotfile_files }}"
-    - "{{ original_check.results }}"
-  when: item.1.rc == 0 # item exists and is not a symlink
+    creates: ~/.local/backups/{{ item.0 }}
+    removes: ~/{{ item.0 }}
+  loop:
+    "{{ dotfile_files | zip(original_check.results) | list }}"
+  when: item.1.stat.exists and not item.1.stat.islnk
   loop_control:
-    label: "{{item.0}}"
+    label: "{{ item.0 }}"
 
 - name: Create symlinks
-  file: src={{ ansible_env.PWD }}/roles/dotfiles/files/{{ item }}
-        path=~/{{ item }}
-        state=link
-  with_items: "{{ dotfile_files }}"
+  file:
+    src: "{{ ansible_env.PWD }}/roles/dotfiles/files/{{ item }}"
+    path: ~/{{ item }}
+    state: link
+  loop: "{{ dotfile_files }}"
 
 - name: Symlink nvim to vim
-  file: path=~/.config/nvim
-        src=~/.vim
-        state=link
-
-- name: Make ~/.config/karabiner
-  file: path=~/.config/karabiner
-        state=directory
-
-- name: Symlink karabiner
-  file: path=~/.config/karabiner
-        src={{ ansible_env.PWD }}/roles/dotfiles/files/.config/karabiner
-        state=link
-        force=true
+  file:
+    path: ~/.config/nvim
+    src: ~/.vim
+    state: link

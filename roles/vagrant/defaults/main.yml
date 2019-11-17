@@ -1,0 +1,5 @@
+---
+vagrant_plugins:
+  - vagrant-bindfs
+  - vagrant-hostmanager
+  - vagrant-vbguest

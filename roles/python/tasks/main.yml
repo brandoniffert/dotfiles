@@ -1,0 +1,52 @@
+---
+- name: Ensure pyenv is installed
+  stat:
+    path: /usr/local/bin/pyenv
+  register: pyenv_check
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+
+- name: Install python {{ python2_version }} with pyenv
+  command: /usr/local/bin/pyenv install {{ python2_version }}
+  args:
+    creates: ~/.pyenv/versions/{{ python2_version }}
+  when: pyenv_check.stat.exists
+
+- name: Install python {{ python3_version }} with pyenv
+  command: /usr/local/bin/pyenv install {{ python3_version }}
+  args:
+    creates: ~/.pyenv/versions/{{ python3_version }}
+  when: pyenv_check.stat.exists
+
+- name: Check if global python version is {{ python3_version }}
+  shell: >
+    set -o pipefail &&
+    /usr/local/bin/pyenv version | cut -d ' ' -f 1 | grep -Fx {{ python3_version }}
+  register: global_python_selected
+  changed_when: false
+  failed_when: false
+  when: pyenv_check.stat.exists
+
+- name: Set python {{ python3_version }} as global version
+  shell: >
+    /usr/local/bin/pyenv global {{ python3_version }} &&
+    /usr/local/bin/pyenv rehash
+  when:
+    - pyenv_check.stat.exists
+    - global_python_selected.rc != 0
+
+- name: Check for virtualenv for neovim (python3)
+  stat:
+    path: ~/.pyenv/versions/py3nvim
+  register: py3nvim_check
+  changed_when: false
+  failed_when: false
+  ignore_errors: true
+
+- name: Setup virtualenv for neovim and install pynvim (python3)
+  shell: >
+    set -o pipefail &&
+    pyenv virtualenv {{ python3_version }} py3nvim &&
+    ~/.pyenv/versions/py3nvim/bin/pip install pynvim
+  when: not py3nvim_check.stat.exists
