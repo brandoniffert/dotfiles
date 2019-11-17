@@ -7,8 +7,15 @@
   failed_when: false
   ignore_errors: true
 
+- name: Download homebrew install script
+  get_url:
+    url: https://raw.githubusercontent.com/Homebrew/install/master/install
+    dest: /tmp/homebrew-install
+  register: homebrew_install_script
+  when: not homebrew_check.stat.exists
+
 - name: Install homebrew
-  command: /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  command: /usr/bin/ruby {{ homebrew_install_script.dest }}
   when: not homebrew_check.stat.exists
 
 - name: Tap homebrew/cask-versions
