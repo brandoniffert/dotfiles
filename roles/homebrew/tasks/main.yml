@@ -33,14 +33,12 @@
   homebrew:
     name: "{{ brew_packages }}"
     state: present
-  when: homebrew_check.stat.exists
 
 - name: Install homebrew cask packages
   homebrew_cask:
     name: "{{ brew_cask_packages }}"
     state: present
     accept_external_apps: true
-  when: homebrew_check.stat.exists
 
 - name: Setup FZF
   command: $(brew --prefix)/opt/fzf/install --xdg --key-bindings --completion --no-update-rc
