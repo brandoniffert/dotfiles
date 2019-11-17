@@ -7,6 +7,11 @@
   failed_when: false
   ignore_errors: true
 
+- name: Create ~/.rbenv
+  file:
+    path: ~/.rbenv
+    state: directory
+
 - name: Setup default gems
   copy:
     src: default-gems
