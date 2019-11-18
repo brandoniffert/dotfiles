@@ -70,10 +70,12 @@ brew_cask_packages:
   - alfred
   - appcleaner
   - docker
+  - dropbox
   - firefox
   - firefox-developer-edition
   - google-chrome
   - hammerspoon
+  - iina
   - iterm2
   - karabiner-elements
   - slack
