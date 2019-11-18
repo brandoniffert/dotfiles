@@ -117,6 +117,10 @@ HOST_OS=$(uname)
 
 if [ "$HOST_OS" = 'Darwin' ]; then
   ANSIBLE_CONFIG=.ansible.cfg ansible-playbook --ask-become-pass ${VERBOSE+-$(printf 'v%.0s' $(seq $VERBOSE))} ${ROLES} "${EXTRA_ARGS[@]}" darwin.yml
+
+  if [ -z "$ROLES" ]; then
+    ./post-run
+  fi
 else
   echo "Unknown host OS: $HOST_OS"
   exit 1
