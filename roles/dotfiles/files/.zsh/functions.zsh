@@ -128,6 +128,7 @@ function p() {
     grep -Ev $ignore |
     fzf --header='Projects'
   )"
+  clear
 }
 
 function pw() {
@@ -137,6 +138,7 @@ function pw() {
     grep -Ev $ignore |
     fzf --header='Projects (Work)'
   )"
+  clear
 }
 
 function pl() {
@@ -146,6 +148,7 @@ function pl() {
     grep -Ev $ignore |
     fzf --header='Projects (Life)'
   )"
+  clear
 }
 
 function pa() {
@@ -155,6 +158,7 @@ function pa() {
     grep -Ev $ignore |
     fzf --header='Projects (Archive)'
   )"
+  clear
 }
 
 # Use fzf to quickly get to a note
@@ -209,6 +213,7 @@ function bhist() {
 function hst() {
   if [ $# -eq 0 ]; then
     cd "$HOME/Projects/vagrant-homestead"
+    clear
   else
     ( cd "$HOME/Projects/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
   fi
