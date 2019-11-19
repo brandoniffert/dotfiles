@@ -273,8 +273,10 @@ function async_load() {
   if command -v fasd >/dev/null 2>&1; then
     eval "$(fasd --init auto)"
   fi
+
+  typeset -U path
 }
 
 async_start_worker async_worker
 async_register_callback async_worker async_load
-async_job async_worker sleep 0.05
+async_job async_worker sleep 0.1
