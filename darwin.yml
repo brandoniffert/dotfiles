@@ -13,4 +13,4 @@
     - { role: vagrant, tags: vagrant }
     - { role: macos, tags: macos }
   vars:
-    computer_hostname: iffydesk
+    computer_hostname: iffymac
