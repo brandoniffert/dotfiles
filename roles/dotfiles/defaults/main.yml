@@ -17,4 +17,5 @@ dotfile_files:
   - .tmux.conf
   - .vim
   - .zsh
+  - .zshenv
   - .zshrc
