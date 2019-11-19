@@ -207,21 +207,6 @@ source "$HOME/.zsh/prompt.zsh"
 # SETUP OTHER SCRIPTS/PROGRAMS
 #-------------------------------------------------------------------------------
 
-# Setup rbenv
-if command -v rbenv >/dev/null 2>&1; then
-  eval "$(rbenv init - --no-rehash)"
-fi
-
-# Setup pyenv
-if command -v pyenv >/dev/null 2>&1; then
-  eval "$(pyenv init -)"
-fi
-
-# Use fasd
-if command -v fasd >/dev/null 2>&1; then
-  eval "$(fasd --init auto)"
-fi
-
 # fzf
 FZF_ZSH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 test -f $FZF_ZSH && source $FZF_ZSH
@@ -255,27 +240,41 @@ test -f $LOCAL_RC && source $LOCAL_RC
 unset LOCAL_RC
 
 #-------------------------------------------------------------------------------
-# NVM
+# ASYNC
 #-------------------------------------------------------------------------------
 
-# node may be set to a specific version from ~/.zshrc.local
-# If it isn't, then load up nvm but do it asynchronously
-if ! command -v node >/dev/null 2>&1; then
-  # https://github.com/creationix/nvm/issues/539#issuecomment-403661578
+source "$HOME/.zsh/async.zsh"
+async_init
 
-  # Setup zsh-async
-  source "$HOME/.zsh/async.zsh"
-  async_init
-
+function async_load() {
+  # Setup nvm
   export NVM_DIR="$HOME/.config/nvm"
+  local nvmsh="/usr/local/opt/nvm/nvm.sh"
 
-  function load-nvm() {
-    # /usr/local/opt/nvm/nvm.sh is the expected path when nvm is managed by homebrew
-    local nvmsh="/usr/local/opt/nvm/nvm.sh"
+  # Check if we have explicitly set an nvm node path already (.zshrc.local)
+  # If we do, then source nvm.sh with the --no-use flag to increase shell startup speed
+  if [[ $(which node) =~ $NVM_DIR ]]; then
+    [ -s "$nvmsh" ] && source "$nvmsh" --no-use
+  else
     [ -s "$nvmsh" ] && source "$nvmsh"
-  }
+  fi
 
-  # Initialize a new worker to load (source) nvm.sh
-  async_start_worker nvm-worker
-  async_job nvm-worker load-nvm
-fi
+  # Setup rbenv
+  if command -v rbenv >/dev/null 2>&1; then
+    eval "$(rbenv init - --no-rehash)"
+  fi
+
+  # Setup pyenv
+  if command -v pyenv >/dev/null 2>&1; then
+    eval "$(pyenv init - --no-rehash)"
+  fi
+
+  # Setup fasd
+  if command -v fasd >/dev/null 2>&1; then
+    eval "$(fasd --init auto)"
+  fi
+}
+
+async_start_worker async_worker
+async_register_callback async_worker async_load
+async_job async_worker sleep 0.05
