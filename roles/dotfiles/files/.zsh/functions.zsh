@@ -238,6 +238,7 @@ function ts() {
 # If the session already exists, attach to that one
 function tnew() {
   local session_name="$1"
+  local working_dir=${2:-$HOME}
 
   if [ -z "$session_name" ]; then
     echo 'Please provide a session name!'
@@ -249,7 +250,7 @@ function tnew() {
 
   # If session doesn't exist, create it
   if [ $? -ne 0 ]; then
-    tmux new-session -c "$HOME" -d -s "$session_name"
+    tmux new-session -c "$working_dir" -d -s "$session_name"
   fi
 
   # Attach or switch to it, depending on whether we are already in a tmux session
