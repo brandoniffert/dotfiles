@@ -261,6 +261,19 @@ function tnew() {
   fi
 }
 
+# Setup two windows in a tmux session
+function tup() {
+  if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
+    if [[ $(tmux list-windows | grep '' -c) -eq 1 ]]; then
+      tmux rename-window 'code'
+      tmux new-window
+      tmux rename-window 'build'
+      tmux select-window -t 1
+      clear
+    fi
+  fi
+}
+
 # Allow Ctrl-z to toggle between suspend and resume
 function Resume {
     fg
