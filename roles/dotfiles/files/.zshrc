@@ -1,20 +1,4 @@
 #-------------------------------------------------------------------------------
-# PATH
-#-------------------------------------------------------------------------------
-
-SYSTEM_PATH=$PATH
-unset PATH
-
-PATH=$HOME/.zsh/bin
-PATH=$PATH:$HOME/.local/bin
-PATH=$PATH:$HOME/.composer/vendor/bin
-PATH=$PATH:$GOPATH/bin
-PATH=$PATH:/usr/local/bin
-PATH=$PATH:/usr/local/sbin
-PATH=$PATH:$SYSTEM_PATH
-export -U PATH
-
-#-------------------------------------------------------------------------------
 # OPTIONS
 #-------------------------------------------------------------------------------
 
@@ -161,6 +145,7 @@ else
   alias lls='ls --color=auto -al'
 fi
 
+# https://github.com/pyenv/pyenv/issues/106
 if command -v pyenv >/dev/null 2>&1; then
   alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
 fi
@@ -249,9 +234,7 @@ function() {
 
   locations=(
     /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
   )
 
   for file in $locations; do
