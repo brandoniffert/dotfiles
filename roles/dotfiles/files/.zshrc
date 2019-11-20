@@ -41,7 +41,6 @@ export BAT_THEME=Nord
 export HOMEBREW_NO_ANALYTICS=1
 
 # Setup dircolors
-command -v dircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(dircolors $HOME/.dir_colors)
 command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
 
 # For ripgrep
@@ -115,20 +114,15 @@ bindkey '^M' magic-enter
 # ALIASES
 #-------------------------------------------------------------------------------
 
-alias digg="dig +multiline +noall +answer -t ANY"
-alias dots="cd $HOME/Projects/Life/computer"
 alias e="$EDITOR"
-alias fixterm='echo -e "\e<"; reset; stty sane; tput rs1; clear; echo -e "\033c"'
 alias g='git'
 alias grep='grep --color'
 alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias llll='tree -L 4'
-alias notes="$EDITOR $HOME/Dropbox/Notes"
 alias nv="nvim"
 alias nvd="nvim -d"
-alias pipenvsh="pipenv shell --fancy"
 alias q=exit
 alias t='tmux -u'
 alias v=view
@@ -212,28 +206,6 @@ FZF_ZSH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 test -f $FZF_ZSH && source $FZF_ZSH
 unset FZF_ZSH
 
-# zsh-autosuggestions and zsh-syntax-highlighting
-function() {
-  local -a locations
-  local file
-
-  locations=(
-    /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-  )
-
-  for file in $locations; do
-    if [ -f $file ]; then
-      source $file
-    fi
-  done
-}
-
-ZSH_AUTOSUGGEST_USE_ASYNC=true
-ZSH_HIGHLIGHT_STYLES[path]="none"
-ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
-
 # Use .zshrc.local for local options
 LOCAL_RC="$HOME/.zshrc.local"
 test -f $LOCAL_RC && source $LOCAL_RC
@@ -273,6 +245,28 @@ function async_load() {
   if command -v fasd >/dev/null 2>&1; then
     eval "$(fasd --init auto)"
   fi
+
+  # zsh-autosuggestions and zsh-syntax-highlighting
+  function() {
+    local -a locations
+    local file
+
+    locations=(
+      /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+      /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    )
+
+    for file in $locations; do
+      if [ -f $file ]; then
+        source $file
+      fi
+    done
+  }
+
+  ZSH_AUTOSUGGEST_USE_ASYNC=true
+  ZSH_HIGHLIGHT_STYLES[path]="none"
+  ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
   typeset -U path
 }
