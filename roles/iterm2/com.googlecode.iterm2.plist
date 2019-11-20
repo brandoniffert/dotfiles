@@ -14,6 +14,8 @@
 	<integer>1</integer>
 	<key>AppleWindowTabbingMode</key>
 	<string>manual</string>
+	<key>CGFontRenderingFontSmoothingDisabled</key>
+	<false/>
 	<key>CompactMinimalTabBarHeight</key>
 	<real>30</real>
 	<key>CopySelection</key>
@@ -1231,7 +1233,7 @@
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Thin Strokes</key>
-			<integer>3</integer>
+			<integer>4</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unicode Version</key>
@@ -1291,7 +1293,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>1AB36F2A-4037-4D7F-A752-BB021A738D7A</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>81</integer>
+	<integer>87</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -2068,7 +2070,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-11-19T13:20:36Z</date>
+	<date>2019-11-20T13:20:36Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
