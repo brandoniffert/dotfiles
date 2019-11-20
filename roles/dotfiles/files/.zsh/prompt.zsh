@@ -58,10 +58,10 @@ function () {
     local LVL=$SHLVL
   fi
 
-  local MARKER="%(?.%F{green}.%F{red})■%f "
+  local MARKER="%(?.%F{green}.%F{red})▍%f "
   local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
   local DIR="%F{blue}%1~%f "
-  local JOBS="%F{yellow}%(1j.*.)%f"
+  local JOBS="%F{yellow}%(1j.* .)%f"
 
   if [[ $EUID -eq 0 ]]; then
     local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
