@@ -206,7 +206,32 @@ FZF_ZSH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
 test -f $FZF_ZSH && source $FZF_ZSH
 unset FZF_ZSH
 
-# Use .zshrc.local for local options
+# zsh-autosuggestions and zsh-syntax-highlighting
+function() {
+  local -a locations
+  local file
+
+  locations=(
+    /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+    /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  )
+
+  for file in $locations; do
+    if [ -f $file ]; then
+      source $file
+    fi
+  done
+}
+
+ZSH_AUTOSUGGEST_USE_ASYNC=true
+ZSH_HIGHLIGHT_STYLES[path]="none"
+ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
+
+#-------------------------------------------------------------------------------
+# LOCAL OPTIONS
+#-------------------------------------------------------------------------------
+
 LOCAL_RC="$HOME/.zshrc.local"
 test -f $LOCAL_RC && source $LOCAL_RC
 unset LOCAL_RC
@@ -245,28 +270,6 @@ function async_load() {
   if command -v fasd >/dev/null 2>&1; then
     eval "$(fasd --init auto)"
   fi
-
-  # zsh-autosuggestions and zsh-syntax-highlighting
-  function() {
-    local -a locations
-    local file
-
-    locations=(
-      /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-      /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    )
-
-    for file in $locations; do
-      if [ -f $file ]; then
-        source $file
-      fi
-    done
-  }
-
-  ZSH_AUTOSUGGEST_USE_ASYNC=true
-  ZSH_HIGHLIGHT_STYLES[path]="none"
-  ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
-  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
   typeset -U path
 }
