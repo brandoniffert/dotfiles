@@ -1,7 +1,8 @@
-# Copyright (c) 2017-present Arctic Ice Studio <development@arcticicestudio.com>
-# Copyright (c) 2017-present Sven Greb <code@svengreb.de>
+# Copyright (C) 2017-present Arctic Ice Studio <development@arcticicestudio.com>
+# Copyright (C) 2017-present Sven Greb <development@svengreb.de>
 
 # Project:    Nord dircolors
+# Version:    0.2.0
 # Repository: https://github.com/arcticicestudio/nord-dircolors
 # License:    MIT
 
@@ -68,7 +69,7 @@ CHR 33
 ORPHAN 31
 MISSING 01;37;41
 
-EXEC 01;32
+EXEC 01;36
 
 SETUID 01;04;37
 SETGID 01;04;37
