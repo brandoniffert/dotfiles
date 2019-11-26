@@ -27,5 +27,6 @@
     name: "{{ item }}"
     global: true
     state: latest
+    production: true
   loop: "{{ yarn_packages }}"
   when: yarn_check.stat.exists
