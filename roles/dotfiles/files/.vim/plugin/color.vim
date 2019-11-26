@@ -41,4 +41,6 @@ if !has('nvim')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+set bg=dark
+set termguicolors
 silent! colorscheme nord

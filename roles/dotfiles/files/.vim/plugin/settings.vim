@@ -48,7 +48,6 @@ endif
 set splitbelow
 set splitright
 set switchbuf+=useopen
-set termguicolors
 set updatetime=300
 set wildmode=longest:full,full
 set wildignore+=.git,*.jpg,*.jpeg,*.png,*.gif
