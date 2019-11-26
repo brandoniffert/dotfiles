@@ -39,6 +39,7 @@ export WORDCHARS='*?[]~&;!$%^<>'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export BAT_THEME=Nord
 export HOMEBREW_NO_ANALYTICS=1
+export PYENV_ROOT="$HOME/.pyenv"
 
 # Setup dircolors
 command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
