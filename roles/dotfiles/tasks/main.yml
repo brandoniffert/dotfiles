@@ -1,8 +1,11 @@
 ---
-- name: Create ~/.config
+- name: Create ~/.config directories
   file:
-    path: ~/.config
+    path: "{{ item }}"
     state: directory
+  loop:
+    - ~/.config
+    - ~/.config/karabiner
 
 - name: Create backup directory
   file:
@@ -39,3 +42,14 @@
     path: ~/.config/nvim
     src: ~/.vim
     state: link
+
+- name: Prepare Karabiner config
+  command: "{{ ansible_env.PWD }}/roles/dotfiles/support/karabiner.js"
+  register: karabiner_config
+  check_mode: false
+
+- name: Create templates
+  template:
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    src: "{{ item }}"
+  loop: "{{dotfile_templates}}"
