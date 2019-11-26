@@ -127,8 +127,7 @@ function p() {
     find ~/Projects/Work ~/Projects/Life -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects'
-  )"
-  clear
+  )" && clear
 }
 
 function pw() {
@@ -137,8 +136,7 @@ function pw() {
     find ~/Projects/Work -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects (Work)'
-  )"
-  clear
+  )" && clear
 }
 
 function pl() {
@@ -147,8 +145,7 @@ function pl() {
     find ~/Projects/Life -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects (Life)'
-  )"
-  clear
+  )" && clear
 }
 
 function pa() {
@@ -157,8 +154,7 @@ function pa() {
     find ~/Projects/Archive -maxdepth 1 -type d |
     grep -Ev $ignore |
     fzf --header='Projects (Archive)'
-  )"
-  clear
+  )" && clear
 }
 
 # Use fzf to quickly get to a note
@@ -212,8 +208,7 @@ function bhist() {
 # Quickly manage vagrant homestead from anywhere
 function hst() {
   if [ $# -eq 0 ]; then
-    cd "$HOME/Projects/vagrant-homestead"
-    clear
+    cd "$HOME/Projects/vagrant-homestead" && clear
   else
     ( cd "$HOME/Projects/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
   fi
@@ -252,6 +247,8 @@ function tnew() {
   if [ $? -ne 0 ]; then
     tmux new-session -c "$working_dir" -d -s "$session_name"
   fi
+
+  clear
 
   # Attach or switch to it, depending on whether we are already in a tmux session
   if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
