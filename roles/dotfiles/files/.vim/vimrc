@@ -48,14 +48,14 @@ endif
 
 if has('python3')
   Plug 'SirVer/ultisnips'
+endif
 
-  if has('nvim')
+if has('nvim')
+  if has('python3')
     Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
   endif
+else
+  Plug 'ervandew/supertab'
 endif
 call plug#end()
 
