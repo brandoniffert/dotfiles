@@ -162,21 +162,6 @@ function n() {
   $EDITOR "$(find $HOME/Dropbox/Notes -maxdepth 1 -type f | fzf)"
 }
 
-# Quickly open life journal
-function jlife() {
-  $EDITOR -c 'set ft=markdown.journal | Goyo' ~/Dropbox/Notes/Life.md
-}
-
-# Quickly open work journal
-function jwork() {
-  $EDITOR -c 'set ft=markdown.journal | Goyo' ~/Dropbox/Notes/Work.md
-}
-
-# Quickly open both life and work journals
-function jlogs() {
-  $EDITOR -c 'silent Goyo 160 | vsp ~/Dropbox/Notes/Life.md | bufdo setlocal ft=markdown.journal | wincmd h' ~/Dropbox/Notes/Work.md
-}
-
 # Use fzf to upgrade installed homebrew package
 function brewup() {
   brew update

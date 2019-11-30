@@ -1,5 +1,0 @@
-let g:UltiSnipsSnippetsDir = $HOME . '/.vim/ultisnips'
-let g:UltiSnipsExpandTrigger = '<c-e>'
-let g:UltiSnipsListSnippets = '<c-s>'
-let g:UltiSnipsJumpForwardTrigger = '<c-n>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-p>'

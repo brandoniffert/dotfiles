@@ -14,14 +14,11 @@ if empty(glob('~/.vim/autoload/plug.vim'))
 endif
 
 call plug#begin()
-Plug 'ambv/black', { 'for': 'python' }
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'janko-m/vim-test'
-Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
-Plug 'junegunn/vim-easy-align'
 Plug 'junegunn/vim-peekaboo'
 Plug 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_s', '<Plug>Sneak_S'] }
 Plug 'ludovicchabant/vim-gutentags'
@@ -46,14 +43,8 @@ if executable('composer')
   Plug 'phpactor/phpactor', {'for': 'php', 'do': 'composer install'}
 endif
 
-if has('python3')
-  Plug 'SirVer/ultisnips'
-endif
-
 if has('nvim')
-  if has('python3')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-  endif
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 else
   Plug 'ervandew/supertab'
 endif
