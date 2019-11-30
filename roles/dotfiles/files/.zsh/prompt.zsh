@@ -8,7 +8,7 @@ zstyle ':vcs_info:*' stagedstr "%F{green}▪%f"
 zstyle ':vcs_info:*' unstagedstr "%F{red}▪%f"
 zstyle ':vcs_info:*' use-simple true
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-aheadbehind git-stash
-zstyle ':vcs_info:git*:*' formats '%F{black}[%f%b%m%c%u%F{black}]%f '
+zstyle ':vcs_info:git*:*' formats '%F{black}(%f%b%m%c%u%F{black})%f '
 zstyle ':vcs_info:git*:*' actionformats '%b|%a%m%c%u '
 
 function +vi-git-untracked() {
@@ -58,7 +58,7 @@ function () {
     local LVL=$SHLVL
   fi
 
-  local MARKER="%(?.%F{green}.%F{red})⁕%f "
+  local MARKER="%(?.%F{green}.%F{red})▌%f "
   local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
   local DIR="%F{blue}%1~%f "
   local JOBS="%F{yellow}%(1j.⁕ .)%f"
@@ -66,7 +66,7 @@ function () {
   if [[ $EUID -eq 0 ]]; then
     local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
   else
-    local SUFFIX="%F{white}$(printf '$%.0s' {1..$LVL})%f"
+    local SUFFIX="%F{white}$(printf '❯%.0s' {1..$LVL})%f"
   fi
 
   export PS1="${MARKER}${SSHTTY}\$(venv_info)${DIR}\${vcs_info_msg_0_%%}${JOBS}${SUFFIX} "
