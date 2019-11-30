@@ -12,10 +12,6 @@ augroup btiAutoCommands
   " Create, edit and save files and parent directories
   autocmd! BufWritePre,FileWritePre * call bti#functions#CreateAndSaveDirectory()
 
-  " Temporary fix for broken bracketed paste
-  " https://github.com/neovim/neovim/issues/7994#issuecomment-388296360
-  autocmd! InsertLeave * set nopaste
-
   " Auto close preview window
   autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | silent! pclose | endif
 
