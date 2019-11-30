@@ -67,6 +67,7 @@ brew_packages:
   - zsh-completions
   - zsh-syntax-highlighting
 brew_cask_packages:
+  - alacritty
   - alfred
   - appcleaner
   - docker
