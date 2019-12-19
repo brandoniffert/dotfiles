@@ -76,7 +76,6 @@ brew_cask_packages:
   - hammerspoon
   - iina
   - istat-menus
-  - iterm2
   - slack
   - transmit
   - ubersicht
