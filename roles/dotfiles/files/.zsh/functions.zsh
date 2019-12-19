@@ -193,9 +193,9 @@ function bhist() {
 # Quickly manage vagrant homestead from anywhere
 function hst() {
   if [ $# -eq 0 ]; then
-    cd "$HOME/Projects/vagrant-homestead" && clear
+    cd "$HOME/Projects/Tooling/vagrant-homestead" && clear
   else
-    ( cd "$HOME/Projects/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
+    ( cd "$HOME/Projects/Tooling/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
   fi
 }
 
