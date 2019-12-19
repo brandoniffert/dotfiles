@@ -2,6 +2,12 @@
 --tag-relative=yes
 
 --exclude=*.min.js
+--exclude=*.svg
+--exclude=*.html
+--exclude=*.css
+--exclude=*.scss
+--exclude=*.sass
+--exclude=*.sql
 --exclude=.git
 --exclude=.svn
 --exclude=.venv
@@ -15,7 +21,6 @@
 --exclude=plugged
 --exclude=thirdparty
 --exclude=vendor
+--exclude=venv
 
 --fields=+i+a+S+n
-
---languages=-html,sql

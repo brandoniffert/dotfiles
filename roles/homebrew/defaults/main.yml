@@ -22,7 +22,6 @@ brew_packages:
   - awscli
   - bat
   - composer
-  - ctags
   - exiftool
   - fasd
   - fd

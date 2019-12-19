@@ -4,7 +4,7 @@ dotfile_files:
   - .config/alacritty
   - .config/bat
   - .config/kitty
-  - .ctags
+  - .ctags.d
   - .dir_colors
   - .eslintrc.json
   - .gemrc

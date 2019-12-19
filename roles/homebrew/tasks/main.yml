@@ -34,6 +34,17 @@
     name: "{{ brew_packages }}"
     state: present
 
+- name: Tap universal-ctags/universal-ctags
+  homebrew_tap:
+    name: universal-ctags/universal-ctags
+    state: present
+
+- name: Install universal-ctags
+  homebrew:
+    name: universal-ctags
+    state: present
+    install_options: HEAD
+
 - name: Install homebrew cask packages
   homebrew_cask:
     name: "{{ brew_cask_packages }}"
