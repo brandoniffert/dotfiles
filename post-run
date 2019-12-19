@@ -7,8 +7,8 @@ set -e
 
 echo
 echo '> Running post-run script'
+echo
 
-/usr/local/bin/brew cask install karabiner-elements
-/usr/local/bin/brew cask install virtualbox
+echo '> Install virtualbox: /usr/local/bin/brew cask install virtualbox'
 
 echo
