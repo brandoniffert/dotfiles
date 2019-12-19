@@ -2,7 +2,7 @@
 function server() {
   local port="${1:-9876}"
   open "http://localhost:${port}/"
-  python -m SimpleHTTPServer $port
+  python -m http.server $port
 }
 
 # Serve a directory on localhost and open in browser (php)
