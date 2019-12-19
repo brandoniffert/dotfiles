@@ -54,6 +54,14 @@ else
   p_error 'Error backing up!'
 fi
 
+# Backup ~/.aws
+p_header "$HOME/.aws"
+if cp -R "$HOME/.aws/" "$BACKUP_DIR/aws"; then
+  p_success 'Backed up ~/.aws'
+else
+  p_error 'Error backing up!'
+fi
+
 # Backup ~/.getmail
 p_header "$HOME/.getmail"
 if cp -R "$HOME/.getmail/" "$BACKUP_DIR/getmail"; then
