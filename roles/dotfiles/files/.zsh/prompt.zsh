@@ -4,8 +4,8 @@ autoload -U colors && colors
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr "%F{green}▪%f"
-zstyle ':vcs_info:*' unstagedstr "%F{red}▪%f"
+zstyle ':vcs_info:*' stagedstr "%F{green}⚬%f"
+zstyle ':vcs_info:*' unstagedstr "%F{red}⚬%f"
 zstyle ':vcs_info:*' use-simple true
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-aheadbehind git-stash
 zstyle ':vcs_info:git*:*' formats '%F{black}(%f%b%m%c%u%F{black})%f '
@@ -14,7 +14,7 @@ zstyle ':vcs_info:git*:*' actionformats '%b|%a%m%c%u '
 function +vi-git-untracked() {
   emulate -L zsh
   if [[ -n $(git ls-files --exclude-standard --others 2> /dev/null) ]]; then
-    hook_com[unstaged]+="%F{yellow}▪%f"
+    hook_com[staged]+="%F{yellow}⚬%f"
   fi
 }
 
