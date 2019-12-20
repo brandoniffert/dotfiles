@@ -48,7 +48,7 @@ command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircol
 export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 
 # For fzf
-export FZF_DEFAULT_COMMAND='rg --files --smart-case --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg -u --files --smart-case'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND="fd . -t d"
 export FZF_DEFAULT_OPTS='
