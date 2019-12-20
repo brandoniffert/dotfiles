@@ -1,4 +1,4 @@
-augroup NordOverrides
+augroup btiColorScheme
   autocmd!
   autocmd ColorScheme nord highlight! CursorLine guibg=#171a26
   autocmd ColorScheme nord highlight! DiffAdd gui=reverse,bold
@@ -16,8 +16,8 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! Search guifg=#bf616a ctermfg=1 guibg=NONE ctermbg=NONE cterm=underline,bold gui=underline,bold
   autocmd ColorScheme nord highlight! SignColumn guibg=NONE
   autocmd ColorScheme nord highlight! Statement gui=NONE
-  autocmd ColorScheme nord highlight! StatusLine guibg=#171a26 guifg=#E5E9F0 ctermbg=16 ctermfg=7
-  autocmd ColorScheme nord highlight! StatusLineNC guibg=#171a26
+  autocmd ColorScheme nord highlight! StatusLine guibg=#131520 guifg=#616E88 ctermbg=16 ctermfg=7
+  autocmd ColorScheme nord highlight! StatusLineNC guibg=#131521 guifg=#616E88 ctermbg=16 ctermfg=7
   autocmd ColorScheme nord highlight! TabLine guibg=#15171E guifg=#D8DEE9
   autocmd ColorScheme nord highlight! TabLineFill guifg=#D8DEE9 guibg=NONE
   autocmd ColorScheme nord highlight! TabLineSel guibg=#D8DEE9 guifg=#12141e
@@ -29,6 +29,9 @@ augroup NordOverrides
   autocmd ColorScheme nord highlight! link Sneak WarningMsg
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
   autocmd ColorScheme nord highlight! link Wildmenu PmenuSel
+
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=#E5E9F0 gui=bold')
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
 augroup END
 
 let g:nord_underline = 1

@@ -85,3 +85,12 @@ function! bti#functions#BlurWindow() abort
     setlocal nocursorline
   endif
 endfunction
+
+function! bti#functions#extend_highlight(base, group, add) abort
+  redir => base_hi
+  silent! execute 'highlight' a:base
+  redir END
+  let group_hi = split(base_hi, '\n')[0]
+  let group_hi = substitute(group_hi, '^'.a:base.'\s\+xxx', '', '')
+  sil exe 'highlight' a:group group_hi a:add
+endfunction

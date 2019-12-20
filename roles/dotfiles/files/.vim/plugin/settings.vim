@@ -15,7 +15,6 @@ endif
 
 set hidden
 set ignorecase
-set laststatus=2
 set lazyredraw
 set linebreak
 set list

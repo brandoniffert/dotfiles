@@ -1,58 +1,31 @@
-function! s:IgnoreBuffer(name) abort
-  let ignore = 'NERD*\|help\|nofile\|__Mundo*'
-
-  return match(a:name, ignore) > -1
-endfunction
-
-function! bti#statusline#Mode() abort
-  return &filetype ==# 'nerdtree' ? 'NERD' :
-        \ &filetype ==# 'help' ? 'HELP' :
-        \ &filetype ==# 'vim-plug' ? 'PLUGINS' :
-        \ &filetype ==# 'Mundo' ? 'MUNDO' :
-        \ &filetype ==# 'MundoDiff' ? 'MUNDO' :
-        \ get(g:lightline.mode_map, mode(1), '')
-endfunction
-
-function! bti#statusline#Readonly() abort
-  if !empty(&buftype) || <sid>IgnoreBuffer(&buftype)
-    return ''
+function! bti#statusline#modified() abort
+  if !&modifiable || &readonly
+    return ' [RO]'
   endif
 
-  if &readonly && !filereadable(bufname('%'))
-    return 'NOPERM'
+  return &modified && &modifiable ? ' [+]' : ''
+endfunction
+
+function! bti#statusline#file_prefix() abort
+  let l:basename=expand('%:h')
+
+  if l:basename ==# '' || l:basename ==# '.'
+    return ''
+  elseif has('modify_fname')
+    " Make sure we show $HOME as ~.
+    return substitute(fnamemodify(l:basename, ':~:.'), '/$', '', '') . '/'
   else
-    return &readonly ? 'READONLY' : ''
+    " Make sure we show $HOME as ~.
+    return substitute(l:basename . '/', '\C^' . $HOME, '~', '')
   endif
 endfunction
 
-function! bti#statusline#FilePrefix() abort
-  let basename = expand('%:h')
-
-  if basename ==# '' || basename ==# '.'
-    return ''
-  else
-    return substitute(basename . '/', '\C^' . $HOME, '~', '')
-  endif
-endfunction
-
-function! bti#statusline#FileType() abort
-  if !empty(&buftype) || <sid>IgnoreBuffer(&buftype)
-    return ''
-  endif
-
+function! bti#statusline#ft() abort
   return strlen(&filetype) ? &filetype : ''
 endfunction
 
-function! bti#statusline#Modified() abort
-  if !empty(&buftype) || <sid>IgnoreBuffer(&buftype)
-    return ''
-  endif
-
-  return &modified && &modifiable ? '(modified)' : ''
-endfunction
-
-function! bti#statusline#FileFormatEncoding() abort
-  if !empty(&buftype) || <sid>IgnoreBuffer(&buftype) || empty(bufname('%'))
+function! bti#statusline#ffenc() abort
+  if !empty(&buftype) || empty(bufname('%'))
     return ''
   endif
 
@@ -65,27 +38,70 @@ function! bti#statusline#FileFormatEncoding() abort
   if expected is# &fileencoding . bomb . ff
     return ''
   else
-    return &fileencoding . bomb . ff
+    return &fileencoding . bomb . ff . ' '
   endif
 endfunction
 
-function! bti#statusline#DiagonsticInfo() abort
-  let counts = ale#statusline#Count(bufnr(''))
-  let all_errors = counts.error + counts.style_error
-  let all_non_errors = counts.total - all_errors
+function! bti#statusline#rhs() abort
+  let l:rhs = ' '
 
-  if counts.total == 0
+  if winwidth(0) > 80
+    let l:column = virtcol('.')
+    let l:width = virtcol('$')
+    let l:line = line('.')
+    let l:height = line('$')
+
+    " Add padding to stop rhs from changing too much as we move the cursor
+    let l:padding = len(l:height) - len(l:line)
+
+    if (l:padding)
+      let l:rhs .= repeat(' ', l:padding)
+    endif
+
+    let l:rhs .= bti#statusline#ffenc()
+    let l:rhs .= 'L '
+    let l:rhs .= l:line
+    let l:rhs .= '/'
+    let l:rhs .= l:height
+    let l:rhs .= ' C '
+    let l:rhs .= l:column
+    let l:rhs .= '/'
+    let l:rhs .= l:width
+    let l:rhs .= ' '
+
+    " Add padding to stop rhs from changing too much as we move the cursor.
+    if len(l:column) < 2
+      let l:rhs .= ' '
+    endif
+
+    if len(l:width) < 2
+      let l:rhs .= ' '
+    endif
+  endif
+  return l:rhs
+endfunction
+
+function! bti#statusline#diagonstic_info() abort
+  if !exists('*ale#statusline#Count')
     return ''
   endif
 
-  if all_errors != 0 && all_non_errors != 0
-    return printf('E: %d W: %d', all_errors, all_non_errors)
+  let l:counts = ale#statusline#Count(bufnr(''))
+  let l:all_errors = l:counts.error + l:counts.style_error
+  let l:all_non_errors = l:counts.total - l:all_errors
+
+  if l:counts.total == 0
+    return ''
   endif
 
-  return all_errors == 0 ? printf('W: %d', all_non_errors) : printf('E: %d', all_errors)
+  if l:all_errors != 0 && l:all_non_errors != 0
+    return printf('E: %d W: %d', l:all_errors, l:all_non_errors)
+  endif
+
+  return l:all_errors == 0 ? printf('W: %d', l:all_non_errors) : printf('E: %d', l:all_errors)
 endfunction
 
-function! bti#statusline#Whitespace() abort
+function! bti#statusline#whitespace() abort
   let b:statusline_whitespace_check = ''
 
   if !&modifiable
@@ -103,23 +119,13 @@ function! bti#statusline#Whitespace() abort
   endif
 
   if len(status)
-    let b:statusline_whitespace_check = join(status, ' · ')
+    let b:statusline_whitespace_check = ' ' . join(status, ' · ') . ' '
   endif
 
   return b:statusline_whitespace_check
 endfunction
 
-function! bti#statusline#SelectedLines() abort
-  let lines = abs(line('.') - line('v')) + 1
-
-  if lines <= 1
-    return ''
-  endif
-
-  return lines
-endfunction
-
-function! bti#statusline#WhitespaceRefresh() abort
+function! bti#statusline#whitespace_refresh() abort
   if bufname('%') == ''
     return
   endif
@@ -130,9 +136,77 @@ function! bti#statusline#WhitespaceRefresh() abort
 
   unlet! b:statusline_whitespace_changedtick
 
-  if exists('g:loaded_lightline')
-    call lightline#update()
+  let b:statusline_whitespace_changedtick = b:changedtick
+endfunction
+
+function! bti#statusline#enable_focus() abort
+  let g:enable_statusline_focus = v:true
+endfunction
+
+function! bti#statusline#focus() abort
+  if exists('g:enable_statusline_focus')
+    call s:update_statusline('', 'focus')
+  endif
+endfunction
+
+function! bti#statusline#blur() abort
+  let l:stl = '%<'    " Truncation point
+  let l:stl .= '%f\ ' " Filename
+  let l:stl .= '%m'   " Modified
+  let l:stl .= '%='   " Split left/right halves (makes background cover whole)
+  call s:update_statusline(l:stl, 'blur')
+endfunction
+
+function! s:update_statusline(default, action) abort
+  let l:statusline = s:get_custom_statusline(a:action)
+
+  if type(l:statusline) == type('')
+    execute 'setlocal statusline=' . l:statusline
+  elseif l:statusline == 0
+    return
+  else
+    execute 'setlocal statusline=' . a:default
+  endif
+endfunction
+
+function! s:get_custom_statusline(action) abort
+  if &ft ==# 'help'
+    return
+          \ '%<'
+          \ . '%1*'
+          \ . 'Help'
+          \ . '\ -\ '
+          \ . '%t'
+          \ . '%*'
+          \ . '%='
+  elseif &ft ==# 'qf'
+    return
+          \ '%<'
+          \ . '%1*'
+          \ . '%q'
+          \ . '\ '
+          \ . '%{get(w:,\"quickfix_title\",\"\")}'
+          \ . '%*'
+          \ . '%='
+  elseif &ft ==# 'Mundo'
+    return
+          \ '%<'
+          \ . '%1*'
+          \ . 'Mundo'
+          \ . '%*'
+          \ . '%='
+  elseif &ft ==# 'MundoDiff'
+    return
+          \ '%<'
+          \ . '%1*'
+          \ . 'Mundo\ Preview'
+          \ . '%*'
+          \ . '%='
+  elseif &ft ==# 'vim-plug'
+    return 0
+  elseif &ft ==# 'nerdtree'
+    return 0
   endif
 
-  let b:statusline_whitespace_changedtick = b:changedtick
+  return 1
 endfunction
