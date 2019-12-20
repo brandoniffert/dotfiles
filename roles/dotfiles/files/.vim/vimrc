@@ -17,8 +17,7 @@ call plug#begin()
 Plug 'arcticicestudio/nord-vim', { 'branch': 'develop' }
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
-Plug 'janko-m/vim-test'
-Plug 'junegunn/vim-peekaboo'
+Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest'] }
 Plug 'justinmk/vim-sneak', { 'on': ['<Plug>Sneak_s', '<Plug>Sneak_S'] }
 Plug 'machakann/vim-sandwich'
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
@@ -43,8 +42,6 @@ endif
 
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'ervandew/supertab'
 endif
 call plug#end()
 
