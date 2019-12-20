@@ -43,14 +43,10 @@ endif
 if has('nvim')
   Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 endif
-call plug#end()
 
-" After this file is sourced, custom plugin code will be evaluated, see:
-"   ~/.vim/plugin/settings.vim
-"   ~/.vim/plugin/mappings.vim
-"   ~/.vim/plugin/color.vim
-"   ~/.vim/plugin/commands.vim
-"   ~/.vim/plugin/autocommands.vim
-"
-" See ~/.vim/plugin/settings for plugin-specific settings
-" See `:scriptnames` for a list of all scripts, in evaluation order
+" Leave this so PlugClean doesn't remove it, but also doesn't load it
+Plug 'lifepillar/vim-colortemplate', { 'on': [] }
+
+" Uncomment to work with vim-colortemplate
+Plug 'lifepillar/vim-colortemplate'
+call plug#end()
