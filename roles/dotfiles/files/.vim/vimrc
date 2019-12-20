@@ -48,5 +48,5 @@ endif
 Plug 'lifepillar/vim-colortemplate', { 'on': [] }
 
 " Uncomment to work with vim-colortemplate
-Plug 'lifepillar/vim-colortemplate'
+" Plug 'lifepillar/vim-colortemplate'
 call plug#end()
