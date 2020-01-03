@@ -174,6 +174,4 @@ plugDeleted          red               none
 
 QuickScopePrimary    red               none              bold,underline
 QuickScopeSecondary  red               none              bold
-
-Sneak                -> WarningMsg
 # }}}

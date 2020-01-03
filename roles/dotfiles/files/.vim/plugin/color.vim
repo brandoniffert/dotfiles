@@ -26,7 +26,6 @@ augroup btiColorScheme
   autocmd ColorScheme nord highlight! WarningMsg cterm=bold gui=bold
   autocmd ColorScheme nord highlight! link CursorLineNr LineNr
   autocmd ColorScheme nord highlight! link NERDTreeCWD Comment
-  autocmd ColorScheme nord highlight! link Sneak WarningMsg
   autocmd ColorScheme nord highlight! link jsObjectKey jsonKeyword
   autocmd ColorScheme nord highlight! link Wildmenu PmenuSel
 
