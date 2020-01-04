@@ -10,4 +10,4 @@ brandoniffert's computer
 
 Pass `computer_hostname` as an extra var to the `run` command
 
-`./run --extra-vars="computer_hostname=hostname`
+`./run --extra-vars="computer_hostname=hostname"`
