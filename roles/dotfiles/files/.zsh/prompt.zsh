@@ -4,17 +4,17 @@ autoload -U colors && colors
 
 zstyle ':vcs_info:*' enable git
 zstyle ':vcs_info:*' check-for-changes true
-zstyle ':vcs_info:*' stagedstr "%F{green}⚬%f"
-zstyle ':vcs_info:*' unstagedstr "%F{red}⚬%f"
+zstyle ':vcs_info:*' stagedstr "%F{green}+%f"
+zstyle ':vcs_info:*' unstagedstr "%F{red}!%f"
 zstyle ':vcs_info:*' use-simple true
 zstyle ':vcs_info:git+set-message:*' hooks git-untracked git-aheadbehind git-stash
-zstyle ':vcs_info:git*:*' formats '%F{black}(%f%b%m%c%u%F{black})%f '
+zstyle ':vcs_info:git*:*' formats '%F{black}[%f%b%m%c%u%F{black}]%f '
 zstyle ':vcs_info:git*:*' actionformats '%b|%a%m%c%u '
 
 function +vi-git-untracked() {
   emulate -L zsh
   if [[ -n $(git ls-files --exclude-standard --others 2> /dev/null) ]]; then
-    hook_com[staged]+="%F{yellow}⚬%f"
+    hook_com[staged]+="%F{yellow}?%f"
   fi
 }
 
@@ -26,10 +26,10 @@ function +vi-git-aheadbehind() {
   branch_name=$(command git symbolic-ref --short HEAD 2> /dev/null)
 
   ahead=$(command git rev-list "${branch_name}"@{upstream}..HEAD 2> /dev/null | wc -l)
-  (( ahead )) && gitstatus+=( "%F{green}+${ahead// /}%f" )
+  (( ahead )) && gitstatus+=( "%F{green}${ahead// /}⇡%f" )
 
   behind=$(command git rev-list HEAD.."${branch_name}"@{upstream} 2> /dev/null | wc -l)
-  (( behind )) && gitstatus+=( "%F{yellow}-${behind// /}%f" )
+  (( behind )) && gitstatus+=( "%F{yellow}${behind// /}⇣%f" )
 
   hook_com[misc]+=${(j::)gitstatus}
 }
@@ -58,7 +58,9 @@ function () {
     local LVL=$SHLVL
   fi
 
-  local MARKER="%(?.%F{green}.%F{red})▌%f "
+  local TOPMARKER="%F{black}┌%f "
+  local BOTTOMMARKER="%F{black}└%f "
+  local NEWLINE=$'\n'
   local SSHTTY="%F{green}${SSH_TTY:+%n@%m}%f%B${SSH_TTY:+:}%b"
   local DIR="%F{blue}%1~%f "
   local JOBS="%F{yellow}%(1j.⁕ .)%f"
@@ -69,7 +71,7 @@ function () {
     local SUFFIX="%F{white}$(printf '❯%.0s' {1..$LVL})%f"
   fi
 
-  export PS1="${MARKER}${SSHTTY}\$(venv_info)${DIR}\${vcs_info_msg_0_%%}${JOBS}${SUFFIX} "
+  export PS1="${TOPMARKER}${SSHTTY}\$(venv_info)${DIR}\${vcs_info_msg_0_%%}${JOBS}${NEWLINE}${BOTTOMMARKER}${SUFFIX} "
 }
 
 export SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
