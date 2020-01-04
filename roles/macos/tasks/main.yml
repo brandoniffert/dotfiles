@@ -2,17 +2,17 @@
 - name: Set computername
   command: scutil --set ComputerName {{ computer_hostname }}
   become: true
-  when: ansible_hostname != computer_hostname
+  when: computer_hostname is defined and ansible_hostname != computer_hostname
 
 - name: Set hostname
   command: scutil --set HostName {{ computer_hostname }}
   become: true
-  when: ansible_hostname != computer_hostname
+  when: computer_hostname is defined and ansible_hostname != computer_hostname
 
 - name: Set localhostname
   command: scutil --set LocalHostName {{ computer_hostname }}
   become: true
-  when: ansible_hostname != computer_hostname
+  when: computer_hostname is defined and ansible_hostname != computer_hostname
 
 - name: Set the netbios name
   become: true
@@ -22,6 +22,7 @@
     type: string
     value: "{{ computer_hostname }}"
     state: present
+  when: computer_hostname is defined
 
 - name: Disable Siri
   osx_defaults:

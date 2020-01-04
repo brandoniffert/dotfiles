@@ -12,5 +12,3 @@
     - { role: vim, tags: vim }
     - { role: vagrant, tags: vagrant }
     - { role: macos, tags: macos }
-  vars:
-    computer_hostname: iffymac
