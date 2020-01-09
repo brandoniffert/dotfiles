@@ -8,5 +8,5 @@ let g:NERDTreeWinSize = 40
 
 augroup NERDTreeSettings
   autocmd!
-  autocmd User NERDTreeInit call bti#functions#AttemptSelectLastFile()
+  autocmd User NERDTreeInit call bti#functions#attempt_select_last_file()
 augroup END

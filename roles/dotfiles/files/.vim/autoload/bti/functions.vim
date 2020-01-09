@@ -1,5 +1,5 @@
 " Replace fancy characters
-function! bti#functions#ReplaceFancyCharacters() abort
+function! bti#functions#replace_fancy_characters() abort
   let chars = {
     \ '“' : '"',
     \ '”' : '"',
@@ -12,7 +12,7 @@ function! bti#functions#ReplaceFancyCharacters() abort
 endfunction
 
 " Strip whitespace and tabs
-function! bti#functions#StripWhitespace() abort
+function! bti#functions#strip_whitespace() abort
   let saved_winview = winsaveview()
   execute ':%s/\v\s+$//e'
   retab
@@ -20,7 +20,7 @@ function! bti#functions#StripWhitespace() abort
 endfunction
 
 " Cycle through number, relativenumber + number, and no numbering
-function! bti#functions#CycleLineNumbering() abort
+function! bti#functions#cycle_line_numbering() abort
   execute {
         \ '00': 'set norelativenumber | set number',
         \ '01': 'set norelativenumber | set number',
@@ -29,7 +29,7 @@ function! bti#functions#CycleLineNumbering() abort
 endfunction
 
 " Inserts a break (newline) at the current cursor location
-function! bti#functions#BreakHere() abort
+function! bti#functions#break_here() abort
   execute 's/^\(\s*\)\(.\{-}\)\(\s*\)\(\%#\)\(\s*\)\(.*\)/\1\2\r\1\4\6'
   call histdel('/', -1)
 endfunction
@@ -39,7 +39,7 @@ function! s:preview(file) abort
   silent execute '!open -a "Marked 2.app" ' . shellescape(a:file)
 endfunction
 
-function! bti#functions#Preview(...) abort
+function! bti#functions#preview(...) abort
   if a:0 == 0
     call s:preview(expand('%'))
   else
@@ -51,14 +51,14 @@ endfunction
 
 " Create, edit and save files and parent directories
 " https://github.com/duggiefresh/vim-easydir
-function! bti#functions#CreateAndSaveDirectory() abort
+function! bti#functions#create_and_save_directory() abort
   let s:directory = expand('<afile>:p:h')
   if s:directory !~# '^\(scp\|ftp\|dav\|fetch\|ftp\|http\|rcp\|rsync\|sftp\|file\):' && !isdirectory(s:directory)
     call mkdir(s:directory, 'p')
   endif
 endfunction
 
-function! bti#functions#AttemptSelectLastFile() abort
+function! bti#functions#attempt_select_last_file() abort
   let previous = expand('#:t')
   if previous !=# ''
     call search('\v<' . previous . '>')
@@ -66,22 +66,22 @@ function! bti#functions#AttemptSelectLastFile() abort
 endfunction
 
 " We want to control what types of files will allow for focus/blur effect
-function! bti#functions#ShouldAllowFocus() abort
-  let s:btiShouldAllowFocusBlacklist = ['diff', 'qf', 'nerdtree', 'help', 'vim-plug', 'Mundo', 'MundoDiff']
+function! bti#functions#should_allow_focus() abort
+  let s:bti_should_allow_focus_blacklist = ['diff', 'qf', 'nerdtree', 'help', 'vim-plug', 'Mundo', 'MundoDiff']
 
-  return !empty(&filetype) && index(s:btiShouldAllowFocusBlacklist, &filetype) == -1
+  return !empty(&filetype) && index(s:bti_should_allow_focus_blacklist, &filetype) == -1
 endfunction
 
 " Focus the window
-function! bti#functions#FocusWindow() abort
-  if bti#functions#ShouldAllowFocus()
+function! bti#functions#focus_window() abort
+  if bti#functions#should_allow_focus()
     setlocal cursorline
   endif
 endfunction
 
 " Blur the window
-function! bti#functions#BlurWindow() abort
-  if bti#functions#ShouldAllowFocus()
+function! bti#functions#blur_window() abort
+  if bti#functions#should_allow_focus()
     setlocal nocursorline
   endif
 endfunction

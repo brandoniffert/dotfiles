@@ -26,7 +26,7 @@ Color: white                 #e5e9f0               ~
 Color: gray10                #131520               ~
 Color: gray30                #363d4a               ~
 Color: gray50                #4c566a               ~
-Color: gray55                #4c566b               ~
+Color: gray60                #616e88               ~
 
 # Terminal colors
 Term colors: black  red green yellow blue magenta cyan white
@@ -46,6 +46,7 @@ DiffDelete                   gray10              red
 DiffText                     gray10              blue
 Directory                    cyan                none
 EndOfBuffer                  black               none
+Error                        red                 black
 ErrorMsg                     white               red            bold
 FoldColumn                   gray50              gray10
 Folded                       white               gray10
@@ -69,8 +70,8 @@ SpellBad                     red                 black          underline
 SpellCap                     yellow              black
 SpellLocal                   white               black
 SpellRare                    white               black
-StatusLine                   gray50              gray10
-StatusLineNC                 gray55              gray10
+StatusLine                   gray60              gray10
+StatusLineNC                 gray50              gray10
 TabLine                      gray50              gray10
 TabLineFill                  none                gray10
 TabLineSel                   white               gray10
@@ -90,7 +91,7 @@ TermCursorNC                 none                black
 # Language Base Groups
 Boolean                      blue                none
 Character                    green               none
-Comment                      gray50              none           italic
+Comment                      gray60              none           italic
 Conditional                  blue                none
 Constant                     white               none
 Define                       blue                none
