@@ -86,6 +86,7 @@ WarningMsg                   black               yellow         bold
 healthError                  red                 black          bold
 healthSuccess                green               black          bold
 healthWarning                yellow              black          bold
+TermCursor                   black               white
 TermCursorNC                 none                black
 
 # Language Base Groups

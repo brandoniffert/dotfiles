@@ -2,6 +2,8 @@
 " vimrc
 "-------------------------------------------------------------------------------
 
+" Plugins {{{
+
 " Set correct paths for python3
 if filereadable($HOME . '/.pyenv/versions/py3nvim/bin/python')
   let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
@@ -48,6 +50,8 @@ Plug 'lifepillar/vim-colortemplate', { 'on': [] }
 " Uncomment to work with vim-colortemplate
 " Plug 'lifepillar/vim-colortemplate'
 call plug#end()
+
+" }}}
 
 " General Settings {{{
 
@@ -298,7 +302,7 @@ endif
 
 set bg=dark
 set termguicolors
-colorscheme bti
+colorscheme nordish
 
 " }}}
 
