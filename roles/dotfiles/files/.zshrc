@@ -122,6 +122,8 @@ alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias llll='tree -L 4'
+alias ls='gls --color=auto'
+alias lls='gls --color=auto -al'
 alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit
@@ -130,15 +132,6 @@ alias v=view
 alias vi=vim
 alias vgs="vagrant global-status"
 alias zr!="source $HOME/.zshrc"
-
-# Need special case for macos
-if [ "$(uname)" = 'Darwin' ]; then
-  alias ls='gls --color=auto'
-  alias lls='gls --color=auto -al'
-else
-  alias ls='ls --color=auto'
-  alias lls='ls --color=auto -al'
-fi
 
 # https://github.com/pyenv/pyenv/issues/106
 if command -v pyenv >/dev/null 2>&1; then
