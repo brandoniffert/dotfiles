@@ -52,9 +52,9 @@ endfunction
 " Create, edit and save files and parent directories
 " https://github.com/duggiefresh/vim-easydir
 function! bti#functions#create_and_save_directory() abort
-  let s:directory = expand('<afile>:p:h')
-  if s:directory !~# '^\(scp\|ftp\|dav\|fetch\|ftp\|http\|rcp\|rsync\|sftp\|file\):' && !isdirectory(s:directory)
-    call mkdir(s:directory, 'p')
+  let l:directory = expand('<afile>:p:h')
+  if l:directory !~# '^\(scp\|ftp\|dav\|fetch\|ftp\|http\|rcp\|rsync\|sftp\|file\):' && !isdirectory(l:directory)
+    call mkdir(l:directory, 'p')
   endif
 endfunction
 
@@ -67,9 +67,9 @@ endfunction
 
 " We want to control what types of files will allow for focus/blur effect
 function! bti#functions#should_allow_focus() abort
-  let s:bti_should_allow_focus_blacklist = ['diff', 'qf', 'nerdtree', 'help', 'vim-plug', 'Mundo', 'MundoDiff']
+  let l:bti_should_allow_focus_blacklist = ['diff', 'qf', 'nerdtree', 'help', 'vim-plug', 'Mundo', 'MundoDiff']
 
-  return !empty(&filetype) && index(s:bti_should_allow_focus_blacklist, &filetype) == -1
+  return !empty(&filetype) && index(l:bti_should_allow_focus_blacklist, &filetype) == -1
 endfunction
 
 " Focus the window
@@ -86,11 +86,12 @@ function! bti#functions#blur_window() abort
   endif
 endfunction
 
+" Extend a highlight group by resetting it with additional attributes
 function! bti#functions#extend_highlight(base, group, add) abort
   redir => base_hi
   silent! execute 'highlight' a:base
   redir END
   let group_hi = split(base_hi, '\n')[0]
   let group_hi = substitute(group_hi, '^'.a:base.'\s\+xxx', '', '')
-  sil exe 'highlight' a:group group_hi a:add
+  silent execute 'highlight' a:group group_hi a:add
 endfunction
