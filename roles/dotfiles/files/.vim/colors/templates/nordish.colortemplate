@@ -144,7 +144,7 @@ cssPseudoClassId             -> cssPseudoClass
 cssVendor                    -> Keyword
 
 htmlArg                      cyan                none
-htmlBold                     -> htmlBold
+htmlLink                     white               none
 htmlEndTag                   -> htmlTag
 htmlItalic                   -> htmlItalic
 htmlH1                       -> markdownH1
@@ -177,7 +177,6 @@ markdownIdDeclaration        cyan                none
 markdownH1                   cyan                none
 markdownLinkText             cyan                none
 markdownUrl                  white               none
-markdownBold                 -> Bold
 markdownBold                 -> Bold
 markdownBoldDelimiter        -> Keyword
 markdownFootnoteDefinition   -> markdownFootnote

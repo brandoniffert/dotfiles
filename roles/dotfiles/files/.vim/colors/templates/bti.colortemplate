@@ -1,0 +1,243 @@
+# vim: ft=colortemplate fdm=marker cc=30,50,65 et ts=2 sw=2
+
+# Mandatory
+Full name:     bti
+Short name:    bti
+Author:        Brandon Iffert <brandoniffert@gmail.com>
+# Optional
+Maintainer:    Brandon Iffert <brandoniffert@gmail.com>
+Website:       https://brandoniffert.com
+Description:   Dark monochromatic colorscheme
+License:       Public domain
+Neovim:        yes
+
+Background: dark
+
+# Color name                 GUI                 Base256
+Color: black                 #3b4252               ~
+Color: red                   #bf616a               ~
+Color: green                 #a3be8c               ~
+Color: yellow                #ebcb8b               ~
+Color: blue                  #81a1c1               ~
+Color: magenta               #b48ead               ~
+Color: cyan                  #88c0d0               ~
+Color: white                 #e5e9f0               ~
+
+Color: accent                #c3d5b4               ~
+Color: light                 #e5e9f0               ~
+Color: dark                  #242932               ~
+Color: gray0                 #616e88               ~
+Color: gray1                 #4c566a               ~
+Color: gray2                 #363d4a               ~
+Color: gray3                 #131520               ~
+
+# Terminal colors
+Term colors: black red green yellow blue magenta cyan white
+Term colors: gray1 red green yellow blue magenta cyan white
+
+# Default highlight groups
+Variant: gui 256
+
+# Group                      Foreground          Background     Attributes
+ColorColumn                  light               gray3
+Cursor                       dark                light
+CursorColumn                 light               gray3
+CursorLine                   none                gray3
+DiffAdd                      gray3               green
+DiffChange                   gray3               yellow
+DiffDelete                   gray3               red
+DiffText                     gray3               blue
+Directory                    light               none
+EndOfBuffer                  dark                none
+Error                        red                 none
+ErrorMsg                     red                 none
+FoldColumn                   light               gray3
+Folded                       light               gray3
+iCursor                      dark                light
+IncSearch                    dark                yellow         bold
+LineNr                       gray2               none
+MatchParen                   dark                light
+ModeMsg                      white               none
+MoreMsg                      white               none
+Normal                       light               none
+NonText                      gray1               none
+Pmenu                        light               gray3
+PmenuSbar                    light               gray3
+PmenuSel                     dark                light          bold
+PmenuThumb                   dark                light
+Question                     light               none
+Search                       red                 none           underline
+SignColumn                   gray3               none
+SpecialKey                   light               none
+SpellBad                     red                 none           bold,underline
+SpellCap                     red                 none
+SpellLocal                   red                 none
+SpellRare                    red                 none
+StatusLine                   gray0               gray3
+StatusLineNC                 gray1               gray3
+TabLine                      gray1               gray3
+TabLineFill                  none                gray3
+TabLineSel                   white               gray3
+Terminal                     white               none
+Title                        gray0               none
+VertSplit                    gray3               none
+Visual                       none                gray2
+VisualNOS                    gray3               light
+WarningMsg                   black               yellow         bold
+Underlined                   light               none           underline
+
+# Neovim
+healthError                  red                 none           bold
+healthSuccess                green               none           bold
+healthWarning                yellow              none           bold
+TermCursorNC                 none                none
+
+# Language Base Groups
+Boolean                      light               none
+Character                    light               none
+Comment                      gray0               none           italic
+Conditional                  light               none           bold
+Constant                     light               none
+Debug                        light               none
+Define                       light               none
+Delimiter                    light               none
+Exception                    light               none
+Float                        light               none
+Function                     light               none           bold
+Identifier                   light               none
+Include                      light               none
+Keyword                      light               none           bold
+Label                        light               none
+Number                       light               none
+Operator                     light               none
+PreProc                      light               none           bold
+Repeat                       light               none
+Special                      light               none
+SpecialChar                  light               none
+SpecialComment               gray0               none           italic
+Statement                    light               none
+StorageClass                 light               none
+String                       accent              none
+Structure                    light               none
+Tag                          light               none
+Todo                         yellow              none
+Type                         light               none
+Typedef                      light               none
+
+# Common linked groups
+CursorLineNr                 -> LineNr
+diffAdded                    -> DiffAdd
+diffChanged                  -> DiffChange
+diffRemoved                  -> DiffDelete
+lCursor                      -> Cursor
+Macro                        -> Define
+Precondit                    -> PreProc
+WildMenu                     -> PmenuSel
+
+# Languages
+# cssAttributeSelector         cyan                none
+# cssDefinition                cyan                none
+# cssIdentifier                cyan                none           underline
+# cssStringQ                   cyan                none
+# cssAttr                      -> Keyword
+# cssBraces                    -> Delimiter
+# cssClassName                 -> cssDefinition
+# cssColor                     -> Number
+# cssProp                      -> cssDefinition
+# cssPseudoClass               -> cssDefinition
+# cssPseudoClassId             -> cssPseudoClass
+# cssVendor                    -> Keyword
+
+# htmlArg                      cyan                none
+htmlEndTag                   -> htmlTag
+htmlItalic                   -> htmlItalic
+htmlH1                       -> markdownH1
+htmlH2                       -> markdownH1
+htmlH3                       -> markdownH1
+htmlH4                       -> markdownH1
+htmlH5                       -> markdownH1
+htmlH6                       -> markdownH1
+htmlSpecialChar              -> SpecialChar
+htmlTag                      -> Keyword
+htmlTagN                     -> htmlTag
+
+# jsGlobalNodeObjects          cyan                none
+# jsonKeyword                  cyan                none
+jsBrackets                   -> Delimiter
+jsFuncCall                   -> Function
+jsFuncParens                 -> Delimiter
+jsThis                       -> Keyword
+# jsNoise                      -> Delimiter
+jsPrototype                  -> Keyword
+jsRegexpString               -> SpecialChar
+jsObjectKey                  -> jsonKeyword
+
+# markdownBlockquote           cyan                none
+# markdownCode                 cyan                none
+# markdownCodeDelimiter        cyan                none
+# markdownFootnote             cyan                none
+# markdownId                   cyan                none
+# markdownIdDeclaration        cyan                none
+markdownH1                   light               none           bold
+# markdownLinkText             cyan                none
+# markdownUrl                  white               none
+markdownBold                 -> Bold
+markdownBoldDelimiter        -> Keyword
+markdownFootnoteDefinition   -> markdownFootnote
+markdownH2                   -> markdownH1
+markdownH3                   -> markdownH1
+markdownH4                   -> markdownH1
+markdownH5                   -> markdownH1
+markdownH6                   -> markdownH1
+markdownIdDelimiter          -> Keyword
+markdownItalic               -> Italic
+markdownItalicDelimiter      -> Keyword
+markdownLinkDelimiter        -> Keyword
+markdownLinkTextDelimiter    -> Keyword
+markdownListMarker           -> Keyword
+markdownRule                 -> Keyword
+markdownHeadingDelimiter     -> Keyword
+
+# sassClass                    cyan                none
+# sassId                       cyan                none           underline
+sassAmpersand                -> Keyword
+# sassClassChar                -> Delimiter
+sassControl                  -> Keyword
+sassControlLine              -> Keyword
+sassExtend                   -> Keyword
+sassFor                      -> Keyword
+sassFunctionDecl             -> Keyword
+# sassFunctionName             -> Function
+# sassidChar                   -> sassId
+# sassInclude                  -> SpecialChar
+# sassMixinName                -> Function
+# sassMixin                    -> SpecialChar
+sassReturn                   -> Keyword
+
+# vimAugroup                   cyan                none
+# vimMapRhs                    cyan                none
+# vimNotation                  cyan                none
+vimFunc                      -> Function
+vimFunction                  -> Function
+vimUserFunc                  -> Function
+
+# yamlBlockMappingKey          cyan                none
+# yamlKey                      cyan                none
+yamlBool                     -> Keyword
+yamlDocumentStart            -> Keyword
+
+# Plugins
+ALEError                     red                 none           underline
+ALEErrorSign                 red                 none
+ALEWarning                   yellow              none           underline
+ALEWarningSign               yellow              none
+
+# NERDTreeExecFile             cyan                none
+NERDTreeCWD                  -> Comment
+NERDTreeDirSlash             -> Keyword
+NERDTreeHelp                 -> Comment
+
+plugDeleted                  red                 none
+
+QuickScopePrimary            red                 none           bold,underline
+QuickScopeSecondary          red                 none           bold

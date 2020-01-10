@@ -286,8 +286,8 @@ augroup END
 
 augroup btiColorScheme
   autocmd!
-  autocmd ColorScheme nordish call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=#E5E9F0 gui=bold')
-  autocmd ColorScheme nordish call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=#E5E9F0 gui=bold')
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
 augroup END
 
 " Set vim-specific sequences for RGB colors
@@ -298,7 +298,7 @@ endif
 
 set bg=dark
 set termguicolors
-colorscheme nordish
+colorscheme bti
 
 " }}}
 
