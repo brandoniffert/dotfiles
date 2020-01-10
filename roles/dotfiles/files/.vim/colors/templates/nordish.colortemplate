@@ -47,13 +47,13 @@ DiffText                     gray10              blue
 Directory                    cyan                none
 EndOfBuffer                  black               none
 Error                        red                 black
-ErrorMsg                     white               red            bold
+ErrorMsg                     red                 none           bold
 FoldColumn                   gray50              gray10
 Folded                       white               gray10
 iCursor                      black               white
 IncSearch                    black               yellow         bold
 LineNr                       gray30              none
-MatchParen                   cyan                gray50
+MatchParen                   white               black
 ModeMsg                      white               none
 MoreMsg                      white               none
 Normal                       white               none
@@ -83,9 +83,9 @@ VisualNOS                    none                black
 WarningMsg                   black               yellow         bold
 
 # Neovim
-healthError                  red                 black          bold
-healthSuccess                green               black          bold
-healthWarning                yellow              black          bold
+healthError                  red                 none           bold
+healthSuccess                green               none           bold
+healthWarning                yellow              none           bold
 TermCursor                   black               white
 TermCursorNC                 none                black
 
