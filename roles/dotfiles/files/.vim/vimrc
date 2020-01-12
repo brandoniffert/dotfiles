@@ -191,7 +191,7 @@ nnoremap <right> :tabn<cr>
 nnoremap <leader>gv V`]
 
 " Quick jump back and forth between files
-nnoremap <leader><leader> <c-^>
+nnoremap <silent> <leader><leader> :<C-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<cr>
 
 " Quick quit
 nnoremap <silent> <leader>q :quit<cr>
