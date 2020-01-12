@@ -82,7 +82,7 @@ function! bti#statusline#rhs() abort
 endfunction
 
 function! bti#statusline#diagonstic_info() abort
-  if !exists('*ale#statusline#Count')
+  if !exists('g:loaded_ale')
     return ''
   endif
 
