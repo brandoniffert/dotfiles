@@ -23,62 +23,62 @@ Color: magenta               #b48ead               ~
 Color: cyan                  #88c0d0               ~
 Color: white                 #e5e9f0               ~
 
-Color: gray10                #131520               ~
-Color: gray30                #363d4a               ~
-Color: gray50                #4c566a               ~
-Color: gray60                #616e88               ~
+Color: gray0                 #131520               ~
+Color: gray1                 #2e3440               ~
+Color: gray2                 #434c5e               ~
+Color: gray3                 #4c566a               ~
 
 # Terminal colors
-Term colors: black  red green yellow blue magenta cyan white
-Term colors: gray50 red green yellow blue magenta cyan white
+Term colors: black red green yellow blue magenta cyan white
+Term colors: gray2 red green yellow blue magenta cyan white
 
 # Default highlight groups
 Variant: gui 256
 
 # Group                      Foreground          Background     Attributes
-ColorColumn                  fg                  gray30
+ColorColumn                  fg                  gray1
 Cursor                       black               white
 CursorColumn                 fg                  black
-CursorLine                   none                gray10
-DiffAdd                      gray10              green
-DiffChange                   gray10              yellow
-DiffDelete                   gray10              red
-DiffText                     gray10              blue
+CursorLine                   none                gray0
+DiffAdd                      gray0               green
+DiffChange                   gray0               yellow
+DiffDelete                   gray0               red
+DiffText                     gray0               blue
 Directory                    cyan                none
 EndOfBuffer                  black               none
 Error                        red                 black
 ErrorMsg                     red                 none           bold
-FoldColumn                   gray50              gray10
-Folded                       white               gray10
+FoldColumn                   gray2               gray0
+Folded                       white               gray0          italic
 iCursor                      black               white
 IncSearch                    black               yellow         bold
-LineNr                       gray30              none
+LineNr                       gray1               none
 MatchParen                   white               black
 ModeMsg                      white               none
 MoreMsg                      white               none
 Normal                       white               none
-NonText                      gray30              none
-Pmenu                        white               gray10
-PmenuSbar                    white               gray10
+NonText                      gray1               none
+Pmenu                        white               gray0
+PmenuSbar                    white               gray0
 PmenuSel                     black               white          bold
-PmenuThumb                   cyan                gray50
+PmenuThumb                   cyan                gray2
 Question                     white               none
 Search                       red                 none           bold,underline
 SignColumn                   black               none
-SpecialKey                   gray50              none
+SpecialKey                   gray2               none
 SpellBad                     red                 black          underline
 SpellCap                     yellow              black
 SpellLocal                   white               black
 SpellRare                    white               black
-StatusLine                   gray60              gray10
-StatusLineNC                 gray50              gray10
-TabLine                      gray50              gray10
-TabLineFill                  none                gray10
-TabLineSel                   white               gray10
+StatusLine                   gray3               gray0
+StatusLineNC                 gray2               gray0
+TabLine                      gray2               gray0
+TabLineFill                  none                gray0
+TabLineSel                   white               gray0
 Terminal                     white               none
 Title                        white               none
-VertSplit                    gray10              none
-Visual                       none                black
+VertSplit                    gray0               none
+Visual                       none                gray1
 VisualNOS                    none                black
 WarningMsg                   black               yellow         bold
 
@@ -92,7 +92,7 @@ TermCursorNC                 none                black
 # Language Base Groups
 Boolean                      blue                none
 Character                    green               none
-Comment                      gray60              none           italic
+Comment                      gray3               none           italic
 Conditional                  blue                none
 Constant                     white               none
 Define                       blue                none
@@ -168,6 +168,8 @@ jsNoise                      -> Delimiter
 jsPrototype                  -> Keyword
 jsRegexpString               -> SpecialChar
 jsObjectKey                  -> jsonKeyword
+
+jsxCloseString               -> htmlTag
 
 markdownBlockquote           cyan                none
 markdownCode                 cyan                none

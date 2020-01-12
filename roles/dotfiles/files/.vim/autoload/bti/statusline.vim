@@ -69,7 +69,7 @@ function! bti#statusline#rhs() abort
     let l:rhs .= l:width
     let l:rhs .= ' '
 
-    " Add padding to stop rhs from changing too much as we move the cursor.
+    " Add padding to stop rhs from changing too much as we move the cursor
     if len(l:column) < 2
       let l:rhs .= ' '
     endif
