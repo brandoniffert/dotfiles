@@ -57,7 +57,7 @@ MatchParen                   white               black
 ModeMsg                      white               none
 MoreMsg                      white               none
 Normal                       white               none
-NonText                      gray1               none
+NonText                      gray3               none
 Pmenu                        white               gray0
 PmenuSbar                    white               gray0
 PmenuSel                     black               white          bold
@@ -120,6 +120,8 @@ Todo                         yellow              none
 Type                         blue                none
 Typedef                      blue                none
 
+NonItalicComment             gray3               none
+
 # Common linked groups
 CursorLineNr                 -> LineNr
 diffAdded                    -> DiffAdd
@@ -170,6 +172,9 @@ jsRegexpString               -> SpecialChar
 jsObjectKey                  -> jsonKeyword
 
 jsxCloseString               -> htmlTag
+
+logBrackets                  -> NonItalicComment
+logLevelTrace                -> NonItalicComment
 
 markdownBlockquote           cyan                none
 markdownCode                 cyan                none
