@@ -22,15 +22,6 @@ bindHyperFn = function(fromKey, func)
   hs.hotkey.bind(hyper, fromKey, func)
 end
 
--- Shortcuts for arrow symbols
-bindHyperFn('-', function()
-  hs.eventtap.keyStrokes('->')
-end)
-
-bindHyperFn('=', function()
-  hs.eventtap.keyStrokes('=>')
-end)
-
 -- Put displays to sleep
 bindHyperFn('`', function()
   os.execute('pmset displaysleepnow')
