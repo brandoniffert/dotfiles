@@ -12,3 +12,4 @@
     - { role: vim, tags: vim }
     - { role: vagrant, tags: vagrant }
     - { role: macos, tags: macos }
+    - { role: tmux, tags: tmux }
