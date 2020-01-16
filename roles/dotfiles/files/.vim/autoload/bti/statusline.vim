@@ -183,8 +183,10 @@ function! s:get_custom_statusline(action) abort
     return
           \ '%<'
           \ . '%1*'
-          \ . '%q'
+          \ . 'Quickfix'
           \ . '\ '
+          \ . '%*'
+          \ . '%2*'
           \ . '%{get(w:,\"quickfix_title\",\"\")}'
           \ . '%*'
           \ . '%='

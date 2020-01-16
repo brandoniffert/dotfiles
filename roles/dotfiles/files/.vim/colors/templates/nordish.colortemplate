@@ -107,6 +107,7 @@ Label                        blue                none
 Number                       magenta             none
 Operator                     blue                none
 PreProc                      blue                none
+QuickFixLine                 black               yellow         bold
 Repeat                       blue                none
 Special                      white               none
 SpecialChar                  yellow              none
