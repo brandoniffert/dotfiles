@@ -70,6 +70,14 @@ else
   p_error 'Error backing up!'
 fi
 
+# Backup ~/.gmail
+p_header "$HOME/.gmail"
+if cp -R "$HOME/.gmail/" "$BACKUP_DIR/dot-gmail"; then
+  p_success 'Backed up ~/.gmail'
+else
+  p_error 'Error backing up!'
+fi
+
 # Backup ~/.local/bin
 p_header "$HOME/.local/bin"
 if cp -R "$HOME/.local/bin/" "$BACKUP_DIR/dot-local-bin"; then
