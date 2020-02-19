@@ -48,7 +48,7 @@ fi
 
 # Backup ~/.ssh
 p_header "$HOME/.ssh"
-if cp -R "$HOME/.ssh/" "$BACKUP_DIR/ssh"; then
+if cp -R "$HOME/.ssh/" "$BACKUP_DIR/dot-ssh"; then
   p_success 'Backed up ~/.ssh'
 else
   p_error 'Error backing up!'
@@ -56,7 +56,7 @@ fi
 
 # Backup ~/.aws
 p_header "$HOME/.aws"
-if cp -R "$HOME/.aws/" "$BACKUP_DIR/aws"; then
+if cp -R "$HOME/.aws/" "$BACKUP_DIR/dot-aws"; then
   p_success 'Backed up ~/.aws'
 else
   p_error 'Error backing up!'
@@ -64,7 +64,7 @@ fi
 
 # Backup ~/.getmail
 p_header "$HOME/.getmail"
-if cp -R "$HOME/.getmail/" "$BACKUP_DIR/getmail"; then
+if cp -R "$HOME/.getmail/" "$BACKUP_DIR/dot-getmail"; then
   p_success 'Backed up ~/.getmail'
 else
   p_error 'Error backing up!'
@@ -72,7 +72,7 @@ fi
 
 # Backup ~/.local/bin
 p_header "$HOME/.local/bin"
-if cp -R "$HOME/.local/bin/" "$BACKUP_DIR/local-bin"; then
+if cp -R "$HOME/.local/bin/" "$BACKUP_DIR/dot-local-bin"; then
   p_success 'Backed up ~/.local/bin'
 else
   p_error 'Error backing up!'
@@ -80,7 +80,7 @@ fi
 
 # Backup zsh_history
 p_header "$HOME/.zsh_history"
-if cp "$HOME/.zsh_history" "$BACKUP_DIR/zsh_history"; then
+if cp "$HOME/.zsh_history" "$BACKUP_DIR/dot-zsh_history"; then
   p_success 'Backed up zsh_history'
 else
   p_error 'Error backing up!'
@@ -88,7 +88,7 @@ fi
 
 # Backup zshrc.local
 p_header "$HOME/.zshrc.local"
-if cp "$HOME/.zshrc.local" "$BACKUP_DIR/zshrc.local"; then
+if cp "$HOME/.zshrc.local" "$BACKUP_DIR/dot-zshrc.local"; then
   p_success 'Backed up zshrc.local'
 else
   p_error 'Error backing up!'
@@ -96,7 +96,7 @@ fi
 
 # Backup gitconfig.local
 p_header "$HOME/.gitconfig.local"
-if cp "$HOME/.gitconfig.local" "$BACKUP_DIR/gitconfig.local"; then
+if cp "$HOME/.gitconfig.local" "$BACKUP_DIR/dot-gitconfig.local"; then
   p_success 'Backed up gitconfig.local'
 else
   p_error 'Error backing up!'
