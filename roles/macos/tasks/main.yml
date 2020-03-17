@@ -37,3 +37,10 @@
     key: AppleShowAllExtensions
     type: bool
     value: true
+
+- name: Allow key hold repeat for VS Code
+  osx_defaults:
+    domain: com.microsoft.VSCode
+    key: ApplePressAndHoldEnabled
+    type: bool
+    value: false
