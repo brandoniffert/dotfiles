@@ -248,3 +248,25 @@ function scratch() {
   echo "Removing scratch directory"
   rm -r "$SCRATCH"
 }
+
+function ssh() {
+  emulate -L zsh
+
+  local LOCAL_TERM=$(echo -n "$TERM" | sed -e s/tmux/screen/)
+  env TERM=$LOCAL_TERM command ssh "$@"
+}
+
+# Print information about a remote SSL certificate
+# Based on: https://serverfault.com/a/661982/219567
+function ssl() {
+  emulate -L zsh
+
+  if [ $# -ne 1 ]; then
+    echo "error: a host argument is required"
+    return 1
+  fi
+
+  local REMOTE=$1
+
+  echo | openssl s_client -showcerts -servername "$REMOTE" -connect "$REMOTE:443" 2>/dev/null | openssl x509 -inform pem -noout -text
+}
