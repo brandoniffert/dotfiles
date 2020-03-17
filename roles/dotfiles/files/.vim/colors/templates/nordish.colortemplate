@@ -24,19 +24,20 @@ Color: cyan                  #88c0d0               ~
 Color: white                 #e5e9f0               ~
 
 Color: gray0                 #131520               ~
-Color: gray1                 #2e3440               ~
-Color: gray2                 #434c5e               ~
-Color: gray3                 #4c566a               ~
+Color: gray1                 #1e2229               ~
+Color: gray2                 #2e3440               ~
+Color: gray3                 #434c5e               ~
+Color: gray4                 #4c566a               ~
 
 # Terminal colors
 Term colors: black red green yellow blue magenta cyan white
-Term colors: gray2 red green yellow blue magenta cyan white
+Term colors: gray3 red green yellow blue magenta cyan white
 
 # Default highlight groups
 Variant: gui 256
 
 # Group                      Foreground          Background     Attributes
-ColorColumn                  fg                  gray1
+ColorColumn                  fg                  gray2
 Cursor                       black               white
 CursorColumn                 fg                  black
 CursorLine                   none                gray0
@@ -48,37 +49,37 @@ Directory                    cyan                none
 EndOfBuffer                  black               none
 Error                        red                 black
 ErrorMsg                     red                 none           bold
-FoldColumn                   gray2               gray0
+FoldColumn                   gray3               gray0
 Folded                       white               gray0          italic
 iCursor                      black               white
 IncSearch                    black               yellow         bold
-LineNr                       gray1               none
+LineNr                       gray2               none
 MatchParen                   white               black
 ModeMsg                      white               none
 MoreMsg                      white               none
 Normal                       white               none
-NonText                      gray3               none
-Pmenu                        white               gray0
+NonText                      gray4               none
+Pmenu                        white               gray1
 PmenuSbar                    white               gray0
 PmenuSel                     black               white          bold
-PmenuThumb                   cyan                gray2
+PmenuThumb                   cyan                gray3
 Question                     white               none
 Search                       red                 none           bold,underline
 SignColumn                   black               none
-SpecialKey                   gray2               none
+SpecialKey                   gray3               none
 SpellBad                     red                 black          underline
 SpellCap                     yellow              black
 SpellLocal                   white               black
 SpellRare                    white               black
-StatusLine                   gray3               gray0
-StatusLineNC                 gray2               gray0
-TabLine                      gray2               gray0
+StatusLine                   gray4               gray0
+StatusLineNC                 gray3               gray0
+TabLine                      gray3               gray0
 TabLineFill                  none                gray0
 TabLineSel                   white               gray0
 Terminal                     white               none
 Title                        white               none
 VertSplit                    gray0               none
-Visual                       none                gray1
+Visual                       none                gray2
 VisualNOS                    none                black
 WarningMsg                   black               yellow         bold
 
@@ -92,7 +93,7 @@ TermCursorNC                 none                black
 # Language Base Groups
 Boolean                      blue                none
 Character                    green               none
-Comment                      gray3               none           italic
+Comment                      gray4               none           italic
 Conditional                  blue                none
 Constant                     white               none
 Define                       blue                none
@@ -121,7 +122,7 @@ Todo                         yellow              none
 Type                         blue                none
 Typedef                      blue                none
 
-NonItalicComment             gray3               none
+NonItalicComment             gray4               none
 
 # Common linked groups
 CursorLineNr                 -> LineNr
@@ -236,6 +237,16 @@ ALEError                     red                 none           underline
 ALEErrorSign                 red                 none
 ALEWarning                   yellow              none           underline
 ALEWarningSign               yellow              none
+
+CocErrorSign                 red                 none
+CocHintSign                  blue                none
+CocInfoSign                  cyan                none
+CocWarningSign               yellow              none
+
+LSPDiagnosticsError          red                 none
+LSPDiagnosticsHint           blue                none
+LSPDiagnosticsInformation    cyan                none
+LSPDiagnosticsWarning        yellow              none
 
 NERDTreeExecFile             cyan                none
 NERDTreeCWD                  -> Comment
