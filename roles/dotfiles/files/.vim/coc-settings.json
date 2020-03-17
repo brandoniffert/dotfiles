@@ -1,0 +1,10 @@
+{
+  "diagnostic.enableHighlightLineNumber": false,
+  "diagnostic.errorSign": "▸",
+  "diagnostic.hintSign": "▸",
+  "diagnostic.warningSign": "▸",
+  "diagnostic.infoSign": "▸",
+  "eslint.autoFixOnSave": true,
+  "eslint.packageManager": "yarn",
+  "yank.highlight.enable": false
+}

@@ -24,6 +24,7 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'dense-analysis/ale'
 Plug 'janko-m/vim-test', { 'on': ['TestFile', 'TestNearest'] }
 Plug 'machakann/vim-sandwich'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'scrooloose/nerdtree', { 'on': 'NERDTree' }
 Plug 'sheerun/vim-polyglot'
 Plug 'simnalamburt/vim-mundo', { 'on': 'MundoShow' }
