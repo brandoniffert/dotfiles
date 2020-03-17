@@ -2,7 +2,6 @@
 dotfile_files:
   - .bashrc
   - .config/alacritty
-  - .config/bat
   - .config/kitty
   - .ctags.d
   - .dir_colors
