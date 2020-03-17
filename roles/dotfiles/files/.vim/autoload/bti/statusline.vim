@@ -82,6 +82,22 @@ function! bti#statusline#rhs() abort
 endfunction
 
 function! bti#statusline#diagonstic_info() abort
+  let l:coc_info = get(b:, 'coc_diagnostic_info', {})
+
+  let l:coc_msgs = []
+
+  if get(l:coc_info, 'error', 0)
+    call add(l:coc_msgs, 'E:' . l:coc_info['error'])
+  endif
+
+  if get(l:coc_info, 'warning', 0)
+    call add(l:coc_msgs, 'W:' . l:coc_info['warning'])
+  endif
+
+  if !empty(l:coc_msgs)
+    return join(coc_msgs, ' ') . get(g:, 'coc_status', '')
+  endif
+
   if !exists('g:loaded_ale')
     return ''
   endif
@@ -95,10 +111,10 @@ function! bti#statusline#diagonstic_info() abort
   endif
 
   if l:all_errors != 0 && l:all_non_errors != 0
-    return printf('E: %d W: %d', l:all_errors, l:all_non_errors)
+    return printf('E:%d W:%d', l:all_errors, l:all_non_errors)
   endif
 
-  return l:all_errors == 0 ? printf('W: %d', l:all_non_errors) : printf('E: %d', l:all_errors)
+  return l:all_errors == 0 ? printf('W:%d', l:all_non_errors) : printf('E:%d', l:all_errors)
 endfunction
 
 function! bti#statusline#whitespace() abort
