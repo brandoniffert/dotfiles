@@ -1,4 +1,4 @@
-let g:fzf_layout = { 'down': '~35%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 
 command! RgFiles call fzf#run(fzf#wrap({'source': 'rg --files --smart-case --hidden --follow --glob "!.git/*"'}))
 
