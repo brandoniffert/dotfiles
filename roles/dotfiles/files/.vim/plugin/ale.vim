@@ -11,7 +11,7 @@ let g:ale_virtualtext_cursor = 1
 
 let g:ale_linters = {
       \ 'sh': ['shellcheck'],
-      \ 'php': ['phpcs']
+      \ 'php': ['phpcs', 'php']
       \ }
 
 let g:ale_fixers = {
