@@ -155,11 +155,11 @@ function! bti#statusline#whitespace_refresh() abort
   let b:statusline_whitespace_changedtick = b:changedtick
 endfunction
 
-function! bti#statusline#enable_focus() abort
-  let g:enable_statusline_focus = v:true
-endfunction
-
 function! bti#statusline#focus() abort
+  if bufname('%') != '' && !exists('g:enable_statusline_focus')
+    let g:enable_statusline_focus = v:true
+  endif
+
   if exists('g:enable_statusline_focus')
     call s:update_statusline('', 'focus')
   endif

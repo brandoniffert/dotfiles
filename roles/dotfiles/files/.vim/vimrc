@@ -282,9 +282,6 @@ augroup btiStatusline
 
   autocmd BufEnter,FocusGained,WinEnter * call bti#statusline#focus()
   autocmd FocusLost,WinLeave * call bti#statusline#blur()
-
-  " Delay enabling focus so the screen isn't immediately cleared on startup
-  autocmd CursorHold * call bti#statusline#enable_focus()
 augroup END
 
 " }}}
