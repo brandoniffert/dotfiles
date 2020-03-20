@@ -128,6 +128,7 @@ alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit
 alias t='tmux -u'
+alias tkill='tmux kill-server'
 alias v=view
 alias vi=vim
 alias vgs="vagrant global-status"
