@@ -37,7 +37,7 @@ export LANG=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export WORDCHARS='*?[]~&;!$%^<>'
 export VIRTUAL_ENV_DISABLE_PROMPT=1
-export BAT_THEME=base16
+export BAT_THEME=Nord
 export HOMEBREW_NO_ANALYTICS=1
 export PYENV_ROOT="$HOME/.pyenv"
 
