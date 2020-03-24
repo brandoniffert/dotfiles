@@ -10,4 +10,5 @@
     - tmux.terminfo
     - tmux-256color.terminfo
     - xterm-256color.terminfo
+    - alacritty.terminfo
   changed_when: false
