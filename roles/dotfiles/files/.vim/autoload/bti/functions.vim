@@ -67,22 +67,36 @@ endfunction
 
 " We want to control what types of files will allow for focus/blur effect
 function! bti#functions#should_allow_focus() abort
-  let l:bti_should_allow_focus_blacklist = ['diff', 'qf', 'nerdtree', 'help', 'vim-plug', 'Mundo', 'MundoDiff']
+  let l:bti_should_allow_focus_blacklist = ['diff']
 
-  return !empty(&filetype) && index(l:bti_should_allow_focus_blacklist, &filetype) == -1
+  return index(l:bti_should_allow_focus_blacklist, &filetype) == -1
 endfunction
 
 " Focus the window
 function! bti#functions#focus_window() abort
   if bti#functions#should_allow_focus()
-    setlocal cursorline
+    if !empty(&filetype)
+      setlocal cursorline
+      ownsyntax on
+    endif
+
+    if has('nvim')
+      set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
+    endif
   endif
 endfunction
 
 " Blur the window
 function! bti#functions#blur_window() abort
   if bti#functions#should_allow_focus()
-    setlocal nocursorline
+    if !empty(&filetype)
+      setlocal nocursorline
+      ownsyntax off
+    endif
+
+    if has('nvim')
+      set winhighlight=Normal:InactiveWindow,NormalNC:InactiveWindow
+    endif
   endif
 endfunction
 

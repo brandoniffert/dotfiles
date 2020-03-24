@@ -23,23 +23,23 @@ Color: magenta               #b48ead               ~
 Color: cyan                  #88c0d0               ~
 Color: white                 #e5e9f0               ~
 
-Color: gray0                 #11131d               ~
-Color: gray1                 #131520               ~
-Color: gray2                 #191b29               ~
-Color: gray3                 #2e3440               ~
-Color: gray4                 #434c5e               ~
+Color: base0                 #0f111a               ~
+Color: base1                 #11131d               ~
+
+Color: gray1                 #171926               ~
+Color: gray2                 #1d202f               ~
+Color: gray3                 #232739               ~
 Color: gray5                 #4c566a               ~
-Color: gray8                 #a6aebf               ~
 
 # Terminal colors
 Term colors: black red green yellow blue magenta cyan white
-Term colors: gray4 red green yellow blue magenta cyan white
+Term colors: gray5 red green yellow blue magenta cyan white
 
 # Default highlight groups
 Variant: gui 256
 
 # Group                      Foreground          Background     Attributes
-ColorColumn                  none                gray1
+ColorColumn                  none                gray2
 Cursor                       black               white
 CursorColumn                 none                black
 CursorLine                   none                gray1
@@ -51,38 +51,36 @@ Directory                    cyan                none
 EndOfBuffer                  black               none
 Error                        red                 gray2
 ErrorMsg                     red                 none           bold
-FoldColumn                   gray4               gray1
-Folded                       gray8               gray0          italic
+Folded                       white               gray1          italic
 iCursor                      black               white
 IncSearch                    black               yellow         bold
-LineNr                       gray3               none
+LineNr                       black               none
 MatchParen                   white               black
 ModeMsg                      white               none
 MoreMsg                      white               none
 Normal                       white               none
 NonText                      gray5               none
-Pmenu                        white               gray2
-PmenuSbar                    white               gray1
+Pmenu                        none                gray2
+PmenuSbar                    white               gray2
 PmenuSel                     black               white          bold
-PmenuThumb                   cyan                gray4
+PmenuThumb                   cyan                gray5
 Question                     white               none
 Search                       red                 none           bold,underline
 SignColumn                   black               none
-SpecialKey                   gray4               none
+SpecialKey                   gray5               none
 SpellBad                     red                 black          underline
 SpellCap                     yellow              black
 SpellLocal                   white               black
 SpellRare                    white               black
-StatusLine                   gray5               gray1
-StatusLineNC                 gray4               gray0
-TabLine                      gray4               gray1
-TabLineFill                  none                gray1
-TabLineSel                   white               gray1
+StatusLine                   gray5               none
+StatusLineNC                 black               none
+TabLine                      gray5               none
+TabLineFill                  none                none
+TabLineSel                   white               none
 Terminal                     white               none
 Title                        white               none
-VertSplit                    gray1               none
+VertSplit                    base1               base1
 Visual                       none                gray3
-VisualNOS                    none                black
 WarningMsg                   black               yellow         bold
 
 # Neovim
@@ -91,6 +89,8 @@ healthSuccess                green               none           bold
 healthWarning                yellow              none           bold
 TermCursor                   black               white
 TermCursorNC                 none                black
+ActiveWindow                 fg                  base1
+InactiveWindow               black               base0
 
 # Language Base Groups
 Boolean                      blue                none
@@ -127,13 +127,15 @@ Typedef                      blue                none
 NonItalicComment             gray5               none
 
 # Common linked groups
-CursorLineNr                 -> LineNr
 diffAdded                    -> DiffAdd
 diffChanged                  -> DiffChange
 diffRemoved                  -> DiffDelete
 lCursor                      -> Cursor
+CursorLineNr                 -> LineNr
+FoldColumn                   -> SignColumn
 Macro                        -> Define
 Precondit                    -> PreProc
+VisualNOS                    -> Visual
 WildMenu                     -> PmenuSel
 
 # Languages
@@ -221,6 +223,12 @@ sassInclude                  -> SpecialChar
 sassMixinName                -> Function
 sassMixin                    -> SpecialChar
 sassReturn                   -> Keyword
+
+typescriptClassName          -> Function
+typescriptClassHeritage      -> Function
+typescriptExport             -> Include
+typescriptImport             -> Include
+typescriptVariable           -> StorageClass
 
 vimAugroup                   cyan                none
 vimMapRhs                    cyan                none
