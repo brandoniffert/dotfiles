@@ -68,7 +68,7 @@ function () {
   if [[ $EUID -eq 0 ]]; then
     local SUFFIX="%F{red}$(printf '#%.0s' {1..$LVL})%f"
   else
-    local SUFFIX="%F{white}$(printf '❯%.0s' {1..$LVL})%f"
+    local SUFFIX="%F{white}$(printf '\$%.0s' {1..$LVL})%f"
   fi
 
   export PS1="${TOPMARKER}${SSHTTY}\$(venv_info)${DIR}\${vcs_info_msg_0_%%}${JOBS}${NEWLINE}${BOTTOMMARKER}${SUFFIX} "
