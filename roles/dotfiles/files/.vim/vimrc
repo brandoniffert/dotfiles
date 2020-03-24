@@ -112,6 +112,11 @@ set wildmode=longest:full,full
 set wildignore+=.git,*.jpg,*.jpeg,*.png,*.gif
 set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so
 
+" Tabline
+if has('windows')
+  set tabline=%!bti#tabline#line()
+endif
+
 " Backups
 if exists('$SUDO_USER')
   set nobackup
