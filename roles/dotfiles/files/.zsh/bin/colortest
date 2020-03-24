@@ -27,3 +27,12 @@ do FG=${FGs// /}
   echo;
 done
 echo
+
+echo -e "\e[30mNormal\e[0m \e[1;30mBright\e[0m \e[2;30mDim\e[0m \e[3;30mItalic\e[0m \e[4;30mUnderline\e[0m"
+echo -e "\e[31mNormal\e[0m \e[1;31mBright\e[0m \e[2;31mDim\e[0m \e[3;31mItalic\e[0m \e[4;31mUnderline\e[0m"
+echo -e "\e[32mNormal\e[0m \e[1;32mBright\e[0m \e[2;32mDim\e[0m \e[3;32mItalic\e[0m \e[4;32mUnderline\e[0m"
+echo -e "\e[33mNormal\e[0m \e[1;33mBright\e[0m \e[2;33mDim\e[0m \e[3;33mItalic\e[0m \e[4;33mUnderline\e[0m"
+echo -e "\e[34mNormal\e[0m \e[1;34mBright\e[0m \e[2;34mDim\e[0m \e[3;34mItalic\e[0m \e[4;34mUnderline\e[0m"
+echo -e "\e[35mNormal\e[0m \e[1;35mBright\e[0m \e[2;35mDim\e[0m \e[3;35mItalic\e[0m \e[4;35mUnderline\e[0m"
+echo -e "\e[36mNormal\e[0m \e[1;36mBright\e[0m \e[2;36mDim\e[0m \e[3;36mItalic\e[0m \e[4;36mUnderline\e[0m"
+echo -e "\e[37mNormal\e[0m \e[1;37mBright\e[0m \e[2;37mDim\e[0m \e[3;37mItalic\e[0m \e[4;37mUnderline\e[0m"

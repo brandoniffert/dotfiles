@@ -42,7 +42,7 @@ function man() {
   LESS_TERMCAP_se=$'\e[0m' \
   LESS_TERMCAP_so=$'\e[01;43;30m' \
   LESS_TERMCAP_ue=$'\e[0m' \
-  LESS_TERMCAP_us=$'\e[04;32m' \
+  LESS_TERMCAP_us=$'\e[04;37m' \
   command man "$@"
 }
 
@@ -252,8 +252,7 @@ function scratch() {
 function ssh() {
   emulate -L zsh
 
-  local LOCAL_TERM=$(echo -n "$TERM" | sed -e s/tmux/screen/)
-  env TERM=$LOCAL_TERM command ssh "$@"
+  env TERM=xterm-256color command ssh "$@"
 }
 
 # Print information about a remote SSL certificate
