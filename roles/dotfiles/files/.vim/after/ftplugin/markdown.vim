@@ -16,5 +16,7 @@ let g:vim_markdown_fenced_languages = [
       \ 'python',
       \ 'bash=sh',
       \ 'php',
-      \ 'ruby'
+      \ 'ruby',
+      \ 'vim',
+      \ 'help'
       \ ]
