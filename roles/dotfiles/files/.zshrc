@@ -50,10 +50,10 @@ export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
 # For fzf
 export FZF_DEFAULT_COMMAND='rg -u --files --smart-case'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd . -t d"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude ".git" .'
 export FZF_DEFAULT_OPTS='
   --height 40%
-  --border
+  --border=sharp
   --color=fg:15
   --color=fg+:3
   --color=hl:-1
@@ -62,9 +62,9 @@ export FZF_DEFAULT_OPTS='
   --color=bg+:-1
   --color=info:-1
   --color=prompt:-1
-  --color=marker:1
-  --color=header:4
-  --color=pointer:-1
+  --color=marker:2
+  --color=header:2
+  --color=pointer:3
   --color=border:#1a1d23
 '
 

@@ -14,3 +14,15 @@ function! s:smart_quote_input(input)
   let hasEscapedSpacesPlusPath = match(a:input, '\\ .*\ ') > 0
   return hasQuotes || hasOptions || hasEscapedSpacesPlusPath ? a:input : '-- "' . a:input . '"'
 endfunction
+
+function! bti#fzf#rg_files(args, bang) abort
+  let s:base_rg_cmd = 'rg --files --smart-case --hidden --follow --glob "!.git/*"'
+  let opts = {'source': s:base_rg_cmd, 'options': '-m'}
+  let file_opts = opts
+
+  if a:bang && &columns >= 80 || &columns >= 120
+    let file_opts = fzf#vim#with_preview(opts)
+  endif
+
+  return call('fzf#vim#files', [a:args, file_opts, a:bang])
+endfunction

@@ -348,7 +348,6 @@ augroup END
 
 command! ReplaceFancyCharacters call bti#functions#replace_fancy_characters()
 command! StripWhitespace call bti#functions#strip_whitespace()
-command! -bang -nargs=+ -complete=dir Rg call bti#fzf#rg_with_opts(<q-args>, <bang>0)
 command! -nargs=* -complete=file Preview call bti#functions#preview(<f-args>)
 
 " }}}
