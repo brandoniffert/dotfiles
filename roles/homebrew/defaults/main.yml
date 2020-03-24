@@ -18,6 +18,8 @@ brew_packages:
   - less
   - make
   # Custom programs
+  - ansible
+  - ansible-lint
   - aspell
   - awscli
   - bat
@@ -59,6 +61,7 @@ brew_packages:
   - tmux
   - tree
   - vim
+  - yamllint
   - yarn
   - youtube-dl
   - zsh
