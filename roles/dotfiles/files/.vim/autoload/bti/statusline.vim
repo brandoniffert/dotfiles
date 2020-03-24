@@ -1,9 +1,9 @@
 function! bti#statusline#modified() abort
-  if !&modifiable || &readonly
-    return ' [RO]'
-  endif
+  return &modified && &modifiable ? ' ●' : ''
+endfunction
 
-  return &modified && &modifiable ? ' [+]' : ''
+function! bti#statusline#readonly() abort
+  return !&modifiable || &readonly ? ' [RO]' : ''
 endfunction
 
 function! bti#statusline#file_prefix() abort
@@ -95,7 +95,7 @@ function! bti#statusline#diagonstic_info() abort
   endif
 
   if !empty(l:coc_msgs)
-    return join(coc_msgs, ' ') . get(g:, 'coc_status', '')
+    return '  ' . join(coc_msgs, ' ') . get(g:, 'coc_status', '') . ' '
   endif
 
   if !exists('g:loaded_ale')
@@ -111,10 +111,10 @@ function! bti#statusline#diagonstic_info() abort
   endif
 
   if l:all_errors != 0 && l:all_non_errors != 0
-    return printf('E:%d W:%d', l:all_errors, l:all_non_errors)
+    return printf('  E:%d W:%d ', l:all_errors, l:all_non_errors)
   endif
 
-  return l:all_errors == 0 ? printf('W:%d', l:all_non_errors) : printf('E:%d', l:all_errors)
+  return l:all_errors == 0 ? printf('  W:%d ', l:all_non_errors) : printf('  E:%d ', l:all_errors)
 endfunction
 
 function! bti#statusline#whitespace() abort
@@ -130,12 +130,12 @@ function! bti#statusline#whitespace() abort
     call add(status, 'trailing')
   endif
 
-  if search('\v(^\t+ +)|(^ +\t+)', 'nw') != 0
+  if &expandtab && search('\v\t', 'nw') != 0
     call add(status, 'mixed')
   endif
 
   if len(status)
-    let b:statusline_whitespace_check = ' ' . join(status, ' · ') . ' '
+    let b:statusline_whitespace_check = '  ' . join(status, ' - ') . ' '
   endif
 
   return b:statusline_whitespace_check
@@ -167,8 +167,8 @@ endfunction
 
 function! bti#statusline#blur() abort
   let l:stl = '%<'    " Truncation point
-  let l:stl .= '%f\ ' " Filename
-  let l:stl .= '%m'   " Modified
+  let l:stl .= '%f'   " Filename
+  let l:stl .= '%{bti#statusline#modified()}'   " Modified
   let l:stl .= '%='   " Split left/right halves (makes background cover whole)
   call s:update_statusline(l:stl, 'blur')
 endfunction

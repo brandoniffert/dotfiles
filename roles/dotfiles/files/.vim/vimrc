@@ -270,14 +270,19 @@ set statusline+=%<                                  " Truncation point
 set statusline+=%{bti#statusline#file_prefix()}     " Relative path excluding filename
 set statusline+=%1*                                 " Bold
 set statusline+=%t                                  " Filename
-set statusline+=%{bti#statusline#modified()}        " Modified/readonly
+set statusline+=%{bti#statusline#readonly()}        " Readonly
+set statusline+=%*                                  " Reset highlight group
+set statusline+=%#SpecialChar#                      " Yellow
+set statusline+=%{bti#statusline#modified()}        " Modified
 set statusline+=%*                                  " Reset highlight group
 set statusline+=\                                   " Space
 set statusline+=%((%2*%{bti#statusline#ft()}%*)%)   " File type in italics
 set statusline+=%=                                  " Split point for left and right groups
 set statusline+=%{bti#statusline#rhs()}             " File encoding and line/column info
-set statusline+=%1*                                 " Bold
+set statusline+=%#WildMenu#                         " White/Black highlight
 set statusline+=%{bti#statusline#whitespace()}      " Whitespace indicator
+set statusline+=%*                                  " Reset highlight group
+set statusline+=%#WarningMsg#                       " Yellow/Black highlight
 set statusline+=%{bti#statusline#diagonstic_info()} " Diagnostic info
 set statusline+=%*                                  " Reset highlight group
 
@@ -295,7 +300,7 @@ augroup END
 
 augroup btiColorScheme
   autocmd!
-  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=#E5E9F0 gui=bold')
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=#e5e9f0 gui=bold')
   autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
 augroup END
 
