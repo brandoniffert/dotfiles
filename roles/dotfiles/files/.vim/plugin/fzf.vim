@@ -1,5 +1,5 @@
 " Set env var here so it only applies to vim sessions
-let $FZF_PREVIEW_COMMAND="cat {}"
+let $FZF_PREVIEW_COMMAND='cat {}'
 
 if has('nvim')
   let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6, 'border': 'sharp' } }

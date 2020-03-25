@@ -1,5 +1,5 @@
-let s:cpo_save = &cpo
-set cpo&vim
+let s:cpo_save = &cpoptions
+set cpoptions&vim
 
 if exists('loaded_matchit') && exists('b:match_words')
   let b:match_words = '\<\if.*%>:\<else.*%>:\<else_if.*%>:\<end_if.*%>'
@@ -10,5 +10,5 @@ if exists('loaded_matchit') && exists('b:match_words')
         \ . ',' . b:match_words
 endif
 
-let &cpo = s:cpo_save
+let &cpoptions = s:cpo_save
 unlet s:cpo_save

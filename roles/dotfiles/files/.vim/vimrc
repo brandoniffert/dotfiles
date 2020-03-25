@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 " vim: foldlevel=0
 "
 "-------------------------------------------------------------------------------
@@ -244,7 +246,7 @@ nnoremap <localleader>e :edit <C-R>=expand('%:p:h') . '/'<cr>
 
 nnoremap <localleader>h :call <sid>syn_stack()<cr>
 function! <sid>syn_stack() abort
-  if !exists("*synstack")
+  if !exists('*synstack')
     return
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
@@ -310,7 +312,7 @@ if !has('nvim')
   let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
-set bg=dark
+set background=dark
 set termguicolors
 colorscheme nordish
 

@@ -5,8 +5,8 @@
 function bti#tabline#line() abort
   let l:line=''
   let l:current=tabpagenr()
-  for l:i in range(1, tabpagenr('$'))
-    if l:i == l:current
+  for i in range(1, tabpagenr('$'))
+    if i == current
       let l:line.='%#TabLineSel#'
     else
       let l:line.='%#TabLine#'
@@ -16,7 +16,7 @@ function bti#tabline#line() abort
   endfor
   let l:line.='%#TabLineFill#'
   let l:line.='%T' " Ends mouse click target region(s).
-  return l:line
+  return line
 endfunction
 
 function bti#tabline#label(n) abort

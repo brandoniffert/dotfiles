@@ -1,4 +1,4 @@
-if bufname('%') != ''
+if bufname('%') !=# ''
   setlocal spell
 endif
 

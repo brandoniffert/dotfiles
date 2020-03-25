@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 let g:ale_cache_executable_check_failures = 1
 let g:ale_close_preview_on_insert = 1
 let g:ale_fix_on_save = 1

@@ -23,11 +23,11 @@ function! SSIndent() abort
   let indent = indent(lnum)
 
   if cline =~# '<%\s\%(' . s:end_tags . '\)\s\+%>'
-    return s:IsStartingTag(lnum) ? indent : indent - &sw
+    return s:IsStartingTag(lnum) ? indent : indent - &shiftwidth
   endif
 
   if s:IsStartingTag(lnum)
-    return indent + &sw
+    return indent + &shiftwidth
   endif
 
   return HtmlIndent()
