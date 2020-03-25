@@ -300,7 +300,7 @@ augroup END
 
 augroup btiColorScheme
   autocmd!
-  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=#e5e9f0 gui=bold')
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=white gui=bold')
   autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
 augroup END
 
