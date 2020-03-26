@@ -90,7 +90,7 @@ healthWarning                yellow              none           bold
 TermCursor                   black               white
 TermCursorNC                 none                black
 ActiveWindow                 fg                  base1
-InactiveWindow               black               base0
+InactiveWindow               gray5               base0
 
 # Language Base Groups
 Boolean                      blue                none
