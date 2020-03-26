@@ -16,49 +16,23 @@ window:
 # Font
 #
 font:
-  # normal:
-  #   family: Operator Mono
-  #   style: Extra Light
-
-  # bold:
-  #   family: Operator Mono
-  #   style: Book
-
-  # italic:
-  #   family: Operator Mono
-  #   style: Extra Light Italic
-
-  # bold_italic:
-  #   family: Operator Mono
-  #   style: Italic
-
-  # size: 13.0
-
-  # offset:
-  #   x: 1
-  #   y: 1
-
-  # glyph_offset:
-  #   x: 0
-  #   y: 3
-
   normal:
-    family: Source Code Pro
-    style: Light
+    family: Operator Mono
+    style: Extra Light
 
   bold:
-    family: Source Code Pro
-    style: Regular
+    family: Operator Mono
+    style: Book
 
   italic:
-    family: Source Code Pro
-    style: Light Italic
+    family: Operator Mono
+    style: Extra Light Italic
 
   bold_italic:
-    family: Source Code Pro
+    family: Operator Mono
     style: Italic
 
-  size: 12.5
+  size: 13.0
 
   offset:
     x: 1
@@ -66,7 +40,33 @@ font:
 
   glyph_offset:
     x: 0
-    y: 1
+    y: 2
+
+  # normal:
+  #   family: Source Code Pro
+  #   style: Light
+
+  # bold:
+  #   family: Source Code Pro
+  #   style: Regular
+
+  # italic:
+  #   family: Source Code Pro
+  #   style: Light Italic
+
+  # bold_italic:
+  #   family: Source Code Pro
+  #   style: Italic
+
+  # size: 12.0
+
+  # offset:
+  #   x: 1
+  #   y: 0
+
+  # glyph_offset:
+  #   x: 0
+  #   y: 1
 
   use_thin_strokes: true
 
