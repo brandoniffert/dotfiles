@@ -36,7 +36,7 @@
   newHighlight = 232 green
 
 [format]
-  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(black)%an%Creset
+  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(bold black)%an%Creset
 
 [merge]
   tool = vimdiff
