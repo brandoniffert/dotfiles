@@ -1,7 +1,7 @@
 scriptencoding utf-8
 
 function! bti#statusline#modified() abort
-  return &modified && &modifiable ? ' ●' : ''
+  return &modified && &modifiable ? ' ✕' : ''
 endfunction
 
 function! bti#statusline#readonly() abort

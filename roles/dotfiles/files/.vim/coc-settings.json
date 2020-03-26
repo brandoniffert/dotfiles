@@ -1,9 +1,9 @@
 {
   "diagnostic.enableHighlightLineNumber": false,
-  "diagnostic.errorSign": "●",
-  "diagnostic.hintSign": "●",
-  "diagnostic.infoSign": "●",
-  "diagnostic.warningSign": "●",
+  "diagnostic.errorSign": "•",
+  "diagnostic.hintSign": "•",
+  "diagnostic.infoSign": "•",
+  "diagnostic.warningSign": "•",
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
   "yank.highlight.enable": false
