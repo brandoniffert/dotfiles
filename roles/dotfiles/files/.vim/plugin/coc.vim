@@ -15,8 +15,8 @@ inoremap <silent><expr> <tab>
 inoremap <expr><s-tab> pumvisible() ? "\<c-p>" : "\<c-h>"
 
 function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
+  let l:col = col('.') - 1
+  return !l:col || getline('.')[l:col - 1]  =~# '\s'
 endfunction
 
 " Use <cr> to confirm completion, `<C-g>u` means break undo chain at current
