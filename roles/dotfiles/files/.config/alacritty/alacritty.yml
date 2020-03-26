@@ -3,12 +3,14 @@
 # Window
 #
 window:
+  dimensions:
+    columns: 180
+    lines: 60
   padding:
     x: 20
     y: 20
   dynamic_padding: true
   decorations: none
-  startup_mode: SimpleFullscreen
 
 #
 # Font
@@ -143,8 +145,6 @@ mouse:
 # Key bindings
 #
 key_bindings:
-  - { key: F, mods: Command|Shift, action: ToggleSimpleFullscreen }
-
   # Need to manually bind all alt key combinations until this is fixed
   # https://github.com/alacritty/alacritty/issues/2017
   - { key: N,           mods: Command,         action: SpawnNewInstance }
