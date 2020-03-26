@@ -74,12 +74,31 @@ function! bti#functions#should_allow_focus() abort
   return index(bti_should_allow_focus_blacklist, &filetype) == -1
 endfunction
 
+function! s:get_spell_settings() abort
+  return {
+        \   'spell': &l:spell,
+        \   'spellcapcheck': &l:spellcapcheck,
+        \   'spellfile': &l:spellfile,
+        \   'spelllang': &l:spelllang
+        \ }
+endfunction
+
+function! s:set_spell_settings(settings) abort
+  let &l:spell=a:settings.spell
+  let &l:spellcapcheck=a:settings.spellcapcheck
+  let &l:spellfile=a:settings.spellfile
+  let &l:spelllang=a:settings.spelllang
+endfunction
+
 " Focus the window
 function! bti#functions#focus_window() abort
   if bti#functions#should_allow_focus()
     if !empty(&filetype)
-      setlocal cursorline
+      let l:settings=s:get_spell_settings()
       ownsyntax on
+      setlocal cursorline
+      set list
+      call s:set_spell_settings(l:settings)
     endif
 
     if has('nvim')
@@ -92,8 +111,11 @@ endfunction
 function! bti#functions#blur_window() abort
   if bti#functions#should_allow_focus()
     if !empty(&filetype)
-      setlocal nocursorline
+      let l:settings=s:get_spell_settings()
       ownsyntax off
+      setlocal nocursorline
+      set nolist
+      call s:set_spell_settings(l:settings)
     endif
 
     if has('nvim')
