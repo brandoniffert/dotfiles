@@ -29,11 +29,11 @@ Color: base1                 #11131d               ~
 Color: gray1                 #171926               ~
 Color: gray2                 #1d202f               ~
 Color: gray3                 #232739               ~
-Color: gray5                 #4c566a               ~
+Color: gray4                 #4c566a               ~
 
 # Terminal colors
 Term colors: black red green yellow blue magenta cyan white
-Term colors: gray5 red green yellow blue magenta cyan white
+Term colors: gray4 red green yellow blue magenta cyan white
 
 # Default highlight groups
 Variant: gui 256
@@ -59,22 +59,22 @@ MatchParen                   white               black
 ModeMsg                      white               none
 MoreMsg                      white               none
 Normal                       white               none
-NonText                      gray5               none
+NonText                      gray4               none
 Pmenu                        none                gray2
 PmenuSbar                    white               gray2
 PmenuSel                     black               white          bold
-PmenuThumb                   cyan                gray5
+PmenuThumb                   cyan                gray4
 Question                     white               none
 Search                       red                 none           bold,underline
 SignColumn                   black               none
-SpecialKey                   gray5               none
+SpecialKey                   gray4               none
 SpellBad                     red                 gray2          underline
 SpellCap                     yellow              gray2
 SpellLocal                   white               gray2
 SpellRare                    white               gray2
-StatusLine                   gray5               none
+StatusLine                   gray4               none
 StatusLineNC                 black               none
-TabLine                      gray5               none
+TabLine                      gray4               none
 TabLineFill                  none                none
 TabLineSel                   white               none
 Terminal                     white               none
@@ -90,12 +90,12 @@ healthWarning                yellow              none           bold
 TermCursor                   black               white
 TermCursorNC                 none                black
 ActiveWindow                 fg                  base1
-InactiveWindow               gray5               base0
+InactiveWindow               gray4               base0
 
 # Language Base Groups
 Boolean                      blue                none
 Character                    green               none
-Comment                      gray5               none           italic
+Comment                      gray4               none           italic
 Conditional                  blue                none
 Constant                     white               none
 Define                       blue                none
@@ -124,7 +124,7 @@ Todo                         yellow              none
 Type                         blue                none
 Typedef                      blue                none
 
-NonItalicComment             gray5               none
+NonItalicComment             gray4               none
 
 # Common linked groups
 diffAdded                    -> DiffAdd
