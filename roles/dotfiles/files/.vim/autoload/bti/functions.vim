@@ -97,7 +97,6 @@ function! bti#functions#focus_window() abort
       let l:settings=s:get_spell_settings()
       ownsyntax on
       setlocal cursorline
-      set list
       call s:set_spell_settings(l:settings)
     endif
 
@@ -114,7 +113,6 @@ function! bti#functions#blur_window() abort
       let l:settings=s:get_spell_settings()
       ownsyntax off
       setlocal nocursorline
-      set nolist
       call s:set_spell_settings(l:settings)
     endif
 
