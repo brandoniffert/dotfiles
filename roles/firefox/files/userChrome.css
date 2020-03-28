@@ -76,10 +76,6 @@ toolbar .toolbarbutton-1 > .toolbarbutton-icon {
   border-inline-end: none !important;
 }
 
-.titlebar-spacer[type="post-tabs"] {
-  display: none !important;
-}
-
 /* Remove Back button circle, fix size */
 :root:not([uidensity="compact"]) #back-button {
   padding-inline-start: 6px !important;
