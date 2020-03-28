@@ -100,7 +100,7 @@ function! bti#functions#focus_window() abort
       call s:set_spell_settings(l:settings)
     endif
 
-    if has('nvim')
+    if has('nvim') && exists('g:bti_enable_window_focus')
       set winhighlight=Normal:ActiveWindow,NormalNC:InactiveWindow
     endif
   endif
@@ -118,6 +118,10 @@ function! bti#functions#blur_window() abort
 
     if has('nvim')
       set winhighlight=Normal:InactiveWindow,NormalNC:InactiveWindow
+
+      if !exists('g:bti_enable_window_focus')
+        let g:bti_enable_window_focus = v:true
+      endif
     endif
   endif
 endfunction

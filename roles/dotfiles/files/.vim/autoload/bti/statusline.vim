@@ -158,11 +158,11 @@ function! bti#statusline#whitespace_refresh() abort
 endfunction
 
 function! bti#statusline#focus() abort
-  if bufname('%') !=# '' && !exists('g:enable_statusline_focus')
-    let g:enable_statusline_focus = v:true
+  if bufname('%') !=# '' && !exists('g:bti_enable_statusline_focus')
+    let g:bti_enable_statusline_focus = v:true
   endif
 
-  if exists('g:enable_statusline_focus')
+  if exists('g:bti_enable_statusline_focus')
     call s:update_statusline('', 'focus')
   endif
 endfunction
