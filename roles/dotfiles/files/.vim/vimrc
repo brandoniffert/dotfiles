@@ -25,6 +25,26 @@ let g:loaded_ruby_provider = 0
 
 " }}}
 
+" Color {{{
+
+augroup btiColorScheme
+  autocmd!
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=white gui=bold')
+  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
+augroup END
+
+" Set vim-specific sequences for RGB colors
+if !has('nvim')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+endif
+
+set termguicolors
+colorscheme nordish
+
+" }}}
+
+" Plugins {{{
 
 " Bootstrap vim-plug on a fresh install - require a manual PlugInstall
 if empty(glob('~/.vim/autoload/plug.vim'))
@@ -304,26 +324,6 @@ augroup btiStatusline
   autocmd BufEnter,FocusGained,WinEnter * call bti#statusline#focus()
   autocmd FocusLost,WinLeave * call bti#statusline#blur()
 augroup END
-
-" }}}
-
-" Color {{{
-
-augroup btiColorScheme
-  autocmd!
-  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User1', 'guifg=white gui=bold')
-  autocmd ColorScheme * call bti#functions#extend_highlight('StatusLine', 'User2', 'gui=italic')
-augroup END
-
-" Set vim-specific sequences for RGB colors
-if !has('nvim')
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-endif
-
-set background=dark
-set termguicolors
-colorscheme nordish
 
 " }}}
 
