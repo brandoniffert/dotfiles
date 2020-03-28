@@ -166,6 +166,9 @@ unset zsh_completions
 autoload -U compinit
 compinit
 
+# Include hidden files
+_comp_options+=(globdots)
+
 # Make aliased completions work
 compdef g=git
 compdef t=tmux
