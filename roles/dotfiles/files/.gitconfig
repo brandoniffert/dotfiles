@@ -29,6 +29,9 @@
   status = auto
   ui = auto
 
+[color "diff"]
+  frag = yellow
+
 [color "diff-highlight"]
   oldNormal = red
   oldHighlight = 232 red
