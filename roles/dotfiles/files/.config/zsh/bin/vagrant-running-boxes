@@ -1,0 +1,4 @@
+#!/bin/bash
+
+RUNNING_BOXES=$(cat "$HOME"/.cache/vagrant-global-status 2> /dev/null)
+[ -n "$RUNNING_BOXES" ] && echo -n "$RUNNING_BOXES"

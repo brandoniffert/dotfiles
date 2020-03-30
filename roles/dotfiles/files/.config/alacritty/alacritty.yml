@@ -1,5 +1,12 @@
 ---
 #
+# Environment
+#
+env:
+  TERM: alacritty
+  TERM_PROGRAM: alacritty
+
+#
 # Window
 #
 window:
@@ -123,14 +130,6 @@ cursor:
 # Live config reload (changes require restart)
 #
 live_config_reload: true
-
-#
-# Shell
-#
-shell:
-  program: /usr/local/bin/zsh
-  args:
-    - --login
 
 #
 # Mouse bindings

@@ -6,6 +6,16 @@
   loop:
     - ~/.config
     - ~/.config/karabiner
+    - ~/.config/git
+    - ~/.config/aws
+    - ~/.config/ripgrep
+    - ~/.config/dircolors
+    - ~/.cache
+    - ~/.local
+    - ~/.local/share
+    - ~/.local/share/tig
+    - ~/.local/share/node
+    - ~/.local/share/zsh
 
 - name: Create backup directory
   file:

@@ -38,27 +38,28 @@
   newNormal = green
   newHighlight = 232 green
 
-[format]
-  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(bold black)%an%Creset
-
-[merge]
-  tool = vimdiff
-[push]
-  default = simple
-[github]
-  user = brandoniffert
-[core]
-  excludesfile = ~/.gitignore.global
-[pull]
-  ff = only
-[diff]
-  compactionHeuristic = true
-
 [tig "color"]
   cursor      = white black bold
   title-focus = black white bold
   title-blur  = white black bold
 
-# Include a local gitconfig for machine specific config (ex: credential.helper)
-[include]
-  path = ~/.gitconfig.local
+[format]
+  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(bold black)%an%Creset
+
+[merge]
+  tool = vimdiff
+
+[push]
+  default = simple
+
+[pull]
+  ff = only
+
+[diff]
+  compactionHeuristic = true
+
+[credential]
+  helper = osxkeychain
+
+[github]
+  user = brandoniffert

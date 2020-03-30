@@ -7,21 +7,21 @@
   failed_when: false
   ignore_errors: true
 
-- name: Create ~/.rbenv
+- name: Create ~/.local/share/rbenv
   file:
-    path: ~/.rbenv
+    path: ~/.local/share/rbenv
     state: directory
 
 - name: Setup default gems
   copy:
     src: default-gems
-    dest: ~/.rbenv/default-gems
+    dest: ~/.local/share/rbenv/default-gems
   when: rbenv_check.stat.exists
 
 - name: Install ruby {{ ruby_version }} with rbenv
   command: /usr/local/bin/rbenv install --skip-existing {{ ruby_version }}
   args:
-    creates: ~/.rbenv/versions/{{ ruby_version }}
+    creates: ~/.local/share/rbenv/versions/{{ ruby_version }}
   when: rbenv_check.stat.exists
 
 - name: Check if global ruby version is {{ ruby_version }}

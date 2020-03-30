@@ -9,8 +9,8 @@ scriptencoding utf-8
 " Providers {{{
 
 " python3
-if filereadable($HOME . '/.pyenv/versions/py3nvim/bin/python')
-  let g:python3_host_prog = $HOME . '/.pyenv/versions/py3nvim/bin/python'
+if filereadable($HOME . '/.local/share/pyenv/versions/py3nvim/bin/python')
+  let g:python3_host_prog = $HOME . '/.local/share/pyenv/versions/py3nvim/bin/python'
 endif
 
 " nodejs
@@ -138,63 +138,51 @@ endif
 set splitbelow
 set splitright
 set switchbuf+=useopen
+set undofile
 set updatetime=300
 set wildmode=longest:full,full
 set wildignore+=.git,*.jpg,*.jpeg,*.png,*.gif
 set wildignore+=*.sw?,*.DS_Store,*.pyc.*/tmp/*,*.so
+
+let g:netrw_dirhistmax = 0
 
 " Tabline
 if has('windows')
   set tabline=%!bti#tabline#line()
 endif
 
-" Backups
+" Backups, swapfiles, undo, viminfo
 if exists('$SUDO_USER')
   set nobackup
   set nowritebackup
-else
-  if !has('nvim')
-    set backupdir=~/.vim/tmp/backup//
-    set backupdir+=.
-  endif
-endif
-
-" Swapfile
-if exists('$SUDO_USER')
   set noswapfile
+  set noundofile
+
+  if !has('nvim')
+    set viminfo=
+  endif
 else
   if !has('nvim')
-    set directory=~/.vim/tmp/swap//
-    set directory+=.
-  endif
-endif
-
-" Undo
-if has('persistent_undo')
-  if exists('$SUDO_USER')
-    set noundofile
-  else
-    if !has('nvim')
-      set undodir=~/.vim/tmp/undo//
-      set undodir+=.
+    if !isdirectory($XDG_CACHE_HOME . '/vim')
+      call mkdir($XDG_CACHE_HOME . '/vim/backup', 'p')
+      call mkdir($XDG_CACHE_HOME . '/vim/swap', 'p')
+      call mkdir($XDG_CACHE_HOME . '/vim/undo', 'p')
     endif
 
-    set undofile
-  endif
-endif
+    set backupdir=$XDG_CACHE_HOME/vim/backup//
+    set backupdir+=.
 
-" viminfo
-if has('viminfo')
-  if exists('$SUDO_USER')
-    set viminfo=
-  else
-    if !has('nvim')
-      set viminfo+=n~/.vim/tmp/viminfo
+    set directory=$XDG_CACHE_HOME/vim/swap//
+    set directory+=.
 
-      if !empty(glob('~/.vim/tmp/viminfo'))
-        if !filereadable(expand('~/.vim/tmp/viminfo'))
-          echoerr 'Warning: ~/.vim/tmp/viminfo exists but is not readable'
-        endif
+    set undodir=$XDG_CACHE_HOME/vim/undo//
+    set undodir+=.
+
+    set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+
+    if !empty(glob($XDG_CACHE_HOME . '/vim/viminfo'))
+      if !filereadable(expand($XDG_CACHE_HOME . '/vim/viminfo'))
+        echoerr 'Warning: $XDG_CACHE_HOME/vim/viminfo exists but is not readable'
       endif
     endif
   endif
@@ -273,6 +261,7 @@ nnoremap <silent> <localleader>c :syntax sync fromstart<cr>
 " Edit file, starting in same directory as current file
 nnoremap <localleader>e :edit <C-R>=expand('%:p:h') . '/'<cr>
 
+" Get syntax highlight group of item under the cursor
 nnoremap <localleader>h :call <sid>syn_stack()<cr>
 function! <sid>syn_stack() abort
   if !exists('*synstack')
@@ -280,6 +269,12 @@ function! <sid>syn_stack() abort
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunction
+
+" Write file with sudo
+if !has('nvim')
+  cnoremap w!! execute 'write !sudo tee % >/dev/null' <bar> edit!
+endif
+
 
 " Terminal mode mappings
 if exists(':tnoremap')

@@ -256,6 +256,12 @@ function ssh() {
   env TERM=xterm-256color command ssh "$@"
 }
 
+function wget() {
+  emulate -L zsh
+
+  command wget --hsts-file="$XDG_CACHE_HOME/wget-hsts" "$@"
+}
+
 # Print information about a remote SSL certificate
 # Based on: https://serverfault.com/a/661982/219567
 function ssl() {

@@ -1,18 +1,4 @@
 ---
-- name: Add /usr/local/bin/zsh to /etc/shells
-  lineinfile: >
-    dest=/etc/shells
-    group=wheel
-    line=/usr/local/bin/zsh
-    owner=root
-  become: true
-
-- name: Change default shell to zsh
-  user:
-    name: "{{ ansible_env.USER }}"
-    shell: /usr/local/bin/zsh
-  become: true
-
 - name: Ensure /usr/local/share is setup correctly
   file:
     path: /usr/local/share

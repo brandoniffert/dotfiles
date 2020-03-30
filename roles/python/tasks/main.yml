@@ -10,13 +10,13 @@
 - name: Install python {{ python2_version }} with pyenv
   command: /usr/local/bin/pyenv install {{ python2_version }}
   args:
-    creates: ~/.pyenv/versions/{{ python2_version }}
+    creates: ~/.local/share/pyenv/versions/{{ python2_version }}
   when: pyenv_check.stat.exists
 
 - name: Install python {{ python3_version }} with pyenv
   command: /usr/local/bin/pyenv install {{ python3_version }}
   args:
-    creates: ~/.pyenv/versions/{{ python3_version }}
+    creates: ~/.local/share/pyenv/versions/{{ python3_version }}
   when: pyenv_check.stat.exists
 
 - name: Check if global python version is {{ python3_version }}
@@ -38,7 +38,7 @@
 
 - name: Check for virtualenv for neovim (python3)
   stat:
-    path: ~/.pyenv/versions/py3nvim
+    path: ~/.local/share/pyenv/versions/py3nvim
   register: py3nvim_check
   changed_when: false
   failed_when: false
@@ -48,5 +48,5 @@
   shell: >
     set -o pipefail &&
     pyenv virtualenv {{ python3_version }} py3nvim &&
-    ~/.pyenv/versions/py3nvim/bin/pip install pynvim
+    ~/.local/share/pyenv/versions/py3nvim/bin/pip install pynvim
   when: not py3nvim_check.stat.exists

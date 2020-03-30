@@ -1,5 +1,4 @@
 ---
 yarn_packages:
   - diff-so-fancy
-  - eslint
   - neovim

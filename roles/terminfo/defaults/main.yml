@@ -1,2 +1,2 @@
 ---
-terminfo_path: ~/.terminfo
+terminfo_path: ~/.local/share/terminfo

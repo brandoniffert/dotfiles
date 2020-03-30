@@ -19,6 +19,7 @@
 --exclude=node_modules
 --exclude=public
 --exclude=plugged
+--exclude=silverstripe-cache
 --exclude=thirdparty
 --exclude=vendor
 --exclude=venv

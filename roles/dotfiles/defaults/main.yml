@@ -1,22 +1,17 @@
 ---
 dotfile_files:
-  - .bashrc
   - .config/alacritty
   - .config/kitty
-  - .ctags.d
-  - .dir_colors
-  - .eslintrc.json
-  - .gemrc
-  - .gitconfig
-  - .gitignore.global
-  - .hammerspoon
-  - .ripgreprc
-  - .rspec
-  - .tmux.conf
+  - .config/hammerspoon
+  - .config/git/config
+  - .config/git/ignore
+  - .config/ctags
+  - .config/dircolors
+  - .config/ripgrep
+  - .config/zsh
   - .vim
-  - .zsh
+  - .tmux.conf
   - .zshenv
-  - .zshrc
 
 dotfile_templates:
   - .config/karabiner/karabiner.json

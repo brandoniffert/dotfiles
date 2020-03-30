@@ -28,24 +28,14 @@ setopt sharehistory        # Share history between sessions
 # EXPORTS
 #-------------------------------------------------------------------------------
 
-export EDITOR=nvim
-export HISTFILE="$HOME/.zsh_history"
+export HISTFILE="$XDG_DATA_HOME"/zsh/history
+export HISTIGNORE="fg"
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
-export HISTIGNORE="fg"
-export LANG=en_US.UTF-8
-export LC_CTYPE=en_US.UTF-8
 export WORDCHARS='*?[]~&;!$%^<>'
-export VIRTUAL_ENV_DISABLE_PROMPT=1
 export BAT_THEME=Nord
 export HOMEBREW_NO_ANALYTICS=1
-export PYENV_ROOT="$HOME/.pyenv"
-
-# Setup dircolors
-command -v gdircolors >/dev/null && [ -f "$HOME"/.dir_colors ] && eval $(gdircolors $HOME/.dir_colors)
-
-# For ripgrep
-export RIPGREP_CONFIG_PATH="$HOME/.ripgreprc"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
 # For fzf
 export FZF_DEFAULT_COMMAND='rg -u --files --smart-case'
@@ -132,11 +122,11 @@ alias tkill='tmux kill-server'
 alias v=view
 alias vi=vim
 alias vgs="vagrant global-status"
-alias zr!="source $HOME/.zshrc"
+alias zr!="source $ZDOTDIR/.zshrc"
 
-# https://github.com/pyenv/pyenv/issues/106
+# https://github.com/pyenv/pyenv/issues/106#issuecomment-440826532
 if command -v pyenv >/dev/null 2>&1; then
-  alias brew="env PATH=${PATH//$(pyenv root)\/shims:/} brew"
+  alias brew='env PATH=${PATH//$(pyenv root)\/shims:/} brew'
 fi
 
 #-------------------------------------------------------------------------------
@@ -177,7 +167,7 @@ compdef t=tmux
 # FUNCTIONS
 #-------------------------------------------------------------------------------
 
-source "$HOME/.zsh/functions.zsh"
+source "$ZDOTDIR/functions.zsh"
 
 # Adds `cdr` command for navigating to recent directories
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
@@ -193,7 +183,7 @@ zstyle ':chpwd:*' recent-dirs-default true
 # PROMPT
 #-------------------------------------------------------------------------------
 
-source "$HOME/.zsh/prompt.zsh"
+source "$ZDOTDIR/prompt.zsh"
 
 #-------------------------------------------------------------------------------
 # SETUP OTHER SCRIPTS/PROGRAMS
@@ -226,6 +216,16 @@ ZSH_HIGHLIGHT_STYLES[path]="none"
 ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
+# z
+Z_SCRIPT=/usr/local/etc/profile.d/z.sh
+test -f $Z_SCRIPT && source $Z_SCRIPT
+unset Z_SCRIPT
+
+# Setup dircolors
+DIRCOLORS_PATH="$XDG_CONFIG_HOME/dircolors/dircolors"
+command -v gdircolors >/dev/null && test -f $DIRCOLORS_PATH && eval $(gdircolors $DIRCOLORS_PATH)
+unset DIRCOLORS_PATH
+
 #-------------------------------------------------------------------------------
 # LOCAL OPTIONS
 #-------------------------------------------------------------------------------
@@ -238,7 +238,7 @@ unset LOCAL_RC
 # ASYNC
 #-------------------------------------------------------------------------------
 
-source "$HOME/.zsh/async.zsh"
+source "$ZDOTDIR/async.zsh"
 async_init
 
 function async_load() {
@@ -262,11 +262,6 @@ function async_load() {
   # Setup pyenv
   if command -v pyenv >/dev/null 2>&1; then
     eval "$(pyenv init - --no-rehash)"
-  fi
-
-  # Setup fasd
-  if command -v fasd >/dev/null 2>&1; then
-    eval "$(fasd --init auto)"
   fi
 
   typeset -U path
