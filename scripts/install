@@ -1,0 +1,103 @@
+#!/bin/bash
+
+set -euo pipefail
+
+REPO_ROOT=$(cd "${BASH_SOURCE%/*}/.." && pwd)
+
+# Set XDG base directories
+XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
+XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
+XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
+
+# shellcheck source=lib/echo.sh
+source "$REPO_ROOT/scripts/lib/echo.sh"
+
+# Read in group names and files from the ./scripts/groups dir
+GROUP_NAMES=()
+GROUP_FILES=()
+for file in "$REPO_ROOT"/scripts/groups/*; do
+  GROUP_NAMES+=("$(basename "$file" | sed 's/...//;s/\.sh$//')")
+  GROUP_FILES+=("$file")
+done
+
+help() {
+  echo
+  echo "Usage: $0 [options] [groups...]"
+  echo
+  echo "Options:"
+  echo
+  echo "  -h, --help     Show this message"
+  echo
+  echo "Available groups:"
+  echo
+  for i in "${!GROUP_NAMES[@]}"; do
+    name=${GROUP_NAMES[$i]}
+    file=${GROUP_FILES[$i]}
+    desc=$(grep -e '^# Description' "$file" | sed 's/# Description: //')
+    name_length=${#name}
+    fill_length=$(( 15 - name_length ))
+    printf "  $name%${fill_length}s$desc\n"
+  done
+  echo
+}
+
+# Collect all groups passed in through args
+RUN_GROUPS=()
+for opt in "$@"; do
+  case $opt in
+    --help | -h)
+      help
+      exit 0
+      ;;
+    *)
+      if printf "%s\n" "${GROUP_NAMES[@]}" | grep -q "^${opt}$"; then
+        RUN_GROUPS+=("$opt")
+      else
+        echo "unknown option: $opt"
+        help
+        exit 1
+      fi
+      ;;
+  esac
+done
+
+# If no args were passed, run all the groups
+if [ "${#RUN_GROUPS[@]}" -eq 0 ]; then
+  RUN_GROUPS=("${GROUP_NAMES[@]}")
+fi
+
+# From the selected groups, find the appropriate file for each group to run
+RUN_FILES=()
+for name in "${RUN_GROUPS[@]}"; do
+  for i in "${!GROUP_NAMES[@]}"; do
+    if [ "${GROUP_NAMES[$i]}" == "$name" ]; then
+      RUN_FILES+=("${GROUP_FILES[$i]}")
+    fi
+  done
+done
+
+clear
+
+echo '#'
+echo '# Running the following groups:'
+echo '#'
+echo "# ${RUN_GROUPS[*]}"
+echo '#'
+echo
+
+# Ask for sudo at the start so any tasks that need it will have it
+sudo -v
+
+# Update existing sudo time stamp until the script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+
+# Run each group file
+for group_file in "${RUN_FILES[@]}"; do
+  # shellcheck source=/dev/null
+  source "$group_file"
+done
+
+echo
+echo '▸ Finished.'
+echo

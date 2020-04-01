@@ -1,6 +1,0 @@
----
-- name: Ensure tmux plugin manager is installed
-  git:
-    repo: 'https://github.com/tmux-plugins/tpm.git'
-    dest: "{{ ansible_env.HOME }}/.tmux/plugins/tpm"
-    update: no

@@ -1,8 +1,0 @@
----
-- name: Ensure /usr/local/share is setup correctly
-  file:
-    path: /usr/local/share
-    owner: "{{ ansible_env.USER }}"
-    group: admin
-    state: directory
-    mode: '0755'

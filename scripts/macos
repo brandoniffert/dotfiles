@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we’re about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+# Ask for the administrator password upfront
+sudo -v
+
+# Update existing sudo time stamp until the script has finished
+while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+#
+# General UI/UX
+#
+
+# Set highlight color to red
+defaults write NSGlobalDomain AppleHighlightColor -string "1.000000 0.733333 0.721569"
+
+# Set sidebar icon size to small
+defaults write NSGlobalDomain NSTableViewDefaultSizeMode -int 1
+
+# Only show scrollbars when scrolling
+defaults write NSGlobalDomain AppleShowScrollBars -string "WhenScrolling"
+# Possible values: `WhenScrolling`, `Automatic` and `Always`
+
+# Disable the warning before emptying the Trash
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+
+# Disable Siri
+defaults write com.apple.assistant.support Assistant\ Enabled -bool false
+
+# Show all file extensions
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+
+#
+# Application Specific
+#
+
+# Allow key hold repeat for VS Code
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+# Set new location for hammerspoon config
+defaults write org.hammerspoon.Hammerspoon MJConfigFile -string "${XDG_CONFIG_HOME:-$HOME/.config}/hammerspoon/init.lua"

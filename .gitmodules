@@ -1,3 +1,0 @@
-[submodule "vendor/ansible"]
-	path = vendor/ansible
-	url = https://github.com/ansible/ansible.git

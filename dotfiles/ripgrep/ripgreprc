@@ -1,0 +1,7 @@
+--colors=line:none
+--colors=path:fg:green
+--colors=path:style:bold
+--colors=match:fg:red
+--smart-case
+--hidden
+--glob=!.git
