@@ -43,7 +43,7 @@ task_start() {
   fill_length=$(( col_length - name_length ))
 
   echo -en "${BWhi}$name${RCol}"
-  printf "%${fill_length}s" | tr ' ' '.'
+  printf "%${fill_length}s" | tr ' ' '·'
   echo
 }
 
