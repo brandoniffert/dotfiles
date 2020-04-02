@@ -145,7 +145,7 @@ zstyle ':completion:*' insert-tab pending
 # Don't autocomplete hosts
 zstyle ':completion:*:ssh:*' hosts off
 # Color ls completion
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
 zsh_completions=/usr/local/share/zsh-completions
 if [ -d $zsh_completions ]; then
@@ -156,12 +156,12 @@ unset zsh_completions
 autoload -U compinit
 compinit
 
-# Include hidden files
-_comp_options+=(globdots)
-
 # Make aliased completions work
 compdef g=git
 compdef t=tmux
+
+# Include hidden files
+_comp_options+=(globdots)
 
 #-------------------------------------------------------------------------------
 # FUNCTIONS
@@ -189,37 +189,31 @@ source "$ZDOTDIR/prompt.zsh"
 # SETUP OTHER SCRIPTS/PROGRAMS
 #-------------------------------------------------------------------------------
 
-# fzf
-FZF_ZSH="${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-test -f $FZF_ZSH && source $FZF_ZSH
-unset FZF_ZSH
+source $ZDOTDIR/plugins/zsh-defer/zsh-defer.plugin.zsh
 
-# zsh-autosuggestions and zsh-syntax-highlighting
-function() {
+function () {
   local -a locations
   local file
 
   locations=(
     /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
     /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+    /usr/local/etc/profile.d/z.sh
   )
 
   for file in $locations; do
     if [ -f $file ]; then
-      source $file
+      zsh-defer -t 0.5 source $file
     fi
   done
 }
 
-ZSH_AUTOSUGGEST_USE_ASYNC=true
+declare -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]="none"
 ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
-
-# z
-Z_SCRIPT=/usr/local/etc/profile.d/z.sh
-test -f $Z_SCRIPT && source $Z_SCRIPT
-unset Z_SCRIPT
 
 # Setup dircolors
 DIRCOLORS_PATH="$XDG_CONFIG_HOME/dircolors/dircolors"
@@ -235,38 +229,58 @@ test -f $LOCAL_RC && source $LOCAL_RC
 unset LOCAL_RC
 
 #-------------------------------------------------------------------------------
-# ASYNC
+# NVM, PYENV, RBENV
 #-------------------------------------------------------------------------------
 
-source "$ZDOTDIR/async.zsh"
-async_init
-
-function async_load() {
+function () {
   # Setup nvm
-  export NVM_DIR="$HOME/.config/nvm"
-  local nvmsh="/usr/local/opt/nvm/nvm.sh"
+  local nvmsh="$(brew --prefix)/opt/nvm/nvm.sh"
 
   # Check if we have explicitly set an nvm node path already (.zshrc.local)
   # If we do, then source nvm.sh with the --no-use flag to increase shell startup speed
   if [[ $(which node) =~ $NVM_DIR ]]; then
-    [ -s "$nvmsh" ] && source "$nvmsh" --no-use
+    [ -s "$nvmsh" ] && zsh-defer -t 1 source "$nvmsh" --no-use
   else
-    [ -s "$nvmsh" ] && source "$nvmsh"
-  fi
-
-  # Setup rbenv
-  if command -v rbenv >/dev/null 2>&1; then
-    eval "$(rbenv init - --no-rehash)"
+    [ -s "$nvmsh" ] && zsh-defer -t 1 source "$nvmsh"
   fi
 
   # Setup pyenv
-  if command -v pyenv >/dev/null 2>&1; then
-    eval "$(pyenv init - --no-rehash)"
+  if command -v pyenv &>/dev/null; then
+    export PYENV_SHELL=zsh
+    zsh-defer -t 2 source "/usr/local/Cellar/pyenv/$(pyenv --version | cut -d' ' -f2)/libexec/../completions/pyenv.zsh"
+    pyenv() {
+      local command
+      command="${1:-}"
+      if [ "$#" -gt 0 ]; then
+        shift
+      fi
+
+      case "$command" in
+      activate|deactivate|rehash|shell)
+        eval "$(pyenv "sh-$command" "$@")";;
+      *)
+        command pyenv "$command" "$@";;
+      esac
+    }
   fi
 
-  typeset -U path
-}
+  # Setup rbenv
+  if command -v rbenv &>/dev/null; then
+    export RBENV_SHELL=zsh
+    zsh-defer -t 2 source "/usr/local/Cellar/rbenv/$(rbenv --version | cut -d' ' -f2)/libexec/../completions/rbenv.zsh"
+    rbenv() {
+      local command
+      command="${1:-}"
+      if [ "$#" -gt 0 ]; then
+        shift
+      fi
 
-async_start_worker async_worker
-async_register_callback async_worker async_load
-async_job async_worker sleep 0.1
+      case "$command" in
+      rehash|shell)
+        eval "$(rbenv "sh-$command" "$@")";;
+      *)
+        command rbenv "$command" "$@";;
+      esac
+    }
+  fi
+}

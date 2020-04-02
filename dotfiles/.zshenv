@@ -21,6 +21,7 @@ export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node/repl_history
 export npm_config_cache="$XDG_CACHE_HOME"/npm
 export npm_config_devdir="$XDG_CACHE_HOME"/node-gyp
 export npm_config_userconfig="$XDG_CONFIG_HOME"/npm/config
+export NVM_DIR="$XDG_CONFIG_HOME"/nvm
 export PYENV_ROOT="$XDG_DATA_HOME"/pyenv
 export RBENV_ROOT="$XDG_DATA_HOME"/rbenv
 export RIPGREP_CONFIG_PATH="$XDG_CONFIG_HOME"/ripgrep/ripgreprc
@@ -42,6 +43,8 @@ export LESSHISTFILE=-
 path=(
   "$ZDOTDIR"/bin
   "$HOME"/.local/bin
+  "$XDG_DATA_HOME"/pyenv/shims
+  "$XDG_DATA_HOME"/rbenv/shims
   "$XDG_DATA_HOME"/composer/vendor/bin
   /usr/local/sbin
   "$path"
