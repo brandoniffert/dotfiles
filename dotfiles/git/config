@@ -2,6 +2,9 @@
   name = Brandon Iffert
   email = brandoniffert@gmail.com
 
+[github]
+  user = brandoniffert
+
 [alias]
   a = add
   aa = add --all
@@ -43,23 +46,23 @@
   title-focus = black white bold
   title-blur  = white black bold
 
-[format]
-  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(bold black)%an%Creset
-
-[merge]
-  tool = vimdiff
-
-[push]
-  default = simple
-
-[pull]
-  ff = only
+[credential]
+  helper = osxkeychain
 
 [diff]
   compactionHeuristic = true
 
-[credential]
-  helper = osxkeychain
+[format]
+  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(bold black)%an%Creset
 
-[github]
-  user = brandoniffert
+[log]
+  follow = true
+
+[merge]
+  tool = vimdiff
+
+[pull]
+  ff = only
+
+[push]
+  default = simple
