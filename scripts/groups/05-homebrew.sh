@@ -11,7 +11,7 @@ group_homebrew() {
   group_header "${FUNCNAME[0]//group_/}"
 
   task_start "Ensure brew is installed"
-  if ! [ -f /usr/local/bin/brew ]; then
+  if ! command -v brew &>/dev/null; then
     task_info 'running homebrew install script'
 
     if /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"; then
@@ -28,7 +28,7 @@ group_homebrew() {
   local tmp_brewfile=/tmp/_brewfile
 
   if ! [ -f $tmp_brewfile ] || ! cmp --silent "$REPO_ROOT/Brewfile" $tmp_brewfile; then
-    if ! /usr/local/bin/brew bundle --no-lock --file "$REPO_ROOT/Brewfile"; then
+    if ! command brew bundle --no-lock --file "$REPO_ROOT/Brewfile"; then
       task_error_exit 'brew bundle failed'
     fi
 
@@ -36,7 +36,7 @@ group_homebrew() {
 
     # https://github.com/pyenv/pyenv/issues/106#issuecomment-440826532
     echo
-    env PATH="${PATH//$(pyenv root)\/shims:/}" /usr/local/bin/brew doctor || true
+    env PATH="${PATH//$(pyenv root)\/shims:/}" command brew doctor || true
   else
     task_skip "nothing new to brew"
   fi

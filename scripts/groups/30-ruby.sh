@@ -19,7 +19,7 @@ group_ruby() {
 
   group_header "${FUNCNAME[0]//group_/}"
 
-  if ! [ -f /usr/local/bin/rbenv ]; then
+  if ! command -v rbenv &>/dev/null; then
     task_error_exit 'rbenv is not installed'
   fi
 
@@ -34,7 +34,7 @@ group_ruby() {
 
   task_start "Install ruby $RUBY_VERSION with rbenv"
   if ! [ -d "$rbenv_dir/versions/$RUBY_VERSION" ]; then
-    RBENV_ROOT=$rbenv_dir /usr/local/bin/rbenv install --skip-existing $RUBY_VERSION
+    RBENV_ROOT=$rbenv_dir command rbenv install --skip-existing $RUBY_VERSION
     task_success "installed ruby $RUBY_VERSION"
   else
     task_skip "ruby $RUBY_VERSION is already installed"
@@ -42,9 +42,9 @@ group_ruby() {
   task_end
 
   task_start "Set global ruby version to $RUBY_VERSION"
-  if ! RBENV_ROOT=$rbenv_dir /usr/local/bin/rbenv version | cut -d ' ' -f 1 | grep -Fxq $RUBY_VERSION; then
-    RBENV_ROOT=$rbenv_dir /usr/local/bin/rbenv global $RUBY_VERSION
-    RBENV_ROOT=$rbenv_dir /usr/local/bin/rbenv rehash
+  if ! RBENV_ROOT=$rbenv_dir command rbenv version | cut -d ' ' -f 1 | grep -Fxq $RUBY_VERSION; then
+    RBENV_ROOT=$rbenv_dir command rbenv global $RUBY_VERSION
+    RBENV_ROOT=$rbenv_dir command rbenv rehash
   else
     task_skip "ruby $RUBY_VERSION is already the global version"
   fi

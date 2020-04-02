@@ -12,7 +12,7 @@ group_nodejs() {
 
   group_header "${FUNCNAME[0]//group_/}"
 
-  if ! [ -f /usr/local/bin/yarn ]; then
+  if ! command -v yarn &>/dev/null; then
     task_error_exit 'yarn is not installed'
   fi
 
@@ -44,21 +44,17 @@ group_nodejs() {
   )
 
   task_start "Install global yarn packages"
-  if [ -f /usr/local/bin/yarn ]; then
-    for pkg in "${yarn_pkgs[@]}"; do
-      if ! yarn global list | grep -q "^info \"$pkg@"; then
-        if yarn global add --prod --no-progress --silent "$pkg"; then
-          task_success "installed $pkg"
-        else
-          task_error "could not install $pkg"
-        fi
+  for pkg in "${yarn_pkgs[@]}"; do
+    if ! yarn global list | grep -q "^info \"$pkg@"; then
+      if yarn global add --prod --no-progress --silent "$pkg"; then
+        task_success "installed $pkg"
       else
-        task_skip "$pkg is already installed"
+        task_error "could not install $pkg"
       fi
-    done
-  else
-    task_error 'yarn is not installed'
-  fi
+    else
+      task_skip "$pkg is already installed"
+    fi
+  done
   task_end
 }
 

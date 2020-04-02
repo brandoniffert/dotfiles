@@ -14,7 +14,7 @@ group_karabiner() {
 
   group_header "${FUNCNAME[0]//group_/}"
 
-  if ! [ -f /usr/local/bin/node ]; then
+  if ! command -v node &>/dev/null; then
     task_error_exit 'node is not installed'
   fi
 

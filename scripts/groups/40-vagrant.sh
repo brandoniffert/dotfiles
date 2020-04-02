@@ -16,17 +16,17 @@ group_vagrant() {
 
   group_header "${FUNCNAME[0]//group_/}"
 
-  if ! [ -f /usr/local/bin/vagrant ]; then
+  if ! command -v vagrant &>/dev/null; then
     task_error_exit 'vagrant is not installed'
   fi
 
   local installed_plugins
-  installed_plugins=$(/usr/local/bin/vagrant plugin list | cut -d ' ' -f 1 | grep -v ^$)
+  installed_plugins=$(command vagrant plugin list | cut -d ' ' -f 1 | grep -v ^$)
 
   task_start 'Install plugins'
   for plugin in "${vagrant_plugins[@]}"; do
     if ! grep -q "$installed_plugins" <<< "$plugin"; then
-      if /usr/local/bin/vagrant plugin install "$plugin"; then
+      if command vagrant plugin install "$plugin"; then
         task_success "installed $plugin"
       else
         task_error "could not install $plugin"

@@ -9,18 +9,18 @@ fi
 
 group_vim() {
   local vim_plug_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  local vim_plug_path="$REPO_ROOT/.vim/autoload/plug.vim"
+  local vim_plug_path="$REPO_ROOT/dotfiles/.vim/autoload/plug.vim"
 
   group_header "${FUNCNAME[0]//group_/}"
 
-  if ! [ -f /usr/local/bin/nvim ]; then
+  if ! command -v nvim &>/dev/null; then
     task_error_exit 'neovim is not installed'
   fi
 
   task_start "Install vim-plug plugins"
   if ! [ -f "$vim_plug_path" ]; then
     wget -q -O "$vim_plug_path" "$vim_plug_url"
-    /usr/local/bin/nvim --headless +UpdateRemotePlugins +'PlugInstall --sync' +qa &>/dev/null
+    command nvim --headless +UpdateRemotePlugins +'PlugInstall --sync' +qa &>/dev/null
     task_success 'setup vim-plug and plugins'
   else
     task_skip 'vim-plug already setup'
