@@ -36,6 +36,8 @@ export WORDCHARS='*?[]~&;!$%^<>'
 export BAT_THEME=Nord
 export HOMEBREW_NO_ANALYTICS=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
+export EDITOR=nvim
+export LESSHISTFILE=-
 
 # For fzf
 export FZF_DEFAULT_COMMAND='rg -u --files --smart-case'
@@ -117,7 +119,7 @@ alias lls='gls --color=auto -al'
 alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit
-alias t='tmux -u'
+alias t='tmux'
 alias tkill='tmux kill-server'
 alias v=view
 alias vi=vim
@@ -191,32 +193,38 @@ source "$ZDOTDIR/prompt.zsh"
 
 source $ZDOTDIR/plugins/zsh-defer/zsh-defer.plugin.zsh
 
-function () {
-  local -a locations
-  local file
-
-  locations=(
-    /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-    /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-    "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-    /usr/local/etc/profile.d/z.sh
-  )
-
-  for file in $locations; do
-    if [ -f $file ]; then
-      zsh-defer -t 0.5 source $file
-    fi
-  done
+function defer-load() {
+  test -f "$1" && zsh-defer -t 0.5 source "$1"
 }
 
+defer-load /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+defer-load /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+defer-load "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
+defer-load /usr/local/etc/profile.d/z.sh
+
+unfunction defer-load
+
+# zsh-syntax-highlighting
 declare -A ZSH_HIGHLIGHT_STYLES
 ZSH_HIGHLIGHT_STYLES[path]="none"
 ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+
+# zsh-autosuggestions
 ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
+# pyenv
+if command -v pyenv &>/dev/null; then
+  zsh-defer -t 2 eval "$(pyenv init - --no-rehash)"
+fi
+
+# rbenv
+if command -v rbenv &>/dev/null; then
+  zsh-defer -t 2 eval "$(rbenv init - --no-rehash)"
+fi
+
 # Setup dircolors
-DIRCOLORS_PATH="$XDG_CONFIG_HOME/dircolors/dircolors"
+DIRCOLORS_PATH="$XDG_CONFIG_HOME/dircolors/nord.dircolors"
 command -v gdircolors >/dev/null && test -f $DIRCOLORS_PATH && eval $(gdircolors $DIRCOLORS_PATH)
 unset DIRCOLORS_PATH
 
@@ -224,63 +232,4 @@ unset DIRCOLORS_PATH
 # LOCAL OPTIONS
 #-------------------------------------------------------------------------------
 
-LOCAL_RC="$HOME/.zshrc.local"
-test -f $LOCAL_RC && source $LOCAL_RC
-unset LOCAL_RC
-
-#-------------------------------------------------------------------------------
-# NVM, PYENV, RBENV
-#-------------------------------------------------------------------------------
-
-function () {
-  # Setup nvm
-  local nvmsh="$(brew --prefix)/opt/nvm/nvm.sh"
-
-  # Check if we have explicitly set an nvm node path already (.zshrc.local)
-  # If we do, then source nvm.sh with the --no-use flag to increase shell startup speed
-  if [[ $(which node) =~ $NVM_DIR ]]; then
-    [ -s "$nvmsh" ] && zsh-defer -t 1 source "$nvmsh" --no-use
-  else
-    [ -s "$nvmsh" ] && zsh-defer -t 1 source "$nvmsh"
-  fi
-
-  # Setup pyenv
-  if command -v pyenv &>/dev/null; then
-    export PYENV_SHELL=zsh
-    zsh-defer -t 2 source "/usr/local/Cellar/pyenv/$(pyenv --version | cut -d' ' -f2)/libexec/../completions/pyenv.zsh"
-    pyenv() {
-      local command
-      command="${1:-}"
-      if [ "$#" -gt 0 ]; then
-        shift
-      fi
-
-      case "$command" in
-      activate|deactivate|rehash|shell)
-        eval "$(pyenv "sh-$command" "$@")";;
-      *)
-        command pyenv "$command" "$@";;
-      esac
-    }
-  fi
-
-  # Setup rbenv
-  if command -v rbenv &>/dev/null; then
-    export RBENV_SHELL=zsh
-    zsh-defer -t 2 source "/usr/local/Cellar/rbenv/$(rbenv --version | cut -d' ' -f2)/libexec/../completions/rbenv.zsh"
-    rbenv() {
-      local command
-      command="${1:-}"
-      if [ "$#" -gt 0 ]; then
-        shift
-      fi
-
-      case "$command" in
-      rehash|shell)
-        eval "$(rbenv "sh-$command" "$@")";;
-      *)
-        command rbenv "$command" "$@";;
-      esac
-    }
-  fi
-}
+[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
