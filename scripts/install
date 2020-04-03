@@ -63,7 +63,15 @@ done
 
 # If no args were passed, run all the groups
 if [ "${#RUN_GROUPS[@]}" -eq 0 ]; then
-  RUN_GROUPS=("${GROUP_NAMES[@]}")
+  read -r -p "Are you sure you want to run all groups? [y|N] " response
+  if [[ $response =~ (yes|y|Y) ]]; then
+    RUN_GROUPS=("${GROUP_NAMES[@]}")
+  else
+    echo
+    echo 'Exiting...'
+    echo
+    exit 0
+  fi
 fi
 
 # From the selected groups, find the appropriate file for each group to run
@@ -90,7 +98,6 @@ sudo -v
 
 # Update existing sudo time stamp until the script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
-
 
 # Run each group file
 for group_file in "${RUN_FILES[@]}"; do
