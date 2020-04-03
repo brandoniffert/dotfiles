@@ -89,7 +89,7 @@ function pa() {
 }
 
 # Use fzf to quickly get to a note
-function n() {
+function note() {
   $EDITOR "$(find $HOME/Dropbox/Notes -maxdepth 1 -type f | fzf)"
 }
 

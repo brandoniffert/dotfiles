@@ -8,26 +8,23 @@ fi
 # Description: Installs the latest LTS node and installs global packages
 
 group_nodejs() {
-  local nvm_dir=$XDG_CONFIG_HOME/nvm
-
   group_header "${FUNCNAME[0]//group_/}"
+
+  local n_dir=$XDG_DATA_HOME/n
+
+  if ! command -v n &>/dev/null; then
+    task_error_exit 'n is not installed'
+  fi
 
   if ! command -v yarn &>/dev/null; then
     task_error_exit 'yarn is not installed'
   fi
 
   task_start "Install the latest LTS node"
-  if ! [ -d "$nvm_dir/versions/node" ]; then
-    mkdir -p "$nvm_dir"
-    (
-      # Assumes that nvm was installed with homebrew, sources nvm.sh at the location homebrew installs it
-      NVM_DIR=$nvm_dir
-      source /usr/local/opt/nvm/nvm.sh
-      nvm install --lts
-      nvm alias default lts/*
-    )
+  if ! [ -d "$n_dir/n/versions" ]; then
+    PREFIX=$n_dir command n lts
 
-    if [ -d "$nvm_dir/versions/node" ]; then
+    if [ -d "$n_dir/n/versions" ]; then
       task_success 'installed node'
     else
       task_error 'could not install node'
