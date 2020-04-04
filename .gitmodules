@@ -13,6 +13,6 @@
 [submodule "dotfiles/zsh/plugins/z"]
 	path = dotfiles/zsh/plugins/z
 	url = git@github.com:rupa/z.git
-[submodule "dotfiles/zsh/plugins/agkozak-zsh-prompt"]
-	path = dotfiles/zsh/plugins/agkozak-zsh-prompt
-	url = git@github.com:agkozak/agkozak-zsh-prompt.git
+[submodule "dotfiles/zsh/plugins/git-prompt.zsh"]
+	path = dotfiles/zsh/plugins/git-prompt.zsh
+	url = git@github.com:woefe/git-prompt.zsh.git

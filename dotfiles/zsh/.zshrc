@@ -9,6 +9,7 @@ setopt completealiases     # Do not expand aliases before completion finishes
 setopt completeinword      # Completion from both ends
 setopt correct             # Spell check commands
 setopt extendedhistory     # Add timestamps to history
+setopt globdots            # Allow hidden files to be matched
 setopt histignorealldups   # Prevent recording dupes in history
 setopt histignorespace     # Do not save commands with leading space to history
 setopt histreduceblanks    # Remove superfluous blanks from history
@@ -155,9 +156,6 @@ source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 autoload -U compinit
 compinit
 
-# Include hidden files
-_comp_options+=(globdots)
-
 #-------------------------------------------------------------------------------
 # FUNCTIONS
 #-------------------------------------------------------------------------------
@@ -178,7 +176,45 @@ zstyle ':chpwd:*' recent-dirs-default true
 # PROMPT
 #-------------------------------------------------------------------------------
 
-source "$ZDOTDIR/prompt.zsh"
+source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
+
+() {
+  local PROMPT_CHAR='❯'
+  local PROMPT_COLOR='%{$fg[white]%}'
+  local LVL=$SHLVL
+
+  if [[ $EUID -eq 0 ]]; then
+    PROMPT_CHAR='#'
+    PROMPT_COLOR='%{$fg[red]%}'
+  fi
+
+  [ -n "$TMUX" ] && LVL=$(($SHLVL - 1))
+
+  PROMPT='%F{black}┌%f '
+  PROMPT+='${${VIRTUAL_ENV#0}:+($(basename $VIRTUAL_ENV))}'
+  PROMPT+='%F{cyan}%1~%f '
+  PROMPT+='$(gitprompt)'
+  PROMPT+='%F{yellow}%(1j.◆ .)%f'
+  PROMPT+=$'\n'
+  PROMPT+='%F{black}└%f '
+  PROMPT+="${PROMPT_COLOR}$(printf "$PROMPT_CHAR%.0s" {1..$LVL})%f "
+
+  SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
+}
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[black]%}["
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[black]%}] "
+ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[magenta]%}:"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▴"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}☰"
+ZSH_THEME_GIT_PROMPT_CLEAN=""
 
 #-------------------------------------------------------------------------------
 # SETUP OTHER SCRIPTS/PROGRAMS
@@ -187,13 +223,13 @@ source "$ZDOTDIR/prompt.zsh"
 source $ZDOTDIR/plugins/zsh-defer/zsh-defer.plugin.zsh
 
 function defer-load() {
-  test -f "$1" && zsh-defer -t 0.5 source "$1"
+  test -f "$1" && zsh-defer -t 0.25 source "$1"
 }
 
 defer-load $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 defer-load $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 defer-load "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-defer-load $ZDOTDIR/plugins/z.sh
+defer-load $ZDOTDIR/plugins/z/z.sh
 
 unfunction defer-load
 
@@ -203,7 +239,7 @@ ZSH_HIGHLIGHT_STYLES[path]="none"
 ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
 
 # zsh-autosuggestions
-ZSH_AUTOSUGGEST_USE_ASYNC=true
+# ZSH_AUTOSUGGEST_USE_ASYNC=true
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
 
 # pyenv
