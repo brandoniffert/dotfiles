@@ -31,7 +31,7 @@ group_python() {
 
   task_start "Install python $PYTHON3_VERSION with pyenv"
   if ! [ -d "$pyenv_dir/versions/$PYTHON3_VERSION" ]; then
-    PYENV_ROOT=$pyenv_dir CFLAGS="-I$(command brew --prefix openssl)/include" LDFLAGS="-L$(command brew --prefix openssl)/lib" command pyenv install $PYTHON3_VERSION
+    PYENV_ROOT=$pyenv_dir command pyenv install $PYTHON3_VERSION
     task_success "installed python $PYTHON3_VERSION"
   else
     task_skip "python $PYTHON3_VERSION is already installed"
