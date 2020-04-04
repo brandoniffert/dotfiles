@@ -149,18 +149,11 @@ zstyle ':completion:*:ssh:*' hosts off
 # Color ls completion
 zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 
-zsh_completions=/usr/local/share/zsh-completions
-if [ -d $zsh_completions ]; then
-  fpath=($zsh_completions $fpath)
-fi
-unset zsh_completions
+# zsh-completions
+source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 
 autoload -U compinit
 compinit
-
-# Make aliased completions work
-compdef g=git
-compdef t=tmux
 
 # Include hidden files
 _comp_options+=(globdots)
@@ -197,10 +190,10 @@ function defer-load() {
   test -f "$1" && zsh-defer -t 0.5 source "$1"
 }
 
-defer-load /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-defer-load /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+defer-load $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+defer-load $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 defer-load "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-defer-load /usr/local/etc/profile.d/z.sh
+defer-load $ZDOTDIR/plugins/z.sh
 
 unfunction defer-load
 

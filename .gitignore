@@ -1,5 +1,3 @@
 .DS_Store
 .zcompdump
 .chpwd-recent-dirs
-/.venv
-/roles/dotfiles/files/.config/karabiner/automatic_backups

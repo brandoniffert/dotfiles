@@ -1,0 +1,18 @@
+[submodule "dotfiles/zsh/plugins/zsh-defer"]
+	path = dotfiles/zsh/plugins/zsh-defer
+	url = git@github.com:romkatv/zsh-defer.git
+[submodule "dotfiles/zsh/plugins/zsh-completions"]
+	path = dotfiles/zsh/plugins/zsh-completions
+	url = git@github.com:zsh-users/zsh-completions.git
+[submodule "dotfiles/zsh/plugins/zsh-syntax-highlighting"]
+	path = dotfiles/zsh/plugins/zsh-syntax-highlighting
+	url = git@github.com:zsh-users/zsh-syntax-highlighting.git
+[submodule "dotfiles/zsh/plugins/zsh-autosuggestions"]
+	path = dotfiles/zsh/plugins/zsh-autosuggestions
+	url = git@github.com:zsh-users/zsh-autosuggestions.git
+[submodule "dotfiles/zsh/plugins/z"]
+	path = dotfiles/zsh/plugins/z
+	url = git@github.com:rupa/z.git
+[submodule "dotfiles/zsh/plugins/agkozak-zsh-prompt"]
+	path = dotfiles/zsh/plugins/agkozak-zsh-prompt
+	url = git@github.com:agkozak/agkozak-zsh-prompt.git
