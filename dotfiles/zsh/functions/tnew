@@ -1,0 +1,25 @@
+# Create a new tmux session and attach to it
+# If the session already exists, attach to that one
+
+local session_name="$1"
+local working_dir=${2:-$HOME}
+
+if [ -z "$session_name" ]; then
+  echo 'Please provide a session name!'
+  return 1
+fi
+
+# Check for existing session
+tmux -q has-session -t "$session_name" &>/dev/null
+
+# If session doesn't exist, create it
+[ $? -ne 0 ] && tmux new-session -c "$working_dir" -d -s "$session_name"
+
+clear
+
+# Attach or switch to it, depending on whether we are already in a tmux session
+if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
+  tmux switch-client -t "$session_name"
+else
+  tmux attach-session -t "$session_name"
+fi

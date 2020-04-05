@@ -1,0 +1,5 @@
+# Use fzf to upgrade installed homebrew package
+
+brew update
+local choices=$(brew outdated -v | fzf -m --reverse --preview="echo {} | cut -d' ' -f1 | xargs brew info")
+[[ ! -z "$choices" ]] && echo "$choices" | cut -d' ' -f1 | xargs brew upgrade

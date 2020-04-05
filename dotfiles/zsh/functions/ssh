@@ -1,0 +1,3 @@
+# Don't send tmux TERM when using ssh
+
+env TERM=xterm-256color command ssh "$@"

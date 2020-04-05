@@ -37,6 +37,8 @@ path=(
   "$ZDOTDIR"/bin
   "$HOME"/.local/bin
   "$N_PREFIX"/bin
+  "$PYENV_ROOT/shims"
+  "$RBENV_ROOT/shims"
   "$XDG_DATA_HOME"/composer/vendor/bin
   /usr/local/sbin
   $path

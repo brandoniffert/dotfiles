@@ -1,0 +1,5 @@
+# Serve a directory on localhost and open in browser
+
+local port="${1:-9876}"
+open "http://localhost:${port}/"
+python -m http.server $port

@@ -345,6 +345,9 @@ augroup btiAutocommands
   autocmd BufEnter,FocusGained,VimEnter,WinEnter * call bti#functions#focus_window()
   autocmd FocusLost,WinLeave * call bti#functions#blur_window()
 
+  " Set zsh filetype if editing a zsh function buffer
+  autocmd BufRead,BufNewFile */zsh/functions/** set filetype=zsh
+
   " When editing a file, always jump to the last known cursor position
   autocmd! BufReadPost *
     \  if line("'\"") > 1 && line("'\"") <= line("$")

@@ -1,33 +1,40 @@
+# vim: foldlevel=0
+#
 #-------------------------------------------------------------------------------
-# OPTIONS
+# zshrc
 #-------------------------------------------------------------------------------
 
-setopt autocd              # Auto cd into directory by name
-setopt autoparamslash      # Tab completing directory appends a slash
-setopt autopushd           # cd automatically pushes old dir onto dir stack
-setopt completealiases     # Do not expand aliases before completion finishes
-setopt completeinword      # Completion from both ends
-setopt correct             # Spell check commands
-setopt extendedhistory     # Add timestamps to history
-setopt globdots            # Allow hidden files to be matched
-setopt histignorealldups   # Prevent recording dupes in history
-setopt histignorespace     # Do not save commands with leading space to history
-setopt histreduceblanks    # Remove superfluous blanks from history
-setopt histverify          # Prevent auto execute expanded history command
-setopt ignoreeof           # Prevent exit on eof
-setopt incappendhistory    # Adds history incrementally
-setopt interactivecomments # Allow comments, even in interactive shells
-setopt localoptions        # Allow functions to have local options
-setopt localtraps          # Allow functions to have local traps
-setopt nobgnice            # Do not nice background tasks
-setopt promptsubst         # Expansion and substitution performed in prompts
-setopt pushdignoredups     # Prevent pushing multiple copies of same dir onto stack
-setopt pushdsilent         # Do not print dir stack after pushing/popping
-setopt sharehistory        # Share history between sessions
+# Options {{{
 
-#-------------------------------------------------------------------------------
-# EXPORTS
-#-------------------------------------------------------------------------------
+setopt AUTO_CD              # Auto cd into directory by name
+setopt AUTO_PARAM_SLASH     # Tab completing directory appends a slash
+setopt AUTO_PUSHD           # cd automatically pushes old dir onto dir stack
+setopt COMPLETE_ALIASES     # Do not expand aliases before completion finishes
+setopt COMPLETE_IN_WORD     # Completion from both ends
+setopt CORRECT              # Spell check commands
+setopt EXTENDED_GLOB        # Use additional special characters in globbing
+setopt EXTENDED_HISTORY     # Add timestamps to history
+setopt GLOB_DOTS            # Allow hidden files to be matched
+setopt HIST_FIND_NO_DUPS    # don't show dups when searching history
+setopt HIST_IGNORE_ALL_DUPS # Prevent recording dupes in history
+setopt HIST_IGNORE_SPACE    # Do not save commands with leading space to history
+setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from history
+setopt HIST_VERIFY          # Prevent auto execute expanded history command
+setopt IGNORE_EOF           # Prevent exit on eof
+setopt INC_APPEND_HISTORY   # Adds history incrementally
+setopt INTERACTIVE_COMMENTS # Allow comments, even in interactive shells
+setopt LIST_PACKED          # make completion lists more densely packed
+setopt LOCAL_OPTIONS        # Allow functions to have local options
+setopt LOCAL_TRAPS          # Allow functions to have local traps
+setopt NO_BG_NICE           # Do not nice background tasks
+setopt PROMPT_SUBST         # Expansion and substitution performed in prompts
+setopt PUSHD_IGNORE_DUPS    # Prevent pushing multiple copies of same dir onto stack
+setopt PUSHD_SILENT         # Do not print dir stack after pushing/popping
+setopt SHARE_HISTORY        # Share history between sessions
+
+# }}}
+
+# Exports {{{
 
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
 export HISTIGNORE="fg"
@@ -38,7 +45,29 @@ export BAT_THEME=Nord
 export HOMEBREW_NO_ANALYTICS=1
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 export EDITOR=nvim
+export PAGER=less
 export LESSHISTFILE=-
+
+# Filename (if known), line number if known, falling back to percent if known,
+# falling back to byte offset, falling back to dash
+export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
+
+# i = case-insensitive searches, unless uppercase characters in search string
+# F = exit immediately if output fits on one screen
+# M = verbose prompt
+# R = ANSI color support
+# S = chop long lines (rather than wrap them onto next line)
+# X = suppress alternate screen
+export LESS=iFMRSX
+
+# Color man pages
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\e[01;34m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;43;30m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[04;37m'
 
 # For fzf
 export FZF_DEFAULT_COMMAND='rg -u --files --smart-case'
@@ -61,12 +90,19 @@ export FZF_DEFAULT_OPTS='
   --color=border:#1a1d23
 '
 
-#-------------------------------------------------------------------------------
-# KEYS
-#-------------------------------------------------------------------------------
+# }}}
+
+# Key Bindings {{{
 
 # Use emacs key bindings
 bindkey -e
+
+bindkey '^r'   history-incremental-pattern-search-backward # ctrl-r
+bindkey "^d"   kill-buffer                                 # ctrl-d
+bindkey '^[k'  kill-line                                   # alt+k
+bindkey '^[j'  backward-kill-line                          # alt+j
+bindkey '^[[Z' reverse-menu-complete                       # shift-tab
+bindkey '^[m'  copy-prev-shell-word                        # alt-m
 
 # Make search up and down work
 bindkey '^[[A' up-line-or-search
@@ -75,38 +111,32 @@ bindkey '^[[B' down-line-or-search
 # Also do history expansion on space
 bindkey ' ' magic-space
 
-bindkey "^K" kill-whole-line
-bindkey "^R" history-incremental-search-backward
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
-bindkey "^D" delete-char
-bindkey "^F" forward-char
-bindkey "^B" backward-char
-
-# Use "cbt" capability ("back_tab", as per `man terminfo`), if we have it:
-if tput cbt &> /dev/null; then
-  bindkey "$(tput cbt)" reverse-menu-complete # Make Shift-tab go to previous completion
-fi
-
 # Allow C-x C-e to edit command line
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
 
-# Magic Enter
-function magic-enter () {
-  if [[ -z $BUFFER ]]; then
-    zle clear-screen
+# Clear the screen if enter is pressed on an empty buffer
+function bti-magic-enter () {
+  [[ -z $BUFFER ]] && zle clear-screen || zle accept-line
+}
+zle -N bti-magic-enter
+bindkey '^M' bti-magic-enter
+
+# Make CTRL-Z background things and unbackground them
+function bti-fg-bg() {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
   else
-    zle accept-line
+    zle push-input
   fi
 }
-zle -N magic-enter
-bindkey '^M' magic-enter
+zle -N bti-fg-bg
+bindkey '^Z' bti-fg-bg
 
-#-------------------------------------------------------------------------------
-# ALIASES
-#-------------------------------------------------------------------------------
+# }}}
+
+# Aliases {{{
 
 alias e="$EDITOR"
 alias g='git'
@@ -123,60 +153,83 @@ alias q=exit
 alias t='tmux'
 alias tkill='tmux kill-server'
 alias v=view
-alias vi=vim
 alias vgs="vagrant global-status"
-alias zr!="source $ZDOTDIR/.zshrc"
 
 # https://github.com/pyenv/pyenv/issues/106#issuecomment-440826532
 if command -v pyenv >/dev/null 2>&1; then
   alias brew='env PATH=${PATH//$(pyenv root)\/shims:/} brew'
 fi
 
-#-------------------------------------------------------------------------------
-# COMPLETION
-#-------------------------------------------------------------------------------
+# }}}
 
-# Make completion:
-# - Case-insensitive
-# - Accept abbreviations after . or _ or - (ie. f.b -> foo.bar)
-# - Substring complete (ie. bar -> foobar)
-zstyle ':completion:*' matcher-list 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-# Visual select
-zstyle ':completion:*' menu select
-# Pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
-# Don't autocomplete hosts
-zstyle ':completion:*:ssh:*' hosts off
-# Color ls completion
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+# Functions {{{
+
+fpath=("$ZDOTDIR/functions" $fpath)
+autoload -Uz $ZDOTDIR/functions/*
+
+# }}}
+
+# Completion {{{
+
+zstyle '*'              single-ignored  show
+zstyle ':completion:*'  completer       _complete
+zstyle ':completion:*'  insert-tab      pending
+zstyle ':completion:*'  list-colors     ${(s.:.)LS_COLORS}
+zstyle ':completion:*'  matcher-list    'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*'  menu            select
+zstyle ':completion:*'  squeeze-slashes true
 
 # zsh-completions
 source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 
-autoload -U compinit
-compinit
+() {
+  emulate -L zsh
+  local -r cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
+  local -r zcd=$cache_dir/.zcompdump
+  local -r zcdc="$zcd.zwc"
 
-#-------------------------------------------------------------------------------
-# FUNCTIONS
-#-------------------------------------------------------------------------------
+  # Store completion cache
+  # https://www.reddit.com/r/zsh/comments/fqpidr/removing_zcompdump_file_creation/
+  autoload -Uz _store_cache compinit
+  zstyle ':completion:*' use-cache true
+  zstyle ':completion:*' cache-path $cache_dir/.zcompcache
+  [[ -f $cache_dir/.zcompcache/.make-cache-dir ]] || _store_cache .make-cache-dir
 
-source "$ZDOTDIR/functions.zsh"
+  # Perform compinit only once a day
+  # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2894219
+  if [[ -f "$zcd"(#qN.m+1) ]]; then
+    compinit -i -d "$zcd"
+    { rm -f "$zcdc" && zcompile "$zcd" } &!
+  else
+    compinit -C -d "$zcd"
+    { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
+  fi
+}
 
-# Adds `cdr` command for navigating to recent directories
-autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
-add-zsh-hook chpwd chpwd_recent_dirs
+# }}}
 
-# Enable menu-style completion for cdr
-zstyle ':completion:*:*:cdr:*:*' menu selection
-
-# Fall through to cd if cdr is passed a non-recent dir as an argument
-zstyle ':chpwd:*' recent-dirs-default true
-
-#-------------------------------------------------------------------------------
-# PROMPT
-#-------------------------------------------------------------------------------
+# Prompt {{{
 
 source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
+
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[black]%}["
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[black]%}] "
+ZSH_THEME_GIT_PROMPT_SEPARATOR="%{$fg[black]%}|%f"
+ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg[white]%}:"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▴"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
+ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
+ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
+ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg[black]%}(%f"
+ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX="%{$fg[black]%})%f "
+ZSH_THEME_GIT_PROMPT_TAG="%{$fg[magenta]%}"
+ZSH_GIT_PROMPT_SHOW_STASH=1
 
 () {
   local PROMPT_CHAR='❯'
@@ -190,75 +243,91 @@ source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
   [ -n "$TMUX" ] && LVL=$(($SHLVL - 1))
 
-  PROMPT='%F{black}┌%f '
+  PROMPT='%{$fg[black]%}┌%f '
   PROMPT+='${${VIRTUAL_ENV#0}:+($(basename $VIRTUAL_ENV))}'
-  PROMPT+='%F{cyan}%1~%f '
+  PROMPT+='%{$fg[cyan]%}%1~%f '
+  PROMPT+='$(gitprompt_secondary)'
   PROMPT+='$(gitprompt)'
-  PROMPT+='%F{yellow}%(1j.◆ .)%f'
+  PROMPT+='%{$fg[yellow]%}%(1j.◆ .)%f'
   PROMPT+=$'\n'
-  PROMPT+='%F{black}└%f '
+  PROMPT+='%{$fg[black]%}└%f '
   PROMPT+="${PROMPT_COLOR}$(printf "$PROMPT_CHAR%.0s" {1..$LVL})%f "
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
 
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[black]%}["
-ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[black]%}] "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=""
-ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[magenta]%}:"
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▴"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}✖"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
-ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}☰"
-ZSH_THEME_GIT_PROMPT_CLEAN=""
+# }}}
 
-#-------------------------------------------------------------------------------
-# SETUP OTHER SCRIPTS/PROGRAMS
-#-------------------------------------------------------------------------------
+# Plugins/Scripts {{{
 
 source $ZDOTDIR/plugins/zsh-defer/zsh-defer.plugin.zsh
 
-function defer-load() {
-  test -f "$1" && zsh-defer -t 0.25 source "$1"
+function bti-defer-load() {
+  test -f "$1" && zsh-defer source "$1"
 }
 
-defer-load $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-defer-load $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-defer-load "${XDG_CONFIG_HOME:-$HOME/.config}"/fzf/fzf.zsh
-defer-load $ZDOTDIR/plugins/z/z.sh
+bti-defer-load $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+bti-defer-load $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+bti-defer-load $ZDOTDIR/plugins/z/z.sh
+bti-defer-load $XDG_CONFIG_HOME/fzf/fzf.zsh
 
-unfunction defer-load
+unfunction bti-defer-load
 
-# zsh-syntax-highlighting
-declare -A ZSH_HIGHLIGHT_STYLES
-ZSH_HIGHLIGHT_STYLES[path]="none"
-ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+function bti-defer-load-after() {
+  # zsh-syntax-highlighting
+  ZSH_HIGHLIGHT_STYLES[path]="none"
+  ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
 
-# zsh-autosuggestions
-# ZSH_AUTOSUGGEST_USE_ASYNC=true
-ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=magic-enter
+  # zsh-autosuggestions
+  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
+  ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-# pyenv
+  unfunction bti-defer-load-after
+}
+
+zsh-defer -t 0.5 bti-defer-load-after
+
+# pyenv (lazy loaded)
 if command -v pyenv &>/dev/null; then
-  zsh-defer -t 2 eval "$(pyenv init - --no-rehash)"
+  pyenv() {
+    eval "$(command pyenv init - --no-rehash)"
+    pyenv "$@"
+    typeset -U path
+  }
 fi
 
-# rbenv
+# rbenv (lazy loaded)
 if command -v rbenv &>/dev/null; then
-  zsh-defer -t 2 eval "$(rbenv init - --no-rehash)"
+  rbenv() {
+    eval "$(command rbenv init - --no-rehash)"
+    command rbenv "$@"
+    typeset -U path
+  }
 fi
+
+# Use fd (https://github.com/sharkdp/fd) instead of the default find
+# command for listing path candidates.
+# - The first argument to the function ($1) is the base path to start traversal
+# - See the source code (completion.{bash,zsh}) for the details.
+function _fzf_compgen_path() {
+  fd --hidden --follow --exclude ".git" . "$1"
+}
+
+# Use fd to generate the list for directory completion
+function _fzf_compgen_dir() {
+  fd --type d --hidden --follow --exclude ".git" . "$1"
+}
 
 # Setup dircolors
-DIRCOLORS_PATH="$XDG_CONFIG_HOME/dircolors/nord.dircolors"
-command -v gdircolors >/dev/null && test -f $DIRCOLORS_PATH && eval $(gdircolors $DIRCOLORS_PATH)
-unset DIRCOLORS_PATH
+() {
+  local _dircolors="$XDG_CONFIG_HOME/dircolors/nord.dircolors"
+  command -v gdircolors >/dev/null && test -r $_dircolors && eval $(command gdircolors $_dircolors)
+}
 
-#-------------------------------------------------------------------------------
-# LOCAL OPTIONS
-#-------------------------------------------------------------------------------
+# }}}
 
-[ -f $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+# Local Options {{{
+
+[ -r $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+
+# }}}

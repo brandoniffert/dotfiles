@@ -1,0 +1,7 @@
+# Quickly manage vagrant homestead from anywhere
+
+if [ $# -eq 0 ]; then
+  cd "$HOME/Projects/Tooling/vagrant-homestead" && clear
+else
+  ( cd "$HOME/Projects/Tooling/vagrant-homestead" && vagrant $* && write-vagrant-global-status )
+fi
