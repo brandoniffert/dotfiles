@@ -24,7 +24,7 @@ group_nodejs() {
 
   task_start "Install the latest LTS node"
   if ! [ -d "$n_dir/n/versions" ]; then
-    PREFIX=$n_dir command n lts
+    N_PREFIX=$n_dir command n lts
 
     if [ -d "$n_dir/n/versions" ]; then
       task_success 'installed node'
