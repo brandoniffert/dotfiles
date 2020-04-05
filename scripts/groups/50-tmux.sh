@@ -8,7 +8,7 @@ fi
 # Description: Installs tmux plugin manager
 
 group_tmux() {
-  local tmux_plugins_dir="$HOME/.tmux/plugins"
+  local tmux_plugins_dir="$XDG_DATA_HOME/tmux/plugins"
   local tpm_repo="https://github.com/tmux-plugins/tpm.git"
 
   mkdir -p "$tmux_plugins_dir"
