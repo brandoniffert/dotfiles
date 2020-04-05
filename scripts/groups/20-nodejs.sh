@@ -8,9 +8,11 @@ fi
 # Description: Installs the latest LTS node and installs global packages
 
 group_nodejs() {
-  group_header "${FUNCNAME[0]//group_/}"
-
   local n_dir=$XDG_DATA_HOME/n
+
+  mkdir -p "$n_dir"
+
+  group_header "${FUNCNAME[0]//group_/}"
 
   if ! command -v n &>/dev/null; then
     task_error_exit 'n is not installed'
