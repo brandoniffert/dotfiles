@@ -45,6 +45,7 @@ group_ruby() {
   if ! RBENV_ROOT=$rbenv_dir command rbenv version | cut -d ' ' -f 1 | grep -Fxq $RUBY_VERSION; then
     RBENV_ROOT=$rbenv_dir command rbenv global $RUBY_VERSION
     RBENV_ROOT=$rbenv_dir command rbenv rehash
+    task_success "set ruby $RUBY_VERSION as the global version"
   else
     task_skip "ruby $RUBY_VERSION is already the global version"
   fi
