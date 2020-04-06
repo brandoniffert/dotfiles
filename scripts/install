@@ -41,6 +41,18 @@ help() {
   echo
 }
 
+# Make sure Xcode Command Line Tools are installed
+if ! xcode-select --print-path &> /dev/null; then
+  xcode-select --install &> /dev/null
+
+  # Wait until the XCode Command Line Tools are installed
+  until xcode-select --print-path &> /dev/null; do
+    sleep 5
+  done
+
+  sudo xcodebuild -license accept &> /dev/null
+fi
+
 # Collect all groups passed in through args
 RUN_GROUPS=()
 for opt in "$@"; do
@@ -105,6 +117,5 @@ for group_file in "${RUN_FILES[@]}"; do
   source "$group_file"
 done
 
-echo
 echo '▸ Finished.'
 echo
