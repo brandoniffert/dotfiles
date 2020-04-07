@@ -321,7 +321,7 @@ const DEFAULT_PROFILE = applyExemptions({
       },
       {
         description:
-          'Change Enter to Hyper when held, Enter when used alone',
+          'Change Enter to Meh when held, Enter when used alone',
         manipulators: [
           {
             from: {
@@ -334,7 +334,6 @@ const DEFAULT_PROFILE = applyExemptions({
               {
                 key_code: 'left_shift',
                 modifiers: [
-                  'left_command',
                   'left_control',
                   'left_option',
                 ]
