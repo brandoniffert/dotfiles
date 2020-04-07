@@ -13,7 +13,7 @@
 --
 local logLevel = 'info'
 
-local log = hs.logger.new('iffy', logLevel)
+local log = hs.logger.new('bti', logLevel)
 
 local module = {
   d = log.d,
