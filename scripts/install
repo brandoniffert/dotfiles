@@ -41,18 +41,6 @@ help() {
   echo
 }
 
-# Make sure Xcode Command Line Tools are installed
-if ! xcode-select --print-path &> /dev/null; then
-  xcode-select --install &> /dev/null
-
-  # Wait until the XCode Command Line Tools are installed
-  until xcode-select --print-path &> /dev/null; do
-    sleep 5
-  done
-
-  sudo xcodebuild -license accept &> /dev/null
-fi
-
 # Collect all groups passed in through args
 RUN_GROUPS=()
 for opt in "$@"; do
@@ -110,6 +98,21 @@ sudo -v
 
 # Update existing sudo time stamp until the script has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
+
+# Make sure Xcode License is accepted
+if ! [ -f /Library/Preferences/com.apple.dt.Xcode.plist ]; then
+  # Make sure Xcode Command Line Tools are installed
+  if ! xcode-select --print-path &> /dev/null; then
+    xcode-select --install &> /dev/null
+
+    # Wait until the XCode Command Line Tools are installed
+    until xcode-select --print-path &> /dev/null; do
+      sleep 5
+    done
+  fi
+
+  sudo xcodebuild -license accept &> /dev/null
+fi
 
 # Run each group file
 for group_file in "${RUN_FILES[@]}"; do
