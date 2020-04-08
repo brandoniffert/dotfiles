@@ -8,6 +8,9 @@ fi
 # Description: Installs a default ruby using rbenv
 
 group_ruby() {
+  export GEM_HOME="$XDG_DATA_HOME"/gem
+  export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
+
   local RUBY_VERSION=2.6.5
   local rbenv_dir=$XDG_DATA_HOME/rbenv
   local default_gems=(
