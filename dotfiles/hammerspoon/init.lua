@@ -3,6 +3,16 @@ local log = require('log')
 
 hs.window.animationDuration = 0
 
+local keyLayout = (hs.battery.name() == nil) and 'colemak' or 'qwerty'
+local colemakForQwerty = {
+  r = 'a',
+  t = 'd',
+  w = 'q',
+  x = 'z',
+  p = 'e',
+  v = 'c'
+}
+
 -- Meh key
 local meh = {'alt', 'ctrl', 'shift'}
 
@@ -20,7 +30,13 @@ bindMeh = function(fromKey, toKey)
 end
 
 bindMehFn = function(fromKey, func)
-  hs.hotkey.bind(meh, fromKey, func)
+  local normalizedKey = fromKey
+
+  if keyLayout == 'qwerty' and colemakForQwerty[fromKey] ~= nil then
+    normalizedKey = colemakForQwerty[fromKey]
+  end
+
+  hs.hotkey.bind(meh, normalizedKey, func)
 end
 
 -- Put displays to sleep
