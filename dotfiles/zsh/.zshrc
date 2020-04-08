@@ -150,6 +150,8 @@ alias lls='gls --color=auto -al'
 alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit
+alias sudoedit='sudo -e'
+alias se='sudo -e'
 alias t='tmux'
 alias tkill='tmux kill-server'
 alias v=view
