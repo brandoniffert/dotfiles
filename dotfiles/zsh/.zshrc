@@ -141,6 +141,7 @@ bindkey '^Z' bti-fg-bg
 alias e="$EDITOR"
 alias g='git'
 alias grep='grep --color'
+alias lg='lazygit'
 alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
