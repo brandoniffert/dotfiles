@@ -2,6 +2,7 @@ tap "homebrew/bundle"
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
 tap "homebrew/core"
+tap "jesseduffield/lazygit"
 tap "universal-ctags/universal-ctags"
 
 brew "ansible"
