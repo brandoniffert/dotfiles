@@ -19,7 +19,7 @@ group_vim() {
 
   task_start "Install vim-plug plugins"
   if ! [ -f "$vim_plug_path" ]; then
-    wget -q -O "$vim_plug_path" "$vim_plug_url"
+    wget --hsts-file="${XDG_CACHE_HOME-$HOME/.cache}/wget-hsts" -q -O "$vim_plug_path" "$vim_plug_url"
     command nvim --headless +UpdateRemotePlugins +'PlugInstall --sync' +qa &>/dev/null
     task_success 'setup vim-plug and plugins'
   else
