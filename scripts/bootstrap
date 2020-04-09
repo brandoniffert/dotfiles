@@ -20,7 +20,7 @@ read -r -p "Do you want to clone the repo to the current directory? [y|N] " resp
 if [[ $response =~ (yes|y|Y) ]]; then
   command git clone --recurse-submodules https://github.com/brandoniffert/computer.git
   echo
-  echo 'Cloned repo!'
+  echo '=> Cloned repo! cd into the directory and run ./scripts/install'
   echo
 else
   echo
