@@ -33,16 +33,18 @@ export VAGRANT_ALIAS_FILE="$XDG_DATA_HOME"/vagrant/aliases
 export _Z_DATA="$XDG_DATA_HOME"/z
 
 # PATH
-path=(
-  "$ZDOTDIR"/bin
-  "$HOME"/.local/bin
-  "$N_PREFIX"/bin
-  "$PYENV_ROOT/shims"
-  "$RBENV_ROOT/shims"
-  "$XDG_DATA_HOME"/composer/vendor/bin
-  /usr/local/sbin
-  $path
-)
+if test -n $ZSH_VERSION; then
+  path=(
+    "$HOME"/.local/bin
+    "$ZDOTDIR"/bin
+    "$N_PREFIX"/bin
+    "$PYENV_ROOT/shims"
+    "$RBENV_ROOT/shims"
+    "$XDG_DATA_HOME"/composer/vendor/bin
+    /usr/local/sbin
+    $path
+  )
 
-# Ensure path arrays do not contain duplicates
-typeset -gU cdpath fpath path
+  # Ensure path arrays do not contain duplicates
+  typeset -gU cdpath fpath path
+fi
