@@ -4,6 +4,6 @@ brandoniffert's computer
 
 ## Setup
 
-`git clone --recurse-submodules https://github.com/brandoniffert/computer.git`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/brandoniffert/computer/master/scripts/bootstrap)"`
 
-Run `./scripts/install` from the repo root directory
+Run `./scripts/install` from the repo directory
