@@ -1,0 +1,37 @@
+#!/bin/bash
+
+current_hostname=$(hostname -s)
+
+echo '#'
+echo "# Current hostname: $current_hostname"
+echo '#'
+echo
+
+read -r -p "Do you want to set a new hostname? [y|N] " response
+if [[ $response =~ (yes|y|Y) ]]; then
+  osascript -e 'tell application "System Preferences" to quit'
+
+  read -r -p "Enter new hostname: " new_hostname
+  if [ -n "$new_hostname" ]; then
+    echo "Setting computer name to $new_hostname"
+    scutil --set ComputerName "$new_hostname"
+
+    echo "Setting hostname to $new_hostname"
+    scutil --set HostName "$new_hostname"
+
+    echo "Setting localhostname to $new_hostname"
+    scutil --set LocalHostName "$new_hostname"
+
+    echo "Setting NetBIOS name to $new_hostname"
+    sudo defaults write com.apple.smb.server NetBIOSName -string "$new_hostname"
+
+    echo
+    echo '=> Updated hostname'
+  else
+    echo
+    echo 'hostname unchanged'
+  fi
+else
+  echo
+  echo 'hostname unchanged'
+fi
