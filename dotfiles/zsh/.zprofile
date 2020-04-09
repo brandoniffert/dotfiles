@@ -33,7 +33,7 @@ export VAGRANT_ALIAS_FILE="$XDG_DATA_HOME"/vagrant/aliases
 export _Z_DATA="$XDG_DATA_HOME"/z
 
 # PATH
-if test -n $ZSH_VERSION; then
+if ! [ -z $ZSH_VERSION ]; then
   path=(
     "$HOME"/.local/bin
     "$ZDOTDIR"/bin
