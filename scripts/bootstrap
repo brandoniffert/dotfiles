@@ -3,6 +3,10 @@
 set -euo pipefail
 
 if ! /usr/bin/xcode-select --print-path &>/dev/null; then
+  echo
+  echo 'Installing XCode Command Line Tools...'
+  echo
+
   # Prompt to install the XCode Command Line Tools
   /usr/bin/xcode-select --install &>/dev/null
 
@@ -10,8 +14,6 @@ if ! /usr/bin/xcode-select --print-path &>/dev/null; then
   until xcode-select --print-path &>/dev/null; do
     sleep 5
   done
-
-  sudo /usr/bin/xcodebuild -license accept
 fi
 
 read -r -p "Do you want to clone the repo to the current directory? [y|N] " response
