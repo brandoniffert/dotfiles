@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+FF_DOTFILES_DIR=$(cd "${BASH_SOURCE%/*}" && pwd)
+
+ff_profile=$(find ~/Library/Application\ Support/Firefox/Profiles -type d -depth 1 -iname '*dev-edition-default*')
+
+if [ -d "$ff_profile" ]; then
+  mkdir -p "$ff_profile/chrome"
+
+  ln -s "$FF_DOTFILES_DIR/userChrome.css" "$ff_profile/chrome/userChrome.css"
+else
+  echo 'Could not find Firefox profile'
+fi
