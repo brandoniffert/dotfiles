@@ -78,7 +78,11 @@ function appLaunched(appName, eventType, app)
     end)
 
     local maximizeApp = (function()
-      app:focusedWindow():setFrame(app:focusedWindow():screen():frame())
+      local appWindow = app:frontmostApplication():focusedWindow()
+
+      if appWindow ~= nil then
+        appWindow:setFrame(appWindow:screen():frame())
+      end
     end)
 
     hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
