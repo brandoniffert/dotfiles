@@ -62,9 +62,9 @@ bindMehFn('x', WinMan.moveWindowBottomLeft)
 bindMehFn('p', WinMan.moveWindowUpperRight)
 bindMehFn('v', WinMan.moveWindowBottomRight)
 bindMehFn('tab', WinMan.moveWindowToNextMonitor)
-bindMehFn('return', WinMan.maximizeWindow)
+bindMehFn('space', WinMan.maximizeWindow)
 bindMehFn('delete', WinMan.undoPop)
-bindMehFn('space', WinMan.centerWindow)
+bindMehFn('=', WinMan.centerWindow)
 
 -- Application watcher
 function appLaunched(appName, eventType, app)
