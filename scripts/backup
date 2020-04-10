@@ -110,6 +110,19 @@ else
   p_error 'Error backing up!'
 fi
 
+# Backup Firefox profile
+ff_profile=$(find ~/Library/Application\ Support/Firefox/Profiles -type d -depth 1 -iname '*dev-*')
+if [ -d "$ff_profile" ]; then
+  p_header "$ff_profile"
+  if cp -R "$ff_profile" "$BACKUP_DIR/firefox"; then
+    p_success "Backed up $ff_profile"
+  else
+    p_error 'Error backing up!'
+  fi
+else
+  p_error "Could not find Firefox profile"
+fi
+
 # Backup Visual Studio Code settings
 p_header "Visual Studio Code settings"
 if cp -R "$HOME/Library/Application Support/Code/User" "$BACKUP_DIR/visual-studio-code"; then
