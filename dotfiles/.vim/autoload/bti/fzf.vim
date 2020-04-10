@@ -15,9 +15,9 @@ function! s:smart_quote_input(input)
   return l:hasQuotes || l:hasOptions || l:hasEscapedSpacesPlusPath ? a:input : '-- "' . a:input . '"'
 endfunction
 
-function! bti#fzf#rg_files(args, bang) abort
-  let l:base_rg_cmd = 'rg --files --smart-case --hidden --follow --glob "!.git/*"'
-  let l:opts = {'source': l:base_rg_cmd, 'options': '-m'}
+function! bti#fzf#all_files(args, bang) abort
+  let l:base_fzf_cmd = $FZF_DEFAULT_COMMAND . ' --no-ignore'
+  let l:opts = {'source': l:base_fzf_cmd, 'options': '-m'}
   let l:file_opts = l:opts
 
   if a:bang && &columns >= 80 || &columns >= 120
