@@ -4,6 +4,7 @@ local log = require('log')
 hs.window.animationDuration = 0
 
 local keyLayout = (hs.battery.name() == nil) and 'colemak' or 'qwerty'
+
 local colemakForQwerty = {
   r = 'a',
   t = 'd',
@@ -42,6 +43,15 @@ end
 -- Put displays to sleep
 bindMehFn('`', function()
   os.execute('pmset displaysleepnow')
+end)
+
+-- Reload hammerspoon config
+bindMehFn('escape', function()
+  hs.alert('Reloading config')
+
+  hs.timer.doAfter(0.5, function()
+    hs.reload()
+  end)
 end)
 
 -- Window management
