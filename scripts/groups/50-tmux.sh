@@ -5,7 +5,7 @@ if [ "$0" = "${BASH_SOURCE[0]}" ]; then
   exit 1
 fi
 
-# Description: Installs tmux plugin manager
+# Description: Installs tmux plugin manager and plugins
 
 group_tmux() {
   local tmux_plugins_dir="$XDG_DATA_HOME/tmux/plugins"
@@ -15,10 +15,14 @@ group_tmux() {
 
   group_header "${FUNCNAME[0]//group_/}"
 
-  task_start 'Install tmux plugin manager'
+  task_start 'Install tmux plugin manager and plugins'
   if ! [ -d "$tmux_plugins_dir/tpm" ]; then
     if git clone -q "$tpm_repo" "$tmux_plugins_dir/tpm"; then
-      task_success 'installed tpm'
+      tmux start-server
+      tmux new-session -d
+      "$tmux_plugins_dir"/tpm/scripts/install_plugins.sh &>/dev/null
+      tmux kill-server
+      task_success 'installed tpm and plugins'
     else
       task_error 'could not clone tpm repo'
     fi
