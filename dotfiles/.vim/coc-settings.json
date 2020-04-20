@@ -7,5 +7,7 @@
   "diagnostic.warningSign": "•",
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
+  "tailwindCSS.headwind.prependCustomClasses": true,
+  "tailwindCSS.htmlLanguages": ["blade", "handlebars", "html", "njk", "nunjucks", "php", "ss.html", "svelte", "vue"],
   "yank.highlight.enable": false
 }
