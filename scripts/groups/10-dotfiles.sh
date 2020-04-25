@@ -70,13 +70,6 @@ group_dotfiles() {
 
   link_file "$source_file" "$target_file"
   task_end
-
-  task_start "Symlink old tmux location to XDG location"
-  source_file="$XDG_CONFIG_HOME/tmux/.tmux.conf"
-  target_file="$HOME/.tmux.conf"
-
-  link_file "$source_file" "$target_file"
-  task_end
 }
 
 group_dotfiles
