@@ -1,4 +1,5 @@
 {
+  "css.validate": false,
   "diagnostic.checkCurrentLine": true,
   "diagnostic.enableHighlightLineNumber": false,
   "diagnostic.errorSign": "•",
