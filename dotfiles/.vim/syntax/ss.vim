@@ -24,4 +24,3 @@ hi def link ssComment Comment
 hi def link ssString String
 
 let b:current_syntax = 'ss'
-let main_syntax = 'html'
