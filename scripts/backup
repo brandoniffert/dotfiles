@@ -55,9 +55,9 @@ else
 fi
 
 # Backup ~/.aws
-p_header "$XDG_CONFIG_HOME/aws"
-if cp -R "$XDG_CONFIG_HOME/aws/" "$BACKUP_DIR/dot-aws"; then
-  p_success "Backed up $XDG_CONFIG_HOME/aws"
+p_header "$HOME/aws"
+if cp -R "$HOME/aws/" "$BACKUP_DIR/dot-aws"; then
+  p_success "Backed up $HOME/aws"
 else
   p_error 'Error backing up!'
 fi
