@@ -9,6 +9,6 @@
   "eslint.autoFixOnSave": true,
   "eslint.packageManager": "yarn",
   "tailwindCSS.headwind.prependCustomClasses": true,
-  "tailwindCSS.htmlLanguages": ["blade", "handlebars", "html", "njk", "nunjucks", "php", "ss.html", "svelte", "vue"],
+  "tailwindCSS.htmlLanguages": ["blade", "handlebars", "html", "njk", "nunjucks", "php", "ss.html", "svelte", "vue", "liquid"],
   "yank.highlight.enable": false
 }
