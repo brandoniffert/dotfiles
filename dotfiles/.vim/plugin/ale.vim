@@ -19,7 +19,8 @@ let g:ale_linters = {
       \ }
 
 let g:ale_fixers = {
-      \ 'php': ['php_cs_fixer']
+      \ 'php': ['php_cs_fixer'],
+      \ 'html': ['prettier']
       \ }
 
 let g:ale_php_phpcs_executable = './vendor/bin/phpcs'
