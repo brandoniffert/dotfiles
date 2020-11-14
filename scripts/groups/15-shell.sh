@@ -26,6 +26,18 @@ group_shell() {
     task_skip "$target_shell is already the default shell"
   fi
   task_end
+
+  task_start "Setup terminfo"
+    local terminfo_dir=~/.terminfo
+
+    if ! [ -d "$terminfo_dir" ]; then
+      mkdir -p "$terminfo_dir"
+      tic -o "$terminfo_dir" "$REPO_ROOT/scripts/support/tmux-256color.terminfo"
+      task_success "setup terminfo"
+    else
+      task_skip "terminfo is already setup"
+    fi
+  task_end
 }
 
 group_shell
