@@ -1,4 +1,4 @@
-# vim: ft=colortemplate fdm=marker cc=30,50,65 et ts=2 sw=2
+# vim: ft=colortemplate fdm=marker cc=37,66,81 et ts=2 sw=2
 
 # Mandatory
 Full name:     Nordish
@@ -13,23 +13,23 @@ Neovim:        yes
 
 Background: dark
 
-# Color name                 GUI                 Base256
-Color: black                 #3b4252               ~
-Color: red                   #bf616a               ~
-Color: green                 #a3be8c               ~
-Color: yellow                #ebcb8b               ~
-Color: blue                  #81a1c1               ~
-Color: magenta               #b48ead               ~
-Color: cyan                  #88c0d0               ~
-Color: white                 #e5e9f0               ~
+# Color name                         GUI                 Base256
+Color: black                         #3b4252               ~
+Color: red                           #bf616a               ~
+Color: green                         #a3be8c               ~
+Color: yellow                        #ebcb8b               ~
+Color: blue                          #81a1c1               ~
+Color: magenta                       #b48ead               ~
+Color: cyan                          #88c0d0               ~
+Color: white                         #e5e9f0               ~
 
-Color: base0                 #0f111a               ~
-Color: base1                 #11131d               ~
+Color: base0                         #0f111a               ~
+Color: base1                         #11131d               ~
 
-Color: gray1                 #171926               ~
-Color: gray2                 #1d202f               ~
-Color: gray3                 #232739               ~
-Color: gray4                 #4c566a               ~
+Color: gray1                         #171926               ~
+Color: gray2                         #1d202f               ~
+Color: gray3                         #232739               ~
+Color: gray4                         #4c566a               ~
 
 # Terminal colors
 Term colors: black red green yellow blue magenta cyan white
@@ -38,232 +38,232 @@ Term colors: gray4 red green yellow blue magenta cyan white
 # Default highlight groups
 Variant: gui 256
 
-# Group                      Foreground          Background     Attributes
-ColorColumn                  none                gray2
-Cursor                       black               white
-CursorColumn                 none                black
-CursorLine                   none                gray1
-DiffAdd                      gray1               green
-DiffChange                   gray1               yellow
-DiffDelete                   gray1               red
-DiffText                     gray1               blue
-Directory                    cyan                none
-EndOfBuffer                  black               none
-Error                        red                 gray2
-ErrorMsg                     red                 none           bold
-Folded                       white               gray1          italic
-iCursor                      black               white
-IncSearch                    black               yellow         bold
-LineNr                       black               none
-MatchParen                   white               black
-ModeMsg                      white               none
-MoreMsg                      white               none
-Normal                       white               none
-NonText                      gray4               none
-Pmenu                        none                gray2
-PmenuSbar                    white               gray2
-PmenuSel                     black               white          bold
-PmenuThumb                   cyan                gray4
-Question                     white               none
-Search                       red                 none           bold,underline
-SignColumn                   black               none
-SpecialKey                   gray4               none
-SpellBad                     red                 gray2          underline
-SpellCap                     yellow              gray2
-SpellLocal                   white               gray2
-SpellRare                    white               gray2
-StatusLine                   gray4               none
-StatusLineNC                 black               none
-TabLine                      gray4               none
-TabLineFill                  none                none
-TabLineSel                   white               none
-Terminal                     white               none
-Title                        white               none
-VertSplit                    base1               base1
-Visual                       none                gray3
-WarningMsg                   black               yellow         bold
+# Group                              Foreground                   Background     Attributes
+ColorColumn                          none                         gray2
+Cursor                               black                        white
+CursorColumn                         none                         black
+CursorLine                           none                         gray1
+DiffAdd                              gray1                        green
+DiffChange                           gray1                        yellow
+DiffDelete                           gray1                        red
+DiffText                             gray1                        blue
+Directory                            cyan                         none
+EndOfBuffer                          black                        none
+Error                                red                          gray2
+ErrorMsg                             red                          none           bold
+Folded                               white                        gray1          italic
+iCursor                              black                        white
+IncSearch                            black                        yellow         bold
+LineNr                               black                        none
+MatchParen                           white                        black
+ModeMsg                              white                        none
+MoreMsg                              white                        none
+Normal                               white                        none
+NonText                              gray4                        none
+Pmenu                                none                         gray2
+PmenuSbar                            white                        gray2
+PmenuSel                             black                        white          bold
+PmenuThumb                           cyan                         gray4
+Question                             white                        none
+Search                               red                          none           bold,underline
+SignColumn                           black                        none
+SpecialKey                           gray4                        none
+SpellBad                             red                          gray2          underline
+SpellCap                             yellow                       gray2
+SpellLocal                           white                        gray2
+SpellRare                            white                        gray2
+StatusLine                           gray4                        none
+StatusLineNC                         black                        none
+TabLine                              gray4                        none
+TabLineFill                          none                         none
+TabLineSel                           white                        none
+Terminal                             white                        none
+Title                                white                        none
+VertSplit                            base1                        base1
+Visual                               none                         gray3
+WarningMsg                           black                        yellow         bold
 
 # Neovim
-healthError                  red                 none           bold
-healthSuccess                green               none           bold
-healthWarning                yellow              none           bold
-TermCursor                   black               white
-TermCursorNC                 none                black
-ActiveWindow                 fg                  base1
-InactiveWindow               gray4               base0
+healthError                          red                          none           bold
+healthSuccess                        green                        none           bold
+healthWarning                        yellow                       none           bold
+TermCursor                           black                        white
+TermCursorNC                         none                         black
+ActiveWindow                         fg                           base1
+InactiveWindow                       gray4                        base0
 
 # Language Base Groups
-Boolean                      blue                none
-Character                    green               none
-Comment                      gray4               none           italic
-Conditional                  blue                none
-Constant                     white               none
-Define                       blue                none
-Delimiter                    white               none
-Exception                    blue                none
-Float                        magenta             none
-Function                     cyan                none
-Identifier                   white               none
-Include                      blue                none
-Keyword                      blue                none
-Label                        blue                none
-Number                       magenta             none
-Operator                     blue                none
-PreProc                      blue                none
-QuickFixLine                 black               yellow         bold
-Repeat                       blue                none
-Special                      white               none
-SpecialChar                  yellow              none
-SpecialComment               cyan                none           italic
-Statement                    blue                none
-StorageClass                 blue                none
-String                       green               none
-Structure                    blue                none
-Tag                          white               none
-Todo                         yellow              none
-Type                         blue                none
-Typedef                      blue                none
+Boolean                              blue                         none
+Character                            green                        none
+Comment                              gray4                        none           italic
+Conditional                          blue                         none
+Constant                             white                        none
+Define                               blue                         none
+Delimiter                            white                        none
+Exception                            blue                         none
+Float                                magenta                      none
+Function                             cyan                         none
+Identifier                           white                        none
+Include                              blue                         none
+Keyword                              blue                         none
+Label                                blue                         none
+Number                               magenta                      none
+Operator                             blue                         none
+PreProc                              blue                         none
+QuickFixLine                         black                        yellow         bold
+Repeat                               blue                         none
+Special                              white                        none
+SpecialChar                          yellow                       none
+SpecialComment                       cyan                         none           italic
+Statement                            blue                         none
+StorageClass                         blue                         none
+String                               green                        none
+Structure                            blue                         none
+Tag                                  white                        none
+Todo                                 yellow                       none
+Type                                 blue                         none
+Typedef                              blue                         none
 
-NonItalicComment             gray4               none
+NonItalicComment                     gray4                        none
 
 # Common linked groups
-diffAdded                    -> DiffAdd
-diffChanged                  -> DiffChange
-diffRemoved                  -> DiffDelete
-lCursor                      -> Cursor
-CursorLineNr                 -> LineNr
-FoldColumn                   -> SignColumn
-Macro                        -> Define
-Precondit                    -> PreProc
-VisualNOS                    -> Visual
-WildMenu                     -> PmenuSel
+diffAdded                            -> DiffAdd
+diffChanged                          -> DiffChange
+diffRemoved                          -> DiffDelete
+lCursor                              -> Cursor
+CursorLineNr                         -> LineNr
+FoldColumn                           -> SignColumn
+Macro                                -> Define
+Precondit                            -> PreProc
+VisualNOS                            -> Visual
+WildMenu                             -> PmenuSel
 
 # Languages
-cssAttributeSelector         cyan                none
-cssDefinition                cyan                none
-cssIdentifier                cyan                none           underline
-cssStringQ                   cyan                none
-cssAttr                      -> Keyword
-cssBraces                    -> Delimiter
-cssClassName                 -> cssDefinition
-cssColor                     -> Number
-cssProp                      -> cssDefinition
-cssPseudoClass               -> cssDefinition
-cssPseudoClassId             -> cssPseudoClass
-cssVendor                    -> Keyword
+cssAttributeSelector                 cyan                         none
+cssDefinition                        cyan                         none
+cssIdentifier                        cyan                         none           underline
+cssStringQ                           cyan                         none
+cssAttr                              -> Keyword
+cssBraces                            -> Delimiter
+cssClassName                         -> cssDefinition
+cssColor                             -> Number
+cssProp                              -> cssDefinition
+cssPseudoClass                       -> cssDefinition
+cssPseudoClassId                     -> cssPseudoClass
+cssVendor                            -> Keyword
 
-htmlArg                      cyan                none
-htmlLink                     white               none
-htmlEndTag                   -> htmlTag
-htmlItalic                   -> htmlItalic
-htmlH1                       -> markdownH1
-htmlH2                       -> markdownH1
-htmlH3                       -> markdownH1
-htmlH4                       -> markdownH1
-htmlH5                       -> markdownH1
-htmlH6                       -> markdownH1
-htmlSpecialChar              -> SpecialChar
-htmlTag                      -> Keyword
-htmlTagN                     -> htmlTag
+htmlArg                              cyan                         none
+htmlLink                             white                        none
+htmlEndTag                           -> htmlTag
+htmlItalic                           -> htmlItalic
+htmlH1                               -> markdownH1
+htmlH2                               -> markdownH1
+htmlH3                               -> markdownH1
+htmlH4                               -> markdownH1
+htmlH5                               -> markdownH1
+htmlH6                               -> markdownH1
+htmlSpecialChar                      -> SpecialChar
+htmlTag                              -> Keyword
+htmlTagN                             -> htmlTag
 
-jsGlobalNodeObjects          cyan                none
-jsonKeyword                  cyan                none
-jsBrackets                   -> Delimiter
-jsFuncCall                   -> Function
-jsFuncParens                 -> Delimiter
-jsThis                       -> Keyword
-jsNoise                      -> Delimiter
-jsPrototype                  -> Keyword
-jsRegexpString               -> SpecialChar
-jsObjectKey                  -> jsonKeyword
+jsGlobalNodeObjects                  cyan                         none
+jsonKeyword                          cyan                         none
+jsBrackets                           -> Delimiter
+jsFuncCall                           -> Function
+jsFuncParens                         -> Delimiter
+jsThis                               -> Keyword
+jsNoise                              -> Delimiter
+jsPrototype                          -> Keyword
+jsRegexpString                       -> SpecialChar
+jsObjectKey                          -> jsonKeyword
 
-jsxCloseString               -> htmlTag
+jsxCloseString                       -> htmlTag
 
-logBrackets                  -> NonItalicComment
-logLevelTrace                -> NonItalicComment
+logBrackets                          -> NonItalicComment
+logLevelTrace                        -> NonItalicComment
 
-markdownBlockquote           cyan                none
-markdownCode                 cyan                none
-markdownCodeDelimiter        cyan                none
-markdownFootnote             cyan                none
-markdownId                   cyan                none
-markdownIdDeclaration        cyan                none
-markdownH1                   cyan                none
-markdownLinkText             cyan                none
-markdownUrl                  white               none
-markdownBold                 -> Bold
-markdownBoldDelimiter        -> Keyword
-markdownFootnoteDefinition   -> markdownFootnote
-markdownH2                   -> markdownH1
-markdownH3                   -> markdownH1
-markdownH4                   -> markdownH1
-markdownH5                   -> markdownH1
-markdownH6                   -> markdownH1
-markdownIdDelimiter          -> Keyword
-markdownItalic               -> Italic
-markdownItalicDelimiter      -> Keyword
-markdownLinkDelimiter        -> Keyword
-markdownLinkTextDelimiter    -> Keyword
-markdownListMarker           -> Keyword
-markdownRule                 -> Keyword
-markdownHeadingDelimiter     -> Keyword
+markdownBlockquote                   cyan                         none
+markdownCode                         cyan                         none
+markdownCodeDelimiter                cyan                         none
+markdownFootnote                     cyan                         none
+markdownId                           cyan                         none
+markdownIdDeclaration                cyan                         none
+markdownH1                           cyan                         none
+markdownLinkText                     cyan                         none
+markdownUrl                          white                        none
+markdownBold                         -> Bold
+markdownBoldDelimiter                -> Keyword
+markdownFootnoteDefinition           -> markdownFootnote
+markdownH2                           -> markdownH1
+markdownH3                           -> markdownH1
+markdownH4                           -> markdownH1
+markdownH5                           -> markdownH1
+markdownH6                           -> markdownH1
+markdownIdDelimiter                  -> Keyword
+markdownItalic                       -> Italic
+markdownItalicDelimiter              -> Keyword
+markdownLinkDelimiter                -> Keyword
+markdownLinkTextDelimiter            -> Keyword
+markdownListMarker                   -> Keyword
+markdownRule                         -> Keyword
+markdownHeadingDelimiter             -> Keyword
 
-sassClass                    cyan                none
-sassId                       cyan                none           underline
-sassAmpersand                -> Keyword
-sassClassChar                -> Delimiter
-sassControl                  -> Keyword
-sassControlLine              -> Keyword
-sassExtend                   -> Keyword
-sassFor                      -> Keyword
-sassFunctionDecl             -> Keyword
-sassFunctionName             -> Function
-sassidChar                   -> sassId
-sassInclude                  -> SpecialChar
-sassMixinName                -> Function
-sassMixin                    -> SpecialChar
-sassReturn                   -> Keyword
+sassClass                            cyan                         none
+sassId                               cyan                         none           underline
+sassAmpersand                        -> Keyword
+sassClassChar                        -> Delimiter
+sassControl                          -> Keyword
+sassControlLine                      -> Keyword
+sassExtend                           -> Keyword
+sassFor                              -> Keyword
+sassFunctionDecl                     -> Keyword
+sassFunctionName                     -> Function
+sassidChar                           -> sassId
+sassInclude                          -> SpecialChar
+sassMixinName                        -> Function
+sassMixin                            -> SpecialChar
+sassReturn                           -> Keyword
 
-typescriptClassName          -> Function
-typescriptClassHeritage      -> Function
-typescriptExport             -> Include
-typescriptImport             -> Include
-typescriptVariable           -> StorageClass
+typescriptClassName                  -> Function
+typescriptClassHeritage              -> Function
+typescriptExport                     -> Include
+typescriptImport                     -> Include
+typescriptVariable                   -> StorageClass
 
-vimAugroup                   cyan                none
-vimMapRhs                    cyan                none
-vimNotation                  cyan                none
-vimFunc                      -> Function
-vimFunction                  -> Function
-vimUserFunc                  -> Function
+vimAugroup                           cyan                         none
+vimMapRhs                            cyan                         none
+vimNotation                          cyan                         none
+vimFunc                              -> Function
+vimFunction                          -> Function
+vimUserFunc                          -> Function
 
-yamlBlockMappingKey          cyan                none
-yamlKey                      cyan                none
-yamlBool                     -> Keyword
-yamlDocumentStart            -> Keyword
+yamlBlockMappingKey                  cyan                         none
+yamlKey                              cyan                         none
+yamlBool                             -> Keyword
+yamlDocumentStart                    -> Keyword
 
 # Plugins
-ALEError                     red                 none           underline
-ALEErrorSign                 red                 none
-ALEWarning                   yellow              none           underline
-ALEWarningSign               yellow              none
+ALEError                             red                          none           underline
+ALEErrorSign                         red                          none
+ALEWarning                           yellow                       none           underline
+ALEWarningSign                       yellow                       none
 
-CocErrorSign                 red                 none
-CocHintSign                  blue                none
-CocInfoSign                  cyan                none
-CocWarningSign               yellow              none
+CocErrorSign                         red                          none
+CocHintSign                          blue                         none
+CocInfoSign                          cyan                         none
+CocWarningSign                       yellow                       none
 
-LSPDiagnosticsError          red                 none
-LSPDiagnosticsHint           blue                none
-LSPDiagnosticsInformation    cyan                none
-LSPDiagnosticsWarning        yellow              none
+LSPDiagnosticsDefaultError           red                          none
+LSPDiagnosticsDefaultWarning         yellow                       none
+LSPDiagnosticsDefaultHint            blue                         none
+LSPDiagnosticsDefaultInformation     cyan                         none
 
-NERDTreeExecFile             cyan                none
-NERDTreeCWD                  -> Comment
-NERDTreeDirSlash             -> Keyword
-NERDTreeHelp                 -> Comment
+NERDTreeExecFile                     cyan                         none
+NERDTreeCWD                          -> Comment
+NERDTreeDirSlash                     -> Keyword
+NERDTreeHelp                         -> Comment
 
-plugDeleted                  red                 none
+plugDeleted                          red                          none
 
-QuickScopePrimary            red                 none           bold,underline
-QuickScopeSecondary          red                 none           bold
+QuickScopePrimary                    red                          none           bold,underline
+QuickScopeSecondary                  red                          none           bold
