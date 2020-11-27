@@ -126,7 +126,7 @@ bindkey '^M' bti-magic-enter
 # Make CTRL-Z background things and unbackground them
 function bti-fg-bg() {
   if [[ $#BUFFER -eq 0 ]]; then
-    fg
+    fg &> /dev/null
   else
     zle push-input
   fi
