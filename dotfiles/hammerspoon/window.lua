@@ -1,5 +1,5 @@
-hs.grid.MARGINX = hs.screen.primaryScreen():frame().w * 0.025
-hs.grid.MARGINY = hs.screen.primaryScreen():frame().w * 0.025
+hs.grid.MARGINX = hs.screen.primaryScreen():frame().w * 0.02
+hs.grid.MARGINY = hs.screen.primaryScreen():frame().w * 0.02
 hs.grid.setGrid('12x12')
 
 local WinMan = {}
