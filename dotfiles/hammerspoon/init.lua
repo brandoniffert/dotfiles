@@ -78,7 +78,7 @@ function appLaunched(appName, eventType, app)
     end)
 
     local maximizeApp = (function()
-      local appWindow = app:frontmostApplication():focusedWindow()
+      local appWindow = app:focusedWindow()
 
       if appWindow ~= nil then
         appWindow:setFrame(appWindow:screen():frame())
