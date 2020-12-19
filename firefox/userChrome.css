@@ -4,7 +4,7 @@
   --gray-600: #282c2f;
   --gray-700: #202124;
   --purple-400: #8000d7;
-  --purple-500: #4d0080;
+  --purple-500: #4d0080;  
 
   --toolbar-bgcolor: var(--gray-400) !important;
   --lwt-accent-color: var(--gray-700) !important;
@@ -25,6 +25,10 @@
  * Tabs
  *************************************/
 
+#tabbrowser-tabs {
+  --tab-min-width: 42px !important;
+}
+
 /* Remove border on tabs */
 .tabbrowser-tab::after,
 .tabbrowser-tab::before {
@@ -43,6 +47,7 @@
 
 .tabbrowser-tab:not([pinned]):hover .tab-close-button {
   opacity: 1 !important;
+  display: initial !important;
 }
 
 /* Make tab line smaller */
@@ -124,13 +129,55 @@ toolbar .toolbarbutton-1 > .toolbarbutton-icon {
 
 /* Lower font size and increase padding */
 #urlbar-input-container {
-  font-size: 13px !important;
+  font-size: 12px !important;
   padding: 0 3px !important;
 }
 
-/* Remove border radius */
+/* Add border radius */
 #urlbar {
-  border-radius: 0 !important;
+  border-radius: 10px !important;
+}
+
+/* Make urlbar appear more compact */
+#urlbar[breakout] {
+  margin-inline-start: 0px !important;
+  width: 100% !important;
+  left: 0 !important;
+  top: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+}
+
+#urlbar[breakout]:not([open]) {
+  bottom: calc((var(--urlbar-toolbar-height) - var(--urlbar-height)) / 2) !important;
+}
+
+.urlbarView {
+  margin-inline: 0 !important;
+  width: auto !important;
+}
+
+.urlbarView-row {
+  padding: 0 2px !important;
+}
+
+.urlbarView-row-inner {
+  padding-inline-start: 4px !important;
+}
+
+#urlbar-background {
+  animation: none !important;
+}
+
+#urlbar-input-container {
+  padding: 0 !important;
+  height: 100% !important;
+}
+
+#identity-icon {
+  margin-block: var(--urlbar-icon-padding)
+}
+
+.urlbarView > .search-one-offs:not([hidden]) {
+  padding-block: 0px !important;
 }
 
 /**************************************
@@ -160,4 +207,9 @@ toolbar .toolbarbutton-1 > .toolbarbutton-icon {
 
 #main-window[privatebrowsingmode="temporary"] #TabsToolbar {
   background: var(--purple-500) !important;
+}
+
+.titlebar-buttonbox-container,
+.titlebar-spacer[type="pre-tabs"] {
+  display: none;
 }
