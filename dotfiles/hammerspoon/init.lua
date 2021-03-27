@@ -72,7 +72,7 @@ function appLaunched(appName, eventType, app)
     return
   end
 
-  if appName == 'Alacritty' then
+  if appName == 'kitty' then
     local checkAppFocused = (function()
       return app:isFrontmost()
     end)
