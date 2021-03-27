@@ -218,7 +218,7 @@ source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[black]%}["
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[black]%}] "
-ZSH_THEME_GIT_PROMPT_SEPARATOR="%{$fg[black]%}|%f"
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg[white]%}:"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg[white]%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
@@ -228,6 +228,7 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
 ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✓"
 ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
 ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
 ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg[black]%}(%f"
