@@ -5,6 +5,9 @@
 [github]
   user = brandoniffert
 
+[init]
+  defaultBranch = main
+
 [alias]
   a = add
   aa = add --all
