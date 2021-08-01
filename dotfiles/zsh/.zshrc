@@ -157,6 +157,7 @@ alias t='tmux'
 alias tkill='tmux kill-server'
 alias v=view
 alias vgs="vagrant global-status"
+alias ap='ansible-playbook'
 
 # https://github.com/pyenv/pyenv/issues/106#issuecomment-440826532
 if command -v pyenv >/dev/null 2>&1; then
