@@ -9,7 +9,7 @@ fi
 
 group_vim() {
   local vim_plug_url="https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-  local vim_plug_path="$REPO_ROOT/dotfiles/.vim/autoload/plug.vim"
+  local vim_plug_path="$REPO_ROOT/dotfiles/nvim/autoload/plug.vim"
 
   group_header "${FUNCNAME[0]//group_/}"
 

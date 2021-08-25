@@ -33,6 +33,7 @@ group_dotfiles() {
     kitty
     git
     hammerspoon
+    nvim
     ripgrep
     tmux
     zsh
@@ -40,7 +41,6 @@ group_dotfiles() {
 
   # Will be symlinked into $HOME
   local home_dots=(
-    .vim
     .zshenv
   )
 
@@ -62,13 +62,6 @@ group_dotfiles() {
 
     link_file "$source_file" "$target_file"
   done
-  task_end
-
-  task_start "Symlink nvim to vim"
-  source_file="$HOME/.vim"
-  target_file="$XDG_CONFIG_HOME/nvim"
-
-  link_file "$source_file" "$target_file"
   task_end
 }
 
