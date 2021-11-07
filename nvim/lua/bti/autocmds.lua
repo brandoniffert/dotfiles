@@ -1,0 +1,3 @@
+local autocmds = {}
+
+return autocmds
