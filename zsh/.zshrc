@@ -94,7 +94,6 @@ export FZF_DEFAULT_OPTS='
 bindkey -e
 
 bindkey '^r'   history-incremental-pattern-search-backward # ctrl-r
-bindkey "^d"   kill-buffer                                 # ctrl-d
 bindkey '^[k'  kill-line                                   # alt+k
 bindkey '^[j'  backward-kill-line                          # alt+j
 bindkey '^[[Z' reverse-menu-complete                       # shift-tab
