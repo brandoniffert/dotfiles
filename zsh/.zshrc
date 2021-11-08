@@ -157,6 +157,9 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
   alias ls='gls --color=auto'
   alias lls='gls --color=auto -al'
   alias vgs="vagrant global-status"
+else
+  alias ls='ls --color=auto'
+  alias lls='ls --color=auto -al'
 fi
 
 #------------------------------------------------------------------------------
