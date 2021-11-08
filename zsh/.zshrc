@@ -142,8 +142,6 @@ alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias llll='tree -L 4'
-alias ls='gls --color=auto'
-alias lls='gls --color=auto -al'
 alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit
@@ -152,8 +150,14 @@ alias se='sudo -e'
 alias t='tmux'
 alias tkill='tmux kill-server'
 alias v=view
-alias vgs="vagrant global-status"
-alias ap='ansible-playbook'
+
+# macOS specific
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  alias ap='ansible-playbook'
+  alias ls='gls --color=auto'
+  alias lls='gls --color=auto -al'
+  alias vgs="vagrant global-status"
+fi
 
 #------------------------------------------------------------------------------
 #-- Functions -----------------------------------------------------------------
