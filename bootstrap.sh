@@ -87,7 +87,7 @@ fi
 
 for file in "${CONFIG_DOTS[@]}"; do
   source_file="$REPO_ROOT/$file"
-  target_file="$XDG_CONFIG_HOME/$file"
+  target_file="$CONFIG_HOME/$file"
 
   link_file "$source_file" "$target_file"
 done
