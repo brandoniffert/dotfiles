@@ -43,7 +43,17 @@ cmp.setup {
   },
   sources = {
     { name = 'nvim_lsp' },
-    { name = 'buffer', priority = 2, keyword_length = 3, max_item_count = 10 },
+    {
+      name = 'buffer',
+      priority = 2,
+      keyword_length = 2,
+      max_item_count = 10,
+      opts = {
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end
+      }
+    },
     { name = 'path' },
   },
 }
