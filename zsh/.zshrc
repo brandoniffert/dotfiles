@@ -247,7 +247,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
 
   PROMPT=''
   PROMPT+='%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%} %m  %f%k'
-  PROMPT+='%K{#1d202f}%{$fg_bold[cyan]%}  %1~  %f%k%F{#1d202f}%f'
+  PROMPT+='%K{#1d202f}%{$fg_bold[cyan]%}  %1~ %f%k%F{#1d202f}%f'
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
   PROMPT+=$'\n'
