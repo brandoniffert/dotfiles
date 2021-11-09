@@ -16,7 +16,6 @@ setopt HIST_IGNORE_ALL_DUPS # Prevent recording dupes in history
 setopt HIST_IGNORE_SPACE    # Do not save commands with leading space to history
 setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from history
 setopt HIST_VERIFY          # Prevent auto execute expanded history command
-setopt IGNORE_EOF           # Prevent exit on eof
 setopt INC_APPEND_HISTORY   # Adds history incrementally
 setopt INTERACTIVE_COMMENTS # Allow comments, even in interactive shells
 setopt LIST_PACKED          # make completion lists more densely packed
@@ -290,9 +289,6 @@ function bti-defer-load-after() {
 
 zsh-defer -t 0.5 bti-defer-load-after
 
-# asdf
-[ -r /usr/local/opt/asdf/libexec/asdf.sh ] && source /usr/local/opt/asdf/libexec/asdf.sh
-
 # pyenv (lazy loaded)
 if command -v pyenv &>/dev/null; then
   pyenv() {
@@ -327,7 +323,11 @@ function _fzf_compgen_dir() {
 # Setup dircolors
 () {
   local _dircolors="$XDG_CONFIG_HOME/dircolors/nord.dircolors"
-  command -v gdircolors >/dev/null && test -r $_dircolors && eval $(command gdircolors $_dircolors)
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    command -v gdircolors >/dev/null && test -r $_dircolors && eval $(command gdircolors $_dircolors)
+  else
+    command -v dircolors >/dev/null && test -r $_dircolors && eval $(command dircolors $_dircolors)
+  fi
 }
 
 #------------------------------------------------------------------------------

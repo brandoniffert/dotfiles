@@ -5,10 +5,6 @@ source $ZDOTDIR/exports
 path=(
   $HOME/.local/bin
   $ZDOTDIR/bin
-  $N_PREFIX/bin
-  $PYENV_ROOT/shims
-  $RBENV_ROOT/shims
-  $XDG_DATA_HOME/composer/vendor/bin
   /usr/local/sbin
   $path
 )
