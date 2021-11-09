@@ -7,9 +7,7 @@ require('packer').startup({function()
     requires = {
       'nvim-lua/plenary.nvim'
     },
-    config = function()
-      require('gitsigns').setup()
-    end
+    config = [[require('bti.config.gitsigns')]]
   }
   use 'nathom/filetype.nvim'
   use 'christoomey/vim-tmux-navigator'
