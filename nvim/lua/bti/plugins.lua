@@ -58,6 +58,11 @@ require('packer').startup({function()
     run = 'make'
   }
   use {
+    'nvim-treesitter/nvim-treesitter',
+    run = ':TSUpdate',
+    config = [[require('bti.config.nvim-treesitter')]]
+  }
+  use {
     'AckslD/nvim-neoclip.lua',
     config = function()
       require('neoclip').setup()
