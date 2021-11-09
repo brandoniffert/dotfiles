@@ -158,7 +158,6 @@ vim.opt.wildcharm      = 26
 vim.opt.wildignore:append('*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.pyc,*.so,*.DS_Store*/tmp/*')
 vim.o.wildmenu         = true
 vim.o.wildmode         = 'longest:full,full'
-vim.o.winblend         = 10
 vim.o.writebackup      = false
 
 -------------------------------------------------------------------------------
