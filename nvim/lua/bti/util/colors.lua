@@ -8,6 +8,7 @@ local themeColors = theme.setup()
 
 local colors = {
   white = themeColors.fg_dark,
+  red = themeColors.red,
   magenta = themeColors.magenta
 }
 

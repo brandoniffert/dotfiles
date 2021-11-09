@@ -79,7 +79,7 @@ require('lualine').setup {
       { '[[ ]]', padding = 0, cond = function () return components.filename_prefix() == ''; end },
       { '%t', padding = 0, color = { fg = 'white', gui = 'bold' }},
       { components.readonly, padding = 0, color = { gui = 'bold' } },
-      { components.modified, padding = 0, color = { fg = bti.util.colors.magenta, gui = 'bold' } },
+      { components.modified, padding = 0, color = { fg = bti.util.colors.red, gui = 'bold' } },
     },
     lualine_x = {
       { components.whitespace },
