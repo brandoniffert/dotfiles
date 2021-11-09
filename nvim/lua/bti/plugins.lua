@@ -90,7 +90,8 @@ config = {
     open_fn = function()
       return require('packer.util').float({ border = 'rounded' })
     end
-  }
+  },
+  prompt_border = 'rounded'
 }})
 
 vim.cmd([[
