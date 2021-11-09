@@ -253,7 +253,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   PROMPT+=$'\n'
   PROMPT+='%{$fg[yellow]%}%(1j. ◆ .)%f'
   PROMPT+='${${VIRTUAL_ENV#0}:+($(basename $VIRTUAL_ENV)) }'
-  PROMPT+="${PROMPT_COLOR}$(printf "$PROMPT_CHAR%.0s" {1..$LVL})%f "
+  PROMPT+="${PROMPT_COLOR}$(printf "$PROMPT_CHAR%.0s" {1..$LVL})%{$reset_color%} "
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
