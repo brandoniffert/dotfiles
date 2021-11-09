@@ -216,7 +216,7 @@ source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" %F{#4a4e68}%f "
 ZSH_THEME_GIT_PROMPT_SUFFIX=" "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
 ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
