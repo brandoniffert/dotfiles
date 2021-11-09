@@ -334,4 +334,4 @@ function _fzf_compgen_dir() {
 #-- Local Options -------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-[ -r $HOME/.zshrc.local ] && source $HOME/.zshrc.local
+[ -r ~/.zshrc.local ] && source ~/.zshrc.local
