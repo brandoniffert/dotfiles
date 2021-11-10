@@ -60,7 +60,8 @@ require('packer').startup({function()
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = [[require('bti.config.nvim-treesitter')]]
+    config = [[require('bti.config.nvim-treesitter')]],
+    requires = { 'nvim-treesitter/playground' }
   }
   use {
     'AckslD/nvim-neoclip.lua',
