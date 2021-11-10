@@ -245,6 +245,8 @@ augroup('BtiAutocmds', function ()
   autocmd('TextYankPost', '*', 'silent! lua vim.highlight.on_yank()')
   autocmd('VimResized', '*', 'execute "normal! \\<c-w>="')
 
+  autocmd('BufEnter,BufRead,BufNewFile', '*.ss', 'set filetype=ss.html syntax=ss | runtime! ftplugin/ss.vim | runtime! indent/ss.vim')
+
   vim.cmd([[autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |  execute 'normal! g`"zvzz' | endif]])
 end)
 
