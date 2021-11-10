@@ -3,11 +3,23 @@ local map = vim.api.nvim_buf_set_keymap
 
 vim.lsp.set_log_level("debug")
 
-vim.cmd [[ sign define LspDiagnosticsSignHint text=■ ]]
-vim.cmd [[ sign define LspDiagnosticsSignError text=■ ]]
-vim.cmd [[ sign define LspDiagnosticsSignWarning text=■ ]]
-vim.cmd [[ sign define LspDiagnosticsSignInformation text=■ ]]
+-- Define how diagnostic signs are displayed
+local signs = { Error = '■', Warn = '■', Hint = '■', Info = '■' }
 
+for type, icon in pairs(signs) do
+  local hl = 'DiagnosticSign' .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
+
+local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
+function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = 'rounded'
+  return orig_util_open_floating_preview(contents, syntax, opts, ...)
+end
+
+-- Setup custom on_attach function
 local on_attach = function(_, bufnr)
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -30,7 +42,7 @@ local on_attach = function(_, bufnr)
   map(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<leader>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   -- map(bufnr, 'n', '<leader>so', [[<cmd>lua require('telescope.builtin').lsp_document_symbols()<CR>]], opts)
-  vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
+  vim.cmd [[command! Format execute 'lua vim.lsp.buf.formatting()']]
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(

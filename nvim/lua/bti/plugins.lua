@@ -91,10 +91,10 @@ end,
 config = {
   display = {
     open_fn = function()
-      return require('packer.util').float({ border = 'none' })
+      return require('packer.util').float({ border = 'rounded' })
     end
   },
-  prompt_border = 'none'
+  prompt_border = 'rounded'
 }})
 
 vim.cmd([[
