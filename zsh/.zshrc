@@ -225,7 +225,7 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
 ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}✓"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}●"
 ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
 ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
 ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[black]%}(%f"
@@ -237,6 +237,11 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   local PROMPT_CHAR='\$'
   local PROMPT_COLOR='%{$fg_bold[white]%}'
   local LVL=$SHLVL
+  local HOST_CHAR='%{$fg_bold[green]%}●%f'
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    HOST_CHAR=''
+  fi
 
   if [[ $EUID -eq 0 ]]; then
     PROMPT_CHAR='#'
@@ -246,8 +251,8 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [ -n "$TMUX" ] && LVL=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+='%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%} %m  %f%k'
-  PROMPT+='%K{#1d202f}%{$fg_bold[cyan]%}  %1~ %f%k%F{#1d202f}%f'
+  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${HOST_CHAR} %m %f%k"
+  PROMPT+='%K{#1d202f}%{$fg_bold[cyan]%} %1~%f%k%F{#1d202f}%f'
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
   PROMPT+=$'\n'
