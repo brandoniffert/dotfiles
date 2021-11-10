@@ -38,7 +38,7 @@ require('packer').startup({function()
   }
   use {
     'nvim-lualine/lualine.nvim',
-    event = { 'BufNew', 'BufRead' },
+    event = { 'BufNew', 'BufRead', 'InsertEnter' },
     requires = {
       {
         'kyazdani42/nvim-web-devicons',
