@@ -229,7 +229,10 @@ nnoremap('<LocalLeader>zz', ':call bti#functions#strip_whitespace()<CR>', { sile
 nnoremap('<LocalLeader>e', ':edit <C-R>=expand("%:p:h") . "/"<CR>')
 
 -- Print the syntax highlighting group(s) that apply at the current cursor position
-nnoremap('<LocalLeader>p',  ':echomsg v:lua.bti.functions.get_highlight_group()<CR>')
+nnoremap('<LocalLeader>pH',  ':echomsg v:lua.bti.functions.get_highlight_group()<CR>')
+
+-- Print the TS highlighting group(s) that apply at the current cursor position
+nnoremap('<LocalLeader>ph',  '<cmd>TSHighlightCapturesUnderCursor<CR>')
 
 -------------------------------------------------------------------------------
 -- Autocommands ---------------------------------------------------------------
