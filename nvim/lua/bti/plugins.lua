@@ -69,10 +69,7 @@ require('packer').startup({function()
       require('neoclip').setup()
     end
   }
-  use {
-    'tpope/vim-commentary',
-    keys = 'gc',
-  }
+  use 'tpope/vim-commentary'
   use {
     'tpope/vim-eunuch',
     event = 'CmdlineEnter'
