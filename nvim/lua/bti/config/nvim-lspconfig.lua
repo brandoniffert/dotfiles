@@ -60,3 +60,13 @@ nvim_lsp.intelephense.setup {
     licenceKey = os.getenv 'INTELEPHENSE_LICENCE_KEY' or '',
   },
 }
+
+nvim_lsp.yamlls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+nvim_lsp.tailwindcss.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
