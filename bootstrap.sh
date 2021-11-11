@@ -3,7 +3,7 @@
 set -euo pipefail
 
 CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
-REPO_ROOT=$(pwd)
+REPO_ROOT=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
 STEP_MARKER=•
 
 ESeq="\x1b["
