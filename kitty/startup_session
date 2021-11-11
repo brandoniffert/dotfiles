@@ -1,0 +1,5 @@
+new_tab local
+launch
+
+new_tab dev
+launch ssh dev
