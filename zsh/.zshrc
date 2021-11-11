@@ -238,9 +238,11 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   local PROMPT_COLOR='%{$fg_bold[white]%}'
   local LVL=$SHLVL
   local HOST_CHAR='%{$fg_bold[green]%}●%f'
+  local HOSTNAME='%m '
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
     HOST_CHAR=''
+    HOSTNAME=''
   fi
 
   if [[ $EUID -eq 0 ]]; then
@@ -251,7 +253,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [ -n "$TMUX" ] && LVL=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${HOST_CHAR} %m %f%k"
+  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${HOST_CHAR} ${HOSTNAME}%f%k"
   PROMPT+='%K{#1d202f}%{$fg_bold[cyan]%} %1~%f%k%F{#1d202f}%f'
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
