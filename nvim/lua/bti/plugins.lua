@@ -2,19 +2,28 @@ local use = require('packer').use
 
 require('packer').startup({function()
   use 'lewis6991/impatient.nvim'
+  use 'nathom/filetype.nvim'
+  use 'wbthomason/packer.nvim'
+
+  -- Git
   use {
     'lewis6991/gitsigns.nvim',
-    requires = {
-      'nvim-lua/plenary.nvim'
-    },
+    requires = { 'nvim-lua/plenary.nvim' },
     config = [[require('bti.config.gitsigns')]]
   }
-  use 'nathom/filetype.nvim'
-  use 'christoomey/vim-tmux-navigator'
+  use 'tpope/vim-fugitive'
+
+  -- Theme
   use {
     'folke/tokyonight.nvim',
     config = [[require('bti.config.tokyonight')]]
   }
+  use {
+    'kyazdani42/nvim-web-devicons',
+    config = [[require('bti.config.nvim-web-devicons')]]
+  }
+
+  -- Completion
   use {
     'hrsh7th/nvim-cmp',
     requires = {
@@ -25,64 +34,65 @@ require('packer').startup({function()
     },
     config = [[require('bti.config.nvim-cmp')]]
   }
+
+  -- File Explorer
   use {
     'kyazdani42/nvim-tree.lua',
-    requires = 'kyazdani42/nvim-web-devicons',
     keys = '<Leader>\\',
     config = [[require('bti.config.nvim-tree')]]
   }
+
+  -- LSP
   use {
     'neovim/nvim-lspconfig',
     event = 'BufRead',
     config = [[require('bti.config.nvim-lspconfig')]]
   }
+
+  -- Statusline
   use {
     'nvim-lualine/lualine.nvim',
     event = { 'BufNew', 'BufRead', 'InsertEnter' },
-    requires = {
-      {
-        'kyazdani42/nvim-web-devicons',
-        config = [[require('bti.config.nvim-web-devicons')]]
-      }
-    },
     config = [[require('bti.config.lualine')]]
   }
+
+  -- Fuzzy Finding
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { 'nvim-lua/plenary.nvim' },
+    requires = {
+      { 'nvim-lua/plenary.nvim' },
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+    },
     keys = '<Leader>',
     config = [[require('bti.config.telescope')]]
   }
-  use {
-    'nvim-telescope/telescope-fzf-native.nvim',
-    run = 'make'
-  }
+
+  -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
     config = [[require('bti.config.nvim-treesitter')]],
     requires = { 'nvim-treesitter/playground' }
   }
+
+  -- Clipboard
   use {
     'AckslD/nvim-neoclip.lua',
     config = function()
       require('neoclip').setup()
     end
   }
+
+  -- Utility
+  use 'christoomey/vim-tmux-navigator'
   use 'tpope/vim-commentary'
-  use {
-    'tpope/vim-eunuch',
-    event = 'CmdlineEnter'
-  }
-  use 'tpope/vim-fugitive'
+  use 'tpope/vim-eunuch'
   use 'tpope/vim-repeat'
-  use 'wbthomason/packer.nvim'
+  use 'wincent/terminus'
   use {
     'wincent/loupe',
-    event = 'CmdlineEnter',
     config = [[require('bti.config.loupe')]]
   }
-  use 'wincent/terminus'
 
   if packer_bootstrap then
     require('packer').sync()
