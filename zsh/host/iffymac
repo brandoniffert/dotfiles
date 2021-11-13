@@ -1,6 +1,9 @@
 # Prevent exit on eof
 setopt IGNORE_EOF
 
+# Set host specific exports
+export HOMEBREW_NO_ANALYTICS=1
+
 # Set host specific path
 path=(
   $N_PREFIX/bin
