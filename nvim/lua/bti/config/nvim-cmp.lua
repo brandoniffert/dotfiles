@@ -12,13 +12,15 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
+  documentation = {
+    border = 'rounded'
+  },
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
     ['<C-e>'] = cmp.mapping.close(),
     ['<CR>'] = cmp.mapping.confirm({
-      behavior = cmp.ConfirmBehavior.Insert,
-      select = true,
+      select = false,
     }),
     ['<Tab>'] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -42,10 +44,9 @@ cmp.setup {
     end, { 'i', 's' }),
   },
   sources = {
-    { name = 'nvim_lsp' },
     {
       name = 'buffer',
-      priority = 2,
+      priority = 1,
       keyword_length = 2,
       max_item_count = 10,
       opts = {
@@ -54,6 +55,20 @@ cmp.setup {
         end
       }
     },
-    { name = 'path' },
+    {
+      name = 'tmux',
+      priority = 2,
+      opts = {
+        trigger_characters = {}
+      }
+    },
+    {
+      name = 'nvim_lsp',
+      priority = 3,
+    },
+    {
+      name = 'path',
+      priority = 4
+    },
   },
 }

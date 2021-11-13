@@ -30,6 +30,7 @@ require('packer').startup({function()
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+      { 'andersevenrud/compe-tmux', branch = 'cmp' },
       'L3MON4D3/LuaSnip'
     },
     config = [[require('bti.config.nvim-cmp')]]
