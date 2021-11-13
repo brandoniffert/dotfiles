@@ -1,0 +1,13 @@
+# Automatically setup tmux session
+() {
+  local session_name="dev"
+  local working_dir="$HOME"
+
+  if [ -z "$TMUX" ]; then
+    # Check for existing session
+    tmux -q has-session -t "$session_name" &>/dev/null
+
+    # If session doesn't exist, create it
+    [ $? -ne 0 ] && tmux new-session -c "$working_dir" -s "$session_name"
+  fi
+}
