@@ -1,1 +1,5 @@
 nvim/spell/** filter=git-crypt diff=git-crypt
+zsh/bin/host/iffymac/generate-alfred-mount-items filter=git-crypt diff=git-crypt
+zsh/bin/host/iffymac/gmail-backup filter=git-crypt diff=git-crypt
+zsh/exports.private filter=git-crypt diff=git-crypt
+zsh/functions/host/iffymac/ytdl-proxy filter=git-crypt diff=git-crypt

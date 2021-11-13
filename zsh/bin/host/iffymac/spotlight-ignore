@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+
+import subprocess
+import os
+import re
+from pathlib import Path
+import pprint
+
+def find_paths(name, scope='~'):
+    scope = os.path.expanduser(scope)
+
+    result = subprocess.run(['mdfind', '-onlyin', scope, 'kMDItemDisplayName == {}'.format(name), 'kind:folder -tag:ignore'], stdout=subprocess.PIPE)
+
+    if result.returncode == 0:
+        return result.stdout.decode('utf-8').splitlines()
+
+def get_node_modules():
+    paths = find_paths('node_modules')
+
+    return list(filter(lambda x: x.count('node_modules') == 1, paths))
+
+def get_php_vendor():
+    paths = find_paths('vendor', '~/Projects')
+
+    def is_php_vendor(path):
+        is_nested = re.search(r'vendor/.*/vendor', path) != None
+        is_node_modules = re.search(r'node_modules', path) != None
+
+        if is_nested or is_node_modules:
+            return None
+
+        is_composer_project = 'composer.json' in os.listdir(Path(path).parent)
+
+        if is_composer_project:
+            return path
+
+
+    return list(filter(is_php_vendor, paths))
+
+def get_cache():
+    paths = find_paths('silverstripe-cache')
+
+    return paths
+
+def get_venv():
+    paths = find_paths('venv')
+
+    return paths
+
+def get_public():
+    assets_paths = find_paths('assets', '~/Projects')
+
+    paths = list(filter(lambda x: re.search(r'public\/assets', x) != None, assets_paths))
+
+    paths = list(map(lambda x: str(Path(x).parent), paths))
+
+    return paths
+
+def get_ignored_paths():
+    paths = []
+
+    paths += get_node_modules()
+    paths += get_php_vendor()
+    paths += get_cache()
+    paths += get_venv()
+    paths += get_public()
+
+    return paths
+
+def main():
+    paths_to_tag = get_ignored_paths()
+
+    pp = pprint.PrettyPrinter()
+    pp.pprint(paths_to_tag)
+
+    for path in paths_to_tag:
+        subprocess.run(['tag', '--add', 'ignore', path], stdout=subprocess.PIPE)
+
+if __name__ == '__main__':
+    main()
+
+# vim:set ft=python

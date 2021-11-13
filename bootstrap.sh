@@ -2,9 +2,9 @@
 
 set -euo pipefail
 
-CONFIG_HOME=${XDG_CONFIG_HOME:-"$HOME/.config"}
-REPO_ROOT=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
-STEP_MARKER=•
+config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
+repo_root=$(cd $(dirname "${BASH_SOURCE[0]}") && pwd)
+step_marker=•
 
 ESeq="\x1b["
 RCol="$ESeq"'0m'
@@ -20,15 +20,15 @@ echo_header() {
 }
 
 echo_success() {
-  echo -e "${Gre}$STEP_MARKER $1${RCol}"
+  echo -e "${Gre}$step_marker $1${RCol}"
 }
 
 echo_skip() {
-  echo -e "${Yel}$STEP_MARKER $1${RCol}"
+  echo -e "${Yel}$step_marker $1${RCol}"
 }
 
 echo_error() {
-  echo -e "${Red}$STEP_MARKER $1${RCol}"
+  echo -e "${Red}$step_marker $1${RCol}"
 }
 
 echo_error_exit() {
@@ -60,17 +60,17 @@ link_file() {
 
 echo_header "Creating config directory"
 
-if ! [ -d "$CONFIG_HOME" ]; then
-  mkdir -p "$CONFIG_HOME"
-  echo_success "created $CONFIG_HOME"
+if ! [ -d "$config_home" ]; then
+  mkdir -p "$config_home"
+  echo_success "created $config_home"
 else
-  echo_skip "$CONFIG_HOME already exists"
+  echo_skip "$config_home already exists"
 fi
 
-echo_header "Symlink files to $CONFIG_HOME"
+echo_header "Symlink files to $config_home"
 
 # Common
-CONFIG_DOTS=(
+config_dots=(
   ctags
   dircolors
   git
@@ -82,24 +82,24 @@ CONFIG_DOTS=(
 
 # macOS specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  CONFIG_DOTS+=(kitty hammerspoon)
+  config_dots+=(kitty hammerspoon)
 fi
 
-for file in "${CONFIG_DOTS[@]}"; do
-  source_file="$REPO_ROOT/$file"
-  target_file="$CONFIG_HOME/$file"
+for file in "${config_dots[@]}"; do
+  source_file="$repo_root/$file"
+  target_file="$config_home/$file"
 
   link_file "$source_file" "$target_file"
 done
 
 echo_header "Symlink files to $HOME"
 
-HOME_DOTS=(
+home_dots=(
   .zshenv
 )
 
-for file in "${HOME_DOTS[@]}"; do
-  source_file="$REPO_ROOT/$file"
+for file in "${home_dots[@]}"; do
+  source_file="$repo_root/$file"
   target_file="$HOME/$file"
 
   link_file "$source_file" "$target_file"

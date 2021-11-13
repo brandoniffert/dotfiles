@@ -1,0 +1,53 @@
+# Prevent exit on eof
+setopt IGNORE_EOF
+
+# Set host specific path
+path=(
+  $N_PREFIX/bin
+  $PYENV_ROOT/shims
+  $RBENV_ROOT/shims
+  $XDG_DATA_HOME/composer/vendor/bin
+  $path
+)
+
+typeset -gU cdpath fpath path
+
+# pyenv (lazy loaded)
+if command -v pyenv &>/dev/null; then
+  pyenv() {
+    eval "$(command pyenv init - --no-rehash)"
+    pyenv "$@"
+    typeset -U path
+  }
+fi
+
+# rbenv (lazy loaded)
+if command -v rbenv &>/dev/null; then
+  rbenv() {
+    eval "$(command rbenv init - --no-rehash)"
+    command rbenv "$@"
+    typeset -U path
+  }
+fi
+
+# Aliases
+alias ap='ansible-playbook'
+alias run=./run
+alias dev=./dev
+alias ls='gls --color=auto'
+alias lls='gls --color=auto -al'
+alias vgs="vagrant global-status"
+alias vapor="php vendor/bin/vapor"
+
+# Automatically setup tmux session
+() {
+  local session_name="local"
+  local working_dir="$HOME/Projects/Life/dotfiles"
+
+  if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "kitty" ]; then
+    # Create or attach to initial session if this is the main kitty window
+    if [[ "$KITTY_WINDOW_ID" -eq 1 ]]; then
+      tmux new-session -A -c "$working_dir" -s "$session_name"
+    fi
+  fi
+}

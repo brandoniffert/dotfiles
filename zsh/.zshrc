@@ -8,7 +8,6 @@ setopt AUTO_PUSHD           # cd automatically pushes old dir onto dir stack
 setopt COMPLETE_ALIASES     # Do not expand aliases before completion finishes
 setopt COMPLETE_IN_WORD     # Completion from both ends
 setopt CORRECT              # Spell check commands
-setopt EXTENDED_GLOB        # Use additional special characters in globbing
 setopt EXTENDED_HISTORY     # Add timestamps to history
 setopt GLOB_DOTS            # Allow hidden files to be matched
 setopt HIST_FIND_NO_DUPS    # don't show dups when searching history
@@ -36,54 +35,6 @@ export HISTIGNORE="fg"
 export HISTSIZE=100000
 export SAVEHIST=$HISTSIZE
 export WORDCHARS='*?[]~&;!$%^<>'
-export BAT_THEME=Nord
-export HOMEBREW_NO_ANALYTICS=1
-export VIRTUAL_ENV_DISABLE_PROMPT=1
-export EDITOR=nvim
-export PAGER=less
-export LESSHISTFILE=-
-
-# Filename (if known), line number if known, falling back to percent if known,
-# falling back to byte offset, falling back to dash
-export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
-
-# i = case-insensitive searches, unless uppercase characters in search string
-# F = exit immediately if output fits on one screen
-# M = verbose prompt
-# R = ANSI color support
-# S = chop long lines (rather than wrap them onto next line)
-# X = suppress alternate screen
-export LESS=iFMRSX
-
-# Color man pages
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\e[01;34m'
-export LESS_TERMCAP_me=$'\e[0m'
-export LESS_TERMCAP_se=$'\e[0m'
-export LESS_TERMCAP_so=$'\e[01;43;30m'
-export LESS_TERMCAP_ue=$'\e[0m'
-export LESS_TERMCAP_us=$'\e[04;37m'
-
-# For fzf
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
-export FZF_DEFAULT_OPTS='
-  --height 40%
-  --border=sharp
-  --color=fg:15
-  --color=fg+:3
-  --color=hl:-1
-  --color=hl+:3
-  --color=bg:-1
-  --color=bg+:-1
-  --color=info:-1
-  --color=prompt:-1
-  --color=marker:2
-  --color=header:2
-  --color=pointer:3
-  --color=border:#1a1d23
-'
 
 #------------------------------------------------------------------------------
 #-- Key Bindings --------------------------------------------------------------
@@ -140,6 +91,8 @@ alias l='tree -L 1'
 alias ll='tree -L 2'
 alias lll='tree -L 3'
 alias llll='tree -L 4'
+alias ls='ls --color=auto'
+alias lls='ls --color=auto -al'
 alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit
@@ -149,23 +102,20 @@ alias t='tmux'
 alias tkill='tmux kill-server'
 alias v=view
 
-# macOS specific
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  alias ap='ansible-playbook'
-  alias ls='gls --color=auto'
-  alias lls='gls --color=auto -al'
-  alias vgs="vagrant global-status"
-else
-  alias ls='ls --color=auto'
-  alias lls='ls --color=auto -al'
-fi
-
 #------------------------------------------------------------------------------
 #-- Functions -----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-fpath=("$ZDOTDIR/functions" $fpath)
-autoload -Uz $ZDOTDIR/functions/*
+fpath=("$ZDOTDIR/functions/common" $fpath)
+autoload -Uz $ZDOTDIR/functions/common/*
+
+# Host specific functions, based on hostname
+host_fpath="$ZDOTDIR/functions/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
+if [ -d "$host_fpath" ]; then
+  fpath=("$host_fpath" $fpath)
+  autoload -Uz $host_fpath/*
+fi
+unset host_fpath
 
 #------------------------------------------------------------------------------
 #-- Completion ----------------------------------------------------------------
@@ -198,7 +148,8 @@ source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 
   # Perform compinit only once a day
   # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2894219
-  if [[ -f "$zcd"(#qN.m+1) ]]; then
+  # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
+  if [[ -f "$zcd"(N.mh+24) ]]; then
     compinit -i -d "$zcd"
     { rm -f "$zcdc" && zcompile "$zcd" } &!
   else
@@ -234,33 +185,33 @@ ZSH_THEME_GIT_PROMPT_TAG="%{$fg[magenta]%}"
 ZSH_GIT_PROMPT_SHOW_STASH=1
 
 () {
-  local PROMPT_CHAR='\$'
-  local PROMPT_COLOR='%{$fg_bold[white]%}'
-  local LVL=$SHLVL
-  local HOST_CHAR='%{$fg_bold[green]%}●%f'
-  local HOSTNAME='%m '
+  local prompt_char='\$'
+  local prompt_color='%{$fg_bold[white]%}'
+  local lvl=$SHLVL
+  local host_char='%{$fg_bold[green]%}●%f'
+  local hostname='%m '
 
   if [[ "$OSTYPE" == "darwin"* ]]; then
-    HOST_CHAR=''
-    HOSTNAME=''
+    host_char=''
+    hostname=''
   fi
 
   if [[ $EUID -eq 0 ]]; then
-    PROMPT_CHAR='#'
-    PROMPT_COLOR='%{$fg_bold[red]%}'
+    prompt_char='#'
+    prompt_color='%{$fg_bold[red]%}'
   fi
 
-  [ -n "$TMUX" ] && LVL=$(($SHLVL - 1))
+  [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${HOST_CHAR} ${HOSTNAME}%f%k"
+  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
   PROMPT+='%K{#1d202f}%{$fg_bold[cyan]%} %1~%f%k%F{#1d202f}%f'
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
   PROMPT+=$'\n'
   PROMPT+='%{$fg[yellow]%}%(1j. ◆ .)%f'
   PROMPT+='${${VIRTUAL_ENV#0}:+($(basename $VIRTUAL_ENV)) }'
-  PROMPT+="${PROMPT_COLOR}$(printf "$PROMPT_CHAR%.0s" {1..$LVL})%{$reset_color%} "
+  PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
@@ -302,24 +253,6 @@ function bti-defer-load-after() {
 
 zsh-defer -t 0.5 bti-defer-load-after
 
-# pyenv (lazy loaded)
-if command -v pyenv &>/dev/null; then
-  pyenv() {
-    eval "$(command pyenv init - --no-rehash)"
-    pyenv "$@"
-    typeset -U path
-  }
-fi
-
-# rbenv (lazy loaded)
-if command -v rbenv &>/dev/null; then
-  rbenv() {
-    eval "$(command rbenv init - --no-rehash)"
-    command rbenv "$@"
-    typeset -U path
-  }
-fi
-
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
@@ -344,7 +277,13 @@ function _fzf_compgen_dir() {
 }
 
 #------------------------------------------------------------------------------
-#-- Local Options -------------------------------------------------------------
+#-- Local & Host Specific Options ---------------------------------------------
 #------------------------------------------------------------------------------
 
-[ -r ~/.zshrc.local ] && source ~/.zshrc.local
+host_rc="$ZDOTDIR/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
+test -r "$host_rc" && source "$host_rc"
+unset host_rc
+
+local_rc=$HOME/.zshrc.local
+test -r "$local_rc" && source "$local_rc"
+unset local_rc
