@@ -17,7 +17,6 @@ require 'bti'
 require 'bti.plugins'
 
 if needs_bootstrap then
-  vim.cmd [[autocmd User PackerComplete quitall]]
   require('packer').sync()
 end
 
