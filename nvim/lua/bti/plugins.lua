@@ -77,6 +77,7 @@ require('packer').startup({function()
   }
 
   -- Clipboard
+  use 'ojroques/vim-oscyank'
   use {
     'AckslD/nvim-neoclip.lua',
     config = function()

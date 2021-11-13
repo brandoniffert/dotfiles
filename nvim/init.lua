@@ -244,7 +244,7 @@ augroup('BtiAutocmds', function ()
   autocmd('BufWritePre,FileWritePre', '*', 'call bti#functions#create_and_save_directory()')
   autocmd('BufWritePost', '*/spell/*.add', 'silent! :mkspell! %')
   autocmd('InsertLeave', '*', 'set nopaste')
-  autocmd('TextYankPost', '*', 'silent! lua vim.highlight.on_yank()')
+  autocmd('TextYankPost', '*', "if v:event.operator is 'y' && v:event.regname is '*' | execute 'OSCYankReg *' | endif | silent! lua vim.highlight.on_yank()")
   autocmd('VimResized', '*', 'execute "normal! \\<c-w>="')
 
   autocmd('BufEnter,BufRead,BufNewFile', '*.ss', 'set filetype=ss.html syntax=ss | runtime! ftplugin/ss.vim | runtime! indent/ss.vim')
