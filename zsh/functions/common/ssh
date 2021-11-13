@@ -1,3 +1,6 @@
 # Don't send tmux TERM when using ssh
 
-env TERM=xterm-256color command ssh "$@"
+emulate -L zsh
+
+local local_term=$(echo -n "$TERM" | sed -e s/tmux/screen/)
+TERM=$local_term command ssh "$@"
