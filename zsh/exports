@@ -83,6 +83,6 @@ if command -v fzf &>/dev/null; then
     --color=marker:2
     --color=header:2
     --color=pointer:3
-    --color=border:#1a1d23
+    --color=border:#1f2233
   '
 fi
