@@ -2,4 +2,4 @@ new_tab local
 launch
 
 new_tab dev
-launch ssh dev -t tmux attach
+launch ssh dev
