@@ -121,6 +121,29 @@ unset host_fpath
 #-- Completion ----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
+# zsh-completions
+source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
+
+# Load and initialize the completion system ignoring insecure directories with a
+# cache time of 20 hours, so it should almost always regenerate the first time a
+# shell is opened each day.
+autoload -Uz compinit
+_comp_path="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
+if [[ $_comp_path(N.mh-20) ]]; then
+  # -C (skip function check) implies -i (skip security check).
+  compinit -C -d "$_comp_path"
+else
+  mkdir -p "$_comp_path:h"
+  compinit -i -d "$_comp_path"
+  # Keep $_comp_path younger than cache time even if it isn't regenerated.
+  touch "$_comp_path"
+fi
+unset _comp_path
+
+# Use caching to make completion for commands such as dpkg and apt usable.
+zstyle ':completion::complete:*' use-cache on
+zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
+
 zstyle '*'                   single-ignored  show
 zstyle ':completion:*'       completer       _complete
 zstyle ':completion:*'       insert-tab      pending
@@ -129,34 +152,6 @@ zstyle ':completion:*'       matcher-list    'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r
 zstyle ':completion:*'       menu            select
 zstyle ':completion:*'       squeeze-slashes true
 zstyle ':completion:*:ssh:*' hosts           off
-
-# zsh-completions
-source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
-
-() {
-  emulate -L zsh
-  local -r cache_dir=${XDG_CACHE_HOME:-$HOME/.cache}/zsh
-  local -r zcd=$cache_dir/.zcompdump
-  local -r zcdc="$zcd.zwc"
-
-  # Store completion cache
-  # https://www.reddit.com/r/zsh/comments/fqpidr/removing_zcompdump_file_creation/
-  autoload -Uz _store_cache compinit
-  zstyle ':completion:*' use-cache true
-  zstyle ':completion:*' cache-path $cache_dir/.zcompcache
-  [[ -f $cache_dir/.zcompcache/.make-cache-dir ]] || _store_cache .make-cache-dir
-
-  # Perform compinit only once a day
-  # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2894219
-  # https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
-  if [[ -f "$zcd"(N.mh+24) ]]; then
-    compinit -i -d "$zcd"
-    { rm -f "$zcdc" && zcompile "$zcd" } &!
-  else
-    compinit -C -d "$zcd"
-    { [[ ! -f "$zcdc" || "$zcd" -nt "$zcdc" ]] && rm -f "$zcdc" && zcompile "$zcd" } &!
-  fi
-}
 
 #------------------------------------------------------------------------------
 #-- Prompt --------------------------------------------------------------------
@@ -284,6 +279,6 @@ host_rc="$ZDOTDIR/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
 test -r "$host_rc" && source "$host_rc"
 unset host_rc
 
-local_rc=$HOME/.zshrc.local
+local_rc="$HOME/.zshrc.local"
 test -r "$local_rc" && source "$local_rc"
 unset local_rc
