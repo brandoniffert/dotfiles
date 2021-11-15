@@ -129,7 +129,8 @@ source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
 # shell is opened each day.
 autoload -Uz compinit
 _comp_path="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
-if [[ $_comp_path(N.mh-20) ]]; then
+setopt EXTENDED_GLOB
+if [[ $_comp_path(#qNmh-20) ]]; then
   # -C (skip function check) implies -i (skip security check).
   compinit -C -d "$_comp_path"
 else
@@ -138,6 +139,7 @@ else
   # Keep $_comp_path younger than cache time even if it isn't regenerated.
   touch "$_comp_path"
 fi
+unsetopt EXTENDED_GLOB
 unset _comp_path
 
 # Use caching to make completion for commands such as dpkg and apt usable.
