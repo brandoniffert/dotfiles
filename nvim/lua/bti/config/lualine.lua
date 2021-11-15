@@ -71,7 +71,7 @@ require('lualine').setup {
       { 'mode', separator = { left = '' }, padding = { left = 1, right = 2 } },
     },
     lualine_b = {
-      { 'FugitiveHead', icon = '', color= 'CursorLine' },
+      { 'FugitiveHead', icon = '', color = 'CursorLine' },
       { 'diff', color = 'CursorLine', colored = false, padding = { left = 0, right = 1 }},
     },
     lualine_c = {
@@ -102,7 +102,9 @@ require('lualine').setup {
     lualine_a = {},
     lualine_b = {},
     lualine_c = {
-      { '%t', color = { fg = bti.util.colors.white } },
+      { components.filename_prefix, color = { fg = 'white' }, padding = { left = 1, right = 0 } },
+      { '[[ ]]', padding = 0, cond = function () return components.filename_prefix() == ''; end },
+      { '%t', padding = 0, color = { fg = 'white' }},
       { components.modified, padding = 0, color = { fg = 'white', gui = 'bold' } },
     },
     lualine_x = {},
