@@ -241,11 +241,18 @@ local augroup = bti.vim.augroup
 local autocmd = bti.vim.autocmd
 
 augroup('BtiAutocmds', function ()
+  autocmd('BufEnter', '*', bti.autocmds.buf_enter)
   autocmd('BufWritePre,FileWritePre', '*', 'call bti#functions#create_and_save_directory()')
   autocmd('BufWritePost', '*/spell/*.add', 'silent! :mkspell! %')
+  autocmd('FocusGained', '*', bti.autocmds.focus_gained)
+  autocmd('FocusLost', '*', bti.autocmds.focus_lost)
   autocmd('InsertLeave', '*', 'set nopaste')
+  autocmd('TermOpen', '*', 'setlocal nonumber norelativenumber')
+  autocmd('TermOpen', '*', 'startinsert')
   autocmd('TextYankPost', '*', "if v:event.operator is 'y' && v:event.regname is '*' | execute 'OSCYankReg *' | endif | silent! lua vim.highlight.on_yank()")
   autocmd('VimResized', '*', 'execute "normal! \\<c-w>="')
+  autocmd('WinEnter', '*', bti.autocmds.win_enter)
+  autocmd('WinLeave', '*', bti.autocmds.win_leave)
 
   autocmd('BufEnter,BufRead,BufNewFile', '*.ss', 'set filetype=ss.html syntax=ss | runtime! ftplugin/ss.vim | runtime! indent/ss.vim')
 

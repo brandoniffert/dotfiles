@@ -11,3 +11,5 @@ vim.g.tokyonight_colors = {
 }
 
 vim.cmd [[colorscheme tokyonight]]
+
+vim.cmd [[hi InactiveWindow guifg=#565f89 guibg=#131520]]
