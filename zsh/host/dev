@@ -1,3 +1,5 @@
+alias paru="sudo -u build paru"
+
 # Automatically setup tmux session
 () {
   local session_name="dev"
