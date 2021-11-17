@@ -153,6 +153,7 @@ end
 -- Don't mess with 'conceallevel' for these.
 autocmds.conceallevel_filetypes = {
   ['help'] = 2,
+  ['json'] = 0,
 }
 
 -- Don't use 'winhighlight' to make these filetypes seem blurred.
@@ -160,6 +161,7 @@ autocmds.winhighlight_filetype_blacklist = {
   ['diff'] = true,
   ['fugitiveblame']= true,
   ['NvimTree'] = true,
+  ['packer'] = true,
   ['qf'] = true,
 }
 
@@ -181,6 +183,7 @@ autocmds.number_blacklist = {
 autocmds.ownsyntax_filetypes = {
   ['NvimTree'] = true,
   ['help'] = true,
+  ['packer'] = true,
   ['qf'] = true,
 }
 
