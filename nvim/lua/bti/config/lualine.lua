@@ -102,8 +102,7 @@ require('lualine').setup {
     lualine_a = {},
     lualine_b = {},
     lualine_c = {
-      { components.filename_prefix, color = { fg = 'white' }, padding = { left = 1, right = 0 } },
-      { '[[ ]]', padding = 0, cond = function () return components.filename_prefix() == ''; end },
+      { components.filename_prefix, color = { fg = 'white' }, padding = { left = 0, right = 0 } },
       { '%t', padding = 0, color = { fg = 'white' }},
       { components.modified, padding = 0, color = { fg = 'white', gui = 'bold' } },
     },
