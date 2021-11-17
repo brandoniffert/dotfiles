@@ -1,5 +1,4 @@
 local nvim_lsp = require 'lspconfig'
-local map = vim.api.nvim_buf_set_keymap
 
 -- vim.lsp.set_log_level('debug')
 
@@ -20,23 +19,27 @@ function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
 end
 
 -- Setup custom on_attach function
-local on_attach = function(_, bufnr)
-  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+local on_attach = function(client, bufnr)
+  local function buf_map(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
+  local function buf_opt(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+
+  buf_opt('omnifunc', 'v:lua.vim.lsp.omnifunc')
 
   local opts = { noremap = true, silent = true }
-  map(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  map(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  map(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  map(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  map(bufnr, 'n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  map(bufnr, 'n', '<leader>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  map(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  map(bufnr, 'n', '<leader>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  map(bufnr, 'n', '<leader>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  map(bufnr, 'n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  map(bufnr, 'n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
+  buf_map('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+  buf_map('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+  buf_map('n', '<leader>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+  buf_map('n', '<Leader>ln', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+  buf_map('n', '<Leader>lr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+  buf_map('n', '<Leader>la', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+  buf_map('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+  buf_map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
+  buf_map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
-  vim.cmd [[command! Format execute 'lua vim.lsp.buf.formatting()']]
+  client.resolved_capabilities.document_formatting = false
+  client.resolved_capabilities.document_range_formatting = false
+
+  vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -49,36 +52,63 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
--- Enable the following language servers
+-- bash
 nvim_lsp.bashls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
+-- css
 nvim_lsp.cssls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  settings = {
+    css = {
+      validate = false
+    }
+  }
+}
+
+-- eslint
+nvim_lsp.eslint.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
+-- php
 nvim_lsp.intelephense.setup {
   on_attach = on_attach,
   capabilities = capabilities,
-  trace = 'verbose',
   init_options = {
     licenceKey = os.getenv 'INTELEPHENSE_LICENCE_KEY' or '',
   },
 }
 
+-- null-ls
+nvim_lsp['null-ls'].setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- python
+nvim_lsp.pyright.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
+
+-- tailwind
 nvim_lsp.tailwindcss.setup {
   on_attach = on_attach,
   capabilities = capabilities,
 }
 
+-- javascript/typescript
 nvim_lsp.tsserver.setup {
-  on_attach = on_attach,
   capabilities = capabilities,
+  on_attach = on_attach,
 }
 
+-- yaml
 nvim_lsp.yamlls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
