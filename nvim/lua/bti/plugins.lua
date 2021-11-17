@@ -49,17 +49,17 @@ require('packer').startup({function()
 
   -- LSP
   use {
-    'neovim/nvim-lspconfig',
-    config = [[require('bti.config.nvim-lspconfig')]]
-  }
-
-  use {
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
       'neovim/nvim-lspconfig'
     },
     config = [[require('bti.config.null-ls')]]
+  }
+
+  use {
+    'neovim/nvim-lspconfig',
+    config = [[require('bti.config.nvim-lspconfig')]]
   }
 
   -- Statusline

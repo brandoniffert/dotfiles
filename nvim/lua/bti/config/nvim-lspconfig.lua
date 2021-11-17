@@ -36,10 +36,9 @@ local on_attach = function(client, bufnr)
   buf_map('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
   buf_map('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
 
-  client.resolved_capabilities.document_formatting = false
-  client.resolved_capabilities.document_range_formatting = false
-
-  vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
+  if client.resolved_capabilities.document_formatting then
+    vim.cmd('autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()')
+  end
 end
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
@@ -77,11 +76,24 @@ nvim_lsp.eslint.setup {
 
 -- php
 nvim_lsp.intelephense.setup {
-  on_attach = on_attach,
   capabilities = capabilities,
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+
+    on_attach(client, bufnr)
+  end,
   init_options = {
     licenceKey = os.getenv 'INTELEPHENSE_LICENCE_KEY' or '',
   },
+}
+
+-- json
+nvim_lsp.jsonls.setup {
+  capabilities = capabilities,
+  init_options = {
+    provideFormatter = false
+  }
 }
 
 -- null-ls
@@ -105,7 +117,12 @@ nvim_lsp.tailwindcss.setup {
 -- javascript/typescript
 nvim_lsp.tsserver.setup {
   capabilities = capabilities,
-  on_attach = on_attach,
+  on_attach = function(client, bufnr)
+    client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+
+    on_attach(client, bufnr)
+  end
 }
 
 -- yaml

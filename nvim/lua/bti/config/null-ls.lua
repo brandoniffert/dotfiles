@@ -1,10 +1,11 @@
 local null_ls = require('null-ls')
+local b = null_ls.builtins
 
 null_ls.config({
   sources = {
-    null_ls.builtins.diagnostics.shellcheck,
-    null_ls.builtins.diagnostics.yamllint,
-    null_ls.builtins.formatting.phpcsfixer,
-    null_ls.builtins.formatting.prettierd,
+    b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+    b.diagnostics.yamllint,
+    b.formatting.phpcsfixer,
+    b.formatting.prettierd,
   }
 })
