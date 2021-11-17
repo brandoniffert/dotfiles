@@ -8,10 +8,14 @@ require('packer').startup({function()
   -- Git
   use {
     'lewis6991/gitsigns.nvim',
+    event = { 'BufNew', 'BufRead', 'InsertEnter' },
     requires = { 'nvim-lua/plenary.nvim' },
     config = [[require('bti.config.gitsigns')]]
   }
-  use 'tpope/vim-fugitive'
+  use {
+    'tpope/vim-fugitive',
+    event = { 'BufNew', 'BufRead', 'InsertEnter' },
+  }
 
   -- Theme
   use {
@@ -46,7 +50,6 @@ require('packer').startup({function()
   -- LSP
   use {
     'neovim/nvim-lspconfig',
-    event = 'BufRead',
     config = [[require('bti.config.nvim-lspconfig')]]
   }
 
@@ -97,12 +100,19 @@ require('packer').startup({function()
 
   -- Utility
   use 'christoomey/vim-tmux-navigator'
-  use 'tpope/vim-commentary'
-  use 'tpope/vim-eunuch'
+  use {
+    'tpope/vim-commentary',
+    keys = 'gc'
+  }
+  use {
+    'tpope/vim-eunuch',
+    event = 'CmdlineEnter'
+  }
   use 'tpope/vim-repeat'
   use 'wincent/terminus'
   use {
     'wincent/loupe',
+    keys = { 'n', 'N', '/' },
     config = [[require('bti.config.loupe')]]
   }
 
