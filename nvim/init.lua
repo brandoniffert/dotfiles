@@ -81,7 +81,7 @@ vim.opt.fillchars      = {
   diff                 = '∙',
   eob                  = ' ',
   fold                 = '·',
-  vert                 = '│',
+  vert                 = ' ',
 }
 vim.opt.foldenable     = false
 vim.opt.formatoptions:append('1rnq')
