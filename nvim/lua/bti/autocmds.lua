@@ -59,6 +59,10 @@ local focus_window = function()
   if filetype ~= '' and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = ''
     vim.cmd('TSBufEnable highlight')
+
+    if package.loaded['gitsigns'] then
+      vim.cmd('Gitsigns attach')
+    end
   end
 
   if filetype ~= '' and autocmds.ownsyntax_filetypes[filetype] ~= true then
@@ -89,6 +93,10 @@ local blur_window = function()
   if filetype == '' or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
     vim.cmd('TSBufDisable highlight')
+
+    if package.loaded['gitsigns'] then
+      vim.cmd('Gitsigns detach')
+    end
   end
 
   if filetype == '' or autocmds.ownsyntax_filetypes[filetype] ~= true then
