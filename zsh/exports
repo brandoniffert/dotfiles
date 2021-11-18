@@ -22,7 +22,8 @@ fi
 
 # Manually manage XDG for some programs
 export CARGO_HOME="$XDG_DATA_HOME"/cargo
-export COMPOSER_HOME="$XDG_DATA_HOME"/composer
+export COMPOSER_HOME="$XDG_CONFIG_HOME"/composer
+export COMPOSER_CACHE_DIR="$XDG_CACHE_HOME"/composer
 export GEM_HOME="$XDG_DATA_HOME"/gem
 export GEM_SPEC_CACHE="$XDG_CACHE_HOME"/gem
 export NODE_REPL_HISTORY="$XDG_DATA_HOME"/node/repl_history

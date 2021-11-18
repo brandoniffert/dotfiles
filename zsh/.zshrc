@@ -84,6 +84,7 @@ bindkey '^Z' bti-fg-bg
 #------------------------------------------------------------------------------
 
 alias e="$EDITOR"
+alias dc='docker compose'
 alias g='git'
 alias grep='grep --color'
 alias lg='lazygit'
