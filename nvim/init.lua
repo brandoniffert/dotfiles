@@ -140,6 +140,7 @@ vim.opt.swapfile       = false
 vim.opt.switchbuf      = 'usetab'
 vim.opt.synmaxcol      = 200
 vim.opt.tabstop        = 2
+vim.opt.tabline        = '%!bti#tabline#line()'
 vim.opt.termguicolors  = true
 
 if root then

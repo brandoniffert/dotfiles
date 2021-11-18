@@ -12,4 +12,7 @@ vim.g.tokyonight_colors = {
 
 vim.cmd [[colorscheme tokyonight]]
 
+vim.cmd [[hi Tabline guifg=#6c759d guibg=#171926]]
+vim.cmd [[hi TablineFill guibg=#171926]]
+vim.cmd [[hi TablineSel guifg=#c0caf5 guibg=#171926]]
 vim.cmd [[hi InactiveWindow guifg=#565f89 guibg=#131520]]

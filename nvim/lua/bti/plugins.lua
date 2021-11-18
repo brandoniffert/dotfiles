@@ -17,7 +17,7 @@ require('packer').startup({function()
     event = { 'BufNew', 'BufRead', 'InsertEnter' },
   }
 
-  -- Theme
+  -- Theme / UI
   use {
     'folke/tokyonight.nvim',
     config = [[require('bti.config.tokyonight')]]
@@ -25,6 +25,12 @@ require('packer').startup({function()
   use {
     'kyazdani42/nvim-web-devicons',
     config = [[require('bti.config.nvim-web-devicons')]]
+  }
+
+  use {
+    'nvim-lualine/lualine.nvim',
+    event = { 'BufNew', 'BufRead', 'InsertEnter' },
+    config = [[require('bti.config.lualine')]]
   }
 
   -- Completion
@@ -60,13 +66,6 @@ require('packer').startup({function()
   use {
     'neovim/nvim-lspconfig',
     config = [[require('bti.config.nvim-lspconfig')]]
-  }
-
-  -- Statusline
-  use {
-    'nvim-lualine/lualine.nvim',
-    event = { 'BufNew', 'BufRead', 'InsertEnter' },
-    config = [[require('bti.config.lualine')]]
   }
 
   -- Fuzzy Finding

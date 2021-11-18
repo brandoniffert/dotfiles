@@ -53,19 +53,6 @@ require('lualine').setup {
     component_separators = '',
     section_separators = { left = '', right = '' },
   },
-  tabline = {
-    lualine_a = {
-      {
-        'tabs',
-        mode = 1
-      }
-    },
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = {}
-  },
   sections = {
     lualine_a = {
       { 'mode', separator = { left = '' }, padding = { left = 1, right = 2 } },
@@ -115,10 +102,3 @@ require('lualine').setup {
     extensions.help,
   }
 }
-
-local augroup = bti.vim.augroup
-local autocmd = bti.vim.autocmd
-
-augroup('LuaLineAutocmds', function ()
-  autocmd('OptionSet', 'showtabline', 'set showtabline=1')
-end)
