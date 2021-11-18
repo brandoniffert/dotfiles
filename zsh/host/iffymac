@@ -8,7 +8,6 @@ export HOMEBREW_NO_ANALYTICS=1
 path=(
   $PYENV_ROOT/shims
   $RBENV_ROOT/shims
-  $XDG_DATA_HOME/composer/vendor/bin
   $path
 )
 

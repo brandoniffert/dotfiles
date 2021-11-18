@@ -6,6 +6,7 @@ path=(
   $ZDOTDIR/bin/common
   $HOME/.local/bin
   $N_PREFIX/bin
+  $XDG_DATA_HOME/composer/vendor/bin
   /usr/local/sbin
   $path
 )
