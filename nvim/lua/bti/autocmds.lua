@@ -59,7 +59,7 @@ local focus_window = function()
   if filetype ~= '' and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = ''
 
-    if package.loaded['treesitter'] then
+    if package.loaded['nvim-treesitter'] then
       vim.cmd('TSBufEnable highlight')
     end
 
@@ -95,7 +95,7 @@ local blur_window = function()
 
   if filetype == '' or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
-    if package.loaded['treesitter'] then
+    if package.loaded['nvim-treesitter'] then
       vim.cmd('TSBufDisable highlight')
     end
 
