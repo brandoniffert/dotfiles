@@ -5,6 +5,7 @@ source $ZDOTDIR/exports
 path=(
   $ZDOTDIR/bin/common
   $HOME/.local/bin
+  $N_PREFIX/bin
   /usr/local/sbin
   $path
 )

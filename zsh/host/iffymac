@@ -6,7 +6,6 @@ export HOMEBREW_NO_ANALYTICS=1
 
 # Set host specific path
 path=(
-  $N_PREFIX/bin
   $PYENV_ROOT/shims
   $RBENV_ROOT/shims
   $XDG_DATA_HOME/composer/vendor/bin
