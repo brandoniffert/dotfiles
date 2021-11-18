@@ -58,7 +58,10 @@ local focus_window = function()
 
   if filetype ~= '' and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = ''
-    vim.cmd('TSBufEnable highlight')
+
+    if package.loaded['treesitter'] then
+      vim.cmd('TSBufEnable highlight')
+    end
 
     if package.loaded['gitsigns'] then
       vim.cmd('Gitsigns attach')
@@ -92,7 +95,9 @@ local blur_window = function()
 
   if filetype == '' or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
-    vim.cmd('TSBufDisable highlight')
+    if package.loaded['treesitter'] then
+      vim.cmd('TSBufDisable highlight')
+    end
 
     if package.loaded['gitsigns'] then
       vim.cmd('Gitsigns detach')
