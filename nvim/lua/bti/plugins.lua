@@ -80,6 +80,11 @@ require('packer').startup({function()
     config = [[require('bti.config.telescope')]]
   }
 
+  use {
+    'camspiers/snap',
+    config = [[require('bti.config.snap')]]
+  }
+
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
