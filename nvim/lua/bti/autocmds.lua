@@ -160,7 +160,11 @@ autocmds.win_enter = function()
 end
 
 autocmds.win_leave = function()
-  blur_window()
+  local win_type = vim.fn.win_gettype()
+
+  if win_type ~= 'popup' then
+    blur_window()
+  end
 end
 
 -- Don't mess with 'conceallevel' for these.
