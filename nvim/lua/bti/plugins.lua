@@ -73,8 +73,7 @@ require('packer').startup({function()
     'nvim-telescope/telescope.nvim',
     requires = {
       { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
-      { 'nvim-telescope/telescope-live-grep-raw.nvim' }
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
     },
     keys = '<Leader>',
     config = [[require('bti.config.telescope')]]
