@@ -51,6 +51,19 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
+-- Setup null-ls
+local null_ls = require('null-ls')
+local null_b = null_ls.builtins
+
+null_ls.config({
+  sources = {
+    null_b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
+    null_b.diagnostics.yamllint,
+    null_b.formatting.phpcsfixer,
+    null_b.formatting.prettierd,
+  }
+})
+
 -- bash
 nvim_lsp.bashls.setup {
   on_attach = on_attach,
