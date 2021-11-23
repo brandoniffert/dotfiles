@@ -49,7 +49,7 @@ cmp.setup {
       priority = 1,
       keyword_length = 2,
       max_item_count = 10,
-      opts = {
+      option = {
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
         end
@@ -58,7 +58,7 @@ cmp.setup {
     {
       name = 'tmux',
       priority = 2,
-      opts = {
+      option = {
         trigger_characters = {}
       }
     },
