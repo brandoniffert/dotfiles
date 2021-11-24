@@ -157,64 +157,6 @@ zstyle ':completion:*'       squeeze-slashes true
 zstyle ':completion:*:ssh:*' hosts           off
 
 #------------------------------------------------------------------------------
-#-- Prompt --------------------------------------------------------------------
-#------------------------------------------------------------------------------
-
-source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
-
-ZSH_THEME_GIT_PROMPT_PREFIX=" %F{#4a4e68}%f "
-ZSH_THEME_GIT_PROMPT_SUFFIX=" "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
-ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▴"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}!"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
-ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}●"
-ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
-ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
-ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[black]%}(%f"
-ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX="%{$fg_bold[black]%})%f "
-ZSH_THEME_GIT_PROMPT_TAG="%{$fg[magenta]%}"
-ZSH_GIT_PROMPT_SHOW_STASH=1
-
-() {
-  local prompt_char='\$'
-  local prompt_color='%{$fg_bold[white]%}'
-  local lvl=$SHLVL
-  local host_char='%{$fg_bold[green]%}●%f'
-  local hostname='%m '
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    host_char=''
-    hostname=''
-  fi
-
-  if [[ $EUID -eq 0 ]]; then
-    prompt_char='#'
-    prompt_color='%{$fg_bold[red]%}'
-  fi
-
-  [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
-
-  PROMPT=''
-  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
-  PROMPT+='%K{#1f2233}%{$fg_bold[cyan]%} %1~%f%k%F{#1f2233}%f'
-  PROMPT+='$(gitprompt)'
-  PROMPT+='$(gitprompt_secondary)'
-  PROMPT+=$'\n'
-  PROMPT+='%{$fg[yellow]%}%(1j. ◆ .)%f'
-  PROMPT+='${${VIRTUAL_ENV#0}:+($(basename $VIRTUAL_ENV)) }'
-  PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
-
-  SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
-}
-
-#------------------------------------------------------------------------------
 #-- Plugins/Scripts -----------------------------------------------------------
 #------------------------------------------------------------------------------
 
@@ -272,6 +214,65 @@ function _fzf_compgen_dir() {
   else
     command -v dircolors >/dev/null && test -r $_dircolors && eval $(command dircolors $_dircolors)
   fi
+}
+
+#------------------------------------------------------------------------------
+#-- Prompt --------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
+source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
+
+ZSH_THEME_GIT_PROMPT_PREFIX=" %F{#4a4e68}%f "
+ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
+ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
+ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▴"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}!"
+ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
+ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
+ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}●"
+ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
+ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
+ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[black]%}(%f"
+ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX="%{$fg_bold[black]%})%f "
+ZSH_THEME_GIT_PROMPT_TAG="%{$fg[magenta]%}"
+ZSH_GIT_PROMPT_SHOW_STASH=1
+
+() {
+  local prompt_char='\$'
+  local prompt_color='%{$fg_bold[white]%}'
+  local lvl=$SHLVL
+  local host_char='%{$fg_bold[green]%}●%f'
+  local hostname='%m '
+
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    host_char=''
+    hostname=''
+  fi
+
+  if [[ $EUID -eq 0 ]]; then
+    prompt_char='#'
+    prompt_color='%{$fg_bold[red]%}'
+  fi
+
+  [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
+
+  PROMPT=''
+  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
+  PROMPT+='%K{#1f2233}%{$fg_bold[cyan]%} %1~%f%k%F{#1f2233}%f'
+  PROMPT+='$(gitprompt)'
+  PROMPT+='$(gitprompt_secondary)'
+  PROMPT+='${${VIRTUAL_ENV#0}:+ ($(basename $VIRTUAL_ENV))}'
+  PROMPT+='%{$fg[yellow]%}%(1j. ◆.)%f '
+  PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
+
+  RPROMPT='%{$fg_bold[black]%}%(4~|.../%3~|%~)%f'
+
+  SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
 
 #------------------------------------------------------------------------------
