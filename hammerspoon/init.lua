@@ -67,27 +67,38 @@ bindMehFn('delete', WinMan.undoPop)
 bindMehFn('=', WinMan.centerWindow)
 
 -- Application watcher
-function appLaunched(appName, eventType, app)
-  if eventType ~= hs.application.watcher.launched then
-    return
+function handleApp(appName, eventType, app)
+  if eventType == hs.application.watcher.launched then
+    -- Maximize kitty windown when launched
+    if appName == 'kitty' then
+      local checkAppFocused = (function()
+        return app:isFrontmost()
+      end)
+
+      local maximizeApp = (function()
+        local appWindow = app:focusedWindow()
+
+        if appWindow ~= nil then
+          appWindow:setFrame(appWindow:screen():frame())
+        end
+      end)
+
+      hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
+    end
+
+    -- Set Chrome as default browser when launched
+    if appName == 'Google Chrome' then
+      hs.execute('defaultbrowser chrome && confirm-use-dialog', true)
+    end
   end
 
-  if appName == 'kitty' then
-    local checkAppFocused = (function()
-      return app:isFrontmost()
-    end)
-
-    local maximizeApp = (function()
-      local appWindow = app:focusedWindow()
-
-      if appWindow ~= nil then
-        appWindow:setFrame(appWindow:screen():frame())
-      end
-    end)
-
-    hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
+  if eventType == hs.application.watcher.terminated then
+    -- Set Firefox as default browser when Chrome is closed
+    if appName == 'Google Chrome' then
+      hs.execute('defaultbrowser firefox && confirm-use-dialog', true)
+    end
   end
 end
 
-appWatcher = hs.application.watcher.new(appLaunched)
+appWatcher = hs.application.watcher.new(handleApp)
 appWatcher:start()
