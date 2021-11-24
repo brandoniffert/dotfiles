@@ -82,6 +82,12 @@ require('packer').startup({function()
     config = [[require('bti.config.snap')]]
   }
 
+  use {
+    'phaazon/hop.nvim',
+    branch = 'v1',
+    config = [[require('bti.config.hop')]]
+  }
+
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
