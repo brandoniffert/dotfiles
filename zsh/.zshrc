@@ -270,7 +270,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   PROMPT+='%{$fg[yellow]%}%(1j. ◆.)%f '
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
-  RPROMPT='%{$fg_bold[black]%}%(4~|.../%3~|%~)%f'
+  RPROMPT='%{$fg_bold[black]%}%(4~|.../%3~|%~)%{$reset_color%}'
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
