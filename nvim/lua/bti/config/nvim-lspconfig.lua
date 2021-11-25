@@ -56,13 +56,27 @@ local null_ls = require('null-ls')
 local null_b = null_ls.builtins
 
 null_ls.config({
+  -- debug = true,
   sources = {
-    null_b.diagnostics.shellcheck.with({ diagnostics_format = "#{m} [#{c}]" }),
-    null_b.diagnostics.yamllint,
+    null_b.diagnostics.shellcheck.with({
+      diagnostics_format = "#{m} [#{c}]"
+    }),
+    null_b.diagnostics.yamllint.with({
+      extra_args = {
+        '-d',
+        '{extends: relaxed, rules: {line-length: disable}}'
+      }
+    }),
     null_b.formatting.phpcsfixer,
     null_b.formatting.prettierd,
   }
 })
+
+-- ansible
+nvim_lsp.ansiblels.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+}
 
 -- bash
 nvim_lsp.bashls.setup {
@@ -142,4 +156,14 @@ nvim_lsp.tsserver.setup {
 nvim_lsp.yamlls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+  settings = {
+    yaml = {
+      schemaStore = {
+        enable = true
+      },
+      format = {
+        singleQuote = false
+      }
+    }
+  }
 }
