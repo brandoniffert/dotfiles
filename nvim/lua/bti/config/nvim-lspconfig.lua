@@ -61,12 +61,7 @@ null_ls.config({
     null_b.diagnostics.shellcheck.with({
       diagnostics_format = "#{m} [#{c}]"
     }),
-    null_b.diagnostics.yamllint.with({
-      extra_args = {
-        '-d',
-        '{extends: relaxed, rules: {line-length: disable}}'
-      }
-    }),
+    null_b.diagnostics.yamllint,
     null_b.formatting.phpcsfixer,
     null_b.formatting.prettierd,
   }
