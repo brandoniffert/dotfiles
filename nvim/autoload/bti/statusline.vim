@@ -74,10 +74,13 @@ function! bti#statusline#ffenc() abort
   let l:expected_ff = 'unix'
   let l:expected_fenc = 'utf-8'
   let l:expected = l:expected_fenc . ' [' . l:expected_ff. ']'
+  let l:expected_empty_fenc = '[' . l:expected_ff. ']'
   let l:bomb = &bomb ? '[BOM]' : ''
   let l:ff = strlen(&fileformat) ? ' [' . &fileformat . ']' : ''
 
   if l:expected is# &fileencoding . l:bomb . l:ff
+    return ''
+  else if l:expected_empty_fenc is# l:bomb . l:ff
     return ''
   else
     return &fileencoding . l:bomb . l:ff . ' '
