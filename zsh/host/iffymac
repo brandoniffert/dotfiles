@@ -43,7 +43,7 @@ alias vapor="php vendor/bin/vapor"
 # Automatically setup tmux session
 () {
   local session_name="local"
-  local working_dir="$HOME/Projects/Life/dotfiles"
+  local working_dir="$HOME/.dotfiles"
 
   if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "kitty" ]; then
     # Create or attach to initial session if this is the main kitty window
