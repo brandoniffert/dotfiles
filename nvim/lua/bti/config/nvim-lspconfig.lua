@@ -153,9 +153,6 @@ nvim_lsp.yamlls.setup {
   capabilities = capabilities,
   settings = {
     yaml = {
-      schemaStore = {
-        enable = true
-      },
       format = {
         singleQuote = false
       }
