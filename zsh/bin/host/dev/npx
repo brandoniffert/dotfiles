@@ -1,0 +1,15 @@
+#!/bin/bash
+
+set -e
+
+image=node:lts
+
+docker run -it --rm \
+  -u "$(id -u):$(id -g)" \
+  --env npm_config_cache \
+  -v "$npm_config_cache":"$npm_config_cache" \
+  -v "$PWD":/app \
+  -w /app \
+  $image \
+  npx \
+  "$@"
