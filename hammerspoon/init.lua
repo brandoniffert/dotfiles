@@ -69,7 +69,7 @@ bindMehFn('=', WinMan.centerWindow)
 -- Application watcher
 function handleApp(appName, eventType, app)
   if eventType == hs.application.watcher.launched then
-    -- Maximize kitty windown when launched
+    -- Maximize kitty window when launched
     if appName == 'kitty' then
       local checkAppFocused = (function()
         return app:isFrontmost()
@@ -84,6 +84,23 @@ function handleApp(appName, eventType, app)
       end)
 
       hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
+    end
+
+    -- Position emacs window when launched
+    if appName == 'Emacs' then
+      local checkAppFocused = (function()
+        return app:isFrontmost()
+      end)
+
+      local positionApp = (function()
+        local appWindow = app:focusedWindow()
+
+        if appWindow ~= nil then
+          hs.grid.set(appWindow, '6,0 6x12')
+        end
+      end)
+
+      hs.timer.waitUntil(checkAppFocused, positionApp, 0.1)
     end
 
     -- Set Chrome as default browser when launched
