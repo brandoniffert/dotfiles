@@ -22,24 +22,35 @@
 ;; (setq doom-font (font-spec :family "monospace" :size 12 :weight 'semi-light)
 ;;       doom-variable-pitch-font (font-spec :family "sans" :size 13))
 
-(setq doom-font (font-spec :family "SauceCodePro Nerd Font" :size 12))
+(setq doom-font (font-spec :family "SauceCodePro Nerd Font" :size 13)
+      doom-variable-pitch-font (font-spec :family "SauceCodePro Nerd Font" :size 13))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 
+(set-frame-parameter nil 'internal-border-width 20)
+
+(setq default-text-properties '(line-spacing 0.25 line-height 1.25))
+
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-one)
+(setq doom-theme 'doom-one-light)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org/")
+(setq org-directory "~/Notes/"
+      org-agenda-files '("~/Notes/todo.org")
+      org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+)
+
+(setq org-hide-emphasis-markers t)
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type t)
 
+(setq projectile-track-known-projects-automatically nil)
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;
