@@ -86,10 +86,8 @@ vim.opt.fillchars      = {
 vim.opt.foldenable     = false
 vim.opt.formatoptions:append('1rnq')
 vim.opt.grepformat     = '%f:%l:%m'
-vim.opt.hidden         = true
 vim.opt.ignorecase     = true
 vim.opt.inccommand     = 'split'
-vim.opt.joinspaces     = false
 vim.opt.laststatus     = 2
 vim.opt.lazyredraw     = true
 vim.opt.linebreak      = false
@@ -215,9 +213,6 @@ nnoremap('<Leader>p', '"*p')
 
 -- Don't replace register with text that was pasted over
 xnoremap('p', "p:if v:register == '\"'<bar>let @@=@0<bar>endif<CR>", { silent = true })
-
--- Make Y act like other capital letters
-noremap('Y', 'y$')
 
 -- Run current file using makeprg
 nnoremap('<Leader>r', ':make!<CR>')
