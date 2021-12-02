@@ -8,9 +8,12 @@ require('packer').startup({function()
   -- Git
   use {
     'lewis6991/gitsigns.nvim',
-    event = { 'BufNew', 'BufRead', 'InsertEnter' },
+    event = 'BufReadPre',
+    wants = 'plenary.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-    config = [[require('bti.config.gitsigns')]]
+    config = function()
+      require('bti.config.gitsigns')
+    end,
   }
   use {
     'tpope/vim-fugitive',
@@ -20,37 +23,48 @@ require('packer').startup({function()
   -- Theme / UI
   use {
     'folke/tokyonight.nvim',
-    config = [[require('bti.config.tokyonight')]]
+    config = function()
+      require('bti.config.tokyonight')
+    end,
   }
   use {
     'kyazdani42/nvim-web-devicons',
-    config = [[require('bti.config.nvim-web-devicons')]]
+    config = function()
+      require('bti.config.nvim-web-devicons')
+    end,
   }
 
   use {
     'nvim-lualine/lualine.nvim',
     event = { 'BufNew', 'BufRead', 'InsertEnter' },
-    config = [[require('bti.config.lualine')]]
+    config = function()
+      require('bti.config.lualine')
+    end,
   }
 
   -- Completion
   use {
     'hrsh7th/nvim-cmp',
+    event = 'InsertEnter',
     requires = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
-      { 'andersevenrud/cmp-tmux' },
+      'andersevenrud/cmp-tmux',
       'L3MON4D3/LuaSnip'
     },
-    config = [[require('bti.config.nvim-cmp')]]
+    config = function()
+      require('bti.config.nvim-cmp')
+    end,
   }
 
   -- File Explorer
   use {
     'kyazdani42/nvim-tree.lua',
     keys = '<Leader>\\',
-    config = [[require('bti.config.nvim-tree')]]
+    config = function()
+      require('bti.config.nvim-tree')
+    end,
   }
 
   -- LSP
@@ -63,7 +77,10 @@ require('packer').startup({function()
 
   use {
     'neovim/nvim-lspconfig',
-    config = [[require('bti.config.nvim-lspconfig')]]
+    event = 'BufReadPre',
+    config = function()
+      require('bti.config.nvim-lspconfig')
+    end,
   }
 
   -- Fuzzy Finding
@@ -71,29 +88,34 @@ require('packer').startup({function()
     'nvim-telescope/telescope.nvim',
     requires = {
       { 'nvim-lua/plenary.nvim' },
-      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+      { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
+      { 'nvim-telescope/telescope-rg.nvim' }
     },
-    keys = '<Leader>',
-    config = [[require('bti.config.telescope')]]
-  }
-
-  use {
-    'camspiers/snap',
-    config = [[require('bti.config.snap')]]
+    config = function()
+      require('bti.config.telescope')
+    end,
   }
 
   use {
     'phaazon/hop.nvim',
     branch = 'v1',
-    config = [[require('bti.config.hop')]]
+    config = function()
+      require('bti.config.hop')
+    end,
   }
 
   -- Treesitter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdate',
-    config = [[require('bti.config.nvim-treesitter')]],
-    requires = { 'nvim-treesitter/playground' }
+    event = 'BufRead',
+    config = function()
+      require('bti.config.nvim-treesitter')
+    end,
+  }
+  use {
+    'nvim-treesitter/playground',
+    cmd = 'TSHighlightCapturesUnderCursor'
   }
 
   -- Clipboard
@@ -109,7 +131,6 @@ require('packer').startup({function()
   use 'christoomey/vim-tmux-navigator'
   use {
     'tpope/vim-commentary',
-    keys = 'gc'
   }
   use {
     'tpope/vim-eunuch',
@@ -118,9 +139,21 @@ require('packer').startup({function()
   use 'tpope/vim-repeat'
   use 'wincent/terminus'
   use {
+    'folke/which-key.nvim',
+    config = function()
+      require('which-key').setup {
+        -- your configuration comes here
+        -- or leave it empty to use the default settings
+        -- refer to the configuration section below
+      }
+    end
+  }
+  use {
     'wincent/loupe',
-    keys = { 'n', 'N', '/' },
-    config = [[require('bti.config.loupe')]]
+    keys = { '/', '?', 'n', 'N', '<CR>' },
+    config = function()
+      require('bti.config.loupe')
+    end
   }
 
   if packer_bootstrap then

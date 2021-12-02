@@ -1,7 +1,6 @@
 local nnoremap = bti.vim.nnoremap
-local vnoremap = bti.vim.vnoremap
 
 require('hop').setup({})
 
-nnoremap('<LocalLeader>f', "<cmd>lua require'hop'.hint_words()<CR>", { silent = true })
-vnoremap('<LocalLeader>f', "<cmd>lua require'hop'.hint_words()<CR>", { silent = true })
+nnoremap('f', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.AFTER_CURSOR, current_line_only = true })<CR>")
+nnoremap('F', "<cmd>lua require'hop'.hint_char1({ direction = require'hop.hint'.HintDirection.BEFORE_CURSOR, current_line_only = true })<CR>")

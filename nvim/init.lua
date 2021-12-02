@@ -140,6 +140,7 @@ vim.opt.synmaxcol      = 200
 vim.opt.tabstop        = 2
 vim.opt.tabline        = '%!bti#tabline#line()'
 vim.opt.termguicolors  = true
+vim.opt.timeoutlen     = 500
 
 if root then
   vim.opt.undofile     = false
