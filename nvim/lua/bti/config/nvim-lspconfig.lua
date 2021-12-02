@@ -58,6 +58,7 @@ local null_b = null_ls.builtins
 null_ls.config({
   -- debug = true,
   sources = {
+    null_b.diagnostics.ansiblelint,
     null_b.diagnostics.shellcheck.with({
       diagnostics_format = "#{m} [#{c}]"
     }),
@@ -66,12 +67,6 @@ null_ls.config({
     null_b.formatting.prettierd,
   }
 })
-
--- ansible
-nvim_lsp.ansiblels.setup {
-  on_attach = on_attach,
-  capabilities = capabilities,
-}
 
 -- bash
 nvim_lsp.bashls.setup {
