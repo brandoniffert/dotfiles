@@ -45,7 +45,6 @@ require('packer').startup({function()
   -- Completion
   use {
     'hrsh7th/nvim-cmp',
-    event = 'InsertEnter',
     requires = {
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-nvim-lsp',
@@ -77,7 +76,7 @@ require('packer').startup({function()
 
   use {
     'neovim/nvim-lspconfig',
-    event = 'BufReadPre',
+    event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       require('bti.config.nvim-lspconfig')
     end,
@@ -86,6 +85,7 @@ require('packer').startup({function()
   -- Fuzzy Finding
   use {
     'nvim-telescope/telescope.nvim',
+    keys = { '<Leader>f', '<Leader>F', '<LocalLeader>f' },
     requires = {
       { 'nvim-lua/plenary.nvim' },
       { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' },
@@ -131,6 +131,7 @@ require('packer').startup({function()
   use 'christoomey/vim-tmux-navigator'
   use {
     'tpope/vim-commentary',
+    keys = { 'gc' }
   }
   use {
     'tpope/vim-eunuch',
@@ -141,11 +142,7 @@ require('packer').startup({function()
   use {
     'folke/which-key.nvim',
     config = function()
-      require('which-key').setup {
-        -- your configuration comes here
-        -- or leave it empty to use the default settings
-        -- refer to the configuration section below
-      }
+      require('which-key').setup {}
     end
   }
   use {
