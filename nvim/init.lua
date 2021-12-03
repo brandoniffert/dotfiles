@@ -202,8 +202,8 @@ nnoremap('<S-Tab>', '<<')
 vnoremap('<Tab>', '>gv')
 vnoremap('<S-Tab>', '<gv')
 
--- Make S split lines (opposite of J)
-nnoremap('S', ':<c-u>call bti#functions#break_here()<CR>', { silent = true })
+-- Split lines (opposite of J)
+nnoremap('|', ':<c-u>call bti#functions#break_here()<CR>', { silent = true })
 
 -- Open new horizontal/vertical split
 nnoremap('<Leader>v', ':vnew<CR>', { silent = true })
