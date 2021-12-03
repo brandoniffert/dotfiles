@@ -87,7 +87,6 @@ vim.opt.foldenable     = false
 vim.opt.formatoptions:append('1rnq')
 vim.opt.grepformat     = '%f:%l:%m'
 vim.opt.ignorecase     = true
-vim.opt.inccommand     = 'split'
 vim.opt.laststatus     = 2
 vim.opt.lazyredraw     = true
 vim.opt.linebreak      = false
