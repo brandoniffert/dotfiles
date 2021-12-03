@@ -49,9 +49,6 @@
   title-focus = black white bold
   title-blur  = white black bold
 
-[credential]
-  helper = osxkeychain
-
 [diff]
   compactionHeuristic = true
 
