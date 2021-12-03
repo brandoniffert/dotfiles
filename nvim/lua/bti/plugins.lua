@@ -97,11 +97,7 @@ require('packer').startup({function()
   }
 
   use {
-    'phaazon/hop.nvim',
-    branch = 'v1',
-    config = function()
-      require('bti.config.hop')
-    end,
+    'ggandor/lightspeed.nvim'
   }
 
   -- Treesitter
