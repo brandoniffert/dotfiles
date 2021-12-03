@@ -12,9 +12,6 @@ cmp.setup {
       luasnip.lsp_expand(args.body)
     end,
   },
-  documentation = {
-    border = 'rounded'
-  },
   mapping = {
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-u>'] = cmp.mapping.scroll_docs(4),
