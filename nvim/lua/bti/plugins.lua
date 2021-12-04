@@ -57,6 +57,10 @@ require('packer').startup({function()
     end,
   }
 
+  use {
+    'onsails/lspkind-nvim'
+  }
+
   -- File Explorer
   use {
     'kyazdani42/nvim-tree.lua',

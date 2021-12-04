@@ -4,9 +4,20 @@ local has_words_before = function()
 end
 
 local luasnip = require('luasnip')
+local lspkind = require('lspkind')
 local cmp = require('cmp')
 
 cmp.setup {
+  formatting = {
+    format = require('lspkind').cmp_format({ with_text = true, menu = ({
+      buffer = '[Buffer]',
+      tmux = '[Tmux]',
+      luasnip = '[LuaSnip]',
+      nvim_lsp = '[LSP]',
+      nvim_lua = '[Lua]',
+      path = '[Path]',
+    })}),
+  },
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
