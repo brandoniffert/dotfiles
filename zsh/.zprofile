@@ -1,5 +1,6 @@
 # Exports
 source $ZDOTDIR/exports
+test -r "$ZDOTDIR/exports.private" && source "$ZDOTDIR/exports.private"
 
 # Path
 path=(
