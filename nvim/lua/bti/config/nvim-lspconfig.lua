@@ -57,6 +57,7 @@ null_ls.config({
     null_b.diagnostics.yamllint,
     null_b.formatting.phpcsfixer,
     null_b.formatting.prettierd,
+    null_b.formatting.rustywind,
   }
 })
 
