@@ -61,7 +61,9 @@ null_ls.config({
     null_b.diagnostics.yamllint,
     null_b.formatting.phpcsfixer,
     null_b.formatting.prettierd,
-    null_b.formatting.rustywind,
+    null_b.formatting.rustywind.with({
+      filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "html", "ss.html" }
+    }),
   }
 })
 
