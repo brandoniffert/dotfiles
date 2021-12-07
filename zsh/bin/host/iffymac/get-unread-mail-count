@@ -1,0 +1,9 @@
+#!/usr/bin/env osascript -l JavaScript
+
+function getUnreadMailCount() {
+  if (Application('Mail').running()) {
+    return Application('Mail').inbox.unreadCount()
+  }
+}
+
+getUnreadMailCount()

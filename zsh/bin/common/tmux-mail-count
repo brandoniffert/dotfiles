@@ -1,0 +1,13 @@
+#!/bin/bash
+
+countfile=/tmp/mailcount
+
+if [ -f "$countfile" ]; then
+  count=$(cat "$countfile")
+
+  if ! [ "$count" == "" ] && ! [ "$count" == "0" ]; then
+    echo "$count | "
+  fi
+else
+  echo '! | '
+fi
