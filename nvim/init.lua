@@ -229,10 +229,6 @@ nnoremap('<LocalLeader>pH',  ':echomsg v:lua.bti.functions.get_highlight_group()
 -- Print the TS highlighting group(s) that apply at the current cursor position
 nnoremap('<LocalLeader>ph',  '<cmd>TSHighlightCapturesUnderCursor<CR>')
 
--- Abbreviations
-vim.cmd([[iabbrev ;- ->]])
-vim.cmd([[iabbrev ;= =>]])
-
 -------------------------------------------------------------------------------
 -- Autocommands ---------------------------------------------------------------
 -------------------------------------------------------------------------------
