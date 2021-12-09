@@ -254,7 +254,7 @@ augroup('BtiAutocmds', function ()
   autocmd('WinEnter', '*', bti.autocmds.win_enter)
   autocmd('WinLeave', '*', bti.autocmds.win_leave)
 
-  autocmd('BufEnter,BufRead,BufNewFile', '*.ss', 'set filetype=ss.html syntax=ss | runtime! ftplugin/ss.vim | runtime! indent/ss.vim')
+  autocmd('BufEnter,BufRead,BufNewFile', '*.ss', 'set filetype=html syntax=ss | runtime! indent/ss.vim')
 
   vim.cmd([[autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |  execute 'normal! g`"zvzz' | endif]])
 end)
