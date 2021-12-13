@@ -1,21 +1,21 @@
-local WinMan = require('window')
-local log = require('log')
+local WinMan = require("window")
+local log = require("log")
 
 hs.window.animationDuration = 0
 
-local keyLayout = (hs.battery.name() == nil) and 'colemak' or 'qwerty'
+local keyLayout = (hs.battery.name() == nil) and "colemak" or "qwerty"
 
 local colemakForQwerty = {
-  r = 'a',
-  t = 'd',
-  w = 'q',
-  x = 'z',
-  p = 'e',
-  v = 'c'
+  r = "a",
+  t = "d",
+  w = "q",
+  x = "z",
+  p = "e",
+  v = "c",
 }
 
 -- Meh key
-local meh = {'alt', 'ctrl', 'shift'}
+local meh = { "alt", "ctrl", "shift" }
 
 fastKeyStroke = function(modifiers, character)
   hs.eventtap.event.newKeyEvent(modifiers, string.lower(character), true):post()
@@ -23,17 +23,23 @@ fastKeyStroke = function(modifiers, character)
 end
 
 bindMeh = function(fromKey, toKey)
-  hs.hotkey.bind(meh, fromKey,
-    function() fastKeyStroke({}, toKey) end,
+  hs.hotkey.bind(
+    meh,
+    fromKey,
+    function()
+      fastKeyStroke({}, toKey)
+    end,
     nil,
-    function() fastKeyStroke({}, toKey) end
+    function()
+      fastKeyStroke({}, toKey)
+    end
   )
 end
 
 bindMehFn = function(fromKey, func)
   local normalizedKey = fromKey
 
-  if keyLayout == 'qwerty' and colemakForQwerty[fromKey] ~= nil then
+  if keyLayout == "qwerty" and colemakForQwerty[fromKey] ~= nil then
     normalizedKey = colemakForQwerty[fromKey]
   end
 
@@ -41,13 +47,13 @@ bindMehFn = function(fromKey, func)
 end
 
 -- Put displays to sleep
-bindMehFn('`', function()
-  os.execute('pmset displaysleepnow')
+bindMehFn("`", function()
+  os.execute("pmset displaysleepnow")
 end)
 
 -- Reload hammerspoon config
-bindMehFn('escape', function()
-  hs.alert('Reloading config')
+bindMehFn("escape", function()
+  hs.alert("Reloading config")
 
   hs.timer.doAfter(0.5, function()
     hs.reload()
@@ -55,64 +61,64 @@ bindMehFn('escape', function()
 end)
 
 -- Window management
-bindMehFn('r', WinMan.moveWindowLeft)
-bindMehFn('t', WinMan.moveWindowRight)
-bindMehFn('w', WinMan.moveWindowUpperLeft)
-bindMehFn('x', WinMan.moveWindowBottomLeft)
-bindMehFn('p', WinMan.moveWindowUpperRight)
-bindMehFn('v', WinMan.moveWindowBottomRight)
-bindMehFn('tab', WinMan.moveWindowToNextMonitor)
-bindMehFn('space', WinMan.maximizeWindow)
-bindMehFn('delete', WinMan.undoPop)
-bindMehFn('=', WinMan.centerWindow)
+bindMehFn("r", WinMan.moveWindowLeft)
+bindMehFn("t", WinMan.moveWindowRight)
+bindMehFn("w", WinMan.moveWindowUpperLeft)
+bindMehFn("x", WinMan.moveWindowBottomLeft)
+bindMehFn("p", WinMan.moveWindowUpperRight)
+bindMehFn("v", WinMan.moveWindowBottomRight)
+bindMehFn("tab", WinMan.moveWindowToNextMonitor)
+bindMehFn("space", WinMan.maximizeWindow)
+bindMehFn("delete", WinMan.undoPop)
+bindMehFn("=", WinMan.centerWindow)
 
 -- Application watcher
 function handleApp(appName, eventType, app)
   if eventType == hs.application.watcher.launched then
     -- Maximize kitty window when launched
-    if appName == 'kitty' then
-      local checkAppFocused = (function()
+    if appName == "kitty" then
+      local checkAppFocused = function()
         return app:isFrontmost()
-      end)
+      end
 
-      local maximizeApp = (function()
+      local maximizeApp = function()
         local appWindow = app:focusedWindow()
 
         if appWindow ~= nil then
           appWindow:setFrame(appWindow:screen():frame())
         end
-      end)
+      end
 
       hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
     end
 
     -- Position emacs window when launched
-    if appName == 'Emacs' then
-      local checkAppFocused = (function()
+    if appName == "Emacs" then
+      local checkAppFocused = function()
         return app:isFrontmost()
-      end)
+      end
 
-      local positionApp = (function()
+      local positionApp = function()
         local appWindow = app:focusedWindow()
 
         if appWindow ~= nil then
-          hs.grid.set(appWindow, '6,0 6x12')
+          hs.grid.set(appWindow, "6,0 6x12")
         end
-      end)
+      end
 
       hs.timer.waitUntil(checkAppFocused, positionApp, 0.5)
     end
 
     -- Set Chrome as default browser when launched
-    if appName == 'Google Chrome' then
-      hs.execute('defaultbrowser chrome && confirm-use-dialog', true)
+    if appName == "Google Chrome" then
+      hs.execute("defaultbrowser chrome && confirm-use-dialog", true)
     end
   end
 
   if eventType == hs.application.watcher.terminated then
     -- Set Firefox as default browser when Chrome is closed
-    if appName == 'Google Chrome' then
-      hs.execute('defaultbrowser firefox && confirm-use-dialog', true)
+    if appName == "Google Chrome" then
+      hs.execute("defaultbrowser firefox && confirm-use-dialog", true)
     end
   end
 end

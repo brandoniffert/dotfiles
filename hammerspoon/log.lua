@@ -11,9 +11,9 @@
 --   - error
 --   - nothing
 --
-local logLevel = 'info'
+local logLevel = "info"
 
-local log = hs.logger.new('bti', logLevel)
+local log = hs.logger.new("bti", logLevel)
 
 local module = {
   d = log.d,
@@ -26,15 +26,27 @@ local module = {
   --
   --   hs.logger.setGlobalLogLevel('debug')
   --
-  debug = (function() log.setLogLevel('debug') end),
-  info = (function() log.setLogLevel('info') end),
-  verbose = (function() log.setLogLevel('verbose') end),
-  warning = (function() log.setLogLevel('warning') end),
-  error = (function() log.setLogLevel('error') end),
-  nothing = (function() log.setLogLevel('nothing') end),
+  debug = function()
+    log.setLogLevel("debug")
+  end,
+  info = function()
+    log.setLogLevel("info")
+  end,
+  verbose = function()
+    log.setLogLevel("verbose")
+  end,
+  warning = function()
+    log.setLogLevel("warning")
+  end,
+  error = function()
+    log.setLogLevel("error")
+  end,
+  nothing = function()
+    log.setLogLevel("nothing")
+  end,
 }
 
 -- Add this separately in order to avoid a syntax error.
-module['if'] = log['if']
+module["if"] = log["if"]
 
 return module

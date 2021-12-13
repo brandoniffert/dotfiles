@@ -1,17 +1,17 @@
 hs.grid.MARGINX = hs.screen.primaryScreen():frame().w * 0.02
 hs.grid.MARGINY = hs.screen.primaryScreen():frame().w * 0.02
-hs.grid.setGrid('12x12')
+hs.grid.setGrid("12x12")
 
 local WinMan = {}
 
-WinMan.undo= {}
+WinMan.undo = {}
 
 -- Move window to the left half
 function WinMan.moveWindowLeft()
   local win = hs.window.focusedWindow()
 
   WinMan.undoPush()
-  hs.grid.set(win, '0,0 6x12')
+  hs.grid.set(win, "0,0 6x12")
 end
 
 -- Move window to the right half
@@ -19,7 +19,7 @@ function WinMan.moveWindowRight()
   local win = hs.window.focusedWindow()
 
   WinMan.undoPush()
-  hs.grid.set(win, '6,0 6x12')
+  hs.grid.set(win, "6,0 6x12")
 end
 
 -- Move window to the upper left
@@ -27,7 +27,7 @@ function WinMan.moveWindowUpperLeft()
   local win = hs.window.focusedWindow()
 
   WinMan.undoPush()
-  hs.grid.set(win, '0,0 6x6')
+  hs.grid.set(win, "0,0 6x6")
 end
 
 -- Move window to the upper right
@@ -35,7 +35,7 @@ function WinMan.moveWindowUpperRight()
   local win = hs.window.focusedWindow()
 
   WinMan.undoPush()
-  hs.grid.set(win, '6,0 6x6')
+  hs.grid.set(win, "6,0 6x6")
 end
 
 -- Move window to the bottom left
@@ -43,7 +43,7 @@ function WinMan.moveWindowBottomLeft()
   local win = hs.window.focusedWindow()
 
   WinMan.undoPush()
-  hs.grid.set(win, '0,6 6x6')
+  hs.grid.set(win, "0,6 6x6")
 end
 
 -- Move window to the bottom right
@@ -51,7 +51,7 @@ function WinMan.moveWindowBottomRight()
   local win = hs.window.focusedWindow()
 
   WinMan.undoPush()
-  hs.grid.set(win, '6,6 6x6')
+  hs.grid.set(win, "6,6 6x6")
 end
 
 -- Maximize window
