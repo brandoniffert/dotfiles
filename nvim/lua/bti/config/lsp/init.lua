@@ -5,9 +5,7 @@ require("bti.config.lsp.diagnostics").setup()
 local function on_attach(client, bufnr)
   require("bti.config.lsp.formatting").setup(client, bufnr)
   require("bti.config.lsp.keys").setup(client, bufnr)
-  -- require("config.lsp.completion").setup(client, bufnr)
-  -- require("bti.config.lsp.highlighting").setup(client)
-  vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
+  require("bti.config.lsp.completion").setup(client, bufnr)
 end
 
 local servers = {
