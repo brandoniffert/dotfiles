@@ -82,7 +82,6 @@ local leader = {
     w = { ":call bti#functions#strip_whitespace()<CR>", "Strip whitespace" },
   },
   v = { ":vnew<CR>", "Vertical split" },
-  w = { "<cmd>:w<CR>", "Write" },
 }
 
 local leader_visual = {
