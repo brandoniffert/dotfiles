@@ -43,7 +43,7 @@ local leader = {
   ["\\"] = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
   ["<Leader>"] = { ":<C-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<CR>", "Last file" },
   ["<CR>"] = { "<cmd>lua require('bti.util.telescope').find_files()<CR>", "Files" },
-  e = { ':edit <C-R>=expand("%:p:h") . "/"<CR>', "Edit File (Same Directory)" },
+  e = { ':edit <C-R>=expand("%:p:h") . "/"<CR>', "Edit File (Same Directory)", silent = false },
   f = {
     name = "+find",
     b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
@@ -64,7 +64,7 @@ local leader = {
     },
     y = { "<cmd>Telescope neoclip<CR>", "Clipboard" },
   },
-  p = { ":*p", "Paste from clipboard" },
+  p = { '"*p', "Paste from clipboard" },
   q = { "<cmd>:q<CR>", "Quit" },
   Q = { "<cmd>:q!<CR>", "Quit without saving" },
   u = {
