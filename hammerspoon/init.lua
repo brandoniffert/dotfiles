@@ -100,7 +100,7 @@ function handleApp(appName, eventType, app)
         end
       end)
 
-      hs.timer.waitUntil(checkAppFocused, positionApp, 0.1)
+      hs.timer.waitUntil(checkAppFocused, positionApp, 0.5)
     end
 
     -- Set Chrome as default browser when launched
