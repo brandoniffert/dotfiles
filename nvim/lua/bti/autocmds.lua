@@ -58,6 +58,7 @@ local focus_window = function()
 
   if filetype ~= '' and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = ''
+    vim.wo.cursorline = true
 
     if vim.fn.exists(':TSBufEnable') == 2 then
       vim.cmd('TSBufEnable highlight')
@@ -95,6 +96,7 @@ local blur_window = function()
 
   if filetype == '' or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
+    vim.wo.cursorline = false
 
     if vim.fn.exists(':TSBufDisable') == 2 then
       vim.cmd('TSBufDisable highlight')
