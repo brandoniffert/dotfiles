@@ -1,15 +1,15 @@
 local autocmds = {}
 
-local ownsyntax_flag = 'bti_ownsyntax'
+local ownsyntax_flag = "bti_ownsyntax"
 
 local winhighlight_blurred = table.concat({
-  'EndOfBuffer:InactiveWindow',
-  'IncSearch:InactiveWindow',
-  'Normal:InactiveWindow',
-  'NormalNC:InactiveWindow',
-  'Search:InactiveWindow',
-  'SignColumn:InactiveWindow',
-}, ',')
+  "EndOfBuffer:InactiveWindow",
+  "IncSearch:InactiveWindow",
+  "Normal:InactiveWindow",
+  "NormalNC:InactiveWindow",
+  "Search:InactiveWindow",
+  "SignColumn:InactiveWindow",
+}, ",")
 
 -- As described in a7e4d8b8383a375d124, `ownsyntax` resets spelling
 -- settings, so we capture and restore them. Note that there is some trickiness
@@ -21,23 +21,23 @@ local ownsyntax = function(active)
 
   if active and flag == false then
     -- We are focussing; restore previous settings.
-    vim.cmd('ownsyntax on')
+    vim.cmd("ownsyntax on")
 
     vim.wo.spell = vim.w.spell or false
-    vim.bo.spellcapcheck = vim.w.spellcapcheck or ''
-    vim.bo.spellfile = vim.w.spellfile or ''
-    vim.bo.spelllang = vim.w.spelllang or 'en'
+    vim.bo.spellcapcheck = vim.w.spellcapcheck or ""
+    vim.bo.spellfile = vim.w.spellfile or ""
+    vim.bo.spelllang = vim.w.spelllang or "en"
 
     -- Set flag to show that we have restored the captured options.
     vim.w[ownsyntax_flag] = true
-  elseif not active and vim.bo.filetype ~= '' and flag ~= false then
+  elseif not active and vim.bo.filetype ~= "" and flag ~= false then
     -- We are blurring; save settings for later restoration.
     vim.w.spell = vim.wo.spell
     vim.w.spellcapcheck = vim.bo.spellcapcheck
     vim.w.spellfile = vim.bo.spellfile
     vim.w.spelllang = vim.bo.spelllang
 
-    vim.cmd('ownsyntax off')
+    vim.cmd("ownsyntax off")
 
     -- Suppress spelling in blurred buffer.
     vim.wo.spell = false
@@ -51,29 +51,29 @@ local focus_window = function()
   local filetype = vim.bo.filetype
 
   -- Turn on relative numbers, unless user has explicitly changed numbering.
-  if filetype ~= '' and autocmds.number_blacklist[filetype] ~= true then
+  if filetype ~= "" and autocmds.number_blacklist[filetype] ~= true then
     vim.wo.number = true
     vim.wo.relativenumber = true
   end
 
-  if filetype ~= '' and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
-    vim.wo.winhighlight = ''
+  if filetype ~= "" and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
+    vim.wo.winhighlight = ""
     vim.wo.cursorline = true
 
-    if vim.fn.exists(':TSBufEnable') == 2 then
-      vim.cmd('TSBufEnable highlight')
+    if vim.fn.exists(":TSBufEnable") == 2 then
+      vim.cmd("TSBufEnable highlight")
     end
 
-    if vim.fn.exists(':Gitsigns') == 2 then
-      vim.cmd('Gitsigns attach')
+    if vim.fn.exists(":Gitsigns") == 2 then
+      vim.cmd("Gitsigns attach")
     end
   end
 
-  if filetype ~= '' and autocmds.ownsyntax_filetypes[filetype] ~= true then
+  if filetype ~= "" and autocmds.ownsyntax_filetypes[filetype] ~= true then
     ownsyntax(true)
   end
 
-  if filetype == '' then
+  if filetype == "" then
     vim.wo.list = true
   else
     local list = autocmds.list_filetypes[filetype]
@@ -89,29 +89,29 @@ local blur_window = function()
 
   -- Turn off relative numbers (and turn on non-relative numbers), unless user
   -- has explicitly changed the numbering.
-  if filetype ~= '' and autocmds.number_blacklist[filetype] ~= true then
+  if filetype ~= "" and autocmds.number_blacklist[filetype] ~= true then
     vim.wo.number = true
     vim.wo.relativenumber = false
   end
 
-  if filetype == '' or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
+  if filetype == "" or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
     vim.wo.cursorline = false
 
-    if vim.fn.exists(':TSBufDisable') == 2 then
-      vim.cmd('TSBufDisable highlight')
+    if vim.fn.exists(":TSBufDisable") == 2 then
+      vim.cmd("TSBufDisable highlight")
     end
 
-    if vim.fn.exists(':Gitsigns') == 2 then
-      vim.cmd('Gitsigns detach')
+    if vim.fn.exists(":Gitsigns") == 2 then
+      vim.cmd("Gitsigns detach")
     end
   end
 
-  if filetype == '' or autocmds.ownsyntax_filetypes[filetype] ~= true then
+  if filetype == "" or autocmds.ownsyntax_filetypes[filetype] ~= true then
     ownsyntax(false)
   end
 
-  if filetype == '' then
+  if filetype == "" then
     vim.wo.list = false
   else
     local list = autocmds.list_filetypes[filetype]
@@ -122,20 +122,20 @@ local blur_window = function()
     end
   end
 
-  if filetype == '' or autocmds.conceallevel_filetypes[filetype] == nil then
+  if filetype == "" or autocmds.conceallevel_filetypes[filetype] == nil then
     vim.wo.conceallevel = 0
   end
 end
 
-local enable_statusline = function ()
-  if package.loaded['lualine'] then
+local enable_statusline = function()
+  if package.loaded["lualine"] then
     vim.go.statusline = "%{%v:lua.require'lualine'.setup()%}"
   end
 end
 
-local disable_statusline = function ()
-  if package.loaded['lualine'] then
-    vim.go.statusline = require'lualine'.statusline(false)
+local disable_statusline = function()
+  if package.loaded["lualine"] then
+    vim.go.statusline = require("lualine").statusline(false)
   end
 end
 
@@ -146,7 +146,7 @@ end
 autocmds.focus_gained = function()
   local filetype = vim.bo.filetype
 
-  if filetype ~= '' then
+  if filetype ~= "" then
     focus_window()
   end
 
@@ -165,46 +165,46 @@ end
 autocmds.win_leave = function()
   local win_type = vim.fn.win_gettype()
 
-  if win_type ~= 'popup' then
+  if win_type ~= "popup" then
     blur_window()
   end
 end
 
 -- Don't mess with 'conceallevel' for these.
 autocmds.conceallevel_filetypes = {
-  ['help'] = 2,
-  ['json'] = 0,
+  ["help"] = 2,
+  ["json"] = 0,
 }
 
 -- Don't use 'winhighlight' to make these filetypes seem blurred.
 autocmds.winhighlight_filetype_blacklist = {
-  ['diff'] = true,
-  ['fugitiveblame']= true,
-  ['NvimTree'] = true,
-  ['packer'] = true,
-  ['qf'] = true,
+  ["diff"] = true,
+  ["fugitiveblame"] = true,
+  ["NvimTree"] = true,
+  ["packer"] = true,
+  ["qf"] = true,
 }
 
 -- Force 'list' (when `true`) or 'nolist' (when `false`) for these.
 autocmds.list_filetypes = {
-  ['help'] = false,
+  ["help"] = false,
 }
 
 -- Don't mess with numbers in these filetypes.
 autocmds.number_blacklist = {
-  ['NvimTree'] = true,
-  ['diff'] = true,
-  ['fugitiveblame']= true,
-  ['help'] = true,
-  ['qf'] = true,
+  ["NvimTree"] = true,
+  ["diff"] = true,
+  ["fugitiveblame"] = true,
+  ["help"] = true,
+  ["qf"] = true,
 }
 
 -- Don't do "ownsyntax off" for these.
 autocmds.ownsyntax_filetypes = {
-  ['NvimTree'] = true,
-  ['help'] = true,
-  ['packer'] = true,
-  ['qf'] = true,
+  ["NvimTree"] = true,
+  ["help"] = true,
+  ["packer"] = true,
+  ["qf"] = true,
 }
 
 return autocmds

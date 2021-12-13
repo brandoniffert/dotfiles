@@ -1,1 +1,1 @@
-return bti.autoload('bti.config')
+return bti.autoload("bti.config")

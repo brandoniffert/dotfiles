@@ -1,22 +1,25 @@
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+  return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
 
-local luasnip = require('luasnip')
-local lspkind = require('lspkind')
-local cmp = require('cmp')
+local luasnip = require("luasnip")
+local lspkind = require("lspkind")
+local cmp = require("cmp")
 
-cmp.setup {
+cmp.setup({
   formatting = {
-    format = require('lspkind').cmp_format({ with_text = true, menu = ({
-      buffer = '[Buffer]',
-      tmux = '[Tmux]',
-      luasnip = '[LuaSnip]',
-      nvim_lsp = '[LSP]',
-      nvim_lua = '[Lua]',
-      path = '[Path]',
-    })}),
+    format = require("lspkind").cmp_format({
+      with_text = true,
+      menu = {
+        buffer = "[Buffer]",
+        tmux = "[Tmux]",
+        luasnip = "[LuaSnip]",
+        nvim_lsp = "[LSP]",
+        nvim_lua = "[Lua]",
+        path = "[Path]",
+      },
+    }),
   },
   snippet = {
     expand = function(args)
@@ -24,13 +27,13 @@ cmp.setup {
     end,
   },
   mapping = {
-    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-u>'] = cmp.mapping.scroll_docs(4),
-    ['<C-e>'] = cmp.mapping.close(),
-    ['<CR>'] = cmp.mapping.confirm({
+    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-u>"] = cmp.mapping.scroll_docs(4),
+    ["<C-e>"] = cmp.mapping.close(),
+    ["<CR>"] = cmp.mapping.confirm({
       select = false,
     }),
-    ['<Tab>'] = cmp.mapping(function(fallback)
+    ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_next_item()
       elseif luasnip.expand_or_jumpable() then
@@ -40,8 +43,8 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
-    ['<S-Tab>'] = cmp.mapping(function(fallback)
+    end, { "i", "s" }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
         cmp.select_prev_item()
       elseif luasnip.jumpable(-1) then
@@ -49,34 +52,34 @@ cmp.setup {
       else
         fallback()
       end
-    end, { 'i', 's' }),
+    end, { "i", "s" }),
   },
   sources = {
     {
-      name = 'buffer',
+      name = "buffer",
       priority = 1,
       keyword_length = 2,
       max_item_count = 10,
       option = {
         get_bufnrs = function()
           return vim.api.nvim_list_bufs()
-        end
-      }
+        end,
+      },
     },
     {
-      name = 'tmux',
+      name = "tmux",
       priority = 2,
       option = {
-        trigger_characters = {}
-      }
+        trigger_characters = {},
+      },
     },
     {
-      name = 'nvim_lsp',
+      name = "nvim_lsp",
       priority = 3,
     },
     {
-      name = 'path',
-      priority = 4
+      name = "path",
+      priority = 4,
     },
   },
-}
+})

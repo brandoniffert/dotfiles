@@ -8,14 +8,14 @@ functions.get_highlight_group = function()
   local synIDattr = vim.fn.synIDattr
   local synIDtrans = vim.fn.synIDtrans
   return (
-    'hi<' ..
-    synIDattr(synID(line, col, true), 'name') ..
-    '> trans<' ..
-    synIDattr(synID(line, col, false), 'name') ..
-    '> lo<' ..
-    synIDattr(synIDtrans(synID(line, col, true)), 'name') ..
-    '>'
-  )
+      "hi<"
+      .. synIDattr(synID(line, col, true), "name")
+      .. "> trans<"
+      .. synIDattr(synID(line, col, false), "name")
+      .. "> lo<"
+      .. synIDattr(synIDtrans(synID(line, col, true)), "name")
+      .. ">"
+    )
 end
 
 return functions

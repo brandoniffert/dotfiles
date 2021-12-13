@@ -1,18 +1,18 @@
-local telescope = require('telescope')
-local actions = require('telescope.actions')
+local telescope = require("telescope")
+local actions = require("telescope.actions")
 
-telescope.setup {
+telescope.setup({
   defaults = {
-    prompt_prefix = '❯ ',
+    prompt_prefix = "❯ ",
     mappings = {
       i = {
-        ['<C-j>'] = actions.cycle_history_next,
-        ['<C-k>'] = actions.cycle_history_prev,
-        ['<Esc>'] = actions.close,
+        ["<C-j>"] = actions.cycle_history_next,
+        ["<C-k>"] = actions.cycle_history_prev,
+        ["<Esc>"] = actions.close,
       },
-    }
+    },
   },
-}
+})
 
-telescope.load_extension('fzf')
-telescope.load_extension('neoclip')
+telescope.load_extension("fzf")
+telescope.load_extension("neoclip")

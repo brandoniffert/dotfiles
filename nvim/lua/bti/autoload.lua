@@ -5,10 +5,10 @@ local autoload = function(base)
   local mt = {
     __index = function(_, key)
       if storage[key] == nil then
-        storage[key] = require(base .. '.' .. key)
+        storage[key] = require(base .. "." .. key)
       end
       return storage[key]
-    end
+    end,
   }
 
   return setmetatable({}, mt)
