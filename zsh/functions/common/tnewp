@@ -1,0 +1,39 @@
+# Create a new tmux session within a project folder and attach to it
+# If the session already exists, attach to that one
+
+# Fail if PROJECTS_HOME is not set
+if [ -z ${PROJECTS_HOME+x} ]; then
+  echo 'Please set $PROJECTS_HOME'
+  return 1
+fi
+
+local project_dir="$(
+  find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
+  sed "s:$PROJECTS_HOME\/::g" |
+  fzf --header='Projects'
+)"
+
+if [ -n "${project_dir}" ]; then
+  local session_name=$(basename "$project_dir" | sed 's/\./-/g')
+
+  if [ -z "$session_name" ]; then
+    return 1
+  fi
+
+  # Check for existing session
+  tmux -q has-session -t "$session_name" > /dev/null 2>&1
+
+  # If session doesn't exist, create it
+  if [ $? -ne 0 ]; then
+    tmux new-session -c "$project_dir" -d -s "$session_name"
+  fi
+
+  clear
+
+  # Attach or switch to it, depending on whether we are already in a tmux session
+  if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
+    tmux switch-client -t "$session_name"
+  else
+    tmux attach-session -t "$session_name"
+  fi
+fi

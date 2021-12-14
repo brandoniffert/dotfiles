@@ -1,0 +1,17 @@
+# Use fzf to quickly get to a project
+
+# Fail if PROJECTS_HOME is not set
+if [ -z ${PROJECTS_HOME+x} ]; then
+  echo 'Please set $PROJECTS_HOME'
+  return 1
+fi
+
+local project_dir="$(
+  find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
+  sed "s:$PROJECTS_HOME\/::g" |
+  fzf --header='Projects'
+)"
+
+if [ -n "${project_dir}" ]; then
+  cd "$PROJECTS_HOME/$project_dir"
+fi
