@@ -14,7 +14,8 @@ local project_dir="$(
 )"
 
 if [ -n "${project_dir}" ]; then
-  local session_name=$(basename "$project_dir" | sed 's/\./-/g')
+  local project_path="$PROJECTS_HOME/$project_dir"
+  local session_name=$(basename "$project_path" | sed 's/\./-/g')
 
   if [ -z "$session_name" ]; then
     return 1
@@ -25,7 +26,7 @@ if [ -n "${project_dir}" ]; then
 
   # If session doesn't exist, create it
   if [ $? -ne 0 ]; then
-    tmux new-session -c "$project_dir" -d -s "$session_name"
+    tmux new-session -c "$project_path" -d -s "$session_name"
   fi
 
   clear
