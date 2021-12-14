@@ -11,5 +11,10 @@ alias paru="sudo -u build paru"
 
     # If session doesn't exist, create it
     [ $? -ne 0 ] && tmux new-session -c "$working_dir" -s "$session_name"
+
+    # If no other clients are attached to the session, attach to it
+    if ! tmux list-clients | grep -q attached; then
+      tmux attach -t "$session_name"
+    fi
   fi
 }
