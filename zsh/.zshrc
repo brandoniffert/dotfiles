@@ -222,7 +222,7 @@ function _fzf_compgen_dir() {
 
 source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" %F{#4a4e68}%f "
+ZSH_THEME_GIT_PROMPT_PREFIX=" "
 ZSH_THEME_GIT_PROMPT_SUFFIX=""
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
@@ -264,13 +264,13 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   PROMPT=''
   PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
   PROMPT+='%K{#1f2233}%{$fg_bold[cyan]%} %1~%f%k%F{#1f2233}%f'
-  PROMPT+='$(gitprompt)'
-  PROMPT+='$(gitprompt_secondary)'
   PROMPT+='${${VIRTUAL_ENV#0}:+ ($(basename $VIRTUAL_ENV))}'
   PROMPT+='%{$fg[yellow]%}%(1j. ◆.)%f '
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
   RPROMPT='%F{#626c9d}%(4~|.../%3~|%~)%{$reset_color%}'
+  RPROMPT+='$(gitprompt)'
+  RPROMPT+='$(gitprompt_secondary)'
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
