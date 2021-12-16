@@ -58,7 +58,6 @@ local focus_window = function()
 
   if filetype ~= "" and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = ""
-    vim.wo.cursorline = true
 
     if vim.fn.exists(":TSBufEnable") == 2 then
       vim.cmd("TSBufEnable highlight")
@@ -67,6 +66,10 @@ local focus_window = function()
     if vim.fn.exists(":Gitsigns") == 2 then
       vim.cmd("Gitsigns attach")
     end
+  end
+
+  if filetype ~= "" and autocmds.cursorline_filetype_blacklist[filetype] ~= true then
+    vim.wo.cursorline = true
   end
 
   if filetype ~= "" and autocmds.ownsyntax_filetypes[filetype] ~= true then
@@ -96,7 +99,6 @@ local blur_window = function()
 
   if filetype == "" or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
-    vim.wo.cursorline = false
 
     if vim.fn.exists(":TSBufDisable") == 2 then
       vim.cmd("TSBufDisable highlight")
@@ -105,6 +107,10 @@ local blur_window = function()
     if vim.fn.exists(":Gitsigns") == 2 then
       vim.cmd("Gitsigns detach")
     end
+  end
+
+  if filetype ~= "" and autocmds.cursorline_filetype_blacklist[filetype] ~= true then
+    vim.wo.cursorline = false
   end
 
   if filetype == "" or autocmds.ownsyntax_filetypes[filetype] ~= true then
@@ -128,15 +134,11 @@ local blur_window = function()
 end
 
 local enable_statusline = function()
-  if package.loaded["lualine"] then
-    vim.go.statusline = "%{%v:lua.require'lualine'.setup()%}"
-  end
+  vim.go.statusline = "%{%v:lua.require'lualine'.setup()%}"
 end
 
 local disable_statusline = function()
-  if package.loaded["lualine"] then
-    vim.go.statusline = require("lualine").statusline(false)
-  end
+  vim.go.statusline = require("lualine").statusline(false)
 end
 
 autocmds.buf_enter = function()
@@ -178,24 +180,29 @@ autocmds.conceallevel_filetypes = {
 
 -- Don't use 'winhighlight' to make these filetypes seem blurred.
 autocmds.winhighlight_filetype_blacklist = {
+  ["NvimTree"] = true,
   ["diff"] = true,
   ["fugitiveblame"] = true,
-  ["NvimTree"] = true,
+  ["lspinfo"] = true,
   ["packer"] = true,
   ["qf"] = true,
 }
 
 -- Force 'list' (when `true`) or 'nolist' (when `false`) for these.
 autocmds.list_filetypes = {
+  ["alpha"] = false,
   ["help"] = false,
+  ["lspinfo"] = false,
 }
 
 -- Don't mess with numbers in these filetypes.
 autocmds.number_blacklist = {
   ["NvimTree"] = true,
+  ["alpha"] = true,
   ["diff"] = true,
   ["fugitiveblame"] = true,
   ["help"] = true,
+  ["lspinfo"] = true,
   ["qf"] = true,
 }
 
@@ -203,8 +210,14 @@ autocmds.number_blacklist = {
 autocmds.ownsyntax_filetypes = {
   ["NvimTree"] = true,
   ["help"] = true,
+  ["lspinfo"] = true,
   ["packer"] = true,
   ["qf"] = true,
+}
+
+-- Don't manage cursorline for these.
+autocmds.cursorline_filetype_blacklist = {
+  ["alpha"] = true,
 }
 
 return autocmds

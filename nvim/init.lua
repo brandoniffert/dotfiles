@@ -14,11 +14,7 @@ if needs_bootstrap then
 end
 
 require("bti")
-require("bti.plugins")
-
-if needs_bootstrap then
-  require("packer").sync()
-end
+require("bti.plugins").setup(needs_bootstrap)
 
 -------------------------------------------------------------------------------
 -- Globals --------------------------------------------------------------------
@@ -186,3 +182,10 @@ augroup("BtiAutocmds", function()
 
   vim.cmd([[autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") |  execute 'normal! g`"zvzz' | endif]])
 end)
+
+vim.cmd([[
+  augroup PackerUserConfig
+    autocmd!
+    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+  augroup end
+]])

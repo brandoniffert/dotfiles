@@ -1,5 +1,12 @@
-local nmap = bti.vim.nmap
-
 vim.g.LoupeCenterResults = 0
 
-nmap("<CR>", "<Plug>(LoupeClearHighlight)")
+return {
+  "wincent/loupe",
+  keys = { "/", "?", "n", "N", "*", "#" },
+  event = "CmdlineEnter",
+  config = function()
+    local nmap = bti.vim.nmap
+
+    nmap("<CR>", "<Plug>(LoupeClearHighlight)")
+  end,
+}
