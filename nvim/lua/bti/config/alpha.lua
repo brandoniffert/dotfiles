@@ -3,13 +3,6 @@ return {
   config = function()
     local alpha = require("alpha")
 
-    local function create_handle(cmd)
-      local handle = io.popen(cmd)
-      local data = handle:read("*a")
-      handle:close()
-      return data
-    end
-
     local header = {
       type = "text",
       val = {
@@ -22,14 +15,14 @@ return {
       },
       opts = {
         position = "center",
-        hl = "Type",
+        hl = "Function",
       },
     }
 
     local footer = {
       type = "text",
       val = function()
-        return create_handle([[nvim --version | head -1]])
+        return "NVIM v" .. vim.version().major .. "." .. vim.version().minor .. "." .. vim.version().patch
       end,
       opts = {
         position = "center",
