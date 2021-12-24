@@ -20,6 +20,7 @@ else
   echo '> Using global container'
   docker run -it --rm \
     -u "$(id -u):$(id -g)" \
+    --network host \
     --env YARN_CACHE_FOLDER \
     -v "$YARN_CACHE_FOLDER":"$YARN_CACHE_FOLDER" \
     -v "$PWD":/app \
