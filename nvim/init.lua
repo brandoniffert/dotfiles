@@ -23,6 +23,10 @@ require("bti.plugins").setup(needs_bootstrap)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim.g.markdown_fenced_languages = {
+  "ts=typescript",
+}
+
 -- Disable unused providers
 vim.g.loaded_node_provider = 0
 vim.g.loaded_python3_provider = 0

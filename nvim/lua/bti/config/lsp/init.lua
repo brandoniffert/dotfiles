@@ -17,7 +17,17 @@ local servers = {
       },
     },
   },
-  eslint = {},
+  denols = {
+    init_options = {
+      enable = true,
+      lint = true,
+      unstable = false,
+    },
+    autostart = false,
+  },
+  eslint = {
+    autostart = false,
+  },
   intelephense = {
     init_options = {
       licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
@@ -39,7 +49,9 @@ local servers = {
   },
   pyright = {},
   tailwindcss = {},
-  tsserver = {},
+  tsserver = {
+    autostart = false,
+  },
   yamlls = {
     settings = {
       yaml = {
@@ -65,7 +77,16 @@ for server, config in pairs(servers) do
   local opts = vim.tbl_deep_extend("force", options, config or {})
 
   require("lspconfig")[server].setup(opts)
-  vim.cmd([[ do User LspAttachBuffers ]])
+  vim.cmd([[do User LspAttachBuffers]])
 end
 
 require("bti.config.lsp.null-ls").setup(options)
+
+vim.cmd([[
+  augroup CustomLspStart
+    autocmd!
+    autocmd FileType typescript execute 'lua require("bti.config.lsp.servers").launch_denols()'
+    autocmd FileType javascript,javascriptreact,javascript.jsx,typescript,typescriptreact,typescript.tsx,vue execute 'lua require("bti.config.lsp.servers").launch_eslint()'
+    autocmd FileType javascript,javascriptreact,javascript.jsx,typescript,typescriptreact,typescript.tsx execute 'lua require("bti.config.lsp.servers").launch_tsserver()'
+  augroup end
+]])
