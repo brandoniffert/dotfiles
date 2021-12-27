@@ -6,7 +6,11 @@ function M.setup(options)
     debounce = 150,
     save_after_format = false,
     sources = {
-      nls.builtins.diagnostics.ansiblelint,
+      nls.builtins.diagnostics.ansiblelint.with({
+        condition = function(utils)
+          return utils.root_has_file({ ".ansible-lint" })
+        end,
+      }),
       nls.builtins.diagnostics.shellcheck.with({
         diagnostics_format = "#{m} [#{c}]",
       }),
