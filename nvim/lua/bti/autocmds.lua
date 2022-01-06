@@ -58,14 +58,6 @@ local focus_window = function()
 
   if filetype ~= "" and autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = ""
-
-    if vim.fn.exists(":TSBufEnable") == 2 then
-      vim.cmd("TSBufEnable highlight")
-    end
-
-    if vim.fn.exists(":Gitsigns") == 2 then
-      vim.cmd("Gitsigns attach")
-    end
   end
 
   if filetype ~= "" and autocmds.cursorline_filetype_blacklist[filetype] ~= true then
@@ -99,14 +91,6 @@ local blur_window = function()
 
   if filetype == "" or autocmds.winhighlight_filetype_blacklist[filetype] ~= true then
     vim.wo.winhighlight = winhighlight_blurred
-
-    if vim.fn.exists(":TSBufDisable") == 2 then
-      vim.cmd("TSBufDisable highlight")
-    end
-
-    if vim.fn.exists(":Gitsigns") == 2 then
-      vim.cmd("Gitsigns detach")
-    end
   end
 
   if filetype ~= "" and autocmds.cursorline_filetype_blacklist[filetype] ~= true then
@@ -133,14 +117,6 @@ local blur_window = function()
   end
 end
 
-local enable_statusline = function()
-  vim.go.statusline = "%{%v:lua.require'lualine'.setup()%}"
-end
-
-local disable_statusline = function()
-  vim.go.statusline = require("lualine").statusline(false)
-end
-
 autocmds.buf_enter = function()
   focus_window()
 end
@@ -151,13 +127,10 @@ autocmds.focus_gained = function()
   if filetype ~= "" then
     focus_window()
   end
-
-  enable_statusline()
 end
 
 autocmds.focus_lost = function()
   blur_window()
-  disable_statusline()
 end
 
 autocmds.win_enter = function()
