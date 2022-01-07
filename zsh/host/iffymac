@@ -6,7 +6,7 @@ export HOMEBREW_NO_ANALYTICS=1
 
 # Set host specific path
 path=(
-  $HOME/.config/emacs/bin
+  $CARGO_HOME/bin
   $PYENV_ROOT/shims
   $RBENV_ROOT/shims
   $path

@@ -92,23 +92,6 @@ function handleApp(appName, eventType, app)
       hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
     end
 
-    -- Position emacs window when launched
-    if appName == "Emacs" then
-      local checkAppFocused = function()
-        return app:isFrontmost()
-      end
-
-      local positionApp = function()
-        local appWindow = app:focusedWindow()
-
-        if appWindow ~= nil then
-          hs.grid.set(appWindow, "6,0 6x12")
-        end
-      end
-
-      hs.timer.waitUntil(checkAppFocused, positionApp, 0.5)
-    end
-
     -- Set Chrome as default browser when launched
     if appName == "Google Chrome" then
       hs.execute("defaultbrowser chrome && confirm-use-dialog", true)
