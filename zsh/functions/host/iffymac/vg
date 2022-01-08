@@ -1,3 +1,0 @@
-# Pass-through vagrant commands and write-vagrant-global-status
-
-command vagrant $* && write-vagrant-global-status

@@ -34,12 +34,8 @@ fi
 
 # Aliases
 alias ap='ansible-playbook'
-alias run=./run
-alias dev=./dev
 alias ls='gls --color=auto'
 alias lls='gls --color=auto -al'
-alias vgs="vagrant global-status"
-alias vapor="php vendor/bin/vapor"
 
 # Automatically setup tmux session
 () {
