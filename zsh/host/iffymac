@@ -1,9 +1,3 @@
-# Prevent exit on eof
-setopt IGNORE_EOF
-
-# Set host specific exports
-export HOMEBREW_NO_ANALYTICS=1
-
 # Set host specific path
 path=(
   $CARGO_HOME/bin
@@ -31,21 +25,3 @@ if command -v rbenv &>/dev/null; then
     typeset -U path
   }
 fi
-
-# Aliases
-alias ap='ansible-playbook'
-alias ls='gls --color=auto'
-alias lls='gls --color=auto -al'
-
-# Automatically setup tmux session
-() {
-  local session_name="local"
-  local working_dir="$HOME/.dotfiles"
-
-  if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "kitty" ]; then
-    # Create or attach to initial session if this is the main kitty window
-    if [[ "$KITTY_WINDOW_ID" -eq 1 ]]; then
-      tmux new-session -A -c "$working_dir" -s "$session_name"
-    fi
-  fi
-}

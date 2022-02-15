@@ -12,9 +12,18 @@ path=(
   $path
 )
 
+iffy_bin="$ZDOTDIR/bin/host/iffy"
+if [[ $(hostname -s) =~ ^iffy(mac|book) ]]; then
+  [ -d "$iffy_bin" ] && path=($iffy_bin $path)
+fi
+unset iffy_bin
+
 host_bin="$ZDOTDIR/bin/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
 [ -d "$host_bin" ] && path=($host_bin $path)
 unset host_bin
 
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath path
+
+# Setup homebrew shellenv
+test -x "/opt/homebrew/bin/brew" && eval "$(/opt/homebrew/bin/brew shellenv)"

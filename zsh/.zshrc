@@ -113,6 +113,15 @@ fpath=("$ZDOTDIR/functions/common" $fpath)
 autoload -Uz $ZDOTDIR/functions/common/*
 
 # Host specific functions, based on hostname
+iffy_fpath="$ZDOTDIR/functions/host/iffy"
+if [[ $(hostname -s) =~ ^iffy(mac|book) ]]; then
+  if [ -d "$iffy_fpath" ]; then
+    fpath=("$iffy_fpath" $fpath)
+    autoload -Uz $iffy_fpath/*
+  fi
+fi
+unset iffy_fpath
+
 host_fpath="$ZDOTDIR/functions/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
 if [ -d "$host_fpath" ]; then
   fpath=("$host_fpath" $fpath)
@@ -280,6 +289,12 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
 #------------------------------------------------------------------------------
 #-- Local & Host Specific Options ---------------------------------------------
 #------------------------------------------------------------------------------
+
+iffy_rc="$ZDOTDIR/host/iffy"
+if [[ $(hostname -s) =~ ^iffy(mac|book) ]]; then
+  test -r "$iffy_rc" && source "$iffy_rc"
+fi
+unset iffy_rc
 
 host_rc="$ZDOTDIR/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
 test -r "$host_rc" && source "$host_rc"
