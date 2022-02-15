@@ -71,7 +71,6 @@ echo_header "Symlink files to $config_home"
 
 # Common
 config_dots=(
-  ctags
   dircolors
   git
   nvim
@@ -82,7 +81,7 @@ config_dots=(
 
 # macOS specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  config_dots+=(doom kitty hammerspoon)
+  config_dots+=(kitty hammerspoon)
 fi
 
 for file in "${config_dots[@]}"; do
