@@ -4,6 +4,9 @@ setopt IGNORE_EOF
 # Set host specific exports
 export HOMEBREW_NO_ANALYTICS=1
 
+# Set askpass helper
+export SUDO_ASKPASS=$(which osaaskpass)
+
 # Aliases
 alias ap='ansible-playbook'
 alias ls='gls --color=auto'
