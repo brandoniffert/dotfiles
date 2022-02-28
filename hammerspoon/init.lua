@@ -3,7 +3,7 @@ local log = require("log")
 
 hs.window.animationDuration = 0
 
-local keyLayout = (hs.battery.name() == nil) and "colemak" or "qwerty"
+local keyLayout = "colemak"
 
 local colemakForQwerty = {
   r = "a",
@@ -13,6 +13,22 @@ local colemakForQwerty = {
   p = "e",
   v = "c",
 }
+
+local usbWatcher = nil
+
+function usbDeviceCallback(data)
+  if string.match(data["productName"], "Moonlander Mark I") then
+    if data["eventType"] == "added" then
+      keyLayout = "colemak"
+    elseif data["eventType"] == "removed" then
+      keyLayout = "qwerty"
+    end
+  end
+end
+
+-- Start the usb watcher
+usbWatcher = hs.usb.watcher.new(usbDeviceCallback)
+usbWatcher:start()
 
 -- Meh key
 local meh = { "alt", "ctrl", "shift" }
