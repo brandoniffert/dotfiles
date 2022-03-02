@@ -51,6 +51,13 @@ bindMehFn("`", function()
   os.execute("pmset displaysleepnow")
 end)
 
+-- Set all displays to max brightness
+bindMehFn("b", function()
+  for _, screen in pairs(hs.screen.allScreens()) do
+    screen:setBrightness(1)
+  end
+end)
+
 -- Reload hammerspoon config
 bindMehFn("escape", function()
   hs.alert("Reloading config")
