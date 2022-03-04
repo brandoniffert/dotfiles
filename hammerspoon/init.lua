@@ -54,7 +54,10 @@ end)
 -- Set all displays to max brightness
 bindMehFn("b", function()
   for _, screen in pairs(hs.screen.allScreens()) do
-    screen:setBrightness(1)
+    screen:setBrightness(0.5)
+    hs.timer.doAfter(0.5, function()
+      screen:setBrightness(1)
+    end)
   end
 end)
 
