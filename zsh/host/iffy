@@ -9,6 +9,8 @@ export SUDO_ASKPASS=$(which osaaskpass)
 
 # Aliases
 alias ap='ansible-playbook'
+alias ave='ansible-vault edit'
+alias avv='ansible-vault view'
 alias ls='gls --color=auto'
 alias lls='gls --color=auto -al'
 
