@@ -3,7 +3,27 @@ local log = require("log")
 
 hs.window.animationDuration = 0
 
-local keyLayout = (hs.battery.name() == nil) and "colemak" or "qwerty"
+local detectKeyLayout = function()
+  for _, device in ipairs(hs.usb.attachedDevices()) do
+    if device.vendorName == "ZSA" then
+      return "colemak"
+    end
+  end
+
+  return "qwerty"
+end
+
+local keyLayout = detectKeyLayout()
+
+hs.usb.watcher.new(function(device)
+  if device.vendorName == "ZSA" and device.eventType == "added" then
+    keyLayout = "colemak"
+  end
+
+  if device.vendorName == "ZSA" and device.eventType == "removed" then
+    keyLayout = "qwerty"
+  end
+end):start()
 
 local colemakForQwerty = {
   r = "a",
