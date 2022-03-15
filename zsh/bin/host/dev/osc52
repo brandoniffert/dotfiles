@@ -1,0 +1,3 @@
+#!/bin/bash
+
+printf "\033]52;c;$(base64 | tr -d '\r\n')\a"
