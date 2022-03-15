@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -e
+
+# Assumes a running project container named `shopify`
+
+docker compose run --rm shopify shopify version &>/dev/null || exit_code=$?
+
+if [[ $exit_code -eq 0 ]]; then
+  echo '> Using project container'
+  docker compose run --rm \
+    shopify shopify "$@"
+else
+  echo '! Not in a shopify project'
+  exit 1
+fi
