@@ -180,6 +180,7 @@ function bti-defer-load() {
 bti-defer-load $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 bti-defer-load $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 bti-defer-load $ZDOTDIR/plugins/z/z.sh
+bti-defer-load $ZDOTDIR/plugins/zsh-hist/zsh-hist.plugin.zsh
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   bti-defer-load $XDG_CONFIG_HOME/fzf/fzf.zsh
