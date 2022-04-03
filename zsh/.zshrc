@@ -32,8 +32,8 @@ setopt SHARE_HISTORY        # Share history between sessions
 
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
 export HISTIGNORE="fg"
-export HISTSIZE=100000
-export SAVEHIST=$HISTSIZE
+export HISTSIZE=120000
+export SAVEHIST=100000
 export WORDCHARS='*?[]~&;!$%^<>'
 
 #------------------------------------------------------------------------------
