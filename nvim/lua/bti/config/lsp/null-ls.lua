@@ -18,7 +18,16 @@ function M.setup(options)
       nls.builtins.formatting.phpcsfixer,
       nls.builtins.formatting.prettierd,
       nls.builtins.formatting.rustywind.with({
-        filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact", "vue", "svelte", "html" },
+        filetypes = {
+          "javascript",
+          "javascriptreact",
+          "typescript",
+          "typescriptreact",
+          "vue",
+          "svelte",
+          "html",
+          "liquid",
+        },
       }),
       nls.builtins.formatting.stylua,
     },
