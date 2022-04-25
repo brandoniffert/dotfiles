@@ -84,6 +84,9 @@ vim.opt.fillchars = {
 }
 vim.opt.foldenable = false
 vim.opt.formatoptions:append("1rnq")
+if vim.fn.executable("rg") then
+  vim.opt.grepprg = "rg --vimgrep --smart-case"
+end
 vim.opt.grepformat = "%f:%l:%m"
 vim.opt.ignorecase = true
 vim.opt.laststatus = 2
