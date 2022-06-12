@@ -2,7 +2,7 @@ return {
   "nvim-telescope/telescope.nvim",
   requires = {
     { "nvim-telescope/telescope-fzf-native.nvim", run = "make" },
-    { "nvim-telescope/telescope-rg.nvim" },
+    { "nvim-telescope/telescope-live-grep-args.nvim" },
   },
   config = function()
     local telescope = require("telescope")

@@ -66,7 +66,7 @@ return {
         button("f", "  Find file", ":lua require('bti.util.telescope').find_files() <CR>"),
         button("e", "  New file", ":ene <BAR> startinsert <CR>"),
         button("r", "  Recently used files", ":Telescope oldfiles <CR>"),
-        button("t", "  Find text", ":lua require('telescope').extensions.live_grep_raw.live_grep_raw() <CR>"),
+        button("t", "  Find text", ":lua require('telescope').extensions.live_grep_args.live_grep_args() <CR>"),
         button("c", "  Configuration", ":e ~/.config/nvim/init.lua <CR>"),
         button("q", "  Quit Neovim", ":qa<CR>"),
       },

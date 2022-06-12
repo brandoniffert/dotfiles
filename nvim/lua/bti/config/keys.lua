@@ -50,7 +50,7 @@ local leader = {
     c = { "<cmd>Telescope commands<CR>", "Commands" },
     f = { "<cmd>lua require('bti.util.telescope').find_files()<CR>", "Files" },
     F = { "<cmd>lua require('bti.util.telescope').find_all_files()<CR>", "Files (All)" },
-    g = { "<cmd>lua require('telescope').extensions.live_grep_raw.live_grep_raw()<CR>", "Grep" },
+    g = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Grep" },
     G = {
       "<cmd>lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden', '--no-ignore' } end })<CR>",
       "Grep (All)",
