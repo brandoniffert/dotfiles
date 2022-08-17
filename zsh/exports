@@ -72,4 +72,4 @@ export LESS_TERMCAP_us=$'\e[04;37m'
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
-export FZF_DEFAULT_OPTS="--height 40% --border --color fg:15,fg+:3,hl:-1,hl+:3,bg:-1,bg+:-1,info:-1,prompt:-1,marker:2,header:2,pointer:3,border:#1f2233"
+export FZF_DEFAULT_OPTS="--height 40% --border --color fg:-1,fg+:3,hl:9,hl+:3,bg:-1,bg+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#313244"

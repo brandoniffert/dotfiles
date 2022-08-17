@@ -274,13 +274,13 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+="%F{#25293c}%f%K{#25293c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
-  PROMPT+='%K{#1f2233}%{$fg_bold[cyan]%} %1~%f%k%F{#1f2233}%f'
+  PROMPT+="%F{#2c2c44}%f%K{#2c2c44}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
+  PROMPT+='%K{#242532}%{$fg_bold[blue]%} %1~%f%k%F{#242532}%f'
   PROMPT+='${${VIRTUAL_ENV#0}:+ ($(basename $VIRTUAL_ENV))}'
   PROMPT+='%{$fg[yellow]%}%(1j. ◆.)%f '
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
-  RPROMPT='%F{#626c9d}%(4~|.../%3~|%~)%{$reset_color%}'
+  RPROMPT='%F{#6c7086}%(4~|.../%3~|%~)%{$reset_color%}'
   RPROMPT+='$(gitprompt)'
   RPROMPT+='$(gitprompt_secondary)'
 
