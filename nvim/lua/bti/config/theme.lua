@@ -23,6 +23,7 @@ return {
         TabLineSel = { fg = colors.text, bg = "#242438" },
         TelescopeBorder = { bg = colors.mantle },
         TelescopeNormal = { bg = colors.mantle },
+        TelescopeSelectionCaret = { link = "TelescopeSelection" },
         VertSplit = { fg = colors.text, bg = colors.mantle },
       },
       integrations = {

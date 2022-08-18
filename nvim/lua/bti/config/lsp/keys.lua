@@ -1,10 +1,9 @@
 local wk = require("which-key")
-local nnoremap = require("bti.vim.nnoremap")
 
 local M = {}
 
 function M.setup(client, bufnr)
-  local opts = { noremap = true, silent = true, buffer = bufnr }
+  local opts = { silent = true, buffer = bufnr }
 
   local keymap = {
     c = {
@@ -44,7 +43,6 @@ function M.setup(client, bufnr)
   local keymap_goto = {
     name = "+goto",
     r = { "<cmd>Telescope lsp_references<cr>", "References" },
-    R = { "<cmd>Trouble lsp_references<cr>", "Trouble References" },
     d = { "<Cmd>lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
     dv = { "<Cmd>vsplit | lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
     ds = { "<Cmd>split | lua vim.lsp.buf.definition()<CR>", "Goto Definition" },
@@ -53,11 +51,11 @@ function M.setup(client, bufnr)
     t = { "<cmd>lua vim.lsp.buf.type_definition()<CR>", "Goto Type Definition" },
   }
 
-  nnoremap("K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
-  nnoremap("[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
-  nnoremap("]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
-  nnoremap("[e", "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
-  nnoremap("]e", "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
+  vim.keymap.set("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>", opts)
+  vim.keymap.set("n", "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", opts)
+  vim.keymap.set("n", "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", opts)
+  vim.keymap.set("n", "[e", "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
+  vim.keymap.set("n", "]e", "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
 
   if client.resolved_capabilities.document_formatting then
     keymap.c.f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" }

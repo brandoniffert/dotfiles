@@ -5,8 +5,6 @@ return {
   keys = { "/", "?", "n", "N", "*", "#" },
   event = "CmdlineEnter",
   config = function()
-    local nmap = bti.vim.nmap
-
-    nmap("<CR>", "<Plug>(LoupeClearHighlight)")
+    vim.keymap.set("n", "<CR>", "<Plug>(LoupeClearHighlight)")
   end,
 }
