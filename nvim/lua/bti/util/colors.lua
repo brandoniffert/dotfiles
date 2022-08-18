@@ -1,15 +1,13 @@
-local ok, theme = pcall(require, "tokyonight.colors")
+local ok, _ = pcall(require, "catppuccin")
 
 if not ok then
-  return false
+  return
 end
 
-local themeColors = theme.setup()
+local themeColors = require("catppuccin.palettes").get_palette()
 
 local colors = {
-  white = themeColors.fg_dark,
   red = themeColors.red,
-  magenta = themeColors.magenta,
 }
 
 return colors
