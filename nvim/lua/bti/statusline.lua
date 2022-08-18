@@ -386,6 +386,7 @@ local SpecialStatusLine = {
 }
 
 local SimpleStatusLine = {
+  { FileNamePrefix },
   { FileName },
   { FileFlags },
   { provider = "%=" },
