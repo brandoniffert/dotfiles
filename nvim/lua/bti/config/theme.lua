@@ -10,6 +10,7 @@ return {
 
     require("catppuccin").setup({
       custom_highlights = {
+        FloatBorder = { bg = colors.mantle },
         InactiveWindow = { bg = colors.mantle },
         MsgArea = { bg = colors.background },
         NvimTreeVertSplit = { fg = colors.text, bg = colors.mantle },
@@ -18,9 +19,9 @@ return {
         GitSignsAdd = { bg = colors.none },
         GitSignsChange = { bg = colors.none },
         GitSignsDelete = { bg = colors.none },
-        TabLine = { fg = colors.overlay1, bg = "#242438" },
+        TabLine = { fg = colors.text, bg = "#242438", bold = true },
         TabLineFill = { fg = colors.text, bg = "#242438" },
-        TabLineSel = { fg = colors.text, bg = "#242438" },
+        TabLineSel = { fg = colors.crust, bg = colors.text, bold = true },
         TelescopeBorder = { bg = colors.mantle },
         TelescopeNormal = { bg = colors.mantle },
         TelescopeSelectionCaret = { link = "TelescopeSelection" },
