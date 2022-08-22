@@ -9,7 +9,10 @@ local ViMode = {
     self.mode = vim.fn.mode(1)
 
     if not self.once then
-      vim.api.nvim_create_autocmd("ModeChanged", { command = "redrawstatus" })
+      vim.api.nvim_create_autocmd("ModeChanged", {
+        pattern = "[^c]*:[^c]*",
+        command = "redrawstatus",
+      })
       self.once = true
     end
   end,
@@ -78,8 +81,6 @@ local ViMode = {
     local mode = self.mode:sub(1, 1)
     return { fg = self.mode_colors[mode], bold = true }
   end,
-
-  update = "ModeChanged",
 }
 
 local Git = {
