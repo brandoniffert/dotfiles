@@ -332,7 +332,7 @@ local SpecialStatusLine = {
     })
   end,
 
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
 
   hl = {
     bold = true,
@@ -403,7 +403,7 @@ local ActiveStatusLine = {
     bg = "#242438",
   },
 
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
 
   SpecialStatusLine,
   StatusLine,
@@ -414,7 +414,7 @@ local InactiveStatusLine = {
     return not conditions.is_active()
   end,
 
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
 
   hl = {
     fg = colors.text,
@@ -431,7 +431,7 @@ local BlurredStatusLine = {
     bg = colors.mantle,
   },
 
-  init = utils.pick_child_on_condition,
+  fallthrough = false,
 
   SpecialStatusLine,
   SimpleStatusLine,
@@ -439,7 +439,7 @@ local BlurredStatusLine = {
 
 M.activate = function()
   require("heirline").setup({
-    init = utils.pick_child_on_condition,
+    fallthrough = false,
     InactiveStatusLine,
     ActiveStatusLine,
   })
