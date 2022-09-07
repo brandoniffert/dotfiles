@@ -51,7 +51,7 @@ require("packer").startup({
     use(require("bti.config.loupe"))
     use(require("bti.config.comment"))
     use(require("bti.config.vim-eunuch"))
-    use("christoomey/vim-tmux-navigator")
+    use("alexghergh/nvim-tmux-navigation")
     use("tpope/vim-repeat")
 
     use(require("bti.config.which-key"))
