@@ -43,14 +43,14 @@ wk.register({
 wk.register({
   ["\\"] = { "<cmd>NvimTreeToggle<CR>", "Toggle NvimTree" },
   ["<Leader>"] = { ":<C-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<CR>", "Last file" },
-  ["<CR>"] = { "<cmd>lua require('bti.util.telescope').find_files()<CR>", "Files" },
+  ["<CR>"] = { "<cmd>lua bti.util.telescope.find_files()<CR>", "Files" },
   e = { ':edit <C-R>=expand("%:p:h") . "/"<CR>', "Edit File (Same Directory)", silent = false },
   f = {
     name = "+find",
     b = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Buffers" },
     c = { "<cmd>Telescope commands<CR>", "Commands" },
-    f = { "<cmd>lua require('bti.util.telescope').find_files()<CR>", "Files" },
-    F = { "<cmd>lua require('bti.util.telescope').find_all_files()<CR>", "Files (All)" },
+    f = { "<cmd>lua bti.util.telescope.find_files()<CR>", "Files" },
+    F = { "<cmd>lua bti.util.telescope.find_all_files()<CR>", "Files (All)" },
     g = { "<cmd>lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>", "Grep" },
     G = {
       "<cmd>lua require('telescope.builtin').live_grep({ additional_args = function() return { '--hidden', '--no-ignore' } end })<CR>",

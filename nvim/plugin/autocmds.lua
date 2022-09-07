@@ -32,10 +32,10 @@ augroups.focus = {
   on = {
     event = { "BufEnter", "FocusGained", "WinEnter" },
     callback = function()
-      local should_focus = vim.bo.filetype ~= "" or require("bti.g").did_load
+      local should_focus = vim.bo.filetype ~= "" or bti.g.did_load
 
       if should_focus then
-        require("bti.util.focus").focus_window()
+        bti.util.focus.focus_window()
       end
     end,
   },
@@ -46,7 +46,7 @@ augroups.focus = {
       local win_type = vim.fn.win_gettype()
 
       if win_type ~= "popup" then
-        require("bti.util.focus").blur_window()
+        bti.util.focus.blur_window()
       end
     end,
   },
@@ -58,7 +58,7 @@ augroups.misc = {
     once = true,
     callback = function()
       vim.schedule(function()
-        require("bti.g").did_load = true
+        bti.g.did_load = true
       end)
     end,
   },
