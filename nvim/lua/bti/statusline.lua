@@ -299,13 +299,16 @@ local LocationProgress = utils.surround({ " ", " " }, nil, {
 })
 
 local SearchCount = utils.surround({ " ", " " }, nil, {
-  condition = function(_)
-    return vim.v.hlsearch == 1
+  init = function(self)
+    self.searchcount = vim.fn.searchcount({ maxcount = 0 })
   end,
 
-  provider = function(_)
-    local searchcount = vim.fn.searchcount({ maxcount = 0 })
-    return "[" .. searchcount["current"] .. "/" .. searchcount["total"] .. "]"
+  condition = function(self)
+    return vim.v.hlsearch == 1 and self.searchcount ~= nil
+  end,
+
+  provider = function(self)
+    return "[" .. self.searchcount["current"] .. "/" .. self.searchcount["total"] .. "]"
   end,
 })
 
