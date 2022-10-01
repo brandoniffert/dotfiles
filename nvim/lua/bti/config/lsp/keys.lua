@@ -57,9 +57,9 @@ function M.setup(client, bufnr)
   vim.keymap.set("n", "[e", "<cmd>lua vim.diagnostic.goto_prev({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
   vim.keymap.set("n", "]e", "<cmd>lua vim.diagnostic.goto_next({severity = vim.diagnostic.severity.ERROR})<CR>", opts)
 
-  if client.resolved_capabilities.document_formatting then
+  if client.server_capabilities.document_formatting then
     keymap.c.f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format Document" }
-  elseif client.resolved_capabilities.document_range_formatting then
+  elseif client.server_capabilities.document_range_formatting then
     keymap_visual.c.f = { "<cmd>lua vim.lsp.buf.range_formatting()<CR>", "Format Range" }
   end
 
