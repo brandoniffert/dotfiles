@@ -6,10 +6,6 @@ if needs_bootstrap then
   vim.api.nvim_command("packadd packer.nvim")
 end
 
-if not needs_bootstrap then
-  require("impatient")
-end
-
 require("packer").startup({
   function(use)
     use("lewis6991/impatient.nvim")
