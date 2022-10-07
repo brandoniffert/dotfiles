@@ -72,7 +72,6 @@ wk.register({
     name = "+util",
     c = {
       function()
-        vim.cmd([[CatppuccinClean]])
         vim.cmd([[CatppuccinCompile]])
         vim.cmd([[PackerCompile]])
         vim.cmd([[LuaCacheClear]])
