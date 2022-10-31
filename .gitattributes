@@ -2,7 +2,7 @@ nvim/spell/** filter=git-crypt diff=git-crypt
 zsh/bin/host/iffy/generate-alfred-mount-items filter=git-crypt diff=git-crypt
 zsh/bin/host/iffy/generate-alfred-mount-dirs filter=git-crypt diff=git-crypt
 zsh/bin/host/iffy/gmail-backup filter=git-crypt diff=git-crypt
-zsh/bin/host/iffy/password-helper-iffybook filter=git-crypt diff=git-crypt
-zsh/bin/host/iffy/password-helper-h207 filter=git-crypt diff=git-crypt
+zsh/bin/host/iffy/pass-helper-personal filter=git-crypt diff=git-crypt
+zsh/bin/host/iffy/pass-helper-h207 filter=git-crypt diff=git-crypt
 zsh/exports.private filter=git-crypt diff=git-crypt
 zsh/functions/host/iffy/ytdl-proxy filter=git-crypt diff=git-crypt
