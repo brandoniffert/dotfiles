@@ -13,5 +13,12 @@ local project_dir="$(
 )"
 
 if [ -n "${project_dir}" ]; then
-  cd "$PROJECTS_HOME/$project_dir"
+  local project_path="$PROJECTS_HOME/$project_dir"
+
+  # Convention for docker based projects
+  if [ -d "$project_path/site" ]; then
+    cd "$project_path/site"
+  else
+    cd "$project_path"
+  fi
 fi
