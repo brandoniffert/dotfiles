@@ -2,4 +2,4 @@
 
 local port="${1:-9876}"
 open "http://localhost:${port}/"
-python -m http.server $port
+python3 -m http.server $port
