@@ -1,0 +1,30 @@
+p_header() {
+  local title="[$@] "
+  local length="${#title}"
+  local cols=$(( $(tput cols) - $length))
+
+  echo "\n"
+  echo -n "$title"
+  printf '%.s-' $(seq 1 $cols)
+  echo "\n"
+}
+
+if command -v npm &> /dev/null; then
+  p_header 'npm'
+  npm upgrade --location=global
+fi
+
+if command -v composer &> /dev/null; then
+  p_header 'composer'
+  composer global outdated
+fi
+
+if command -v tmux &> /dev/null; then
+  p_header 'tmux'
+  /usr/bin/env bash "$XDG_DATA_HOME/tmux/plugins/tpm/scripts/update_plugin.sh" "" all
+  /usr/bin/env bash "$XDG_DATA_HOME/tmux/plugins/tpm/scripts/source_plugins.sh"
+fi
+
+echo "\n"
+
+unfunction p_header
