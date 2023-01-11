@@ -444,14 +444,20 @@ local BlurredStatusLine = {
 
 M.activate = function()
   require("heirline").setup({
-    fallthrough = false,
-    InactiveStatusLine,
-    ActiveStatusLine,
+    statusline = {
+      fallthrough = false,
+      InactiveStatusLine,
+      ActiveStatusLine,
+    },
   })
 end
 
 M.deactivate = function()
-  require("heirline").setup(BlurredStatusLine)
+  require("heirline").setup({
+    statusline = {
+      BlurredStatusLine,
+    },
+  })
 end
 
 return M
