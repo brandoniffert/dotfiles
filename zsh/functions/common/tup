@@ -1,11 +1,32 @@
-# Setup two windows in a tmux session
+# Setup two windows in a tmux session or custom layout if .tmux file exists
 
 if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
   if [[ $(tmux list-windows | grep '' -c) -eq 1 ]]; then
-    tmux rename-window 'code'
-    tmux new-window
-    tmux rename-window 'build'
-    tmux select-window -t 1
-    clear
+    # Check for .tmux file (poor man's Tmuxinator)
+    if [ -x .tmux ]; then
+      # Prompt the first time we see a given .tmux file before running it
+      local DIGEST="$(openssl sha512 .tmux)"
+      if ! grep -q "$DIGEST" "$XDG_DATA_HOME/.tmux-digests" 2> /dev/null; then
+        cat .tmux
+        echo
+        read -k 1 -r \
+          'REPLY?Trust (and run) this .tmux file? (t = trust, otherwise = skip) '
+        echo
+        if [[ $REPLY =~ ^[Tt]$ ]]; then
+          echo "$DIGEST" >> "$XDG_DATA_HOME/.tmux-digests"
+          ./.tmux
+          return
+        fi
+      else
+        ./.tmux
+        return
+      fi
+    else
+      tmux rename-window 'code'
+      tmux new-window
+      tmux rename-window 'build'
+      tmux select-window -t 1
+      clear
+    fi
   fi
 fi
