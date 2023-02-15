@@ -7,6 +7,7 @@ export HELM_CACHE_HOME="$XDG_CACHE_HOME/helm"
 export HELM_CONFIG_HOME="$XDG_CONFIG_HOME/helm"
 export HELM_DATA_HOME="$XDG_DATA_HOME/helm"
 export HOMEBREW_NO_ANALYTICS=1
+export TMUX_MACHINE_LABEL="@local"
 
 # Set askpass helper
 export SUDO_ASKPASS=$(which osaaskpass)

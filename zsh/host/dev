@@ -1,5 +1,8 @@
 alias paru="sudo -u build paru"
 
+# Set host specific exports
+export TMUX_MACHINE_LABEL="@dev"
+
 # Automatically setup tmux session
 () {
   local session_name="dev"
