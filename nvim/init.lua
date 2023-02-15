@@ -1,8 +1,4 @@
-local ok, _ = pcall(require, "impatient")
-
-if ok then
-  require("impatient")
-end
-
-require("bti")
-require("bti.plugins")
+require("bti.config.options")
+require("bti.config.lazy")
+require("bti.config.autocmds")
+require("bti.config.keymaps")
