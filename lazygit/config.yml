@@ -1,0 +1,8 @@
+---
+gui:
+  theme:
+    selectedLineBgColor:
+      - "#2a2b3c"
+  authorColors:
+    "Brandon Iffert": "red"
+    "*": "blue"

@@ -73,6 +73,7 @@ echo_header "Symlink files to $config_home"
 config_dots=(
   dircolors
   git
+  lazygit
   nvim
   ripgrep
   tmux
