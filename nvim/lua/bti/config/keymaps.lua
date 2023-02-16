@@ -61,7 +61,10 @@ keymap(
   ":<C-u>exe v:count ? v:count . 'b' : 'b' . (bufloaded(0) ? '#' : 'n')<CR>",
   { desc = "Last file" }
 )
-vim.keymap.set("n", "<Leader>e", ':edit <C-R>=expand("%:p:h") . "/"<CR>', { desc = "Edit File (Same Directory)" })
+
+keymap("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>", { silent = true, desc = "Close all buffers but the current one" })
+
+keymap("n", "<Leader>e", ':edit <C-R>=expand("%:p:h") . "/"<CR>', { desc = "Edit File (Same Directory)" })
 
 keymap("n", "<Leader>p", '"*p', { desc = "Paste from clipboard" })
 keymap("n", "<Leader>q", "<cmd>:q<CR>", { desc = "Quit" })
