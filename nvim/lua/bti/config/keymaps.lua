@@ -23,14 +23,6 @@ keymap("n", "<S-Tab>", "<<")
 keymap("v", "<Tab>", ">gv")
 keymap("v", "<S-Tab>", "<gv")
 
--- Move Lines
-keymap("n", "<A-j>", "<cmd>m .+1<cr>==", { desc = "Move down" })
-keymap("n", "<A-k>", "<cmd>m .-2<cr>==", { desc = "Move up" })
-keymap("i", "<A-j>", "<esc><cmd>m .+1<cr>==gi", { desc = "Move down" })
-keymap("i", "<A-k>", "<esc><cmd>m .-2<cr>==gi", { desc = "Move up" })
-keymap("v", "<A-j>", ":m '>+1<cr>gv=gv", { desc = "Move down" })
-keymap("v", "<A-k>", ":m '<-2<cr>gv=gv", { desc = "Move up" })
-
 -- Add undo break-points
 keymap("i", ",", ",<c-g>u")
 keymap("i", ".", ".<c-g>u")
@@ -62,9 +54,14 @@ keymap(
   { desc = "Last file" }
 )
 
-keymap("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>", { silent = true, desc = "Close all buffers but the current one" })
+keymap("n", "<Leader>bo", "<cmd>%bd|e#|bd#<CR>", { desc = "Close all buffers but the current one" })
 
-keymap("n", "<Leader>e", ':edit <C-R>=expand("%:p:h") . "/"<CR>', { desc = "Edit File (Same Directory)" })
+keymap(
+  "n",
+  "<Leader>e",
+  ':edit <C-R>=expand("%:p:h") . "/"<CR>',
+  { silent = false, desc = "Edit File (Same Directory)" }
+)
 
 keymap("n", "<Leader>p", '"*p', { desc = "Paste from clipboard" })
 keymap("n", "<Leader>q", "<cmd>:q<CR>", { desc = "Quit" })
