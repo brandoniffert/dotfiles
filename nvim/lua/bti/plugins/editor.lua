@@ -5,17 +5,6 @@ return {
     config = true,
   },
 
-  -- PLUGIN: alexghergh/nvim-tmux-navigation
-  {
-    "alexghergh/nvim-tmux-navigation",
-    init = function()
-      vim.keymap.set("n", "<C-h>", require("nvim-tmux-navigation").NvimTmuxNavigateLeft)
-      vim.keymap.set("n", "<C-j>", require("nvim-tmux-navigation").NvimTmuxNavigateDown)
-      vim.keymap.set("n", "<C-k>", require("nvim-tmux-navigation").NvimTmuxNavigateUp)
-      vim.keymap.set("n", "<C-l>", require("nvim-tmux-navigation").NvimTmuxNavigateRight)
-    end,
-  },
-
   -- PLUGIN: folke/which-key.nvim
   {
     "folke/which-key.nvim",
@@ -140,6 +129,18 @@ return {
   {
     "lewis6991/gitsigns.nvim",
     event = { "BufReadPre", "BufNewFile" },
+    config = true,
+  },
+
+  -- PLUGIN: numToStr/Navigator.nvim
+  {
+    "numToStr/Navigator.nvim",
+    keys = {
+      { "<C-h>", "<cmd>NavigatorLeft<CR>", mode = { "n", "t" }, desc = "Navigate left" },
+      { "<C-j>", "<cmd>NavigatorDown<CR>", mode = { "n", "t" }, desc = "Navigate down" },
+      { "<C-k>", "<cmd>NavigatorUp<CR>", mode = { "n", "t" }, desc = "Navigate up" },
+      { "<C-l>", "<cmd>NavigatorRight<CR>", mode = { "n", "t" }, desc = "Navigate right" },
+    },
     config = true,
   },
 
