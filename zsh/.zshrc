@@ -5,6 +5,7 @@
 setopt AUTO_CD              # Auto cd into directory by name
 setopt AUTO_PARAM_SLASH     # Tab completing directory appends a slash
 setopt AUTO_PUSHD           # cd automatically pushes old dir onto dir stack
+setopt COMBINING_CHARS      # Combine zero-length punc chars (accents) with base
 setopt COMPLETE_ALIASES     # Do not expand aliases before completion finishes
 setopt COMPLETE_IN_WORD     # Completion from both ends
 setopt CORRECT              # Spell check commands
@@ -275,8 +276,8 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+="%F{#2c2c44}%f%K{#2c2c44}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
-  PROMPT+='%K{#242532}%{$fg_bold[blue]%} %1~%f%k%F{#242532}%f'
+  PROMPT+="%F{#2a2b3c}%f%K{#2a2b3c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
+  PROMPT+='%K{#242438}%{$fg_bold[blue]%} %1~%f%k%F{#242438}%f'
   PROMPT+='${${VIRTUAL_ENV#0}:+ ($(basename $VIRTUAL_ENV))}'
   PROMPT+='%{$fg[yellow]%}%(1j. ◆.)%f '
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
