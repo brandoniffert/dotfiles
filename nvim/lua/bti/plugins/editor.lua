@@ -17,9 +17,6 @@ return {
         key_labels = {
           ["<leader>"] = "SPC",
         },
-        window = {
-          winblend = 20,
-        },
       })
 
       local wk = require("which-key")
@@ -41,7 +38,6 @@ return {
   -- PLUGIN: ggandor/flit.nvim
   {
     "ggandor/leap.nvim",
-    event = "VeryLazy",
     dependencies = {
       {
         "ggandor/flit.nvim",
@@ -196,6 +192,7 @@ return {
   -- PLUGIN: smjonas/inc-rename.nvim
   {
     "smjonas/inc-rename.nvim",
+    cmd = "IncRename",
     config = true,
   },
 

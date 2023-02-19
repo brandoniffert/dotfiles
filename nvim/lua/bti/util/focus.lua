@@ -16,12 +16,6 @@ local number_filetype_blacklist = {
   ["qf"] = true,
 }
 
--- Don't mess with 'conceallevel' for these
-local conceallevel_filetype_blacklist = {
-  ["help"] = 2,
-  ["json"] = 0,
-}
-
 -- Don't manage cursorline for these
 local cursorline_filetype_blacklist = {}
 
@@ -41,9 +35,6 @@ M.focus_window = function()
   if cursorline_filetype_blacklist[filetype] ~= true then
     vim.wo.cursorline = true
   end
-
-  local conceallevel = conceallevel_filetype_blacklist[filetype] or 2
-  vim.wo.conceallevel = conceallevel
 end
 
 M.blur_window = function()
@@ -60,10 +51,6 @@ M.blur_window = function()
   end
 
   vim.wo.cursorline = false
-
-  if filetype == "" or conceallevel_filetype_blacklist[filetype] == nil then
-    vim.wo.conceallevel = 0
-  end
 end
 
 return M

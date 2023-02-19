@@ -1,14 +1,44 @@
 return {
+  -- PLUGIN: glepnir/lspsaga.nvim
+  {
+    "glepnir/lspsaga.nvim",
+    cmd = "Lspsaga",
+    config = function()
+      require("lspsaga").setup({
+        symbol_in_winbar = {
+          enable = false,
+        },
+        code_action = {
+          extend_gitsigns = false,
+        },
+        lightbulb = {
+          enable = false,
+        },
+        ui = {
+          border = "rounded",
+          kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+        },
+      })
+    end,
+  },
+
   -- PLUGIN: neovim/nvim-lspconfig
   -- PLUGIN: hrsh7th/cmp-nvim-lsp
+  -- PLUGIN: folke/neodev.nvim
   {
     "neovim/nvim-lspconfig",
     event = "BufReadPre",
     dependencies = {
-      "hrsh7th/cmp-nvim-lsp",
-      cond = function()
-        return require("bti.util").has_plugin("nvim-cmp")
-      end,
+      {
+        "hrsh7th/cmp-nvim-lsp",
+        cond = function()
+          return require("bti.util").has_plugin("nvim-cmp")
+        end,
+      },
+      {
+        "folke/neodev.nvim",
+        config = true,
+      },
     },
     opts = {
       diagnostics = {
@@ -16,6 +46,9 @@ return {
         update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
+        float = {
+          border = "rounded",
+        },
       },
       autoformat = true,
       servers = {
@@ -55,7 +88,6 @@ return {
                 globals = { "vim", "hs" },
               },
               workspace = {
-                library = vim.api.nvim_get_runtime_file("", true),
                 checkThirdParty = false,
               },
             },
@@ -92,6 +124,12 @@ return {
         require("bti.plugins.lsp.format").on_attach(client, buffer)
         require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
+
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = "rounded",
+      })
 
       -- Server Setup
       local servers = opts.servers

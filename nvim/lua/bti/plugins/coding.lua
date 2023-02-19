@@ -32,13 +32,15 @@ return {
     end,
   },
 
-  -- PLUGIN: JoosepAlviste/nvim-ts-context-commentstring
-  { "JoosepAlviste/nvim-ts-context-commentstring", lazy = true },
-
   -- PLUGIN: echasnovski/mini.comment
+  -- PLUGIN: JoosepAlviste/nvim-ts-context-commentstring
   {
     "echasnovski/mini.comment",
-    event = "VeryLazy",
+    dependencies = {
+      {
+        "JoosepAlviste/nvim-ts-context-commentstring",
+      },
+    },
     opts = {
       hooks = {
         pre = function()

@@ -11,7 +11,10 @@ return {
       require("catppuccin").setup({
         custom_highlights = {
           IndentBlanklineContextChar = { fg = colors.surface2 },
+          FzfLuaBorder = { link = "FloatBorder" },
           NeoTreeNormal = { bg = colors.base },
+          NormalFloat = { bg = colors.base },
+          Pmenu = { bg = colors.base },
           VertSplit = { fg = colors.base1, bg = colors.none },
         },
         integrations = {
@@ -19,6 +22,7 @@ return {
           leap = true,
           lsp_saga = true,
           neotree = true,
+          treesitter_context = true,
           which_key = true,
         },
       })
@@ -30,7 +34,6 @@ return {
   -- PLUGIN: kyazdani42/nvim-web-devicons
   {
     "kyazdani42/nvim-web-devicons",
-    lazy = true,
   },
 
   -- PLUGIN: lukas-reineke/indent-blankline.nvim
@@ -39,6 +42,32 @@ return {
     opts = {
       show_current_context = true,
       indent_blankline_char = "│",
+    },
+  },
+
+  -- PLUGIN: NvChad/nvim-colorizer.lua
+  {
+    "NvChad/nvim-colorizer.lua",
+    cmd = "ColorizerToggle",
+    keys = {
+      { "<Leader>uc", "<cmd>ColorizerToggle<CR>", desc = "Toggle Colorizer" },
+    },
+    opts = {
+      filetypes = { "*", "!lazy" },
+      buftype = { "*", "!prompt", "!nofile", "!popup" },
+      user_default_options = {
+        RGB = true,
+        RRGGBB = true,
+        names = false,
+        RRGGBBAA = true,
+        AARRGGBB = false,
+        rgb_fn = true,
+        hsl_fn = true,
+        css = false,
+        css_fn = true,
+        mode = "virtualtext",
+        virtualtext = "",
+      },
     },
   },
 
@@ -53,7 +82,6 @@ return {
   -- PLUGIN: stevearc/dressing.nvim
   {
     "stevearc/dressing.nvim",
-    lazy = true,
     init = function()
       ---@diagnostic disable-next-line: duplicate-set-field
       vim.ui.select = function(...)

@@ -42,8 +42,13 @@ return {
           }),
         },
         window = {
-          completion = cmp.config.window.bordered(),
-          documentation = cmp.config.window.bordered(),
+          completion = {
+            border = "rounded",
+            winhighlight = "Normal:Pmenu,FloatBorder:FloatBorder,CursorLine:PmenuSel,Search:None",
+          },
+          documentation = {
+            border = "rounded",
+          },
         },
         snippet = {
           expand = function(args)
@@ -88,7 +93,6 @@ return {
           {
             name = "buffer",
             option = {
-              keyword_length = 2,
               max_item_count = 10,
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
@@ -124,24 +128,15 @@ return {
       local ls = require("luasnip")
 
       ls.config.set_config({
-        -- prevent back to snippet when leaving it
         history = true,
         updateevents = "TextChanged,TextChangedI",
       })
 
       require("luasnip.loaders.from_lua").load()
 
-      -- vim.keymap.set({ 'i', 's' }, '<c-k>', function()
-      --   if ls.expand_or_jumpable() then
-      --     ls.expand_or_jump()
-      --   end
-      -- end, { silent = true })
-      --
-      -- vim.keymap.set({ 'i', 's' }, '<c-j>', function()
-      --   if ls.jumpable(-1) then
-      --     ls.jump(-1)
-      --   end
-      -- end, { silent = true })
+      vim.keymap.set({ "i", "s" }, "<C-n>", "<Plug>luasnip-next-choice", {})
+      vim.keymap.set({ "i", "s" }, "<C-p>", "<Plug>luasnip-prev-choice", {})
+      vim.keymap.set({ "i" }, "<C-u>", "<cmd>lua require('luasnip.extras.select_choice')()<CR>")
     end,
   },
 }

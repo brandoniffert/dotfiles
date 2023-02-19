@@ -86,6 +86,16 @@ augroups.spell = {
 }
 
 augroups.ui = {
+  add_border = {
+    event = { "FileType" },
+    pattern = {
+      "lspinfo",
+    },
+    callback = function()
+      vim.api.nvim_win_set_config(0, { border = "rounded" })
+    end,
+  },
+
   restore_cursor_position = {
     event = { "BufReadPost" },
     callback = function()

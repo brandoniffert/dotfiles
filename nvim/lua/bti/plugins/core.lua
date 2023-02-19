@@ -1,9 +1,4 @@
 return {
-  -- PLUGIN: nathom/filetype.nvim
-  {
-    "nathom/filetype.nvim",
-  },
-
   -- PLUGIN: nvim-lua/plenary.nvim
   {
     "nvim-lua/plenary.nvim",

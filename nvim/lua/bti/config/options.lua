@@ -49,7 +49,9 @@ vim.opt.backspace = "indent,start,eol"
 vim.opt.backup = false
 vim.opt.backupcopy = "yes"
 vim.opt.belloff = "all"
-vim.opt.cmdheight = 2
+if vim.env.TMUX ~= nil then
+  vim.opt.cmdheight = 2
+end
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.cursorline = true
 vim.opt.diffopt:append("foldcolumn:0")
@@ -85,7 +87,6 @@ vim.opt.listchars = {
 vim.opt.modelines = 5
 vim.opt.mouse = "a"
 vim.opt.number = true
-vim.opt.pumblend = 10
 vim.opt.relativenumber = true
 vim.opt.ruler = false
 vim.opt.scrolloff = 3

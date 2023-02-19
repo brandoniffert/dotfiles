@@ -9,12 +9,22 @@ function M.get()
     or {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
       { "<leader>cl", "<cmd>LspInfo<CR>", desc = "Lsp Info" },
-      { "gd", "<cmd>FzfLua lsp_definitions<CR>", desc = "Goto Definition" },
-      { "gr", "<cmd>FzfLua lsp_references<CR>", desc = "References" },
-      { "gD", vim.lsp.buf.declaration, desc = "Goto Declaration" },
+      { "<leader>ca", "<cmd>Lspsaga code_action<CR>", desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
+      { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
+      { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
+      {
+        "<leader>cF",
+        require("bti.plugins.lsp.format").toggle,
+        desc = "Toggle formatting",
+        has = "documentFormatting",
+      },
+      { "<leader>cr", M.rename, expr = true, desc = "Rename", has = "rename" },
+      { "gd", "<cmd>Lspsaga peek_definition<CR>", desc = "Peek Definition" },
+      { "gD", "<cmd>FzfLua lsp_definitions<CR>", desc = "Goto Definition" },
       { "gI", "<cmd>FzfLua lsp_implementations<CR>", desc = "Goto Implementation" },
-      { "gt", "<cmd>FzfLua lsp_type_definitions<CR>", desc = "Goto Type Definition" },
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
+      { "gr", "<cmd>FzfLua lsp_references<CR>", desc = "References" },
+      { "gt", "<cmd>FzfLua lsp_typedefs<CR>", desc = "Goto Type Definition" },
+      { "K", "<cmd>Lspsaga hover_doc<CR>", desc = "Hover" },
       { "gK", vim.lsp.buf.signature_help, desc = "Signature Help", has = "signatureHelp" },
       { "<c-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
       { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
@@ -23,10 +33,6 @@ function M.get()
       { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
       { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
       { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
-      { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
-      { "<leader>cr", M.rename, expr = true, desc = "Rename", has = "rename" },
     }
   return M._keys
 end
