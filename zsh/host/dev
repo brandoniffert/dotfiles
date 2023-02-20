@@ -1,4 +1,6 @@
+# Aliases
 alias paru="sudo -u build paru"
+alias devroot="cd /mnt/devroot"
 
 # Automatically setup tmux session
 () {
