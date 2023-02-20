@@ -8,9 +8,6 @@ return {
         symbol_in_winbar = {
           enable = false,
         },
-        code_action = {
-          extend_gitsigns = false,
-        },
         lightbulb = {
           enable = false,
         },
