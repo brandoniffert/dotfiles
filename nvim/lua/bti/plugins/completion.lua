@@ -1,15 +1,17 @@
 return {
   -- PLUGIN: hrsh7th/nvim-cmp
   -- PLUGIN: hrsh7th/cmp-buffer
+  -- PLUGIN: hrsh7th/cmp-cmdline
   -- PLUGIN: hrsh7th/cmp-path
   -- PLUGIN: onsails/lspkind-nvim
   -- PLUGIN: andersevenrud/cmp-tmux
   -- PLUGIN: saadparwaiz1/cmp_luasnip
   {
     "hrsh7th/nvim-cmp",
-    event = "InsertEnter",
+    event = { "InsertEnter", "CmdLineEnter" },
     dependencies = {
       "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-cmdline",
       "hrsh7th/cmp-path",
       "onsails/lspkind-nvim",
       "andersevenrud/cmp-tmux",
@@ -56,8 +58,8 @@ return {
           end,
         },
         mapping = {
-          ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-          ["<C-u>"] = cmp.mapping.scroll_docs(4),
+          ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+          ["<C-f>"] = cmp.mapping.scroll_docs(4),
           ["<C-e>"] = cmp.mapping.close(),
           ["<CR>"] = cmp.mapping.confirm({
             select = false,
@@ -83,7 +85,7 @@ return {
             end
           end, { "i", "s" }),
         },
-        sources = {
+        sources = cmp.config.sources({
           {
             name = "nvim_lsp",
           },
@@ -92,23 +94,21 @@ return {
           },
           {
             name = "buffer",
+            max_item_count = 15,
             option = {
-              max_item_count = 10,
               get_bufnrs = function()
                 return vim.api.nvim_list_bufs()
               end,
             },
           },
+        }, {
           {
             name = "tmux",
             option = {
               trigger_characters = {},
             },
           },
-          {
-            name = "path",
-          },
-        },
+        }),
         sorting = {
           comparators = {
             function(...)
@@ -116,6 +116,18 @@ return {
             end,
           },
         },
+      })
+
+      cmp.setup.cmdline(":", {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = "path" },
+        }, {
+          {
+            name = "cmdline",
+            keyword_length = 2,
+          },
+        }),
       })
     end,
   },
