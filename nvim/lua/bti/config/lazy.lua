@@ -16,6 +16,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("bti.plugins", {
   install = {
     colorscheme = { "catppuccin-mocha", "habamax" },
+    missing = false,
   },
   ui = {
     border = "rounded",
