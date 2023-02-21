@@ -1,5 +1,5 @@
 {
-  "LuaSnip": { "branch": "master", "commit": "92276ba735056dab04b0508e421a6a5d729e3f81" },
+  "LuaSnip": { "branch": "master", "commit": "d33cf7de14eea209b8ed4a7edaed72f0b8cedb30" },
   "Navigator.nvim": { "branch": "master", "commit": "91d86506ac2a039504d5205d32a1d4bc7aa57072" },
   "catppuccin": { "branch": "main", "commit": "4175759297350557315987d479fb687a9f0b781f" },
   "cmp-buffer": { "branch": "main", "commit": "3022dbc9166796b644a841a02de8dd1cc1d311fa" },
@@ -20,7 +20,7 @@
   "leap.nvim": { "branch": "main", "commit": "9a69febb2e5a4f5f5a55dd2d7173098fde917bc5" },
   "loupe": { "branch": "main", "commit": "af1eb735c9787b8a67a7db24651116f56cefeeb0" },
   "lspkind-nvim": { "branch": "master", "commit": "c68b3a003483cf382428a43035079f78474cd11e" },
-  "lspsaga.nvim": { "branch": "main", "commit": "4e957c780bdc9d0767a254360d68e3f7ff12e5cd" },
+  "lspsaga.nvim": { "branch": "main", "commit": "7ebc947071defc7a1f570d4efac6236d6d7b81d5" },
   "mini.comment": { "branch": "main", "commit": "9fc3fe43129e8c2611bd21b8f50af8c0d0742533" },
   "mini.surround": { "branch": "main", "commit": "6a4f31e2a380439315729f561d7e7898bde1fd52" },
   "neo-tree.nvim": { "branch": "v2.x", "commit": "245cf1e68840defcc75a16297740f6203f5a045d" },
