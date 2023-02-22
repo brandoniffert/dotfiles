@@ -333,7 +333,7 @@ local SpecialStatusLine = {
   condition = function()
     return conditions.buffer_matches({
       buftype = { "nofile", "help", "quickfix" },
-      filetype = { "^git.*", "fugitive", "checkhealth", "neo-tree" },
+      filetype = { "^gitcommit", "fugitive", "checkhealth", "neo-tree" },
     })
   end,
 
@@ -364,7 +364,7 @@ local SpecialStatusLine = {
 
   {
     condition = function()
-      return string.match(vim.bo.filetype, "^git.*")
+      return string.match(vim.bo.filetype, "^gitcommit")
     end,
 
     { provider = "git - " },
@@ -441,7 +441,6 @@ local WinBar = {
           "terminal",
         },
         filetype = {
-          "^git.*",
           "fugitive",
         },
       })
@@ -515,7 +514,6 @@ M.setup = function()
       }, vim.bo[buf].buftype)
 
       local filetype = vim.tbl_contains({
-        "gitcommit",
         "fugitive",
       }, vim.bo[buf].filetype)
 
