@@ -20,7 +20,6 @@ return {
         integrations = {
           harpoon = true,
           leap = true,
-          lsp_saga = true,
           neotree = true,
           treesitter_context = true,
           which_key = true,

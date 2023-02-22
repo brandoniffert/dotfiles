@@ -13,26 +13,6 @@ return {
     },
   },
 
-  -- PLUGIN: glepnir/lspsaga.nvim
-  {
-    "glepnir/lspsaga.nvim",
-    cmd = "Lspsaga",
-    config = function()
-      require("lspsaga").setup({
-        symbol_in_winbar = {
-          enable = false,
-        },
-        lightbulb = {
-          enable = false,
-        },
-        ui = {
-          border = "rounded",
-          kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-        },
-      })
-    end,
-  },
-
   -- PLUGIN: neovim/nvim-lspconfig
   -- PLUGIN: hrsh7th/cmp-nvim-lsp
   -- PLUGIN: folke/neodev.nvim
