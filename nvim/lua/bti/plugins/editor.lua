@@ -30,6 +30,7 @@ return {
         ["<Leader>f"] = { name = "+find" },
         ["<Leader>h"] = { name = "+harpoon" },
         ["<leader>u"] = { name = "+util" },
+        ["<leader>x"] = { name = "+trouble" },
       })
     end,
   },
