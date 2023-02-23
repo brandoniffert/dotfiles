@@ -36,6 +36,7 @@ return {
   -- PLUGIN: JoosepAlviste/nvim-ts-context-commentstring
   {
     "echasnovski/mini.comment",
+    event = "BufReadPre",
     dependencies = {
       {
         "JoosepAlviste/nvim-ts-context-commentstring",
