@@ -83,6 +83,7 @@ return {
           ["--pointer"] = " ",
         },
         winopts = {
+          border = "single",
           width = 0.90,
         },
       })

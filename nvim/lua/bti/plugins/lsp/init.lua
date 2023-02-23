@@ -46,7 +46,7 @@ return {
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
         float = {
-          border = "rounded",
+          border = "single",
         },
       })
 
@@ -56,10 +56,10 @@ return {
         require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
 
       vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
+        border = "single",
       })
 
       -- Server Setup

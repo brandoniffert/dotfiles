@@ -19,6 +19,6 @@ require("lazy").setup("bti.plugins", {
     missing = false,
   },
   ui = {
-    border = "rounded",
+    border = "single",
   },
 })

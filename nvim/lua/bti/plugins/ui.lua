@@ -11,6 +11,7 @@ return {
       require("catppuccin").setup({
         custom_highlights = {
           IndentBlanklineContextChar = { fg = colors.surface2 },
+          FloatBorder = { fg = colors.overlay2 },
           FzfLuaBorder = { link = "FloatBorder" },
           NeoTreeNormal = { bg = colors.base },
           NormalFloat = { bg = colors.base },
