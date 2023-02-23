@@ -31,8 +31,16 @@ return {
         config = true,
       },
     },
-    opts = {
-      diagnostics = {
+    config = function()
+      -- vim.lsp.set_log_level('debug')
+
+      -- Diagnostics
+      for name, icon in pairs(require("bti.theme").icons.diagnostics) do
+        name = "DiagnosticSign" .. name
+        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
+      end
+
+      vim.diagnostic.config({
         underline = false,
         update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
@@ -40,9 +48,22 @@ return {
         float = {
           border = "rounded",
         },
-      },
-      autoformat = true,
-      servers = {
+      })
+
+      -- Formatting & Keymaps
+      require("bti.util").on_attach(function(client, buffer)
+        require("bti.plugins.lsp.format").on_attach(client, buffer)
+        require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
+      end)
+
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+
+      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+        border = "rounded",
+      })
+
+      -- Server Setup
+      local servers = {
         bashls = {},
         cssls = {
           settings = {
@@ -52,16 +73,9 @@ return {
           },
         },
         denols = {
-          init_options = {
-            enable = true,
-            lint = true,
-            unstable = false,
-          },
           autostart = false,
         },
-        eslint = {
-          autostart = false,
-        },
+        eslint = {},
         intelephense = {
           init_options = {
             licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
@@ -98,32 +112,8 @@ return {
             },
           },
         },
-      },
-    },
-    config = function(_, opts)
-      -- vim.lsp.set_log_level('debug')
+      }
 
-      -- Diagnostics
-      for name, icon in pairs(require("bti.theme").icons.diagnostics) do
-        name = "DiagnosticSign" .. name
-        vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-      end
-      vim.diagnostic.config(opts.diagnostics)
-
-      -- Formatting & Keymaps
-      require("bti.util").on_attach(function(client, buffer)
-        require("bti.plugins.lsp.format").on_attach(client, buffer)
-        require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
-      end)
-
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-
-      vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-        border = "rounded",
-      })
-
-      -- Server Setup
-      local servers = opts.servers
       local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
       local function setup(server)
@@ -139,19 +129,12 @@ return {
           setup(server)
         end
       end
-    end,
-  },
 
-  -- PLUGIN: jose-elias-alvarez/null-ls.nvim
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    init = function()
       local custom_lsp_start = vim.api.nvim_create_augroup("CustomLspStart", { clear = true })
 
       vim.api.nvim_create_autocmd("FileType", {
         desc = "Start denols",
-        pattern = { "typescript" },
+        pattern = require("lspconfig.configs").denols.filetypes,
         group = custom_lsp_start,
         callback = function()
           require("bti.plugins.lsp.servers").launch_denols()
@@ -159,38 +142,20 @@ return {
       })
 
       vim.api.nvim_create_autocmd("FileType", {
-        desc = "Start eslint",
-        pattern = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-          "vue",
-        },
-        group = custom_lsp_start,
-        callback = function()
-          require("bti.plugins.lsp.servers").launch_eslint()
-        end,
-      })
-
-      vim.api.nvim_create_autocmd("FileType", {
         desc = "Start tsserver",
-        pattern = {
-          "javascript",
-          "javascriptreact",
-          "javascript.jsx",
-          "typescript",
-          "typescriptreact",
-          "typescript.tsx",
-        },
+        pattern = require("lspconfig.configs").tsserver.filetypes,
         group = custom_lsp_start,
         callback = function()
           require("bti.plugins.lsp.servers").launch_tsserver()
         end,
       })
     end,
+  },
+
+  -- PLUGIN: jose-elias-alvarez/null-ls.nvim
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    event = "BufReadPre",
     opts = function()
       local nls = require("null-ls")
       return {
@@ -209,14 +174,7 @@ return {
           nls.builtins.formatting.phpcsfixer,
           nls.builtins.formatting.prettierd,
           nls.builtins.formatting.rustywind.with({
-            filetypes = {
-              "javascript",
-              "javascriptreact",
-              "typescript",
-              "typescriptreact",
-              "vue",
-              "svelte",
-              "html",
+            extra_filetypes = {
               "liquid",
             },
           }),
