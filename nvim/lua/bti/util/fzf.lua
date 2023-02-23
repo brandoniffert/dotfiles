@@ -5,6 +5,9 @@ M.plugin_spec_finder = function()
     prompt = "Plugins❯ ",
     actions = require("fzf-lua").defaults.actions.files,
     previewer = false,
+    fzf_opts = {
+      ["--nth"] = 2,
+    },
     fn_transform = function(x)
       local parts = {}
       for part in x:gmatch("%S+") do

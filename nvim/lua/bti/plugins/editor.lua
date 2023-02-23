@@ -70,12 +70,12 @@ return {
         grep = {
           git_icons = false,
           rg_glob = true,
+          rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --colors=path:fg:white",
         },
         fzf_opts = {
-          ["--ansi"] = "",
           ["--border"] = "none",
           ["--height"] = "100%",
-          ["--info"] = "default",
+          ["--info"] = "inline",
           ["--layout"] = "default",
           ["--no-scrollbar"] = "",
           ["--no-separator"] = "",
