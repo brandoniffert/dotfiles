@@ -260,28 +260,24 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   local prompt_char='\$'
   local prompt_color='%{$fg_bold[white]%}'
   local lvl=$SHLVL
+  local tmux_session=''
 
   if [[ $EUID -eq 0 ]]; then
     prompt_char='#'
     prompt_color='%{$fg_bold[red]%}'
   fi
 
-  [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
+  [[ -n "${TMUX+set}" ]] && lvl=$(($SHLVL - 1))
+  [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"
 
   PROMPT=''
-  PROMPT+='%K{#242438}%{$fg_bold[white]%} %m %f%k '
   PROMPT+='%{$fg_bold[blue]%}%1~%f '
+  PROMPT+="%F{#7F849C}• %m$tmux_session %f"
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
   PROMPT+=$'\n'
   PROMPT+='%{$fg[yellow]%}%(1j.◆ .)%f'
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
-
-  local lineup=$'\e[1A'
-  local linedown=$'\e[1B'
-  RPROMPT=%{${lineup}%}
-  RPROMPT+='%F{#7F849C}%(4~|.../%3~|%~)%{$reset_color%}'
-  RPROMPT+=%{${linedown}%}
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
