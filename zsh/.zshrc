@@ -237,7 +237,7 @@ function _fzf_compgen_dir() {
 source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
 ZSH_THEME_GIT_PROMPT_PREFIX=" "
-ZSH_THEME_GIT_PROMPT_SUFFIX=""
+ZSH_THEME_GIT_PROMPT_SUFFIX=" "
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
@@ -248,7 +248,7 @@ ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
 ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}●"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}•"
 ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
 ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
 ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[black]%}(%f"
@@ -260,13 +260,6 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   local prompt_char='\$'
   local prompt_color='%{$fg_bold[white]%}'
   local lvl=$SHLVL
-  local host_char='%{$fg_bold[green]%}●%f'
-  local hostname='%m '
-
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    host_char=''
-    hostname=''
-  fi
 
   if [[ $EUID -eq 0 ]]; then
     prompt_char='#'
@@ -276,15 +269,19 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+="%F{#2a2b3c}%f%K{#2a2b3c}%{$fg_bold[white]%}${host_char} ${hostname}%f%k"
-  PROMPT+='%K{#242438}%{$fg_bold[blue]%} %1~%f%k%F{#242438}%f'
+  PROMPT+='%{$fg_bold[blue]%}%1~%f'
   PROMPT+='${${VIRTUAL_ENV#0}:+ ($(basename $VIRTUAL_ENV))}'
-  PROMPT+='%{$fg[yellow]%}%(1j. ◆.)%f '
+  PROMPT+='$(gitprompt)'
+  PROMPT+='$(gitprompt_secondary)'
+  PROMPT+=$'\n'
+  PROMPT+='%{$fg[yellow]%}%(1j.◆ .)%f'
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
-  RPROMPT='%F{#6c7086}%(4~|.../%3~|%~)%{$reset_color%}'
-  RPROMPT+='$(gitprompt)'
-  RPROMPT+='$(gitprompt_secondary)'
+  local lineup=$'\e[1A'
+  local linedown=$'\e[1B'
+  RPROMPT=%{${lineup}%}
+  RPROMPT+='%F{#6c7086}%(4~|.../%3~|%~) @%m%{$reset_color%}'
+  RPROMPT+=%{${linedown}%}
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
 }
