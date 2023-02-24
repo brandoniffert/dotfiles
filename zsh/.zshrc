@@ -236,24 +236,24 @@ function _fzf_compgen_dir() {
 
 source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" "
+ZSH_THEME_GIT_PROMPT_PREFIX=" %F{#6c7086}•%f "
 ZSH_THEME_GIT_PROMPT_SUFFIX=" "
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
 ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}▾"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}▴"
+ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}↓"
+ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}↑"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}!"
 ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
 ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
 ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}•"
+ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}●"
 ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
-ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR=", "
-ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[black]%}(%f"
-ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX="%{$fg_bold[black]%})%f "
-ZSH_THEME_GIT_PROMPT_TAG="%{$fg[magenta]%}"
+ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR="%{$fg_bold[cyan]%},%f "
+ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[cyan]%}(%f"
+ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX="%{$fg_bold[cyan]%})%f "
+ZSH_THEME_GIT_PROMPT_TAG="%{$fg[cyan]%}"
 ZSH_GIT_PROMPT_SHOW_STASH=1
 
 () {
