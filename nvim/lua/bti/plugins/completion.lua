@@ -145,7 +145,11 @@ return {
         updateevents = "TextChanged,TextChangedI",
       })
 
-      require("luasnip.loaders.from_lua").load()
+      ls.filetype_extend("typescript", { "javascript" })
+
+      require("luasnip.loaders.from_lua").lazy_load({
+        paths = "~/.config/nvim/lua/bti/snippets",
+      })
 
       vim.keymap.set({ "i", "s" }, "<C-n>", "<Plug>luasnip-next-choice", {})
       vim.keymap.set({ "i", "s" }, "<C-p>", "<Plug>luasnip-prev-choice", {})
