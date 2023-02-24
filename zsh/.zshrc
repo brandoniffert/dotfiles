@@ -271,7 +271,7 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"
 
   PROMPT=''
-  PROMPT+='%{$fg_bold[blue]%}%1~%f '
+  PROMPT+='%{$fg_bold[blue]%}%(3~|%2~|%1~)%f '
   PROMPT+="%F{#7F849C}• %m$tmux_session %f"
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
