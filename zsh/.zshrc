@@ -236,7 +236,7 @@ function _fzf_compgen_dir() {
 
 source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
 
-ZSH_THEME_GIT_PROMPT_PREFIX=" %F{#7F849C}•%f "
+ZSH_THEME_GIT_PROMPT_PREFIX="%F{#7F849C}•%f "
 ZSH_THEME_GIT_PROMPT_SUFFIX=" "
 ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
 ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
@@ -269,11 +269,11 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
   [ -n "$TMUX" ] && lvl=$(($SHLVL - 1))
 
   PROMPT=''
-  PROMPT+='%K{#242438}%{$fg_bold[white]%} %m %f%k'
+  PROMPT+='%K{#242438}%{$fg_bold[white]%} %m %f%k '
+  PROMPT+='%{$fg_bold[blue]%}%1~%f '
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
   PROMPT+=$'\n'
-  PROMPT+='%{$fg_bold[blue]%}%1~%f '
   PROMPT+='%{$fg[yellow]%}%(1j.◆ .)%f'
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
