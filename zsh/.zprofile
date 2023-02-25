@@ -6,7 +6,6 @@ test -r "$ZDOTDIR/exports.private" && source "$ZDOTDIR/exports.private"
 path=(
   $ZDOTDIR/bin/common
   $HOME/.local/bin
-  $N_PREFIX/bin
   $COMPOSER_HOME/vendor/bin
   /usr/local/sbin
   $path
