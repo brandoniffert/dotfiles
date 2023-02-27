@@ -8,7 +8,6 @@ return {
   -- PLUGIN: saadparwaiz1/cmp_luasnip
   {
     "hrsh7th/nvim-cmp",
-    event = { "InsertEnter", "CmdLineEnter" },
     dependencies = {
       "hrsh7th/cmp-buffer",
       "hrsh7th/cmp-cmdline",
