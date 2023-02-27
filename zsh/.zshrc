@@ -272,11 +272,11 @@ ZSH_GIT_PROMPT_SHOW_STASH=1
 
   PROMPT=''
   PROMPT+='%{$fg_bold[blue]%}%(3~|%2~|%1~)%f '
-  PROMPT+="%F{#7F849C}• %m$tmux_session %f"
+  PROMPT+="%F{#6C7086}%m$tmux_session %f"
   PROMPT+='$(gitprompt)'
   PROMPT+='$(gitprompt_secondary)'
   PROMPT+=$'\n'
-  PROMPT+='%{$fg[yellow]%}%(1j.◆ .)%f'
+  PROMPT+='%{$fg[yellow]%}%(1j.● .)%f'
   PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
 
   SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
