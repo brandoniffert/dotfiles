@@ -54,6 +54,12 @@ return {
           disable = { "yaml" },
         },
       })
+
+      if vim.fn.has("macunix") and vim.fn.executable("gcc-12") then
+        local compilers = require("nvim-treesitter.install").compilers
+        table.insert(compilers, 1, "gcc-12")
+        require("nvim-treesitter.install").compilers = compilers
+      end
     end,
   },
 
