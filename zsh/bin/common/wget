@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -e
+
 # Wraps wget so we can set its history file location
 
 command wget --hsts-file="$XDG_CACHE_HOME/wget-hsts" "$@"

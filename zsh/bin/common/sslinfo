@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Print information about a remote SSL certificate
+# Based on: https://serverfault.com/a/661982/219567
+
+if [[ $# -ne 1 ]]; then
+  echo "! A host argument is required"
+  exit 1
+fi
+
+remote=$1
+
+echo | openssl s_client -showcerts -servername "$remote" -connect "$remote:443" 2>/dev/null | openssl x509 -inform pem -noout -text

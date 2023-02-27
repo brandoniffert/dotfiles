@@ -111,13 +111,16 @@ alias v=view
 #-- Functions -----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-fpath=("$ZDOTDIR/functions/common" $fpath)
-autoload -Uz $ZDOTDIR/functions/common/*
+common_fpath="$ZDOTDIR/functions/common"
+if [ -n "$(ls -A $common_fpath 2>/dev/null)" ]; then
+  fpath=("$common_fpath" $fpath)
+  autoload -Uz $common_fpath/*
+fi
 
 # Host specific functions, based on hostname
 iffy_fpath="$ZDOTDIR/functions/host/iffy"
 if [[ $(hostname -s) =~ ^iffy(mac|book) ]]; then
-  if [ -d "$iffy_fpath" ]; then
+  if [ -n "$(ls -A $iffy_fpath 2>/dev/null)" ]; then
     fpath=("$iffy_fpath" $fpath)
     autoload -Uz $iffy_fpath/*
   fi
@@ -125,7 +128,7 @@ fi
 unset iffy_fpath
 
 host_fpath="$ZDOTDIR/functions/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
-if [ -d "$host_fpath" ]; then
+if [ -n "$(ls -A $host_fpath 2>/dev/null)" ]; then
   fpath=("$host_fpath" $fpath)
   autoload -Uz $host_fpath/*
 fi

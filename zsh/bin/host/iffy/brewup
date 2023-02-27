@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Use fzf to upgrade installed homebrew package
+
+brew update
+outdated=$(brew outdated -v)
+
+if [[ -n "$outdated" ]]; then
+  choices=$(echo "$outdated" | fzf -m --reverse --preview="echo {} | cut -d' ' -f1 | xargs brew info")
+  [[ -n "$choices" ]] && echo "$choices" | cut -d' ' -f1 | xargs brew upgrade
+fi

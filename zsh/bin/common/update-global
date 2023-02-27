@@ -1,12 +1,16 @@
-p_header() {
-  local title="[$@] "
-  local length="${#title}"
-  local cols=$(( $(tput cols) - $length))
+#!/usr/bin/env bash
 
-  echo "\n"
-  echo -n "$title"
+set -e
+
+p_header() {
+  local title=("[$@]")
+  local length="${#title}"
+  local cols=$(( $(tput cols) - length))
+
+  printf "\n"
+  echo -n "${title[@]}"
   printf '%.s-' $(seq 1 $cols)
-  echo "\n"
+  printf "\n"
 }
 
 if command -v npm &> /dev/null; then
@@ -25,6 +29,4 @@ if command -v tmux &> /dev/null; then
   /usr/bin/env bash "$XDG_DATA_HOME/tmux/plugins/tpm/scripts/source_plugins.sh"
 fi
 
-echo "\n"
-
-unfunction p_header
+printf "\n"

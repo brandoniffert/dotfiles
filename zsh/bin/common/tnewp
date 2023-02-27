@@ -1,33 +1,34 @@
+#!/usr/bin/env bash
+
+set -e
+
 # Create a new tmux session within a project folder and attach to it
 # If the session already exists, attach to that one
 
 # Fail if PROJECTS_HOME is not set
-if [ -z ${PROJECTS_HOME+x} ]; then
-  echo 'Please set $PROJECTS_HOME'
-  return 1
+if [[ -z ${PROJECTS_HOME+x} ]]; then
+  echo "Please set \$PROJECTS_HOME"
+  exit 1
 fi
 
-local project_dir="$(
+project_dir="$(
   find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
   sed "s:$PROJECTS_HOME\/::g" |
   fzf --header='Projects'
 )"
 
-if [ -n "${project_dir}" ]; then
-  local project_path="$PROJECTS_HOME/$project_dir"
-  local session_name=$(basename "$project_path" | sed 's/\./-/g')
+if [[ -n "${project_dir}" ]]; then
+  project_path="$PROJECTS_HOME/$project_dir"
+  session_name=$(basename "$project_path" | sed 's/\./-/g')
 
-  if [ -z "$session_name" ]; then
-    return 1
+  if [[ -z "$session_name" ]]; then
+    exit 1
   fi
 
-  # Check for existing session
-  tmux -q has-session -t "$session_name" > /dev/null 2>&1
-
   # If session doesn't exist, create it
-  if [ $? -ne 0 ]; then
+  if ! tmux -q has-session -t "$session_name" > /dev/null 2>&1; then
     # Convention for docker based projects
-    if [ -d "$project_path/site" ]; then
+    if [[ -d "$project_path/site" ]]; then
       tmux new-session -c "$project_path/site" -d -s "$session_name"
     else
       tmux new-session -c "$project_path" -d -s "$session_name"
@@ -37,7 +38,7 @@ if [ -n "${project_dir}" ]; then
   clear
 
   # Attach or switch to it, depending on whether we are already in a tmux session
-  if [[ ! -z "$TMUX" ]] || [[ ! -z "$TMUX_PANE" ]]; then
+  if [[ -n "$TMUX" ]] || [[ -n "$TMUX_PANE" ]]; then
     tmux switch-client -t "$session_name"
   else
     tmux attach-session -t "$session_name"

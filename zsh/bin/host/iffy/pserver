@@ -1,5 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
 # Serve a directory on localhost and open in browser (php)
 
-local port="${1:-6789}"
+port="${1:-6789}"
 open "http://localhost:${port}/"
-php -S localhost:$port
+php -S localhost:"$port"

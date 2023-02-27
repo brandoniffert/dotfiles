@@ -1,4 +1,5 @@
 #!/usr/bin/env osascript -l JavaScript
+// vim: ft=javascript
 
 function getUnreadMailCount() {
   if (Application('Mail').running()) {

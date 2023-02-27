@@ -1,3 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-printf "\033]52;c;$(base64 | tr -d '\r\n')\a"
+chars=$(base64 | tr -d '\r\n')
+printf "\033]52;c;%s\a" "$chars"

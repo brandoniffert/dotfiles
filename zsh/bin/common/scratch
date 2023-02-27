@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Create a scratch shell and directory
+
+scratch=$(mktemp -d)
+echo '> Spawing subshell in scratch directory:'
+echo "  $scratch"
+(cd "$scratch"; zsh)
+echo "> Removing scratch directory"
+rm -fr "$scratch"
