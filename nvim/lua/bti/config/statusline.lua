@@ -160,7 +160,7 @@ local FileFlags = {
       return vim.bo.modified
     end,
 
-    provider = " 󱎘",
+    provider = " ",
 
     hl = { fg = colors.red, bold = true },
   },
@@ -169,25 +169,32 @@ local FileFlags = {
       return vim.bo.readonly
     end,
 
-    provider = " [RO]",
+    provider = " RO",
 
-    hl = { bold = true },
+    hl = { fg = colors.red, bold = true },
   },
   {
     condition = function()
-      return vim.wo.spell
+      local filetype = vim.bo.filetype
+
+      local filetype_blacklist = {
+        ["markdown"] = true,
+        ["norg"] = true,
+      }
+
+      return vim.wo.spell and filetype_blacklist[filetype] ~= true
     end,
 
     provider = " SPELL",
 
-    hl = { bold = true, fg = colors.orange },
+    hl = { bold = true, fg = colors.lavender },
   },
 }
 
 local Whitespace = utils.surround({ " ", " " }, nil, {
   condition = function(_)
     local is_modifiable = vim.bo.modifiable
-    local has_bufname = vim.fn.bufname("%") ~= ""
+    local has_bufname = vim.fn.bufname() ~= ""
 
     return is_modifiable and has_bufname
   end,
