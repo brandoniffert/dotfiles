@@ -86,21 +86,9 @@ return {
           end, { "i", "s" }),
         },
         sources = cmp.config.sources({
-          {
-            name = "nvim_lsp",
-          },
-          {
-            name = "luasnip",
-          },
-          {
-            name = "buffer",
-            max_item_count = 15,
-            option = {
-              get_bufnrs = function()
-                return vim.api.nvim_list_bufs()
-              end,
-            },
-          },
+          { name = "nvim_lsp" },
+          { name = "luasnip" },
+          { name = "buffer" },
         }, {
           {
             name = "tmux",
@@ -116,6 +104,14 @@ return {
             end,
           },
         },
+      })
+
+      cmp.setup.filetype("norg", {
+        sources = cmp.config.sources({
+          { name = "neorg" },
+          { name = "luasnip" },
+          { name = "buffer" },
+        }),
       })
 
       cmp.setup.cmdline(":", {
