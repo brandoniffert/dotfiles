@@ -163,6 +163,7 @@ return {
         save_after_format = false,
         sources = {
           nls.builtins.diagnostics.ansiblelint.with({
+            filetypes = { "yaml" },
             condition = function(utils)
               return utils.root_has_file({ ".ansible-lint" })
             end,
