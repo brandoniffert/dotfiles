@@ -160,7 +160,7 @@ local FileFlags = {
       return vim.bo.modified
     end,
 
-    provider = " ✕",
+    provider = " 󱎘",
 
     hl = { fg = colors.red, bold = true },
   },
