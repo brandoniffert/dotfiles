@@ -167,7 +167,7 @@ zstyle '*'                   single-ignored  show
 zstyle ':completion:*'       completer       _complete
 zstyle ':completion:*'       insert-tab      pending
 zstyle ':completion:*'       list-colors     ${(s.:.)LS_COLORS}
-zstyle ':completion:*'       matcher-list    'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*'       matcher-list    'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 zstyle ':completion:*'       menu            select
 zstyle ':completion:*'       squeeze-slashes true
 zstyle ':completion:*:ssh:*' hosts           off
