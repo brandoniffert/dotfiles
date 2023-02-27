@@ -83,7 +83,7 @@ config_dots=(
 
 # macOS specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  config_dots+=(kitty hammerspoon)
+  config_dots+=(kitty hammerspoon wezterm)
 fi
 
 for file in "${config_dots[@]}"; do
