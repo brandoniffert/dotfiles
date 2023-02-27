@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [ $# -ne 1 ]; then
+  echo "! Too few args"
+  exit 1
+fi
+
+if command -v gtar &> /dev/null; then
+  gtar zcf "$1.tar.gz" "$1"
+else
+  tar zcf "$1.tar.gz" "$1"
+fi
