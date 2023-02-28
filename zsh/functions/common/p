@@ -1,26 +1,25 @@
-#!/usr/bin/env bash
-
-set -e
-
+# vim:ft=zsh
 # Use fzf to quickly get to a project
+
+emulate -L zsh
 
 # Fail if PROJECTS_HOME is not set
 if [[ -z ${PROJECTS_HOME+x} ]]; then
-  echo "! Please set \$PROJECTS_HOME"
-  exit 1
+  echo 'Please set $PROJECTS_HOME'
+  return 1
 fi
 
-project_dir="$(
+local project_dir="$(
   find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
   sed "s:$PROJECTS_HOME\/::g" |
   fzf --header='Projects'
 )"
 
-if [ -n "${project_dir}" ]; then
-  project_path="$PROJECTS_HOME/$project_dir"
+if [[ -n "${project_dir}" ]]; then
+  local project_path="$PROJECTS_HOME/$project_dir"
 
   # Convention for docker based projects
-  if [[ -d "$project_path/site" ]]; then
+  if [ -d "$project_path/site" ]; then
     cd "$project_path/site"
   else
     cd "$project_path"
