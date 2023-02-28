@@ -30,22 +30,21 @@ return {
   initial_cols = 160,
   initial_rows = 60,
   font = wezterm.font_with_fallback({
-    { family = "Operator Mono SSm", weight = "Light" },
-    "Symbols Nerd Font",
+    { family = "OperatorMonoSSm Nerd Font", weight = "Light" },
   }),
   font_rules = {
     {
       intensity = "Normal",
       italic = true,
       font = wezterm.font({
-        family = "Operator Mono SSm",
+        family = "OperatorMonoSSm Nerd Font",
         weight = "Light",
       }),
     },
     {
       intensity = "Bold",
       font = wezterm.font({
-        family = "Operator Mono SSm",
+        family = "OperatorMonoSSm Nerd Font",
         weight = "Book",
       }),
     },
@@ -53,7 +52,7 @@ return {
       intensity = "Bold",
       italic = true,
       font = wezterm.font({
-        family = "Operator Mono SSm",
+        family = "OperatorMonoSSm Nerd Font",
         weight = "Book",
         italic = true,
       }),
