@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+input="$1"
+dir="$HOME"
+target=""
+
+if [[ -d $input ]]; then
+  target="$(readlink -f -- "$input")"
+  dir="$target"
+elif [[ -f $input ]]; then
+  target="$(readlink -f -- "$input")"
+  dir="$(dirname -- "$target")"
+fi
+
+if [[ -z "$target" ]]; then
+  /opt/homebrew/bin/wezterm start -- nvim -c ":cd $dir"
+else
+  /opt/homebrew/bin/wezterm start -- nvim -c ":cd $dir" -- "$target"
+fi
