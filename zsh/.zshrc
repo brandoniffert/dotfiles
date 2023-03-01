@@ -138,9 +138,6 @@ unset host_fpath
 #-- Completion ----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-# zsh-completions
-source $ZDOTDIR/plugins/zsh-completions/zsh-completions.plugin.zsh
-
 # Load and initialize the completion system ignoring insecure directories with a
 # cache time of 20 hours, so it should almost always regenerate the first time a
 # shell is opened each day.
@@ -176,39 +173,40 @@ zstyle ':completion:*:ssh:*' hosts           off
 #-- Plugins/Scripts -----------------------------------------------------------
 #------------------------------------------------------------------------------
 
-source $ZDOTDIR/plugins/zsh-defer/zsh-defer.plugin.zsh
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
+[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+source "${ZINIT_HOME}/zinit.zsh"
 
-function bti-defer-load() {
-  test -f "$1" && zsh-defer source "$1"
-}
+autoload -Uz _zinit
+(( ${+_comps} )) && _comps[zinit]=_zinit
 
-bti-defer-load $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-bti-defer-load $ZDOTDIR/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-bti-defer-load $ZDOTDIR/plugins/z/z.sh
-bti-defer-load $ZDOTDIR/plugins/zsh-hist/zsh-hist.plugin.zsh
+zinit ice depth=1; zinit light romkatv/powerlevel10k
+
+zinit wait lucid light-mode for \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+  atload"zicompinit; zicdreplay" blockf \
+    zsh-users/zsh-completions \
+  compile'{src/*.zsh,src/strategies/*}' atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
+  marlonrichert/zsh-hist \
+  rupa/z \
+
+ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
+ZSH_AUTOSUGGEST_MANUAL_REBIND=1
+
+typeset -gA FAST_HIGHLIGHT_STYLES
+FAST_HIGHLIGHT_STYLES[path]="none"
+FAST_HIGHLIGHT_STYLES[path-to-dir]="none"
+FAST_HIGHLIGHT_STYLES[unknown-token]="fg=red"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  bti-defer-load $XDG_CONFIG_HOME/fzf/fzf.zsh
+  source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
 else
-  bti-defer-load /usr/share/fzf/key-bindings.zsh
-  bti-defer-load /usr/share/fzf/completion.zsh
+  source /usr/share/fzf/key-bindings.zsh
+  source /usr/share/fzf/completion.zsh
 fi
-
-unfunction bti-defer-load
-
-function bti-defer-load-after() {
-  # zsh-syntax-highlighting
-  ZSH_HIGHLIGHT_STYLES[path]="none"
-  ZSH_HIGHLIGHT_STYLES[unknown-token]="fg=red"
-
-  # zsh-autosuggestions
-  ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
-  ZSH_AUTOSUGGEST_MANUAL_REBIND=1
-
-  unfunction bti-defer-load-after
-}
-
-zsh-defer -t 0.5 bti-defer-load-after
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
@@ -234,58 +232,6 @@ function _fzf_compgen_dir() {
 }
 
 #------------------------------------------------------------------------------
-#-- Prompt --------------------------------------------------------------------
-#------------------------------------------------------------------------------
-
-source $ZDOTDIR/plugins/git-prompt.zsh/git-prompt.zsh
-
-ZSH_THEME_GIT_PROMPT_PREFIX="%F{#7F849C}•%f "
-ZSH_THEME_GIT_PROMPT_SUFFIX=" "
-ZSH_THEME_GIT_PROMPT_SEPARATOR=" "
-ZSH_THEME_GIT_PROMPT_DETACHED="%{$fg_bold[white]%}:"
-ZSH_THEME_GIT_PROMPT_BRANCH="%{$fg_bold[white]%}"
-ZSH_THEME_GIT_PROMPT_BEHIND="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_AHEAD="%{$fg[green]%}"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}!"
-ZSH_THEME_GIT_PROMPT_STAGED="%{$fg[green]%}•"
-ZSH_THEME_GIT_PROMPT_UNSTAGED="%{$fg[red]%}•"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[yellow]%}•"
-ZSH_THEME_GIT_PROMPT_STASHED="%{$fg[red]%}#"
-ZSH_THEME_GIT_PROMPT_CLEAN="%{$fg_bold[green]%}"
-ZSH_GIT_PROMPT_ENABLE_SECONDARY=1
-ZSH_THEME_GIT_PROMPT_TAGS_SEPARATOR="%{$fg_bold[cyan]%},%f "
-ZSH_THEME_GIT_PROMPT_TAGS_PREFIX="%{$fg_bold[cyan]%}(%f"
-ZSH_THEME_GIT_PROMPT_TAGS_SUFFIX="%{$fg_bold[cyan]%})%f "
-ZSH_THEME_GIT_PROMPT_TAG="%{$fg[cyan]%}"
-ZSH_GIT_PROMPT_SHOW_STASH=1
-
-() {
-  local prompt_char='\$'
-  local prompt_color='%{$fg_bold[white]%}'
-  local lvl=$SHLVL
-  local tmux_session=''
-
-  if [[ $EUID -eq 0 ]]; then
-    prompt_char='#'
-    prompt_color='%{$fg_bold[red]%}'
-  fi
-
-  [[ -n "${TMUX+set}" ]] && lvl=$(($SHLVL - 1))
-  [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"
-
-  PROMPT=''
-  PROMPT+='%{$fg_bold[blue]%}%(3~|%2~|%1~)%f '
-  PROMPT+="%F{#6C7086}%m$tmux_session %f"
-  PROMPT+='$(gitprompt)'
-  PROMPT+='$(gitprompt_secondary)'
-  PROMPT+=$'\n'
-  PROMPT+='%{$fg[yellow]%}%(1j.● .)%f'
-  PROMPT+="${prompt_color}$(printf "$prompt_char%.0s" {1..$lvl})%{$reset_color%} "
-
-  SPROMPT="zsh: correct %F{red}'%R'%f to %F{red}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
-}
-
-#------------------------------------------------------------------------------
 #-- Local & Host Specific Options ---------------------------------------------
 #------------------------------------------------------------------------------
 
@@ -302,3 +248,9 @@ unset host_rc
 local_rc="$HOME/.zshrc.local"
 test -r "$local_rc" && source "$local_rc"
 unset local_rc
+
+#------------------------------------------------------------------------------
+#-- Prompt --------------------------------------------------------------------
+#------------------------------------------------------------------------------
+
+[[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
