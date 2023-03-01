@@ -1,4 +1,24 @@
 #------------------------------------------------------------------------------
+#-- Local & Host Specific Startup ---------------------------------------------
+#------------------------------------------------------------------------------
+iffy_rc="$ZDOTDIR/host/iffy-startup"
+if [[ $(hostname -s) =~ ^iffy(mac|book) ]]; then
+  test -r "$iffy_rc" && source "$iffy_rc"
+fi
+unset iffy_rc
+
+host_rc="$ZDOTDIR/host/$(hostname -s | tr '[:upper:]' '[:lower:]')-startup"
+test -r "$host_rc" && source "$host_rc"
+unset host_rc
+
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
+# Initialization code that may require console input (password prompts, [y/n]
+# confirmations, etc.) must go above this block; everything else may go below.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+#------------------------------------------------------------------------------
 #-- Options -------------------------------------------------------------------
 #------------------------------------------------------------------------------
 

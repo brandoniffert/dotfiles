@@ -19,16 +19,3 @@ alias ave='ansible-vault edit'
 alias avv='ansible-vault view'
 alias ls='gls --color=auto'
 alias lls='gls --color=auto -al'
-
-# Automatically setup tmux session
-() {
-  local session_name="local"
-  local working_dir="$HOME/.dotfiles"
-
-  if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "kitty" ]; then
-    # Create or attach to initial session if this is the main kitty window
-    if [[ "$KITTY_WINDOW_ID" -eq 1 ]]; then
-      tmux new-session -A -c "$working_dir" -s "$session_name"
-    fi
-  fi
-}
