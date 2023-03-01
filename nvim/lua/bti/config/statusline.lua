@@ -312,12 +312,13 @@ local SearchCount = utils.surround({ " ", " " }, nil, {
 
   provider = function(_)
     local searchcount = vim.fn.searchcount({ maxcount = 0 })
+    local output = searchcount.incomplete > 0 and "[?/?]"
+      or searchcount.total > 0 and ("[%s/%s]"):format(searchcount.current, searchcount.total)
+      or nil
 
-    if searchcount == nil then
-      return ""
+    if output ~= nil then
+      return output
     end
-
-    return "[" .. searchcount["current"] .. "/" .. searchcount["total"] .. "]"
   end,
 })
 
