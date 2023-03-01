@@ -218,7 +218,7 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
 typeset -gA FAST_HIGHLIGHT_STYLES
 FAST_HIGHLIGHT_STYLES[path]="none"
-FAST_HIGHLIGHT_STYLES[path-to-dir]="none"
+FAST_HIGHLIGHT_STYLES[path-to-dir]="fg=none,underline"
 FAST_HIGHLIGHT_STYLES[unknown-token]="fg=red"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
