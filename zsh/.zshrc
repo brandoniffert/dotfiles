@@ -273,4 +273,6 @@ unset local_rc
 #-- Prompt --------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
+SPROMPT="zsh: correct %F{red}'%R'%f to %F{green}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo, %B%Ue%u%bdit, %B%Ua%u%bbort]? "
+
 [[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
