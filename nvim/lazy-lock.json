@@ -11,7 +11,7 @@
   "dressing.nvim": { "branch": "master", "commit": "5f44f829481640be0f96759c965ae22a3bcaf7ce" },
   "flit.nvim": { "branch": "main", "commit": "980e80e8fe44caaeb9de501c8e97a559b17db2f4" },
   "fzf-lua": { "branch": "main", "commit": "d4c2e3f32da453afb55e1becbe4b92357576db9b" },
-  "gitsigns.nvim": { "branch": "main", "commit": "f965e3bad0be96898dec97dc15bdfe226a176e3a" },
+  "gitsigns.nvim": { "branch": "main", "commit": "3b6c0a6412b31b91eb26bb8f712562cf7bb1d3be" },
   "harpoon": { "branch": "master", "commit": "f7040fd0c44e7a4010369136547de5604b9c22a1" },
   "heirline.nvim": { "branch": "master", "commit": "b69415d912d466db17b8ee1eb777cc7f776a9286" },
   "inc-rename.nvim": { "branch": "main", "commit": "21c23c379342a731a0c90f226601ec0434627b26" },
@@ -31,15 +31,15 @@
   "nvim-colorizer.lua": { "branch": "master", "commit": "dde3084106a70b9a79d48f426f6d6fec6fd203f7" },
   "nvim-lspconfig": { "branch": "master", "commit": "95b7a69bc6da2a6a740584ea3c555e5327638b7d" },
   "nvim-neoclip.lua": { "branch": "main", "commit": "5b9286a40ea2020352280caeb713515badb03d99" },
-  "nvim-treesitter": { "branch": "master", "commit": "9dd1b9c09707bf1cdd565b999c79ac6461602591" },
+  "nvim-treesitter": { "branch": "master", "commit": "252c1011c4bae91d25a8c54be4ed1a7b341c088c" },
   "nvim-ts-context-commentstring": { "branch": "main", "commit": "a0f89563ba36b3bacd62cf967b46beb4c2c29e52" },
   "nvim-web-devicons": { "branch": "master", "commit": "c2c2317f356c8b7da0252f5da758f71bb60bb6b2" },
   "playground": { "branch": "master", "commit": "4044b53c4d4fcd7a78eae20b8627f78ce7dc6f56" },
   "plenary.nvim": { "branch": "master", "commit": "253d34830709d690f013daf2853a9d21ad7accab" },
   "trouble.nvim": { "branch": "main", "commit": "67337644e38144b444d026b0df2dc5fa0038930f" },
   "vim-eunuch": { "branch": "master", "commit": "291ef1f8c8996ca7715df1032a35a27b12d7b5cf" },
-  "vim-fugitive": { "branch": "master", "commit": "d507d00bd04794119beeb41da118774a96815b65" },
+  "vim-fugitive": { "branch": "master", "commit": "b54ee90d56a8f6815d7e827c919bc2a7c8d357ad" },
   "vim-oscyank": { "branch": "main", "commit": "14685fcc4f487ca42dfe786dd54e4b2913370085" },
   "vim-repeat": { "branch": "master", "commit": "24afe922e6a05891756ecf331f39a1f6743d3d5a" },
-  "which-key.nvim": { "branch": "main", "commit": "6e190f4732a0f2fc517036f2fcf7727893bc5329" }
+  "which-key.nvim": { "branch": "main", "commit": "454fe081e6427fb27cd5ebd886fff999c447c859" }
 }
