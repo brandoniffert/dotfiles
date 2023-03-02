@@ -176,18 +176,32 @@ fi
 unsetopt EXTENDED_GLOB
 unset _comp_path
 
+# Make completion:
+# - Try exact (case-sensitive) match first.
+# - Then fall back to case-insensitive.
+# - Accept abbreviations after . or _ or - (ie. f.b -> foo.bar).
+# - Substring complete (ie. bar -> foobar).
+zstyle ':completion:*' matcher-list '' '+m:{[:lower:]}={[:upper:]}' '+m:{[:upper:]}={[:lower:]}' '+m:{_-}={-_}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+# Allow completion of ..<Tab> to ../ and beyond.
+zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(..) ]] && reply=(..)'
+
 # Use caching to make completion for commands such as dpkg and apt usable.
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 
-zstyle '*'                   single-ignored  show
-zstyle ':completion:*'       completer       _complete
-zstyle ':completion:*'       insert-tab      pending
-zstyle ':completion:*'       list-colors     ${(s.:.)LS_COLORS}
-zstyle ':completion:*'       matcher-list    'm:{a-z}={A-Z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
-zstyle ':completion:*'       menu            select
-zstyle ':completion:*'       squeeze-slashes true
-zstyle ':completion:*:ssh:*' hosts           off
+# Enable keyboard navigation of completions in menu
+# (not just tab/shift-tab but cursor keys as well):
+zstyle ':completion:*' menu select interactive
+
+# Disable completion of users
+zstyle ':completion:*' users
+
+# Only use Host value for ssh completion
+if [[ -r "$HOME/.ssh/config" ]]; then
+  zstyle ':completion:*:(ssh|scp|ftp|sftp):*' hosts ${${${(@M)${(f)"$(cat $HOME/.ssh/config)"}:#Host *}#Host }:#*[*?]*}
+  zstyle ':completion:*:(ssh|scp|ftp|sftp):argument-1:*' tag-order hosts
+fi
 
 #------------------------------------------------------------------------------
 #-- Plugins/Scripts -----------------------------------------------------------
@@ -204,14 +218,14 @@ autoload -Uz _zinit
 zinit ice depth=1; zinit light romkatv/powerlevel10k
 
 zinit wait lucid light-mode for \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
-  atload"zicompinit; zicdreplay" blockf \
-    zsh-users/zsh-completions \
-  compile'{src/*.zsh,src/strategies/*}' atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
   marlonrichert/zsh-hist \
   rupa/z \
+  atload"zicompinit; zicdreplay" blockf \
+    zsh-users/zsh-completions \
+  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
+    zdharma-continuum/fast-syntax-highlighting \
+  compile'{src/*.zsh,src/strategies/*}' atload"!_zsh_autosuggest_start" \
+    zsh-users/zsh-autosuggestions \
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
@@ -250,6 +264,9 @@ function _fzf_compgen_dir() {
     command -v dircolors >/dev/null && test -r $_dircolors && eval $(command dircolors $_dircolors)
   fi
 }
+
+[ -d /opt/homebrew/share/zsh/site-functions ] &&
+  fpath=("/opt/homebrew/share/zsh/site-functions" $fpath)
 
 #------------------------------------------------------------------------------
 #-- Local & Host Specific Options ---------------------------------------------
