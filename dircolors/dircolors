@@ -60,8 +60,8 @@ RESET 0
 
 FILE 00
 DIR 01;34
-LINK 36
-MULTIHARDLINK 04;36
+LINK 35
+MULTIHARDLINK 04;35
 
 FIFO 04;01;36
 SOCK 04;33
@@ -70,7 +70,7 @@ BLK 01;33
 CHR 33
 
 ORPHAN 31
-MISSING 01;37;41
+MISSING 04;31
 
 EXEC 01;36
 
@@ -131,45 +131,21 @@ STICKY 04;30;44
 .zst 01;32
 
 #+--- Audio ---+
-.aac 32
-.au 32
-.flac 32
-.m4a 32
-.mid 32
-.midi 32
-.mka 32
-.mp3 32
-.mpa 32
-.mpeg 32
-.mpg 32
-.ogg 32
-.opus 32
-.ra 32
-.wav 32
-
-#+--- Customs ---+
-.3des 01;35
-.aes 01;35
-.gpg 01;35
-.pgp 01;35
-
-#+--- Documents ---+
-.doc 32
-.docx 32
-.dot 32
-.odg 32
-.odp 32
-.ods 32
-.odt 32
-.otg 32
-.otp 32
-.ots 32
-.ott 32
-.pdf 32
-.ppt 32
-.pptx 32
-.xls 32
-.xlsx 32
+.aac 36
+.au 36
+.flac 36
+.m4a 36
+.mid 36
+.midi 36
+.mka 36
+.mp3 36
+.mpa 36
+.mpeg 36
+.mpg 36
+.ogg 36
+.opus 36
+.ra 36
+.wav 36
 
 #+--- Executables ---+
 .app 01;36
@@ -184,8 +160,10 @@ STICKY 04;30;44
 *~ 02;37
 .bak 02;37
 .BAK 02;37
+.CFUserTextEncoding 02;37
+.DS_Store 02;37
 .log 02;37
-.log 02;37
+.LOG 02;37
 .old 02;37
 .OLD 02;37
 .orig 02;37
@@ -194,63 +172,65 @@ STICKY 04;30;44
 .swp 02;37
 
 #+--- Images ---+
-.bmp 32
-.cgm 32
-.dl 32
-.dvi 32
-.emf 32
-.eps 32
-.gif 32
-.jpeg 32
-.jpg 32
-.JPG 32
-.mng 32
-.pbm 32
-.pcx 32
-.pgm 32
-.png 32
-.PNG 32
-.ppm 32
-.pps 32
-.ppsx 32
-.ps 32
-.svg 32
-.svgz 32
-.tga 32
-.tif 32
-.tiff 32
-.xbm 32
-.xcf 32
-.xpm 32
-.xwd 32
-.xwd 32
-.yuv 32
+.bmp 36
+.cgm 36
+.dl 36
+.dvi 36
+.emf 36
+.eps 36
+.gif 36
+.jpeg 36
+.jpg 36
+.JPG 36
+.mng 36
+.pbm 36
+.pcx 36
+.pgm 36
+.png 36
+.PNG 36
+.ppm 36
+.pps 36
+.ppsx 36
+.ps 36
+.svg 36
+.svgz 36
+.tga 36
+.tif 36
+.tiff 36
+.xbm 36
+.xcf 36
+.xpm 36
+.xwd 36
+.xwd 36
+.webp 36
+.yuv 36
 
 #+--- Video ---+
-.anx 32
-.asf 32
-.avi 32
-.axv 32
-.flc 32
-.fli 32
-.flv 32
-.gl 32
-.m2v 32
-.m4v 32
-.mkv 32
-.mov 32
-.MOV 32
-.mp4 32
-.mpeg 32
-.mpg 32
-.nuv 32
-.ogm 32
-.ogv 32
-.ogx 32
-.qt 32
-.rm 32
-.rmvb 32
-.swf 32
-.vob 32
-.webm 32
-.wmv 32
+.anx 36
+.asf 36
+.avi 36
+.axv 36
+.flc 36
+.fli 36
+.flv 36
+.gl 36
+.m2v 36
+.m4v 36
+.mkv 36
+.mov 36
+.MOV 36
+.mp4 36
+.MP4 36
+.mpeg 36
+.mpg 36
+.nuv 36
+.ogm 36
+.ogv 36
+.ogx 36
+.qt 36
+.rm 36
+.rmvb 36
+.swf 36
+.vob 36
+.webm 36
+.wmv 36

@@ -257,12 +257,9 @@ function _fzf_compgen_dir() {
 
 # Setup dircolors
 () {
-  local _dircolors="$XDG_CONFIG_HOME/dircolors/nord.dircolors"
-  if [[ "$OSTYPE" == "darwin"* ]]; then
-    command -v gdircolors >/dev/null && test -r $_dircolors && eval $(command gdircolors $_dircolors)
-  else
-    command -v dircolors >/dev/null && test -r $_dircolors && eval $(command dircolors $_dircolors)
-  fi
+  local _dircolors="$XDG_CONFIG_HOME/dircolors/dircolors"
+  [[ "$OSTYPE" == "darwin"* ]] && local dircolors_cmd='gdircolors' || local dircolors_cmd='dircolors'
+  command -v "$dircolors_cmd" >/dev/null && test -r $_dircolors && eval $(command $dircolors_cmd $_dircolors)
 }
 
 [ -d /opt/homebrew/share/zsh/site-functions ] &&
