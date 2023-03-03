@@ -2,6 +2,9 @@
 source $ZDOTDIR/exports
 test -r "$ZDOTDIR/exports.private" && source "$ZDOTDIR/exports.private"
 
+# Setup homebrew shellenv
+test -x "/opt/homebrew/bin/brew" && eval "$(/opt/homebrew/bin/brew shellenv)"
+
 # Path
 path=(
   $ZDOTDIR/bin/common
@@ -23,6 +26,3 @@ unset host_bin
 
 # Ensure path arrays do not contain duplicates
 typeset -gU cdpath fpath path
-
-# Setup homebrew shellenv
-test -x "/opt/homebrew/bin/brew" && eval "$(/opt/homebrew/bin/brew shellenv)"
