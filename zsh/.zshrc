@@ -223,17 +223,15 @@ zinit wait lucid light-mode for \
   atload"zicompinit; zicdreplay" blockf \
     zsh-users/zsh-completions \
   atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zdharma-continuum/fast-syntax-highlighting \
+    zsh-users/zsh-syntax-highlighting \
   compile'{src/*.zsh,src/strategies/*}' atload"!_zsh_autosuggest_start" \
     zsh-users/zsh-autosuggestions \
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 
-typeset -gA FAST_HIGHLIGHT_STYLES
-FAST_HIGHLIGHT_STYLES[path]="none"
-FAST_HIGHLIGHT_STYLES[path-to-dir]="fg=none,underline"
-FAST_HIGHLIGHT_STYLES[unknown-token]="fg=red"
+[[ -r "$ZDOTDIR/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh" ]] &&
+  source "$ZDOTDIR/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
   source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
