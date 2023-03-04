@@ -192,7 +192,7 @@ zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh
 
 # Enable keyboard navigation of completions in menu
 # (not just tab/shift-tab but cursor keys as well):
-zstyle ':completion:*' menu select interactive
+zstyle ':completion:*' menu select
 
 # Disable completion of users
 zstyle ':completion:*' users
