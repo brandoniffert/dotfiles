@@ -1,3 +1,5 @@
+# vim:ft=gitconfig
+
 [user]
   name = Brandon Iffert
   email = brandoniffert@gmail.com
@@ -44,16 +46,11 @@
   newNormal = green
   newHighlight = 232 green
 
-[tig "color"]
-  cursor      = white black bold
-  title-focus = black white bold
-  title-blur  = white black bold
-
 [diff]
   compactionHeuristic = true
 
 [format]
-  pretty=format:%Cgreen%h%Creset %s%Cred%d%Creset %Cblue(%ar) %C(bold black)%an%Creset
+  pretty=format:"%C(green)%h%C(reset) %s%C(red)%d%C(reset) %C(blue)(%ar)%C(reset) %C(#6C7086)%an%C(reset)"
 
 [log]
   follow = true
