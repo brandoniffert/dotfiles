@@ -207,25 +207,12 @@ fi
 #-- Plugins/Scripts -----------------------------------------------------------
 #------------------------------------------------------------------------------
 
-ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
-[ ! -d $ZINIT_HOME ] && mkdir -p "$(dirname $ZINIT_HOME)"
-[ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
-source "${ZINIT_HOME}/zinit.zsh"
+[[ -d ${ZDOTDIR:-~}/.antidote ]] ||
+  git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
 
-autoload -Uz _zinit
-(( ${+_comps} )) && _comps[zinit]=_zinit
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
 
-zinit ice depth=1; zinit light romkatv/powerlevel10k
-
-zinit wait lucid light-mode for \
-  marlonrichert/zsh-hist \
-  rupa/z \
-  atload"zicompinit; zicdreplay" blockf \
-    zsh-users/zsh-completions \
-  atinit"ZINIT[COMPINIT_OPTS]=-C; zicompinit; zicdreplay" \
-    zsh-users/zsh-syntax-highlighting \
-  compile'{src/*.zsh,src/strategies/*}' atload"!_zsh_autosuggest_start" \
-    zsh-users/zsh-autosuggestions \
+antidote load
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1

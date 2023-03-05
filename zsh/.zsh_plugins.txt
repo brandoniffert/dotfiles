@@ -1,0 +1,9 @@
+romkatv/powerlevel10k
+
+marlonrichert/zsh-hist kind:defer
+rupa/z kind:defer
+
+zsh-users/zsh-syntax-highlighting kind:defer
+zsh-users/zsh-completions path:src kind:fpath
+
+zsh-users/zsh-autosuggestions kind:defer
