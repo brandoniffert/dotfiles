@@ -64,8 +64,11 @@ return {
     config = function()
       require("fzf-lua").setup({
         files = {
-          prompt = "Files❯ ",
           git_icons = false,
+        },
+        oldfiles = {
+          cwd_only = true,
+          include_current_session = true,
         },
         grep = {
           git_icons = false,
