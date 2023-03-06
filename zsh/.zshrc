@@ -26,7 +26,6 @@ setopt AUTO_CD              # Auto cd into directory by name
 setopt AUTO_PARAM_SLASH     # Tab completing directory appends a slash
 setopt AUTO_PUSHD           # cd automatically pushes old dir onto dir stack
 setopt COMBINING_CHARS      # Combine zero-length punc chars (accents) with base
-setopt COMPLETE_ALIASES     # Do not expand aliases before completion finishes
 setopt COMPLETE_IN_WORD     # Completion from both ends
 setopt CORRECT              # Spell check commands
 setopt EXTENDED_HISTORY     # Add timestamps to history
@@ -158,23 +157,10 @@ unset host_fpath
 #-- Completion ----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-# Load and initialize the completion system ignoring insecure directories with a
-# cache time of 20 hours, so it should almost always regenerate the first time a
-# shell is opened each day.
+fpath=($ZDOTDIR/completions $fpath)
+
 autoload -Uz compinit
-_comp_path="${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompdump"
-setopt EXTENDED_GLOB
-if [[ $_comp_path(#qNmh-20) ]]; then
-  # -C (skip function check) implies -i (skip security check).
-  compinit -C -d "$_comp_path"
-else
-  mkdir -p "$_comp_path:h"
-  compinit -i -d "$_comp_path"
-  # Keep $_comp_path younger than cache time even if it isn't regenerated.
-  touch "$_comp_path"
-fi
-unsetopt EXTENDED_GLOB
-unset _comp_path
+compinit -u
 
 # Make completion:
 # - Try exact (case-sensitive) match first.
@@ -246,9 +232,6 @@ function _fzf_compgen_dir() {
   [[ "$OSTYPE" == "darwin"* ]] && local dircolors_cmd='gdircolors' || local dircolors_cmd='dircolors'
   command -v "$dircolors_cmd" >/dev/null && test -r $_dircolors && eval $(command $dircolors_cmd $_dircolors)
 }
-
-[ -d /opt/homebrew/share/zsh/site-functions ] &&
-  fpath=("/opt/homebrew/share/zsh/site-functions" $fpath)
 
 #------------------------------------------------------------------------------
 #-- Local & Host Specific Options ---------------------------------------------
