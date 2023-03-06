@@ -105,23 +105,6 @@ bindMehFn("=", WinMan.centerWindow)
 -- Application watcher
 function handleApp(appName, eventType, app)
   if eventType == hs.application.watcher.launched then
-    -- Maximize kitty window when launched
-    if appName == "kitty" then
-      local checkAppFocused = function()
-        return app:isFrontmost()
-      end
-
-      local maximizeApp = function()
-        local appWindow = app:focusedWindow()
-
-        if appWindow ~= nil then
-          appWindow:setFrame(appWindow:screen():frame())
-        end
-      end
-
-      hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
-    end
-
     -- Set Chrome as default browser when launched
     if appName == "Google Chrome" then
       hs.execute("defaultbrowser chrome && confirm-use-dialog", true)
