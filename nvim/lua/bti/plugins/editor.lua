@@ -185,13 +185,20 @@ return {
     },
   },
 
-  -- PLUGIN: ojroques/vim-oscyank
+  -- PLUGIN: ojroques/nvim-osc52
   {
-    "ojroques/vim-oscyank",
-    cmd = { "OSCYankReg" },
-    init = function()
-      vim.g.oscyank_term = "default"
-    end,
+    "ojroques/nvim-osc52",
+    keys = {
+      {
+        "<Leader>y",
+        function()
+          require("osc52").copy_visual()
+        end,
+        mode = { "v" },
+        desc = "Yank to system clipboard",
+      },
+    },
+    config = true,
   },
 
   -- PLUGIN: smjonas/inc-rename.nvim

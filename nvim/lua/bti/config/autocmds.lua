@@ -122,7 +122,7 @@ augroups.ui = {
 
   yank = {
     event = { "TextYankPost" },
-    command = "if v:event.operator is 'y' && v:event.regname is '*' | execute 'OSCYankReg *' | endif | silent! lua require('vim.highlight').on_yank()",
+    command = "lua require('vim.highlight').on_yank()",
   },
 }
 
