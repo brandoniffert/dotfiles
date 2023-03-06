@@ -2,4 +2,6 @@
 
 set -e
 
+trap "{ docker compose stop; }" SIGHUP
+
 docker compose up "$@"

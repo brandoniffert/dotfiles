@@ -11,7 +11,12 @@ docker compose run --rm node node --version &>/dev/null || exit_code=$?
 
 if [[ $exit_code -eq 0 ]]; then
   echo '> Using project container'
+  project_name=$(docker compose config node | grep -m 1 '^name' | cut -d : -f 2 | xargs)
+  container_name="${project_name}-dyarn-$(openssl rand -hex 2)"
+  trap '{ docker stop "$container_name"; }' SIGHUP
+
   docker compose run --rm \
+    --name "$container_name" \
     -u "$(id -u):$(id -g)" \
     --env YARN_CACHE_FOLDER \
     -v "$YARN_CACHE_FOLDER":"$YARN_CACHE_FOLDER" \
