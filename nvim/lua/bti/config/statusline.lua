@@ -306,24 +306,20 @@ local LocationProgress = utils.surround({ " ", " " }, nil, {
 })
 
 local SearchCount = utils.surround({ " ", " " }, nil, {
-  condition = function(_)
-    return vim.v.hlsearch == 1
+  condition = function()
+    return vim.v.hlsearch ~= 0
   end,
 
-  provider = function(_)
-    local searchcount = vim.fn.searchcount({ maxcount = 0 })
-
-    if searchcount ~= nil then
-      local incomplete = searchcount.incomplete or 0
-      local total = searchcount.total or 0
-      local output = incomplete > 0 and "[?/?]"
-        or total > 0 and ("[%s/%s]"):format(searchcount.current, searchcount.total)
-        or nil
-
-      if output ~= nil then
-        return output
-      end
+  init = function(self)
+    local ok, search = pcall(vim.fn.searchcount)
+    if ok and search.total then
+      self.search = search
     end
+  end,
+
+  provider = function(self)
+    local search = self.search
+    return string.format("[%d/%d]", search.current, math.min(search.total, search.maxcount))
   end,
 })
 
