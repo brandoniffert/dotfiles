@@ -13,6 +13,8 @@ return {
           IndentBlanklineContextChar = { fg = colors.surface2 },
           FloatBorder = { fg = colors.overlay2 },
           FzfLuaBorder = { link = "FloatBorder" },
+          LeapLabelPrimary = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
+          LeapLabelSecondary = { fg = colors.text, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
           NeoTreeNormal = { bg = colors.base },
           NormalFloat = { bg = colors.base },
           Pmenu = { bg = colors.base },
