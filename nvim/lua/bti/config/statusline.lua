@@ -420,42 +420,6 @@ local StatusLine = {
 }
 
 local WinBar = {
-  fallthrough = false,
-
-  {
-    condition = function()
-      return vim.bo.filetype == "neo-tree"
-    end,
-
-    provider = "Neo-Tree",
-
-    hl = {
-      fg = colors.text,
-      bold = true,
-    },
-  },
-
-  {
-    init = function()
-      vim.opt_local.winbar = nil
-    end,
-
-    condition = function()
-      return conditions.buffer_matches({
-        buftype = {
-          "help",
-          "nofile",
-          "prompt",
-          "quickfix",
-          "terminal",
-        },
-        filetype = {
-          "fugitive",
-        },
-      })
-    end,
-  },
-
   SimpleStatusLine,
 }
 
@@ -508,28 +472,16 @@ M.setup = function()
     tabline = {
       TabLine,
     },
-  })
 
-  vim.api.nvim_create_autocmd("User", {
-    pattern = "HeirlineInitWinbar",
-    callback = function(args)
-      local buf = args.buf
+    opts = {
+      disable_winbar_cb = function(args)
+        local buf = args.buf
+        local buftype = vim.tbl_contains({ "prompt", "nofile", "help", "quickfix", "terminal" }, vim.bo[buf].buftype)
+        local filetype = vim.tbl_contains({ "fugitive", "Trouble" }, vim.bo[buf].filetype)
 
-      local buftype = vim.tbl_contains({
-        "prompt",
-        "nofile",
-        "help",
-        "quickfix",
-      }, vim.bo[buf].buftype)
-
-      local filetype = vim.tbl_contains({
-        "fugitive",
-      }, vim.bo[buf].filetype)
-
-      if buftype or filetype then
-        vim.opt_local.winbar = nil
-      end
-    end,
+        return buftype or filetype
+      end,
+    },
   })
 end
 
