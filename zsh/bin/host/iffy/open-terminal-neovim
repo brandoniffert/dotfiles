@@ -13,7 +13,7 @@ elif [[ -f $input ]]; then
 fi
 
 if [[ -z "$target" ]]; then
-  /opt/homebrew/bin/wezterm start --always-new-process -- nvim -c ":cd $dir"
+  /opt/homebrew/bin/wezterm -e nvim -c ":cd $dir"
 else
-  /opt/homebrew/bin/wezterm start --always-new-process -- nvim -c ":cd $dir" -- "$target"
+  /opt/homebrew/bin/wezterm -e nvim -c ":cd $dir" "$target"
 fi
