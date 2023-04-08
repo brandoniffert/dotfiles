@@ -5,11 +5,6 @@ augroups.editor = {
     event = { "BufWritePre", "FileWritePre" },
     command = [[silent! call mkdir(expand("<afile>:p:h"), "p")]],
   },
-
-  disable_paste = {
-    event = { "InsertLeave" },
-    command = "set nopaste",
-  },
 }
 
 augroups.filetype = {
