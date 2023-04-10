@@ -3,6 +3,8 @@ local root = vim.env.USER == "root"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
+vim.g.editorconfig = false
+
 vim.g.markdown_fenced_languages = {
   "ts=typescript",
 }
