@@ -51,9 +51,6 @@ vim.opt.backspace = "indent,start,eol"
 vim.opt.backup = false
 vim.opt.backupcopy = "yes"
 vim.opt.belloff = "all"
-if vim.env.TMUX ~= nil then
-  vim.opt.cmdheight = 2
-end
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.cursorline = true
 vim.opt.diffopt:append("foldcolumn:0")
