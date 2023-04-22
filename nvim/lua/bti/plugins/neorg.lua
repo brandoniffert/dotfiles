@@ -7,18 +7,18 @@ return {
     config = function()
       local load_opts = {
         ["core.defaults"] = {},
-        ["core.norg.completion"] = {
+        ["core.completion"] = {
           config = {
             engine = "nvim-cmp",
           },
         },
-        ["core.norg.concealer"] = {},
+        ["core.concealer"] = {},
       }
 
       local notes_dir = os.getenv("LOCAL_NOTES_HOME")
 
       if notes_dir ~= nil then
-        load_opts["core.norg.dirman"] = {
+        load_opts["core.dirman"] = {
           config = {
             workspaces = {
               homelab = notes_dir .. "/Homelab",
