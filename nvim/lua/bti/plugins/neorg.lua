@@ -3,7 +3,6 @@ return {
   {
     "nvim-neorg/neorg",
     build = ":Neorg sync-parsers",
-    ft = { "norg" },
     config = function()
       local load_opts = {
         ["core.defaults"] = {},
