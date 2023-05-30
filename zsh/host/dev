@@ -1,5 +1,5 @@
 # vim:ft=zsh
 
 # Aliases
-alias paru="sudo -u build paru"
+alias paru="sudo -u paru paru"
 alias devroot="cd /mnt/devroot"
