@@ -15,7 +15,7 @@ path=(
 )
 
 iffy_bin="$ZDOTDIR/bin/host/iffy"
-if [[ $(hostname -s) =~ ^iffy(mac|book) ]]; then
+if [[ $(hostname -s) =~ ^iffy(mac|book|studio|air) ]]; then
   [ -d "$iffy_bin" ] && path=($iffy_bin $path)
 fi
 unset iffy_bin
