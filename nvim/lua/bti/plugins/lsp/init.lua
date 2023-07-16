@@ -22,9 +22,6 @@ return {
     dependencies = {
       {
         "hrsh7th/cmp-nvim-lsp",
-        cond = function()
-          return require("bti.util").has_plugin("nvim-cmp")
-        end,
       },
       {
         "folke/neodev.nvim",
