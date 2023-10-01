@@ -10,7 +10,8 @@ return {
 
       require("catppuccin").setup({
         custom_highlights = {
-          IndentBlanklineContextChar = { fg = colors.surface2 },
+          IblIndent = { fg = colors.surface0 },
+          IblScope = { fg = colors.surface2 },
           FloatBorder = { fg = colors.overlay2 },
           FzfLuaBorder = { link = "FloatBorder" },
           LeapLabelPrimary = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
@@ -42,9 +43,11 @@ return {
   {
     "lukas-reineke/indent-blankline.nvim",
     opts = {
-      show_current_context = true,
-      indent_blankline_char = "│",
+      scope = {
+        show_start = false,
+      },
     },
+    main = "ibl",
   },
 
   -- PLUGIN: NvChad/nvim-colorizer.lua
