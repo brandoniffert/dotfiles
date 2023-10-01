@@ -61,6 +61,7 @@ return {
 
       -- Server Setup
       local servers = {
+        ansiblels = {},
         bashls = {},
         cssls = {
           settings = {
