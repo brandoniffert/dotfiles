@@ -3,15 +3,18 @@ local M = {}
 M._keys = nil
 
 function M.get()
-  local format = require("bti.plugins.lsp.format").format
-
   M._keys = M._keys
     or {
       { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
       { "<leader>cl", "<cmd>LspInfo<CR>", desc = "Lsp Info" },
       { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      { "<leader>cf", format, desc = "Format Document", has = "documentFormatting" },
-      { "<leader>cf", format, desc = "Format Range", mode = "v", has = "documentRangeFormatting" },
+      {
+        "<leader>cf",
+        require("bti.plugins.lsp.format").format,
+        desc = "Format",
+        mode = { "n", "v" },
+        has = "documentFormatting",
+      },
       {
         "<leader>cF",
         require("bti.plugins.lsp.format").toggle,

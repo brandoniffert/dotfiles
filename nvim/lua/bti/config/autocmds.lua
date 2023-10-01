@@ -85,7 +85,6 @@ augroups.ui = {
     event = { "FileType" },
     pattern = {
       "lspinfo",
-      "null-ls-info",
     },
     callback = function()
       vim.api.nvim_win_set_config(0, { border = "single" })

@@ -4,6 +4,18 @@ function M.has_plugin(plugin)
   return require("lazy.core.config").plugins[plugin] ~= nil
 end
 
+function M.has_ancestor_files(files, startpath)
+  local path = startpath or vim.fs.dirname(vim.api.nvim_buf_get_name(0))
+
+  local found = vim.fs.find(files, {
+    upward = true,
+    stop = vim.loop.os_homedir(),
+    path = path,
+  })
+
+  return #found > 0 and found or nil
+end
+
 function M.on_attach(on_attach)
   vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(args)

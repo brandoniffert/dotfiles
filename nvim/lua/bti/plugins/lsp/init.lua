@@ -49,7 +49,6 @@ return {
 
       -- Formatting & Keymaps
       require("bti.util").on_attach(function(client, buffer)
-        require("bti.plugins.lsp.format").on_attach(client, buffer)
         require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
       end)
 
@@ -90,6 +89,20 @@ return {
         jsonls = {
           init_options = {
             provideFormatter = false,
+          },
+          settings = {
+            json = {
+              schemas = {
+                {
+                  fileMatch = { "package.json" },
+                  url = "https://json.schemastore.org/package.json",
+                },
+                {
+                  fileMatch = { "tsconfig.json", "tsconfig.*.json" },
+                  url = "http://json.schemastore.org/tsconfig",
+                },
+              },
+            },
           },
         },
         lua_ls = {
@@ -158,36 +171,67 @@ return {
     end,
   },
 
-  -- PLUGIN: jose-elias-alvarez/null-ls.nvim
+  -- PLUGIN: mfussenegger/nvim-lint
   {
-    "jose-elias-alvarez/null-ls.nvim",
-    event = "BufReadPre",
-    opts = function()
-      local nls = require("null-ls")
-      return {
-        debounce = 150,
-        save_after_format = false,
-        sources = {
-          nls.builtins.diagnostics.ansiblelint.with({
-            filetypes = { "yaml" },
-            condition = function(utils)
-              return utils.root_has_file({ ".ansible-lint" })
-            end,
-          }),
-          nls.builtins.diagnostics.shellcheck.with({
-            diagnostics_format = "#{m} [#{c}]",
-          }),
-          nls.builtins.diagnostics.yamllint,
-          nls.builtins.formatting.phpcsfixer,
-          nls.builtins.formatting.prettierd,
-          nls.builtins.formatting.rustywind.with({
-            extra_filetypes = {
-              "liquid",
-            },
-          }),
-          nls.builtins.formatting.stylua,
-        },
+    "mfussenegger/nvim-lint",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("lint").linters_by_ft = {
+        sh = { "shellcheck" },
+        yaml = { "yamllint" },
       }
+
+      vim.api.nvim_create_autocmd({ "InsertLeave", "BufWritePost" }, {
+        desc = "Run linters",
+        group = vim.api.nvim_create_augroup("CustomRunLinters", { clear = true }),
+        callback = function()
+          local lint_status, lint = pcall(require, "lint")
+          if lint_status then
+            lint.try_lint()
+          end
+        end,
+      })
+    end,
+  },
+
+  -- PLUGIN: stevearc/conform.nvim
+  {
+    "stevearc/conform.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    config = function()
+      require("conform").setup({
+        formatters_by_ft = {
+          astro = { "rustywind", "prettierd" },
+          css = { "prettierd" },
+          graphql = { "prettierd" },
+          html = { "rustywind" },
+          javascript = { "rustywind", "prettierd" },
+          javascriptreact = { "rustywind", "prettierd" },
+          json = { "prettierd" },
+          less = { "prettierd" },
+          liquid = { "rustywind" },
+          lua = { "stylua" },
+          markdown = { "prettierd" },
+          php = { "php_cs_fixer" },
+          scss = { "prettierd" },
+          svelte = { "rustywind" },
+          typescript = { "rustywind", "prettierd" },
+          typescriptreact = { "rustywind", "prettierd" },
+          vue = { "rustywind" },
+          yaml = { "prettierd" },
+        },
+        format_on_save = function(bufnr)
+          local ignore_filetypes = {}
+
+          if vim.tbl_contains(ignore_filetypes, vim.bo[bufnr].filetype) then
+            return
+          end
+
+          if require("bti.plugins.lsp.format").autoformat then
+            return { timeout_ms = 500, lsp_fallback = true }
+          end
+        end,
+      })
     end,
   },
 }
