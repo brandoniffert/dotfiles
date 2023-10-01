@@ -62,6 +62,13 @@ return {
       -- Server Setup
       local servers = {
         ansiblels = {},
+        astro = {
+          init_options = {
+            typescript = {
+              tsdk = vim.fs.normalize("~/.local/lib/node_modules/typescript/lib"),
+            },
+          },
+        },
         bashls = {},
         cssls = {
           settings = {
