@@ -94,6 +94,10 @@ return {
             json = {
               schemas = {
                 {
+                  fileMatch = { "composer.json" },
+                  url = "https://getcomposer.org/schema.json",
+                },
+                {
                   fileMatch = { "package.json" },
                   url = "https://json.schemastore.org/package.json",
                 },
