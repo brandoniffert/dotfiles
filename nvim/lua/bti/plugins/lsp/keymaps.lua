@@ -18,8 +18,7 @@ function M.get()
       {
         "<leader>cF",
         require("bti.plugins.lsp.format").toggle,
-        desc = "Toggle formatting",
-        has = "documentFormatting",
+        desc = "Toggle formatting"
       },
       { "<leader>cr", M.rename, expr = true, desc = "Rename", has = "rename" },
       { "gd", "<cmd>FzfLua lsp_definitions<CR>", desc = "Goto Definition" },
