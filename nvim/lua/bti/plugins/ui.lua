@@ -34,9 +34,9 @@ return {
     end,
   },
 
-  -- PLUGIN: kyazdani42/nvim-web-devicons
+  -- PLUGIN: nvim-tree/nvim-web-devicons
   {
-    "kyazdani42/nvim-web-devicons",
+    "nvim-tree/nvim-web-devicons",
   },
 
   -- PLUGIN: lukas-reineke/indent-blankline.nvim
