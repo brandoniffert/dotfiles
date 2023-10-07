@@ -50,9 +50,6 @@ export LESSHISTFILE=-
 export PAGER=less
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-# TODO: Remove once latest php is supported
-export PHP_CS_FIXER_IGNORE_ENV=1
-
 # Filename (if known), line number if known, falling back to percent if known,
 # falling back to byte offset, falling back to dash
 export LESSPROMPT='?f%f .?ltLine %lt:?pt%pt\%:?btByte %bt:-...'
