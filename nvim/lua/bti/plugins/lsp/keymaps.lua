@@ -1,64 +1,26 @@
 local M = {}
 
-M._keys = nil
+local k = vim.keymap.set
 
-function M.get()
-  M._keys = M._keys
-    or {
-      { "<leader>cd", vim.diagnostic.open_float, desc = "Line Diagnostics" },
-      { "<leader>cl", "<cmd>LspInfo<CR>", desc = "Lsp Info" },
-      { "<leader>ca", vim.lsp.buf.code_action, desc = "Code Action", mode = { "n", "v" }, has = "codeAction" },
-      {
-        "<leader>cf",
-        require("bti.plugins.lsp.format").format,
-        desc = "Format",
-        mode = { "n", "v" },
-        has = "documentFormatting",
-      },
-      {
-        "<leader>cF",
-        require("bti.plugins.lsp.format").toggle,
-        desc = "Toggle formatting"
-      },
-      { "<leader>cr", M.rename, expr = true, desc = "Rename", has = "rename" },
-      { "gd", "<cmd>FzfLua lsp_definitions<CR>", desc = "Goto Definition" },
-      { "gI", "<cmd>FzfLua lsp_implementations<CR>", desc = "Goto Implementation" },
-      { "gr", "<cmd>FzfLua lsp_references<CR>", desc = "References" },
-      { "gt", "<cmd>FzfLua lsp_typedefs<CR>", desc = "Goto Type Definition" },
-      { "K", vim.lsp.buf.hover, desc = "Hover" },
-      { "<C-k>", vim.lsp.buf.signature_help, mode = "i", desc = "Signature Help", has = "signatureHelp" },
-      { "]d", M.diagnostic_goto(true), desc = "Next Diagnostic" },
-      { "[d", M.diagnostic_goto(false), desc = "Prev Diagnostic" },
-      { "]e", M.diagnostic_goto(true, "ERROR"), desc = "Next Error" },
-      { "[e", M.diagnostic_goto(false, "ERROR"), desc = "Prev Error" },
-      { "]w", M.diagnostic_goto(true, "WARN"), desc = "Next Warning" },
-      { "[w", M.diagnostic_goto(false, "WARN"), desc = "Prev Warning" },
-    }
-  return M._keys
-end
-
-function M.on_attach(client, buffer)
-  local Keys = require("lazy.core.handler.keys")
-  local keymaps = {}
-
-  for _, value in ipairs(M.get()) do
-    local keys = Keys.parse(value)
-    if keys[2] == vim.NIL or keys[2] == false then
-      keymaps[keys.id] = nil
-    else
-      keymaps[keys.id] = keys
-    end
-  end
-
-  for _, keys in pairs(keymaps) do
-    if not keys.has or client.server_capabilities[keys.has .. "Provider"] then
-      local opts = Keys.opts(keys)
-      opts.has = nil
-      opts.silent = true
-      opts.buffer = buffer
-      vim.keymap.set(keys.mode or "n", keys[1], keys[2], opts)
-    end
-  end
+function M.on_attach(_, buffer)
+  k("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics", buffer = buffer })
+  k("n", "<leader>cl", "<cmd>LspInfo<CR>", { desc = "Lsp Info", buffer = buffer })
+  k({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action", buffer = buffer })
+  k({ "n", "v" }, "<leader>cf", require("bti.plugins.lsp.format").format, { desc = "Format", buffer = buffer })
+  k("n", "<leader>cF", require("bti.plugins.lsp.format").toggle, { desc = "Toggle formatting", buffer = buffer })
+  k("n", "<leader>cr", M.rename, { desc = "Rename", buffer = buffer, expr = true })
+  k("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", { desc = "Goto Definition", buffer = buffer })
+  k("n", "gI", "<cmd>FzfLua lsp_implementations<CR>", { desc = "Goto Implementation", buffer = buffer })
+  k("n", "gr", "<cmd>FzfLua lsp_references<CR>", { desc = "References", buffer = buffer })
+  k("n", "gt", "<cmd>FzfLua lsp_typedefs<CR>", { desc = "Goto Type Definition", buffer = buffer })
+  k("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = buffer })
+  k("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help", buffer = buffer })
+  k("n", "]d", M.diagnostic_goto(true), { desc = "Next Diagnostic", buffer = buffer })
+  k("n", "[d", M.diagnostic_goto(false), { desc = "Prev Diagnostic", buffer = buffer })
+  k("n", "]e", M.diagnostic_goto(true, "ERROR"), { desc = "Next Error", buffer = buffer })
+  k("n", "[e", M.diagnostic_goto(false, "ERROR"), { desc = "Prev Error", buffer = buffer })
+  k("n", "]w", M.diagnostic_goto(true, "WARN"), { desc = "Next Warning", buffer = buffer })
+  k("n", "[w", M.diagnostic_goto(false, "WARN"), { desc = "Prev Warning", buffer = buffer })
 end
 
 function M.rename()
