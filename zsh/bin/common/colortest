@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-#
+
 set -e
 
 #   Daniel Crisman's ANSI color chart script from
@@ -30,11 +30,11 @@ do FG=${FGs// /}
 done
 echo
 
-echo -e "\e[30mNormal\e[0m \e[1;30mBright\e[0m \e[2;30mDim\e[0m \e[3;30mItalic\e[0m \e[4;30mUnderline\e[0m \e[9;30mStrikethrough\e[0m"
-echo -e "\e[31mNormal\e[0m \e[1;31mBright\e[0m \e[2;31mDim\e[0m \e[3;31mItalic\e[0m \e[4;31mUnderline\e[0m \e[9;31mStrikethrough\e[0m"
-echo -e "\e[32mNormal\e[0m \e[1;32mBright\e[0m \e[2;32mDim\e[0m \e[3;32mItalic\e[0m \e[4;32mUnderline\e[0m \e[9;32mStrikethrough\e[0m"
-echo -e "\e[33mNormal\e[0m \e[1;33mBright\e[0m \e[2;33mDim\e[0m \e[3;33mItalic\e[0m \e[4;33mUnderline\e[0m \e[9;33mStrikethrough\e[0m"
-echo -e "\e[34mNormal\e[0m \e[1;34mBright\e[0m \e[2;34mDim\e[0m \e[3;34mItalic\e[0m \e[4;34mUnderline\e[0m \e[9;34mStrikethrough\e[0m"
-echo -e "\e[35mNormal\e[0m \e[1;35mBright\e[0m \e[2;35mDim\e[0m \e[3;35mItalic\e[0m \e[4;35mUnderline\e[0m \e[9;35mStrikethrough\e[0m"
-echo -e "\e[36mNormal\e[0m \e[1;36mBright\e[0m \e[2;36mDim\e[0m \e[3;36mItalic\e[0m \e[4;36mUnderline\e[0m \e[9;36mStrikethrough\e[0m"
-echo -e "\e[37mNormal\e[0m \e[1;37mBright\e[0m \e[2;37mDim\e[0m \e[3;37mItalic\e[0m \e[4;37mUnderline\e[0m \e[9;37mStrikethrough\e[0m"
+echo -e "\033[30mNormal\033[0m \033[1;30mBright\033[0m \033[2;30mDim\033[0m \033[3;30mItalic\033[0m \033[4;30mUnderline\033[0m \033[9;30mStrikethrough\033[0m"
+echo -e "\033[31mNormal\033[0m \033[1;31mBright\033[0m \033[2;31mDim\033[0m \033[3;31mItalic\033[0m \033[4;31mUnderline\033[0m \033[9;31mStrikethrough\033[0m"
+echo -e "\033[32mNormal\033[0m \033[1;32mBright\033[0m \033[2;32mDim\033[0m \033[3;32mItalic\033[0m \033[4;32mUnderline\033[0m \033[9;32mStrikethrough\033[0m"
+echo -e "\033[33mNormal\033[0m \033[1;33mBright\033[0m \033[2;33mDim\033[0m \033[3;33mItalic\033[0m \033[4;33mUnderline\033[0m \033[9;33mStrikethrough\033[0m"
+echo -e "\033[34mNormal\033[0m \033[1;34mBright\033[0m \033[2;34mDim\033[0m \033[3;34mItalic\033[0m \033[4;34mUnderline\033[0m \033[9;34mStrikethrough\033[0m"
+echo -e "\033[35mNormal\033[0m \033[1;35mBright\033[0m \033[2;35mDim\033[0m \033[3;35mItalic\033[0m \033[4;35mUnderline\033[0m \033[9;35mStrikethrough\033[0m"
+echo -e "\033[36mNormal\033[0m \033[1;36mBright\033[0m \033[2;36mDim\033[0m \033[3;36mItalic\033[0m \033[4;36mUnderline\033[0m \033[9;36mStrikethrough\033[0m"
+echo -e "\033[37mNormal\033[0m \033[1;37mBright\033[0m \033[2;37mDim\033[0m \033[3;37mItalic\033[0m \033[4;37mUnderline\033[0m \033[9;37mStrikethrough\033[0m"
