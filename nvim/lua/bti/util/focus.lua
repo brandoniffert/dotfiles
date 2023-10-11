@@ -7,6 +7,7 @@ local win_type_blacklist = {
 
 -- Don't mess with numbers in these filetypes
 local number_filetype_blacklist = {
+  ["checkhealth"] = true,
   ["diff"] = true,
   ["fugitiveblame"] = true,
   ["fzf"] = true,

@@ -18,7 +18,34 @@ require("lazy").setup("bti.plugins", {
     colorscheme = { "catppuccin-mocha", "habamax" },
     missing = false,
   },
+  change_detection = {
+    enabled = true,
+    notify = false,
+  },
   ui = {
     border = "single",
+  },
+  performance = {
+    rtp = {
+      disabled_plugins = {
+        "2html_plugin",
+        "getscript",
+        "getscriptPlugin",
+        "gzip",
+        "logipat",
+        "netrw",
+        "netrwFileHandlers",
+        "netrwPlugin",
+        "netrwSettings",
+        "rrhelper",
+        "tar",
+        "tarPlugin",
+        "tohtml",
+        "vimball",
+        "vimballPlugin",
+        "zip",
+        "zipPlugin",
+      },
+    },
   },
 })
