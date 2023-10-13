@@ -12,4 +12,13 @@ return {
       return vim.ui.input(...)
     end
   end,
+  opts = {
+    select = {
+      backend = "builtin",
+      builtin = {
+        relative = "cursor",
+        min_height = { 0, 0 },
+      },
+    },
+  },
 }
