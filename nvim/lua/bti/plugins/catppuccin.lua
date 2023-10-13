@@ -13,6 +13,7 @@ return {
         LeapLabelPrimary = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
         LeapLabelSecondary = { fg = colors.text, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
+        NeoTreeIndentMarker = { fg = colors.surface2 },
         NeoTreeNormal = { bg = colors.base },
         NeoTreeNormalNC = { bg = colors.base },
         NormalFloat = { bg = colors.base },

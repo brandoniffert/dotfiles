@@ -25,7 +25,6 @@ return {
   opts = {
     filesystem = {
       bind_to_cwd = false,
-      follow_current_file = true,
       filtered_items = {
         visible = true,
         hide_dotfiles = false,
@@ -37,6 +36,10 @@ return {
           ".DS_Store",
         },
       },
+      follow_current_file = {
+        enabled = true,
+      },
+      use_libuv_file_watcher = true,
     },
     window = {
       mappings = {
@@ -50,6 +53,12 @@ return {
         trailing_slash = false,
         use_git_status_colors = false,
         highlight = "NeoTreeFileName",
+      },
+      indent = {
+        with_expanders = true,
+        expander_collapsed = "",
+        expander_expanded = "",
+        expander_highlight = "NeoTreeExpander",
       },
       git_status = {
         symbols = {
