@@ -12,6 +12,7 @@ path=(
   $COMPOSER_HOME/vendor/bin
   /usr/local/sbin
   $path
+  $CARGO_HOME/bin
 )
 
 iffy_bin="$ZDOTDIR/bin/host/iffy"
