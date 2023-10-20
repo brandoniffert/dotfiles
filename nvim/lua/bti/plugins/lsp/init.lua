@@ -62,12 +62,6 @@ return {
         autostart = false,
       },
       eslint = {},
-      intelephense = {
-        init_options = {
-          globalStoragePath = os.getenv("XDG_DATA_HOME") .. "/intelephense",
-          licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
-        },
-      },
       jsonls = {
         init_options = {
           provideFormatter = false,
@@ -103,6 +97,7 @@ return {
           },
         },
       },
+      phpactor = {},
       pyright = {},
       rust_analyzer = {},
       tailwindcss = {},
