@@ -119,5 +119,5 @@ function handleApp(appName, eventType, app)
   end
 end
 
-appWatcher = hs.application.watcher.new(handleApp)
-appWatcher:start()
+-- appWatcher = hs.application.watcher.new(handleApp)
+-- appWatcher:start()
