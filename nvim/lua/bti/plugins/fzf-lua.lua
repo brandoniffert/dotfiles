@@ -21,8 +21,6 @@ return {
         ["--layout"] = "default",
         ["--no-scrollbar"] = "",
         ["--no-separator"] = "",
-        ["--marker"] = " ",
-        ["--pointer"] = " ",
       },
       winopts = {
         border = "single",
