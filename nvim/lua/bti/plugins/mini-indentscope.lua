@@ -13,6 +13,7 @@ return {
       pattern = {
         "checkhealth",
         "help",
+        "fzf",
         "lspinfo",
         "neo-tree",
         "Trouble",
