@@ -60,6 +60,9 @@ return {
         enable = true,
         disable = { "yaml" },
       },
+      matchup = {
+        enable = true, -- mandatory, false will disable the whole extension
+      },
     })
 
     if vim.fn.has("macunix") and vim.fn.executable("gcc-12") then
