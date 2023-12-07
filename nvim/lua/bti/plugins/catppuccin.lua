@@ -19,6 +19,7 @@ return {
         NormalFloat = { bg = colors.base },
         Pmenu = { bg = colors.base },
         VertSplit = { fg = colors.base1, bg = colors.none },
+        WinSeparator = { fg = colors.base1, bg = colors.none },
       },
       integrations = {
         harpoon = true,
