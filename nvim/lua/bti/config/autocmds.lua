@@ -3,7 +3,17 @@ local augroups = {}
 augroups.editor = {
   create_missing_directories = {
     event = { "BufWritePre", "FileWritePre" },
-    command = [[silent! call mkdir(expand("<afile>:p:h"), "p")]],
+    callback = function()
+      if vim.tbl_contains({ "oil" }, vim.bo.ft) then
+        return
+      end
+
+      local dir = vim.fn.expand("<afile>:p:h")
+
+      if vim.fn.isdirectory(dir) == 0 then
+        vim.fn.mkdir(dir, "p")
+      end
+    end,
   },
 }
 
