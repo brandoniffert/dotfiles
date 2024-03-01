@@ -11,7 +11,7 @@ return {
       javascriptreact = { "rustywind", "prettierd" },
       json = { "prettierd" },
       less = { "prettierd" },
-      liquid = { "rustywind" },
+      liquid = { "rustywind", "prettierd" },
       lua = { "stylua" },
       markdown = { "prettierd" },
       php = { "php_cs_fixer" },
