@@ -16,6 +16,7 @@ return {
         NeoTreeIndentMarker = { fg = colors.surface2 },
         NeoTreeNormal = { bg = colors.base },
         NeoTreeNormalNC = { bg = colors.base },
+        NeoTreeWinSeparator = { fg = colors.base1, bg = colors.none },
         NormalFloat = { bg = colors.base },
         Pmenu = { bg = colors.base },
         VertSplit = { fg = colors.base1, bg = colors.none },
