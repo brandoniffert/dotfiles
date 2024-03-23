@@ -117,3 +117,10 @@ vim.opt.wildignore:append("*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.pyc,*.so,*.DS_Store*
 vim.o.wildmenu = true
 vim.o.wildmode = "longest:full,full"
 vim.o.writebackup = false
+
+-- Handle filetypes
+vim.filetype.add({
+  extension = {
+    conf = "conf",
+  },
+})
