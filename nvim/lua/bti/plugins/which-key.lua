@@ -9,6 +9,11 @@ return {
       key_labels = {
         ["<leader>"] = "SPC",
       },
+      icons = {
+        breadcrumb = "•",
+        separator = "•",
+        group = "+",
+      },
     })
 
     local wk = require("which-key")
