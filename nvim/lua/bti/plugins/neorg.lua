@@ -1,6 +1,7 @@
 return {
   {
     "nvim-neorg/neorg",
+    version = "v7.0.0",
     build = ":Neorg sync-parsers",
     ft = "norg",
     config = function()
