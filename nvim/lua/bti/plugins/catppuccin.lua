@@ -10,6 +10,7 @@ return {
       custom_highlights = {
         FloatBorder = { fg = colors.overlay2 },
         FzfLuaBorder = { link = "FloatBorder" },
+        LazyBackdrop = { link = "NormalFloat" },
         LeapLabelPrimary = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
         LeapLabelSecondary = { fg = colors.text, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
