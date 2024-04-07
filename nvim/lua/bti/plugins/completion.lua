@@ -130,6 +130,9 @@ return {
         {
           name = "cmdline",
           keyword_length = 2,
+          option = {
+            treat_trailing_slash = false,
+          },
         },
       }),
     })
