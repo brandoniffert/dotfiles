@@ -114,14 +114,6 @@ return {
       },
     })
 
-    cmp.setup.filetype("norg", {
-      sources = cmp.config.sources({
-        { name = "neorg" },
-        { name = "luasnip" },
-        { name = "buffer" },
-      }),
-    })
-
     cmp.setup.cmdline(":", {
       mapping = cmp.mapping.preset.cmdline(),
       sources = cmp.config.sources({

@@ -179,7 +179,6 @@ local FileFlags = {
 
       local filetype_blacklist = {
         ["markdown"] = true,
-        ["norg"] = true,
       }
 
       return vim.wo.spell and filetype_blacklist[filetype] ~= true
