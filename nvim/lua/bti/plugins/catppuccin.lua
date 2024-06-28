@@ -8,7 +8,7 @@ return {
 
     require("catppuccin").setup({
       custom_highlights = {
-        FloatBorder = { fg = colors.overlay2 },
+        FloatBorder = { fg = colors.overlay2, bg = colors.none },
         FzfLuaBorder = { link = "FloatBorder" },
         LazyBackdrop = { link = "NormalFloat" },
         LeapLabelPrimary = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
