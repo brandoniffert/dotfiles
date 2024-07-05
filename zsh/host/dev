@@ -2,4 +2,3 @@
 
 # Aliases
 alias paru="sudo -u paru paru"
-alias devroot="cd /mnt/devroot"
