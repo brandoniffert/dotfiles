@@ -58,9 +58,6 @@ return {
           },
         },
       },
-      denols = {
-        autostart = false,
-      },
       eslint = {},
       intelephense = {
         init_options = {
@@ -106,9 +103,7 @@ return {
       pyright = {},
       rust_analyzer = {},
       tailwindcss = {},
-      tsserver = {
-        autostart = false,
-      },
+      tsserver = {},
       yamlls = {
         settings = {
           yaml = {
@@ -135,25 +130,5 @@ return {
         setup(server)
       end
     end
-
-    local custom_lsp_start = vim.api.nvim_create_augroup("CustomLspStart", { clear = true })
-
-    vim.api.nvim_create_autocmd("FileType", {
-      desc = "Start denols",
-      pattern = require("lspconfig.configs").denols.filetypes,
-      group = custom_lsp_start,
-      callback = function()
-        require("bti.plugins.lsp.servers").launch_denols()
-      end,
-    })
-
-    vim.api.nvim_create_autocmd("FileType", {
-      desc = "Start tsserver",
-      pattern = require("lspconfig.configs").tsserver.filetypes,
-      group = custom_lsp_start,
-      callback = function()
-        require("bti.plugins.lsp.servers").launch_tsserver()
-      end,
-    })
   end,
 }
