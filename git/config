@@ -28,7 +28,49 @@
   noff = merge --no-ff
   st = status
   dsf = "!f() { [ -z \"$GIT_PREFIX\" ] || cd \"$GIT_PREFIX\" && git diff --color \"$@\" | diff-so-fancy  | less --tabs=4 -RFX; }; clear && f"
-  fza = "!git ls-files -m -o --exclude-standard | fzf --print0 -m | xargs -0 -t -o git add --all"
+  fza = "!git ls-files -m -o --exclude-standard | fzf --print0 --border sharp --height 40% -m | xargs -0 -t -o git add --all"
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=catppuccin-mocha
+
+[delta]
+    features = catppuccin-mocha navigate
+
+[delta "catppuccin-mocha"]
+  blame-palette = "#1e1e2e #181825 #11111b #313244 #45475a"
+  commit-decoration-style = box ul
+  dark = true
+  file-decoration-style = "#f9e2af" ol ul
+  file-style = "#f9e2af"
+  hunk-header-decoration-style = ul
+  hunk-header-file-style = bold
+  hunk-header-line-number-style = bold "#a6adc8"
+  hunk-header-style = file line-number syntax omit-code-fragment
+  keep-plus-minus-markers = false
+  line-numbers = true
+  line-numbers-left-style = "#6c7086"
+  line-numbers-minus-style = bold "#f38ba8"
+  line-numbers-plus-style = bold "#a6e3a1"
+  line-numbers-right-style = "#6c7086"
+  line-numbers-zero-style = "#6c7086"
+  # 25% red 75% base
+  minus-emph-style = bold syntax "#53394c"
+  # 10% red 90% base
+  minus-style = syntax "#34293a"
+  # 25% green 75% base
+  plus-emph-style = bold syntax "#404f4a"
+  # 10% green 90% base
+  plus-style = syntax "#2c3239"
+  map-styles = \
+    bold purple => syntax "#494060", \
+    bold blue => syntax "#384361", \
+    bold cyan => syntax "#384d5d", \
+    bold yellow => syntax "#544f4e"
+  # Should match the name of the bat theme
+  syntax-theme = Catppuccin-mocha
 
 [color]
   branch = auto
