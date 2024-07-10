@@ -89,6 +89,7 @@
   newHighlight = 232 green
 
 [diff]
+  colorMoved = default
   compactionHeuristic = true
 
 [format]
@@ -98,6 +99,7 @@
   follow = true
 
 [merge]
+  conflictstyle = diff3
   tool = vimdiff
 
 [pull]
