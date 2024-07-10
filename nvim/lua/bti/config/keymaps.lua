@@ -20,7 +20,7 @@ keymap("i", ".", ".<c-g>u")
 keymap("i", ";", ";<c-g>u")
 
 -- Split lines (opposite of J)
-keymap("n", "|", ":<c-u>call bti#functions#break_here()<CR>")
+keymap("n", "|", "<cmd>lua require('bti.util.functions').split_at()<CR>")
 
 -- Don't replace register with text that was pasted over
 keymap("x", "p", "p:if v:register == '\"'<bar>let @@=@0<bar>endif<CR>")
@@ -58,11 +58,21 @@ keymap("n", "<Leader>p", '"*p', { desc = "Paste from clipboard" })
 keymap("n", "<Leader>q", "<cmd>:q<CR>", { desc = "Quit" })
 keymap("n", "<Leader>Q", "<cmd>:q!<CR>", { desc = "Quit without saving" })
 
-keymap("n", "<Leader>uf", ":call bti#functions#replace_fancy_characters()<CR>", { desc = "Replace fancy characters" })
+keymap(
+  "n",
+  "<Leader>uf",
+  "<cmd>lua require('bti.util.functions').replace_fancy_characters()<CR>",
+  { desc = "Replace fancy characters" }
+)
 keymap("n", "<Leader>ul", "<cmd>:Lazy<CR>", { desc = "Lazy" })
 keymap("n", "<Leader>ur", ":make!<CR>", { desc = "Run current file" })
 keymap("n", "<Leader>uv", "V`]", { desc = "Select text that was just pasted" })
-keymap("n", "<Leader>uw", ":call bti#functions#strip_whitespace()<CR>", { desc = "Strip whitespace" })
+keymap(
+  "n",
+  "<Leader>uw",
+  "<cmd>lua require('bti.util.functions').strip_whitespace()<CR>",
+  { desc = "Strip whitespace" }
+)
 
 keymap("n", "<Leader>=", ":vnew<CR>", { desc = "Vertical split" })
 keymap("n", "<Leader>-", ":new<CR>", { desc = "Horizontal split" })
