@@ -45,7 +45,7 @@ export SQLITE_HISTORY="$XDG_DATA_HOME"/sqlite_history
 export SUBVERSION_HOME="$XDG_CONFIG_HOME"/subversion
 export TERMINFO="$XDG_DATA_HOME"/terminfo
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME"/yarn
-export _Z_DATA="$XDG_DATA_HOME"/z
+export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 
 export EDITOR=nvim
 export LESSHISTFILE=-
