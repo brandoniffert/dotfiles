@@ -12,7 +12,7 @@ fi
 local project_dir="$(
   find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
   sed "s:$PROJECTS_HOME\/::g" |
-  fzf --header='Projects'
+  fzf --header='Projects' --height 40% --border sharp
 )"
 
 if [[ -n "${project_dir}" ]]; then

@@ -8,6 +8,6 @@ brew update
 outdated=$(brew outdated -v)
 
 if [[ -n "$outdated" ]]; then
-  choices=$(echo "$outdated" | fzf -m --reverse --preview="echo {} | cut -d' ' -f1 | xargs brew info")
+  choices=$(echo "$outdated" | fzf -m --reverse --height 40% --border sharp --preview="echo {} | cut -d' ' -f1 | xargs brew info")
   [[ -n "$choices" ]] && echo "$choices" | cut -d' ' -f1 | xargs brew upgrade
 fi

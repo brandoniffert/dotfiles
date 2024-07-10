@@ -13,8 +13,8 @@ fi
 
 project_dir="$(
   find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
-  sed "s:$PROJECTS_HOME\/::g" |
-  fzf --header='Projects'
+    sed "s:$PROJECTS_HOME\/::g" |
+    fzf --header='Projects' --height 40% --border sharp
 )"
 
 if [[ -n "${project_dir}" ]]; then
@@ -26,7 +26,7 @@ if [[ -n "${project_dir}" ]]; then
   fi
 
   # If session doesn't exist, create it
-  if ! tmux -q has-session -t "$session_name" > /dev/null 2>&1; then
+  if ! tmux -q has-session -t "$session_name" >/dev/null 2>&1; then
     # Convention for docker based projects
     if [[ -d "$project_path/site" ]]; then
       tmux new-session -c "$project_path/site" -d -s "$session_name"
