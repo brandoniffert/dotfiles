@@ -47,6 +47,7 @@ export TERMINFO="$XDG_DATA_HOME"/terminfo
 export YARN_CACHE_FOLDER="$XDG_CACHE_HOME"/yarn
 export _ZO_DATA_DIR="$XDG_DATA_HOME/zoxide"
 
+export COLORTERM=truecolor
 export EDITOR=nvim
 export LESSHISTFILE=-
 export PAGER=less
