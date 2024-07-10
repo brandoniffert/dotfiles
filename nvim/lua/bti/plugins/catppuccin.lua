@@ -10,9 +10,9 @@ return {
       custom_highlights = {
         FloatBorder = { fg = colors.overlay2, bg = colors.none },
         FzfLuaBorder = { link = "FloatBorder" },
+        FzfLuaHeaderText = { fg = colors.red },
         LazyBackdrop = { link = "NormalFloat" },
-        LeapLabelPrimary = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
-        LeapLabelSecondary = { fg = colors.text, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
+        LeapLabel = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
         NeoTreeIndentMarker = { fg = colors.surface2 },
         NeoTreeNormal = { bg = colors.base },
