@@ -4,26 +4,30 @@ return {
   keys = {
     { "<Leader>o", "<cmd>lua require('oil').open_float()<CR>", desc = "Oil (Float)" },
   },
-  opts = {
-    default_file_explorer = false,
-    keymaps = {
-      ["g?"] = "actions.show_help",
-      ["<CR>"] = "actions.select",
-      ["<C-p>"] = "actions.preview",
-      ["q"] = "actions.close",
-      ["R"] = "actions.refresh",
-      ["<BS>"] = "actions.parent",
-      ["gx"] = "actions.open_external",
-      ["g."] = "actions.toggle_hidden",
-    },
-    use_default_keymaps = false,
-    win_options = {
-      number = false,
-    },
-    float = {
-      max_width = 80,
-      max_height = 40,
-    },
-  },
-  config = true,
+  config = function()
+    local detail = false
+
+    require("oil").setup({
+      default_file_explorer = false,
+      keymaps = {
+        ["q"] = "actions.close",
+        ["R"] = "actions.refresh",
+        ["gd"] = {
+          desc = "Toggle file detail view",
+          callback = function()
+            detail = not detail
+            if detail then
+              require("oil").set_columns({ "icon", "permissions", "size", "mtime" })
+            else
+              require("oil").set_columns({ "icon" })
+            end
+          end,
+        },
+      },
+      float = {
+        max_width = 80,
+        max_height = 40,
+      },
+    })
+  end,
 }
