@@ -3,7 +3,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = { "*.txt", "*.md" },
   callback = function()
     vim.cmd.wincmd("L")
-    vim.cmd("vertical resize 80")
+    vim.cmd("vertical resize 100")
     vim.opt_local.spell = false
   end,
 })
