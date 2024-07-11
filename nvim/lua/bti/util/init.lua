@@ -9,7 +9,7 @@ function M.has_ancestor_files(files, startpath)
 
   local found = vim.fs.find(files, {
     upward = true,
-    stop = vim.loop.os_homedir(),
+    stop = vim.uv.os_homedir(),
     path = path,
   })
 
