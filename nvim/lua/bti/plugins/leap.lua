@@ -9,16 +9,16 @@ return {
       },
     },
   },
-  config = function(_, opts)
-    local leap = require("leap")
-
-    for k, v in pairs(opts) do
-      leap.opts[k] = v
+  config = function()
+    require("leap").opts.preview_filter = function()
+      return false
     end
 
-    leap.add_default_mappings(true)
-
-    vim.keymap.del({ "x", "o" }, "x")
-    vim.keymap.del({ "x", "o" }, "X")
+    vim.keymap.set("n", "s", "<Plug>(leap)")
+    vim.keymap.set({ "n", "o" }, "gs", function()
+      require("leap.remote").action()
+    end)
+    vim.keymap.set({ "x", "o" }, "s", "<Plug>(leap-forward)")
+    vim.keymap.set({ "x", "o" }, "S", "<Plug>(leap-backward)")
   end,
 }

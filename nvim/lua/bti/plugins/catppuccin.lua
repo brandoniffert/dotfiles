@@ -12,6 +12,7 @@ return {
         FloatBorder = { fg = colors.overlay2, bg = colors.none },
         FzfLuaHeaderText = { fg = colors.red },
         LazyBackdrop = { link = "NormalFloat" },
+        LeapBackdrop = { link = "Comment" },
         LeapLabel = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
         NeoTreeIndentMarker = { fg = colors.surface2 },
