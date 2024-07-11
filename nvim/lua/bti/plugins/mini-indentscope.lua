@@ -5,6 +5,7 @@ local excluded_buftypes = {
   "terminal",
 }
 
+---@type LazySpec
 return {
   "echasnovski/mini.indentscope",
   init = function()

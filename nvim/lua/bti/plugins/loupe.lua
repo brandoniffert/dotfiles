@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "wincent/loupe",
   init = function()

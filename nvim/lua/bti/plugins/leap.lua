@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
   "ggandor/leap.nvim",
   dependencies = {
