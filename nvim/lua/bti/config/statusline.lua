@@ -304,27 +304,6 @@ local LocationProgress = utils.surround({ " ", " " }, nil, {
   },
 })
 
-local SearchCount = utils.surround({ " ", " " }, nil, {
-  condition = function()
-    return vim.v.hlsearch ~= 0
-  end,
-
-  init = function(self)
-    local ok, search = pcall(vim.fn.searchcount)
-    if ok and search.total then
-      self.search = search
-    end
-  end,
-
-  provider = function(self)
-    local search = self.search
-
-    if search then
-      return string.format("[%d/%d]", search.current, math.min(search.total, search.maxcount))
-    end
-  end,
-})
-
 local ActiveStatusLine = {
   { ViMode },
   { Git },
@@ -337,7 +316,6 @@ local ActiveStatusLine = {
   { FileEncodingFormat },
   { FileType },
   { LocationProgress },
-  { SearchCount },
 }
 
 local SpecialStatusLine = {

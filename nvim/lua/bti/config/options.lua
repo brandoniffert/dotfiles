@@ -74,7 +74,7 @@ end
 
 vim.opt.shiftround = false
 vim.opt.shiftwidth = 2
-vim.opt.shortmess = "AFOSTWacot"
+vim.opt.shortmess = "AFOTWacot"
 vim.opt.showbreak = "↳ "
 vim.opt.showcmd = false
 vim.opt.showmatch = true

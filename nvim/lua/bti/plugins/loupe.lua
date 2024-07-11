@@ -5,6 +5,9 @@ return {
     vim.g.LoupeClearHighlightMap = 0
   end,
   config = function()
-    vim.keymap.set("n", "<CR>", "<Plug>(LoupeClearHighlight)", { desc = "Clear search highlight" })
+    vim.keymap.set("n", "<CR>", function()
+      vim.cmd([[execute "normal! \<Plug>(LoupeClearHighlight)"]])
+      vim.cmd("echo")
+    end, { desc = "Clear search highlight" })
   end,
 }
