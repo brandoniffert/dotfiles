@@ -8,12 +8,12 @@ return {
     "onsails/lspkind-nvim",
     "andersevenrud/cmp-tmux",
     "saadparwaiz1/cmp_luasnip",
+    "roobert/tailwindcss-colorizer-cmp.nvim",
   },
   config = function()
     local luasnip = require("luasnip")
     local lspkind = require("lspkind")
     local cmp = require("cmp")
-    local cmp_buffer = require("cmp_buffer")
 
     local has_words_before = function()
       unpack = unpack or table.unpack
@@ -23,8 +23,9 @@ return {
 
     cmp.setup({
       formatting = {
+        expandable_indicator = true,
+        fields = { "abbr", "kind", "menu" },
         format = lspkind.cmp_format({
-          with_text = true,
           menu = {
             buffer = "[Buffer]",
             tmux = "[Tmux]",
@@ -33,6 +34,11 @@ return {
             nvim_lua = "[Lua]",
             path = "[Path]",
           },
+          before = function(entry, vim_item)
+            require("tailwindcss-colorizer-cmp").formatter(entry, vim_item)
+
+            return vim_item
+          end,
         }),
       },
       window = {
@@ -92,6 +98,7 @@ return {
         },
       }),
       sorting = {
+        priority_weight = 2,
         comparators = {
           cmp.config.compare.offset,
           cmp.config.compare.exact,
