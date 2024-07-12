@@ -13,7 +13,7 @@ return {
         FzfLuaHeaderText = { fg = colors.red },
         LazyBackdrop = { link = "NormalFloat" },
         LeapBackdrop = { fg = colors.overlay0 },
-        LeapLabel = { fg = colors.red, bg = colors.mantle, style = { "nocombine", "bold", "underline" } },
+        LeapLabel = { fg = colors.red, bg = colors.none, style = { "nocombine", "bold", "underline" } },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
         NeoTreeIndentMarker = { fg = colors.surface2 },
         NeoTreeNormal = { bg = colors.base },
