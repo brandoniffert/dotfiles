@@ -7,113 +7,154 @@ return {
       "hrsh7th/cmp-nvim-lsp",
     },
   },
-  config = function()
-    -- vim.lsp.set_log_level('debug')
-
-    -- Diagnostics
-    for name, icon in pairs(require("bti.theme").icons.diagnostics) do
-      name = "DiagnosticSign" .. name
-      vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-    end
-
-    vim.diagnostic.config({
-      underline = false,
-      update_in_insert = false,
-      virtual_text = { spacing = 4, prefix = "●" },
-      severity_sort = true,
-      float = {
-        border = "single",
-      },
-    })
-
-    -- Formatting & Keymaps
-    require("bti.util").on_attach(function(client, buffer)
-      require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
-    end)
-
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = "single",
-    })
-
-    -- Server Setup
-    local servers = {
-      ansiblels = {},
-      astro = {
-        init_options = {
-          typescript = {
-            tsdk = vim.fs.normalize("~/.local/lib/node_modules/typescript/lib"),
+  opts = function()
+    return {
+      diagnostics = {
+        underline = false,
+        update_in_insert = false,
+        virtual_text = { spacing = 4, prefix = "●" },
+        severity_sort = true,
+        float = {
+          border = "single",
+        },
+        signs = {
+          text = {
+            [vim.diagnostic.severity.ERROR] = require("bti.theme").icons.diagnostics.Error,
+            [vim.diagnostic.severity.WARN] = require("bti.theme").icons.diagnostics.Warn,
+            [vim.diagnostic.severity.HINT] = require("bti.theme").icons.diagnostics.Hint,
+            [vim.diagnostic.severity.INFO] = require("bti.theme").icons.diagnostics.Info,
           },
         },
       },
-      bashls = {},
-      cssls = {
-        settings = {
-          css = {
-            validate = false,
+      capabilities = {
+        workspace = {
+          fileOperations = {
+            didRename = true,
+            willRename = true,
           },
         },
       },
-      eslint = {},
-      intelephense = {
-        init_options = {
-          globalStoragePath = os.getenv("XDG_DATA_HOME") .. "/intelephense",
-          licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
+      servers = {
+        ansiblels = {},
+        astro = {
+          init_options = {
+            typescript = {
+              tsdk = vim.fs.normalize("~/.local/lib/node_modules/typescript/lib"),
+            },
+          },
         },
-      },
-      jsonls = {
-        init_options = {
-          provideFormatter = false,
+        bashls = {},
+        cssls = {
+          settings = {
+            css = {
+              validate = false,
+            },
+          },
         },
-        settings = {
-          json = {
-            schemas = {
-              {
-                fileMatch = { "composer.json" },
-                url = "https://getcomposer.org/schema.json",
-              },
-              {
-                fileMatch = { "package.json" },
-                url = "https://json.schemastore.org/package.json",
-              },
-              {
-                fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-                url = "http://json.schemastore.org/tsconfig",
+        eslint = {},
+        intelephense = {
+          init_options = {
+            globalStoragePath = os.getenv("XDG_DATA_HOME") .. "/intelephense",
+            licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
+          },
+        },
+        jsonls = {
+          init_options = {
+            provideFormatter = false,
+          },
+          settings = {
+            json = {
+              schemas = {
+                {
+                  fileMatch = { "composer.json" },
+                  url = "https://getcomposer.org/schema.json",
+                },
+                {
+                  fileMatch = { "package.json" },
+                  url = "https://json.schemastore.org/package.json",
+                },
+                {
+                  fileMatch = { "tsconfig.json", "tsconfig.*.json" },
+                  url = "http://json.schemastore.org/tsconfig",
+                },
               },
             },
           },
         },
-      },
-      lua_ls = {
-        settings = {
-          Lua = {
-            diagnostics = {
-              globals = { "hs" },
+        lua_ls = {
+          settings = {
+            Lua = {
+              workspace = {
+                checkThirdParty = false,
+              },
+              completion = {
+                callSnippet = "Replace",
+              },
+              doc = {
+                privateName = { "^_" },
+              },
+              hint = {
+                enable = true,
+                setType = false,
+                paramType = true,
+                paramName = "Disable",
+                semicolon = "Disable",
+                arrayIndex = "Disable",
+              },
+              diagnostics = {
+                globals = { "hs" },
+              },
             },
           },
         },
-      },
-      pyright = {},
-      rust_analyzer = {},
-      tailwindcss = {},
-      tsserver = {},
-      yamlls = {
-        settings = {
-          yaml = {
-            format = {
-              singleQuote = false,
+        pyright = {},
+        rust_analyzer = {},
+        tailwindcss = {},
+        tsserver = {},
+        yamlls = {
+          settings = {
+            yaml = {
+              format = {
+                singleQuote = false,
+              },
             },
           },
         },
       },
     }
+  end,
+  config = function(_, opts)
+    -- vim.lsp.set_log_level('debug')
 
-    local capabilities = require("cmp_nvim_lsp").default_capabilities(vim.lsp.protocol.make_client_capabilities())
+    -- Style adjustments
+    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
+    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+      border = "single",
+    })
+
+    -- Diagnostics
+    vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
+
+    -- Formatting & Keymaps
+    require("bti.plugins.lsp.util").on_attach(function(client, buffer)
+      require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
+    end)
+
+    -- Server Setup
+    local capabilities = vim.tbl_deep_extend(
+      "force",
+      {},
+      vim.lsp.protocol.make_client_capabilities(),
+      require("cmp_nvim_lsp").default_capabilities(),
+      opts.capabilities or {}
+    )
+
+    local servers = opts.servers
 
     local function setup(server)
-      local server_opts = servers[server] or {}
-      server_opts.capabilities = capabilities
+      local server_opts = vim.tbl_deep_extend("force", {
+        capabilities = vim.deepcopy(capabilities),
+      }, servers[server] or {})
 
       require("lspconfig")[server].setup(server_opts)
     end

@@ -1,7 +1,11 @@
 local M = {}
 
 function M.has_plugin(plugin)
-  return require("lazy.core.config").plugins[plugin] ~= nil
+  return M.get_plugin(plugin) ~= nil
+end
+
+function M.get_plugin(name)
+  return require("lazy.core.config").spec.plugins[name]
 end
 
 function M.has_ancestor_files(files, startpath)
@@ -16,25 +20,13 @@ function M.has_ancestor_files(files, startpath)
   return #found > 0 and found or nil
 end
 
-function M.on_attach(on_attach)
-  vim.api.nvim_create_autocmd("LspAttach", {
-    callback = function(args)
-      local buffer = args.buf
-      local client = vim.lsp.get_client_by_id(args.data.client_id)
-      on_attach(client, buffer)
-    end,
-  })
-end
-
-function M.keymap(mode, lhs, rhs, opts)
-  local keys = require("lazy.core.handler").handlers.keys
-  ---@cast keys LazyKeysHandler
-  -- do not create the keymap if a lazy keys handler exists
-  if not keys.active[keys.parse({ lhs, mode = mode }).id] then
-    opts = opts or {}
-    opts.silent = opts.silent ~= false
-    vim.keymap.set(mode, lhs, rhs, opts)
+function M.opts(name)
+  local plugin = M.get_plugin(name)
+  if not plugin then
+    return {}
   end
+  local Plugin = require("lazy.core.plugin")
+  return Plugin.values(plugin, "opts", false)
 end
 
 return M
