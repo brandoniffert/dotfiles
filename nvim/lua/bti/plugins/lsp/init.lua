@@ -57,6 +57,22 @@ return {
             globalStoragePath = os.getenv("XDG_DATA_HOME") .. "/intelephense",
             licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
           },
+          keys = {
+            {
+              "<leader>ca",
+              function()
+                vim.lsp.buf.code_action({
+                  filter = function(action)
+                    -- Filter out PHPDoc related code actions
+                    return not string.match(action.title, "Add PHPDoc")
+                  end,
+                })
+              end,
+              desc = "Code Action",
+              mode = { "n", "v" },
+              has = "codeAction",
+            },
+          },
         },
         jsonls = {
           init_options = {
