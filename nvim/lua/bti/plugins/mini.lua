@@ -1,14 +1,14 @@
-local excluded_buftypes = {
-  "nofile",
-  "prompt",
-  "quickfix",
-  "terminal",
-}
-
 ---@type LazySpec
 return {
-  "echasnovski/mini.indentscope",
+  "echasnovski/mini.nvim",
   init = function()
+    local excluded_buftypes = {
+      "nofile",
+      "prompt",
+      "quickfix",
+      "terminal",
+    }
+
     vim.api.nvim_create_autocmd("FileType", {
       desc = "Disable indentscope for certain filetypes",
       pattern = {
@@ -35,12 +35,28 @@ return {
     })
   end,
   config = function()
+    require("mini.comment").setup()
+
     require("mini.indentscope").setup({
       draw = {
         delay = 0,
         animation = require("mini.indentscope").gen_animation.none(),
       },
       symbol = "▎",
+    })
+
+    require("mini.splitjoin").setup()
+
+    require("mini.surround").setup({
+      mappings = {
+        add = "gza",
+        delete = "gzd",
+        find = "gzf",
+        find_left = "gzF",
+        highlight = "gzh",
+        replace = "gzr",
+        update_n_lines = "gzn",
+      },
     })
   end,
 }
