@@ -19,14 +19,3 @@ function M.has_ancestor_files(files, startpath)
 
   return #found > 0 and found or nil
 end
-
-function M.opts(name)
-  local plugin = M.get_plugin(name)
-  if not plugin then
-    return {}
-  end
-  local Plugin = require("lazy.core.plugin")
-  return Plugin.values(plugin, "opts", false)
-end
-
-return M

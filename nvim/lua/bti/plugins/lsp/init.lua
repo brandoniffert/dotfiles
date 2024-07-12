@@ -6,9 +6,23 @@ return {
     {
       "hrsh7th/cmp-nvim-lsp",
     },
+    {
+      "folke/lazydev.nvim",
+      dependencies = {
+        { "Bilal2453/luvit-meta", lazy = true },
+      },
+      ft = "lua",
+      opts = {
+        library = {
+          { path = "luvit-meta/library", words = { "vim%.uv" } },
+          { path = "lazy.nvim", words = { "Lazy" } },
+        },
+      },
+    },
   },
   opts = function()
     return {
+      ---@type vim.diagnostic.Opts
       diagnostics = {
         underline = false,
         update_in_insert = false,
@@ -57,22 +71,7 @@ return {
             globalStoragePath = os.getenv("XDG_DATA_HOME") .. "/intelephense",
             licenceKey = os.getenv("INTELEPHENSE_LICENCE_KEY") or "",
           },
-          keys = {
-            {
-              "<leader>ca",
-              function()
-                vim.lsp.buf.code_action({
-                  filter = function(action)
-                    -- Filter out PHPDoc related code actions
-                    return not string.match(action.title, "Add PHPDoc")
-                  end,
-                })
-              end,
-              desc = "Code Action",
-              mode = { "n", "v" },
-              has = "codeAction",
-            },
-          },
+          single_file_support = true,
         },
         jsonls = {
           init_options = {
@@ -142,6 +141,7 @@ return {
     -- vim.lsp.set_log_level('debug')
 
     -- Style adjustments
+    require("lspconfig.ui.windows").default_options.border = "single"
     vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
     vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
       border = "single",
@@ -150,10 +150,31 @@ return {
     -- Diagnostics
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
 
-    -- Formatting & Keymaps
-    require("bti.plugins.lsp.util").on_attach(function(client, buffer)
-      require("bti.plugins.lsp.keymaps").on_attach(client, buffer)
-    end)
+    -- Keymaps
+    vim.api.nvim_create_autocmd("LspAttach", {
+      group = vim.api.nvim_create_augroup("_btiLspAttach", { clear = true }),
+      callback = function(event)
+        local buffer = event.buf
+
+        local map = function(modes, lhs, rhs, map_opts)
+          map_opts = vim.tbl_deep_extend("force", map_opts or {}, { buffer = buffer })
+          vim.keymap.set(modes, lhs, rhs, map_opts)
+        end
+
+        map("n", "<leader>cl", "<cmd>LspInfo<CR>", { desc = "Lsp Info" })
+        map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
+        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+        map("n", "<leader>cF", require("bti.plugins.lsp.format").toggle, { desc = "Toggle formatting" })
+        map("n", "<leader>cr", ":IncRename " .. vim.fn.expand("<cword>"), { expr = true, desc = "Rename" })
+        map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
+        map("n", "gd", "<cmd>FzfLua lsp_definitions<CR>", { desc = "Goto Definition" })
+        map("n", "gI", "<cmd>FzfLua lsp_implementations<CR>", { desc = "Goto Implementation" })
+        map("n", "gr", "<cmd>FzfLua lsp_references<CR>", { desc = "References" })
+        map("n", "gt", "<cmd>FzfLua lsp_typedefs<CR>", { desc = "Goto Type Definition" })
+        map("n", "gK", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+        map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
+      end,
+    })
 
     -- Server Setup
     local capabilities = vim.tbl_deep_extend(
