@@ -19,3 +19,5 @@ function M.has_ancestor_files(files, startpath)
 
   return #found > 0 and found or nil
 end
+
+return M
