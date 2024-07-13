@@ -9,6 +9,7 @@ return {
     icons = {
       breadcrumb = "•",
       separator = "•",
+      group = "",
       rules = false,
     },
     replace = {
