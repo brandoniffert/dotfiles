@@ -1,35 +1,32 @@
 ---@type LazySpec
 return {
   "folke/which-key.nvim",
-  config = function()
-    require("which-key").setup({
-      show_help = false,
-      plugins = {
-        spelling = true,
+  ---@class wk.Opts
+  opts = {
+    preset = "modern",
+    show_help = false,
+    show_keys = true,
+    icons = {
+      breadcrumb = "•",
+      separator = "•",
+      rules = false,
+    },
+    replace = {
+      key = {
+        { "<Space>", "SPC" },
       },
-      key_labels = {
-        ["<leader>"] = "SPC",
-      },
-      icons = {
-        breadcrumb = "•",
-        separator = "•",
-        group = "+",
-      },
-    })
-
-    local wk = require("which-key")
-
-    wk.register({
+    },
+    spec = {
       mode = { "n", "v" },
-      ["g"] = { name = "+goto" },
-      ["gz"] = { name = "+surround" },
-      ["]"] = { name = "+next" },
-      ["["] = { name = "+prev" },
-      ["<Leader>c"] = { name = "+code" },
-      ["<Leader>f"] = { name = "+find" },
-      ["<Leader>h"] = { name = "+harpoon" },
-      ["<leader>u"] = { name = "+util" },
-      ["<leader>x"] = { name = "+trouble" },
-    })
-  end,
+      { "<Leader>c", group = "code" },
+      { "<Leader>f", group = "find" },
+      { "<Leader>h", group = "harpoon" },
+      { "<leader>u", group = "util" },
+      { "<leader>x", group = "trouble" },
+      { "[", group = "prev" },
+      { "]", group = "next" },
+      { "g", group = "goto" },
+      { "gz", group = "surround" },
+    },
+  },
 }
