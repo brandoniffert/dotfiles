@@ -51,5 +51,7 @@ return {
         update_n_lines = "gzn",
       },
     })
+
+    require("mini.trailspace").setup()
   end,
 }

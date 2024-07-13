@@ -190,34 +190,6 @@ local FileFlags = {
   },
 }
 
-local Whitespace = utils.surround({ " ", " " }, nil, {
-  condition = function(_)
-    local is_modifiable = vim.bo.modifiable
-    local has_bufname = vim.fn.bufname() ~= ""
-
-    return is_modifiable and has_bufname
-  end,
-
-  provider = function(_)
-    local has_trailing = vim.fn.search("\\s$", "nw") ~= 0
-    local has_mixed = vim.bo.expandtab and vim.fn.search("\\v\\t", "nw") ~= 0
-
-    if has_trailing and has_mixed then
-      return "trailing/mixed"
-    end
-
-    if has_mixed then
-      return "mixed"
-    end
-
-    if has_trailing then
-      return "trailing"
-    end
-
-    return ""
-  end,
-})
-
 local Diagnostics = utils.surround({ " ", " " }, nil, {
   condition = conditions.has_diagnostics,
 
@@ -311,7 +283,6 @@ local ActiveStatusLine = {
   { FileName },
   { FileFlags },
   { provider = "%=" },
-  { Whitespace },
   { Diagnostics },
   { FileEncodingFormat },
   { FileType },
