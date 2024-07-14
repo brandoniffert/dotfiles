@@ -35,12 +35,13 @@ function M.strip_whitespace()
 end
 
 function M.split_at()
-  if require("bti.util").has_plugin("mini.splitjoin") then
+  local ok, splitjoin = pcall(require, "mini.splitjoin")
+  if ok then
     local pos = vim.api.nvim_win_get_cursor(0)
     local line = pos[1]
     local col = pos[2]
 
-    require("mini.splitjoin").split_at({ { line = line, col = col } })
+    splitjoin.split_at({ { line = line, col = col } })
   else
     vim.api.nvim_err_writeln("mini.splitjoin is not installed")
   end
