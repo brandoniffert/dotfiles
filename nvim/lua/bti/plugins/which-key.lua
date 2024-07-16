@@ -4,6 +4,7 @@ return {
   ---@class wk.Opts
   opts = {
     preset = "modern",
+    delay = 500,
     show_help = false,
     show_keys = true,
     icons = {
