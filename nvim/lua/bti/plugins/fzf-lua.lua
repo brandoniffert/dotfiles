@@ -23,6 +23,9 @@ return {
       fzf_opts = {
         ["--marker"] = "• ",
       },
+      winopts = {
+        backdrop = 100,
+      },
     })
 
     vim.keymap.set("n", "<Leader><CR>", "<cmd>lua require('fzf-lua').files()<CR>", { desc = "Files" })
