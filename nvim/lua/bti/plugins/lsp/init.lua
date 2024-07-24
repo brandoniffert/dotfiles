@@ -155,6 +155,7 @@ return {
       group = vim.api.nvim_create_augroup("_btiLspAttach", { clear = true }),
       callback = function(event)
         local buffer = event.buf
+        local client = vim.lsp.get_client_by_id(event.data.client_id)
 
         local map = function(modes, lhs, rhs, map_opts)
           map_opts = vim.tbl_deep_extend("force", map_opts or {}, { buffer = buffer })
@@ -163,7 +164,18 @@ return {
 
         map("n", "<leader>cl", "<cmd>LspInfo<CR>", { desc = "Lsp Info" })
         map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-        map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, { desc = "Code Action" })
+        map({ "n", "v" }, "<leader>ca", function()
+          if client and client.name == "intelephense" then
+            vim.lsp.buf.code_action({
+              filter = function(action)
+                -- Filter out PHPDoc related code actions
+                return not string.match(action.title, "Add PHPDoc")
+              end,
+            })
+          else
+            vim.lsp.buf.code_action()
+          end
+        end, { desc = "Code Action" })
         map("n", "<leader>cF", require("bti.plugins.lsp.format").toggle, { desc = "Toggle formatting" })
         map("n", "<leader>cr", ":IncRename " .. vim.fn.expand("<cword>"), { expr = true, desc = "Rename" })
         map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
