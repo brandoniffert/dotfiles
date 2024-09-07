@@ -5,7 +5,7 @@ set -e
 image=node:lts
 
 # Assumes a running project container named `node`
-# If one is not found, defaults to running global `yarn` in current directory
+# If one is not found, defaults to running global `npm` in current directory
 
 docker compose run --rm node node --version &>/dev/null || exit_code=$?
 
