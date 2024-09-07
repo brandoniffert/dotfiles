@@ -124,7 +124,7 @@ return {
         },
         rust_analyzer = {},
         tailwindcss = {},
-        tsserver = {},
+        ts_ls = {},
         yamlls = {
           settings = {
             yaml = {
