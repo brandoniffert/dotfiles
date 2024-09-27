@@ -15,7 +15,25 @@ return {
       liquid = { "rustywind", "prettierd" },
       lua = { "stylua" },
       markdown = { "prettierd" },
-      php = { "php_cs_fixer" },
+      php = function()
+        local has_php_cs_fixer_config = require("bti.util").has_ancestor_files({
+          ".php-cs-fixer.dist.php",
+        })
+
+        local has_php_cs_config = require("bti.util").has_ancestor_files({
+          "phpcs.xml.dist",
+        })
+
+        if has_php_cs_fixer_config then
+          return { "php_cs_fixer" }
+        end
+
+        if has_php_cs_config then
+          return { "phpcbf" }
+        end
+
+        return { "php_cs_fixer" }
+      end,
       scss = { "prettierd" },
       svelte = { "rustywind" },
       typescript = { "rustywind", "prettierd" },
