@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+
+# Recursively remove .DS_Store and ._ files
+
+results=$(fd -u '^\._.*|^\.DS_Store$' 2>&1)
+
+if [ ${#results} -eq 0 ]; then
+  echo '> Nothing found.'
+  echo
+else
+  echo "$results"
+  echo
+
+  printf '%s' 'Do you want to remove these files? [y|N] '
+  read -r response
+  if [[ $response =~ (yes|y|Y) ]]; then
+    fd -u '^\._.*|^\.DS_Store$' -tf -X rm
+  fi
+fi
