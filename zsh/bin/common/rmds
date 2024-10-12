@@ -4,7 +4,7 @@ set -e
 
 # Recursively remove .DS_Store files
 
-results=$(fd --hidden --no-ignore .DS_Store 2>&1)
+results=$(fd -u '^\.DS_Store$' 2>&1)
 
 if [ ${#results} -eq 0 ]; then
   echo '> Nothing found.'
@@ -16,6 +16,6 @@ else
   printf '%s' 'Do you want to remove these files? [y|N] '
   read -r response
   if [[ $response =~ (yes|y|Y) ]]; then
-    fd --hidden --no-ignore '^\.DS_Store$' -tf -X rm
+    fd -u '^\.DS_Store$' -tf -X rm
   fi
 fi
