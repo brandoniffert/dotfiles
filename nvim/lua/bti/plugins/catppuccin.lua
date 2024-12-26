@@ -25,6 +25,7 @@ return {
         WinSeparator = { fg = colors.base1, bg = colors.none },
       },
       integrations = {
+        blink_cmp = true,
         harpoon = true,
         leap = true,
         neotree = true,

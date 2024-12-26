@@ -4,7 +4,7 @@ return {
   event = "BufReadPre",
   dependencies = {
     {
-      "hrsh7th/cmp-nvim-lsp",
+      "saghen/blink.cmp",
     },
     {
       "folke/lazydev.nvim",
@@ -209,7 +209,7 @@ return {
       "force",
       {},
       vim.lsp.protocol.make_client_capabilities(),
-      require("cmp_nvim_lsp").default_capabilities(),
+      require("blink.cmp").get_lsp_capabilities(),
       opts.capabilities or {}
     )
 
