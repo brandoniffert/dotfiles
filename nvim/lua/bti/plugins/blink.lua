@@ -52,15 +52,30 @@ return {
       },
     },
 
-    signature = { window = { border = "single" } },
-
     appearance = {
       use_nvim_cmp_as_default = false,
       nerd_font_variant = "mono",
     },
 
+    signature = { window = { border = "single" } },
+
+    snippets = {
+      expand = function(snippet)
+        require("luasnip").lsp_expand(snippet)
+      end,
+      active = function(filter)
+        if filter and filter.direction then
+          return require("luasnip").jumpable(filter.direction)
+        end
+        return require("luasnip").in_snippet()
+      end,
+      jump = function(direction)
+        require("luasnip").jump(direction)
+      end,
+    },
+
     sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
+      default = { "lsp", "path", "luasnip", "buffer" },
     },
   },
   opts_extend = { "sources.default" },
