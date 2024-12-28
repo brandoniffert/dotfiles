@@ -46,9 +46,7 @@ return {
       },
       menu = { border = "single" },
       list = {
-        selection = function(ctx)
-          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-        end,
+        selection = "auto_insert",
       },
     },
 
@@ -78,5 +76,4 @@ return {
       default = { "lsp", "path", "luasnip", "buffer" },
     },
   },
-  opts_extend = { "sources.default" },
 }
