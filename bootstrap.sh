@@ -8,9 +8,9 @@ step_marker=•
 
 ESeq="\x1b["
 RCol="$ESeq"'0m'
-Red="$ESeq"'0;31m';
-Gre="$ESeq"'0;32m';
-Yel="$ESeq"'0;33m';
+Red="$ESeq"'0;31m'
+Gre="$ESeq"'0;32m'
+Yel="$ESeq"'0;33m'
 
 echo_header() {
   printf "%$(tput cols)s" | tr ' ' '─'
