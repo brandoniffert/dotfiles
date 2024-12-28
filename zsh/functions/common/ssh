@@ -1,7 +1,0 @@
-# vim:ft=zsh
-# Don't send tmux TERM when using ssh
-
-emulate -L zsh
-
-local local_term=$(echo -n "$TERM" | sed -e s/tmux/screen/)
-TERM=$local_term command ssh "$@"
