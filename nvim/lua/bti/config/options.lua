@@ -123,4 +123,7 @@ vim.filetype.add({
   extension = {
     conf = "conf",
   },
+  filename = {
+    ["config"] = "conf",
+  },
 })
