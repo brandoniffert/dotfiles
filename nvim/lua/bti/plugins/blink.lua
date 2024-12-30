@@ -9,7 +9,12 @@ return {
       preset = "none",
 
       ["<C-e>"] = { "hide", "fallback" },
-      ["<CR>"] = { "accept", "fallback" },
+      ["<C-y>"] = { "select_and_accept", "fallback" },
+      ["<C-p>"] = { "select_prev", "fallback" },
+      ["<C-n>"] = { "select_next", "fallback" },
+      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
+      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
+      ["<CR>"] = { "select_and_accept", "fallback" },
       ["<Tab>"] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -30,12 +35,6 @@ return {
         end,
         "fallback",
       },
-      ["<Up>"] = { "select_prev", "fallback" },
-      ["<Down>"] = { "select_next", "fallback" },
-      ["<C-p>"] = { "select_prev", "fallback" },
-      ["<C-n>"] = { "select_next", "fallback" },
-      ["<C-b>"] = { "scroll_documentation_up", "fallback" },
-      ["<C-f>"] = { "scroll_documentation_down", "fallback" },
     },
 
     completion = {
@@ -46,7 +45,9 @@ return {
       },
       menu = { border = "single" },
       list = {
-        selection = "auto_insert",
+        selection = function(ctx)
+          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
+        end,
       },
     },
 
@@ -55,7 +56,12 @@ return {
       nerd_font_variant = "mono",
     },
 
-    signature = { window = { border = "single" } },
+    signature = {
+      enabled = true,
+      window = {
+        border = "single",
+      },
+    },
 
     snippets = {
       expand = function(snippet)
@@ -74,6 +80,9 @@ return {
 
     sources = {
       default = { "lsp", "path", "luasnip", "buffer" },
+      min_keyword_length = function(ctx)
+        return ctx.trigger.kind == "manual" and 0 or 2
+      end,
     },
   },
 }
