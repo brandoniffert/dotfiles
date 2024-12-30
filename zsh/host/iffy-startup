@@ -6,8 +6,13 @@
   local working_dir="$HOME/.dotfiles"
 
   if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "kitty" ]; then
-    # Create or attach to initial session if this is the main kitty window
-    if [[ "$KITTY_WINDOW_ID" -eq 1 ]]; then
+    if ! tmux list-clients | grep -q attached; then
+      tmux new-session -A -c "$working_dir" -s "$session_name"
+    fi
+  fi
+
+  if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "ghostty" ]; then
+    if ! tmux list-clients | grep -q attached; then
       tmux new-session -A -c "$working_dir" -s "$session_name"
     fi
   fi
