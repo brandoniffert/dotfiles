@@ -2,16 +2,12 @@
 
 # Automatically setup tmux session
 () {
+  HISTFILE=/dev/null
+
   local session_name="local"
   local working_dir="$HOME/.dotfiles"
 
-  if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "kitty" ]; then
-    if ! tmux list-clients | grep -q attached; then
-      tmux new-session -A -c "$working_dir" -s "$session_name"
-    fi
-  fi
-
-  if [ -z "$TMUX" ] && [ "$TERM_PROGRAM" = "ghostty" ]; then
+  if [ -z "$TMUX" ] && [[ "$TERM_PROGRAM" =~ ^(kitty|ghostty)$ ]]; then
     if ! tmux list-clients | grep -q attached; then
       tmux new-session -A -c "$working_dir" -s "$session_name"
     fi
