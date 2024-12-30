@@ -18,7 +18,7 @@ return {
       grep = {
         git_icons = false,
         rg_glob = true,
-        rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --colors=path:fg:147,153,178",
+        rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --colors=path:fg:147,153,178",
         actions = { ["ctrl-i"] = { actions.toggle_ignore } },
       },
       fzf_opts = {
