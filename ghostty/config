@@ -1,0 +1,29 @@
+font-size = 10.5
+font-family = Source Code Pro
+font-style-bold = Semibold
+font-style-bold-italic = Semibold Italic
+
+adjust-cell-height = 30%
+adjust-cursor-height = 8
+
+theme = catppuccin-mocha
+
+cursor-style = block
+cursor-style-blink = false
+
+mouse-hide-while-typing = true
+
+window-padding-x = 15
+window-padding-y = 0,15
+window-padding-balance = true
+window-title-font-family = Source Code Pro
+window-colorspace = display-p3
+
+quit-after-last-window-closed = true
+
+shell-integration-features = no-cursor
+
+macos-titlebar-style = tabs
+macos-titlebar-proxy-icon = hidden
+
+keybind = global:alt+ctrl+shift+t=toggle_quick_terminal
