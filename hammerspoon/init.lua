@@ -65,8 +65,8 @@ end)
 -- Window management
 bindMehFn("tab", require("window").moveWindowToNextMonitor)
 
--- Spaces
-require("spaces").init()
-
 -- Application watcher
 require("applications").init()
+
+-- Spaces
+require("spaces").init()

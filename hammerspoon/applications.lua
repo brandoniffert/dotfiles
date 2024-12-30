@@ -1,28 +1,14 @@
 local M = {}
 
-local handleApp = function(appName, eventType, app)
-  if eventType == hs.application.watcher.launched then
-    -- Maximize Ghostty window when launched
-    if appName == "Ghostty" then
-      local checkAppFocused = function()
-        return app:isFrontmost()
-      end
-      local maximizeApp = function()
-        local appWindow = app:focusedWindow()
-        if appWindow ~= nil then
-          hs.eventtap.keyStroke({ "alt", "ctrl", "shift" }, "space")
-        end
-      end
-      hs.timer.waitUntil(checkAppFocused, maximizeApp, 0.1)
-    end
-  end
-end
-
 M.init = function()
-  local appWatcher = hs.application.watcher.new(handleApp)
+  local ghosttyFilter = hs.window.filter.new("Ghostty")
 
-  hs.timer.doAfter(0.2, function()
-    appWatcher:start()
+  ghosttyFilter:subscribe(hs.window.filter.windowCreated, function(window)
+    local app = hs.application.get("Ghostty")
+
+    if app and #app:allWindows() == 1 and window ~= nil then
+      hs.eventtap.keyStroke({ "alt", "ctrl", "shift" }, "space")
+    end
   end)
 end
 
