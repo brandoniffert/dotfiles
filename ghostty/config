@@ -2,6 +2,7 @@ font-size = 10.5
 font-family = Source Code Pro
 font-style-bold = Semibold
 font-style-bold-italic = Semibold Italic
+font-feature = -calt
 
 adjust-cell-height = 30%
 adjust-cursor-height = 8
