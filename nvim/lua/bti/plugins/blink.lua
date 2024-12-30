@@ -35,6 +35,10 @@ return {
         end,
         "fallback",
       },
+
+      cmdline = {
+        ["<CR>"] = { "accept", "fallback" },
+      },
     },
 
     completion = {
