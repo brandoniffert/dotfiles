@@ -15,7 +15,7 @@ cursor-style-blink = false
 mouse-hide-while-typing = true
 
 window-padding-x = 15
-window-padding-y = 0,15
+window-padding-y = 5,15
 window-padding-balance = true
 window-title-font-family = Source Code Pro
 window-colorspace = display-p3
