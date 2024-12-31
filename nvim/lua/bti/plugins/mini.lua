@@ -29,7 +29,7 @@ return {
   end,
   config = function()
     require("mini.comment").setup()
-
+    require("mini.icons").setup()
     require("mini.indentscope").setup({
       draw = {
         delay = 0,
@@ -37,9 +37,7 @@ return {
       },
       symbol = "▎",
     })
-
     require("mini.splitjoin").setup()
-
     require("mini.surround").setup({
       mappings = {
         add = "gza",
@@ -51,7 +49,6 @@ return {
         update_n_lines = "gzn",
       },
     })
-
     require("mini.trailspace").setup()
   end,
 }

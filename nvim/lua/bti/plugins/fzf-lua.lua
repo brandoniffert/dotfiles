@@ -1,12 +1,14 @@
 ---@type LazySpec
 return {
   "ibhagwan/fzf-lua",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
   config = function()
     local actions = require("fzf-lua.actions")
 
     require("fzf-lua").setup({
       "telescope",
+      defaults = {
+        file_icons = "mini",
+      },
       files = {
         git_icons = false,
         actions = { ["ctrl-g"] = false, ["ctrl-i"] = { actions.toggle_ignore } },
