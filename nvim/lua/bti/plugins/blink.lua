@@ -14,8 +14,7 @@ return {
       ["<C-n>"] = { "select_next", "fallback" },
       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
-      ["<CR>"] = { "select_and_accept", "fallback" },
-      ["<Esc>"] = { "cancel", "fallback" },
+      ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -36,13 +35,6 @@ return {
         end,
         "fallback",
       },
-
-      cmdline = {
-        ["<CR>"] = { "accept", "fallback" },
-        ["<C-p>"] = { "select_prev", "fallback" },
-        ["<C-n>"] = { "select_next", "fallback" },
-        ["<Esc>"] = { "cancel", "fallback" },
-      },
     },
 
     completion = {
@@ -51,6 +43,7 @@ return {
         auto_show_delay_ms = 500,
         window = { border = "single" },
       },
+      ghost_text = { enabled = true },
       menu = { border = "single" },
       list = {
         selection = "auto_insert",
