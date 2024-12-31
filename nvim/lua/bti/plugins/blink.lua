@@ -15,6 +15,7 @@ return {
       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
       ["<CR>"] = { "select_and_accept", "fallback" },
+      ["<Esc>"] = { "cancel", "fallback" },
       ["<Tab>"] = {
         function(cmp)
           if cmp.snippet_active() then
@@ -38,6 +39,9 @@ return {
 
       cmdline = {
         ["<CR>"] = { "accept", "fallback" },
+        ["<C-p>"] = { "select_prev", "fallback" },
+        ["<C-n>"] = { "select_next", "fallback" },
+        ["<Esc>"] = { "cancel", "fallback" },
       },
     },
 
@@ -49,9 +53,7 @@ return {
       },
       menu = { border = "single" },
       list = {
-        selection = function(ctx)
-          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-        end,
+        selection = "auto_insert",
       },
     },
 
