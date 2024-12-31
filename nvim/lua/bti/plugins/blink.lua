@@ -35,6 +35,11 @@ return {
         end,
         "fallback",
       },
+
+      cmdline = {
+        ["<Tab>"] = { "show", "select_next", "fallback" },
+        ["<S-Tab>"] = { "select_prev", "fallback" },
+      },
     },
 
     completion = {
