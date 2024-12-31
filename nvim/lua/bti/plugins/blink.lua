@@ -87,6 +87,13 @@ return {
       min_keyword_length = function(ctx)
         return ctx.trigger.kind == "manual" and 0 or 2
       end,
+      cmdline = function()
+        local type = vim.fn.getcmdtype()
+        if type == ":" then
+          return { "cmdline" }
+        end
+        return {}
+      end,
     },
   },
 }
