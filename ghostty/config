@@ -1,4 +1,4 @@
-font-size = 10
+font-size = 10.5
 font-family = MonoLisa Variable
 font-feature = -liga
 font-feature = ss02
@@ -6,6 +6,8 @@ font-feature = ss03
 
 adjust-cell-height = 8
 adjust-cursor-height = 6
+adjust-underline-thickness = -1
+adjust-strikethrough-thickness = -1
 
 theme = catppuccin-mocha
 
@@ -17,7 +19,7 @@ mouse-hide-while-typing = true
 window-padding-x = 15
 window-padding-y = 5,15
 window-padding-balance = true
-window-title-font-family = MonoLisa Variable
+window-title-font-family = JetBrains Mono
 window-colorspace = display-p3
 
 quit-after-last-window-closed = true
