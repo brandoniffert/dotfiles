@@ -294,7 +294,7 @@
   # Background jobs color.
   typeset -g POWERLEVEL9K_BACKGROUND_JOBS_FOREGROUND=yellow
   # Custom icon.
-  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='●'
+  typeset -g POWERLEVEL9K_BACKGROUND_JOBS_VISUAL_IDENTIFIER_EXPANSION='◆'
 
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
@@ -341,11 +341,12 @@
   typeset -g POWERLEVEL9K_USER_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 
   function prompt_user_context() {
-    local tmux_session=''
+    if [[ $(hostname -s) =~ ^dev ]]; then
+      local tmux_session=''
 
-    [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"
-
-    p10k segment -f '#6c7086' -t "%m$tmux_session"
+      [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"
+      p10k segment -f '#6c7086' -t "%m$tmux_session"
+    fi
   }
 
   function instant_prompt_user_context() {
