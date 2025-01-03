@@ -8,33 +8,15 @@ return {
     keymap = {
       preset = "none",
 
-      ["<C-e>"] = { "hide", "fallback" },
+      ["<C-e>"] = { "show", "hide", "fallback" },
       ["<C-y>"] = { "select_and_accept", "fallback" },
       ["<C-p>"] = { "select_prev", "fallback" },
       ["<C-n>"] = { "select_next", "fallback" },
       ["<C-b>"] = { "scroll_documentation_up", "fallback" },
       ["<C-f>"] = { "scroll_documentation_down", "fallback" },
       ["<CR>"] = { "accept", "fallback" },
-      ["<Tab>"] = {
-        function(cmp)
-          if cmp.snippet_active() then
-            return cmp.snippet_forward()
-          else
-            return cmp.select_next()
-          end
-        end,
-        "fallback",
-      },
-      ["<S-Tab>"] = {
-        function(cmp)
-          if cmp.snippet_active() then
-            return cmp.snippet_backward()
-          else
-            return cmp.select_prev()
-          end
-        end,
-        "fallback",
-      },
+      ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
+      ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
 
       cmdline = {
         ["<Tab>"] = { "show", "select_next", "fallback" },
@@ -89,9 +71,11 @@ return {
       end,
       cmdline = function()
         local type = vim.fn.getcmdtype()
-        if type == ":" then
+
+        if type == ":" or type == "@" then
           return { "cmdline" }
         end
+
         return {}
       end,
     },
