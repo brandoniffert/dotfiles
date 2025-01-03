@@ -1,27 +1,22 @@
-# vim:ft=zsh
+#!/usr/bin/env bash
 
-emulate -L zsh
-
-function p_header() {
-  local title="$@"
+p_header() {
+  local title="$*"
   local length="${#title}"
-  local cols=$(( $(tput cols) - length - 3))
-
-  printf "\n"
-  echo -n "[${title[@]}] "
+  local cols=$(($(tput cols) - length - 3))
+  printf "\n[%s] " "$title"
   printf '%.s·' $(seq 1 $cols)
   printf "\n"
 }
 
-if command -v npm &> /dev/null; then
+if command -v npm &>/dev/null; then
   p_header 'npm'
   npm outdated --location=global
-  local ret=$?
-
+  ret=$?
   if [[ "$ret" -eq 1 ]]; then
     printf "\n"
-    read 'response?> Do you want to update? [y|N] '
-    if [[ $response =~ (yes|y|Y) ]]; then
+    read -r -p "> Do you want to update? [y|N] " response
+    if [[ $response =~ ^[yY](es)?$ ]]; then
       printf "\n"
       npm upgrade --location=global
     fi
@@ -31,34 +26,30 @@ if command -v npm &> /dev/null; then
   fi
 fi
 
-if command -v composer &> /dev/null; then
+if command -v composer &>/dev/null; then
   p_header 'composer'
   composer global outdated --direct --strict
-  local ret=$?
-
+  ret=$?
   if [[ "$ret" -eq 1 ]]; then
     printf "\n"
     composer global update --interactive
   fi
 fi
 
-if command -v tmux &> /dev/null; then
+if command -v tmux &>/dev/null; then
   p_header 'tmux'
-
   if [[ -n "$TMUX" ]]; then
-    "$XDG_DATA_HOME/tmux/plugins/tpm/scripts/update_plugin.sh" "" all
-    "$XDG_DATA_HOME/tmux/plugins/tpm/scripts/source_plugins.sh"
+    "${XDG_DATA_HOME}/tmux/plugins/tpm/scripts/update_plugin.sh" "" all
+    "${XDG_DATA_HOME}/tmux/plugins/tpm/scripts/source_plugins.sh"
   else
     echo '! Not inside a tmux session, skipping...'
   fi
 fi
 
-if command -v antidote &> /dev/null; then
+if command -v antidote &>/dev/null; then
   p_header 'antidote'
-
   antidote update
 fi
 
 printf "\n"
-
-unset p_header
+unset -f p_header

@@ -1,36 +1,37 @@
-#!/usr/bin/env zsh
-
-set -e
+#!/usr/bin/env bash
 
 # Setup two windows in a tmux session or custom layout if .tmux file exists
 
-if [[ -n "$TMUX" ]] || [[ -n "$TMUX_PANE" ]]; then
-  if [[ $(tmux list-windows | grep '' -c) -eq 1 ]]; then
-    # Check for .tmux file (poor man's Tmuxinator)
-    if [[ -x .tmux ]]; then
-      # Prompt the first time we see a given .tmux file before running it
-      digest="$(openssl sha512 .tmux)"
-      if ! grep -q "$digest" "$XDG_DATA_HOME/.tmux-digests" 2> /dev/null; then
-        cat .tmux
-        echo
-        read -k 1 -r \
-          'REPLY?Trust (and run) this .tmux file? (t = trust, otherwise = skip) '
-        echo
-        if [[ $REPLY =~ ^[Tt]$ ]]; then
-          echo "$digest" >> "$XDG_DATA_HOME/.tmux-digests"
-          ./.tmux
-          return
-        fi
-      else
-        ./.tmux
-        return
-      fi
-    else
-      tmux rename-window 'code'
-      tmux new-window
-      tmux rename-window 'build'
-      tmux select-window -t 1
-      clear
+set -euo pipefail
+IFS=$'\n\t'
+
+# Exit if not in tmux
+[[ -z "$TMUX" && -z "$TMUX_PANE" ]] && exit 0
+
+# Only proceed if single window exists
+[[ $(tmux list-windows | grep -c '^') -ne 1 ]] && exit 0
+
+# Check for executable .tmux file
+if [[ -x .tmux ]]; then
+  digest=$(openssl sha512 .tmux)
+  digest_file="${XDG_DATA_HOME}/.tmux-digests"
+
+  if ! grep -q "$digest" "$digest_file" 2>/dev/null; then
+    cat .tmux
+    echo
+    read -r -p "Trust (and run) this .tmux file? (t = trust, otherwise = skip) " -n 1 REPLY
+    echo
+    if [[ $REPLY =~ ^[Tt]$ ]]; then
+      echo "$digest" >>"$digest_file"
+      ./.tmux
     fi
+  else
+    ./.tmux
   fi
+else
+  tmux rename-window 'code'
+  tmux new-window
+  tmux rename-window 'build'
+  tmux select-window -t 1
+  clear
 fi

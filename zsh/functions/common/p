@@ -1,18 +1,21 @@
-# vim:ft=zsh
+# shellcheck shell=bash
+# shellcheck disable=SC2168
+
 # Use fzf to quickly get to a project
 
 emulate -L zsh
 
 # Fail if PROJECTS_HOME is not set
 if [[ -z ${PROJECTS_HOME+x} ]]; then
-  echo 'Please set $PROJECTS_HOME'
+  echo "Please set \$PROJECTS_HOME"
   return 1
 fi
 
-local project_dir="$(
+local project_dir
+project_dir="$(
   find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
-  sed "s:$PROJECTS_HOME\/::g" |
-  fzf --header='Projects' --height 40% --border sharp
+    sed "s:$PROJECTS_HOME\/::g" |
+    fzf --header='Projects' --height 40% --border sharp
 )"
 
 if [[ -n "${project_dir}" ]]; then
@@ -20,8 +23,8 @@ if [[ -n "${project_dir}" ]]; then
 
   # Convention for docker based projects
   if [ -d "$project_path/site" ]; then
-    cd "$project_path/site"
+    cd "$project_path/site" || exit
   else
-    cd "$project_path"
+    cd "$project_path" || exit
   fi
 fi

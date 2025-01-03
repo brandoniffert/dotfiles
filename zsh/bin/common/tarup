@@ -1,14 +1,23 @@
 #!/usr/bin/env bash
 
-set -e
+set -euo pipefail
+
+IFS=$'\n\t'
 
 if [ $# -ne 1 ]; then
-  echo "! Too few args"
+  echo "Usage: $0 directory" >&2
   exit 1
 fi
 
-if command -v gtar &> /dev/null; then
-  gtar zcf "$1.tar.gz" "$1"
-else
-  tar zcf "$1.tar.gz" "$1"
+if [ ! -d "$1" ]; then
+  echo "Error: Not a directory: $1" >&2
+  exit 1
 fi
+
+if command -v gtar &>/dev/null; then
+  tar_cmd="gtar"
+else
+  tar_cmd="tar"
+fi
+
+"$tar_cmd" -czf "$1.tar.gz" "$1"
