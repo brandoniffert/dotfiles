@@ -32,7 +32,7 @@ if command -v composer &>/dev/null; then
   ret=$?
   if [[ "$ret" -eq 1 ]]; then
     printf "\n"
-    composer global update --interactive --with-dependencies "$(composer global show --direct | grep '^[a-zA-Z]' | cut -d ' ' -f1)"
+    composer global update --interactive --with-dependencies "$(composer global show --direct 2>/dev/null | grep '^[a-zA-Z]' | cut -d ' ' -f1)"
   fi
 fi
 
