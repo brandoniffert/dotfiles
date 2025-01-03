@@ -126,4 +126,7 @@ vim.filetype.add({
   filename = {
     ["config"] = "conf",
   },
+  pattern = {
+    [".*/zsh/functions/.*"] = "sh",
+  },
 })
