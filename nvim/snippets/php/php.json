@@ -1,0 +1,7 @@
+{
+  "die_var_dump": {
+    "prefix": "dv",
+    "body": ["die(var_dump($0));"],
+    "description": "die_var_dump"
+  }
+}
