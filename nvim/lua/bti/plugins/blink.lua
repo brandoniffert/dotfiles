@@ -17,6 +17,14 @@ return {
       ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
+      ["<Esc>"] = {
+        function(cmp)
+          if cmp.is_visible() then
+            return cmp.cancel()
+          end
+        end,
+        "fallback",
+      },
 
       cmdline = {
         ["<Tab>"] = { "show", "select_next", "fallback" },
@@ -33,9 +41,6 @@ return {
       },
       ghost_text = { enabled = true },
       menu = { border = "single" },
-      list = {
-        selection = "auto_insert",
-      },
     },
 
     appearance = {
