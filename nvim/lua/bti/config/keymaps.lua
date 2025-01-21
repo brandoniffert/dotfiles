@@ -50,7 +50,12 @@ vim.keymap.set(
   { silent = true, desc = "Close all buffers but the current one" }
 )
 
-vim.keymap.set("n", "<Leader>e", ':edit <C-R>=expand("%:p:h") . "/"<CR>', { desc = "Edit File (Same Directory)" })
+vim.keymap.set(
+  "n",
+  "<Leader>e",
+  ':edit <C-R>=expand("%") == "" ? getcwd() . "/" : expand("%:h") . "/"<CR>',
+  { desc = "Edit File (Same Directory)" }
+)
 
 vim.keymap.set("n", "<Leader>p", '"*p', { desc = "Paste from clipboard" })
 vim.keymap.set("n", "<Leader>q", "<cmd>:q<CR>", { desc = "Quit" })
