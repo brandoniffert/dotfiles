@@ -24,6 +24,7 @@ return {
         VertSplit = { fg = colors.base1, bg = colors.none },
         WinSeparator = { fg = colors.base1, bg = colors.none },
       },
+      -- https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
       integrations = {
         blink_cmp = true,
         harpoon = true,
