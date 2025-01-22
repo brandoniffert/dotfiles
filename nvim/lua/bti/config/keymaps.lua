@@ -23,10 +23,6 @@ vim.keymap.set("n", "|", "<cmd>lua require('bti.util.functions').split_at()<CR>"
 -- Don't replace register with text that was pasted over
 vim.keymap.set("x", "p", "p:if v:register == '\"'<bar>let @@=@0<bar>endif<CR>")
 
--- Quickfix navigation
-vim.keymap.set("n", "]q", "<cmd>cnext<CR>", { desc = "Next quickfix item" })
-vim.keymap.set("n", "[q", "<cmd>cprevious<CR>", { desc = "Previous quickfix item" })
-
 -- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
 vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
 vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })

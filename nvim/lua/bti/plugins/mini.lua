@@ -28,6 +28,7 @@ return {
     })
   end,
   config = function()
+    require("mini.bracketed").setup()
     require("mini.comment").setup()
     require("mini.icons").setup()
     require("mini.indentscope").setup({
