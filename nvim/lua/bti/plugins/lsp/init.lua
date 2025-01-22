@@ -140,7 +140,6 @@ return {
         },
         rust_analyzer = {},
         tailwindcss = {},
-        ts_ls = {},
         yamlls = {
           settings = {
             yaml = {
