@@ -52,7 +52,15 @@ return {
 
     sources = {
       default = { "lsp", "path", "snippets", "buffer" },
-      cmdline = {},
+      cmdline = function()
+        local type = vim.fn.getcmdtype()
+
+        if type == ":" or type == "@" then
+          return { "cmdline" }
+        end
+
+        return {}
+      end,
     },
   },
 }
