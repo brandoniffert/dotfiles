@@ -28,6 +28,7 @@ return {
     })
   end,
   config = function()
+    require("mini.ai").setup()
     require("mini.bracketed").setup()
     require("mini.comment").setup()
     require("mini.icons").setup()
