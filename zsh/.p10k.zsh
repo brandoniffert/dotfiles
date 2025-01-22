@@ -94,6 +94,8 @@
   # The right end of right prompt.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 
+  typeset -g POWERLEVEL9K_TERM_SHELL_INTEGRATION=true
+
   # Filler between left and right prompt on the first prompt line. You can set it to '·' or '─'
   # to make it easier to see the alignment between left and right prompt and to separate prompt
   # from command output. It serves the same purpose as ruler (see above) without increasing
