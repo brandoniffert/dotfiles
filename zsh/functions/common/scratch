@@ -8,7 +8,7 @@ echo '> Spawning subshell in scratch directory:'
 echo "  $scratch"
 (
   cd "$scratch" || exit
-  zsh
+  FORGET_ME=1 zsh
 )
 echo "> Removing scratch directory"
 rm -fr "$scratch"
