@@ -2,6 +2,14 @@
 
 set -euo pipefail
 
+quiet=false
+while getopts "q" opt; do
+  case $opt in
+  q) quiet=true ;;
+  *) exit 1 ;;
+  esac
+done
+
 config_home=${XDG_CONFIG_HOME:-"$HOME/.config"}
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 step_marker=•
@@ -13,6 +21,7 @@ Gre="$ESeq"'0;32m'
 Yel="$ESeq"'0;33m'
 
 echo_header() {
+  [ "$quiet" = true ] && return
   printf "%$(tput cols)s" | tr ' ' '─'
   echo -e "$1"
   printf "%$(tput cols)s" | tr ' ' '─'
@@ -20,20 +29,22 @@ echo_header() {
 }
 
 echo_success() {
+  [ "$quiet" = true ] && return
   echo -e "${Gre}$step_marker $1${RCol}"
 }
 
 echo_skip() {
+  [ "$quiet" = true ] && return
   echo -e "${Yel}$step_marker $1${RCol}"
 }
 
 echo_error() {
+  [ "$quiet" = true ] && return
   echo -e "${Red}$step_marker $1${RCol}"
 }
 
 echo_error_exit() {
-  echo_error "$@"
-  echo
+  [ "$quiet" = true ] || echo -e "${Red}$step_marker $1${RCol}\n"
   exit 1
 }
 
@@ -106,6 +117,4 @@ for file in "${home_dots[@]}"; do
   link_file "$source_file" "$target_file"
 done
 
-echo
-echo "Done."
-echo
+[ "$quiet" = true ] || echo -e "\nDone.\n"
