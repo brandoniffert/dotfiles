@@ -205,7 +205,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' fzf-bindings '`:toggle'
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-flags --color fg:#9399B2,fg+:-1,bg:-1,bg+:#2a2b3d,gutter:-1,hl:bold:-1,hl+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#9399B2 --bind=tab:accept --border sharp --info=inline
+zstyle ':fzf-tab:*' fzf-flags --color fg:#9399B2,fg+:-1,bg:-1,bg+:#2a2b3d,gutter:-1,hl:bold:-1,hl+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#9399B2 --bind=tab:accept --border sharp --info=inline --prompt=' ' --marker='• '
 
 # Disable completion of users
 zstyle ':completion:*' users
