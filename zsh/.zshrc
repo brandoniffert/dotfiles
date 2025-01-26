@@ -60,6 +60,13 @@ export HISTSIZE=120000
 export SAVEHIST=100000
 export WORDCHARS='*?[]~&;!$%^<>'
 
+# Setup dircolors
+() {
+  local _dircolors="$XDG_CONFIG_HOME/dircolors/dircolors"
+  [[ "$OSTYPE" == "darwin"* ]] && local dircolors_cmd='gdircolors' || local dircolors_cmd='dircolors'
+  command -v "$dircolors_cmd" >/dev/null && test -r $_dircolors && eval $(command $dircolors_cmd $_dircolors)
+}
+
 #------------------------------------------------------------------------------
 #-- Key Bindings --------------------------------------------------------------
 #------------------------------------------------------------------------------
@@ -102,6 +109,18 @@ function bti-fg-bg() {
 }
 zle -N bti-fg-bg
 bindkey '^Z' bti-fg-bg
+
+# Show indicator for tab completion
+function expand-or-complete-with-dots() {
+  [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti rmam
+  print -Pn "%{%F{yellow}......%f%}"
+  [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti smam
+
+  zle expand-or-complete
+  zle redisplay
+}
+zle -N expand-or-complete-with-dots
+bindkey "^I" expand-or-complete-with-dots
 
 #------------------------------------------------------------------------------
 #-- Aliases -------------------------------------------------------------------
@@ -180,9 +199,13 @@ zstyle -e ':completion:*' special-dirs '[[ $PREFIX = (../)#(..) ]] && reply=(..)
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path "${XDG_CACHE_HOME:-$HOME/.cache}/zsh/zcompcache"
 
-# Enable keyboard navigation of completions in menu
-# (not just tab/shift-tab but cursor keys as well):
-zstyle ':completion:*' menu select
+# fzf-tab setup
+zstyle ':completion:*' menu no
+zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
+zstyle ':completion:*:descriptions' format '[%d]'
+zstyle ':fzf-tab:*' fzf-bindings '`:toggle'
+zstyle ':fzf-tab:*' switch-group '<' '>'
+zstyle ':fzf-tab:*' fzf-flags --color fg:#9399B2,fg+:-1,bg:-1,bg+:#2a2b3d,gutter:-1,hl:bold:-1,hl+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#9399B2 --bind=tab:accept --border sharp --info=inline
 
 # Disable completion of users
 zstyle ':completion:*' users
@@ -230,13 +253,6 @@ function _fzf_compgen_path() {
 # Use fd to generate the list for directory completion
 function _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
-}
-
-# Setup dircolors
-() {
-  local _dircolors="$XDG_CONFIG_HOME/dircolors/dircolors"
-  [[ "$OSTYPE" == "darwin"* ]] && local dircolors_cmd='gdircolors' || local dircolors_cmd='dircolors'
-  command -v "$dircolors_cmd" >/dev/null && test -r $_dircolors && eval $(command $dircolors_cmd $_dircolors)
 }
 
 #------------------------------------------------------------------------------
