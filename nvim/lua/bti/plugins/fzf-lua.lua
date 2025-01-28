@@ -2,22 +2,28 @@
 return {
   "ibhagwan/fzf-lua",
   config = function()
+    local actions = require("fzf-lua.actions")
+
     require("fzf-lua").setup({
       "telescope",
       defaults = {
         file_icons = "mini",
       },
       files = {
-        rg_opts = [[--color=never --files --hidden -g "!.git"]],
-        fd_opts = [[--color=never --type f --hidden --type l --exclude .git]],
+        actions = {
+          ["alt-i"] = { actions.toggle_ignore },
+        },
       },
       oldfiles = {
         cwd_only = true,
         include_current_session = true,
       },
       grep = {
-        rg_glob = true,
+        hidden = true,
         rg_opts = "--column --line-number --no-heading --color=always --smart-case --max-columns=4096 --hidden --glob '!.git' --colors=path:fg:147,153,178 -e",
+        actions = {
+          ["alt-i"] = { actions.toggle_ignore },
+        },
       },
       fzf_opts = {
         ["--marker"] = "• ",
