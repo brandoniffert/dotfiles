@@ -1,9 +1,9 @@
 font-size = 10
 font-family = MonoLisa Variable
-font-variation = wght=300
-font-variation-italic = wght=300
-font-variation-bold = wght=600
-font-variation-bold-italic = wght=600
+font-variation = wght=250
+font-variation-italic = wght=250
+font-variation-bold = wght=400
+font-variation-bold-italic = wght=400
 font-feature = -liga
 font-feature = -calt
 font-feature = ss02
