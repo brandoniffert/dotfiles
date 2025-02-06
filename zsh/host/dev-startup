@@ -12,4 +12,6 @@
   if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-session -A -c "$working_dir" -s "$session_name"
   fi
+
+  [[ -z "$(tmux list-clients -t "$session_name")" ]] && tmux attach -t "$session_name"
 }
