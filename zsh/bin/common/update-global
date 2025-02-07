@@ -5,17 +5,17 @@ p_header() {
   local length="${#title}"
   local cols=$(($(tput cols) - length - 3))
   printf "\n[%s] " "$title"
-  printf '%.s·' $(seq 1 $cols)
+  repeat $cols printf "·"
   printf "\n"
 }
 
-if command -v npm &>/dev/null; then
+if (( $+commands[npm] )); then
   p_header 'npm'
   npm outdated --location=global
   ret=$?
   if [[ "$ret" -eq 1 ]]; then
     printf "\n"
-    read -r -p "> Do you want to update? [y|N] " response
+    read "response?> Do you want to update? [y|N] "
     if [[ $response =~ ^[yY](es)?$ ]]; then
       printf "\n"
       npm upgrade --location=global
@@ -26,18 +26,18 @@ if command -v npm &>/dev/null; then
   fi
 fi
 
-if command -v composer &>/dev/null; then
+if (( $+commands[composer] )); then
   p_header 'composer'
   composer global outdated --direct --strict
   ret=$?
   if [[ "$ret" -eq 1 ]]; then
     printf "\n"
-    mapfile -t packages < <(composer global show --direct 2>/dev/null | grep '^[a-zA-Z]' | cut -d ' ' -f1)
+    packages=($(composer global show --direct 2>/dev/null | grep '^[a-zA-Z]' | cut -d ' ' -f1))
     composer global update --interactive --with-dependencies "${packages[@]}"
   fi
 fi
 
-if command -v tmux &>/dev/null; then
+if (( $+commands[tmux] )); then
   p_header 'tmux'
   if [[ -n "$TMUX" ]]; then
     "${XDG_DATA_HOME}/tmux/plugins/tpm/scripts/update_plugin.sh" "" all
@@ -47,7 +47,7 @@ if command -v tmux &>/dev/null; then
   fi
 fi
 
-if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]] &>/dev/null; then
+if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]]; then
   p_header 'antidote'
   source ${ZDOTDIR:-~}/.antidote/antidote.zsh
   antidote update
