@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env zsh
 
 p_header() {
   local title="$*"
@@ -47,8 +47,9 @@ if command -v tmux &>/dev/null; then
   fi
 fi
 
-if command -v antidote &>/dev/null; then
+if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]] &>/dev/null; then
   p_header 'antidote'
+  source ${ZDOTDIR:-~}/.antidote/antidote.zsh
   antidote update
 fi
 
