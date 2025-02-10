@@ -233,11 +233,25 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 [[ -r "$ZDOTDIR/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh" ]] &&
   source "$ZDOTDIR/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-  source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
-else
-  source /usr/share/fzf/key-bindings.zsh
-  source /usr/share/fzf/completion.zsh
+if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]]; then
+  # Using fzf-tab so don't use the default fzf completion
+  if [[ $(grep "fzf-tab" ${ZDOTDIR:-~}/.zsh_plugins.txt) ]]; then
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+        PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+      fi
+      source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
+    else
+      source /usr/share/fzf/key-bindings.zsh
+    fi
+  else
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+      source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
+    else
+      source /usr/share/fzf/key-bindings.zsh
+      source /usr/share/fzf/completion.zsh
+    fi
+  fi
 fi
 
 eval "$(zoxide init zsh)"
