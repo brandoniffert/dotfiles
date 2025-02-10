@@ -13,5 +13,5 @@
     tmux new-session -A -c "$working_dir" -s "$session_name"
   fi
 
-  [[ -z "$(tmux list-clients -t "$session_name")" ]] && tmux attach -t "$session_name"
+  [[ -z "$(tmux list-clients)" ]] && tmux attach -t "$session_name"
 }
