@@ -63,7 +63,7 @@ bindMehFn("escape", function()
 end)
 
 -- Window management
-bindMehFn("tab", require("window").moveWindowToNextMonitor)
+-- bindMehFn("tab", require("window").moveWindowToNextMonitor)
 
 -- Application watcher
 require("applications").init()
