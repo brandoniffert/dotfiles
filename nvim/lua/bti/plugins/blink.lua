@@ -17,11 +17,6 @@ return {
       ["<CR>"] = { "accept", "fallback" },
       ["<Tab>"] = { "select_next", "snippet_forward", "fallback" },
       ["<S-Tab>"] = { "select_prev", "snippet_backward", "fallback" },
-
-      cmdline = {
-        ["<Tab>"] = { "show", "select_next", "fallback" },
-        ["<S-Tab>"] = { "select_prev", "fallback" },
-      },
     },
 
     completion = {
@@ -50,9 +45,8 @@ return {
       },
     },
 
-    sources = {
-      default = { "lsp", "path", "snippets", "buffer" },
-      cmdline = {},
+    cmdline = {
+      enabled = false,
     },
   },
 }
