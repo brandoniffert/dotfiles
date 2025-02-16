@@ -1,0 +1,50 @@
+#!/usr/bin/env bash
+
+# shellcheck disable=SC1091
+source "$CONFIG_DIR/colors.sh"
+
+ITEM_DIR="$CONFIG_DIR/items"
+export PLUGIN_DIR="$CONFIG_DIR/plugins"
+export APP_FONT="sketchybar-app-font:Regular:11.5"
+NERD_FONT="Symbols Nerd Font:Regular:11.0"
+TEXT_FONT="MonoLisa:Regular:10.0"
+PADDINGS=3
+
+bar=(
+  blur_radius=50
+  color="$BAR_COLOR"
+  corner_radius=5
+  display=main
+  height=25
+  margin=15
+  padding_left=0
+  padding_right=15
+  position=bottom
+  topmost=window
+  y_offset=3
+)
+sketchybar --bar "${bar[@]}"
+
+default=(
+  updates=when_shown
+  icon.font="$NERD_FONT"
+  label.font="$TEXT_FONT"
+  label.color="$LABEL_COLOR"
+  icon.padding_left="$PADDINGS"
+  icon.padding_right="$PADDINGS"
+  label.padding_left="$PADDINGS"
+  label.padding_right="$PADDINGS"
+  background.padding_right="$PADDINGS"
+  background.padding_left="$PADDINGS"
+)
+sketchybar --default "${default[@]}"
+
+# Left
+source "$ITEM_DIR/aerospace.sh"
+
+# Right
+source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/mail.sh"
+source "$ITEM_DIR/slack.sh"
+
+sketchybar --update
