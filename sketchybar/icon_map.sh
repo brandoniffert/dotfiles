@@ -552,7 +552,7 @@ function __icon_map() {
    "Proton Mail" | "Proton Mail Bridge")
         icon_result=":proton_mail:"
         ;;
-   "Proton VPN")
+   "Proton VPN" | "ProtonVPN")
         icon_result=":proton_vpn:"
         ;;
    "PrusaSlicer" | "SuperSlicer")
@@ -596,6 +596,9 @@ function __icon_map() {
         ;;
    "Royal TSX")
         icon_result=":royaltsx:"
+        ;;
+   "RustDesk")
+        icon_result=":rustdesk:"
         ;;
    "Safari" | "Safari浏览器" | "Safari Technology Preview")
         icon_result=":safari:"
@@ -653,6 +656,9 @@ function __icon_map() {
         ;;
    "Tabby")
         icon_result=":tabby:"
+        ;;
+   "TablePlus")
+        icon_result=":tableplus:"
         ;;
    "Tana")
         icon_result=":tana:"
