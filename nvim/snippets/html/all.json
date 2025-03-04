@@ -1,0 +1,6 @@
+{
+  "target _blank": {
+    "prefix": "target",
+    "body": "target=\"_blank\" rel=\"noopener noreferrer\""
+  }
+}

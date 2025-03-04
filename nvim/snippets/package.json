@@ -26,6 +26,17 @@
       },
       {
         "language": [
+          "html",
+          "astro",
+          "javascriptreact",
+          "typescriptreact",
+          "vue",
+          "svelte"
+        ],
+        "path": "./html/all.json"
+      },
+      {
+        "language": [
           "php"
         ],
         "path": "./php/php.json"
