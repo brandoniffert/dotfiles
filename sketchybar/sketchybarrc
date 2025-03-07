@@ -1,14 +1,10 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/ui.sh"
 
-ITEM_DIR="$CONFIG_DIR/items"
+export ITEM_DIR="$CONFIG_DIR/items"
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
-export APP_FONT="sketchybar-app-font:Regular:11.5"
-NERD_FONT="Symbols Nerd Font:Regular:11.0"
-TEXT_FONT="MonoLisa:Regular:10.0"
-PADDINGS=3
 
 bar=(
   blur_radius=50
@@ -40,7 +36,7 @@ default=(
 sketchybar --default "${default[@]}"
 
 # Left
-source "$ITEM_DIR/aerospace.sh"
+source "$ITEM_DIR/windows.sh"
 
 # Right
 source "$ITEM_DIR/clock.sh"

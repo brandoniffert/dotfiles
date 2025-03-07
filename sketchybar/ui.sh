@@ -41,3 +41,9 @@ export BAR_COLOR=$(hex_to_argb $BASE "B3")
 export LABEL_COLOR=$(hex_to_argb $TEXT)
 export ACCENT_COLOR=$(hex_to_argb $YELLOW)
 export SPACE_BG_COLOR=$(hex_to_argb $SURFACE0)
+
+export APP_FONT="sketchybar-app-font:Regular:11.5"
+export NERD_FONT="Symbols Nerd Font:Regular:11.0"
+export TEXT_FONT="MonoLisa:Regular:10.0"
+
+export PADDINGS=3

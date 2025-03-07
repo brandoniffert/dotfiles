@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/ui.sh"
 
 # sketchybar --add event aerospace_workspace_change
 sketchybar --add event aerospace_focus_change

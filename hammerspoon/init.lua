@@ -1,5 +1,7 @@
 -- local log = require("log")
 
+require("hs.ipc")
+
 hs.window.animationDuration = 0
 
 local detectKeyLayout = function()
@@ -62,11 +64,11 @@ bindMehFn("escape", function()
   end)
 end)
 
--- Window management
--- bindMehFn("tab", require("window").moveWindowToNextMonitor)
+-- Sketchybar windows
+require("window").init()
 
 -- Application watcher
 require("applications").init()
 
 -- Spaces
-require("spaces").init()
+-- require("spaces").init()

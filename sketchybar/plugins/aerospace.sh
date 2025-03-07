@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # shellcheck disable=SC1091
-source "$CONFIG_DIR/colors.sh"
+source "$CONFIG_DIR/ui.sh"
 source "$CONFIG_DIR/icon_map.sh"
 
 workspace_cache="$(cat /tmp/aerospace_cache_workspace)"
