@@ -89,6 +89,7 @@ config_dots=(
   nvim
   ripgrep
   tmux
+  yazi
   zsh
 )
 
@@ -101,7 +102,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     hammerspoon
     sketchybar
     wezterm
-    yazi
   )
 fi
 
