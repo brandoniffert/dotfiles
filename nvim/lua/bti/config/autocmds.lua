@@ -116,7 +116,7 @@ augroups.ui = {
 
   yank = {
     event = { "TextYankPost" },
-    command = "lua require('vim.highlight').on_yank()",
+    command = "lua require('vim.hl').on_yank()",
   },
 }
 
