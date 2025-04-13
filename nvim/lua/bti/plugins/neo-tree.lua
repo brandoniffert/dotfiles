@@ -48,7 +48,6 @@ return {
         ["<space>"] = "none",
       },
     },
-    popup_border_style = "rounded",
     enable_diagnostics = false,
     default_component_configs = {
       name = {

@@ -24,13 +24,11 @@ return {
         auto_show = true,
         auto_show_delay_ms = 250,
         treesitter_highlighting = true,
-        window = { border = "single" },
       },
       ghost_text = { enabled = true },
       list = {
         selection = { preselect = false, auto_insert = true },
       },
-      menu = { border = "single" },
     },
 
     appearance = {
@@ -40,9 +38,6 @@ return {
 
     signature = {
       enabled = true,
-      window = {
-        border = "single",
-      },
     },
 
     cmdline = {

@@ -25,6 +25,7 @@ require("lazy").setup("bti.plugins", {
     notify = false,
   },
   ui = {
+    backdrop = 100,
     border = "single",
   },
   performance = {

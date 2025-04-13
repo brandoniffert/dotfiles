@@ -28,9 +28,6 @@ return {
         update_in_insert = false,
         virtual_text = { spacing = 4, prefix = "●" },
         severity_sort = true,
-        float = {
-          border = "single",
-        },
         signs = {
           text = {
             [vim.diagnostic.severity.ERROR] = require("bti.theme").icons.diagnostics.Error,
@@ -154,13 +151,6 @@ return {
   end,
   config = function(_, opts)
     -- vim.lsp.set_log_level('debug')
-
-    -- Style adjustments
-    require("lspconfig.ui.windows").default_options.border = "single"
-    vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "single" })
-    vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-      border = "single",
-    })
 
     -- Diagnostics
     vim.diagnostic.config(vim.deepcopy(opts.diagnostics))
