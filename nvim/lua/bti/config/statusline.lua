@@ -149,6 +149,7 @@ local FileName = {
     end,
 
     hl = {
+      fg = colors.text,
       bold = true,
     },
   },
