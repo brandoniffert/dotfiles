@@ -24,6 +24,9 @@ require("lazy").setup("bti.plugins", {
     enabled = true,
     notify = false,
   },
+  rocks = {
+    enabled = false,
+  },
   ui = {
     backdrop = 100,
     border = "single",
