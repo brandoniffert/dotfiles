@@ -102,6 +102,9 @@ function __icon_map() {
    "Brave Browser")
         icon_result=":brave_browser:"
         ;;
+   "Bruno")
+        icon_result=":bruno:"
+        ;;
    "BusyCal")
         icon_result=":busycal:"
         ;;
@@ -740,6 +743,9 @@ function __icon_map() {
         ;;
    "WebStorm")
         icon_result=":web_storm:"
+        ;;
+   "Webull Desktop")
+        icon_result=":webull:"
         ;;
    "微信" | "WeChat")
         icon_result=":wechat:"
