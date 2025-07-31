@@ -10,7 +10,7 @@ return {
     require("catppuccin").setup({
       custom_highlights = {
         FloatBorder = { fg = colors.overlay2, bg = colors.none },
-        FzfLuaHeaderText = { fg = colors.red },
+        FloatTitle = { fg = colors.text, bg = colors.base1 },
         LazyBackdrop = { link = "NormalFloat" },
         LeapBackdrop = { fg = colors.overlay0 },
         LeapLabel = { fg = colors.red, bg = colors.none, style = { "nocombine", "bold", "underline" } },
@@ -21,6 +21,10 @@ return {
         NeoTreeWinSeparator = { fg = colors.base1, bg = colors.none },
         NormalFloat = { bg = colors.base },
         Pmenu = { bg = colors.base },
+        SnacksPickerCursorLine = { bg = colors.base1 },
+        SnacksPickerDir = { fg = colors.overlay1 },
+        SnacksPickerListCursorLine = { bg = colors.base1 },
+        SnacksPickerSelected = { bg = colors.none },
         VertSplit = { fg = colors.base1, bg = colors.none },
         WinSeparator = { fg = colors.base1, bg = colors.none },
       },
@@ -30,6 +34,7 @@ return {
         harpoon = true,
         leap = true,
         neotree = true,
+        snacks = true,
         treesitter_context = true,
         which_key = true,
       },

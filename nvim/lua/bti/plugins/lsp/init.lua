@@ -186,11 +186,6 @@ return {
           return ":IncRename " .. vim.fn.expand("<cword>")
         end, { expr = true, desc = "Rename" })
         map("n", "K", vim.lsp.buf.hover, { desc = "Hover" })
-        map("n", "<Leader>cgf", "<cmd>FzfLua lsp_finder<CR>", { desc = "Finder" })
-        map("n", "<Leader>cgd", "<cmd>FzfLua lsp_definitions<CR>", { desc = "Goto Definition" })
-        map("n", "<Leader>cgi", "<cmd>FzfLua lsp_implementations<CR>", { desc = "Goto Implementation" })
-        map("n", "<Leader>cgr", "<cmd>FzfLua lsp_references<CR>", { desc = "References" })
-        map("n", "<Leader>cgt", "<cmd>FzfLua lsp_typedefs<CR>", { desc = "Goto Type Definition" })
         map("n", "<A-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
         map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
       end,
