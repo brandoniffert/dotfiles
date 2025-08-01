@@ -30,35 +30,10 @@ return {
   initial_cols = 160,
   initial_rows = 60,
   font = wezterm.font_with_fallback({
-    { family = "OperatorMonoSSm Nerd Font", weight = "Light" },
+    { family = "MonoLisa Variable" },
+    { family = "Symbols Nerd Font" },
   }),
-  font_rules = {
-    {
-      intensity = "Normal",
-      italic = true,
-      font = wezterm.font({
-        family = "OperatorMonoSSm Nerd Font",
-        weight = "Light",
-      }),
-    },
-    {
-      intensity = "Bold",
-      font = wezterm.font({
-        family = "OperatorMonoSSm Nerd Font",
-        weight = "Book",
-      }),
-    },
-    {
-      intensity = "Bold",
-      italic = true,
-      font = wezterm.font({
-        family = "OperatorMonoSSm Nerd Font",
-        weight = "Book",
-        italic = true,
-      }),
-    },
-  },
-  font_size = 10.5,
+  font_size = 10.0,
   line_height = 1.4,
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = false,
