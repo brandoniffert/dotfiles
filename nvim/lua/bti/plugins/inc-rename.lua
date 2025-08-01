@@ -1,5 +1,7 @@
 ---@type LazySpec
 return {
   "smjonas/inc-rename.nvim",
-  config = true,
+  opts = {
+    input_buffer_type = "snacks",
+  },
 }
