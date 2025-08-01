@@ -13,7 +13,7 @@ elif [[ -f $input ]]; then
 fi
 
 if [[ -z "$target" ]]; then
-  /opt/homebrew/bin/wezterm -e nvim -c ":cd $dir"
+  open -a WezTerm --args -e nvim -c ":cd $dir"
 else
-  /opt/homebrew/bin/wezterm -e nvim -c ":cd $dir" "$target"
+  open -a WezTerm --args -e nvim -c ":cd $dir" "$target"
 fi
