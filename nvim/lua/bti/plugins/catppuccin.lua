@@ -12,8 +12,6 @@ return {
         FloatBorder = { fg = colors.overlay2, bg = colors.none },
         FloatTitle = { fg = colors.text, bg = colors.base1 },
         LazyBackdrop = { link = "NormalFloat" },
-        LeapBackdrop = { fg = colors.overlay0 },
-        LeapLabel = { fg = colors.red, bg = colors.none, style = { "nocombine", "bold", "underline" } },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
         NeoTreeIndentMarker = { fg = colors.surface2 },
         NeoTreeNormal = { bg = colors.base },
@@ -32,7 +30,6 @@ return {
       integrations = {
         blink_cmp = true,
         harpoon = true,
-        leap = true,
         neotree = true,
         snacks = true,
         treesitter_context = true,
