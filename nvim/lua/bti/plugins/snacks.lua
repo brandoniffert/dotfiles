@@ -4,6 +4,7 @@ return {
   ---@module 'snacks'
   ---@type snacks.Config
   opts = {
+    input = {},
     picker = {
       layout = "bottom",
       win = {
@@ -19,7 +20,9 @@ return {
     {
       "<Leader><CR>",
       function()
-        Snacks.picker.smart()
+        Snacks.picker.smart({
+          multi = { "buffers", "files" },
+        })
       end,
       desc = "Smart Find Files",
     },
