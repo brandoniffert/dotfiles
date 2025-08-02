@@ -8,18 +8,16 @@ return {
     local colors = require("bti.theme").colors
 
     require("catppuccin").setup({
+      transparent_background = true,
       float = {
         transparent = true,
         solid = false,
       },
       custom_highlights = {
-        MiniIndentscopeSymbol = { fg = colors.surface2 },
-        Pmenu = { bg = colors.base },
-        PmenuSel = { bg = colors.surface0 },
+        MiniIndentscopeSymbol = { fg = colors.surface1 },
         SnacksPickerDir = { fg = colors.overlay2 },
         SnacksPickerFile = { bold = true },
         SnacksPickerSelected = { bg = colors.none },
-        VertSplit = { fg = colors.base1, bg = colors.none },
         Visual = { bg = colors.surface0 },
         VisualNOS = { bg = colors.surface0 },
         WinSeparator = { fg = colors.base1, bg = colors.none },
