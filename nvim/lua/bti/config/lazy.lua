@@ -29,7 +29,7 @@ require("lazy").setup("bti.plugins", {
   },
   ui = {
     backdrop = 100,
-    border = "single",
+    border = "rounded",
   },
   performance = {
     rtp = {
