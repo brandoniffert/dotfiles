@@ -114,10 +114,10 @@ vim.opt.visualbell = true
 vim.opt.whichwrap = "b,h,l,s,<,>,[,],~"
 vim.opt.wildcharm = 26
 vim.opt.wildignore:append("*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.pyc,*.so,*.DS_Store*/tmp/*")
-vim.o.wildmenu = true
-vim.o.wildmode = "longest:full,full"
-vim.o.winborder = "rounded"
-vim.o.writebackup = false
+vim.opt.wildmenu = true
+vim.opt.wildmode = "longest:full,full"
+vim.opt.winborder = "rounded"
+vim.opt.writebackup = false
 
 -- Handle filetypes
 vim.filetype.add({
