@@ -8,18 +8,20 @@ return {
     local colors = require("bti.theme").colors
 
     require("catppuccin").setup({
+      float = {
+        transparent = true,
+        solid = false,
+      },
       custom_highlights = {
-        FloatBorder = { fg = colors.overlay2, bg = colors.none },
-        FloatTitle = { fg = colors.text, bg = colors.base1 },
-        LazyBackdrop = { link = "NormalFloat" },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
-        NormalFloat = { bg = colors.base },
         Pmenu = { bg = colors.base },
-        SnacksPickerCursorLine = { bg = colors.base1 },
-        SnacksPickerDir = { fg = colors.overlay1 },
-        SnacksPickerListCursorLine = { bg = colors.base1 },
+        PmenuSel = { bg = colors.surface0 },
+        SnacksPickerDir = { fg = colors.overlay2 },
+        SnacksPickerFile = { bold = true },
         SnacksPickerSelected = { bg = colors.none },
         VertSplit = { fg = colors.base1, bg = colors.none },
+        Visual = { bg = colors.surface0 },
+        VisualNOS = { bg = colors.surface0 },
         WinSeparator = { fg = colors.base1, bg = colors.none },
       },
       -- https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
