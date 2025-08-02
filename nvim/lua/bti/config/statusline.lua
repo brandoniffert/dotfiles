@@ -294,7 +294,7 @@ local SpecialStatusLine = {
   condition = function()
     return conditions.buffer_matches({
       buftype = { "nofile", "help", "quickfix" },
-      filetype = { "^gitcommit", "fugitive", "checkhealth", "neo-tree" },
+      filetype = { "^gitcommit", "fugitive", "checkhealth" },
     })
   end,
 
@@ -335,10 +335,10 @@ local SpecialStatusLine = {
 
   {
     condition = function()
-      return vim.bo.filetype == "neo-tree"
+      return vim.bo.filetype == "snacks_picker_list"
     end,
 
-    { provider = "Neo-Tree" },
+    { provider = "Explorer" },
     { provider = "%=" },
   },
 

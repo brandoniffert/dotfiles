@@ -13,7 +13,6 @@ local number_filetype_blacklist = {
   ["fzf"] = true,
   ["help"] = true,
   ["lspinfo"] = true,
-  ["neo-tree"] = true,
   ["oil"] = true,
   ["qf"] = true,
 }

@@ -13,10 +13,6 @@ return {
         FloatTitle = { fg = colors.text, bg = colors.base1 },
         LazyBackdrop = { link = "NormalFloat" },
         MiniIndentscopeSymbol = { fg = colors.surface2 },
-        NeoTreeIndentMarker = { fg = colors.surface2 },
-        NeoTreeNormal = { bg = colors.base },
-        NeoTreeNormalNC = { bg = colors.base },
-        NeoTreeWinSeparator = { fg = colors.base1, bg = colors.none },
         NormalFloat = { bg = colors.base },
         Pmenu = { bg = colors.base },
         SnacksPickerCursorLine = { bg = colors.base1 },
@@ -30,7 +26,6 @@ return {
       integrations = {
         blink_cmp = true,
         harpoon = true,
-        neotree = true,
         snacks = true,
         treesitter_context = true,
         which_key = true,

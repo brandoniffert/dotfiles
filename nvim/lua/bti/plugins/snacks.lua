@@ -5,6 +5,7 @@ return {
   ---@type snacks.Config
   opts = {
     input = {},
+    explorer = {},
     picker = {
       layout = "bottom",
       win = {
@@ -14,9 +15,29 @@ return {
           },
         },
       },
+      sources = {
+        explorer = {
+          hidden = true,
+          exclude = { ".DS_Store" },
+          win = {
+            input = {
+              keys = {
+                ["<Esc>"] = "cancel",
+              },
+            },
+          },
+        },
+      },
     },
   },
   keys = {
+    {
+      "<Leader>\\",
+      function()
+        Snacks.explorer()
+      end,
+      desc = "File Explorer",
+    },
     {
       "<Leader><CR>",
       function()

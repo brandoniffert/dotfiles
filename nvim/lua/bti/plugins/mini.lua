@@ -9,7 +9,6 @@ return {
         "help",
         "fzf",
         "lspinfo",
-        "neo-tree",
         "Trouble",
         "lazy",
       },
