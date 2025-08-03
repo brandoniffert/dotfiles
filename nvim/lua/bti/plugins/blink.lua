@@ -5,6 +5,17 @@ return {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+    sources = {
+      default = { "lazydev", "lsp", "buffer", "snippets", "path" },
+      providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          score_offset = 100,
+        },
+      },
+    },
+
     keymap = {
       preset = "none",
 

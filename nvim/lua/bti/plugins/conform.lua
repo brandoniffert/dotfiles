@@ -47,7 +47,7 @@ return {
         return
       end
 
-      if require("bti.plugins.lsp.format").autoformat then
+      if require("bti.util.format").autoformat then
         return { timeout_ms = 500, lsp_fallback = true }
       end
     end,
