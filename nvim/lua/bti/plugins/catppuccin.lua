@@ -14,6 +14,7 @@ return {
         solid = false,
       },
       custom_highlights = {
+        BlinkCmpMenuSelection = { link = "Cursorline" },
         MiniIndentscopeSymbol = { fg = colors.surface1 },
         SnacksPickerDir = { fg = colors.overlay2 },
         SnacksPickerFile = { bold = true },
