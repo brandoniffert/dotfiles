@@ -14,6 +14,8 @@ return {
   },
   config = function()
     require("nvim-treesitter.configs").setup({
+      sync_install = false,
+      auto_install = true,
       ensure_installed = {
         "astro",
         "bash",
@@ -54,6 +56,7 @@ return {
         "vue",
         "yaml",
       },
+      ignore_install = {},
       highlight = {
         enable = true,
       },

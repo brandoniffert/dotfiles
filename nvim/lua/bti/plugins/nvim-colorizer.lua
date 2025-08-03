@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  "NvChad/nvim-colorizer.lua",
+  "catgoose/nvim-colorizer.lua",
   cmd = "ColorizerToggle",
   keys = {
     { "<Leader>uc", "<cmd>ColorizerToggle<CR>", desc = "Toggle Colorizer" },
