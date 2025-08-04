@@ -1,12 +1,14 @@
 local M = {}
 
 M.icons = {
-  diagnostics = {
-    Error = "■",
-    Warn = "■",
-    Hint = "■",
-    Info = "■",
-  },
+  circle = "",
+}
+
+M.icons.diagnostics = {
+  Error = M.icons.circle,
+  Warn = M.icons.circle,
+  Hint = M.icons.circle,
+  Info = M.icons.circle,
 }
 
 -- Using catppuccin mocha colors

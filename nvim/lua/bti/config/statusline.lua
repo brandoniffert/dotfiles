@@ -3,6 +3,7 @@ local M = {}
 local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 local colors = require("bti.theme").colors
+local icons = require("bti.theme").icons
 
 local ViMode = {
   init = function(self)
@@ -161,7 +162,7 @@ local FileFlags = {
       return vim.bo.modified
     end,
 
-    provider = " ",
+    provider = " " .. icons.circle,
 
     hl = { fg = colors.red, bold = true },
   },
