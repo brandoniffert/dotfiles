@@ -378,25 +378,18 @@ local WinBar = {
 
 local TabPage = {
   provider = function(self)
-    local winnr = vim.fn.tabpagewinnr(self.tabpage)
-    local buflist = vim.fn.tabpagebuflist(self.tabpage)
-    local name = vim.fn.bufname(buflist[winnr])
-    name = name == "" and "[No Name]" or vim.fn.fnamemodify(name, ":~:.")
-
-    return " " .. name .. " "
+    return "%" .. self.tabnr .. "T " .. self.tabpage .. " %T"
   end,
 
   hl = function(self)
     if self.is_active then
       return {
         fg = colors.text,
-        bg = colors.base1,
         bold = true,
       }
     else
       return {
         fg = colors.overlay2,
-        bg = colors.base1,
       }
     end
   end,
@@ -408,6 +401,7 @@ local TabPages = {
   end,
 
   utils.make_tablist(TabPage),
+  { provider = "%=" },
 }
 
 local TabLine = { TabPages }

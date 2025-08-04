@@ -19,6 +19,7 @@ return {
         SnacksPickerDir = { fg = colors.overlay2 },
         SnacksPickerFile = { bold = true },
         SnacksPickerSelected = { bg = colors.none },
+        TablineFill = { bg = colors.base1 },
         Visual = { bg = colors.surface0 },
         VisualNOS = { bg = colors.surface0 },
         WinSeparator = { fg = colors.base1, bg = colors.none },
