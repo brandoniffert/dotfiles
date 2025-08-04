@@ -1,7 +1,7 @@
 vim.diagnostic.config({
   underline = false,
   update_in_insert = false,
-  virtual_lines = { current_line = true },
+  virtual_text = { current_line = true, spacing = 2, prefix = require("bti.theme").icons.circle },
   severity_sort = true,
   signs = {
     text = {
