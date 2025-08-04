@@ -7,7 +7,7 @@ return {
     input = {},
     explorer = {},
     picker = {
-      layout = "bottom",
+      layout = "vertical",
       win = {
         input = {
           keys = {
