@@ -2,6 +2,7 @@ local M = {}
 
 M.icons = {
   circle = "",
+  circle_sm = "•",
 }
 
 M.icons.diagnostics = {

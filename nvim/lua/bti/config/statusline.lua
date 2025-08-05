@@ -196,10 +196,10 @@ local Diagnostics = utils.surround({ " ", " " }, nil, {
   condition = conditions.has_diagnostics,
 
   static = {
-    error_icon = "•",
-    warn_icon = "•",
-    info_icon = "•",
-    hint_icon = "•",
+    error_icon = icons.circle_sm,
+    warn_icon = icons.circle_sm,
+    info_icon = icons.circle_sm,
+    hint_icon = icons.circle_sm,
   },
 
   init = function(self)
