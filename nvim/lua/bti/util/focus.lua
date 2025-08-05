@@ -9,7 +9,6 @@ local win_type_blacklist = {
 local number_filetype_blacklist = {
   ["checkhealth"] = true,
   ["diff"] = true,
-  ["fugitiveblame"] = true,
   ["fzf"] = true,
   ["help"] = true,
   ["lspinfo"] = true,

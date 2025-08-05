@@ -295,7 +295,7 @@ local SpecialStatusLine = {
   condition = function()
     return conditions.buffer_matches({
       buftype = { "nofile", "help", "quickfix" },
-      filetype = { "^gitcommit", "fugitive", "checkhealth" },
+      filetype = { "^gitcommit", "checkhealth" },
     })
   end,
 
@@ -424,7 +424,7 @@ M.setup = function()
       disable_winbar_cb = function(args)
         local buf = args.buf
         local buftype = vim.tbl_contains({ "prompt", "nofile", "help", "quickfix", "terminal" }, vim.bo[buf].buftype)
-        local filetype = vim.tbl_contains({ "fugitive", "Trouble" }, vim.bo[buf].filetype)
+        local filetype = vim.tbl_contains({ "Trouble" }, vim.bo[buf].filetype)
 
         return buftype or filetype
       end,

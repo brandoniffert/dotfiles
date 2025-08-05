@@ -22,7 +22,6 @@ augroups.filetype = {
     event = { "FileType" },
     pattern = {
       "checkhealth",
-      "fugitive",
       "git*",
       "help",
       "lspinfo",
