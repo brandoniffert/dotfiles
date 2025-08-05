@@ -1,13 +1,10 @@
-font-size = 10
-font-family = MonoLisa Variable
+font-size = 10.5
+font-family = JetBrains Mono
 font-variation = wght=250
 font-variation-italic = wght=250
-font-variation-bold = wght=400
-font-variation-bold-italic = wght=400
-font-feature = -liga
+font-variation-bold = wght=500
+font-variation-bold-italic = wght=500
 font-feature = -calt
-font-feature = ss02
-font-feature = ss03
 
 adjust-cell-height = 8
 adjust-cursor-height = 6
