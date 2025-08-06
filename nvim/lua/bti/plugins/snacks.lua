@@ -8,6 +8,7 @@ return {
     explorer = {},
     picker = {
       layout = "vertical",
+      hidden = true,
       win = {
         input = {
           keys = {
@@ -17,7 +18,6 @@ return {
       },
       sources = {
         explorer = {
-          hidden = true,
           exclude = { ".DS_Store" },
           win = {
             input = {
