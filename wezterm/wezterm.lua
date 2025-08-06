@@ -30,11 +30,11 @@ return {
   initial_cols = 160,
   initial_rows = 60,
   font = wezterm.font_with_fallback({
-    { family = "JetBrains Mono", weight = 300 },
+    { family = "JetBrains Mono", weight = 200 },
     { family = "Symbols Nerd Font" },
   }),
   font_size = 10.5,
-  line_height = 1.3,
+  line_height = 1.2,
   use_fancy_tab_bar = false,
   tab_bar_at_bottom = false,
   hide_tab_bar_if_only_one_tab = true,
