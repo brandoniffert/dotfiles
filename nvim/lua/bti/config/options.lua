@@ -126,6 +126,7 @@ vim.filetype.add({
   },
   filename = {
     ["config"] = "conf",
+    ["tmux.conf"] = "conf",
   },
   pattern = {
     [".*/zsh/functions/.*"] = "sh",
