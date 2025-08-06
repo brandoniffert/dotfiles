@@ -29,6 +29,7 @@ fi
 setopt AUTO_CD              # Auto cd into directory by name
 setopt AUTO_PARAM_SLASH     # Tab completing directory appends a slash
 setopt AUTO_PUSHD           # cd automatically pushes old dir onto dir stack
+setopt CHASE_LINKS          # Resolve symbolic links to their true values when changing directory
 setopt COMBINING_CHARS      # Combine zero-length punc chars (accents) with base
 setopt COMPLETE_IN_WORD     # Completion from both ends
 setopt CORRECT              # Spell check commands
