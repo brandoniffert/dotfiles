@@ -1,21 +1,26 @@
-#!/usr/bin/env bash
-
-set -e
+# shellcheck shell=bash
 
 # Create a new tmux session within a project folder and attach to it
 # If the session already exists, attach to that one
 
+emulate -L zsh
+
 # Fail if PROJECTS_HOME is not set
 if [[ -z ${PROJECTS_HOME+x} ]]; then
   echo "Please set \$PROJECTS_HOME"
+  sleep 2
   exit 1
 fi
 
-project_dir="$(
-  find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
-    sed "s:$PROJECTS_HOME\/::g" |
-    fzf --header='Projects' --height 40% --border sharp
-)"
+# Modify display if inside a tmux popup
+if [[ -n "$TMUX_POPUP" ]]; then
+  fzf_args=(--border none)
+else
+  fzf_args=(--height 40% --border sharp)
+fi
+
+find_output=$(find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d | sed "s:$PROJECTS_HOME\/::g")
+project_dir=$(echo "$find_output" | fzf --header='Projects' "${fzf_args[@]}")
 
 if [[ -n "${project_dir}" ]]; then
   project_path="$PROJECTS_HOME/$project_dir"
