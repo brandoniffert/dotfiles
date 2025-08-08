@@ -17,6 +17,7 @@ return {
         BlinkCmpMenuSelection = { link = "Cursorline" },
         MiniIndentscopeSymbol = { fg = colors.surface1 },
         SnacksPickerCol = { link = "NonText" },
+        SnacksPickerListCursorLine = { bg = colors.base1 },
         SnacksPickerDir = { fg = colors.overlay2 },
         SnacksPickerFile = { bold = true },
         SnacksPickerSelected = { bg = colors.none },
