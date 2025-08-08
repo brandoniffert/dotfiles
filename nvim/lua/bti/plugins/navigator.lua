@@ -1,7 +1,7 @@
 ---@type LazySpec
 return {
   "numToStr/Navigator.nvim",
-  lazy = false,
+  event = "VeryLazy",
   keys = {
     { "<C-h>", "<cmd>NavigatorLeft<CR>", mode = { "n", "t" }, desc = "Navigate left" },
     { "<C-j>", "<cmd>NavigatorDown<CR>", mode = { "n", "t" }, desc = "Navigate down" },
