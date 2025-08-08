@@ -19,8 +19,8 @@ cursor-text = black
 
 mouse-hide-while-typing = true
 
-window-padding-x = 15
-window-padding-y = 15
+window-padding-x = 12
+window-padding-y = 12,0
 window-padding-balance = true
 window-decoration = false
 window-title-font-family = JetBrains Mono
