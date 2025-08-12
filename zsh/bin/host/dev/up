@@ -4,4 +4,4 @@ set -e
 
 trap "{ docker compose stop; }" SIGHUP
 
-docker compose up "$@"
+TERM=xterm-256color docker compose up "$@"
