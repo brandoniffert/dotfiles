@@ -116,7 +116,7 @@ return {
       end
 
       if require("bti.util.format").autoformat then
-        return { timeout_ms = 500, lsp_fallback = true }
+        return { timeout_ms = 1000, lsp_fallback = true }
       end
     end,
   },
