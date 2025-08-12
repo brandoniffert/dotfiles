@@ -43,16 +43,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
     map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
     map({ "n", "v" }, "<leader>ca", function()
-      if client and client.name == "intelephense" then
-        vim.lsp.buf.code_action({
-          filter = function(action)
-            -- Filter out PHPDoc related code actions
-            return not string.match(action.title, "Add PHPDoc")
-          end,
-        })
-      else
-        vim.lsp.buf.code_action()
-      end
+      vim.lsp.buf.code_action({
+        filter = function(action)
+          -- Filter out PHPDoc related code actions
+          return not string.match(action.title, "Add PHPDoc")
+        end,
+      })
     end, { desc = "Code Action" })
     map("n", "<leader>cF", require("bti.util.format").toggle, { desc = "Toggle formatting" })
     map("n", "<leader>cr", function()
