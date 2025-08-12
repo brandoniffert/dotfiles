@@ -29,6 +29,13 @@ return {
         },
       },
     },
+    styles = {
+      input = {
+        keys = {
+          i_esc = { "<esc>", { "cancel", "stopinsert" }, mode = "i", expr = true },
+        },
+      },
+    },
   },
   keys = {
     {
@@ -83,11 +90,45 @@ return {
       desc = "Resume",
     },
     {
+      "<Leader>fc",
+      function()
+        Snacks.picker.commands({ layout = { preset = "select" } })
+      end,
+      desc = "Commands",
+    },
+    {
       "<Leader>fp",
       function()
         Snacks.picker.pickers()
       end,
       desc = "Pickers",
+    },
+    {
+      "<Leader>fd",
+      function()
+        Snacks.picker.pick({
+          title = "Directories",
+          format = "text",
+          layout = { preset = "select" },
+          finder = function(opts, ctx)
+            local proc_opts = {
+              cmd = "fd",
+              args = { ".", "--type", "directory" },
+            }
+            return require("snacks.picker.source.proc").proc({ opts, proc_opts }, ctx)
+          end,
+          confirm = function(picker, item)
+            picker:close()
+
+            if item then
+              local selected_dir = item.text
+
+              require("oil").open_float(selected_dir)
+            end
+          end,
+        })
+      end,
+      desc = "Directories",
     },
   },
 }
