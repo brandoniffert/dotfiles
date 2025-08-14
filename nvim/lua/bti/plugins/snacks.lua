@@ -7,7 +7,11 @@ return {
     input = {},
     explorer = {},
     picker = {
-      layout = "vertical",
+      layout = {
+        preset = function()
+          return vim.o.columns >= 120 and "ivy" or "ivy_split"
+        end,
+      },
       hidden = true,
       win = {
         input = {
@@ -31,6 +35,7 @@ return {
     },
     styles = {
       input = {
+        relative = "editor",
         keys = {
           i_esc = { "<esc>", { "cancel", "stopinsert" }, mode = "i", expr = true },
         },
