@@ -7,3 +7,5 @@ zsh/bin/host/iffy/ytdl-proxy filter=git-crypt diff=git-crypt
 zsh/exports.private filter=git-crypt diff=git-crypt
 git/config filter=git-crypt diff=git-crypt
 git/config.homelab filter=git-crypt diff=git-crypt
+git/config.houseof207 filter=git-crypt diff=git-crypt
+git/config.trainor filter=git-crypt diff=git-crypt
