@@ -13,6 +13,12 @@ return {
         end,
       },
       hidden = true,
+      formatters = {
+        file = {
+          filename_first = true,
+          truncate = 60,
+        },
+      },
       win = {
         input = {
           keys = {
@@ -42,14 +48,9 @@ return {
       },
     },
   },
+  -- stylua: ignore
   keys = {
-    {
-      "<Leader>\\",
-      function()
-        Snacks.explorer()
-      end,
-      desc = "File Explorer",
-    },
+    { "<Leader>\\", function() Snacks.explorer() end, desc = "File Explorer", },
     {
       "<Leader><CR>",
       function()
@@ -59,20 +60,8 @@ return {
       end,
       desc = "Smart Find Files",
     },
-    {
-      "<Leader>fg",
-      function()
-        Snacks.picker.grep()
-      end,
-      desc = "Grep",
-    },
-    {
-      "<Leader>fb",
-      function()
-        Snacks.picker.buffers()
-      end,
-      desc = "Buffers",
-    },
+    { "<Leader>fg", function() Snacks.picker.grep() end, desc = "Grep", },
+    { "<Leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers", },
     {
       "<Leader>fo",
       function()
@@ -80,20 +69,8 @@ return {
       end,
       desc = "Recent",
     },
-    {
-      "<Leader>fh",
-      function()
-        Snacks.picker.help()
-      end,
-      desc = "Help",
-    },
-    {
-      "<Leader>fr",
-      function()
-        Snacks.picker.resume()
-      end,
-      desc = "Resume",
-    },
+    { "<Leader>fh", function() Snacks.picker.help() end, desc = "Help", },
+    { "<Leader>fr", function() Snacks.picker.resume() end, desc = "Resume", },
     {
       "<Leader>fc",
       function()
@@ -101,13 +78,7 @@ return {
       end,
       desc = "Commands",
     },
-    {
-      "<Leader>fp",
-      function()
-        Snacks.picker.pickers()
-      end,
-      desc = "Pickers",
-    },
+    { "<Leader>fp", function() Snacks.picker.pickers() end, desc = "Pickers", },
     {
       "<Leader>fd",
       function()
