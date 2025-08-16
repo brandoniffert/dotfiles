@@ -23,6 +23,7 @@ local servers = {
   "jsonls",
   "lua_ls",
   "tailwindcss",
+  "vtsls",
   "yamlls",
 }
 
@@ -34,7 +35,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("_bti_LspAttach", { clear = true }),
   callback = function(event)
     local buffer = event.buf
-    local client = vim.lsp.get_client_by_id(event.data.client_id)
 
     local map = function(modes, lhs, rhs, map_opts)
       map_opts = vim.tbl_deep_extend("force", map_opts or {}, { buffer = buffer })
