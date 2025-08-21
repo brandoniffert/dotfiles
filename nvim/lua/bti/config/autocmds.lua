@@ -32,12 +32,6 @@ augroups.filetype = {
       vim.keymap.set("n", "q", "<cmd>close<cr>", { buffer = event.buf, silent = true })
     end,
   },
-
-  silverstripe = {
-    event = { "BufEnter", "BufRead", "BufNewFile" },
-    pattern = { "*.ss" },
-    command = [[set filetype=html syntax=ss | runtime! indent/ss.vim]],
-  },
 }
 
 augroups.focus = {

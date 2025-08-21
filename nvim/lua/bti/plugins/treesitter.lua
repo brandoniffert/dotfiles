@@ -61,12 +61,10 @@ return {
       },
       indent = {
         enable = true,
-        disable = { "yaml" },
-      },
-      matchup = {
-        enable = true,
-        disable_virtual_text = true,
+        disable = { "silverstripe", "yaml" },
       },
     })
+
+    vim.treesitter.language.register("silverstripe", "silverstripe")
   end,
 }

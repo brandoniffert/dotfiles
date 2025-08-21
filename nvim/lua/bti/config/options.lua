@@ -123,6 +123,7 @@ vim.opt.writebackup = false
 vim.filetype.add({
   extension = {
     conf = "conf",
+    ss = "silverstripe",
   },
   filename = {
     ["config"] = "conf",
