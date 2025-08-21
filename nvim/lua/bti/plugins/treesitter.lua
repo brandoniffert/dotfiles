@@ -61,5 +61,21 @@ return {
         end)
       end,
     })
+
+    if vim.env.TREE_SITTER_SILVERSTRIPE_DIR then
+      vim.api.nvim_create_autocmd("User", {
+        pattern = "TSUpdate",
+        callback = function()
+          require("nvim-treesitter.parsers").silverstripe = {
+            install_info = {
+              path = vim.env.TREE_SITTER_SILVERSTRIPE_DIR,
+              generate = true,
+              generate_from_json = false,
+              queries = "queries/silverstripe",
+            },
+          }
+        end,
+      })
+    end
   end,
 }
