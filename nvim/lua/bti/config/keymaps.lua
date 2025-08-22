@@ -45,7 +45,7 @@ vim.keymap.set(
 vim.keymap.set(
   "n",
   "<Leader>e",
-  ':edit <C-R>=expand("%") == "" ? getcwd() . "/" : expand("%:h") . "/"<CR>',
+  ':edit <C-R>=fnameescape(expand("%") == "" ? getcwd() . "/" : expand("%:h") . "/")<CR>',
   { desc = "Edit File (Same Directory)" }
 )
 
