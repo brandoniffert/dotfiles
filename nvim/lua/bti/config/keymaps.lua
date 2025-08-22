@@ -18,7 +18,7 @@ vim.keymap.set("i", ".", ".<c-g>u")
 vim.keymap.set("i", ";", ";<c-g>u")
 
 -- Split lines (opposite of J)
-vim.keymap.set("n", "|", "<cmd>lua require('bti.util.functions').split_at()<CR>")
+vim.keymap.set("n", "|", require("bti.util.functions").split_at)
 
 -- Clear search highlight
 vim.keymap.set("n", "<CR>", "<cmd>noh<CR>")
@@ -26,14 +26,6 @@ vim.keymap.set("n", "<Leader>n", "<cmd>noh<CR>")
 
 -- Don't replace register with text that was pasted over
 vim.keymap.set("x", "p", "p:if v:register == '\"'<bar>let @@=@0<bar>endif<CR>")
-
--- https://github.com/mhinz/vim-galore#saner-behavior-of-n-and-n
-vim.keymap.set("n", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("x", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("o", "n", "'Nn'[v:searchforward]", { expr = true, desc = "Next search result" })
-vim.keymap.set("n", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-vim.keymap.set("x", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
-vim.keymap.set("o", "N", "'nN'[v:searchforward]", { expr = true, desc = "Prev search result" })
 
 -- Normal (Leader)
 vim.keymap.set(
@@ -63,19 +55,14 @@ vim.keymap.set("n", "<Leader>Q", "<cmd>:q!<CR>", { desc = "Quit without saving" 
 
 vim.keymap.set(
   "n",
-  "<Leader>uf",
-  "<cmd>lua require('bti.util.functions').replace_fancy_characters()<CR>",
+  "<Leader>uF",
+  require("bti.util.functions").replace_fancy_characters,
   { desc = "Replace fancy characters" }
 )
 vim.keymap.set("n", "<Leader>ul", "<cmd>:Lazy<CR>", { desc = "Lazy" })
 vim.keymap.set("n", "<Leader>ur", ":make!<CR>", { desc = "Run current file" })
 vim.keymap.set("n", "<Leader>uv", "V`]", { desc = "Select text that was just pasted" })
-vim.keymap.set(
-  "n",
-  "<Leader>uw",
-  "<cmd>lua require('bti.util.functions').strip_whitespace()<CR>",
-  { desc = "Strip whitespace" }
-)
+vim.keymap.set("n", "<Leader>uw", require("bti.util.functions").strip_whitespace, { desc = "Strip whitespace" })
 
 vim.keymap.set("n", "<Leader>=", ":vnew<CR>", { silent = true, desc = "Vertical split" })
 vim.keymap.set("n", "<Leader>-", ":new<CR>", { silent = true, desc = "Horizontal split" })

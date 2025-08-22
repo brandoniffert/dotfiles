@@ -33,16 +33,8 @@ end
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("_bti_LspAttach", { clear = true }),
-  callback = function(event)
-    local buffer = event.buf
-
-    local map = function(modes, lhs, rhs, map_opts)
-      map_opts = vim.tbl_deep_extend("force", map_opts or {}, { buffer = buffer })
-      vim.keymap.set(modes, lhs, rhs, map_opts)
-    end
-
-    map("n", "<leader>cd", vim.diagnostic.open_float, { desc = "Line Diagnostics" })
-    map({ "n", "v" }, "<leader>ca", function()
+  callback = function()
+    vim.keymap.set({ "n", "x" }, "gra", function()
       vim.lsp.buf.code_action({
         filter = function(action)
           -- Filter out PHPDoc related code actions
@@ -50,11 +42,5 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end,
       })
     end, { desc = "Code Action" })
-    map("n", "<leader>cF", require("bti.util.format").toggle, { desc = "Toggle formatting" })
-    map("n", "<leader>cr", function()
-      return ":IncRename " .. vim.fn.expand("<cword>")
-    end, { expr = true, desc = "Rename" })
-    map("n", "<A-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
-    map("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Signature Help" })
   end,
 })

@@ -120,4 +120,9 @@ return {
       end
     end,
   },
+  config = function(_, opts)
+    require("conform").setup(opts)
+
+    vim.keymap.set("n", "<Leader>uf", require("bti.util.format").toggle, { desc = "Toggle formatting" })
+  end,
 }
