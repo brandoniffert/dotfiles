@@ -343,7 +343,7 @@
   typeset -g POWERLEVEL9K_USER_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 
   function prompt_user_context() {
-    if [[ $(hostname -s) =~ ^dev ]]; then
+    if [[ $(hostname -s) =~ ^iffyarch ]]; then
       local tmux_session=''
 
       [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"

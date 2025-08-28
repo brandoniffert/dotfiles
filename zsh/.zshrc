@@ -2,7 +2,7 @@
 #-- Local & Host Specific Startup ---------------------------------------------
 #------------------------------------------------------------------------------
 iffy_rc="$ZDOTDIR/host/iffy-startup"
-if [[ $(hostname -s) =~ ^iffy(mac|book|studio|air) ]]; then
+if [[ $(hostname -s) =~ ^iffy(studio|air) ]]; then
   test -r "$iffy_rc" && source "$iffy_rc"
 fi
 unset iffy_rc
@@ -162,7 +162,7 @@ fi
 
 # Host specific functions, based on hostname
 iffy_fpath="$ZDOTDIR/functions/host/iffy"
-if [[ $(hostname -s) =~ ^iffy(mac|book|studio|air) ]]; then
+if [[ $(hostname -s) =~ ^iffy(studio|air) ]]; then
   if [ -n "$(ls -A $iffy_fpath 2>/dev/null)" ]; then
     fpath=("$iffy_fpath" $fpath)
     autoload -Uz $iffy_fpath/*
@@ -275,7 +275,7 @@ function _fzf_compgen_dir() {
 #------------------------------------------------------------------------------
 
 iffy_rc="$ZDOTDIR/host/iffy"
-if [[ $(hostname -s) =~ ^iffy(mac|book|studio|air) ]]; then
+if [[ $(hostname -s) =~ ^iffy(studio|air) ]]; then
   test -r "$iffy_rc" && source "$iffy_rc"
 fi
 unset iffy_rc
