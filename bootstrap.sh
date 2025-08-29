@@ -83,6 +83,7 @@ echo_header "Symlink files to $config_home"
 # Common
 config_dots=(
   bat
+  btop
   dircolors
   git
   lazygit
