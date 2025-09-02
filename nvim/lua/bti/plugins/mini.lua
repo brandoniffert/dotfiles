@@ -1,6 +1,6 @@
 ---@type LazySpec
 return {
-  "echasnovski/mini.nvim",
+  "nvim-mini/mini.nvim",
   init = function()
     vim.api.nvim_create_autocmd("FileType", {
       desc = "Disable indentscope for certain filetypes",
