@@ -65,7 +65,7 @@ return {
     vim.api.nvim_create_autocmd("FileType", {
       group = vim.api.nvim_create_augroup("_bti_EnableTreesitterIndentation", { clear = true }),
       desc = "Try to enable tree-sitter indentation",
-      pattern = "*",
+      pattern = { "*", "!yaml" },
       callback = function()
         vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
       end,
