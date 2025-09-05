@@ -25,4 +25,4 @@ if override_file=$(find_override_file); then
   compose_args+=("-f" "$override_file")
 fi
 
-docker compose "${compose_args[@]}" down
+docker compose "${compose_args[@]}" exec "$@"

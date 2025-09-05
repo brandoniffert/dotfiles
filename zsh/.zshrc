@@ -129,7 +129,6 @@ bindkey "^I" expand-or-complete-with-dots
 
 alias e="$EDITOR"
 alias dc='docker compose'
-alias dce='docker compose exec'
 alias dcr='docker compose run --rm'
 alias dcu='docker compose pull && docker compose up -d --force-recreate'
 alias g='git'
