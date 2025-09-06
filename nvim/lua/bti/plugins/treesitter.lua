@@ -62,6 +62,15 @@ return {
       end,
     })
 
+    vim.api.nvim_create_autocmd("FileType", {
+      group = vim.api.nvim_create_augroup("_bti_EnableTreesitterIndentation", { clear = true }),
+      desc = "Try to enable tree-sitter indentation",
+      pattern = { "php" },
+      callback = function()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+
     if vim.env.TREE_SITTER_SILVERSTRIPE_DIR then
       vim.api.nvim_create_autocmd("User", {
         pattern = "TSUpdate",
