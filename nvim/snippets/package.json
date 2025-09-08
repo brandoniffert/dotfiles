@@ -29,6 +29,7 @@
           "html",
           "astro",
           "javascriptreact",
+          "silverstripe",
           "typescriptreact",
           "vue",
           "svelte"

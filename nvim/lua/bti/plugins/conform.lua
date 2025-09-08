@@ -8,15 +8,7 @@ return {
       astro = { "rustywind", "prettierd" },
       css = { "prettierd" },
       graphql = { "prettierd" },
-      html = function(bufnr)
-        local filename = vim.api.nvim_buf_get_name(bufnr)
-
-        if filename:match("%.ss$") then
-          return { "rustywind_ss_html" }
-        else
-          return { "rustywind" }
-        end
-      end,
+      html = { "rustywind" },
       javascript = { "rustywind", "prettierd" },
       javascriptreact = { "rustywind", "prettierd" },
       json = { "prettierd" },
@@ -44,6 +36,7 @@ return {
         return { "php_cs_fixer" }
       end,
       scss = { "prettierd" },
+      silverstripe = { "rustywind_ss_html" },
       svelte = { "rustywind" },
       typescript = { "rustywind", "prettierd" },
       typescriptreact = { "rustywind", "prettierd" },
