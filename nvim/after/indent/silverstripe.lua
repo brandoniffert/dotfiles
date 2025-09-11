@@ -142,4 +142,4 @@ _G.SSIndent = function()
 end
 
 vim.bo.indentexpr = "v:lua.SSIndent()"
-vim.bo.indentkeys = "o,O,*<Return>,<:>,0),0],0},=end_if,=end_with,=end_loop,=end_cached,=else,=else_if"
+vim.bo.indentkeys = "o,O,*<Return>,<>>,0),0],0},=end_if,=end_with,=end_loop,=end_cached,=else,=else_if"
