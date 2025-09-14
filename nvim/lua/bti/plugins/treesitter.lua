@@ -28,6 +28,7 @@ return {
       "jsdoc",
       "json",
       "jsonc",
+      "liquid",
       "lua",
       "make",
       "markdown",
