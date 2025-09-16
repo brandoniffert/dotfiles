@@ -8,8 +8,7 @@ return {
     explorer = {},
     picker = {
       layout = {
-        preset = "ivy",
-        preview = false,
+        preset = "ivy_split",
       },
       matcher = {
         frecency = true,
