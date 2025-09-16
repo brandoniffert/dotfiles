@@ -44,9 +44,5 @@ return {
     signature = {
       enabled = true,
     },
-
-    cmdline = {
-      enabled = false,
-    },
   },
 }
