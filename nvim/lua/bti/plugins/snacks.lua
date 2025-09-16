@@ -8,15 +8,16 @@ return {
     explorer = {},
     picker = {
       layout = {
-        preset = function()
-          return vim.o.columns >= 120 and "ivy" or "ivy_split"
-        end,
+        preset = "ivy",
+        preview = false,
+      },
+      matcher = {
+        frecency = true,
       },
       hidden = true,
       formatters = {
         file = {
-          filename_first = true,
-          truncate = 60,
+          truncate = 90,
         },
       },
       win = {
