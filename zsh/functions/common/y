@@ -1,0 +1,13 @@
+# shellcheck shell=bash
+# shellcheck disable=SC2168
+
+# Wrapper for yazi to cd to the active directory when exiting yazi
+
+emulate -L zsh
+
+local tmp cwd
+tmp="$(mktemp -t "yazi-cwd.XXXXXX")"
+yazi "$@" --cwd-file="$tmp"
+IFS= read -r -d '' cwd <"$tmp"
+[ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && { builtin cd -- "$cwd" || return; }
+rm -f -- "$tmp"
