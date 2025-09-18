@@ -1,0 +1,109 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+trim_sanitize() {
+  local s="${1-}"
+  s="${s#"${s%%[![:space:]]*}"}" # ltrim
+  s="${s%"${s##*[![:space:]]}"}" # rtrim
+  s="${s//./-}"                  # dots -> dashes
+  printf '%s' "$s"
+}
+
+confirm() {
+  local prompt="$1" ans
+  tput sc >/dev/tty
+  printf '%s' "$prompt" >/dev/tty
+  read -r ans </dev/tty || {
+    tput rc >/dev/tty
+    tput ed >/dev/tty
+    return 1
+  }
+  tput rc >/dev/tty
+  tput ed >/dev/tty
+  [[ "$ans" == [yY] ]]
+}
+
+# fzf binding: on Ctrl-E, create session from sanitized query, print query, abort
+ctrl_e_bind=$'start:first,ctrl-e:execute-silent(sh -c \'q="$1"; q="${q//./-}"; [ -n "$q" ] && tmux new-session -ds "$q"\' _ {q})+print-query+abort'
+
+while :; do
+  current="$(tmux display-message -p '#S' 2>/dev/null || true)"
+  preferred="$(tmux display-message -p '#{client_last_session}' 2>/dev/null || true)"
+
+  mapfile -t sessions < <(tmux list-sessions -F '#S')
+  ((${#sessions[@]})) || {
+    echo "No sessions." >&2
+    exit 0
+  }
+
+  # Put preferred first if present
+  ordered=()
+  if [[ -n "$preferred" ]]; then
+    for s in "${sessions[@]}"; do [[ "$s" == "$preferred" ]] && ordered+=("$preferred") && break; done
+  fi
+  for s in "${sessions[@]}"; do
+    [[ -n "$preferred" && "$s" == "$preferred" ]] && continue
+    ordered+=("$s")
+  done
+
+  # Note: only expect ctrl-x; ctrl-e is handled via bind+abort+print-query
+  result=$(
+    printf '%s\n' "${ordered[@]}" | fzf \
+      --header="Current: ${current:-<none>}" \
+      --expect=ctrl-x \
+      --print-query \
+      --multi \
+      --no-sort --tiebreak=index \
+      --bind "$ctrl_e_bind"
+  ) || true # ctrl-e path aborts; keep output
+
+  # With --print-query and (maybe) --expect:
+  #   line1 = query
+  #   line2 = key (only if from --expect, e.g. ctrl-x)
+  #   rest  = selected items (if any)
+  query="$(printf '%s\n' "$result" | sed -n '1p')"
+  key="$(printf '%s\n' "$result" | sed -n '2p' || true)"
+  mapfile -t selected < <(printf '%s\n' "$result" | sed '1,2d')
+
+  # Ctrl-E path: fzf aborted after creating session & printing query.
+  # That means: key empty, maybe no selections; switch to the sanitized query session.
+  if [[ -n "$query" && -z "${key:-}" && ${#selected[@]} -eq 0 ]]; then
+    name="$(trim_sanitize "$query")"
+    if tmux has-session -t "$name" 2>/dev/null; then
+      tmux switch-client -t "$name"
+      exit 0
+    else
+      # If creation failed (e.g., empty name), prompt and create
+      tput sc >/dev/tty
+      printf 'New session name: ' >/dev/tty
+      read -r name </dev/tty || {
+        tput rc >/dev/tty
+        tput ed >/dev/tty
+        continue
+      }
+      tput rc >/dev/tty
+      tput ed >/dev/tty
+      name="$(trim_sanitize "$name")"
+      [[ -z "$name" ]] && continue
+      tmux new-session -ds "$name"
+      tmux switch-client -t "$name"
+      exit 0
+    fi
+  fi
+
+  # Ctrl-X: confirm & kill; then refresh picker
+  if [[ "$key" == "ctrl-x" ]]; then
+    ((${#selected[@]})) || continue
+    prompt=$([[ ${#selected[@]} -gt 5 ]] && echo "Kill ${#selected[@]} sessions? (y/N): " || echo "Kill: ${selected[*]} ? (y/N): ")
+    confirm "$prompt" || continue
+    for s in "${selected[@]}"; do tmux kill-session -t "$s" || true; done
+    continue
+  fi
+
+  # Default: switch/attach to chosen session
+  ((${#selected[@]})) || exit 0
+  target="${selected[-1]}"
+  if [[ -n "${TMUX-}" ]]; then tmux switch-client -t "$target"; else tmux attach -t "$target"; fi
+  exit 0
+done
