@@ -25,7 +25,7 @@ command = """
 [[ -n "${TMUX+set}" ]] && print -P "%m@$(tmux display-message -p '#S')"
 """
 description = 'Displays hostname and tmux session only on dev hosts'
-when = """ [[ $(hostname -s) =~ ^iffyarch ]] """
+when = """ [[ $(hostname -s) =~ ^dev ]] """
 style = 'fg:#6c7086'
 
 [custom.shlvl]
