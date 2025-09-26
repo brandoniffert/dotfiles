@@ -65,12 +65,11 @@ augroups.misc = {
   },
 
   indicate_did_load = {
-    event = { "FocusGained" },
+    event = { "User" },
+    pattern = "VeryLazy",
     once = true,
     callback = function()
-      vim.schedule(function()
-        require("bti.g").did_load = true
-      end)
+      require("bti.g").did_load = true
     end,
   },
 }
