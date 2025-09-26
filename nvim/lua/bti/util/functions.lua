@@ -43,7 +43,7 @@ function M.split_at()
 
     splitjoin.split_at({ { line = line, col = col } })
   else
-    vim.api.nvim_err_writeln("mini.splitjoin is not installed")
+    vim.notify("mini.splitjoin is not installed", vim.log.levels.ERROR)
   end
 end
 
