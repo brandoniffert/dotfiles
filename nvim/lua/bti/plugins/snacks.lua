@@ -10,6 +10,14 @@ return {
       layout = {
         preset = "ivy_split",
       },
+      layouts = {
+        select = {
+          layout = {
+            width = 0.3,
+            min_width = 80,
+          },
+        },
+      },
       matcher = {
         frecency = true,
       },
