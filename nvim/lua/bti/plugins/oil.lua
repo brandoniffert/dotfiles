@@ -9,7 +9,6 @@ return {
     local detail = false
 
     require("oil").setup({
-      default_file_explorer = false,
       keymaps = {
         ["g?"] = { "actions.show_help", mode = "n" },
         ["<CR>"] = "actions.select",
