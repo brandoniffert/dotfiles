@@ -25,6 +25,8 @@ window-title-font-family = JetBrains Mono
 window-colorspace = display-p3
 window-width = 150
 window-height = 45
+window-position-x = 0
+window-position-y = 0
 
 quit-after-last-window-closed = true
 
