@@ -126,7 +126,7 @@
 
   # Formatter for Git status.
   #
-  # Example output: master wip ⇣42⇡42 *42 merge ~42 +42 !42 ?42.
+  # Example output: master wip ↓42↑42 *42 merge ~42 +42 !42 ?42.
   #
   # You can edit the function to customize how Git status looks.
   #
@@ -196,11 +196,11 @@
 
     local before_res="$res"
 
-    # ⇣42 if behind the remote.
-    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${yellow}⇣${VCS_STATUS_COMMITS_BEHIND}"
-    # ⇡42 if ahead of the remote; no leading space if also behind the remote: ⇣42⇡42.
+    # ↓42 if behind the remote.
+    (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${yellow}↓${VCS_STATUS_COMMITS_BEHIND}"
+    # ↑42 if ahead of the remote; no leading space if also behind the remote: ↓42↑42.
     (( VCS_STATUS_COMMITS_AHEAD && !VCS_STATUS_COMMITS_BEHIND )) && res+=" "
-    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${green}⇡${VCS_STATUS_COMMITS_AHEAD}"
+    (( VCS_STATUS_COMMITS_AHEAD  )) && res+="${green}↑${VCS_STATUS_COMMITS_AHEAD}"
     # ⇠42 if behind the push remote.
     (( VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" ${cyan}⇠${VCS_STATUS_PUSH_COMMITS_BEHIND}"
     (( VCS_STATUS_PUSH_COMMITS_AHEAD && !VCS_STATUS_PUSH_COMMITS_BEHIND )) && res+=" "
