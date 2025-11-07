@@ -3,7 +3,7 @@
 count=$(lsappinfo -all info -only StatusLabel "$1" | sed -n 's/.*"label"="\([^"]*\)".*/\1/p')
 
 if [ "$count" = "•" ]; then
-  count="1"
+  count="1+"
 fi
 
 drawing="off"

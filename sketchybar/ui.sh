@@ -43,7 +43,7 @@ export ACCENT_COLOR=$(hex_to_argb $YELLOW)
 export SPACE_BG_COLOR=$(hex_to_argb $SURFACE0)
 
 export APP_FONT="sketchybar-app-font:Regular:11.5"
-export NERD_FONT="Symbols Nerd Font:Regular:11.0"
+export NERD_FONT="Symbols Nerd Font:Regular:12.0"
 export TEXT_FONT="JetBrains Mono:Regular:10.5"
 
 export PADDINGS=3
