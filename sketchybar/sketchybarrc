@@ -40,6 +40,7 @@ source "$ITEM_DIR/windows.sh"
 
 # Right
 source "$ITEM_DIR/clock.sh"
+source "$ITEM_DIR/audio_output.sh"
 source "$ITEM_DIR/mail.sh"
 source "$ITEM_DIR/slack.sh"
 
