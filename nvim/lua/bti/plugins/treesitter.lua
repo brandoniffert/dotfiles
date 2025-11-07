@@ -80,8 +80,8 @@ return {
             install_info = {
               path = vim.env.TREE_SITTER_SILVERSTRIPE_DIR,
               generate = true,
-              generate_from_json = false,
-              queries = "queries/silverstripe",
+              generate_from_json = true,
+              queries = "queries",
             },
           }
         end,
