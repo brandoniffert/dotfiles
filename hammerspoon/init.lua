@@ -3,6 +3,7 @@
 require("hs.ipc")
 
 hs.window.animationDuration = 0
+hs.application.enableSpotlightForNameSearches(true)
 
 local detectKeyLayout = function()
   for _, device in ipairs(hs.usb.attachedDevices()) do
