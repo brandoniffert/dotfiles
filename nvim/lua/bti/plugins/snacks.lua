@@ -99,7 +99,8 @@ return {
               cmd = "fd",
               args = { ".", "--type", "directory" },
             }
-            return require("snacks.picker.source.proc").proc({ opts, proc_opts }, ctx)
+            local merged_opts = vim.tbl_deep_extend("force", opts or {}, proc_opts)
+            return require("snacks.picker.source.proc").proc(merged_opts, ctx)
           end,
           confirm = function(picker, item)
             picker:close()
