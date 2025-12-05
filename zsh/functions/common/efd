@@ -1,0 +1,46 @@
+# shellcheck shell=bash
+# shellcheck disable=SC2168
+
+if [[ $# -eq 0 ]]; then
+    cat << 'EOF'
+Usage: efd [OPTIONS] <pattern>
+
+Search for files with fd, select with fzf, and open in Neovim's quickfix list.
+Searches hidden and ignored files by default.
+
+Options:
+-l, --list    Just list the files instead of opening in Neovim
+
+All other options are passed directly to fd.
+EOF
+    return 0
+fi
+
+local list_only=false
+local args=()
+
+for arg in "$@"; do
+    if [[ "$arg" == "--list" || "$arg" == "-l" ]]; then
+        list_only=true
+    else
+        args+=("$arg")
+    fi
+done
+
+if $list_only; then
+    fd --hidden --no-ignore --type file "${args[@]}"
+else
+    local selected
+    selected=$(fd --hidden --no-ignore --type file "${args[@]}" | fzf --multi --height 40% --border sharp)
+
+    if [[ -n "$selected" ]]; then
+        local qffile
+        qffile=$(mktemp)
+        while IFS= read -r line; do
+            echo "$line:1:1:" >> "$qffile"
+        done <<< "$selected"
+        nvim -q "$qffile" -c ":copen"
+        rm "$qffile"
+    fi
+fi
+
