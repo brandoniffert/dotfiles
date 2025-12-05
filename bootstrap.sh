@@ -85,6 +85,7 @@ config_dots=(
   bat
   btop
   dircolors
+  just
   git
   lazygit
   nvim
