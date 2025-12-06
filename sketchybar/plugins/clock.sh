@@ -1,3 +1,6 @@
 #!/usr/bin/env bash
 
-sketchybar --set "$NAME" label="$(date '+%H:%M %a %b %d')"
+local_time=$(date '+%H:%M %a %b %d')
+utc_time=$(date -u '+%H:%M %a')
+
+sketchybar --set "$NAME" label="[$utc_time] $local_time"
