@@ -181,6 +181,12 @@ unset host_fpath
 #-- Completion ----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
+nix_fpath=/nix/var/nix/profiles/default/share/zsh/site-functions
+if [[ -d "$nix_fpath" ]]; then
+  fpath=("$nix_fpath" $fpath)
+fi
+unset nix_fpath
+
 fpath=($ZDOTDIR/completions $fpath)
 
 autoload -Uz compinit
@@ -256,6 +262,10 @@ if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]]; then
 fi
 
 eval "$(zoxide init zsh)"
+
+if command -v direnv &> /dev/null; then
+  eval "$(direnv hook zsh)"
+fi
 
 # Use fd (https://github.com/sharkdp/fd) instead of the default find
 # command for listing path candidates.
