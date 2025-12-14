@@ -75,7 +75,7 @@ yarn *args:
 
     export YARN_CACHE_FOLDER="${YARN_CACHE_FOLDER:-$XDG_CACHE_HOME/yarn}"
 
-    {{ docker_compose }} {{ _compose_args }}run --rm \
+    {{ docker_compose }} {{ _compose_args }}run --rm --no-deps \
       -e YARN_CACHE_FOLDER \
       -v "$YARN_CACHE_FOLDER:$YARN_CACHE_FOLDER" \
       {{ node_service }} yarn "$@"
@@ -94,7 +94,7 @@ npm *args:
 
     export npm_config_cache="${npm_config_cache:-$XDG_CACHE_HOME/npm}"
 
-    {{ docker_compose }} {{ _compose_args }}run --rm \
+    {{ docker_compose }} {{ _compose_args }}run --rm --no-deps \
       -e npm_config_cache \
       -v "$npm_config_cache:$npm_config_cache" \
       {{ node_service }} npm "$@"
@@ -105,7 +105,7 @@ composer *args:
     export COMPOSER_HOME="${COMPOSER_HOME:-$XDG_CONFIG_HOME/composer}"
     export COMPOSER_CACHE_DIR="${COMPOSER_CACHE_DIR:-$XDG_CACHE_HOME/composer}"
 
-    {{ docker_compose }} {{ _compose_args }}run --rm \
+    {{ docker_compose }} {{ _compose_args }}run --rm --no-deps \
       --env COMPOSER_HOME \
       --env COMPOSER_CACHE_DIR \
       -v "$COMPOSER_HOME":"$COMPOSER_HOME" \
