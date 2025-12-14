@@ -4,7 +4,7 @@ p_header() {
   local title="$*"
   local length="${#title}"
   local cols=$(($(tput cols) - length - 3))
-  printf "\n[%s] " "$title"
+  printf "\n[$(tput setaf 3)%s$(tput sgr0)] " "$title"
   repeat $cols printf "·"
   printf "\n"
 }
@@ -51,6 +51,11 @@ if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]]; then
   p_header 'antidote'
   source ${ZDOTDIR:-~}/.antidote/antidote.zsh
   antidote update
+fi
+
+if (( $+commands[determinate-nixd] )); then
+  p_header 'determinate-nixd'
+  sudo determinate-nixd upgrade
 fi
 
 printf "\n"
