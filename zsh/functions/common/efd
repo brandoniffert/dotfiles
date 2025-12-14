@@ -31,7 +31,7 @@ if $list_only; then
     fd --hidden --no-ignore --type file "${args[@]}"
 else
     local selected
-    selected=$(fd --hidden --no-ignore --type file "${args[@]}" | fzf --multi --height 40% --border sharp)
+    selected=$(fd --hidden --no-ignore --type file "${args[@]}" | fzf --multi --height 40% --border sharp --preview 'cat {}')
 
     if [[ -n "$selected" ]]; then
         local qffile
