@@ -3,9 +3,9 @@ set allow-duplicate-variables := true
 set positional-arguments := true
 
 docker_compose := if `command -v docker >/dev/null 2>&1 && docker compose version >/dev/null 2>&1 && echo "true" || echo "false"` == "true" { "docker compose" } else { "docker-compose" }
-php_service := "php"
-node_service := "node"
-compose_args := ""
+php_service := env("DOCKER_PHP_SERVICE", "php")
+node_service := env("DOCKER_NODE_SERVICE", "node")
+compose_args := env("DOCKER_COMPOSE_ARGS", "")
 [private]
 _compose_args := if compose_args != "" { compose_args + " " } else { "" }
 
