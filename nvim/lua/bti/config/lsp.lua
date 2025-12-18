@@ -23,6 +23,7 @@ local servers = {
   "jsonls",
   "lua_ls",
   "tailwindcss",
+  "tofu_ls",
   "vtsls",
   "yamlls",
 }
