@@ -27,7 +27,6 @@ return {
       "javascript",
       "jsdoc",
       "json",
-      "jsonc",
       "liquid",
       "lua",
       "make",
