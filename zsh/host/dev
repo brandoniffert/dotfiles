@@ -1,4 +1,4 @@
 # vim:ft=zsh
 
 # Aliases
-alias paru="sudo -u paru paru"
+alias yay="sudo -u yay yay"
