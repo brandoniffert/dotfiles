@@ -126,6 +126,7 @@ vim.filetype.add({
     ss = "silverstripe",
   },
   filename = {
+    ["Caddyfile.j2"] = "caddy",
     ["config"] = "conf",
   },
   pattern = {

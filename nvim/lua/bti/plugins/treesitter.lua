@@ -13,6 +13,7 @@ return {
     require("nvim-treesitter").install({
       "astro",
       "bash",
+      "caddy",
       "css",
       "diff",
       "dockerfile",
