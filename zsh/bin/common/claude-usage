@@ -4,6 +4,8 @@ set -euo pipefail
 
 readonly CREDENTIALS_FILE="${CLAUDE_USAGE_CREDENTIALS:-$HOME/.claude/.credentials.json}"
 readonly API_URL="https://api.anthropic.com/api/oauth/usage"
+readonly TOKEN_URL="https://console.anthropic.com/v1/oauth/token"
+readonly CLIENT_ID="9d1c250a-e61b-44d9-88ed-5944d1962f5e"
 DEBUG="${CLAUDE_USAGE_DEBUG:-0}"
 
 # Detect platform once
@@ -100,21 +102,77 @@ format_output() {
     out+=" • Extra: \$${used_display}/\$${limit_display} (${util_display}%)"
   else
     out="5h: ${display_5h}% (${time_5h}) • 7d: ${display_7d}% (${time_7d})"
-    if [[ "$extra_enabled" == "true" ]]; then
+    if [[ "$extra_enabled" == "true" && ("$display_5h" -ge 100 || "$display_7d" -ge 100) ]]; then
       local used_display limit_display util_display
       used_display=$(awk "BEGIN {printf \"%.2f\", $extra_used / 100}")
       limit_display=$(awk "BEGIN {printf \"%.2f\", $extra_limit / 100}")
       util_display="${extra_util%.*}"
       util_display="${util_display:-0}"
-      out+=" • Extra: ON \$${used_display}/\$${limit_display} (${util_display}%)"
+      out+=" • Extra: \$${used_display}/\$${limit_display} (${util_display}%)"
     fi
   fi
 
   echo "$out"
 }
 
+refresh_token_if_expired() {
+  local expires_at now_ms
+  expires_at=$(jq -r '.claudeAiOauth.expiresAt // empty' "$CREDENTIALS_FILE" 2>/dev/null)
+  [[ -n "$expires_at" ]] || return 0
+
+  now_ms=$(($(date +%s) * 1000))
+
+  # Refresh if within 10 min of expiry or already expired
+  if [[ $((expires_at - now_ms)) -gt 600000 ]]; then
+    return 0
+  fi
+
+  local refresh_token
+  refresh_token=$(jq -r '.claudeAiOauth.refreshToken // empty' "$CREDENTIALS_FILE" 2>/dev/null)
+  [[ -n "$refresh_token" ]] || return 1
+
+  [[ "$DEBUG" == "1" ]] && echo "DEBUG: refreshing expired token" >&2
+
+  local response http_code
+  response=$(curl -s --max-time 10 -w '\n%{http_code}' -X POST "$TOKEN_URL" \
+    -H "Content-Type: application/x-www-form-urlencoded" \
+    -d "grant_type=refresh_token&refresh_token=${refresh_token}&client_id=${CLIENT_ID}" 2>/dev/null)
+  http_code=$(echo "$response" | tail -1)
+  response=$(echo "$response" | sed '$d')
+
+  [[ "$http_code" == "200" ]] || return 1
+
+  local new_access new_refresh new_expires
+  new_access=$(echo "$response" | jq -r '.access_token // empty' 2>/dev/null)
+  new_refresh=$(echo "$response" | jq -r '.refresh_token // empty' 2>/dev/null)
+  local expires_in
+  expires_in=$(echo "$response" | jq -r '.expires_in // empty' 2>/dev/null)
+
+  [[ -n "$new_access" ]] || return 1
+
+  # Calculate new expiresAt in milliseconds
+  local new_expires_ms
+  if [[ -n "$expires_in" ]]; then
+    new_expires_ms=$(( $(date +%s) * 1000 + expires_in * 1000 ))
+  fi
+
+  # Update credentials file
+  local tmp
+  tmp=$(jq \
+    --arg at "$new_access" \
+    --arg rt "${new_refresh:-$refresh_token}" \
+    --argjson ea "${new_expires_ms:-$expires_at}" \
+    '.claudeAiOauth.accessToken = $at | .claudeAiOauth.refreshToken = $rt | .claudeAiOauth.expiresAt = $ea' \
+    "$CREDENTIALS_FILE" 2>/dev/null) || return 1
+  echo "$tmp" > "$CREDENTIALS_FILE"
+
+  [[ "$DEBUG" == "1" ]] && echo "DEBUG: token refreshed successfully" >&2
+}
+
 fetch_usage() {
   [[ -f "$CREDENTIALS_FILE" ]] || return 1
+
+  refresh_token_if_expired
 
   local token
   token=$(jq -r '.claudeAiOauth.accessToken // empty' "$CREDENTIALS_FILE" 2>/dev/null)
@@ -127,7 +185,16 @@ fetch_usage() {
     -H "Content-Type: application/json" 2>/dev/null)
   http_code=$(echo "$response" | tail -1)
   response=$(echo "$response" | sed '$d')
-  [[ "$http_code" == "200" && -n "$response" ]] || return 1
+  if [[ "$http_code" != "200" || -z "$response" ]]; then
+    local err_msg
+    err_msg=$(echo "$response" | jq -r '.error.message // empty' 2>/dev/null)
+    if [[ -n "$err_msg" ]]; then
+      echo "$err_msg"
+    else
+      echo "HTTP $http_code"
+    fi
+    return 1
+  fi
 
   local parsed
   parsed=$(echo "$response" | jq -r '[
@@ -160,8 +227,11 @@ fetch_usage() {
 main() {
   check_dependencies
 
-  if ! fetch_usage; then
-    echo "5h: --% (?) • 7d: --% (?)"
+  local output
+  if output=$(fetch_usage); then
+    echo "$output"
+  else
+    echo "${output:-error}"
   fi
 }
 
