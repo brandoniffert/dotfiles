@@ -7,4 +7,4 @@ clock=(
 
 sketchybar \
   --add item clock right \
-  --set clock "${clock[@]}"
+  --set clock "${clock[@]}" icon=""
