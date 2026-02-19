@@ -1,0 +1,168 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+readonly CREDENTIALS_FILE="${CLAUDE_USAGE_CREDENTIALS:-$HOME/.claude/.credentials.json}"
+readonly API_URL="https://api.anthropic.com/api/oauth/usage"
+DEBUG="${CLAUDE_USAGE_DEBUG:-0}"
+
+# Detect platform once
+if [[ "$(uname)" == "Darwin" ]]; then
+  readonly IS_MAC=1
+else
+  readonly IS_MAC=0
+fi
+
+check_dependencies() {
+  local missing=()
+  for cmd in curl jq date; do
+    command -v "$cmd" &>/dev/null || missing+=("$cmd")
+  done
+  if [[ ${#missing[@]} -gt 0 ]]; then
+    echo "ERROR: missing ${missing[*]}" >&2
+    exit 1
+  fi
+}
+
+# Cross-platform ISO 8601 to epoch seconds
+iso_to_epoch() {
+  local ts="$1"
+  if [[ "$IS_MAC" -eq 1 ]]; then
+    local cleaned
+    cleaned=$(echo "$ts" | sed -E 's/\.[0-9]+//; s/([+-][0-9]{2}):([0-9]{2})$/\1\2/')
+    date -jf "%Y-%m-%d %H:%M:%S %z" "$(echo "$cleaned" | sed 's/T/ /')" +%s 2>/dev/null
+  else
+    local cleaned
+    cleaned=$(echo "$ts" | sed -E 's/T/ /; s/\.[0-9]+//; s/([+-][0-9]{2}):([0-9]{2})$/ \1\2/')
+    date -d "$cleaned" +%s 2>/dev/null
+  fi
+}
+
+format_time_until() {
+  local reset_at="$1"
+  if [[ -z "$reset_at" || "$reset_at" == "null" ]]; then
+    echo "--"
+    return
+  fi
+
+  local reset_epoch now_epoch diff_seconds
+  reset_epoch=$(iso_to_epoch "$reset_at") || {
+    echo "?"
+    return
+  }
+  [[ -n "$reset_epoch" ]] || {
+    echo "?"
+    return
+  }
+  now_epoch=$(date +%s)
+  diff_seconds=$((reset_epoch - now_epoch))
+
+  if [[ "$diff_seconds" -le 0 ]]; then
+    echo "0m"
+    return
+  fi
+
+  local diff_minutes=$((diff_seconds / 60))
+  local diff_hours=$((diff_seconds / 3600))
+  local diff_days=$((diff_seconds / 86400))
+
+  if [[ "$diff_hours" -lt 1 ]]; then
+    echo "${diff_minutes}m"
+  elif [[ "$diff_hours" -lt 24 ]]; then
+    echo "${diff_hours}h"
+  else
+    echo "${diff_days}d"
+  fi
+}
+
+format_output() {
+  local five_hour="$1" seven_day="$2" five_hour_reset="$3" seven_day_reset="$4"
+  local extra_enabled="$5" extra_limit="$6" extra_used="$7" extra_util="$8"
+
+  local display_5h="${five_hour%.*}" display_7d="${seven_day%.*}"
+  display_5h="${display_5h:-0}"
+  display_7d="${display_7d:-0}"
+
+  local time_5h time_7d
+  time_5h=$(format_time_until "$five_hour_reset")
+  time_7d=$(format_time_until "$seven_day_reset")
+
+  local out=""
+
+  # When on extra usage (7d maxed out), 5h is irrelevant
+  if [[ "$extra_enabled" == "true" && "$display_7d" -ge 100 ]]; then
+    out="7d: ${display_7d}% (${time_7d})"
+    local used_display limit_display util_display
+    used_display=$(awk "BEGIN {printf \"%.2f\", $extra_used / 100}")
+    limit_display=$(awk "BEGIN {printf \"%.2f\", $extra_limit / 100}")
+    util_display="${extra_util%.*}"
+    util_display="${util_display:-0}"
+    out+=" • Extra: \$${used_display}/\$${limit_display} (${util_display}%)"
+  else
+    out="5h: ${display_5h}% (${time_5h}) • 7d: ${display_7d}% (${time_7d})"
+    if [[ "$extra_enabled" == "true" ]]; then
+      local used_display limit_display util_display
+      used_display=$(awk "BEGIN {printf \"%.2f\", $extra_used / 100}")
+      limit_display=$(awk "BEGIN {printf \"%.2f\", $extra_limit / 100}")
+      util_display="${extra_util%.*}"
+      util_display="${util_display:-0}"
+      out+=" • Extra: ON \$${used_display}/\$${limit_display} (${util_display}%)"
+    fi
+  fi
+
+  echo "$out"
+}
+
+fetch_usage() {
+  [[ -f "$CREDENTIALS_FILE" ]] || return 1
+
+  local token
+  token=$(jq -r '.claudeAiOauth.accessToken // empty' "$CREDENTIALS_FILE" 2>/dev/null)
+  [[ -n "$token" ]] || return 1
+
+  local response http_code
+  response=$(curl -s --max-time 5 -w '\n%{http_code}' "$API_URL" \
+    --config <(printf 'header = "Authorization: Bearer %s"\n' "$token") \
+    -H "anthropic-beta: oauth-2025-04-20" \
+    -H "Content-Type: application/json" 2>/dev/null)
+  http_code=$(echo "$response" | tail -1)
+  response=$(echo "$response" | sed '$d')
+  [[ "$http_code" == "200" && -n "$response" ]] || return 1
+
+  local parsed
+  parsed=$(echo "$response" | jq -r '[
+    (.five_hour.utilization // 0 | tostring),
+    (.seven_day.utilization // 0 | tostring),
+    (.five_hour.resets_at // "null"),
+    (.seven_day.resets_at // "null"),
+    (.extra_usage.is_enabled // false | tostring),
+    (.extra_usage.monthly_limit // 0 | tostring),
+    (.extra_usage.used_credits // 0 | tostring),
+    (.extra_usage.utilization // 0 | tostring)
+  ] | join("|")' 2>/dev/null) || return 1
+
+  local five_hour seven_day five_hour_reset seven_day_reset
+  local extra_enabled extra_limit extra_used extra_util
+  IFS='|' read -r five_hour seven_day five_hour_reset seven_day_reset \
+    extra_enabled extra_limit extra_used extra_util <<<"$parsed"
+
+  if [[ "$DEBUG" == "1" ]]; then
+    echo "DEBUG raw response:" >&2
+    echo "$response" | jq . >&2
+    echo "DEBUG parsed: 5h=$five_hour 7d=$seven_day 5h_reset=$five_hour_reset 7d_reset=$seven_day_reset" >&2
+    echo "DEBUG extra: enabled=$extra_enabled limit=$extra_limit used=$extra_used util=$extra_util" >&2
+  fi
+
+  format_output "$five_hour" "$seven_day" "$five_hour_reset" "$seven_day_reset" \
+    "$extra_enabled" "$extra_limit" "$extra_used" "$extra_util"
+}
+
+main() {
+  check_dependencies
+
+  if ! fetch_usage; then
+    echo "5h: --% (?) • 7d: --% (?)"
+  fi
+}
+
+main "$@"
