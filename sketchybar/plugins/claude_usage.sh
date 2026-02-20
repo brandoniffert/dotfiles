@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-if label=$("$HOME/.config/zsh/bin/common/claude-usage" 2>/dev/null); then
+if label=$("$HOME/.config/zsh/bin/host/iffy/claude-usage" 2>/dev/null); then
   timestamp=$(date +"%H:%M")
   sketchybar \
     --set "$NAME" label="$label" \
