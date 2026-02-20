@@ -3,6 +3,7 @@
 set -euo pipefail
 
 readonly CREDENTIALS_FILE="${CLAUDE_USAGE_CREDENTIALS:-$HOME/.claude/.credentials.json}"
+readonly KEYCHAIN_SERVICE="Claude Code-credentials"
 readonly API_URL="https://api.anthropic.com/api/oauth/usage"
 readonly TOKEN_URL="https://console.anthropic.com/v1/oauth/token"
 readonly CLIENT_ID="9d1c250a-e61b-44d9-88ed-5944d1962f5e"
@@ -14,6 +15,23 @@ if [[ "$(uname)" == "Darwin" ]]; then
 else
   readonly IS_MAC=0
 fi
+
+read_credentials() {
+  if [[ "$IS_MAC" -eq 1 ]]; then
+    security find-generic-password -s "$KEYCHAIN_SERVICE" -w 2>/dev/null
+  else
+    [[ -f "$CREDENTIALS_FILE" ]] && cat "$CREDENTIALS_FILE"
+  fi
+}
+
+write_credentials() {
+  local json="$1"
+  if [[ "$IS_MAC" -eq 1 ]]; then
+    security add-generic-password -U -s "$KEYCHAIN_SERVICE" -a "$(whoami)" -w "$json" 2>/dev/null
+  else
+    echo "$json" > "$CREDENTIALS_FILE"
+  fi
+}
 
 check_dependencies() {
   local missing=()
@@ -116,8 +134,12 @@ format_output() {
 }
 
 refresh_token_if_expired() {
+  local creds
+  creds=$(read_credentials) || return 1
+  [[ -n "$creds" ]] || return 1
+
   local expires_at now_ms
-  expires_at=$(jq -r '.claudeAiOauth.expiresAt // empty' "$CREDENTIALS_FILE" 2>/dev/null)
+  expires_at=$(echo "$creds" | jq -r '.claudeAiOauth.expiresAt // empty' 2>/dev/null)
   [[ -n "$expires_at" ]] || return 0
 
   now_ms=$(($(date +%s) * 1000))
@@ -128,7 +150,7 @@ refresh_token_if_expired() {
   fi
 
   local refresh_token
-  refresh_token=$(jq -r '.claudeAiOauth.refreshToken // empty' "$CREDENTIALS_FILE" 2>/dev/null)
+  refresh_token=$(echo "$creds" | jq -r '.claudeAiOauth.refreshToken // empty' 2>/dev/null)
   [[ -n "$refresh_token" ]] || return 1
 
   [[ "$DEBUG" == "1" ]] && echo "DEBUG: refreshing expired token" >&2
@@ -159,26 +181,31 @@ refresh_token_if_expired() {
     new_expires_ms=$(( $(date +%s) * 1000 + expires_in * 1000 ))
   fi
 
-  # Update credentials file
+  # Update credentials
   local tmp
-  tmp=$(jq \
+  tmp=$(echo "$creds" | jq \
     --arg at "$new_access" \
     --arg rt "${new_refresh:-$refresh_token}" \
     --argjson ea "${new_expires_ms:-$expires_at}" \
     '.claudeAiOauth.accessToken = $at | .claudeAiOauth.refreshToken = $rt | .claudeAiOauth.expiresAt = $ea' \
-    "$CREDENTIALS_FILE" 2>/dev/null) || return 1
-  echo "$tmp" > "$CREDENTIALS_FILE"
+    2>/dev/null) || return 1
+  write_credentials "$tmp"
 
   [[ "$DEBUG" == "1" ]] && echo "DEBUG: token refreshed successfully" >&2
 }
 
 fetch_usage() {
-  [[ -f "$CREDENTIALS_FILE" ]] || return 1
+  local creds
+  creds=$(read_credentials) || return 1
+  [[ -n "$creds" ]] || return 1
 
   refresh_token_if_expired
 
+  # Re-read in case refresh updated the credentials
+  creds=$(read_credentials) || return 1
+
   local token
-  token=$(jq -r '.claudeAiOauth.accessToken // empty' "$CREDENTIALS_FILE" 2>/dev/null)
+  token=$(echo "$creds" | jq -r '.claudeAiOauth.accessToken // empty' 2>/dev/null)
   [[ -n "$token" ]] || return 1
 
   local response http_code
