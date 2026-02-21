@@ -183,7 +183,7 @@ refresh_token_if_expired() {
 
   # Update credentials
   local tmp
-  tmp=$(echo "$creds" | jq \
+  tmp=$(echo "$creds" | jq -c \
     --arg at "$new_access" \
     --arg rt "${new_refresh:-$refresh_token}" \
     --argjson ea "${new_expires_ms:-$expires_at}" \
