@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1091
 source "$CONFIG_DIR/ui.sh"
-source "$CONFIG_DIR/icon_map.sh"
+source "$CONFIG_DIR/helpers/icon_map.sh"
 
 workspace_cache="$(cat /tmp/aerospace_cache_workspace)"
 window_cache=/tmp/aerospace_cache_windows.json

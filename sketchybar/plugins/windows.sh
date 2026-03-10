@@ -2,7 +2,7 @@
 
 # shellcheck disable=SC1091
 source "$CONFIG_DIR/ui.sh"
-source "$CONFIG_DIR/icon_map.sh"
+source "$CONFIG_DIR/helpers/icon_map.sh"
 window_counts="/tmp/hs-window-counts"
 
 cmd="sketchybar"
