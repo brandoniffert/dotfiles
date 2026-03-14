@@ -111,18 +111,6 @@ function bti-fg-bg() {
 zle -N bti-fg-bg
 bindkey '^Z' bti-fg-bg
 
-# Show indicator for tab completion
-function expand-or-complete-with-dots() {
-  [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti rmam
-  print -Pn "%{%F{yellow}......%f%}"
-  [[ -n "$terminfo[rmam]" && -n "$terminfo[smam]" ]] && echoti smam
-
-  zle expand-or-complete
-  zle redisplay
-}
-zle -N expand-or-complete-with-dots
-bindkey "^I" expand-or-complete-with-dots
-
 #------------------------------------------------------------------------------
 #-- Aliases -------------------------------------------------------------------
 #------------------------------------------------------------------------------
