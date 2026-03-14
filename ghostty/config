@@ -34,6 +34,8 @@ quit-after-last-window-closed = true
 
 shell-integration-features = no-cursor
 
+custom-shader = shaders/cursor_warp.glsl
+
 macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
 
