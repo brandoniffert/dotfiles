@@ -1,17 +1,30 @@
 ---@type LazySpec
 return {
   "saghen/blink.cmp",
+  dependencies = {
+    "mgalliou/blink-cmp-tmux",
+  },
   version = "*",
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
     sources = {
-      default = { "lazydev", "lsp", "buffer", "snippets", "path" },
+      default = { "lazydev", "lsp", "buffer", "snippets", "path", "tmux" },
       providers = {
         lazydev = {
           name = "LazyDev",
           module = "lazydev.integrations.blink",
           score_offset = 100,
+        },
+        tmux = {
+          module = "blink-cmp-tmux",
+          name = "tmux",
+          opts = {
+            panes = "window",
+            capture_history = false,
+            triggered_only = false,
+            trigger_chars = { "." },
+          },
         },
       },
     },
