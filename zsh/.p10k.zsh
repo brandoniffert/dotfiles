@@ -317,7 +317,7 @@
   #---------------------------------------------------------------------------------------------
 
   function prompt_user_dir() {
-    p10k segment -f 'blue' -t '%B%(3~|%2~|%1~)%b'
+    p10k segment -f 'blue' -t '%~'
   }
 
   function instant_prompt_user_dir() {
