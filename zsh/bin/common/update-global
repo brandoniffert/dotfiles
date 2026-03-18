@@ -33,7 +33,7 @@ if (( $+commands[composer] )); then
   if [[ "$ret" -eq 1 ]]; then
     printf "\n"
     packages=($(composer global show --direct 2>/dev/null | grep '^[a-zA-Z]' | cut -d ' ' -f1))
-    composer global update --interactive --with-dependencies "${packages[@]}"
+    composer global update --interactive --with-dependencies "${packages[@]}" --ansi 2>&1 | sed $'s/\x1b\\[37;41m/\x1b[31m/g'
   fi
 fi
 
