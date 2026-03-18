@@ -3,5 +3,75 @@
     "prefix": "dv",
     "body": ["die(var_dump($0));"],
     "description": "die_var_dump"
+  },
+  "ss_db": {
+    "prefix": "ssdb",
+    "body": ["private static \\$db = [", "\t$0", "];"],
+    "description": "SilverStripe $db property"
+  },
+  "ss_has_one": {
+    "prefix": "sshasone",
+    "body": ["private static \\$has_one = [", "\t$0", "];"],
+    "description": "SilverStripe $has_one property"
+  },
+  "ss_has_many": {
+    "prefix": "sshasmany",
+    "body": ["private static \\$has_many = [", "\t$0", "];"],
+    "description": "SilverStripe $has_many property"
+  },
+  "ss_many_many": {
+    "prefix": "ssmanymany",
+    "body": ["private static \\$many_many = [", "\t$0", "];"],
+    "description": "SilverStripe $many_many property"
+  },
+  "ss_many_many_extraFields": {
+    "prefix": "ssmanymanyextrafields",
+    "body": ["private static \\$many_many_extraFields = [", "\t$0", "];"],
+    "description": "SilverStripe $many_many_extraFields property"
+  },
+  "ss_owns": {
+    "prefix": "ssowns",
+    "body": ["private static \\$owns = [", "\t$0", "];"],
+    "description": "SilverStripe $owns property"
+  },
+  "ss_summary_fields": {
+    "prefix": "sssummaryfields",
+    "body": ["private static \\$summary_fields = [", "\t$0", "];"],
+    "description": "SilverStripe $summary_fields property"
+  },
+  "ss_searchable_fields": {
+    "prefix": "sssearchablefields",
+    "body": ["private static \\$searchable_fields = [", "\t$0", "];"],
+    "description": "SilverStripe $searchable_fields property"
+  },
+  "ss_getCMSCompositeValidator": {
+    "prefix": "ssgetcmscompositevalidator",
+    "body": [
+      "public function getCMSCompositeValidator(): CompositeValidator",
+      "{",
+      "\t\\$validator = parent::getCMSCompositeValidator();",
+      "",
+      "\t\\$validator->addValidator(RequiredFieldsValidator::create([",
+      "\t\t'${1:Title}',",
+      "\t]));",
+      "",
+      "\treturn \\$validator;",
+      "}"
+    ],
+    "description": "SilverStripe getCMSCompositeValidator method"
+  },
+  "ss_validate": {
+    "prefix": "ssvalidate",
+    "body": [
+      "public function validate(): ValidationResult",
+      "{",
+      "\t\\$result = parent::validate();",
+      "",
+      "\t$0",
+      "",
+      "\treturn \\$result;",
+      "}"
+    ],
+    "description": "SilverStripe validate method"
   }
 }
