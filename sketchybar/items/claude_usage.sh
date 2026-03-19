@@ -5,7 +5,7 @@ source "$CONFIG_DIR/ui.sh"
 source "$CONFIG_DIR/helpers/icon_map.sh"
 
 claude_usage=(
-  update_freq=600
+  update_freq=300
   label.padding_right=0
   script="$PLUGIN_DIR/claude_usage.sh"
 )
