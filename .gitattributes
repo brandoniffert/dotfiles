@@ -9,3 +9,4 @@ git/config filter=git-crypt diff=git-crypt
 git/config.homelab filter=git-crypt diff=git-crypt
 git/config.houseof207 filter=git-crypt diff=git-crypt
 git/config.trainor filter=git-crypt diff=git-crypt
+git/config.rvohealth filter=git-crypt diff=git-crypt
