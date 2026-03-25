@@ -29,7 +29,6 @@ return {
       -- https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
       integrations = {
         blink_cmp = true,
-        harpoon = true,
         snacks = true,
         treesitter_context = true,
         which_key = true,
