@@ -68,7 +68,9 @@ vim.keymap.set("n", "<Leader>=", ":vnew<CR>", { silent = true, desc = "Vertical 
 vim.keymap.set("n", "<Leader>-", ":new<CR>", { silent = true, desc = "Horizontal split" })
 
 vim.keymap.set("n", "<Leader>yp", function()
-  vim.fn.setreg("+", vim.fn.expand("%:."))
+  local path = vim.fn.expand("%:.")
+  vim.fn.setreg("+", path)
+  vim.notify("Yanked: " .. path)
 end, { desc = "Yank current relative path to clipboard" })
 
 -- Visual (Leader)
