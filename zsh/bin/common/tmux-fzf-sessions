@@ -55,7 +55,9 @@ while :; do
       --print-query \
       --multi \
       --no-sort --tiebreak=index \
-      --bind "$ctrl_e_bind"
+      --bind "$ctrl_e_bind" \
+      --bind "change:transform-header:echo \"Current: ${current:-<none>}\"" \
+      --bind 'zero:transform-header:echo "ctrl-e: create {q}"'
   ) || true # ctrl-e path aborts; keep output
 
   # With --print-query and (maybe) --expect:
