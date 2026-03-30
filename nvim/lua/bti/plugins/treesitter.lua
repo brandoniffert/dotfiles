@@ -4,11 +4,6 @@ return {
   lazy = false,
   branch = "main",
   build = ":TSUpdate",
-  dependencies = {
-    {
-      "JoosepAlviste/nvim-ts-context-commentstring",
-    },
-  },
   config = function()
     require("nvim-treesitter").install({
       "astro",
