@@ -1,395 +1,386 @@
 local M = {}
 
-local conditions = require("heirline.conditions")
-local utils = require("heirline.utils")
 local colors = require("bti.theme").colors
 local icons = require("bti.theme").icons
 
-local ViMode = {
-  init = function(self)
-    self.mode = vim.fn.mode(1)
+-------------------------------------------------------------
+-- Highlights
+-------------------------------------------------------------
 
-    if not self.once then
-      vim.api.nvim_create_autocmd("ModeChanged", {
-        pattern = "*:*o",
-        command = "redrawstatus",
-      })
-      self.once = true
-    end
-  end,
+local function setup_highlights()
+  local hl = vim.api.nvim_set_hl
+  local bg = colors.base1
 
-  static = {
-    mode_names = {
-      ["n"] = "NORMAL",
-      ["no"] = "O-PENDING",
-      ["nov"] = "O-PENDING",
-      ["noV"] = "O-PENDING",
-      ["no\22"] = "O-PENDING",
-      ["niI"] = "NORMAL",
-      ["niR"] = "NORMAL",
-      ["niV"] = "NORMAL",
-      ["nt"] = "NORMAL",
-      ["ntT"] = "NORMAL",
-      ["v"] = "VISUAL",
-      ["vs"] = "VISUAL",
-      ["V"] = "V-LINE",
-      ["Vs"] = "V-LINE",
-      ["\22"] = "V-BLOCK",
-      ["\22s"] = "V-BLOCK",
-      ["s"] = "SELECT",
-      ["S"] = "S-LINE",
-      ["\19"] = "S-BLOCK",
-      ["i"] = "INSERT",
-      ["ic"] = "INSERT",
-      ["ix"] = "INSERT",
-      ["R"] = "REPLACE",
-      ["Rc"] = "REPLACE",
-      ["Rx"] = "REPLACE",
-      ["Rv"] = "V-REPLACE",
-      ["Rvc"] = "V-REPLACE",
-      ["Rvx"] = "V-REPLACE",
-      ["c"] = "COMMAND",
-      ["cv"] = "EX",
-      ["ce"] = "EX",
-      ["r"] = "REPLACE",
-      ["rm"] = "MORE",
-      ["r?"] = "CONFIRM",
-      ["!"] = "SHELL",
-      ["t"] = "TERMINAL",
-    },
-    mode_colors = {
-      n = colors.blue,
-      i = colors.green,
-      v = colors.mauve,
-      V = colors.mauve,
-      ["\22"] = colors.mauve,
-      c = colors.peach,
-      s = colors.teal,
-      S = colors.teal,
-      ["\19"] = colors.teal,
-      R = colors.red,
-      r = colors.red,
-      ["!"] = colors.red,
-      t = colors.red,
-    },
-  },
+  -- Mode
+  hl(0, "StlModeNormal", { fg = colors.blue, bg = bg, bold = true })
+  hl(0, "StlModeInsert", { fg = colors.green, bg = bg, bold = true })
+  hl(0, "StlModeVisual", { fg = colors.mauve, bg = bg, bold = true })
+  hl(0, "StlModeReplace", { fg = colors.red, bg = bg, bold = true })
+  hl(0, "StlModeCommand", { fg = colors.peach, bg = bg, bold = true })
+  hl(0, "StlModeSelect", { fg = colors.teal, bg = bg, bold = true })
+  hl(0, "StlModeTerminal", { fg = colors.red, bg = bg, bold = true })
 
-  provider = function(self)
-    return "  " .. self.mode_names[self.mode] .. " "
-  end,
+  -- Statusline
+  hl(0, "StlBase", { fg = colors.text, bg = bg })
+  hl(0, "StlProgress", { fg = colors.yellow, bg = bg })
+  hl(0, "StlPath", { fg = colors.overlay2, bg = bg })
+  hl(0, "StlFile", { fg = colors.text, bg = bg, bold = true })
+  hl(0, "StlModified", { fg = colors.red, bg = bg, bold = true })
+  hl(0, "StlReadonly", { fg = colors.red, bg = bg, bold = true })
+  hl(0, "StlSpell", { fg = colors.lavender, bg = bg, bold = true })
+  hl(0, "StlFiletype", { fg = colors.text, bg = bg, bold = true })
+  hl(0, "StlLocation", { fg = colors.subtext0, bg = bg })
+  hl(0, "StlSpecial", { fg = colors.text, bg = bg, bold = true })
+  hl(0, "StlDiagError", { fg = colors.red, bg = bg })
+  hl(0, "StlDiagWarn", { fg = colors.yellow, bg = bg })
+  hl(0, "StlDiagInfo", { fg = colors.blue, bg = bg })
+  hl(0, "StlDiagHint", { fg = colors.teal, bg = bg })
+  hl(0, "StlGitBranch", { fg = colors.subtext0, bg = bg })
+  hl(0, "StlGitAdded", { fg = colors.green, bg = bg })
+  hl(0, "StlGitChanged", { fg = colors.yellow, bg = bg })
+  hl(0, "StlGitRemoved", { fg = colors.red, bg = bg })
 
-  hl = function(self)
-    local mode = self.mode:sub(1, 1)
-    return { fg = self.mode_colors[mode], bold = true }
-  end,
+  -- Winbar (no bg, inherits window background)
+  hl(0, "WinBarPath", { fg = colors.overlay2 })
+  hl(0, "WinBarFile", { fg = colors.text, bold = true })
+  hl(0, "WinBarModified", { fg = colors.red, bold = true })
+  hl(0, "WinBarReadonly", { fg = colors.red, bold = true })
+  hl(0, "WinBarSpell", { fg = colors.lavender, bold = true })
+
+  -- Tabline
+  hl(0, "TabActive", { fg = colors.text, bg = bg, bold = true })
+  hl(0, "TabInactive", { fg = colors.overlay2, bg = bg })
+end
+
+-------------------------------------------------------------
+-- Mode
+-------------------------------------------------------------
+
+local mode_names = {
+  n = "NORMAL",
+  no = "O-PENDING",
+  nov = "O-PENDING",
+  noV = "O-PENDING",
+  ["no\22"] = "O-PENDING",
+  niI = "NORMAL",
+  niR = "NORMAL",
+  niV = "NORMAL",
+  nt = "NORMAL",
+  ntT = "NORMAL",
+  v = "VISUAL",
+  vs = "VISUAL",
+  V = "V-LINE",
+  Vs = "V-LINE",
+  ["\22"] = "V-BLOCK",
+  ["\22s"] = "V-BLOCK",
+  s = "SELECT",
+  S = "S-LINE",
+  ["\19"] = "S-BLOCK",
+  i = "INSERT",
+  ic = "INSERT",
+  ix = "INSERT",
+  R = "REPLACE",
+  Rc = "REPLACE",
+  Rx = "REPLACE",
+  Rv = "V-REPLACE",
+  Rvc = "V-REPLACE",
+  Rvx = "V-REPLACE",
+  c = "COMMAND",
+  cv = "EX",
+  ce = "EX",
+  r = "REPLACE",
+  rm = "MORE",
+  ["r?"] = "CONFIRM",
+  ["!"] = "SHELL",
+  t = "TERMINAL",
 }
 
-local FileNamePrefix = {
-  {
-    provider = " ",
-  },
-  {
-    provider = function(_)
-      local basename = vim.fn.expand("%:h")
+local mode_hls = {
+  n = "StlModeNormal",
+  i = "StlModeInsert",
+  v = "StlModeVisual",
+  V = "StlModeVisual",
+  ["\22"] = "StlModeVisual",
+  c = "StlModeCommand",
+  s = "StlModeSelect",
+  S = "StlModeSelect",
+  ["\19"] = "StlModeSelect",
+  R = "StlModeReplace",
+  r = "StlModeReplace",
+  ["!"] = "StlModeTerminal",
+  t = "StlModeTerminal",
+}
 
-      if basename == "" or basename == "." then
-        return ""
-      else
-        return vim.fn.substitute(vim.fn.fnamemodify(basename, ":~:."), "/$", "", "") .. "/"
+local function mode()
+  local m = vim.fn.mode(1)
+  local name = mode_names[m] or m
+  local hl = mode_hls[m:sub(1, 1)] or "StlModeNormal"
+  return "%#" .. hl .. "#  " .. name .. " "
+end
+
+local function escape_stl(s)
+  return s:gsub("%%", "%%%%")
+end
+
+local function git()
+  local dict = vim.b.gitsigns_status_dict
+  if not dict then
+    return ""
+  end
+  local parts = { "%#StlGitBranch# " .. escape_stl(dict.head or "") }
+  if (dict.added or 0) > 0 then
+    parts[#parts + 1] = " %#StlGitAdded#+" .. dict.added
+  end
+  if (dict.changed or 0) > 0 then
+    parts[#parts + 1] = " %#StlGitChanged#~" .. dict.changed
+  end
+  if (dict.removed or 0) > 0 then
+    parts[#parts + 1] = " %#StlGitRemoved#-" .. dict.removed
+  end
+  parts[#parts + 1] = " %#StlGitBranch#"
+  return table.concat(parts)
+end
+
+-------------------------------------------------------------
+-- File info (shared by statusline and winbar)
+-------------------------------------------------------------
+
+local stl_hl = {
+  path = "StlPath",
+  file = "StlFile",
+  modified = "StlModified",
+  readonly = "StlReadonly",
+  spell = "StlSpell",
+}
+
+local winbar_hl = {
+  path = "WinBarPath",
+  file = "WinBarFile",
+  modified = "WinBarModified",
+  readonly = "WinBarReadonly",
+  spell = "WinBarSpell",
+}
+
+local function file_info(hl)
+  local parts = {}
+  local dir = vim.fn.expand("%:h")
+  if dir ~= "" and dir ~= "." then
+    parts[#parts + 1] = "%#" .. hl.path .. "# " .. escape_stl(vim.fn.fnamemodify(dir, ":~:.")) .. "/"
+  else
+    parts[#parts + 1] = " "
+  end
+  parts[#parts + 1] = "%#" .. hl.file .. "#%t"
+  if vim.bo.modified then
+    parts[#parts + 1] = "%#" .. hl.modified .. "# " .. icons.circle
+  end
+  if vim.bo.readonly then
+    parts[#parts + 1] = "%#" .. hl.readonly .. "# RO"
+  end
+  if vim.wo.spell and vim.bo.filetype ~= "markdown" then
+    parts[#parts + 1] = "%#" .. hl.spell .. "# SPELL"
+  end
+  return table.concat(parts)
+end
+
+-------------------------------------------------------------
+-- Right-side components
+-------------------------------------------------------------
+
+local diag_hl = {
+  [vim.diagnostic.severity.ERROR] = "StlDiagError",
+  [vim.diagnostic.severity.WARN] = "StlDiagWarn",
+  [vim.diagnostic.severity.INFO] = "StlDiagInfo",
+  [vim.diagnostic.severity.HINT] = "StlDiagHint",
+}
+
+local function diagnostics()
+  local counts = vim.diagnostic.count(0)
+  if not next(counts) then
+    return ""
+  end
+  local parts = { " " }
+  for _, sev in ipairs({
+    vim.diagnostic.severity.ERROR,
+    vim.diagnostic.severity.WARN,
+    vim.diagnostic.severity.INFO,
+    vim.diagnostic.severity.HINT,
+  }) do
+    local n = counts[sev]
+    if n and n > 0 then
+      parts[#parts + 1] = "%#" .. diag_hl[sev] .. "#" .. icons.circle_sm .. n
+    end
+  end
+  parts[#parts + 1] = " "
+  return table.concat(parts)
+end
+
+local function lsp_progress()
+  local status = vim.lsp.status()
+  if status == "" then
+    return ""
+  end
+  return "%#StlProgress# " .. escape_stl(status) .. " "
+end
+
+local function encoding()
+  local fmt = vim.bo.fileformat
+  local enc = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
+  if fmt ~= "unix" or enc ~= "utf-8" then
+    return "%#StlBase#" .. escape_stl(fmt) .. " [" .. escape_stl(enc) .. "] "
+  end
+  return ""
+end
+
+local function filetype()
+  local ft = vim.bo.filetype
+  if ft == "" then
+    return ""
+  end
+  return "%#StlFiletype#" .. escape_stl(ft) .. " "
+end
+
+local location = "%#StlLocation# %3l:%-3c %P "
+
+-------------------------------------------------------------
+-- Special statusline for non-standard buffers
+-------------------------------------------------------------
+
+local function special_statusline()
+  local bt = vim.bo.buftype
+  local ft = vim.bo.filetype
+
+  if bt == "help" then
+    return "%#StlSpecial#Help - %t%="
+  elseif bt == "quickfix" then
+    return '%#StlSpecial#Quickfix - %{get(w:,"quickfix_title","")}%='
+  elseif ft:match("^gitcommit") then
+    return "%#StlSpecial#git - %t%="
+  elseif ft == "snacks_picker_list" then
+    return "%#StlSpecial#Explorer%="
+  elseif bt == "nofile" or ft == "checkhealth" then
+    return "%#StlSpecial#%t%="
+  end
+  return nil
+end
+
+-------------------------------------------------------------
+-- Public: statusline, winbar, tabline
+-------------------------------------------------------------
+
+function M.statusline()
+  local special = special_statusline()
+  if special then
+    return special
+  end
+
+  return table.concat({
+    mode(),
+    git(),
+    file_info(stl_hl),
+    "%#StlBase#%=",
+    lsp_progress(),
+    diagnostics(),
+    encoding(),
+    filetype(),
+    location,
+  })
+end
+
+function M.winbar()
+  return file_info(winbar_hl) .. "%="
+end
+
+function M.tabline()
+  local tabs = vim.api.nvim_list_tabpages()
+  if #tabs < 2 then
+    return ""
+  end
+
+  local current = vim.api.nvim_get_current_tabpage()
+  local parts = {}
+  for i, tab in ipairs(tabs) do
+    local hl = tab == current and "%#TabActive#" or "%#TabInactive#"
+    parts[#parts + 1] = hl .. "%" .. i .. "T " .. i .. " %T"
+  end
+  parts[#parts + 1] = "%="
+  return table.concat(parts)
+end
+
+-------------------------------------------------------------
+-- Setup
+-------------------------------------------------------------
+
+local disabled_winbar_bt = {
+  prompt = true,
+  nofile = true,
+  help = true,
+  quickfix = true,
+  terminal = true,
+}
+local disabled_winbar_ft = { Trouble = true }
+
+function M.setup()
+  setup_highlights()
+
+  local group = vim.api.nvim_create_augroup("bti_statusline", { clear = true })
+
+  vim.api.nvim_create_autocmd("ColorScheme", {
+    group = group,
+    callback = setup_highlights,
+  })
+
+  vim.api.nvim_create_autocmd("User", {
+    group = group,
+    pattern = "GitSignsUpdate",
+    command = "redrawstatus",
+  })
+
+  vim.api.nvim_create_autocmd("ModeChanged", {
+    group = group,
+    pattern = "*:*",
+    command = "redrawstatus",
+  })
+
+  local last_progress_redraw = 0
+  vim.api.nvim_create_autocmd("LspProgress", {
+    group = group,
+    callback = function(args)
+      local kind = (args.data or {}).params and args.data.params.value and args.data.params.value.kind
+      if kind == "end" then
+        vim.defer_fn(function()
+          vim.cmd.redrawstatus()
+        end, 1000)
+        return
+      end
+      local now = vim.uv.hrtime() / 1e6
+      if now - last_progress_redraw > 100 then
+        last_progress_redraw = now
+        vim.cmd.redrawstatus()
       end
     end,
+  })
 
-    hl = {
-      fg = colors.overlay2,
-    },
-  },
-}
+  vim.o.statusline = "%{%v:lua.require('bti.config.statusline').statusline()%}"
+  vim.o.tabline = "%{%v:lua.require('bti.config.statusline').tabline()%}"
 
-local FileName = {
-  {
-    provider = function(_)
-      return "%t"
+  vim.api.nvim_create_autocmd({ "BufWinEnter", "BufFilePost", "FileType" }, {
+    group = group,
+    callback = function(args)
+      vim.schedule(function()
+        if not vim.api.nvim_buf_is_valid(args.buf) then
+          return
+        end
+        local bt = vim.bo[args.buf].buftype
+        local ft = vim.bo[args.buf].filetype
+        for _, win in ipairs(vim.fn.win_findbuf(args.buf)) do
+          if disabled_winbar_bt[bt] or disabled_winbar_ft[ft] then
+            vim.wo[win].winbar = ""
+          else
+            vim.wo[win].winbar = "%{%v:lua.require('bti.config.statusline').winbar()%}"
+          end
+        end
+      end)
     end,
-
-    hl = {
-      fg = colors.text,
-      bold = true,
-    },
-  },
-}
-
-local FileFlags = {
-  {
-    condition = function(_)
-      return vim.bo.modified
-    end,
-
-    provider = " " .. icons.circle,
-
-    hl = { fg = colors.red, bold = true },
-  },
-  {
-    condition = function(_)
-      return vim.bo.readonly
-    end,
-
-    provider = " RO",
-
-    hl = { fg = colors.red, bold = true },
-  },
-  {
-    condition = function()
-      local filetype = vim.bo.filetype
-
-      local filetype_blacklist = {
-        ["markdown"] = true,
-      }
-
-      return vim.wo.spell and filetype_blacklist[filetype] ~= true
-    end,
-
-    provider = " SPELL",
-
-    hl = { bold = true, fg = colors.lavender },
-  },
-}
-
-local Diagnostics = utils.surround({ " ", " " }, nil, {
-  condition = conditions.has_diagnostics,
-
-  static = {
-    error_icon = icons.circle_sm,
-    warn_icon = icons.circle_sm,
-    info_icon = icons.circle_sm,
-    hint_icon = icons.circle_sm,
-  },
-
-  init = function(self)
-    self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
-    self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
-    self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
-    self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
-  end,
-
-  update = { "DiagnosticChanged", "BufEnter" },
-
-  {
-    provider = function(self)
-      return self.errors > 0 and (self.error_icon .. self.errors)
-    end,
-    hl = { fg = colors.red },
-  },
-  {
-    provider = function(self)
-      return self.warnings > 0 and (self.warn_icon .. self.warnings)
-    end,
-    hl = { fg = colors.yellow },
-  },
-  {
-    provider = function(self)
-      return self.info > 0 and (self.info_icon .. self.info)
-    end,
-    hl = { fg = colors.blue },
-  },
-  {
-    provider = function(self)
-      return self.hints > 0 and (self.hint_icon .. self.hints)
-    end,
-    hl = { fg = colors.teal },
-  },
-})
-
-local FileEncodingFormat = {
-  provider = function()
-    local expected = "unix [utf-8]"
-    local fmt = vim.bo.fileformat
-    local enc = (vim.bo.fenc ~= "" and vim.bo.fenc) or vim.o.enc
-    local fmt_enc = fmt .. " [" .. enc .. "]"
-
-    if fmt_enc ~= expected then
-      return fmt_enc
-    end
-  end,
-}
-
-local FileType = {
-  provider = function()
-    return vim.bo.filetype
-  end,
-  hl = { bold = true },
-}
-
-local LocationProgress = utils.surround({ " ", " " }, nil, {
-  provider = function(_)
-    local line = vim.fn.line(".")
-    local col = vim.fn.col(".")
-    local total = vim.fn.line("$")
-    local location = math.floor(line / total * 100) .. "%%"
-
-    if line == 1 then
-      location = "Top"
-    elseif line == total then
-      location = "Bot"
-    end
-
-    return string.format("%3d:%-3d", line, col) .. " " .. "%-3(" .. location .. "%)"
-  end,
-
-  hl = {
-    fg = colors.subtext0,
-  },
-})
-
-local ActiveStatusLine = {
-  { ViMode },
-  { FileNamePrefix },
-  { FileName },
-  { FileFlags },
-  { provider = "%=" },
-  { Diagnostics },
-  { FileEncodingFormat },
-  { FileType },
-  { LocationProgress },
-}
-
-local SpecialStatusLine = {
-  condition = function()
-    return conditions.buffer_matches({
-      buftype = { "nofile", "help", "quickfix" },
-      filetype = { "^gitcommit", "checkhealth" },
-    })
-  end,
-
-  fallthrough = false,
-
-  hl = {
-    bold = true,
-  },
-
-  {
-    condition = function()
-      return vim.bo.buftype == "help"
-    end,
-
-    { provider = "Help - " },
-    { FileName },
-    { provider = "%=" },
-  },
-
-  {
-    condition = function()
-      return vim.bo.buftype == "quickfix"
-    end,
-
-    { provider = 'Quickfix - %{get(w:,"quickfix_title","")}' },
-    { provider = "%=" },
-  },
-
-  {
-    condition = function()
-      return string.match(vim.bo.filetype, "^gitcommit")
-    end,
-
-    { provider = "git - " },
-    { FileName },
-    { provider = "%=" },
-  },
-
-  {
-    condition = function()
-      return vim.bo.filetype == "snacks_picker_list"
-    end,
-
-    { provider = "Explorer" },
-    { provider = "%=" },
-  },
-
-  {
-    condition = function()
-      return true
-    end,
-
-    { FileName },
-    { provider = "%=" },
-  },
-}
-
-local SimpleStatusLine = {
-  { FileNamePrefix },
-  { FileName },
-  { FileFlags },
-  { provider = "%=" },
-}
-
-local StatusLine = {
-  hl = {
-    fg = colors.text,
-    bg = colors.base1,
-  },
-
-  fallthrough = false,
-
-  SpecialStatusLine,
-  ActiveStatusLine,
-}
-
-local WinBar = {
-  SimpleStatusLine,
-}
-
-local TabPage = {
-  provider = function(self)
-    return "%" .. self.tabnr .. "T " .. self.tabpage .. " %T"
-  end,
-
-  hl = function(self)
-    if self.is_active then
-      return {
-        fg = colors.text,
-        bold = true,
-      }
-    else
-      return {
-        fg = colors.overlay2,
-      }
-    end
-  end,
-}
-
-local TabPages = {
-  condition = function()
-    return #vim.api.nvim_list_tabpages() >= 2
-  end,
-
-  utils.make_tablist(TabPage),
-  { provider = "%=" },
-}
-
-local TabLine = { TabPages }
-
-M.setup = function()
-  require("heirline").setup({
-    statusline = {
-      StatusLine,
-    },
-
-    winbar = {
-      WinBar,
-    },
-
-    tabline = {
-      TabLine,
-    },
-
-    opts = {
-      disable_winbar_cb = function(args)
-        local buf = args.buf
-        local buftype = vim.tbl_contains({ "prompt", "nofile", "help", "quickfix", "terminal" }, vim.bo[buf].buftype)
-        local filetype = vim.tbl_contains({ "Trouble" }, vim.bo[buf].filetype)
-
-        return buftype or filetype
-      end,
-    },
   })
 end
 
