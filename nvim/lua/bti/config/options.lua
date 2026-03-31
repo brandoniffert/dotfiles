@@ -22,11 +22,7 @@ for _, provider in pairs(disabled_providers) do
   vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
-vim.opt.autoindent = true
-vim.opt.backspace = "indent,start,eol"
-vim.opt.backup = false
 vim.opt.backupcopy = "yes"
-vim.opt.belloff = "all"
 vim.opt.completeopt = "menu,menuone,noselect"
 vim.opt.cursorline = true
 vim.opt.diffopt:append("foldcolumn:0")
@@ -47,10 +43,9 @@ vim.opt.formatoptions:append("1rnq")
 if vim.fn.executable("rg") then
   vim.opt.grepprg = "rg --vimgrep --smart-case"
 end
-vim.opt.grepformat = "%f:%l:%m"
+vim.opt.grepformat = "%f:%l:%c:%m"
 vim.opt.ignorecase = true
 vim.opt.laststatus = 3
-vim.opt.linebreak = false
 vim.opt.list = true
 vim.opt.listchars = {
   nbsp = "⦸",
@@ -59,8 +54,6 @@ vim.opt.listchars = {
   tab = "▷⋯",
   trail = "•",
 }
-vim.opt.modelines = 5
-vim.opt.mouse = "a"
 vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.ruler = false
@@ -72,7 +65,6 @@ if root then
   vim.opt.shadafile = "NONE"
 end
 
-vim.opt.shiftround = false
 vim.opt.shiftwidth = 2
 vim.opt.shortmess = "AFOTWacot"
 vim.opt.showbreak = "↳ "
@@ -82,7 +74,6 @@ vim.opt.sidescroll = 0
 vim.opt.sidescrolloff = 3
 vim.opt.signcolumn = "yes"
 vim.opt.smartcase = true
-vim.opt.smarttab = true
 vim.opt.softtabstop = -1
 vim.opt.spellcapcheck = ""
 
@@ -96,9 +87,7 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 vim.opt.swapfile = false
 vim.opt.switchbuf = "usetab"
-vim.opt.synmaxcol = 200
 vim.opt.tabstop = 2
-vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
 
 if root then
@@ -108,13 +97,10 @@ else
 end
 
 vim.opt.updatetime = 2000
-vim.opt.updatecount = 0
 vim.opt.virtualedit = "block"
-vim.opt.visualbell = true
 vim.opt.whichwrap = "b,h,l,s,<,>,[,],~"
 vim.opt.wildcharm = 26
 vim.opt.wildignore:append("*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.pyc,*.so,*.DS_Store*/tmp/*")
-vim.opt.wildmenu = true
 vim.opt.wildmode = "longest:full,full"
 vim.opt.winborder = "rounded"
 vim.opt.writebackup = false
