@@ -20,10 +20,6 @@ vim.keymap.set("i", ";", ";<c-g>u")
 -- Split lines (opposite of J)
 vim.keymap.set("n", "|", require("bti.util.functions").split_at)
 
--- Clear search highlight
-vim.keymap.set("n", "<CR>", "<cmd>noh<CR>")
-vim.keymap.set("n", "<Leader>n", "<cmd>noh<CR>")
-
 -- Don't replace register with text that was pasted over
 vim.keymap.set("x", "p", "p:if v:register == '\"'<bar>let @@=@0<bar>endif<CR>")
 
