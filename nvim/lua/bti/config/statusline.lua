@@ -22,7 +22,7 @@ local function setup_highlights()
 
   -- Statusline
   hl(0, "StlBase", { fg = colors.text, bg = bg })
-  hl(0, "StlProgress", { fg = colors.yellow, bg = bg })
+  hl(0, "StlProgress", { fg = colors.overlay2, bg = bg })
   hl(0, "StlPath", { fg = colors.overlay2, bg = bg })
   hl(0, "StlFile", { fg = colors.text, bg = bg, bold = true })
   hl(0, "StlModified", { fg = colors.red, bg = bg, bold = true })
