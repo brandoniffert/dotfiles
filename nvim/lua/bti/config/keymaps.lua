@@ -59,10 +59,13 @@ vim.keymap.set(
   require("bti.util.functions").replace_fancy_characters,
   { desc = "Replace fancy characters" }
 )
-vim.keymap.set("n", "<Leader>ul", "<cmd>:Lazy<CR>", { desc = "Lazy" })
+vim.keymap.set("n", "<Leader>up", "<cmd>lua vim.pack.update()<CR>", { desc = "Update plugins" })
 vim.keymap.set("n", "<Leader>ur", ":make!<CR>", { desc = "Run current file" })
 vim.keymap.set("n", "<Leader>uv", "V`]", { desc = "Select text that was just pasted" })
 vim.keymap.set("n", "<Leader>uw", require("bti.util.functions").strip_whitespace, { desc = "Strip whitespace" })
+
+vim.cmd("packadd nvim.undotree")
+vim.keymap.set("n", "<Leader>uu", require("undotree").open, { desc = "Open undotree" })
 
 vim.keymap.set("n", "<Leader>=", ":vnew<CR>", { silent = true, desc = "Vertical split" })
 vim.keymap.set("n", "<Leader>-", ":new<CR>", { silent = true, desc = "Horizontal split" })

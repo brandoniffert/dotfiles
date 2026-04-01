@@ -1,3 +1,5 @@
+vim.pack.add({ { src = "https://github.com/neovim/nvim-lspconfig" } })
+
 vim.diagnostic.config({
   underline = false,
   update_in_insert = false,

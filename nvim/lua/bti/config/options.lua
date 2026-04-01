@@ -3,11 +3,14 @@ local root = vim.env.USER == "root"
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
 
-vim.g.editorconfig = false
+-- Enable default plugins
+vim.cmd("packadd nvim.difftool")
+vim.cmd("packadd nohlsearch")
 
-vim.g.markdown_fenced_languages = {
-  "ts=typescript",
-}
+-- Disable default plugins
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.g.editorconfig = false
 
 -- Disable unused providers
 local disabled_providers = {

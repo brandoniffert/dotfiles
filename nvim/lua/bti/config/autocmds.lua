@@ -65,8 +65,7 @@ augroups.misc = {
   },
 
   indicate_did_load = {
-    event = { "User" },
-    pattern = "VeryLazy",
+    event = { "UIEnter" },
     once = true,
     callback = function()
       require("bti.g").did_load = true

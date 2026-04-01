@@ -1,6 +1,6 @@
+vim.loader.enable(true)
+
 require("bti.config.options")
-require("bti.config.lazy")
 require("bti.config.keymaps")
 require("bti.config.autocmds")
-require("bti.config.lsp")
 require("bti.config.statusline").setup()
