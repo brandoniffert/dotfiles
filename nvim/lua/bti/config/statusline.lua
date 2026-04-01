@@ -335,12 +335,6 @@ function M.setup()
     command = "redrawstatus",
   })
 
-  vim.api.nvim_create_autocmd("ModeChanged", {
-    group = group,
-    pattern = "*:*",
-    command = "redrawstatus",
-  })
-
   local last_progress_redraw = 0
   vim.api.nvim_create_autocmd("LspProgress", {
     group = group,
