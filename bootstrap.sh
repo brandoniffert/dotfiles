@@ -103,6 +103,7 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     kitty
     ghostty
     hammerspoon
+    nvim-ephemeral
     sketchybar
     wezterm
   )
