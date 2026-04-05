@@ -58,6 +58,29 @@ augroups.focus = {
   },
 }
 
+augroups.lsp = {
+  progress_bar = {
+    event = { "LspProgress" },
+    callback = function(ev)
+      local value = ev.data.params.value
+
+      if value.kind == "end" then
+        require("bti.util").osc("\x1b]9;4;0\x07")
+      else
+        require("bti.util").osc("\x1b]9;4;3\x07")
+      end
+
+      vim.api.nvim_echo({ { value.message or "done" } }, false, {
+        id = "lsp." .. ev.data.client_id,
+        kind = "progress",
+        source = "vim.lsp",
+        title = value.title,
+        status = value.kind ~= "end" and "running" or "success",
+      })
+    end,
+  },
+}
+
 augroups.misc = {
   checktime = {
     event = { "FocusGained", "TermClose", "TermLeave" },

@@ -22,7 +22,6 @@ local function setup_highlights()
 
   -- Statusline
   hl(0, "StlBase", { fg = colors.text, bg = bg })
-  hl(0, "StlProgress", { fg = colors.overlay2, bg = bg })
   hl(0, "StlPath", { fg = colors.overlay2, bg = bg })
   hl(0, "StlFile", { fg = colors.text, bg = bg, bold = true })
   hl(0, "StlModified", { fg = colors.red, bg = bg, bold = true })
@@ -214,14 +213,6 @@ local function diagnostics()
   return table.concat(parts)
 end
 
-local function lsp_progress()
-  local status = vim.lsp.status()
-  if status == "" then
-    return ""
-  end
-  return "%#StlProgress# " .. escape_stl(status) .. " "
-end
-
 local function encoding()
   local fmt = vim.bo.fileformat
   local enc = vim.bo.fenc ~= "" and vim.bo.fenc or vim.o.enc
@@ -278,7 +269,6 @@ function M.statusline()
     git(),
     file_info(stl_hl),
     "%#StlBase#%=",
-    lsp_progress(),
     diagnostics(),
     encoding(),
     filetype(),
@@ -333,25 +323,6 @@ function M.setup()
     group = group,
     pattern = "GitSignsUpdate",
     command = "redrawstatus",
-  })
-
-  local last_progress_redraw = 0
-  vim.api.nvim_create_autocmd("LspProgress", {
-    group = group,
-    callback = function(args)
-      local kind = (args.data or {}).params and args.data.params.value and args.data.params.value.kind
-      if kind == "end" then
-        vim.defer_fn(function()
-          vim.cmd.redrawstatus()
-        end, 1000)
-        return
-      end
-      local now = vim.uv.hrtime() / 1e6
-      if now - last_progress_redraw > 100 then
-        last_progress_redraw = now
-        vim.cmd.redrawstatus()
-      end
-    end,
   })
 
   vim.o.statusline = "%{%v:lua.require('bti.config.statusline').statusline()%}"
