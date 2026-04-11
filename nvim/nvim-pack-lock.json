@@ -41,6 +41,10 @@
       "rev": "5cfe7fffbd01e17b3c1e14af85d5febdef88bd8c",
       "src": "https://github.com/catgoose/nvim-colorizer.lua"
     },
+    "nvim-jump": {
+      "rev": "79c91e5860b856c66187107d8d3c8d0950261f2c",
+      "src": "https://github.com/yorickpeterse/nvim-jump"
+    },
     "nvim-lint": {
       "rev": "eab58b48eb11d7745c11c505e0f3057165902461",
       "src": "https://github.com/mfussenegger/nvim-lint"
