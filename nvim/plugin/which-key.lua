@@ -6,9 +6,6 @@ require("which-key").setup({
   show_help = false,
   show_keys = true,
   icons = {
-    breadcrumb = "•",
-    separator = "•",
-    group = "",
     rules = false,
   },
   replace = {
@@ -18,13 +15,8 @@ require("which-key").setup({
   },
   spec = {
     mode = { "n", "v" },
-    { "<Leader>c", group = "code" },
     { "<Leader>f", group = "find" },
     { "<leader>u", group = "util" },
     { "<leader>x", group = "trouble" },
-    { "[", group = "prev" },
-    { "]", group = "next" },
-    { "g", group = "goto" },
-    { "gz", group = "surround" },
   },
 })
