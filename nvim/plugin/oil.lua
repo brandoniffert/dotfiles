@@ -55,3 +55,23 @@ require("oil").setup({
 })
 
 vim.keymap.set("n", "<Leader>o", "<cmd>lua require('oil').open_float()<CR>", { desc = "Oil (Float)" })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "OilActionsPost",
+  callback = function(event)
+    if event.data.actions then
+      for _, action in ipairs(event.data.actions) do
+        if action.type == "delete" and action.entry_type == "file" then
+          local path = action.url:gsub("^oil://", "")
+          local bufnr = vim.fn.bufnr(path)
+          if bufnr ~= -1 then
+            for _, win in ipairs(vim.fn.win_findbuf(bufnr)) do
+              vim.api.nvim_win_set_buf(win, vim.api.nvim_create_buf(false, true))
+            end
+            vim.api.nvim_buf_delete(bufnr, { force = true })
+          end
+        end
+      end
+    end
+  end,
+})
