@@ -14,13 +14,10 @@ local number_filetype_blacklist = {
   ["lspinfo"] = true,
   ["oil"] = true,
   ["qf"] = true,
-  ["snacks_picker_preview"] = true,
 }
 
 -- Don't manage cursorline for these
-local cursorline_filetype_blacklist = {
-  "snacks_picker_preview",
-}
+local cursorline_filetype_blacklist = {}
 
 M.focus_window = function()
   local win_type = vim.fn.win_gettype()

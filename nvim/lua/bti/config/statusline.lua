@@ -246,8 +246,6 @@ local function special_statusline()
     return '%#StlSpecial#Quickfix - %{get(w:,"quickfix_title","")}%='
   elseif ft:match("^gitcommit") then
     return "%#StlSpecial#git - %t%="
-  elseif ft == "snacks_picker_list" then
-    return "%#StlSpecial#Explorer%="
   elseif bt == "nofile" or ft == "checkhealth" then
     return "%#StlSpecial#%t%="
   end

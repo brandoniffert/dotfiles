@@ -3,8 +3,10 @@ vim.pack.add({
 })
 
 require("mini.ai").setup()
+require("mini.align").setup()
 require("mini.bracketed").setup()
 require("mini.comment").setup()
+require("mini.extra").setup()
 require("mini.hipatterns").setup({
   highlighters = {
     fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },
@@ -21,6 +23,74 @@ require("mini.indentscope").setup({
   },
   symbol = "▎",
 })
+
+require("mini.pick").setup()
+vim.keymap.set("n", "<Leader><CR>", function()
+  MiniPick.builtin.cli({
+    command = { "rg", "--files", "--hidden", "--color=never" },
+  }, {
+    source = { name = "Files (rg)" },
+  })
+end, { desc = "Find Files" })
+
+local grep_show_aligned = function(buf_id, items, query, opts)
+  local delimiter = "\031"
+  items = vim.tbl_map(function(item)
+    return item:gsub("%z", delimiter)
+  end, items)
+  items = MiniAlign.align_strings(items, {
+    split_pattern = delimiter,
+    justify_side = { "left", "right", "right" },
+    merge_delimiter = { "", " ", "", " ", "" },
+  })
+  items = vim.tbl_map(function(item)
+    return item:gsub(delimiter, "\0")
+  end, items)
+  MiniPick.default_show(buf_id, items, query, opts)
+end
+
+vim.keymap.set("n", "<Leader>fg", function()
+  MiniPick.builtin.grep_live(nil, {
+    source = { show = grep_show_aligned },
+    window = {
+      config = function()
+        return { width = vim.o.columns }
+      end,
+    },
+  })
+end, { desc = "Grep" })
+
+vim.keymap.set("n", "<Leader>fb", function()
+  MiniPick.builtin.buffers()
+end, { desc = "Buffers" })
+
+vim.keymap.set("n", "<Leader>fo", function()
+  MiniExtra.pickers.oldfiles({ current_dir = true })
+end, { desc = "Oldfiles" })
+
+vim.keymap.set("n", "<Leader>fh", function()
+  MiniPick.builtin.help()
+end, { desc = "Help" })
+
+vim.keymap.set("n", "<Leader>fr", function()
+  MiniPick.builtin.resume()
+end, { desc = "Resume" })
+
+vim.keymap.set("n", "<Leader>fd", function()
+  MiniPick.builtin.cli({
+    command = { "fd", ".", "--type", "directory" },
+  }, {
+    source = {
+      name = "Directories",
+      choose = function(item)
+        vim.schedule(function()
+          require("oil").open_float(item)
+        end)
+      end,
+    },
+  })
+end, { desc = "Directories" })
+
 require("mini.splitjoin").setup()
 require("mini.surround").setup({
   mappings = {
