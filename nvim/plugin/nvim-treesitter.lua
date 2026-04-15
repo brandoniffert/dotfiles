@@ -30,7 +30,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
   end,
 })
 
-require("nvim-treesitter").install({
+local parsers = {
   "astro",
   "bash",
   "caddy",
@@ -59,7 +59,6 @@ require("nvim-treesitter").install({
   "ruby",
   "rust",
   "scss",
-  "silverstripe",
   "sql",
   "svelte",
   "terraform",
@@ -71,7 +70,13 @@ require("nvim-treesitter").install({
   "vimdoc",
   "vue",
   "yaml",
-})
+}
+
+if vim.env.TREE_SITTER_SILVERSTRIPE_DIR then
+  table.insert(parsers, "silverstripe")
+end
+
+require("nvim-treesitter").install(parsers)
 
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("_bti_EnableTreesitterHighlighting", { clear = true }),
