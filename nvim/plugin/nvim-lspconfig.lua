@@ -34,9 +34,36 @@ for _, server in pairs(servers) do
   vim.lsp.enable(server)
 end
 
+local _document_color_enabled = false
+
+vim.keymap.set("n", "<Leader>uc", function()
+  local supported = false
+  for _, client in ipairs(vim.lsp.get_clients({ bufnr = 0 })) do
+    if client:supports_method("textDocument/documentColor") then
+      supported = true
+      break
+    end
+  end
+
+  if not supported then
+    vim.notify("Document color not supported", vim.log.levels.WARN)
+    return
+  end
+
+  _document_color_enabled = not _document_color_enabled
+  for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+    if vim.api.nvim_buf_is_loaded(buf) then
+      vim.lsp.document_color.enable(_document_color_enabled, { bufnr = buf }, { style = "virtual" })
+    end
+  end
+  vim.notify("Document color " .. (_document_color_enabled and "enabled" or "disabled"))
+end, { desc = "Toggle Document Color" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("_bti_LspAttach", { clear = true }),
-  callback = function()
+  callback = function(ev)
+    vim.lsp.document_color.enable(_document_color_enabled, { bufnr = ev.buf }, { style = "virtual" })
+
     vim.keymap.set({ "n", "x" }, "gra", function()
       vim.lsp.buf.code_action({
         filter = function(action)
