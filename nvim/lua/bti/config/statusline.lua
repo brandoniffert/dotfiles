@@ -242,6 +242,8 @@ local function special_statusline()
 
   if bt == "help" then
     return "%#StlSpecial#Help - %t%="
+  elseif ft == "minipick" then
+    return "%#StlSpecial#MiniPick%="
   elseif bt == "quickfix" then
     return '%#StlSpecial#Quickfix - %{get(w:,"quickfix_title","")}%='
   elseif ft:match("^gitcommit") then
