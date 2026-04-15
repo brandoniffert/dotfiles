@@ -24,6 +24,20 @@ require("mini.indentscope").setup({
   symbol = "▎",
 })
 
+require("mini.jump2d").setup({
+  labels = "tnseriaogmplfuwyqbjdhvkzxc",
+  view = {
+    dim = true,
+  },
+  allowed_windows = {
+    not_current = false,
+  },
+  mappings = {
+    start_jumping = "s",
+  },
+  silent = true,
+})
+
 require("mini.pick").setup()
 vim.keymap.set("n", "<Leader><CR>", function()
   MiniPick.builtin.cli({

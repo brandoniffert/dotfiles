@@ -11,6 +11,7 @@ require("catppuccin").setup({
   custom_highlights = {
     BlinkCmpMenuSelection = { link = "Cursorline" },
     MiniIndentscopeSymbol = { fg = colors.surface1 },
+    MiniJump2dSpotUnique = { bg = colors.base, fg = colors.sky, style = { "bold", "underline" } },
     TablineFill = { bg = colors.base1 },
     WinSeparator = { fg = colors.base1, bg = colors.none },
   },
