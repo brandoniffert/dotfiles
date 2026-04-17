@@ -22,10 +22,13 @@ Yel="$ESeq"'0;33m'
 
 echo_header() {
   [ "$quiet" = true ] && return
-  printf "%$(tput cols)s" | tr ' ' '─'
+  local cols
+  cols=$(tput cols)
+  local line
+  line=$(printf '%*s' "$cols" '' | sed 's/ /─/g')
+  echo "$line"
   echo -e "$1"
-  printf "%$(tput cols)s" | tr ' ' '─'
-  echo
+  echo "$line"
 }
 
 echo_success() {
