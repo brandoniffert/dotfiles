@@ -169,12 +169,6 @@ unset host_fpath
 #-- Completion ----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-nix_fpath=/nix/var/nix/profiles/default/share/zsh/site-functions
-if [[ -d "$nix_fpath" ]]; then
-  fpath=("$nix_fpath" $fpath)
-fi
-unset nix_fpath
-
 fpath=($ZDOTDIR/completions $fpath)
 
 autoload -Uz compinit

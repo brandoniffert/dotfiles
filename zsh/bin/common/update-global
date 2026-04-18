@@ -53,10 +53,5 @@ if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]]; then
   antidote update
 fi
 
-if (( $+commands[determinate-nixd] )); then
-  p_header 'determinate-nixd'
-  sudo determinate-nixd upgrade
-fi
-
 printf "\n"
 unset -f p_header
