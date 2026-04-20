@@ -40,44 +40,7 @@ require("mini.jump2d").setup({
 
 require("mini.pick").setup()
 
-MiniPick.registry.frecency = function()
-  local inf = math.huge
-  local sort = MiniVisits.gen_sort.z()
-  local visit_paths = MiniVisits.list_paths(nil, { sort = sort })
-
-  local visit_rank = {}
-  for i, path in ipairs(visit_paths) do
-    visit_rank[vim.fn.fnamemodify(path, ":.")] = i
-  end
-  visit_paths = visit_rank
-
-  local current_file = vim.fn.expand("%:.")
-  if visit_paths[current_file] then
-    visit_paths[current_file] = inf
-  end
-
-  MiniPick.builtin.cli({
-    command = { "rg", "--files", "--hidden", "--color=never" },
-  }, {
-    source = {
-      name = "Files (frecency)",
-      match = function(stritems, indices, query)
-        local filtered = (#query == 0) and vim.deepcopy(indices)
-          or (MiniPick.default_match(stritems, indices, query, { sync = true, preserve_order = true }) or {})
-        table.sort(filtered, function(a, b)
-          local score_a = visit_paths[stritems[a]] or inf
-          local score_b = visit_paths[stritems[b]] or inf
-          return score_a < score_b
-        end)
-        return filtered
-      end,
-    },
-  })
-end
-
-vim.keymap.set("n", "<Leader><CR>", function()
-  MiniPick.registry.frecency()
-end, { desc = "Find Files (frecency)" })
+vim.keymap.set("n", "<Leader><CR>", require("bti.util.smartpick").picker, { desc = "Find Files (Smart)" })
 
 local grep_show_aligned = function(buf_id, items, query, opts)
   local delimiter = "\031"
@@ -150,7 +113,6 @@ require("mini.surround").setup({
   },
 })
 require("mini.trailspace").setup()
-require("mini.visits").setup()
 
 vim.api.nvim_create_autocmd("FileType", {
   desc = "Disable indentscope for certain filetypes",
