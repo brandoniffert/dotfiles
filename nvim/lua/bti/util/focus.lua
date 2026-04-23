@@ -14,6 +14,7 @@ local number_filetype_blacklist = {
   ["lspinfo"] = true,
   ["oil"] = true,
   ["qf"] = true,
+  ["trouble"] = true,
 }
 
 -- Don't manage cursorline for these
