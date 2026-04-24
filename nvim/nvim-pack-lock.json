@@ -37,6 +37,10 @@
       "rev": "5849ef04c32a6a8e55957b946c0a275801d87530",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
+    "nvim-jump": {
+      "rev": "672204397c51507d7a821bc61ba9fad7dbed4303",
+      "src": "https://github.com/yorickpeterse/nvim-jump"
+    },
     "nvim-lint": {
       "rev": "eab58b48eb11d7745c11c505e0f3057165902461",
       "src": "https://github.com/mfussenegger/nvim-lint"
