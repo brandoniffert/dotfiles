@@ -7,8 +7,20 @@ if [ $# -ne 1 ]; then
   exit 1
 fi
 
-if command -v gtar &> /dev/null; then
-  pigz -dc "$1" | pv | gtar xf -
-else
-  pigz -dc "$1" | pv | tar xf -
-fi
+case "$1" in
+  *.tar.zst|*.tzst)
+    DECOMP="zstd -dc -T0"
+    ;;
+  *.tar.gz|*.tgz)
+    DECOMP="pigz -dc"
+    ;;
+  *)
+    echo "! Unknown format: $1"
+    exit 1
+    ;;
+esac
+
+TAR=tar
+command -v gtar &> /dev/null && TAR=gtar
+
+$DECOMP "$1" | pv | $TAR xf -
