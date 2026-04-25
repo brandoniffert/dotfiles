@@ -86,6 +86,28 @@ vim.keymap.set("n", "<Leader>fd", function()
   })
 end, { desc = "Directories" })
 
+vim.keymap.set("n", "<Leader>upd", function()
+  local plugins = vim.tbl_map(function(p)
+    return p.spec.name
+  end, vim.pack.get())
+  table.sort(plugins)
+
+  MiniPick.start({
+    source = {
+      name = "Delete Plugin",
+      items = plugins,
+      choose = function(item)
+        vim.schedule(function()
+          if vim.fn.confirm("Delete " .. item .. "?", "&Yes\n&No") == 1 then
+            vim.pack.del({ item })
+            vim.notify("Deleted " .. item)
+          end
+        end)
+      end,
+    },
+  })
+end, { desc = "Delete plugin" })
+
 require("mini.splitjoin").setup()
 require("mini.surround").setup({
   mappings = {
