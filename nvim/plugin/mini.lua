@@ -129,6 +129,7 @@ vim.api.nvim_create_autocmd("FileType", {
     "help",
     "fzf",
     "lspinfo",
+    "neo-tree",
     "Trouble",
   },
   callback = function(event)

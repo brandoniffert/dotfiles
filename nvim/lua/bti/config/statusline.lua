@@ -244,6 +244,8 @@ local function special_statusline()
     return "%#StlSpecial#Help - %t%="
   elseif ft == "minipick" then
     return "%#StlSpecial#MiniPick%="
+  elseif ft == "neo-tree" then
+    return "%#StlSpecial#Neotree%="
   elseif bt == "quickfix" then
     return '%#StlSpecial#Quickfix - %{get(w:,"quickfix_title","")}%='
   elseif ft:match("^gitcommit") then
