@@ -6,5 +6,6 @@ vim.pack.add({
 require("lazydev").setup({
   library = {
     { path = "luvit-meta/library", words = { "vim%.uv" } },
+    { path = "snacks.nvim", words = { "Snacks" } },
   },
 })

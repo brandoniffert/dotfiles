@@ -242,8 +242,8 @@ local function special_statusline()
 
   if bt == "help" then
     return "%#StlSpecial#Help - %t%="
-  elseif ft == "minipick" then
-    return "%#StlSpecial#MiniPick%="
+  elseif ft == "snacks_picker_list" then
+    return "%#StlSpecial#Explorer%="
   elseif ft == "neo-tree" then
     return "%#StlSpecial#Neotree%="
   elseif bt == "quickfix" then

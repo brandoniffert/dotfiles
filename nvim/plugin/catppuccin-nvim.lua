@@ -11,6 +11,11 @@ require("catppuccin").setup({
   custom_highlights = {
     BlinkCmpMenuSelection = { link = "Cursorline" },
     MiniIndentscopeSymbol = { fg = colors.surface1 },
+    SnacksPickerCol = { link = "NonText" },
+    SnacksPickerListCursorLine = { bg = colors.base1 },
+    SnacksPickerDir = { fg = colors.overlay2 },
+    SnacksPickerFile = { bold = true },
+    SnacksPickerSelected = { bg = colors.none },
     NeoTreeIndentMarker = { fg = colors.surface2 },
     NeoTreeNormal = { bg = colors.base },
     NeoTreeNormalNC = { bg = colors.base },
@@ -22,6 +27,7 @@ require("catppuccin").setup({
   -- https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
   integrations = {
     blink_cmp = true,
+    snacks = true,
     treesitter_context = true,
     which_key = true,
   },

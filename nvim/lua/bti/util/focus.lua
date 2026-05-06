@@ -19,7 +19,9 @@ local number_filetype_blacklist = {
 }
 
 -- Don't manage cursorline for these
-local cursorline_filetype_blacklist = {}
+local cursorline_filetype_blacklist = {
+  "snacks_picker_preview",
+}
 
 M.focus_window = function()
   local win_type = vim.fn.win_gettype()
