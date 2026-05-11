@@ -11,7 +11,6 @@ adjust-underline-thickness = -1
 adjust-strikethrough-thickness = -1
 
 theme = Catppuccin Mocha
-background = #181825
 
 cursor-style = block
 cursor-style-blink = false
