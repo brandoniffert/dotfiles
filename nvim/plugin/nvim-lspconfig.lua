@@ -24,6 +24,7 @@ local servers = {
   "intelephense",
   "jsonls",
   "lua_ls",
+  "svelte",
   "tailwindcss",
   "tofu_ls",
   "vtsls",
