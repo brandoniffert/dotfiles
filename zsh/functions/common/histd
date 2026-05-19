@@ -1,0 +1,38 @@
+# shellcheck shell=bash
+# shellcheck disable=SC2168
+
+# Pick zsh history entries with fzf (multi-select) and delete via `hist -d`.
+
+emulate -L zsh
+setopt local_options pipe_fail
+
+if ! (( $+commands[fzf] )); then
+  print -ru2 -- "histd: fzf not found"
+  return 1
+fi
+
+if ! (( $+functions[hist] )); then
+  print -ru2 -- "histd: zsh-hist plugin not loaded"
+  return 1
+fi
+
+local selected
+selected=$(hist list '*' 2>/dev/null | fzf \
+  --ansi \
+  --multi \
+  --tac \
+  --no-sort \
+  --height 80% \
+  --border sharp \
+  --prompt 'Delete History> ' \
+  --header 'tab: select, ^a: all, ^d: none, enter: delete' \
+  --bind 'ctrl-a:select-all,ctrl-d:deselect-all') || return
+
+[[ -z $selected ]] && return
+
+local -a ids
+ids=( ${(f)"$(print -r -- $selected | sed -E $'s/\x1b\\[[0-9;]*m//g' | awk '{print $1}')"} )
+
+(( $#ids )) || return
+
+hist -f d "${ids[@]}"
