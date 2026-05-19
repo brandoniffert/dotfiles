@@ -12,5 +12,6 @@ fi
 if [[ $# -gt 0 ]]; then
   du $arg -- "$@"
 else
-  du $arg -- .* ./* 2>/dev/null || true
+  shopt -s dotglob nullglob
+  du $arg -- ./* 2>/dev/null || true
 fi

@@ -15,7 +15,7 @@ else
 
   printf '%s' 'Do you want to remove these files? [y|N] '
   read -r response
-  if [[ $response =~ (yes|y|Y) ]]; then
+  if [[ $response =~ ^(y|Y|yes|YES)$ ]]; then
     fd -u '^\.DS_Store$' -tf -X rm
   fi
 fi

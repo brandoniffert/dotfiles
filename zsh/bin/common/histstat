@@ -1,7 +1,0 @@
-#!/usr/bin/env bash
-
-set -e
-
-# Shows the most used shell commands
-
-history 0 | awk '{print $2}' | sort | uniq -c | sort -n -r | head

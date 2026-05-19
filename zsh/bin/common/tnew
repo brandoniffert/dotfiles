@@ -14,7 +14,7 @@ if [[ -z "$session_name" ]]; then
 fi
 
 # If session doesn't exist, create it
-if ! tmux -q has-session -t "$session_name" &>/dev/null; then
+if ! tmux has-session -t "$session_name" &>/dev/null; then
   tmux new-session -c "$working_dir" -d -s "$session_name"
 fi
 
