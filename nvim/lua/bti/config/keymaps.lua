@@ -78,5 +78,11 @@ vim.keymap.set("n", "<Leader>yp", function()
   vim.notify("Yanked: " .. path)
 end, { desc = "Yank current relative path to clipboard" })
 
+vim.keymap.set("n", "<Leader>yP", function()
+  local path = vim.fn.expand("%:p")
+  vim.fn.setreg("+", path)
+  vim.notify("Yanked: " .. path)
+end, { desc = "Yank current absolute path to clipboard" })
+
 -- Visual (Leader)
 vim.keymap.set("v", "<Leader>y", '"*y', { desc = "Yank to clipboard" })
