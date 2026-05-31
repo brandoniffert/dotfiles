@@ -66,10 +66,15 @@ yarn *args:
     #!/usr/bin/env bash
     cd "{{ invocation_directory() }}"
 
-    if [ ! -f "yarn.lock" ]; then
-        echo "Error: yarn.lock not found"
-        exit 1
-    fi
+    case "${1:-}" in
+        ""|install) ;;
+        *)
+            if [ ! -f "yarn.lock" ]; then
+                echo "Error: yarn.lock not found"
+                exit 1
+            fi
+            ;;
+    esac
 
     cd "{{ justfile_directory() }}"
 
@@ -85,10 +90,15 @@ npm *args:
     #!/usr/bin/env bash
     cd "{{ invocation_directory() }}"
 
-    if [ ! -f "package-lock.json" ]; then
-        echo "Error: package-lock.json not found"
-        exit 1
-    fi
+    case "${1:-}" in
+        install|i|ci) ;;
+        *)
+            if [ ! -f "package-lock.json" ]; then
+                echo "Error: package-lock.json not found"
+                exit 1
+            fi
+            ;;
+    esac
 
     cd "{{ justfile_directory() }}"
 
