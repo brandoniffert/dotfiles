@@ -121,4 +121,4 @@ composer *args:
       -v "$COMPOSER_HOME":"$COMPOSER_HOME" \
       -v "$COMPOSER_CACHE_DIR":"$COMPOSER_CACHE_DIR" \
       {{ php_service }} \
-      composer "$@" --ansi 2>&1 | sed $'s/\x1b\\[37;41m/\x1b[31m/g'
+      composer "$@"
