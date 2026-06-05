@@ -28,12 +28,28 @@ fi
 
 if (( $+commands[composer] )); then
   p_header 'composer'
-  composer global outdated --direct --strict
-  ret=$?
-  if [[ "$ret" -eq 1 ]]; then
-    printf "\n"
-    packages=($(composer global show --direct 2>/dev/null | grep '^[a-zA-Z]' | cut -d ' ' -f1))
-    composer global update --interactive --with-dependencies "${packages[@]}"
+
+  # Packages with patch/minor (safe) updates
+  updatable=("${(@f)$(composer global outdated --direct --minor-only --format=json 2>/dev/null \
+    | jq -r '.installed[].name')}")
+  updatable=("${updatable[@]:#}")
+
+  # Packages with major updates available
+  major=("${(@f)$(composer global outdated --direct --major-only 2>/dev/null \
+    | grep '^[a-zA-Z]')}")
+  major=("${major[@]:#}")
+
+  if (( ${#updatable[@]} )); then
+    composer global update --interactive "${updatable[@]}"
+  fi
+
+  if (( ${#major[@]} )); then
+    printf '\nMajor updates available (manual upgrade):\n'
+    printf '  %s\n' "${major[@]}"
+  fi
+
+  if (( ! ${#updatable[@]} && ! ${#major[@]} )); then
+    printf 'Everything up to date.\n'
   fi
 fi
 
