@@ -7,7 +7,7 @@ export ITEM_DIR="$CONFIG_DIR/items"
 export PLUGIN_DIR="$CONFIG_DIR/plugins"
 
 bar=(
-  blur_radius=50
+  blur_radius=15
   color="$BAR_COLOR"
   corner_radius=0
   display=main
