@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#MISE description="Run npm in the node service"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+
+case "${1:-}" in
+  install|i|ci) ;;
+  *) [ -f "$INVOCATION_DIR/package-lock.json" ] || { echo "Error: package-lock.json not found in $INVOCATION_DIR" >&2; exit 1; } ;;
+esac
+
+export npm_config_cache="${npm_config_cache:-${XDG_CACHE_HOME:-$HOME/.cache}/npm}"
+dco run --rm --no-deps \
+  -e npm_config_cache \
+  -v "$npm_config_cache:$npm_config_cache" \
+  "$NODE_SERVICE" npm "$@"

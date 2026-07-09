@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Bring services down"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+dco down "$@"

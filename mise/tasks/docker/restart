@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+#MISE description="Restart services"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+dco stop -t 2 "$@"
+dco start "$@"

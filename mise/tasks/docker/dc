@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#MISE description="Run docker compose with the configured flags"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+dco "$@"

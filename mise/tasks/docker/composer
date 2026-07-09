@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#MISE description="Run composer in the php service"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+
+export COMPOSER_HOME="${COMPOSER_HOME:-${XDG_CONFIG_HOME:-$HOME/.config}/composer}"
+export COMPOSER_CACHE_DIR="${COMPOSER_CACHE_DIR:-${XDG_CACHE_HOME:-$HOME/.cache}/composer}"
+dco run --rm --no-deps \
+  --env COMPOSER_HOME \
+  --env COMPOSER_CACHE_DIR \
+  -v "$COMPOSER_HOME:$COMPOSER_HOME" \
+  -v "$COMPOSER_CACHE_DIR:$COMPOSER_CACHE_DIR" \
+  "$PHP_SERVICE" \
+  composer "$@"

@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+#MISE description="Exec into a service, or list running services"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+if [ $# -eq 0 ]; then
+  if ! dco ps -q 2>/dev/null | grep -q .; then
+    echo "No services are currently running"
+  else
+    echo "Available services:"
+    dco ps --services
+  fi
+else
+  dco exec "$@"
+fi

@@ -129,6 +129,7 @@ alias lll='tree -L 3'
 alias llll='tree -L 4'
 alias ls='ls --color=auto'
 alias lls='ls --color=auto -al'
+alias m='mise'
 alias nv="nvim"
 alias nvd="nvim -d"
 alias q=exit

@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#MISE description="Run yarn in the node service"
+set -euo pipefail
+source "$(dirname "${BASH_SOURCE[0]}")/_docker.sh"
+
+case "${1:-}" in
+  ""|install) ;;
+  *) [ -f "$INVOCATION_DIR/yarn.lock" ] || { echo "Error: yarn.lock not found in $INVOCATION_DIR" >&2; exit 1; } ;;
+esac
+
+export YARN_CACHE_FOLDER="${YARN_CACHE_FOLDER:-${XDG_CACHE_HOME:-$HOME/.cache}/yarn}"
+dco run --rm --no-deps \
+  -e YARN_CACHE_FOLDER \
+  -v "$YARN_CACHE_FOLDER:$YARN_CACHE_FOLDER" \
+  "$NODE_SERVICE" yarn "$@"
