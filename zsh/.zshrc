@@ -115,6 +115,7 @@ bindkey '^Z' bti-fg-bg
 #-- Aliases -------------------------------------------------------------------
 #------------------------------------------------------------------------------
 
+alias codex='codex --profile custom'
 alias e="$EDITOR"
 alias dc='docker compose'
 alias dcr='docker compose run --rm'
