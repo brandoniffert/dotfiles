@@ -1,15 +1,10 @@
 #------------------------------------------------------------------------------
 #-- Local & Host Specific Startup ---------------------------------------------
 #------------------------------------------------------------------------------
-iffy_rc="$ZDOTDIR/host/iffy-startup"
-if [[ $(hostname -s) =~ ^iffy(studio|air) ]]; then
-  test -r "$iffy_rc" && source "$iffy_rc"
-fi
-unset iffy_rc
-
-host_rc="$ZDOTDIR/host/$(hostname -s | tr '[:upper:]' '[:lower:]')-startup"
-test -r "$host_rc" && source "$host_rc"
-unset host_rc
+for _rc in $ZDOTDIR/host/${^bti_host_layers}-startup; do
+  test -r "$_rc" && source "$_rc"
+done
+unset _rc
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
@@ -40,7 +35,6 @@ setopt HIST_IGNORE_ALL_DUPS # Prevent recording dupes in history
 setopt HIST_IGNORE_SPACE    # Do not save commands with leading space to history
 setopt HIST_REDUCE_BLANKS   # Remove superfluous blanks from history
 setopt HIST_VERIFY          # Prevent auto execute expanded history command
-setopt INC_APPEND_HISTORY   # Adds history incrementally
 setopt INTERACTIVE_COMMENTS # Allow comments, even in interactive shells
 setopt LIST_PACKED          # make completion lists more densely packed
 setopt LOCAL_OPTIONS        # Allow functions to have local options
@@ -56,7 +50,7 @@ setopt SHARE_HISTORY        # Share history between sessions
 #------------------------------------------------------------------------------
 
 export HISTFILE="$XDG_DATA_HOME"/zsh/history
-export HISTIGNORE="fg"
+export HISTORY_IGNORE="fg"
 export HISTSIZE=120000
 export SAVEHIST=100000
 export WORDCHARS='*?[]~&;!$%^<>'
@@ -81,9 +75,11 @@ bindkey '^[j'  backward-kill-line                          # alt+j
 bindkey '^[[Z' reverse-menu-complete                       # shift-tab
 bindkey '^[m'  copy-prev-shell-word                        # alt-m
 
-# Make search up and down work
+# Make search up and down work (^[O* variants for keypad application mode)
 bindkey '^[[A' up-line-or-search
+bindkey '^[OA' up-line-or-search
 bindkey '^[[B' down-line-or-search
+bindkey '^[OB' down-line-or-search
 
 # Also do history expansion on space
 bindkey ' ' magic-space
@@ -144,37 +140,35 @@ alias v=view
 #-- Functions -----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
-common_fpath="$ZDOTDIR/functions/common"
-if [ -n "$(ls -A $common_fpath 2>/dev/null)" ]; then
-  fpath=("$common_fpath" $fpath)
-  autoload -Uz $common_fpath/*
-fi
-
-# Host specific functions, based on hostname
-iffy_fpath="$ZDOTDIR/functions/host/iffy"
-if [[ $(hostname -s) =~ ^iffy(studio|air) ]]; then
-  if [ -n "$(ls -A $iffy_fpath 2>/dev/null)" ]; then
-    fpath=("$iffy_fpath" $fpath)
-    autoload -Uz $iffy_fpath/*
+# Load common and host-specific functions
+for _dir in $ZDOTDIR/functions/common $ZDOTDIR/functions/host/${^bti_host_layers}; do
+  if [ -n "$(ls -A $_dir 2>/dev/null)" ]; then
+    fpath=("$_dir" $fpath)
+    autoload -Uz $_dir/*
   fi
-fi
-unset iffy_fpath
-
-host_fpath="$ZDOTDIR/functions/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
-if [ -n "$(ls -A $host_fpath 2>/dev/null)" ]; then
-  fpath=("$host_fpath" $fpath)
-  autoload -Uz $host_fpath/*
-fi
-unset host_fpath
+done
+unset _dir
 
 #------------------------------------------------------------------------------
 #-- Completion ----------------------------------------------------------------
 #------------------------------------------------------------------------------
 
+[[ -d ${ZDOTDIR:-~}/.antidote ]] ||
+  git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
+
+source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+
+# zsh-completions is kind:fpath, so it must be in fpath before compinit runs
+# (empty on very first run, before antidote load has cloned it)
+zsh_completions_path="$(antidote path zsh-users/zsh-completions 2>/dev/null)"
+[[ -n "$zsh_completions_path" ]] && fpath=($zsh_completions_path/src $fpath)
+unset zsh_completions_path
+
 fpath=($ZDOTDIR/completions $fpath)
 
 autoload -Uz compinit
-compinit -u
+[[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
+compinit -u -d "$XDG_CACHE_HOME/zsh/zcompdump"
 
 # Make completion:
 # - Try exact (case-sensitive) match first.
@@ -196,7 +190,7 @@ zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*:descriptions' format '[%d]'
 zstyle ':fzf-tab:*' fzf-bindings '`:toggle'
 zstyle ':fzf-tab:*' switch-group '<' '>'
-zstyle ':fzf-tab:*' fzf-flags --color fg:#9399B2,fg+:-1,bg:-1,bg+:#2a2b3d,gutter:#313244,hl:bold:-1,hl+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#9399B2 --bind=tab:accept --border sharp --info=inline --prompt=' ' --marker='• ' --height=~40
+zstyle ':fzf-tab:*' fzf-flags --color "$BTI_FZF_COLORS" --bind=tab:accept --border sharp --info=inline --prompt=' ' --marker='• ' --height=~40
 
 # Disable completion of users
 zstyle ':completion:*' users
@@ -211,11 +205,8 @@ fi
 #-- Plugins/Scripts -----------------------------------------------------------
 #------------------------------------------------------------------------------
 
-[[ -d ${ZDOTDIR:-~}/.antidote ]] ||
-  git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
-
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
-
+# antidote is sourced in the Completion section above (zsh-completions must be
+# in fpath before compinit); fzf-tab needs compinit to run before antidote load
 antidote load
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
@@ -224,28 +215,29 @@ ZSH_AUTOSUGGEST_MANUAL_REBIND=1
 [[ -r "$ZDOTDIR/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh" ]] &&
   source "$ZDOTDIR/themes/catppuccin_mocha-zsh-syntax-highlighting.zsh"
 
-if [[ -f ${ZDOTDIR:-~}/.antidote/antidote.zsh ]]; then
-  # Using fzf-tab so don't use the default fzf completion
-  if [[ $(grep "fzf-tab" ${ZDOTDIR:-~}/.zsh_plugins.txt) ]]; then
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
-        PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
-      fi
+# Using fzf-tab so don't use the default fzf completion
+if grep -q "fzf-tab" ${ZDOTDIR:-~}/.zsh_plugins.txt; then
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    if [[ ! "$PATH" == */opt/homebrew/opt/fzf/bin* ]]; then
+      PATH="${PATH:+${PATH}:}/opt/homebrew/opt/fzf/bin"
+    fi
+    [[ -r "/opt/homebrew/opt/fzf/shell/key-bindings.zsh" ]] &&
       source "/opt/homebrew/opt/fzf/shell/key-bindings.zsh"
-    else
-      source /usr/share/fzf/key-bindings.zsh
-    fi
   else
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-      source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
-    else
-      source /usr/share/fzf/key-bindings.zsh
-      source /usr/share/fzf/completion.zsh
-    fi
+    source /usr/share/fzf/key-bindings.zsh
+  fi
+else
+  if [[ "$OSTYPE" == "darwin"* ]]; then
+    source "${XDG_CONFIG_HOME}/fzf/fzf.zsh"
+  else
+    source /usr/share/fzf/key-bindings.zsh
+    source /usr/share/fzf/completion.zsh
   fi
 fi
 
-eval "$(zoxide init zsh)"
+if command -v zoxide &> /dev/null; then
+  eval "$(zoxide init zsh)"
+fi
 
 if command -v mise &> /dev/null; then
   eval "$(mise activate zsh)"
@@ -268,15 +260,11 @@ function _fzf_compgen_dir() {
 #-- Local & Host Specific Options ---------------------------------------------
 #------------------------------------------------------------------------------
 
-iffy_rc="$ZDOTDIR/host/iffy"
-if [[ $(hostname -s) =~ ^iffy(studio|air) ]]; then
-  test -r "$iffy_rc" && source "$iffy_rc"
-fi
-unset iffy_rc
-
-host_rc="$ZDOTDIR/host/$(hostname -s | tr '[:upper:]' '[:lower:]')"
-test -r "$host_rc" && source "$host_rc"
-unset host_rc
+# Source host-specific rc files
+for _rc in $ZDOTDIR/host/${^bti_host_layers}; do
+  test -r "$_rc" && source "$_rc"
+done
+unset _rc
 
 local_rc="$HOME/.zshrc.local"
 test -r "$local_rc" && source "$local_rc"

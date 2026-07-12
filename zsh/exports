@@ -2,7 +2,6 @@
 # Language
 export LANG=en_US.UTF-8
 export LANGUAGE=en_US.UTF-8
-export LC_ALL=en_US.UTF-8
 export LC_COLLATE=en_US.UTF-8
 export LC_CTYPE=en_US.UTF-8
 export LC_MESSAGES=en_US.UTF-8
@@ -18,7 +17,8 @@ export XDG_DATA_HOME=${XDG_DATA_HOME:-"$HOME/.local/share"}
 export XDG_STATE_HOME=${XDG_STATE_HOME:-"$HOME/.local/state"}
 
 if [[ "$OSTYPE" == "darwin"* ]]; then
-  export XDG_RUNTIME_DIR="$HOME/Library/Application Support"
+  export XDG_RUNTIME_DIR="${${TMPDIR:-/tmp/user-$UID}%/}/xdg-runtime"
+  [[ -d "$XDG_RUNTIME_DIR" ]] || mkdir -m 0700 -p "$XDG_RUNTIME_DIR"
 fi
 
 # Manually manage XDG for some programs
@@ -83,8 +83,11 @@ export FZF_ALT_C_COMMAND="${FZF_DEFAULT_COMMAND} --type d"
 export FZF_ALT_C_OPTS="--height 40% --border sharp"
 export FZF_CTRL_R_OPTS="--height 40% --border sharp"
 
+# Shared with fzf-tab's fzf-flags zstyle in .zshrc
+export BTI_FZF_COLORS="fg:#9399B2,fg+:-1,bg:-1,bg+:#2a2b3d,gutter:#313244,hl:bold:-1,hl+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#9399B2"
+
 local FZF_DEFAULT_OPTS=""
-FZF_DEFAULT_OPTS+=" --color fg:#9399B2,fg+:-1,bg:-1,bg+:#2a2b3d,gutter:#313244,hl:bold:-1,hl+:-1,info:-1,prompt:-1,marker:3,header:2,pointer:3,border:#9399B2"
+FZF_DEFAULT_OPTS+=" --color $BTI_FZF_COLORS"
 FZF_DEFAULT_OPTS+=" --info=inline"
 FZF_DEFAULT_OPTS+=" --prompt=' '"
 FZF_DEFAULT_OPTS+=" --marker='• '"
