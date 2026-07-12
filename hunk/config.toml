@@ -1,0 +1,5 @@
+theme = "custom"
+
+[custom_theme]
+base = "catppuccin-mocha"
+panel = "#1e1e2e"

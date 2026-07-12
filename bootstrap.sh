@@ -90,6 +90,7 @@ config_dots=(
   dircolors
   just
   git
+  hunk
   lazygit
   mise
   nvim
