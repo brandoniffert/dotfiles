@@ -55,11 +55,18 @@ export HISTSIZE=120000
 export SAVEHIST=100000
 export WORDCHARS='*?[]~&;!$%^<>'
 
-# Setup dircolors
+# Setup dircolors (cached to skip the dircolors fork on every startup)
 () {
-  local _dircolors="$XDG_CONFIG_HOME/dircolors/dircolors"
-  [[ "$OSTYPE" == "darwin"* ]] && local dircolors_cmd='gdircolors' || local dircolors_cmd='dircolors'
-  command -v "$dircolors_cmd" >/dev/null && test -r $_dircolors && eval $(command $dircolors_cmd $_dircolors)
+  local src="$XDG_CONFIG_HOME/dircolors/dircolors"
+  local cache="$XDG_CACHE_HOME/zsh/dircolors.zsh"
+  [[ "$OSTYPE" == "darwin"* ]] && local cmd='gdircolors' || local cmd='dircolors'
+  command -v "$cmd" >/dev/null && test -r "$src" || return 0
+  if [[ ! "$cache" -nt "$src" ]]; then
+    mkdir -p "${cache:h}"
+    command "$cmd" "$src" > "$cache"
+    zcompile "$cache" 2>/dev/null
+  fi
+  source "$cache"
 }
 
 #------------------------------------------------------------------------------
@@ -142,12 +149,13 @@ alias v=view
 
 # Load common and host-specific functions
 for _dir in $ZDOTDIR/functions/common $ZDOTDIR/functions/host/${^bti_host_layers}; do
-  if [ -n "$(ls -A $_dir 2>/dev/null)" ]; then
+  _fns=($_dir/*(N))
+  if (( $#_fns )); then
     fpath=("$_dir" $fpath)
-    autoload -Uz $_dir/*
+    autoload -Uz $_fns
   fi
 done
-unset _dir
+unset _dir _fns
 
 #------------------------------------------------------------------------------
 #-- Completion ----------------------------------------------------------------
@@ -156,19 +164,41 @@ unset _dir
 [[ -d ${ZDOTDIR:-~}/.antidote ]] ||
   git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-~}/.antidote
 
-source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+# Only pay for antidote (~45ms) when the plugin list changes; the static
+# bundle is sourced directly in the Plugins section, after compinit
+if [[ ! "$ZDOTDIR/.zsh_plugins.zsh" -nt "$ZDOTDIR/.zsh_plugins.txt" ]]; then
+  source ${ZDOTDIR:-~}/.antidote/antidote.zsh
+  antidote bundle < "$ZDOTDIR/.zsh_plugins.txt" > "$ZDOTDIR/.zsh_plugins.zsh"
+fi
 
-# zsh-completions is kind:fpath, so it must be in fpath before compinit runs
-# (empty on very first run, before antidote load has cloned it)
-zsh_completions_path="$(antidote path zsh-users/zsh-completions 2>/dev/null)"
-[[ -n "$zsh_completions_path" ]] && fpath=($zsh_completions_path/src $fpath)
-unset zsh_completions_path
+# zsh-completions is kind:fpath, so it must be in fpath before compinit runs.
+# Glob the antidote cache dir (mirrors antidote's get_cachedir) instead of
+# `antidote path`, which would need antidote sourced + a subshell
+if [[ "$OSTYPE" == "darwin"* ]]; then
+  _antidote_cache="${ANTIDOTE_HOME:-$HOME/Library/Caches/antidote}"
+else
+  _antidote_cache="${ANTIDOTE_HOME:-${XDG_CACHE_HOME:-$HOME/.cache}/antidote}"
+fi
+fpath=($_antidote_cache/*zsh-completions/src(N) $fpath)
+unset _antidote_cache
 
 fpath=($ZDOTDIR/completions $fpath)
 
 autoload -Uz compinit
 [[ -d "$XDG_CACHE_HOME/zsh" ]] || mkdir -p "$XDG_CACHE_HOME/zsh"
-compinit -u -d "$XDG_CACHE_HOME/zsh/zcompdump"
+# compaudit costs ~20ms; run full compinit only when the dump is >24h old or
+# the plugin list changed, otherwise -C trusts the existing dump
+() {
+  setopt local_options extended_glob
+  local zcd="$XDG_CACHE_HOME/zsh/zcompdump"
+  if [[ -n $zcd(#qN.mh-24) && "$zcd" -nt "$ZDOTDIR/.zsh_plugins.txt" ]]; then
+    compinit -C -d "$zcd"
+  else
+    compinit -u -d "$zcd"
+    touch "$zcd"  # compinit may not rewrite the dump; reset the 24h clock
+  fi
+  [[ "$zcd.zwc" -nt "$zcd" ]] || zcompile "$zcd" 2>/dev/null
+}
 
 # Make completion:
 # - Try exact (case-sensitive) match first.
@@ -205,9 +235,9 @@ fi
 #-- Plugins/Scripts -----------------------------------------------------------
 #------------------------------------------------------------------------------
 
-# antidote is sourced in the Completion section above (zsh-completions must be
-# in fpath before compinit); fzf-tab needs compinit to run before antidote load
-antidote load
+# Bundle is regenerated in the Completion section when .zsh_plugins.txt
+# changes; fzf-tab (in the bundle) needs compinit to have run first
+source "$ZDOTDIR/.zsh_plugins.zsh"
 
 ZSH_AUTOSUGGEST_CLEAR_WIDGETS+=bti-magic-enter
 ZSH_AUTOSUGGEST_MANUAL_REBIND=1
