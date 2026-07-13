@@ -17,12 +17,15 @@ require("oil").setup({})
 
 vim.api.nvim_create_autocmd("VimLeave", {
   callback = function()
+    -- Guard: never wipe real state/cache if run without NVIM_APPNAME=nvim-ephemeral
+    if not tostring(vim.fn.stdpath("state")):match("nvim%-ephemeral") then
+      return
+    end
     local base_dirs = {
       vim.fn.stdpath("state"),
       vim.fn.stdpath("cache"),
     }
     for _, dir in ipairs(base_dirs) do
-      vim.notify(dir)
       vim.fn.delete(dir, "rf")
     end
   end,

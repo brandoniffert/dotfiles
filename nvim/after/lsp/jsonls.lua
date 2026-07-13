@@ -5,20 +5,8 @@ return {
   },
   settings = {
     json = {
-      schemas = {
-        {
-          fileMatch = { "composer.json" },
-          url = "https://getcomposer.org/schema.json",
-        },
-        {
-          fileMatch = { "package.json" },
-          url = "https://json.schemastore.org/package.json",
-        },
-        {
-          fileMatch = { "tsconfig.json", "tsconfig.*.json" },
-          url = "http://json.schemastore.org/tsconfig",
-        },
-      },
+      schemas = require("schemastore").json.schemas(),
+      validate = { enable = true },
     },
   },
 }

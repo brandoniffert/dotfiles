@@ -25,8 +25,7 @@ for _, provider in pairs(disabled_providers) do
   vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
-vim.opt.backupcopy = "yes"
-vim.opt.completeopt = "menu,menuone,noselect"
+vim.opt.breakindent = true
 vim.opt.cursorline = true
 vim.opt.diffopt:append("foldcolumn:0")
 vim.opt.emoji = false
@@ -102,8 +101,7 @@ end
 vim.opt.updatetime = 2000
 vim.opt.virtualedit = "block"
 vim.opt.whichwrap = "b,h,l,s,<,>,[,],~"
-vim.opt.wildcharm = 26
-vim.opt.wildignore:append("*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.pyc,*.so,*.DS_Store*/tmp/*")
+vim.opt.wildignore:append("*.jpg,*.jpeg,*.png,*.gif,*.sw?,*.pyc,*.so,*.DS_Store,*/tmp/*")
 vim.opt.wildmode = "longest:full,full"
 vim.opt.winborder = "rounded"
 vim.opt.writebackup = false

@@ -1,7 +1,10 @@
 vim.api.nvim_create_autocmd("BufWinEnter", {
   group = vim.api.nvim_create_augroup("_bti_ft_help", { clear = true }),
   pattern = { "*.txt", "*.md" },
-  callback = function()
+  callback = function(ev)
+    if vim.bo[ev.buf].buftype ~= "help" then
+      return
+    end
     vim.cmd.wincmd("L")
     vim.cmd("vertical resize 100")
     vim.opt_local.spell = false

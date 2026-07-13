@@ -242,8 +242,6 @@ local function special_statusline()
 
   if bt == "help" then
     return "%#StlSpecial#Help - %t%="
-  elseif ft == "snacks_picker_list" then
-    return "%#StlSpecial#Explorer%="
   elseif ft == "neo-tree" then
     return "%#StlSpecial#Neotree%="
   elseif bt == "quickfix" then
@@ -324,6 +322,11 @@ function M.setup()
   vim.api.nvim_create_autocmd("User", {
     group = group,
     pattern = "GitSignsUpdate",
+    command = "redrawstatus",
+  })
+
+  vim.api.nvim_create_autocmd("DiagnosticChanged", {
+    group = group,
     command = "redrawstatus",
   })
 

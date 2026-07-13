@@ -70,7 +70,7 @@ augroups.lsp = {
         require("bti.util").osc("\x1b]9;4;3\x07")
       end
 
-      vim.api.nvim_echo({ { value.message or "done" } }, false, {
+      vim.api.nvim_echo({ { value.message or value.title or "" } }, false, {
         id = "lsp." .. ev.data.client_id,
         kind = "progress",
         source = "vim.lsp",
@@ -107,7 +107,11 @@ augroups.spell = {
 augroups.ui = {
   restore_cursor_position = {
     event = { "BufReadPost" },
-    callback = function()
+    callback = function(ev)
+      -- ft not yet set here (these autocmds register before filetype detection)
+      if vim.filetype.match({ filename = ev.file }) == "gitcommit" then
+        return
+      end
       local mark = vim.api.nvim_buf_get_mark(0, '"')
       local lcount = vim.api.nvim_buf_line_count(0)
       if mark[1] > 0 and mark[1] <= lcount then

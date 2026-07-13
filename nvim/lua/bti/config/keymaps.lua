@@ -7,8 +7,8 @@ vim.keymap.set("n", "<Left>", "<cmd>tabp<CR>", { silent = true })
 vim.keymap.set("n", "<Right>", "<cmd>tabn<CR>", { silent = true })
 
 -- Easy indent/outdent
-vim.keymap.set({ "n", "o" }, "<Tab>", ">>_", { silent = true })
-vim.keymap.set({ "n", "o" }, "<S-Tab>", "<<_", { silent = true })
+vim.keymap.set({ "n" }, "<Tab>", ">>_", { silent = true })
+vim.keymap.set({ "n" }, "<S-Tab>", "<<_", { silent = true })
 vim.keymap.set("v", "<Tab>", ">gv", { silent = true })
 vim.keymap.set("v", "<S-Tab>", "<gv", { silent = true })
 
@@ -19,9 +19,6 @@ vim.keymap.set("i", ";", ";<c-g>u")
 
 -- Split lines (opposite of J)
 vim.keymap.set("n", "|", require("bti.util.functions").split_at)
-
--- Don't replace register with text that was pasted over
-vim.keymap.set("x", "p", "p:if v:register == '\"'<bar>let @@=@0<bar>endif<CR>")
 
 -- Normal (Leader)
 vim.keymap.set(

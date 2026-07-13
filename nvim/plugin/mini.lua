@@ -4,7 +4,6 @@ vim.pack.add({
 
 require("mini.ai").setup()
 require("mini.bracketed").setup()
-require("mini.comment").setup()
 require("mini.hipatterns").setup({
   highlighters = {
     fixme = { pattern = "%f[%w]()FIXME()%f[%W]", group = "MiniHipatternsFixme" },

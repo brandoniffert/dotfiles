@@ -29,7 +29,7 @@ end
 function M.strip_whitespace()
   local saved_view = vim.fn.winsaveview()
 
-  vim.api.nvim_command([[%s/\v\s+$//e]])
+  require("mini.trailspace").trim()
   vim.api.nvim_command("retab")
   vim.fn.winrestview(saved_view)
 end

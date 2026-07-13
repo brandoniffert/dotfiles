@@ -1,4 +1,7 @@
-vim.pack.add({ { src = "https://github.com/neovim/nvim-lspconfig" } })
+vim.pack.add({
+  { src = "https://github.com/neovim/nvim-lspconfig" },
+  { src = "https://github.com/b0o/SchemaStore.nvim" },
+})
 
 vim.diagnostic.config({
   underline = false,
@@ -72,6 +75,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
           return not string.match(action.title, "Add PHPDoc")
         end,
       })
-    end, { desc = "Code Action" })
+    end, { buffer = ev.buf, desc = "Code Action" })
   end,
 })

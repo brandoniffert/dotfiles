@@ -1,113 +1,33 @@
--- Need to keep this mostly in sync with https://github.com/neovim/nvim-lspconfig/blob/master/lsp/tailwindcss.lua
-
-local filetypes = {
-  -- html
-  "aspnetcorerazor",
-  "astro",
-  "astro-markdown",
-  "blade",
-  "clojure",
-  "django-html",
-  "htmldjango",
-  "edge",
-  "eelixir", -- vim ft
-  "elixir",
-  "ejs",
-  "erb",
-  "eruby", -- vim ft
-  "gohtml",
-  "gohtmltmpl",
-  "haml",
-  "handlebars",
-  "hbs",
-  "html",
-  "htmlangular",
-  "html-eex",
-  "heex",
-  "jade",
-  "leaf",
-  "liquid",
-  "markdown",
-  "mdx",
-  "mustache",
-  "njk",
-  "nunjucks",
-  "php",
-  "razor",
-  "slim",
-  "twig",
-  -- css
-  "css",
-  "less",
-  "postcss",
-  "sass",
-  "scss",
-  "stylus",
-  "sugarss",
-  -- js
-  "javascript",
-  "javascriptreact",
-  "reason",
-  "rescript",
-  "typescript",
-  "typescriptreact",
-  -- mixed
-  "vue",
-  "svelte",
-  "templ",
-}
-
-local settings = {
-  tailwindCSS = {
-    classAttributes = {
-      "class",
-      "className",
-      "class:list",
-      "classList",
-      "ngClass",
-    },
-    includeLanguages = {
-      eelixir = "html-eex",
-      elixir = "phoenix-heex",
-      eruby = "erb",
-      heex = "phoenix-heex",
-      htmlangular = "html",
-      templ = "html",
-    },
-  },
-}
-
--- Custom values
-local customFiletypes = {
-  "silverstripe",
-}
-
-local customClassAttributes = {
-  "Class",
-  "Classes",
-  "ExtraClass",
-  "ExtraClasses",
-}
-
-local customIncludeLanguages = {
-  silverstripe = "html",
-}
-
--- Append custom values
-for _, ft in ipairs(customFiletypes) do
-  table.insert(filetypes, ft)
+-- Load nvim-lspconfig's base config at runtime instead of duplicating it.
+-- vim.lsp.config merges runtime lsp/ configs with tbl_deep_extend, which REPLACES
+-- list-like values (filetypes, classAttributes) rather than appending, so this file
+-- must return the full extended lists.
+local base = {}
+for _, path in ipairs(vim.api.nvim_get_runtime_file("lsp/tailwindcss.lua", true)) do
+  -- Skip after/ matches (including this file) to avoid recursion.
+  if not path:match("/after/") then
+    base = dofile(path)
+    break
+  end
 end
 
-for _, attr in ipairs(customClassAttributes) do
-  table.insert(settings.tailwindCSS.classAttributes, attr)
+base.filetypes = base.filetypes or {}
+table.insert(base.filetypes, "silverstripe")
+
+base.settings = base.settings or {}
+base.settings.tailwindCSS = base.settings.tailwindCSS or {}
+
+local tw = base.settings.tailwindCSS
+tw.classAttributes = tw.classAttributes or {}
+for _, attr in ipairs({ "Class", "Classes", "ExtraClass", "ExtraClasses" }) do
+  table.insert(tw.classAttributes, attr)
 end
 
-for lang, mapping in pairs(customIncludeLanguages) do
-  settings.tailwindCSS.includeLanguages[lang] = mapping
-end
+tw.includeLanguages = tw.includeLanguages or {}
+tw.includeLanguages.silverstripe = "html"
 
 ---@type vim.lsp.Config
 return {
-  filetypes = filetypes,
-  settings = settings,
+  filetypes = base.filetypes,
+  settings = base.settings,
 }
