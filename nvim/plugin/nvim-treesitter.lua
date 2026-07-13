@@ -98,7 +98,11 @@ vim.api.nvim_create_autocmd("FileType", {
 vim.api.nvim_create_autocmd("FileType", {
   group = vim.api.nvim_create_augroup("_bti_EnableTreesitterIndentation", { clear = true }),
   desc = "Try to enable tree-sitter indentation",
-  pattern = { "php", "html", "silverstripe" },
+  -- silverstripe is intentionally omitted: its after/indent/silverstripe.lua
+  -- shim owns indentexpr (base = this same TS indent + SS-block depth). This
+  -- FileType autocmd fires AFTER filetype-indent's after/indent load, so
+  -- including silverstripe here would clobber the shim's indentexpr.
+  pattern = { "php", "html" },
   callback = function()
     vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
   end,
