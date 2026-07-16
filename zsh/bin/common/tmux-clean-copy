@@ -14,9 +14,13 @@ exec awk -v with_path="$with_path" '
     sub(/ *·.*/, "", ctx) # drop gap fill onward
   }
   pending = emitted
+  after_prompt = 1
   next
 }
 {
+  # drop prompts where nothing was run
+  if (after_prompt && $0 ~ /^\$ *$/) { after_prompt = 0; ctx = ""; next }
+  after_prompt = 0
   if (pending) { print ""; pending = 0 }
   if (ctx != "") { $0 = "[" ctx "] " $0; ctx = "" }
   print; emitted = 1
