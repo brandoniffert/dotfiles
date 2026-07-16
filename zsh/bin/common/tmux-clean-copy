@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+# Strip p10k first prompt lines (· gap fill) from copied text, leaving one
+# blank line between command blocks - for pasting terminal output to LLMs
+
+# 1 = prefix commands with the prompt's path: [~/path] $ cmd
+with_path=1
+
+exec awk -v with_path="$with_path" '
+/···/ {
+  if (with_path) {
+    ctx = $0
+    sub(/ *•.*/, "", ctx) # drop segments after path (git, user@host)
+    sub(/ *·.*/, "", ctx) # drop gap fill onward
+  }
+  pending = emitted
+  next
+}
+{
+  if (pending) { print ""; pending = 0 }
+  if (ctx != "") { $0 = "[" ctx "] " $0; ctx = "" }
+  print; emitted = 1
+}
+'
