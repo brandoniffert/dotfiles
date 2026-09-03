@@ -5,7 +5,7 @@
       "src": "https://github.com/numToStr/Navigator.nvim"
     },
     "SchemaStore.nvim": {
-      "rev": "76c1a2357d4a9da49a90f922e251e5c32d74c99b",
+      "rev": "6a1a2daf151dd742d5ff2f64eb2cc049d7e5ab4a",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "blink-cmp-tmux": {
@@ -42,11 +42,11 @@
       "src": "https://github.com/Bilal2453/luvit-meta"
     },
     "mini.nvim": {
-      "rev": "fb2bbae327f3c306f3c825031345b89dd176ce60",
+      "rev": "9d01f392b33fb2ba36fbc87fc0bf4453e63ffb0a",
       "src": "https://github.com/nvim-mini/mini.nvim"
     },
     "neo-tree.nvim": {
-      "rev": "83e7a2982fd12b9c3d35bc39dd5877cd91a02a61",
+      "rev": "f3f3bf73414e400cf9fc13fda50f00404a8f8ab1",
       "src": "https://github.com/nvim-neo-tree/neo-tree.nvim",
       "version": "3.0.0 - 4.0.0"
     },
@@ -59,11 +59,11 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "684cb45c2faa24ce463b4fe9aaf011bfe1e0fb26",
+      "rev": "ee1e369181a9e64904cdd7b739e98c70778cfc71",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
-      "rev": "857651fce37eba032ebe28f3a206283cdc65c45a",
+      "rev": "427e9222363d07c32d6db6169e4049c28d58d141",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
