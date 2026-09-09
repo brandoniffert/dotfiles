@@ -104,6 +104,7 @@ config_dots=(
 if [[ "$OSTYPE" == "darwin"* ]]; then
   config_dots+=(
     aerospace
+    k9s
     kitty
     ghostty
     hammerspoon
