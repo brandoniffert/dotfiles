@@ -332,7 +332,8 @@
       prompt_char='#'
     fi
 
-    [[ -n "${TMUX+set}" || -n "${HERDR_ENV+set}" ]] && lvl=$(($SHLVL - 1))
+    [[ -n "${TMUX+set}" ]] && lvl=$(($SHLVL - 1))
+    [[ -n "${HERDR_SHLVL_BASE+set}" ]] && lvl=$(($SHLVL - $HERDR_SHLVL_BASE + 1))
 
     p10k segment -f white -t "$(printf "$prompt_char%.0s" {1..$lvl})"
   }

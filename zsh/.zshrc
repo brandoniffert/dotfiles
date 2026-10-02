@@ -6,6 +6,10 @@ for _rc in $ZDOTDIR/host/${^bti_host_layers}-startup; do
 done
 unset _rc
 
+if [[ -n "$HERDR_ENV" && -z "$HERDR_SHLVL_BASE" ]]; then
+  export HERDR_SHLVL_BASE=$SHLVL
+fi
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
