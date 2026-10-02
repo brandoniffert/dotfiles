@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Create a herdr workspace for a project folder and focus it
+# If the workspace already exists, focus that one
+
+HERDR="${HERDR_BIN_PATH:-herdr}"
+
+if [[ -z "${PROJECTS_HOME:-}" ]]; then
+  echo "Please set \$PROJECTS_HOME"
+  sleep 2
+  exit 1
+fi
+
+project_dir="${1:-}"
+
+if [[ -z "$project_dir" ]]; then
+  project_dir=$(find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d |
+    sed "s:^$PROJECTS_HOME/::" |
+    fzf --header='Projects' --border none) || true
+fi
+
+if [[ -z "$project_dir" ]]; then
+  exit 0
+fi
+
+project_path="$PROJECTS_HOME/$project_dir"
+label=$(basename "$project_path" | sed 's/\./-/g')
+
+if [[ -z "$label" ]]; then
+  exit 1
+fi
+
+# Convention for docker based projects
+if [[ -d "$project_path/site" ]]; then
+  cwd="$project_path/site"
+else
+  cwd="$project_path"
+fi
+
+workspace_id=$("$HERDR" workspace list |
+  jq -r --arg label "$label" 'first(.result.workspaces[] | select(.label == $label) | .workspace_id) // empty')
+
+if [[ -n "$workspace_id" ]]; then
+  "$HERDR" workspace focus "$workspace_id" >/dev/null
+else
+  "$HERDR" workspace create --cwd "$cwd" --label "$label" --focus >/dev/null
+fi

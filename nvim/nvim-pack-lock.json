@@ -1,9 +1,5 @@
 {
   "plugins": {
-    "Navigator.nvim": {
-      "rev": "91d86506ac2a039504d5205d32a1d4bc7aa57072",
-      "src": "https://github.com/numToStr/Navigator.nvim"
-    },
     "SchemaStore.nvim": {
       "rev": "5553e77b8628b7a08fc2a5135c17647f11d828ee",
       "src": "https://github.com/b0o/SchemaStore.nvim"
@@ -78,6 +74,10 @@
     "render-markdown.nvim": {
       "rev": "640a3ec6d538bad17c328be373c7cad0293d9589",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
+    },
+    "smart-splits.nvim": {
+      "rev": "ec76708f1617ef9e2ac353357fe52d2c997a0f06",
+      "src": "https://github.com/mrjones2014/smart-splits.nvim"
     },
     "snacks.nvim": {
       "rev": "882c996cf28183f4d63640de0b4c02ec886d01f2",

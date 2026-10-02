@@ -1,0 +1,80 @@
+onboarding = false
+
+[theme]
+name = "catppuccin"
+
+[keys]
+prefix = "ctrl+space"
+settings = "prefix+shift+s"
+reload_config = "prefix+r"
+resize_mode = "prefix+shift+r"
+detach = "prefix+d"
+close_tab = "prefix+q"
+close_workspace = "prefix+shift+q"
+rename_tab = "prefix+comma"
+goto = "prefix+s"
+previous_tab = "prefix+left"
+next_tab = ["prefix+n", "prefix+right"]
+move_tab_previous = "prefix+shift+comma"
+move_tab_next = "prefix+shift+period"
+split_vertical = ["prefix+v", "prefix+="]
+split_horizontal = "prefix+minus"
+resize_pane_left = "shift+left"
+resize_pane_right = "shift+right"
+resize_pane_up = "shift+up"
+resize_pane_down = "shift+down"
+
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+command = 'cd "$HERDR_ACTIVE_PANE_CWD" && lazygit'
+description = "lazygit"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "prefix+backtick"
+type = "popup"
+command = 'cd "$HERDR_ACTIVE_PANE_CWD" && exec zsh -il'
+description = "shell"
+width = "80%"
+height = "80%"
+
+[[keys.command]]
+key = "prefix+p"
+type = "popup"
+command = "herdr-projects"
+description = "project workspace picker"
+width = "30%"
+height = "30%"
+
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "smart-splits.nvim.left"
+description = "navigate left (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "smart-splits.nvim.down"
+description = "navigate down (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "smart-splits.nvim.up"
+description = "navigate up (vim/herdr)"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "smart-splits.nvim.right"
+description = "navigate right (vim/herdr)"
+
+[ui]
+prompt_new_tab_name = false
+prompt_new_workspace_name = true
+hide_tab_bar_when_single_tab = true
+window_title = "{workspace}:{tab}"
+tab_bar_right = [{ type = "hostname" }]

@@ -91,3 +91,6 @@ FZF_DEFAULT_OPTS+=" --info=inline"
 FZF_DEFAULT_OPTS+=" --prompt=' '"
 FZF_DEFAULT_OPTS+=" --marker='• '"
 export FZF_DEFAULT_OPTS
+
+# smart-splits.nvim herdr plugin: TUIs that receive ctrl+h/j/k/l directly
+export SMART_SPLITS_HERDR_PASSTHROUGH_RE='^(lazygit|k9s|btop|yazi)$'

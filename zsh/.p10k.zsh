@@ -332,7 +332,7 @@
       prompt_char='#'
     fi
 
-    [[ -n "${TMUX+set}" ]] && lvl=$(($SHLVL - 1))
+    [[ -n "${TMUX+set}" || -n "${HERDR_ENV+set}" ]] && lvl=$(($SHLVL - 1))
 
     p10k segment -f white -t "$(printf "$prompt_char%.0s" {1..$lvl})"
   }
@@ -345,10 +345,16 @@
 
   function prompt_user_context() {
     if [[ $(hostname -s) =~ ^dev ]]; then
-      local tmux_session=''
+      local mux_session=''
 
-      [[ -n "${TMUX+set}" ]] && tmux_session="@$(tmux display-message -p '#S')"
-      p10k segment -f '#6c7086' -t "%m$tmux_session"
+      if [[ -n "${TMUX+set}" ]]; then
+        mux_session="@$(tmux display-message -p '#S')"
+      elif [[ -n "${HERDR_ENV+set}" ]]; then
+        mux_session="$(herdr workspace get "$HERDR_WORKSPACE_ID" 2>/dev/null | jq -r '.result.workspace.label // empty')"
+        [[ -n "$mux_session" ]] && mux_session="@$mux_session"
+      fi
+
+      p10k segment -f '#6c7086' -t "%m$mux_session"
     fi
   }
 

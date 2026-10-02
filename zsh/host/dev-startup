@@ -2,16 +2,17 @@
 
 # Automatically setup tmux session
 () {
-  HISTFILE=/dev/null
+  local HISTFILE=/dev/null
 
   local session_name="dev"
   local working_dir="$HOME"
 
   [[ -n "$TMUX" ]] && return
+  [[ -n "$HERDR_ENV" ]] && return
 
   if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-session -A -c "$working_dir" -s "$session_name"
   fi
 
-  [[ -z "$(tmux list-clients)" ]] && tmux attach -t "$session_name"
+  [[ -z "$(tmux list-clients 2>/dev/null)" ]] && tmux attach -t "$session_name"
 }

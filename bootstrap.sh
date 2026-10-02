@@ -90,6 +90,7 @@ config_dots=(
   dircolors
   just
   git
+  herdr
   hunk
   lazygit
   mise
@@ -133,5 +134,16 @@ for file in "${home_dots[@]}"; do
 
   link_file "$source_file" "$target_file"
 done
+
+echo_header "Herdr plugins"
+
+if ! command -v herdr >/dev/null 2>&1; then
+  echo_skip "herdr not installed"
+elif [[ "$(herdr plugin list --json)" == *'"plugin_id":"smart-splits.nvim"'* ]]; then
+  echo_skip "smart-splits.nvim already installed"
+else
+  herdr plugin install -y mrjones2014/smart-splits.nvim >/dev/null 2>&1 || echo_error_exit "failed to install smart-splits.nvim"
+  echo_success "installed smart-splits.nvim"
+fi
 
 [ "$quiet" = true ] || echo -e "\nDone.\n"
