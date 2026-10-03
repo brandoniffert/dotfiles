@@ -43,10 +43,16 @@ height = "80%"
 [[keys.command]]
 key = "prefix+p"
 type = "popup"
-command = "herdr-projects"
+command = "zsh -ic herdr-projects"
 description = "project workspace picker"
 width = "30%"
 height = "30%"
+
+[[keys.command]]
+key = "prefix+ctrl+l"
+type = "shell"
+command = '"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" ctrl+l'
+description = "send ctrl+l to pane"
 
 [[keys.command]]
 key = "ctrl+h"
