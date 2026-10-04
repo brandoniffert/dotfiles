@@ -3,6 +3,12 @@ onboarding = false
 [theme]
 name = "catppuccin"
 
+[theme.custom]
+panel_bg = "#1e1e2e"
+overlay0 = "#585b70"
+overlay1 = "#a6adc8"
+active_row_bg = "#313244"
+
 [keys]
 prefix = "ctrl+space"
 settings = "prefix+shift+s"
@@ -98,5 +104,10 @@ description = "navigate right (vim/herdr)"
 prompt_new_tab_name = false
 prompt_new_workspace_name = true
 hide_tab_bar_when_single_tab = true
+tab_bar_position = "bottom"
+pane_borders = "always"
 window_title = "{workspace}:{tab}"
 tab_bar_right = [{ type = "hostname" }]
+
+[ui.toast]
+delivery = "herdr"
