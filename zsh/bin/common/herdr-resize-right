@@ -1,0 +1,42 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Resize the rightmost pane of the current tab to a percent of the tab width
+
+HERDR="${HERDR_BIN_PATH:-herdr}"
+
+pct="${1:-33}"
+
+if [[ -n "${HERDR_ACTIVE_PANE_ID:-}" ]]; then
+  target=(--pane "$HERDR_ACTIVE_PANE_ID")
+else
+  target=(--current)
+fi
+
+# resize --amount is a ratio delta (capped at 0.5) on the split adjacent to the pane
+for _ in 1 2 3 4; do
+  step=$("$HERDR" pane layout "${target[@]}" | jq -r --argjson pct "$pct" '
+    .result.layout as $l
+    | def left_split($r): first($l.splits[]
+        | select(.direction == "right")
+        | select(.rect.x + (.rect.width * .ratio | round) == $r.x)
+        | select(.rect.y <= $r.y and .rect.y + .rect.height > $r.y));
+      def step($pane; $s; $w): ($s.ratio - ($s.rect.width - $w) / $s.rect.width) as $d
+        | if $d > 0 then "\($pane) left \($d)" else "\($pane) right \(-$d)" end;
+    ($l.panes | max_by(.rect.x)) as $p
+    | ($l.area.width * $pct / 100 | round) as $want
+    | left_split($p.rect) as $s
+    | if $p.rect.width == $want then empty
+      elif ($s.rect.width - $want) / $s.rect.width >= 0.1 then step($p.pane_id; $s; $want)
+      else
+        # adjacent split clamps at 0.1; widen it via its parent split first
+        first($l.panes[] | select(.rect.x == $s.rect.x and .rect.y <= $p.rect.y and .rect.y + .rect.height > $p.rect.y)) as $q
+        | step($q.pane_id; left_split($s.rect); ($want / 0.9 | ceil))
+      end
+  ')
+  [[ -z "$step" ]] && exit 0
+  read -r pane dir amount <<<"$step"
+  changed=$("$HERDR" pane resize --pane "$pane" --direction "$dir" --amount "$amount" | jq -r '.result.resize.changed')
+  [[ "$changed" == "true" ]] || exit 0
+done

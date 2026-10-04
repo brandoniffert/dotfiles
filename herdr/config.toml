@@ -77,6 +77,12 @@ width = "75%"
 height = "75%"
 
 [[keys.command]]
+key = "prefix+]"
+type = "shell"
+command = "herdr-resize-right"
+description = "right pane 33%"
+
+[[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
 command = "smart-splits.nvim.left"
