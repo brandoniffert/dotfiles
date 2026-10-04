@@ -1,0 +1,150 @@
+#!/usr/bin/env bash
+
+# up: apply .herdr layout (or default code/build tabs) to a fresh workspace
+# up save [-f] [path]: write .herdr reproducing the current workspace
+
+set -euo pipefail
+IFS=$'\n\t'
+
+HERDR="${HERDR_BIN_PATH:-herdr}"
+
+# Exit if not in herdr
+[[ -z "${HERDR_ENV:-}" ]] && { [[ ${1:-} == save ]] && echo "not in herdr" >&2 && exit 1; exit 0; }
+
+sh_quote() {
+  local s=$1
+  s=${s//\\/\\\\}
+  s=${s//\"/\\\"}
+  s=${s//\$/\\\$}
+  s=${s//\`/\\\`}
+  printf '"%s"' "$s"
+}
+
+# Emits {ok, splits: [{parent, new, direction, ratio}], vars: {pane_id: var}}
+# by replaying splits largest-first over virtual regions
+read -r -d '' LAYOUT_JQ <<'JQ' || true
+.result.layout as $l
+| ($l.panes | length) as $n
+| def var($m): "t\($tab)p\($m)";
+  def tl($r): "\($r.x),\($r.y)";
+  reduce ($l.splits | sort_by(-(.rect.width * .rect.height)))[] as $s (
+    {ok: true, regions: [{var: var(1), rect: $l.area}], splits: []};
+    if .ok | not then . else
+      (.regions | map(tl(.rect) == tl($s.rect)) | index(true)) as $i
+      | if $i == null or .regions[$i].rect != $s.rect then .ok = false else
+          .regions[$i].rect as $r
+          | var((.regions | length) + 1) as $new
+          | (if $s.direction == "right" then
+              ($r.x + ($r.width * $s.ratio | round)) as $d
+              | [($r | .width = $d - $r.x), ($r | .x = $d | .width = $r.x + $r.width - $d)]
+            elif $s.direction == "down" then
+              ($r.y + ($r.height * $s.ratio | round)) as $d
+              | [($r | .height = $d - $r.y), ($r | .y = $d | .height = $r.y + $r.height - $d)]
+            else null end) as $parts
+          | if $parts == null then .ok = false else
+              .splits += [{parent: .regions[$i].var, new: $new, direction: $s.direction, ratio: ($s.ratio * 100 | round / 100)}]
+              | .regions[$i].rect = $parts[0]
+              | .regions += [{var: $new, rect: $parts[1]}]
+            end
+        end
+    end
+  )
+| .vars = ([$l.panes[] as $p | .regions[] | select(tl(.rect) == tl($p.rect)) | {key: $p.pane_id, value: .var}] | from_entries)
+| if (.regions | length) != $n or (.vars | length) != $n or (.vars | map(.) | unique | length) != $n then .ok = false else . end
+| if .ok then . else .splits = [] | .vars = {($l.panes[0].pane_id): var(1)} end
+| del(.regions)
+JQ
+
+pane_run_line() {
+  local pane=$1 var=$2 label=$3 info name cmd reply
+  if [[ $pane != "${HERDR_PANE_ID:-}" ]]; then
+    info=$("$HERDR" pane process-info --pane "$pane" | jq -c '.result.process_info.foreground_processes[0] // {}')
+    name=$(jq -r '.name // ""' <<<"$info")
+    cmd=$(jq -r '.cmdline // ""' <<<"$info")
+  fi
+  case "${name:-}" in
+    "" | up | bash | sh | zsh | fish | jq | herdr) ;;
+    *)
+      printf 'pane %s (%s): %s\n' "$var" "$label" "$cmd" >/dev/tty
+      read -r -p "Save this command? (y/N) " -n 1 reply </dev/tty >/dev/tty 2>&1
+      echo >/dev/tty
+      if [[ $reply =~ ^[Yy]$ ]]; then
+        printf 'herdr pane run "$%s" %s >/dev/null\n' "$var" "$(sh_quote "$cmd")"
+        return
+      fi
+      ;;
+  esac
+  printf '# herdr pane run "$%s" ""\n' "$var"
+}
+
+save() {
+  local force=0 out=./.herdr
+  while (($#)); do
+    case $1 in
+      -f) force=1 ;;
+      *) out=$1 ;;
+    esac
+    shift
+  done
+  if [[ -e $out && $force -eq 0 ]]; then
+    echo "$out exists (use -f to overwrite)" >&2
+    exit 1
+  fi
+
+  local tabs tab_id label pane plan var n=0
+  tabs=$("$HERDR" tab list --workspace "$HERDR_WORKSPACE_ID" | jq -r '.result.tabs | sort_by(.number)[] | [.tab_id, .label] | @tsv')
+  {
+    printf '#!/bin/sh\nset -e\n'
+    while IFS=$'\t' read -r tab_id label; do
+      n=$((n + 1))
+      pane=$("$HERDR" pane list --workspace "$HERDR_WORKSPACE_ID" | jq -r --arg t "$tab_id" '[.result.panes[] | select(.tab_id == $t)][0].pane_id')
+      plan=$("$HERDR" pane layout --pane "$pane" | jq -c --argjson tab "$n" "$LAYOUT_JQ")
+      echo
+      if ((n == 1)); then
+        printf 'herdr tab rename "$HERDR_TAB_ID" %s >/dev/null\n' "$(sh_quote "$label")"
+        printf 't1p1="$HERDR_PANE_ID"\n'
+      else
+        printf 't%sp1=$(herdr tab create --workspace "$HERDR_WORKSPACE_ID" --label %s --no-focus | jq -r '"'"'.result.root_pane.pane_id'"'"')\n' "$n" "$(sh_quote "$label")"
+      fi
+      jq -r '.splits[] | "\(.new)=$(herdr pane split \"$\(.parent)\" --direction \(.direction) --ratio \(.ratio) --no-focus | jq -r '"'"'.result.pane.pane_id'"'"')"' <<<"$plan"
+      jq -e .ok <<<"$plan" >/dev/null || echo "# layout not reproduced"
+      while IFS=$'\t' read -r pane var; do
+        pane_run_line "$pane" "$var" "$label"
+      done < <(jq -r '.vars | to_entries | sort_by(.value | ltrimstr("t") | split("p") | map(tonumber)) | .[] | [.key, .value] | @tsv' <<<"$plan")
+    done <<<"$tabs"
+  } >"$out"
+  chmod +x "$out"
+  echo "$out"
+}
+
+if [[ ${1:-} == save ]]; then
+  shift
+  save "$@"
+  exit 0
+fi
+
+# Only proceed if single tab exists
+[[ $("$HERDR" tab list --workspace "$HERDR_WORKSPACE_ID" | jq '.result.tabs | length') -ne 1 ]] && exit 0
+
+# Check for executable .herdr file
+if [[ -x .herdr ]]; then
+  digest=$(openssl sha512 .herdr)
+  digest_file="${XDG_DATA_HOME}/.herdr-digests"
+
+  if ! grep -q "$digest" "$digest_file" 2>/dev/null; then
+    cat .herdr
+    echo
+    read -r -p "Trust (and run) this .herdr file? (t = trust, otherwise = skip) " -n 1 REPLY
+    echo
+    if [[ $REPLY =~ ^[Tt]$ ]]; then
+      echo "$digest" >>"$digest_file"
+      ./.herdr
+    fi
+  else
+    ./.herdr
+  fi
+else
+  "$HERDR" tab rename "$HERDR_TAB_ID" code >/dev/null
+  "$HERDR" tab create --workspace "$HERDR_WORKSPACE_ID" --label build --no-focus >/dev/null
+  clear
+fi

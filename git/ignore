@@ -6,5 +6,6 @@ ehthumbs.db
 Thumbs.db
 *.pyc
 .tmux
+.herdr
 
 **/.claude/settings.local.json
