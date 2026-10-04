@@ -18,8 +18,7 @@ detach = "prefix+d"
 close_tab = "prefix+q"
 close_workspace = "prefix+shift+q"
 rename_tab = "prefix+comma"
-goto = "prefix+s"
-previous_tab = "prefix+left"
+previous_tab = ["prefix+p", "prefix+left"]
 next_tab = ["prefix+n", "prefix+right"]
 move_tab_previous = "prefix+shift+comma"
 move_tab_next = "prefix+shift+period"
@@ -31,7 +30,7 @@ resize_pane_up = "shift+up"
 resize_pane_down = "shift+down"
 
 [[keys.command]]
-key = "prefix+g"
+key = "prefix+shift+v"
 type = "popup"
 command = 'cd "$HERDR_ACTIVE_PANE_CWD" && lazygit'
 description = "lazygit"
@@ -47,7 +46,7 @@ width = "80%"
 height = "80%"
 
 [[keys.command]]
-key = "prefix+p"
+key = "prefix+s"
 type = "popup"
 command = "zsh -ic herdr-projects"
 description = "project workspace picker"
