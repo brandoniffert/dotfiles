@@ -6,9 +6,15 @@
 
   local session_name="dev"
   local working_dir="$HOME"
+  local mux="herdr"
 
   [[ -n "$TMUX" ]] && return
   [[ -n "$HERDR_ENV" ]] && return
+
+  if [[ "$mux" == herdr ]]; then
+    pgrep -u "$EUID" -f '^[^ ]*herdr$' >/dev/null || herdr
+    return
+  fi
 
   if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-session -A -c "$working_dir" -s "$session_name"
