@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+# Fuzzy-pick words or lines from a pane's scrollback (extrakto/fuzzback replacement)
+# enter: copy via OSC 52, tab: insert into pane
+
+HERDR="${HERDR_BIN_PATH:-herdr}"
+
+mode="${1:-words}"
+pane="${2:-${HERDR_ACTIVE_PANE_ID:-}}"
+
+if [[ -z "$pane" ]]; then
+  echo "No pane id"
+  sleep 2
+  exit 1
+fi
+
+reverse() {
+  awk '{ a[NR] = $0 } END { for (i = NR; i > 0; i--) print a[i] }'
+}
+
+scrollback=$("$HERDR" pane read "$pane" --source recent-unwrapped --lines 500 --format text)
+
+header="enter: copy  tab: insert"
+case "$mode" in
+words)
+  candidates=$(printf '%s\n' "$scrollback" |
+    tr -s '[:space:]' '\n' |
+    sed -E "s/^[\"'\`(<{[]+//; s/[]\"'\`)>}.,;:!?]+$//" |
+    awk 'length >= 3 && /[[:alnum:]]/' |
+    reverse | awk '!seen[$0]++')
+  ;;
+lines)
+  candidates=$(printf '%s\n' "$scrollback" |
+    sed -E 's/^[[:space:]]+//; s/[[:space:]]+$//' |
+    awk 'length' |
+    reverse | awk '!seen[$0]++')
+  ;;
+*)
+  echo "Usage: herdr-extract [words|lines] [pane_id]"
+  sleep 2
+  exit 1
+  ;;
+esac
+
+out=$(printf '%s\n' "$candidates" |
+  fzf --no-sort --exact --expect=tab --header="$header" --border none) || true
+
+key=$(sed -n 1p <<<"$out")
+sel=$(sed -n 2p <<<"$out")
+
+if [[ -z "$sel" ]]; then
+  exit 0
+fi
+
+if [[ "$key" == "tab" ]]; then
+  "$HERDR" pane send-text "$pane" "$sel" >/dev/null
+else
+  printf '\e]52;c;%s\a' "$(printf %s "$sel" | base64 | tr -d '\n')" >/dev/tty
+fi

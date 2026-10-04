@@ -55,6 +55,22 @@ command = '"$HERDR_BIN_PATH" pane send-keys "$HERDR_ACTIVE_PANE_ID" ctrl+l'
 description = "send ctrl+l to pane"
 
 [[keys.command]]
+key = "prefix+tab"
+type = "popup"
+command = "zsh -ic 'herdr-extract words'"
+description = "extract words/paths/urls"
+width = "75%"
+height = "75%"
+
+[[keys.command]]
+key = "prefix+slash"
+type = "popup"
+command = "zsh -ic 'herdr-extract lines'"
+description = "search scrollback lines"
+width = "75%"
+height = "75%"
+
+[[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
 command = "smart-splits.nvim.left"
