@@ -1,0 +1,12 @@
+id = "clean-copy"
+name = "clean-copy"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Copy the copy-mode selection via OSC 52, cleaned with tmux-clean-copy"
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "copy"
+title = "Clean copy selection"
+contexts = ["global"]
+command = ["bash", "scripts/clean-copy.sh"]

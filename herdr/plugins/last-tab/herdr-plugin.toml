@@ -1,0 +1,16 @@
+id = "last-tab"
+name = "last-tab"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Toggle to the previously focused tab in the workspace"
+platforms = ["linux", "macos"]
+
+[[events]]
+on = "tab.focused"
+command = ["bash", "scripts/last-tab.sh", "focused"]
+
+[[actions]]
+id = "toggle"
+title = "Last tab"
+contexts = ["global"]
+command = ["bash", "scripts/last-tab.sh", "toggle"]

@@ -146,4 +146,18 @@ else
   echo_success "installed smart-splits.nvim"
 fi
 
+if ! command -v herdr >/dev/null 2>&1; then
+  echo_skip "herdr not installed"
+else
+  herdr_plugins="$(herdr plugin list --json)"
+  for plugin in last-tab clean-copy; do
+    if [[ "$herdr_plugins" == *"\"plugin_id\":\"$plugin\""* ]]; then
+      echo_skip "$plugin already linked"
+    else
+      herdr plugin link "$repo_root/herdr/plugins/$plugin" >/dev/null 2>&1 || echo_error_exit "failed to link $plugin"
+      echo_success "linked $plugin"
+    fi
+  done
+fi
+
 [ "$quiet" = true ] || echo -e "\nDone.\n"

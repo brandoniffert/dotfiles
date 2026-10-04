@@ -10,5 +10,7 @@ herdr/*.sock*
 herdr/session.json
 herdr/session-snapshots/
 herdr/.plugins.lock
-herdr/plugins/
+herdr/plugins/*
+!herdr/plugins/last-tab/
+!herdr/plugins/clean-copy/
 herdr/plugins.json

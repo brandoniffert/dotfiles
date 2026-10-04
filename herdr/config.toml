@@ -100,6 +100,18 @@ type = "plugin_action"
 command = "smart-splits.nvim.right"
 description = "navigate right (vim/herdr)"
 
+[[keys.command]]
+key = "prefix+space"
+type = "plugin_action"
+command = "last-tab.toggle"
+description = "last tab"
+
+[[keys.command]]
+key = "prefix+shift+y"
+type = "plugin_action"
+command = "clean-copy.copy"
+description = "clean-copy selection"
+
 [ui]
 prompt_new_tab_name = false
 prompt_new_workspace_name = true
