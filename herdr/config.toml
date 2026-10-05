@@ -5,8 +5,6 @@ name = "catppuccin"
 
 [theme.custom]
 panel_bg = "#1e1e2e"
-overlay0 = "#585b70"
-overlay1 = "#a6adc8"
 active_row_bg = "#313244"
 
 [keys]
