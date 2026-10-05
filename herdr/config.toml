@@ -110,6 +110,12 @@ command = "last-tab.toggle"
 description = "last tab"
 
 [[keys.command]]
+key = "prefix+backspace"
+type = "plugin_action"
+command = "last-workspace.toggle"
+description = "last workspace"
+
+[[keys.command]]
 key = "prefix+shift+y"
 type = "plugin_action"
 command = "clean-copy.copy"

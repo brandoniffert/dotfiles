@@ -13,4 +13,5 @@ herdr/.plugins.lock
 herdr/plugins/*
 !herdr/plugins/last-tab/
 !herdr/plugins/clean-copy/
+!herdr/plugins/last-workspace/
 herdr/plugins.json

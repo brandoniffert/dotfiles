@@ -1,0 +1,16 @@
+id = "last-workspace"
+name = "last-workspace"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Toggle to the previously focused workspace"
+platforms = ["linux", "macos"]
+
+[[events]]
+on = "workspace.focused"
+command = ["bash", "scripts/last-workspace.sh", "focused"]
+
+[[actions]]
+id = "toggle"
+title = "Last workspace"
+contexts = ["global"]
+command = ["bash", "scripts/last-workspace.sh", "toggle"]
