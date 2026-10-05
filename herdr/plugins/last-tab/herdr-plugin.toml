@@ -9,6 +9,14 @@ platforms = ["linux", "macos"]
 on = "tab.focused"
 command = ["bash", "scripts/last-tab.sh", "focused"]
 
+[[events]]
+on = "tab.closed"
+command = ["bash", "scripts/last-tab.sh", "closed"]
+
+[[events]]
+on = "workspace.closed"
+command = ["bash", "scripts/last-tab.sh", "workspace-closed"]
+
 [[actions]]
 id = "toggle"
 title = "Last tab"

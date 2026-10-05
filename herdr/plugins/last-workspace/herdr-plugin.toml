@@ -9,6 +9,10 @@ platforms = ["linux", "macos"]
 on = "workspace.focused"
 command = ["bash", "scripts/last-workspace.sh", "focused"]
 
+[[events]]
+on = "workspace.closed"
+command = ["bash", "scripts/last-workspace.sh", "closed"]
+
 [[actions]]
 id = "toggle"
 title = "Last workspace"
