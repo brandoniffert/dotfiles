@@ -8,4 +8,7 @@ Thumbs.db
 .tmux
 .herdr
 
+CLAUDE.local.md
+AGENTS.local.md
+AGENTS.override.md
 **/.claude/settings.local.json
