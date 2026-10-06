@@ -25,6 +25,23 @@ for _, provider in pairs(disabled_providers) do
   vim.g["loaded_" .. provider .. "_provider"] = 0
 end
 
+-- herdr drops OSC 52 `p` selection and has no clipboard read
+if vim.env.HERDR_ENV and vim.env.SSH_CONNECTION then
+  local cache = { {}, "v" }
+  local function copy(lines, regtype)
+    cache = { lines, regtype }
+    require("vim.ui.clipboard.osc52").copy("+")(lines)
+  end
+  local function paste()
+    return cache
+  end
+  vim.g.clipboard = {
+    name = "herdr-osc52",
+    copy = { ["+"] = copy, ["*"] = copy },
+    paste = { ["+"] = paste, ["*"] = paste },
+  }
+end
+
 vim.opt.breakindent = true
 vim.opt.cursorline = true
 vim.opt.diffopt:append("foldcolumn:0")
