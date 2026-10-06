@@ -150,7 +150,7 @@ if ! command -v herdr >/dev/null 2>&1; then
   echo_skip "herdr not installed"
 else
   herdr_plugins="$(herdr plugin list --json)"
-  for plugin in last-tab clean-copy last-workspace; do
+  for plugin in last-tab clean-copy last-workspace popups; do
     if [[ "$herdr_plugins" == *"\"plugin_id\":\"$plugin\""* ]]; then
       echo_skip "$plugin already linked"
     else
