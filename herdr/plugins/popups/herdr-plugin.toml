@@ -1,0 +1,76 @@
+id = "popups"
+name = "popups"
+version = "0.1.0"
+min_herdr_version = "0.9.0"
+description = "Titled popup panes for lazygit, shell, project picker, and scrollback extract"
+platforms = ["linux", "macos"]
+
+[[panes]]
+id = "lazygit"
+title = "lazygit"
+placement = "popup"
+width = "80%"
+height = "80%"
+command = ["bash", "scripts/run.sh", "lazygit"]
+
+[[actions]]
+id = "lazygit"
+title = "Lazygit"
+contexts = ["global"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint lazygit"]
+
+[[panes]]
+id = "shell"
+title = "shell"
+placement = "popup"
+width = "80%"
+height = "80%"
+command = ["bash", "scripts/run.sh", "zsh", "-il"]
+
+[[actions]]
+id = "shell"
+title = "Shell"
+contexts = ["global"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint shell"]
+
+[[panes]]
+id = "projects"
+title = "projects"
+placement = "popup"
+width = "30%"
+height = "30%"
+command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-projects"]
+
+[[actions]]
+id = "projects"
+title = "Project workspace picker"
+contexts = ["global"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint projects"]
+
+[[panes]]
+id = "extract-words"
+title = "extract words"
+placement = "popup"
+width = "75%"
+height = "75%"
+command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-extract words"]
+
+[[actions]]
+id = "extract-words"
+title = "Extract words/paths/urls"
+contexts = ["global"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint extract-words"]
+
+[[panes]]
+id = "extract-lines"
+title = "extract lines"
+placement = "popup"
+width = "75%"
+height = "75%"
+command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-extract lines"]
+
+[[actions]]
+id = "extract-lines"
+title = "Search scrollback lines"
+contexts = ["global"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint extract-lines"]

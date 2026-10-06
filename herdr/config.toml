@@ -29,43 +29,33 @@ resize_pane_down = "shift+down"
 
 [[keys.command]]
 key = "prefix+shift+v"
-type = "popup"
-command = 'cd "$HERDR_ACTIVE_PANE_CWD" && lazygit'
+type = "plugin_action"
+command = "popups.lazygit"
 description = "lazygit"
-width = "80%"
-height = "80%"
 
 [[keys.command]]
 key = "prefix+backtick"
-type = "popup"
-command = 'cd "$HERDR_ACTIVE_PANE_CWD" && exec zsh -il'
+type = "plugin_action"
+command = "popups.shell"
 description = "shell"
-width = "80%"
-height = "80%"
 
 [[keys.command]]
 key = "prefix+s"
-type = "popup"
-command = "zsh -ic herdr-projects"
+type = "plugin_action"
+command = "popups.projects"
 description = "project workspace picker"
-width = "30%"
-height = "30%"
 
 [[keys.command]]
 key = "prefix+tab"
-type = "popup"
-command = "zsh -ic 'herdr-extract words'"
+type = "plugin_action"
+command = "popups.extract-words"
 description = "extract words/paths/urls"
-width = "75%"
-height = "75%"
 
 [[keys.command]]
 key = "prefix+slash"
-type = "popup"
-command = "zsh -ic 'herdr-extract lines'"
+type = "plugin_action"
+command = "popups.extract-lines"
 description = "search scrollback lines"
-width = "75%"
-height = "75%"
 
 [[keys.command]]
 key = "prefix+ctrl+l"

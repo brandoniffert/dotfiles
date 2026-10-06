@@ -15,4 +15,5 @@ herdr/plugins/*
 !herdr/plugins/clean-copy/
 !herdr/plugins/last-workspace/
 !herdr/plugins/lib/
+!herdr/plugins/popups/
 herdr/plugins.json
