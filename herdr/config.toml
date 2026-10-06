@@ -114,7 +114,7 @@ description = "clean-copy selection"
 [ui]
 prompt_new_tab_name = false
 prompt_new_workspace_name = true
-hide_tab_bar_when_single_tab = true
+hide_tab_bar_when_single_tab = false
 tab_bar_position = "bottom"
 pane_borders = "always"
 window_title = "{workspace}:{tab}"
