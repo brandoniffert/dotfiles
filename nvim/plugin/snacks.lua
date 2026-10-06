@@ -55,6 +55,10 @@ vim.keymap.set("n", "<Leader>fb", function()
   Snacks.picker.buffers()
 end, { desc = "Buffers" })
 
+vim.keymap.set("n", "<Leader>fs", function()
+  Snacks.picker.git_status()
+end, { desc = "Git Status" })
+
 vim.keymap.set("n", "<Leader>fo", function()
   Snacks.picker.recent({ filter = { cwd = true } })
 end, { desc = "Recent" })
