@@ -7,7 +7,7 @@ platforms = ["linux", "macos"]
 
 [[panes]]
 id = "lazygit"
-title = "lazygit"
+title = "Lazygit"
 placement = "popup"
 width = "80%"
 height = "80%"
@@ -21,7 +21,7 @@ command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popup
 
 [[panes]]
 id = "shell"
-title = "shell"
+title = "Shell"
 placement = "popup"
 width = "80%"
 height = "80%"
@@ -35,7 +35,7 @@ command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popup
 
 [[panes]]
 id = "projects"
-title = "projects"
+title = "Projects"
 placement = "popup"
 width = "30%"
 height = "30%"
@@ -43,13 +43,27 @@ command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-projects"]
 
 [[actions]]
 id = "projects"
-title = "Project workspace picker"
+title = "Project Workspace Picker"
 contexts = ["global"]
 command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint projects"]
 
 [[panes]]
+id = "workspaces"
+title = "Workspaces"
+placement = "popup"
+width = "30%"
+height = "30%"
+command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-fzf-workspaces"]
+
+[[actions]]
+id = "workspaces"
+title = "Workspace Picker"
+contexts = ["global"]
+command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint workspaces"]
+
+[[panes]]
 id = "extract-words"
-title = "extract words"
+title = "Extract Words"
 placement = "popup"
 width = "75%"
 height = "75%"
@@ -57,13 +71,13 @@ command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-extract words"]
 
 [[actions]]
 id = "extract-words"
-title = "Extract words/paths/urls"
+title = "Extract Words/Paths/URLs"
 contexts = ["global"]
 command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint extract-words"]
 
 [[panes]]
 id = "extract-lines"
-title = "extract lines"
+title = "Extract Lines"
 placement = "popup"
 width = "75%"
 height = "75%"
@@ -71,6 +85,6 @@ command = ["bash", "scripts/run.sh", "zsh", "-ic", "herdr-extract lines"]
 
 [[actions]]
 id = "extract-lines"
-title = "Search scrollback lines"
+title = "Search Scrollback Lines"
 contexts = ["global"]
 command = ["sh", "-c", "exec \"$HERDR_BIN_PATH\" plugin pane open --plugin popups --entrypoint extract-lines"]

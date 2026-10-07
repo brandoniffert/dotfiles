@@ -16,8 +16,9 @@ detach = "prefix+d"
 close_tab = "prefix+q"
 close_workspace = "prefix+shift+q"
 rename_tab = "prefix+comma"
-previous_tab = ["prefix+p", "prefix+left"]
-next_tab = ["prefix+n", "prefix+right"]
+focus_agent = "ctrl+1..9"
+previous_tab = ""
+next_tab = ""
 move_tab_previous = "prefix+shift+comma"
 move_tab_next = "prefix+shift+period"
 split_vertical = ["prefix+v", "prefix+="]
@@ -26,9 +27,13 @@ resize_pane_left = "shift+left"
 resize_pane_right = "shift+right"
 resize_pane_up = "shift+up"
 resize_pane_down = "shift+down"
+focus_pane_left = ""
+focus_pane_down = ""
+focus_pane_up = ""
+focus_pane_right = ""
 
 [[keys.command]]
-key = "prefix+shift+v"
+key = "prefix+l"
 type = "plugin_action"
 command = "popups.lazygit"
 description = "lazygit"
@@ -40,10 +45,16 @@ command = "popups.shell"
 description = "shell"
 
 [[keys.command]]
-key = "prefix+s"
+key = "prefix+p"
 type = "plugin_action"
 command = "popups.projects"
 description = "project workspace picker"
+
+[[keys.command]]
+key = "prefix+s"
+type = "plugin_action"
+command = "popups.workspaces"
+description = "workspace picker"
 
 [[keys.command]]
 key = "prefix+tab"

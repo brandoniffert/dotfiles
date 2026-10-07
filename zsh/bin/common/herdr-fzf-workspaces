@@ -1,0 +1,82 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+HERDR="${HERDR_BIN_PATH:-herdr}"
+
+trim_sanitize() {
+  local s="${1-}"
+  s="${s#"${s%%[![:space:]]*}"}" # ltrim
+  s="${s%"${s##*[![:space:]]}"}" # rtrim
+  s="${s//./-}"                  # dots -> dashes
+  printf '%s' "$s"
+}
+
+confirm() {
+  local prompt="$1" ans
+  tput sc >/dev/tty
+  printf '%s' "$prompt" >/dev/tty
+  read -r ans </dev/tty || {
+    tput rc >/dev/tty
+    tput ed >/dev/tty
+    return 1
+  }
+  tput rc >/dev/tty
+  tput ed >/dev/tty
+  [[ "$ans" == [yY] ]]
+}
+
+while :; do
+  list="$("$HERDR" workspace list)"
+  current="$(jq -r 'first(.result.workspaces[] | select(.focused) | .label) // empty' <<<"$list")"
+
+  mapfile -t rows < <(jq -r '.result.workspaces | sort_by(.number)[] | "\(.workspace_id)\t\(.label)"' <<<"$list")
+  ((${#rows[@]})) || {
+    echo "No workspaces." >&2
+    exit 0
+  }
+
+  result=$(
+    printf '%s\n' "${rows[@]}" | fzf \
+      --with-nth=2.. --delimiter=$'\t' \
+      --header="Current: ${current:-<none>}" \
+      --expect=ctrl-e,ctrl-x \
+      --print-query \
+      --multi \
+      --no-sort --tiebreak=index \
+      --border none \
+      --bind "change:transform-header:echo \"Current: ${current:-<none>}\"" \
+      --bind 'zero:transform-header:echo "ctrl-e: create {q}"'
+  ) || true
+
+  # --print-query + --expect: line1 = query, line2 = key, rest = selections
+  query="$(printf '%s\n' "$result" | sed -n '1p')"
+  key="$(printf '%s\n' "$result" | sed -n '2p')"
+  mapfile -t selected < <(printf '%s\n' "$result" | sed '1,2d' | cut -f1)
+
+  if [[ "$key" == "ctrl-e" ]]; then
+    name="$(trim_sanitize "$query")"
+    [[ -n "$name" ]] || continue
+    ws="$(jq -r --arg label "$name" 'first(.result.workspaces[] | select(.label == $label) | .workspace_id) // empty' <<<"$list")"
+    if [[ -n "$ws" ]]; then
+      "$HERDR" workspace focus "$ws" >/dev/null
+    else
+      "$HERDR" workspace create --label "$name" --focus >/dev/null
+    fi
+    exit 0
+  fi
+
+  # Ctrl-X: confirm & close; then refresh picker
+  if [[ "$key" == "ctrl-x" ]]; then
+    ((${#selected[@]})) || continue
+    mapfile -t labels < <(printf '%s\n' "$result" | sed '1,2d' | cut -f2-)
+    prompt=$([[ ${#selected[@]} -gt 5 ]] && echo "Close ${#selected[@]} workspaces? (y/N): " || echo "Close: ${labels[*]} ? (y/N): ")
+    confirm "$prompt" || continue
+    for ws in "${selected[@]}"; do "$HERDR" workspace close "$ws" >/dev/null || true; done
+    continue
+  fi
+
+  ((${#selected[@]})) || exit 0
+  "$HERDR" workspace focus "${selected[-1]}" >/dev/null
+  exit 0
+done
