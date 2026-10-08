@@ -88,7 +88,6 @@ config_dots=(
   bat
   btop
   dircolors
-  just
   git
   herdr
   hunk
