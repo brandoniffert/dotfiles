@@ -83,25 +83,25 @@ description = "right pane 33%"
 [[keys.command]]
 key = "ctrl+h"
 type = "plugin_action"
-command = "smart-splits.nvim.left"
+command = "smart-splits.left"
 description = "navigate left (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+j"
 type = "plugin_action"
-command = "smart-splits.nvim.down"
+command = "smart-splits.down"
 description = "navigate down (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+k"
 type = "plugin_action"
-command = "smart-splits.nvim.up"
+command = "smart-splits.up"
 description = "navigate up (vim/herdr)"
 
 [[keys.command]]
 key = "ctrl+l"
 type = "plugin_action"
-command = "smart-splits.nvim.right"
+command = "smart-splits.right"
 description = "navigate right (vim/herdr)"
 
 [[keys.command]]

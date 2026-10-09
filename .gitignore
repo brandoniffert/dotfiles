@@ -16,4 +16,5 @@ herdr/plugins/*
 !herdr/plugins/last-workspace/
 !herdr/plugins/lib/
 !herdr/plugins/popups/
+!herdr/plugins/smart-splits/
 herdr/plugins.json
