@@ -138,18 +138,9 @@ echo_header "Herdr plugins"
 
 if ! command -v herdr >/dev/null 2>&1; then
   echo_skip "herdr not installed"
-elif [[ "$(herdr plugin list --json)" == *'"plugin_id":"smart-splits.nvim"'* ]]; then
-  echo_skip "smart-splits.nvim already installed"
-else
-  herdr plugin install -y mrjones2014/smart-splits.nvim >/dev/null 2>&1 || echo_error_exit "failed to install smart-splits.nvim"
-  echo_success "installed smart-splits.nvim"
-fi
-
-if ! command -v herdr >/dev/null 2>&1; then
-  echo_skip "herdr not installed"
 else
   herdr_plugins="$(herdr plugin list --json)"
-  for plugin in last-tab clean-copy last-workspace popups; do
+  for plugin in last-tab clean-copy last-workspace popups smart-splits; do
     if [[ "$herdr_plugins" == *"\"plugin_id\":\"$plugin\""* ]]; then
       echo_skip "$plugin already linked"
     else
