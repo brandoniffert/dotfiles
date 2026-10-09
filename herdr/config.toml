@@ -128,6 +128,7 @@ prompt_new_workspace_name = true
 hide_tab_bar_when_single_tab = false
 tab_bar_position = "bottom"
 pane_borders = "always"
+pane_scrollbars = false
 window_title = "{workspace}:{tab}"
 tab_bar_right = [{ type = "hostname" }]
 
