@@ -4,6 +4,10 @@
       "rev": "31626d9d0a95418bf12a8b3f0e8f9f42e73e1f35",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
+    "backend-tmux": {
+      "rev": "9e9e6aa9b3eb7a8d3896a993611622ac97abff52",
+      "src": "https://github.com/smart-splits-nvim/backend-tmux"
+    },
     "blink-cmp-tmux": {
       "rev": "112ddbf2e09d9cb4736de70dd01eb9654cf01d70",
       "src": "https://github.com/mgalliou/blink-cmp-tmux"

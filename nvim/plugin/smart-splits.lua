@@ -1,11 +1,12 @@
 vim.pack.add({
   { src = "https://github.com/mrjones2014/smart-splits.nvim" },
+  { src = "https://github.com/smart-splits-nvim/backend-tmux" },
 })
 
 local smart_splits = require("smart-splits")
 
 ---@diagnostic disable-next-line: missing-fields
-smart_splits.setup({ mux = { backend = "tmux" } })
+smart_splits.setup({ mux = { backend = "smart-splits-backend-tmux" } })
 
 vim.keymap.set({ "n", "t" }, "<C-h>", smart_splits.move_cursor_left, { desc = "Navigate left" })
 vim.keymap.set({ "n", "t" }, "<C-j>", smart_splits.move_cursor_down, { desc = "Navigate down" })
