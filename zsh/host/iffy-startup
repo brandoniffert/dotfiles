@@ -6,18 +6,19 @@
 
   local session_name="local"
   local working_dir="$HOME/.dotfiles"
-  local mux="herdr"
 
-  if [ -z "$TMUX" ] && [ -z "$HERDR_ENV" ] && [[ "$TERM_PROGRAM" =~ ^(kitty|ghostty)$ ]]; then
-    if [[ "$mux" == herdr ]]; then
-      pgrep -u "$EUID" -f '^[^ ]*herdr$' >/dev/null || herdr
-      return
-    fi
+  [[ -n "$TMUX" ]] && return
 
-    if ! tmux has-session -t "$session_name" 2>/dev/null; then
-      tmux new-session -A -c "$working_dir" -s "$session_name"
-    fi
-
-    [[ -z "$(tmux list-clients 2>/dev/null)" ]] && tmux attach -t "$session_name"
+  if [[ -n "$MUXEDO" ]]; then
+    exec tmux new-session -A -c "$working_dir" -s "$session_name"
   fi
+
+  [[ "$TERM_PROGRAM" == ghostty ]] || return
+  pgrep -u "$EUID" -x Muxedo >/dev/null && return
+
+  if ! tmux has-session -t "$session_name" 2>/dev/null; then
+    tmux new-session -A -c "$working_dir" -s "$session_name"
+  fi
+
+  [[ -z "$(tmux list-clients 2>/dev/null)" ]] && tmux attach -t "$session_name"
 }

@@ -1,0 +1,20 @@
+[ui]
+sidebar_font_size = 10.5
+sidebar_padding = 15
+sidebar_padding_right = 0
+window_margin = 10
+window_margin_bottom = 30
+
+[ui.colors]
+unfocused_session = "#6C7086"
+
+[local]
+session = "local"
+tmux = "/Users/brandoniffert/.local/bin/tmux"
+
+[[machine]]
+name = "dev"
+host = "dev"
+session = "dev"
+term = "xterm-256color"
+tmux = "/home/brandon/.local/bin/tmux"
