@@ -6,7 +6,6 @@ ehthumbs.db
 Thumbs.db
 *.pyc
 .tmux
-.herdr
 
 CLAUDE.local.md
 AGENTS.local.md

@@ -5,16 +5,3 @@ hunk/state.json
 lazygit/state.yml
 zsh/.antidote
 zsh/.zsh_plugins.zsh
-herdr/*.log
-herdr/*.sock*
-herdr/session.json
-herdr/session-snapshots/
-herdr/.plugins.lock
-herdr/plugins/*
-!herdr/plugins/last-tab/
-!herdr/plugins/clean-copy/
-!herdr/plugins/last-workspace/
-!herdr/plugins/lib/
-!herdr/plugins/popups/
-!herdr/plugins/smart-splits/
-herdr/plugins.json
