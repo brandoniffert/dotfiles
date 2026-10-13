@@ -2,6 +2,7 @@ local M = {}
 
 local ignoreList = {
   "com.apple.dock.helper",
+  "com.apple.systemevents",
   "com.apple.notificationcenterui",
   "app.loshadki.OpenIn.v4",
   "com.lowtechguys.rcmd",
