@@ -45,4 +45,7 @@ source "$ITEM_DIR/mtplx.sh"
 source "$ITEM_DIR/mail.sh"
 source "$ITEM_DIR/slack.sh"
 
+# Center
+source "$ITEM_DIR/muxedo.sh"
+
 sketchybar --update

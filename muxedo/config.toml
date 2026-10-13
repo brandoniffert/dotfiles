@@ -6,7 +6,10 @@ window_margin = 10
 window_margin_bottom = 40
 
 [ui.colors]
-unfocused_session = "#6C7086"
+current_session = "#242438"
+
+[attention]
+command = "sketchybar --trigger muxedo_attention ATTENTION=$MUXEDO_ATTENTION"
 
 [local]
 session = "local"
