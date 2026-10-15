@@ -10,5 +10,6 @@ Thumbs.db
 CLAUDE.local.md
 AGENTS.local.md
 AGENTS.override.md
+compose.override.yaml
+mise.local.toml
 **/.claude/settings.local.json
-**/.agents/docs/
