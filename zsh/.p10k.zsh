@@ -79,7 +79,12 @@
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=true
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+
+  # Horizontal line before each prompt, in place of the empty line.
+  typeset -g POWERLEVEL9K_SHOW_RULER=true
+  typeset -g POWERLEVEL9K_RULER_CHAR='─'
+  typeset -g POWERLEVEL9K_RULER_FOREGROUND='#313244'
 
   # Connect left prompt lines with these symbols.
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=

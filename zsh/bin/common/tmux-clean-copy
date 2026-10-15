@@ -2,7 +2,7 @@
 
 # Strip p10k prompts from copied text, leaving one blank line between command
 # blocks - for pasting terminal output to LLMs. A prompt is a path line (~ or /)
-# followed by a prompt char line ($ or #); the blank line before it is dropped.
+# followed by a prompt char line ($ or #); the ruler/blank line before it is dropped.
 
 # 1 = prefix commands with the prompt's path: [~/path] $ cmd
 with_path=1
@@ -14,7 +14,8 @@ function is_prompt(i) {
 { L[++n] = $0 }
 END {
   for (i = 1; i <= n; i++) {
-    if (L[i] == "" && is_prompt(i + 1)) continue
+    if ((L[i] == "" || L[i] ~ /^─+$/) && is_prompt(i + 1)) continue
+    if (L[i] == "" && L[i + 1] ~ /^─+$/ && is_prompt(i + 2)) continue
     if (is_prompt(i)) {
       ctx = ""
       if (with_path) {
