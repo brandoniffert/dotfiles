@@ -1,28 +1,36 @@
 #!/usr/bin/env bash
 
-# Strip p10k first prompt lines (· gap fill) from copied text, leaving one
-# blank line between command blocks - for pasting terminal output to LLMs
+# Strip p10k prompts from copied text, leaving one blank line between command
+# blocks - for pasting terminal output to LLMs. A prompt is a path line (~ or /)
+# followed by a prompt char line ($ or #); the blank line before it is dropped.
 
 # 1 = prefix commands with the prompt's path: [~/path] $ cmd
 with_path=1
 
 exec awk -v with_path="$with_path" '
-/···/ {
-  if (with_path) {
-    ctx = $0
-    sub(/ *•.*/, "", ctx) # drop segments after path (git, user@host)
-    sub(/ *·.*/, "", ctx) # drop gap fill onward
-  }
-  pending = emitted
-  after_prompt = 1
-  next
+function is_prompt(i) {
+  return i < n && L[i] ~ /^[~\/]/ && L[i + 1] ~ /^[$#]+( |$)/
 }
-{
-  # drop prompts where nothing was run
-  if (after_prompt && $0 ~ /^\$ *$/) { after_prompt = 0; ctx = ""; next }
-  after_prompt = 0
-  if (pending) { print ""; pending = 0 }
-  if (ctx != "") { $0 = "[" ctx "] " $0; ctx = "" }
-  print; emitted = 1
+{ L[++n] = $0 }
+END {
+  for (i = 1; i <= n; i++) {
+    if (L[i] == "" && is_prompt(i + 1)) continue
+    if (is_prompt(i)) {
+      ctx = ""
+      if (with_path) {
+        ctx = L[i]
+        sub(/ •.*/, "", ctx)  # drop segments (git, compose)
+        sub(/  +.*/, "", ctx) # drop right prompt (exec time)
+      }
+      pending = emitted
+      i++
+      # drop prompts where nothing was run
+      if (L[i] ~ /^[$#]+ *$/) continue
+      line = L[i]
+      if (ctx != "") line = "[" ctx "] " line
+    } else line = L[i]
+    if (pending) { print ""; pending = 0 }
+    print line; emitted = 1
+  }
 }
 '

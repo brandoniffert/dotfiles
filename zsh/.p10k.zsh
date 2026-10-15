@@ -32,8 +32,8 @@
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
     user_dir
-    user_context
     vcs                     # git status
+    user_compose            # running docker compose stack
     # =========================[ Line #2 ]=========================
     newline                 # \n
     background_jobs         # presence of background jobs
@@ -79,7 +79,7 @@
   typeset -g POWERLEVEL9K_ICON_BEFORE_CONTENT=true
 
   # Add an empty line before each prompt.
-  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=false
+  typeset -g POWERLEVEL9K_PROMPT_ADD_NEWLINE=true
 
   # Connect left prompt lines with these symbols.
   typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_PREFIX=
@@ -103,7 +103,7 @@
   # the number of prompt lines. You'll probably want to set POWERLEVEL9K_SHOW_RULER=false
   # if using this. You might also like POWERLEVEL9K_PROMPT_ADD_NEWLINE=false for more compact
   # prompt.
-  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR='·'
+  typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR=' '
   if [[ $POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_CHAR != ' ' ]]; then
     # The color of the filler.
     typeset -g POWERLEVEL9K_MULTILINE_FIRST_PROMPT_GAP_FOREGROUND=8
@@ -195,8 +195,6 @@
       res+="${magenta}:${(V)VCS_STATUS_REMOTE_BRANCH//\%/%%}"
     fi
 
-    local before_res="$res"
-
     # ↓42 if behind the remote.
     (( VCS_STATUS_COMMITS_BEHIND )) && res+=" ${yellow}↓${VCS_STATUS_COMMITS_BEHIND}"
     # ↑42 if ahead of the remote; no leading space if also behind the remote: ↓42↑42.
@@ -227,10 +225,6 @@
     # in the repository config. The number of staged and untracked files may also be unknown
     # in this case.
     (( VCS_STATUS_HAS_UNSTAGED == -1 )) && res+=" ${red}─"
-
-    if [[ $before_res == $res ]]; then
-      res+=" ${green}"
-    fi
 
     typeset -g my_git_format=$res
   }
@@ -343,21 +337,34 @@
 
   typeset -g POWERLEVEL9K_USER_PROMPT_CHAR_LEFT_PROMPT_LAST_SEGMENT_END_SYMBOL=
 
-  function prompt_user_context() {
-    if [[ $(hostname -s) =~ ^dev ]]; then
-      local mux_session=''
+  zmodload zsh/net/socket
 
-      if [[ -n "${TMUX+set}" ]]; then
-        mux_session="@$(tmux display-message -p '#S')"
-      fi
+  function prompt_user_compose() {
+    local dir=$PWD
+    while [[ $dir != / ]]; do
+      [[ -e $dir/compose.yaml || -e $dir/compose.yml || -e $dir/docker-compose.yaml || -e $dir/docker-compose.yml ]] && break
+      dir=${dir:h}
+    done
+    [[ $dir == / ]] && return
 
-      p10k segment -f '#6c7086' -t "%m$mux_session"
+    # Query daemon socket directly; avoids ~10ms docker CLI fork per prompt.
+    local fd line body='[]'
+    local filter="%7B%22label%22%3A%5B%22com.docker.compose.project.working_dir%3D${dir//\//%2F}%22%5D%7D"
+    if zsocket /var/run/docker.sock 2>/dev/null; then
+      fd=$REPLY
+      print -n "GET /containers/json?filters=$filter HTTP/1.0\r\nHost: docker\r\n\r\n" >&$fd
+      while IFS= read -r -u $fd line; do body=$line; done
+      exec {fd}>&-
+    fi
+
+    if [[ $body != "[]" ]]; then
+      p10k segment -f '#a6e3a1' -t '●'
+    else
+      p10k segment -f '#6c7086' -t '○'
     fi
   }
 
-  function instant_prompt_user_context() {
-    prompt_user_context
-  }
+  function instant_prompt_user_compose() { :; }
   # Transient prompt works similarly to the builtin transient_rprompt option. It trims down prompt
   # when accepting a command line. Supported values:
   #
