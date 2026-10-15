@@ -2,6 +2,7 @@
 sidebar_font_size = 10.5
 sidebar_padding = 15
 sidebar_padding_right = 0
+sidebar_width = 200
 window_margin = 10
 window_margin_bottom = 40
 
