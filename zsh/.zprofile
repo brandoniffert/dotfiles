@@ -20,7 +20,6 @@ typeset +x FPATH
 
 # Path
 path=(
-  ${MISE_DATA_DIR:-$XDG_DATA_HOME/mise}/shims
   $ZDOTDIR/bin/common
   $HOME/.local/bin
   $COMPOSER_HOME/vendor/bin
