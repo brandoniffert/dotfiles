@@ -2,5 +2,11 @@
 
 set -e
 
-# shellcheck disable=SC2005
-echo "$(osascript -e 'activate' -e 'display dialog "Password:" default answer "" with hidden answer' -e 'text returned of result' 2>/dev/null)"
+# Dialog must be owned by a real GUI app (not osascript) to take key focus.
+osascript 2>/dev/null <<'APPLESCRIPT'
+tell application "System Events"
+  activate
+  display dialog "Password:" default answer "" with hidden answer
+  text returned of result
+end tell
+APPLESCRIPT
