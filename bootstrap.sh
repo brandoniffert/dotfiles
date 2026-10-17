@@ -102,7 +102,6 @@ config_dots=(
 # macOS specific
 if [[ "$OSTYPE" == "darwin"* ]]; then
   config_dots+=(
-    aerospace
     k9s
     kitty
     ghostty
