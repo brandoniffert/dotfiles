@@ -105,7 +105,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     k9s
     kitty
     ghostty
-    hammerspoon
     muxedo
     nvim-ephemeral
     sketchybar

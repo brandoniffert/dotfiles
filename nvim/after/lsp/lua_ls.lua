@@ -16,9 +16,6 @@ return {
         semicolon = "Disable",
         arrayIndex = "Disable",
       },
-      diagnostics = {
-        globals = { "hs" },
-      },
     },
   },
 }
