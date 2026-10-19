@@ -357,13 +357,19 @@
     local filter="%7B%22label%22%3A%5B%22com.docker.compose.project.working_dir%3D${dir//\//%2F}%22%5D%7D"
     if zsocket /var/run/docker.sock 2>/dev/null; then
       fd=$REPLY
-      print -n "GET /containers/json?filters=$filter HTTP/1.0\r\nHost: docker\r\n\r\n" >&$fd
+      print -n "GET /containers/json?all=true&filters=$filter HTTP/1.0\r\nHost: docker\r\n\r\n" >&$fd
       while IFS= read -r -u $fd line; do body=$line; done
       exec {fd}>&-
     fi
 
-    if [[ $body != "[]" ]]; then
+    # Count matches via length delta after stripping the needle.
+    local ids=${body//\"Id\":\"} up=${body//\"State\":\"running\"}
+    local -i total=$(( (${#body} - ${#ids}) / 6 )) running=$(( (${#body} - ${#up}) / 17 ))
+
+    if (( total > 0 && running == total )); then
       p10k segment -f '#a6e3a1' -t '●'
+    elif (( running > 0 )); then
+      p10k segment -f '#f9e2af' -t '●'
     else
       p10k segment -f '#6c7086' -t '○'
     fi
