@@ -1,0 +1,208 @@
+# shellcheck shell=bash
+
+# Eject a volume/disk/image, offering to stop processes holding it open
+
+emulate -L zsh
+setopt extended_glob
+
+if (( $# > 1 )); then
+  print -u2 "usage: safe-eject [mount point | volume name | diskN | image file]"
+  return 2
+fi
+
+local target=$1 dev="" whole="" store="" out="" ans="" pid="" line="" img="" imgwhole="" m="" sel=""
+local -i is_image=0 i
+local -a mounts disks containers targets alive eject_cmd candidates
+local -aU pids
+local -A pcmd
+
+{
+  _field() {
+    diskutil info "$1" 2>/dev/null | awk -v k="$2" '
+      { line=$0; sub(/^ +/, "", line)
+        if (index(line, k ":") == 1) { sub(/^[^:]*: */, "", line); print line; exit } }'
+  }
+
+  if (( ! $# )); then
+    for line in ${(f)"$(mount)"}; do
+      [[ $line == (#b)/dev/(disk<->)((s<->)#)\ on\ (*)\ \(*\) && $match[4] == /Volumes/* ]] || continue
+      dev=$match[1]$match[2]
+      [[ $(_field "$dev" "Device Location") == Internal ]] && continue
+      candidates+=("$match[4]"$'\t'"$dev"$'\t'"$(_field "$dev" "Protocol")")
+    done
+    dev=""
+    (( $#candidates )) || { print -u2 "No ejectable volumes mounted."; return 1 }
+    sel=$(print -rl -- $candidates | fzf --header='Eject' --height 40% --border sharp --delimiter=$'\t' --with-nth=1..)
+    [[ -n $sel ]] || return 1
+    target=${sel%%$'\t'*}
+  fi
+
+  # ---------- resolve the argument to a whole-disk identifier ----------
+  if [[ $target == /dev/disk* || $target == disk<->(s<->)# ]]; then
+    dev=${target#/dev/}
+  elif [[ -e $target && ! -d $target ]] || [[ $target == *.sparsebundle ]]; then
+    img=${target:A}
+    whole=$(hdiutil info | awk -v img="$img" '
+      /^image-path/ { p=$0; sub(/^image-path *: */, "", p); hit=(p==img); next }
+      hit && /^\/dev\/disk[0-9]+[ \t]/ { sub(/^\/dev\//, "", $1); print $1; exit }')
+    [[ -z $whole ]] && { print -u2 "Image is not attached: $img"; return 1 }
+  else
+    if [[ $target != /* && -d /Volumes/$target ]]; then
+      target=/Volumes/$target
+    fi
+    [[ -d $target ]] || { print -u2 "No such volume: $1"; return 1 }
+    dev=$(_field "$target" "Device Identifier")
+  fi
+
+  if [[ -z $whole ]]; then
+    [[ -z $dev ]] && { print -u2 "Could not determine device for: $target"; return 1 }
+
+    # APFS volume -> walk back to its physical store
+    store=$(_field "$dev" "APFS Physical Store")
+    [[ -n $store ]] && dev=$store
+    whole=$(_field "$dev" "Part of Whole")
+    [[ -z $whole ]] && whole=$dev
+  fi
+
+  # If this device belongs to an attached disk image, use the image's top device
+  imgwhole=$(hdiutil info | awk -v d="/dev/$whole" '
+    /^=+$/          { first=""; next }
+    /^\/dev\/disk/  { if (first == "") first=$1
+                      if ($1 == d) { sub(/^\/dev\//, "", first); print first; exit } }')
+  [[ -n $imgwhole ]] && { whole=$imgwhole; is_image=1 }
+
+  # ---------- find every mount point on this disk (incl. APFS containers) ----------
+  containers=(${(f)"$(diskutil list "$whole" 2>/dev/null | grep -oE 'Container disk[0-9]+' | awk '{print $2}')"})
+  disks=($whole $containers)
+  for line in ${(f)"$(mount)"}; do
+    if [[ $line == (#b)/dev/(disk<->)(s<->)#\ on\ (*)\ \(*\) ]]; then
+      (( ${disks[(Ie)$match[1]]} )) && mounts+=("$match[3]")
+    fi
+  done
+
+  if (( is_image )); then
+    eject_cmd=(hdiutil detach "/dev/$whole")
+  else
+    eject_cmd=(diskutil eject "$whole")
+  fi
+
+  # ---------- first attempt ----------
+  print "Ejecting $whole${mounts:+ (${(j:, :)mounts})}..."
+  if out=$("${eject_cmd[@]}" 2>&1); then
+    print "Ejected."; return 0
+  fi
+  print -r -u2 -- "Eject failed:"$'\n'"$out"$'\n'
+
+  # ---------- figure out who's holding it ----------
+  for m in $mounts; do
+    if [[ $PWD == $m || $PWD == $m/* ]]; then
+      print "This shell is inside $m, moving to ~"
+      cd ~
+    fi
+  done
+
+  _collect() {   # $@ = optional prefix (e.g. sudo)
+    local l p
+    for l in ${(f)"$("$@" lsof -n -Fpc -- $mounts 2>/dev/null)"}; do
+      case $l in
+        p*) p=${l#p}; [[ $p != $$ ]] && pids+=$p ;;
+        c*) [[ -n $p ]] && pcmd[$p]=${l#c} ;;
+      esac
+    done
+  }
+
+  # Skips processes that already exited; sudo only for other users' processes
+  _kill() {   # $1 = signal, $2 = pid
+    local uid=${$(ps -p $2 -o uid= 2>/dev/null)// /}
+    local -a pre
+    [[ -n $uid ]] || return 0
+    [[ $uid != $UID ]] && pre=(sudo)
+    "${pre[@]}" kill -$1 $2 2>/dev/null
+  }
+
+  (( $#mounts )) && _collect
+  # diskutil sometimes names the dissenting process directly
+  for pid in ${(f)"$(print -r -- $out | grep -oE 'PID [0-9]+' | awk '{print $2}')"}; do
+    pids+=$pid; pcmd[$pid]=$(ps -p $pid -o comm= 2>/dev/null)
+  done
+
+  if (( ! $#pids && EUID != 0 && $#mounts )); then
+    if read -q "?No processes visible as $USER. Check again with sudo? [y/N] "; then
+      print; _collect sudo
+    else
+      print
+    fi
+  fi
+
+  if (( ! $#pids )); then
+    print "Couldn't identify a blocking process."
+  else
+    print "Processes using the volume:"
+    for pid in $pids; do
+      printf '  %6s  %s\n' $pid "$(ps -p $pid -o user=,command= 2>/dev/null || print ${pcmd[$pid]})"
+    done
+    if (( ${#${(M)pcmd:#(mds|mds_stores|mdworker*)}} )); then
+      print "\nNote: Spotlight is indexing this volume (it will just reattach if killed)."
+      if read -q "?Disable Spotlight indexing on it instead? [y/N] "; then
+        print; for m in $mounts; sudo mdutil -i off "$m" >/dev/null
+      else
+        print
+      fi
+    fi
+
+    print
+    read -r "ans?End [a]ll, [s]elect individually, or [n]one? "
+    case $ans in
+      [aA]*) targets=($pids) ;;
+      [sS]*) for pid in $pids; do
+               read -q "?  End $pid (${pcmd[$pid]})? [y/N] " && targets+=$pid
+               print
+             done ;;
+      *)     print "Leaving processes alone."; return 1 ;;
+    esac
+
+    for pid in $targets; _kill TERM $pid
+
+    # give them up to 5s to exit
+    for i in {1..10}; do
+      alive=()
+      for pid in $targets; ps -p $pid >/dev/null 2>&1 && alive+=$pid
+      (( $#alive )) || break
+      sleep 0.5
+    done
+
+    if (( $#alive )); then
+      print "Still running: $alive"
+      if read -q "?Force kill (SIGKILL)? [y/N] "; then
+        print
+        for pid in $alive; _kill KILL $pid
+        sleep 1
+      else
+        print
+      fi
+    fi
+  fi
+
+  # ---------- retry ----------
+  print "Retrying eject..."
+  if out=$("${eject_cmd[@]}" 2>&1); then
+    print "Ejected."; return 0
+  fi
+  print -r -u2 -- "Still failed:"$'\n'"$out"
+
+  if read -q "?Force eject? Unsaved data on the volume may be lost. [y/N] "; then
+    print
+    if (( is_image )); then
+      hdiutil detach -force "/dev/$whole"
+    else
+      diskutil unmountDisk force "$whole" && diskutil eject "$whole"
+    fi
+    return $?
+  fi
+  print
+  return 1
+} always {
+  (( $+functions[_field] )) && unfunction _field
+  (( $+functions[_collect] )) && unfunction _collect
+  (( $+functions[_kill] )) && unfunction _kill
+}
