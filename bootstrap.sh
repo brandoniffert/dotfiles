@@ -94,6 +94,7 @@ config_dots=(
   mise
   nbrc
   nvim
+  rex
   ripgrep
   tmux
   yazi
