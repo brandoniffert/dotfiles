@@ -79,6 +79,10 @@
       "rev": "8e8795368391036643b622875a6da6a51bcd33f4",
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
+    "smart-splits-backend-rex": {
+      "rev": "d15615e5c2deb237535884a921b0401dc2603533",
+      "src": "https://github.com/rawnly/smart-splits-backend-rex"
+    },
     "smart-splits.nvim": {
       "rev": "6a03b298635205802ee1d390826f02414a13290d",
       "src": "https://github.com/mrjones2014/smart-splits.nvim"
