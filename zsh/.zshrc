@@ -310,7 +310,7 @@ SPROMPT="zsh: correct %F{red}'%R'%f to %F{green}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo,
 # a subshell (e.g. scratch) must re-report the unchanged parent cwd
 _osc7_cwd() {
   local LC_ALL=C url c
-  for c in ${(s::)PWD}; do
+  for c in ${(s::)${_osc7_dir:-$PWD}}; do
     [[ $c == [[:alnum:]/._~-] ]] && url+=$c || url+=$(printf '%%%02X' "'$c")
   done
   printf '\e]7;file://%s%s\e\\' "$HOST" "$url"
