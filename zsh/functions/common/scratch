@@ -2,13 +2,19 @@
 
 # Create a scratch shell and directory
 
-scratch=$(mktemp -d)
+local scratch
+scratch=$(mktemp -d "${${TMPDIR:-/tmp}%/}/scratch.XXXXXXXX") || return
+
+setopt localoptions localtraps
+# Closing the tab sends SIGHUP, which would otherwise skip cleanup
+trap '_scratch_gc "$scratch"; exit 129' HUP TERM
 
 echo '> Spawning subshell in scratch directory:'
 echo "  $scratch"
-(
-  cd "$scratch" || exit
-  FORGET_ME=1 zsh
-)
-echo "> Removing scratch directory"
-rm -fr "$scratch"
+(cd "$scratch" && FORGET_ME=1 zsh)
+# Fallback for a shell that died without releasing; splits may still be open
+if _scratch_gc "$scratch"; then
+  echo "> Removed scratch directory"
+else
+  echo "> Scratch directory still in use; the last shell to exit removes it"
+fi

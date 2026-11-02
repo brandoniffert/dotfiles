@@ -306,10 +306,19 @@ SPROMPT="zsh: correct %F{red}'%R'%f to %F{green}'%r'%f [%B%Uy%u%bes, %B%Un%u%bo,
 
 [[ ! -f "$ZDOTDIR/.p10k.zsh" ]] || source "$ZDOTDIR/.p10k.zsh"
 
+# Report cwd (OSC 7) so new splits open here. precmd, not chpwd: returning from
+# a subshell (e.g. scratch) must re-report the unchanged parent cwd
+_osc7_cwd() {
+  local LC_ALL=C url c
+  for c in ${(s::)PWD}; do
+    [[ $c == [[:alnum:]/._~-] ]] && url+=$c || url+=$(printf '%%%02X' "'$c")
+  done
+  printf '\e]7;file://%s%s\e\\' "$HOST" "$url"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _osc7_cwd
+
 #------------------------------------------------------------------------------
 #-- Private Mode --------------------------------------------------------------
 #------------------------------------------------------------------------------
-if [ -n "$FORGET_ME" ]; then
-   fc -R $HISTFILE
-   unset HISTFILE
-fi
+source "$ZDOTDIR/private.zsh"

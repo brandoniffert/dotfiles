@@ -38,6 +38,7 @@
     newline                 # \n
     background_jobs         # presence of background jobs
     virtualenv
+    user_scratch            # private scratch shell
     user_prompt_char        # custom prompt char
   )
 
@@ -335,6 +336,13 @@
 
     p10k segment -f white -t "$(printf "$prompt_char%.0s" {1..$lvl})"
   }
+
+  function prompt_user_scratch() {
+    [[ -n $FORGET_ME ]] && p10k segment -f '#fab387' -t 'scratch'
+  }
+
+  # Skipped: instant prompt is cached across shells, so it would show stale state
+  function instant_prompt_user_scratch() { :; }
 
   function instant_prompt_user_prompt_char() {
     prompt_user_prompt_char
