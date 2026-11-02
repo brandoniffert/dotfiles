@@ -7,7 +7,7 @@
   local session_name="dev"
   local working_dir="$HOME"
 
-  [[ -n "$TMUX" ]] && return
+  [[ -n "$TMUX" || -n "$REX_SESSION" ]] && return
 
   if ! tmux has-session -t "$session_name" 2>/dev/null; then
     tmux new-session -A -c "$working_dir" -s "$session_name"
