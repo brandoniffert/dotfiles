@@ -13,19 +13,27 @@ local function is_vim(ctx)
   return false
 end
 
-for key, direction in pairs({ h = "left", j = "down", k = "up", l = "right" }) do
-  rex.bind("ctrl+" .. key, function(ctx)
+local M = {}
+
+-- Returns a binding function; false passes the key through to vim
+function M.navigate(direction)
+  return function(ctx)
     if is_vim(ctx) then
       return false
     end
     rex.session.focus_direction({ direction = direction })
     return true
-  end)
+  end
 end
 
--- Ctrl-l is taken by navigation; prefix it to clear the screen
-rex.bind("ctrl+space>ctrl+l", function(ctx)
-  -- write raw ^L; pane.send_key re-enters bindings and hits the ctrl+l nav
-  rex.block.call("com.superlogical.terminal", "write", { block_id = ctx.block_id, data = "\12" })
-  return true
-end)
+-- Ctrl-l is taken by navigation, so clearing needs its own action
+rex.action({
+  name = "clear_screen",
+  title = "Clear Screen",
+  run = function(ctx)
+    -- write raw ^L; pane.send_key re-enters bindings and hits the ctrl+l nav
+    rex.block.call("com.superlogical.terminal", "write", { block_id = ctx.block_id, data = "\12" })
+  end,
+})
+
+return M

@@ -1,3 +1,6 @@
 require("smart-splits")
 require("projects")
 require("lazygit")
+require("terminal")
+require("layout")
+require("keys")
