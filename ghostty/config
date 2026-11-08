@@ -18,15 +18,15 @@ cursor-text = black
 
 mouse-hide-while-typing = true
 
-window-padding-x = 10
-window-padding-y = 10
+window-padding-x = 15
+window-padding-y = 15
 window-padding-balance = true
 window-title-font-family = JetBrains Mono
 window-colorspace = display-p3
 window-width = 150
-window-height = 45
-window-position-x = 0
-window-position-y = 0
+window-height = 65
+window-position-x = 10
+window-position-y = 10
 
 clipboard-read = allow
 
@@ -39,7 +39,5 @@ custom-shader = shaders/cursor_warp.glsl
 macos-titlebar-style = hidden
 macos-titlebar-proxy-icon = hidden
 
-keybind = global:alt+ctrl+shift+enter=toggle_quick_terminal
 keybind = super+equal=increase_font_size:0.5
 keybind = super+minus=decrease_font_size:0.5
-keybind = super+s=text:\x00g/
