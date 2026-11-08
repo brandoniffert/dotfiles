@@ -1,5 +1,11 @@
 #!/usr/bin/env bash
 
+nvim_cmd=(nvim)
+if [[ $1 == "--clean" ]]; then
+  nvim_cmd=(env NVIM_APPNAME=nvim-ephemeral nvim)
+  shift
+fi
+
 input="$1"
 dir="$HOME"
 target=""
@@ -13,7 +19,7 @@ elif [[ -f $input ]]; then
 fi
 
 if [[ -z "$target" ]]; then
-  open -a WezTerm --args -e nvim -c ":cd $dir"
+  open -na Ghostty --args -e "${nvim_cmd[@]}" -c ":cd $dir"
 else
-  open -a WezTerm --args -e nvim -c ":cd $dir" "$target"
+  open -na Ghostty --args -e "${nvim_cmd[@]}" -c ":cd $dir" "$target"
 fi

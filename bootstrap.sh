@@ -109,7 +109,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
     ghostty
     nvim-ephemeral
     sketchybar
-    wezterm
   )
 fi
 
