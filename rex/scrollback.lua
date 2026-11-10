@@ -12,7 +12,7 @@ rex.action({
         command = {
           "sh",
           "-c",
-          'printf "\\033]0;scrollback\\007"; f=$(mktemp -t rex-scrollback); trap \'rm -f "$f"\' EXIT; rex capture -b "$1" --trim --unwrap > "$f" && nvim -R + "$f"',
+          'printf "\\033]0;scrollback\\007"; f=$(mktemp "${TMPDIR:-/tmp}/rex-scrollback.XXXXXX") || exit; trap \'rm -f "$f"\' EXIT; rex capture -b "$1" --trim --unwrap > "$f" && nvim -R + "$f"',
           "sh",
           ctx.block_id,
         },
