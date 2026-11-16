@@ -1,0 +1,140 @@
+#!/usr/bin/env python3
+"""Copy whichever text clipboard is newer (this Mac's or a remote X11 host's) over the other.
+
+Usage: clipsync HOST [DISPLAY]
+
+Only runs while Moonlight is open. Change times come from the clipwatch helper on each side.
+"""
+
+import base64
+import hashlib
+import json
+import os
+import subprocess
+import sys
+import time
+
+MAX_BYTES = 1024 * 1024
+MAX_LINE = MAX_BYTES * 4 // 3 + 16
+STATE = os.path.expanduser("~/Library/Application Support/clipsync/changed")
+BARNOTIFY = os.path.join(os.path.dirname(os.path.abspath(__file__)), "barnotify")
+ENV = dict(os.environ, LANG="en_US.UTF-8", LC_CTYPE="en_US.UTF-8")
+
+# Runs on the remote host: reports its clipboard's age and hash, then waits for "pull" or "push <b64>".
+REMOTE = r"""
+import base64, hashlib, json, os, subprocess, sys, time
+
+MAX = int(sys.argv[1])
+state = os.path.join(os.environ.get("XDG_RUNTIME_DIR", "/run/user/%d" % os.getuid()), "clipwatch")
+
+try:
+    data = subprocess.run(["xclip", "-selection", "clipboard", "-o", "-t", "UTF8_STRING"],
+                          capture_output=True, timeout=2).stdout
+except subprocess.TimeoutExpired:
+    data = b""
+sha = hashlib.sha256(data).hexdigest()
+try:
+    changed, seen = open(state).read().split()
+    # a hash the watcher has not recorded yet means the clipboard changed just now
+    age = time.monotonic() - float(changed) if seen == sha else 0.0
+except (OSError, ValueError):
+    age = None
+print(json.dumps({"age": age, "sha": sha, "size": len(data)}), flush=True)
+
+cmd = sys.stdin.readline().split()
+if cmd and cmd[0] == "pull":
+    print(base64.b64encode(data).decode(), flush=True)
+elif cmd and cmd[0] == "push":
+    new = base64.b64decode(cmd[1])
+    if len(new) <= MAX:
+        # xclip stays alive to own the selection; it must not hold our stdout
+        subprocess.run(["xclip", "-selection", "clipboard", "-i"], input=new,
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        print("ok", flush=True)
+"""
+
+
+def notify(message, level="ok"):
+    print(message)
+    subprocess.run([BARNOTIFY, "-l", level, message])
+
+
+def fail(message):
+    notify(message, "error")
+    sys.exit(1)
+
+
+def mac_age():
+    try:
+        with open(STATE) as f:
+            return time.time() - float(f.read())
+    except (OSError, ValueError):
+        return None
+
+
+def main():
+    if len(sys.argv) < 2:
+        sys.exit(__doc__)
+    host = sys.argv[1]
+    display = sys.argv[2] if len(sys.argv) > 2 else ":0"
+
+    if subprocess.run(["pgrep", "-xq", "Moonlight"]).returncode != 0:
+        fail("Moonlight is not running")
+
+    mac_data = subprocess.run(["pbpaste"], capture_output=True, env=ENV).stdout
+    mac_sha = hashlib.sha256(mac_data).hexdigest()
+
+    remote_cmd = (
+        f"DISPLAY={display} exec python3 -u -c "
+        f"\"$(echo {base64.b64encode(REMOTE.encode()).decode()} | base64 -d)\" {MAX_BYTES}"
+    )
+    ssh = subprocess.Popen(
+        ["ssh", "-T", "-o", "BatchMode=yes", "-o", "ConnectTimeout=5", host, remote_cmd],
+        stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL,
+    )
+    try:
+        try:
+            vm = json.loads(ssh.stdout.readline(4096))
+        except ValueError:
+            fail(f"No answer from {host}")
+
+        if vm["sha"] == mac_sha:
+            notify("Already in sync", "info")
+            return
+
+        ages = {"mac": mac_age(), "vm": vm["age"]}
+        # an unknown age counts as oldest; a tie goes to the Mac
+        newest = min(ages, key=lambda side: (ages[side] is None, ages[side] or 0, side != "mac"))
+
+        if newest == "mac":
+            if not mac_data:
+                fail("Mac clipboard is newer but has no text")
+            if len(mac_data) > MAX_BYTES:
+                fail("Mac clipboard is over 1 MiB, not sent")
+            ssh.stdin.write(b"push " + base64.b64encode(mac_data) + b"\n")
+            ssh.stdin.flush()
+            if ssh.stdout.readline(16).strip() != b"ok":
+                fail("VM did not accept the clipboard")
+            notify(f"Mac → VM ({len(mac_data.decode(errors='replace'))} chars)")
+        else:
+            if not vm["size"]:
+                fail("VM clipboard is newer but has no text")
+            if vm["size"] > MAX_BYTES:
+                fail("VM clipboard is over 1 MiB, not fetched")
+            ssh.stdin.write(b"pull\n")
+            ssh.stdin.flush()
+            line = ssh.stdout.readline(MAX_LINE + 1)
+            if len(line) > MAX_LINE:
+                fail("VM sent more than 1 MiB, ignored")
+            data = base64.b64decode(line)
+            if hashlib.sha256(data).hexdigest() != vm["sha"]:
+                fail("VM clipboard changed mid-sync, try again")
+            subprocess.run(["pbcopy"], input=data, env=ENV)
+            notify(f"VM → Mac ({len(data.decode(errors='replace'))} chars)")
+    finally:
+        ssh.stdin.close()
+        ssh.wait(timeout=5)
+
+
+if __name__ == "__main__":
+    main()
