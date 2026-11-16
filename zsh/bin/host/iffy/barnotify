@@ -1,0 +1,57 @@
+#!/usr/bin/env bash
+
+# Show a transient message in the sketchybar notify item
+
+PATH="/opt/homebrew/bin:$PATH"
+
+usage() {
+  echo "usage: barnotify [-l info|ok|error] [-t secs] MESSAGE" >&2
+  exit 2
+}
+
+level=info
+secs=
+while getopts "l:t:" opt; do
+  case $opt in
+  l) level=$OPTARG ;;
+  t) secs=$OPTARG ;;
+  *) usage ;;
+  esac
+done
+shift $((OPTIND - 1))
+(($# == 1)) || usage
+message=$1
+
+# shellcheck disable=SC1091
+source "${XDG_CONFIG_HOME:-$HOME/.config}/sketchybar/ui.sh"
+
+case $level in
+info) icon="" color=$BLUE ;;
+ok) icon="" color=$GREEN ;;
+error) icon="" color=$RED secs=${secs:-8} ;;
+*) usage ;;
+esac
+secs=${secs:-4}
+
+if ! sketchybar --query notify >/dev/null 2>&1; then
+  if [ "$level" = error ]; then
+    osascript -e 'on run argv' -e 'display notification (item 1 of argv)' -e 'end run' "$message"
+  fi
+  exit 0
+fi
+
+# The token lives in the unused click_script (a no-op) so a stale timer cannot hide a newer message
+token="$$.$RANDOM"
+sketchybar --set notify \
+  drawing=on \
+  icon="$icon" \
+  icon.color="$(hex_to_argb "$color")" \
+  label="$message" \
+  click_script=": $token"
+
+(
+  sleep "$secs"
+  if sketchybar --query notify | grep -qF "\"click_script\": \": $token\""; then
+    sketchybar --set notify drawing=off
+  fi
+) </dev/null >/dev/null 2>&1 &

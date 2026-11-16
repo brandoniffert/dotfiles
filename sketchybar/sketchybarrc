@@ -35,6 +35,9 @@ default=(
 )
 sketchybar --default "${default[@]}"
 
+# Left
+source "$ITEM_DIR/notify.sh"
+
 # Right
 source "$ITEM_DIR/clock.sh"
 source "$ITEM_DIR/audio_output.sh"
