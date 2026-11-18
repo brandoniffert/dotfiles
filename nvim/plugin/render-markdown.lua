@@ -5,4 +5,6 @@ vim.pack.add({
 require("render-markdown").setup({
   completions = { lsp = { enabled = true } },
   heading = { icons = {} },
+  quote = { icon = "▏" },
+  code = { sign = false },
 })

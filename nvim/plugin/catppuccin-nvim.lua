@@ -23,6 +23,12 @@ require("catppuccin").setup({
     SmartPickPath = { fg = colors.overlay1 },
     TablineFill = { bg = colors.base1 },
     WinSeparator = { fg = colors.base1, bg = colors.none },
+    RenderMarkdownH1Bg = { link = "Cursorline" },
+    RenderMarkdownH2Bg = { link = "Cursorline" },
+    RenderMarkdownH3Bg = { link = "Cursorline" },
+    RenderMarkdownH4Bg = { link = "Cursorline" },
+    RenderMarkdownH5Bg = { link = "Cursorline" },
+    RenderMarkdownH6Bg = { link = "Cursorline" },
   },
   -- https://github.com/catppuccin/nvim?tab=readme-ov-file#integrations
   integrations = {
