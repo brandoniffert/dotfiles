@@ -13,12 +13,7 @@ rex.action({
 
     float.open({
       label = "lazygit",
-      bounds = { 0.1, 0.1, 0.8, 0.8 },
-      options = {
-        -- Header shows the terminal title, not the block label (open Rex feature request), so set it here
-        command = { "sh", "-c", 'printf "\\033]0;%s\\007" "$1"; exec lazygit', "sh", cwd },
-        cwd = cwd,
-      },
+      options = { command = { "lazygit" }, cwd = cwd },
     })
   end,
 })

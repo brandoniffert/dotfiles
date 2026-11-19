@@ -12,17 +12,8 @@ if [[ -z ${PROJECTS_HOME+x} ]]; then
   return 1
 fi
 
-# Modify display if inside a rex floating layer
-if [[ -n "$REX_POPUP" ]]; then
-  # Header shows the terminal title, not the block label (open Rex feature request), so set it here
-  print -n '\e]0;Project Sessions\a'
-  fzf_args=(--border none)
-else
-  fzf_args=(--height 40% --border sharp)
-fi
-
 find_output=$(find "$PROJECTS_HOME" -mindepth 2 -maxdepth 2 -type d | sed "s:$PROJECTS_HOME\/::g")
-project_dir=$(echo "$find_output" | fzf --header='Projects' "${fzf_args[@]}")
+project_dir=$(echo "$find_output" | fzf --header='Projects' --height 40% --border sharp)
 
 [[ -z "$project_dir" ]] && return
 

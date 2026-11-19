@@ -7,7 +7,6 @@ rex.action({
   run = function(ctx)
     float.open({
       label = "Terminal",
-      bounds = { 0.1, 0.1, 0.8, 0.8 },
       options = { cwd = float.cwd(ctx) },
     })
   end,

@@ -5,10 +5,10 @@ function M.cwd(ctx)
   return proc and proc.foreground and proc.foreground.cwd
 end
 
--- opts: label, bounds, options (terminal block options)
+-- opts: label, bounds?, options (terminal block options)
 function M.open(opts)
   local _, err = rex.session.new_layer({
-    bounds = opts.bounds,
+    bounds = opts.bounds or { 0.1, 0.1, 0.8, 0.8 },
     focus = true,
     layout = {
       block = {

@@ -20,6 +20,17 @@ bind("space", function(ctx)
   rex.block.call("com.superlogical.terminal", "write", { block_id = ctx.block_id, data = "\0" })
   return true
 end)
+
+-- Ctrl-l is taken by navigation, so clearing needs its own action
+rex.action({
+  name = "clear_screen",
+  title = "Clear Screen",
+  run = function(ctx)
+    -- write raw ^L; pane.send_key re-enters bindings and hits the ctrl+l nav
+    rex.block.call("com.superlogical.terminal", "write", { block_id = ctx.block_id, data = "\12" })
+  end,
+})
+
 bind("shift+;", "client.palette.toggle")
 bind("r", "client.config.reload")
 
