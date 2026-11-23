@@ -92,7 +92,6 @@ config_dots=(
   hunk
   lazygit
   mise
-  nbrc
   nvim
   rex
   ripgrep
