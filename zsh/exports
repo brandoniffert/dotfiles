@@ -19,6 +19,8 @@ export XDG_STATE_HOME=${XDG_STATE_HOME:-"$HOME/.local/state"}
 if [[ "$OSTYPE" == "darwin"* ]]; then
   export XDG_RUNTIME_DIR="${${TMPDIR:-/tmp/user-$UID}%/}/xdg-runtime"
   [[ -d "$XDG_RUNTIME_DIR" ]] || mkdir -m 0700 -p "$XDG_RUNTIME_DIR"
+  # Rex.app's server listens here, not under XDG_RUNTIME_DIR; keep the CLI on the same socket
+  export REX_RUNTIME_DIR="$HOME/Library/Application Support/rex"
 fi
 
 # Manually manage XDG for some programs
