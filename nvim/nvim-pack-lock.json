@@ -1,7 +1,7 @@
 {
   "plugins": {
     "SchemaStore.nvim": {
-      "rev": "ffbe34a31de0cf696f688e7d9e226dc5b86b4323",
+      "rev": "c01d3d7026af6347b03b05dc5972c072a7ed37af",
       "src": "https://github.com/b0o/SchemaStore.nvim"
     },
     "backend-tmux": {
@@ -30,7 +30,7 @@
       "src": "https://github.com/folke/flash.nvim"
     },
     "gitsigns.nvim": {
-      "rev": "c0862d382a35b7b45757d8d151a6a634c09bf3ce",
+      "rev": "166c03131e6a3528f692dd89f37668d991f17baa",
       "src": "https://github.com/lewis6991/gitsigns.nvim"
     },
     "lazydev.nvim": {
@@ -59,7 +59,7 @@
       "src": "https://github.com/mfussenegger/nvim-lint"
     },
     "nvim-lspconfig": {
-      "rev": "4648fd8ba5c678d7e2db75ae44ffac269bb589d8",
+      "rev": "76f4cafc49677a34dc8ad8142b773d78ab4a041e",
       "src": "https://github.com/neovim/nvim-lspconfig"
     },
     "nvim-treesitter": {
@@ -80,7 +80,7 @@
       "src": "https://github.com/MeanderingProgrammer/render-markdown.nvim"
     },
     "smart-splits-backend-rex": {
-      "rev": "68f54325975ad47b03a968a3f201081bfadc0ff5",
+      "rev": "13950be0566162a54d8e5225dadf6de2399e2ea4",
       "src": "https://github.com/rawnly/smart-splits-backend-rex"
     },
     "smart-splits.nvim": {
